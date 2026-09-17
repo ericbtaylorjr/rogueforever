@@ -2,6 +2,7 @@ import { config } from '../../config';
 import { specs } from '../../content/content';
 import { hero } from '../../content/copy';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { Callout } from '../ui/Callout';
 
 function PoisonDrip() {
   return (
@@ -126,6 +127,12 @@ export function Overview() {
           {hero.titleBottom}
         </span>
       </h1>
+
+      <div className="relative mt-[16px] max-w-[62ch]">
+        <Callout tone="accent" dashed label={hero.disclaimer.label}>
+          {hero.disclaimer.text}
+        </Callout>
+      </div>
 
       <PoisonDrip />
 

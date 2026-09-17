@@ -10,8 +10,12 @@
 
 export const hero = {
   eyebrow: 'WORLD OF WARCRAFT FOREVER',
-  titleTop: 'Rogue DPS',
+  titleTop: 'Rogue',
   titleBottom: 'Handbook',
+  disclaimer: {
+    label: 'PLACEHOLDER',
+    text: 'Everything in this Handbook is placeholder until more Forever data is confirmed. Content will update as sim data, logs and official patch notes come in.',
+  },
   lede: 'Everything a raiding Rogue needs, on one page. Community-built from sims, log analysis, and a lot of arguing in Discord. No ads, no twelve-page SEO detour before the actual answer.',
   support: {
     before: 'Built on Classic Era right now, with a running list of everything Blizzard has actually confirmed for ',
