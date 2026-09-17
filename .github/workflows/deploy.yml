@@ -24,10 +24,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # TODO: set VITE_BASE to /<repo-name>/ for a GitHub Pages project site.
       - run: npm run build
         env:
-          VITE_BASE: /
+          VITE_BASE: /rogueforever/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
