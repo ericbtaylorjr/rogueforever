@@ -1,0 +1,50 @@
+import { useCompendium } from '../../state/CompendiumProvider';
+
+/**
+ * Copy-to-clipboard with a 1600ms confirmation. Only one confirmation shows at
+ * a time — the provider holds a single `copied` key.
+ */
+export function CopyButton({
+  copyKey,
+  text,
+  label,
+  copiedLabel = 'Copied',
+  variant = 'block',
+}: {
+  copyKey: string;
+  text: string;
+  label: string;
+  copiedLabel?: string;
+  variant?: 'block' | 'small';
+}) {
+  const { copied, copy } = useCompendium();
+  const done = copied === copyKey;
+
+  const base =
+    variant === 'block'
+      ? 'w-full rounded-[8px] px-[13px] py-[10px] text-[12.5px] font-semibold text-center transition-colors'
+      : 'rounded-[6px] border px-[9px] py-[4px] text-[10.5px] font-semibold transition-colors';
+
+  return (
+    <button
+      type="button"
+      onClick={() => copy(copyKey, text)}
+      className={base}
+      style={
+        done
+          ? {
+              border: '1px solid rgba(123,224,107,.4)',
+              background: 'rgba(123,224,107,.1)',
+              color: 'var(--venom)',
+            }
+          : {
+              border: '1px solid rgba(255,244,104,.4)',
+              background: 'rgba(255,244,104,.1)',
+              color: 'var(--accent)',
+            }
+      }
+    >
+      {done ? copiedLabel : label}
+    </button>
+  );
+}

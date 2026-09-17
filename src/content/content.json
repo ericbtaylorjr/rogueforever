@@ -1,0 +1,1378 @@
+{
+  "$schema": "See README.md — Content Model section",
+  "$note": "Single source of truth for all page content. Every array here maps 1:1 to a const in the prototype logic class. Swap values here, not in markup.",
+  "specs": [
+    {
+      "id": "cbsword",
+      "name": "Combat Swords",
+      "weapon": "Sword MH / Sword OH",
+      "color": "#FFD966",
+      "color2": "#A8862E",
+      "tier": "S",
+      "role": "RAID ST",
+      "tag": "Classic default"
+    },
+    {
+      "id": "cbdagger",
+      "name": "Combat Daggers",
+      "weapon": "Dagger MH / Dagger OH",
+      "color": "#FF6B5E",
+      "color2": "#A83C34",
+      "tier": "A",
+      "role": "RAID ST",
+      "tag": "Positional"
+    },
+    {
+      "id": "assn",
+      "name": "Assassination",
+      "weapon": "Dagger MH / Dagger OH",
+      "color": "#5FC9F8",
+      "color2": "#2E7FA8",
+      "tier": "A",
+      "role": "RAID ST",
+      "tag": "Poison / bleed"
+    },
+    {
+      "id": "subt",
+      "name": "Subtlety",
+      "weapon": "Dagger MH / Dagger OH",
+      "color": "#B98BFF",
+      "color2": "#6F4FB8",
+      "tier": "C",
+      "role": "PVP",
+      "tag": "PvP in Classic"
+    }
+  ],
+  "specDetail": {
+    "cbsword": {
+      "talents": [
+        {
+          "name": "Assassination",
+          "pts": 15,
+          "color": "#8A8A96"
+        },
+        {
+          "name": "Combat",
+          "pts": 31,
+          "color": "#FFD966"
+        },
+        {
+          "name": "Subtlety",
+          "pts": 5,
+          "color": "#6E6E7A"
+        }
+      ],
+      "talentNote": "Deep Combat for Adrenaline Rush and Blade Flurry, with Assassination filler for Malice, Improved Eviscerate and Lethality. The Classic raid default, and the least positional spec in the game.",
+      "keyTalents": [
+        "Adrenaline Rush — your only real damage cooldown",
+        "Blade Flurry — cleave and a flat attack speed boost",
+        "Sword Specialization — extra swings, the reason swords win",
+        "Improved Sinister Strike — cheaper builder, more finishers"
+      ],
+      "weapons": [
+        {
+          "slot": "Main hand",
+          "name": "Fast sword",
+          "why": "more Sinister Strikes, more Instant Poison procs"
+        },
+        {
+          "slot": "Off hand",
+          "name": "Fast sword",
+          "why": "Sword Spec procs off both hands"
+        },
+        {
+          "slot": "Ranged",
+          "name": "Thrown or bow",
+          "why": "pulls and the occasional out-of-range global"
+        },
+        {
+          "slot": "Skill cap",
+          "name": "300 weapon skill",
+          "why": "reduces miss and glancing penalty",
+          "sweaty": true
+        }
+      ],
+      "apl": [
+        {
+          "name": "Slice and Dice",
+          "cond": "Missing, or under 2s remaining. Nothing else on this list matters if this drops."
+        },
+        {
+          "name": "Expose Armor",
+          "cond": "At 5 combo points, only if you are the assigned Expose Rogue and the debuff is falling off."
+        },
+        {
+          "name": "Adrenaline Rush",
+          "cond": "On cooldown, ideally inside a damage window and with energy already low."
+        },
+        {
+          "name": "Blade Flurry",
+          "cond": "Adds are in melee range. On a single target it is still an attack speed buff, so do not hoard it forever."
+        },
+        {
+          "name": "Eviscerate",
+          "cond": "At 5 combo points with Slice and Dice comfortably up."
+        },
+        {
+          "name": "Sinister Strike",
+          "cond": "Your builder. Cheap, no positioning, works from anywhere."
+        }
+      ],
+      "opener": [
+        "Thistle Tea",
+        "Sapper",
+        "Sinister Strike ×2",
+        "Slice and Dice",
+        "Sinister Strike ×5",
+        "Eviscerate"
+      ],
+      "nevers": [
+        "Clipping Slice and Dice to squeeze in one more builder.",
+        "Casting Expose Armor under 5 combo points.",
+        "Saving Adrenaline Rush for a perfect window that never arrives."
+      ]
+    },
+    "cbdagger": {
+      "talents": [
+        {
+          "name": "Assassination",
+          "pts": 20,
+          "color": "#8A8A96"
+        },
+        {
+          "name": "Combat",
+          "pts": 31,
+          "color": "#FF6B5E"
+        },
+        {
+          "name": "Subtlety",
+          "pts": 0,
+          "color": "#6E6E7A"
+        }
+      ],
+      "talentNote": "Combat core for the cooldowns, Assassination for Opportunity and Lethality. Higher ceiling than swords when you can stay behind the boss, and a much lower floor when you cannot.",
+      "keyTalents": [
+        "Dagger Specialization — crit chance with daggers",
+        "Opportunity — flat Backstab and Ambush damage",
+        "Adrenaline Rush — your only real damage cooldown",
+        "Blade Flurry — cleave plus attack speed"
+      ],
+      "weapons": [
+        {
+          "slot": "Main hand",
+          "name": "High-damage dagger",
+          "why": "Backstab scales off main hand weapon damage"
+        },
+        {
+          "slot": "Off hand",
+          "name": "Fast dagger",
+          "why": "poison procs and white damage only"
+        },
+        {
+          "slot": "Ranged",
+          "name": "Thrown or bow",
+          "why": "pulls and out-of-range filler"
+        },
+        {
+          "slot": "Skill cap",
+          "name": "300 weapon skill",
+          "why": "Backstab cannot miss what it cannot reach",
+          "sweaty": true
+        }
+      ],
+      "apl": [
+        {
+          "name": "Slice and Dice",
+          "cond": "Missing, or under 2s remaining."
+        },
+        {
+          "name": "Expose Armor",
+          "cond": "At 5 combo points, only if you are the assigned Expose Rogue."
+        },
+        {
+          "name": "Adrenaline Rush",
+          "cond": "On cooldown, aligned with a damage window."
+        },
+        {
+          "name": "Blade Flurry",
+          "cond": "Adds in melee range, or simply on cooldown for the attack speed."
+        },
+        {
+          "name": "Eviscerate",
+          "cond": "At 5 combo points with Slice and Dice up."
+        },
+        {
+          "name": "Backstab",
+          "cond": "Your builder. Behind the target only — this is the entire spec."
+        },
+        {
+          "name": "Sinister Strike",
+          "cond": "You have been forced in front of the boss and cannot fix it this global.",
+          "sweaty": true
+        }
+      ],
+      "opener": [
+        "Thistle Tea",
+        "Sapper",
+        "Backstab ×2",
+        "Slice and Dice",
+        "Backstab ×3",
+        "Eviscerate"
+      ],
+      "nevers": [
+        "Standing in front of the boss and calling it a rotation.",
+        "Backstabbing with a slow off-hand equipped in the main hand slot.",
+        "Letting Slice and Dice drop during a movement phase."
+      ]
+    },
+    "assn": {
+      "talents": [
+        {
+          "name": "Assassination",
+          "pts": 30,
+          "color": "#5FC9F8"
+        },
+        {
+          "name": "Combat",
+          "pts": 21,
+          "color": "#8A8A96"
+        },
+        {
+          "name": "Subtlety",
+          "pts": 0,
+          "color": "#6E6E7A"
+        }
+      ],
+      "talentNote": "Deep Assassination for Improved Expose Armor, Lethality and Improved Poisons, with enough Combat to keep the cooldowns. The natural home for the Expose Armor assignment.",
+      "keyTalents": [
+        "Improved Expose Armor — the raid utility nobody else brings",
+        "Improved Poisons — higher application chance",
+        "Lethality — crit damage on your builders",
+        "Relentless Strikes — energy back on finishers"
+      ],
+      "weapons": [
+        {
+          "slot": "Main hand",
+          "name": "High-damage dagger",
+          "why": "Ambush and Backstab both scale off it"
+        },
+        {
+          "slot": "Off hand",
+          "name": "Fast dagger",
+          "why": "maximum poison applications"
+        },
+        {
+          "slot": "Ranged",
+          "name": "Thrown or bow",
+          "why": "pulls and out-of-range filler"
+        },
+        {
+          "slot": "Skill cap",
+          "name": "300 weapon skill",
+          "why": "and it now feeds poisons too, in Forever",
+          "sweaty": true
+        }
+      ],
+      "apl": [
+        {
+          "name": "Slice and Dice",
+          "cond": "Missing, or under 2s remaining."
+        },
+        {
+          "name": "Expose Armor",
+          "cond": "At 5 combo points. If you are Assassination you are very likely the Expose Rogue — own it."
+        },
+        {
+          "name": "Rupture",
+          "cond": "Not applied and the target will live longer than 12 seconds."
+        },
+        {
+          "name": "Eviscerate",
+          "cond": "At 5 combo points with Slice and Dice and Rupture both up."
+        },
+        {
+          "name": "Backstab",
+          "cond": "Your builder, from behind. Sinister Strike if the fight will not let you."
+        },
+        {
+          "name": "Re-apply poisons",
+          "cond": "Between pulls, every pull. Charges run out mid-raid and nobody warns you.",
+          "sweaty": true
+        }
+      ],
+      "opener": [
+        "Thistle Tea",
+        "Ambush",
+        "Slice and Dice",
+        "Backstab ×3",
+        "Expose Armor",
+        "Rupture"
+      ],
+      "nevers": [
+        "Eviscerating at 4 combo points because it felt close enough.",
+        "Taking the Expose assignment and then not tracking the debuff.",
+        "Raiding on empty poison charges."
+      ]
+    },
+    "subt": {
+      "talents": [
+        {
+          "name": "Assassination",
+          "pts": 15,
+          "color": "#8A8A96"
+        },
+        {
+          "name": "Combat",
+          "pts": 6,
+          "color": "#6E6E7A"
+        },
+        {
+          "name": "Subtlety",
+          "pts": 30,
+          "color": "#B98BFF"
+        }
+      ],
+      "talentNote": "A PvP tree in Classic Era, and honest about it. Preparation, Improved Kidney Shot and Hemorrhage are control tools, not a raid damage plan. Forever points this tree at bleeds and stealth, which is the most interesting thing to happen to it in twenty years.",
+      "keyTalents": [
+        "Preparation — resets your escape and burst cooldowns",
+        "Improved Kidney Shot — the stun that sets up everything",
+        "Hemorrhage — a builder that buffs the whole group’s physical damage",
+        "Premeditation — free combo points from stealth"
+      ],
+      "weapons": [
+        {
+          "slot": "Main hand",
+          "name": "High-damage dagger",
+          "why": "Ambush from stealth is the whole opener"
+        },
+        {
+          "slot": "Off hand",
+          "name": "Fast dagger",
+          "why": "poison applications between stuns"
+        },
+        {
+          "slot": "Ranged",
+          "name": "Thrown",
+          "why": "pulls and finishing runners"
+        },
+        {
+          "slot": "Skill cap",
+          "name": "300 weapon skill",
+          "why": "a missed opener is a lost duel",
+          "sweaty": true
+        }
+      ],
+      "apl": [
+        {
+          "name": "Ambush",
+          "cond": "From stealth, with Premeditation already used. This is your burst."
+        },
+        {
+          "name": "Kidney Shot",
+          "cond": "At 5 combo points, as the setup rather than the finisher."
+        },
+        {
+          "name": "Hemorrhage",
+          "cond": "Your builder. The debuff helps every physical attacker on your target."
+        },
+        {
+          "name": "Slice and Dice",
+          "cond": "Between control windows, if the target is going to live."
+        },
+        {
+          "name": "Preparation",
+          "cond": "After your escapes are down and you need a second opener."
+        },
+        {
+          "name": "Eviscerate",
+          "cond": "At 5 combo points when the kill is actually available.",
+          "sweaty": true
+        }
+      ],
+      "opener": [
+        "Premeditation",
+        "Ambush",
+        "Kidney Shot",
+        "Hemorrhage ×3",
+        "Eviscerate"
+      ],
+      "nevers": [
+        "Bringing this to a raid and being surprised by the damage meter.",
+        "Using Preparation before your cooldowns are actually spent.",
+        "Opening without checking for a nearby healer."
+      ]
+    }
+  },
+  "specIndex": {
+    "st": {
+      "label": "Single target",
+      "note": "CLASSIC ERA RAID CONSENSUS INDEX · NOT A SIM · TOP SPEC = 100",
+      "rows": {
+        "cbsword": 100,
+        "cbdagger": 95,
+        "assn": 87,
+        "subt": 58
+      }
+    },
+    "cleave": {
+      "label": "Cleave / adds",
+      "note": "CLASSIC ERA RAID CONSENSUS INDEX · BLADE FLURRY DOMINATES · TOP SPEC = 100",
+      "rows": {
+        "cbsword": 100,
+        "cbdagger": 96,
+        "assn": 74,
+        "subt": 52
+      }
+    },
+    "forever": {
+      "label": "Forever outlook",
+      "note": "BETA 17 SEP · LAUNCH 4 NOV · NO SIM OR LOG DATA EXISTS YET",
+      "pending": true
+    }
+  },
+  "foreverOutlook": [
+    {
+      "id": "assn",
+      "arrow": "▲",
+      "arrowColor": "#7BE06B",
+      "why": "Blizzard states Assassination now focuses on poison damage, and unified Hit/Crit explicitly covers poisons. Mutilate appeared in the BlizzCon demo. Most confirmed upside of the four."
+    },
+    {
+      "id": "subt",
+      "arrow": "▲",
+      "arrowColor": "#7BE06B",
+      "why": "Confirmed redirection toward bleeds and stealth effects, plus a new 16-point talent milestone. The spec that had the least to lose."
+    },
+    {
+      "id": "cbsword",
+      "arrow": "●",
+      "arrowColor": "#FFD966",
+      "why": "Blizzard says Combat keeps its upfront style. One-Handed Axes join the weapon list, which widens your options without changing the rotation."
+    },
+    {
+      "id": "cbdagger",
+      "arrow": "●",
+      "arrowColor": "#FFD966",
+      "why": "No confirmed change to Backstab positioning. Reworked itemization is the real variable — Classic dagger BiS will not survive the loot pass."
+    }
+  ],
+  "foreverDates": [
+    {
+      "label": "Announced",
+      "val": "12 Sep 2026",
+      "note": "BlizzCon 2026 main stage",
+      "color": "#A4A4B0"
+    },
+    {
+      "label": "Beta",
+      "val": "17 Sep 2026",
+      "note": "Pre-purchase packs guarantee access",
+      "color": "#7FC4E8"
+    },
+    {
+      "label": "Launch",
+      "val": "4 Nov 2026",
+      "note": "3pm Pacific, worldwide",
+      "color": "#FFF468"
+    },
+    {
+      "label": "Level cap",
+      "val": "60",
+      "note": "No increases planned",
+      "color": "#A4A4B0"
+    }
+  ],
+  "foreverChanges": [
+    {
+      "title": "Rogues can use One-Handed Axes",
+      "cat": "Class",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Axes join Daggers, Swords, Maces, Fist Weapons, Bows, Crossbows and Thrown on the Rogue weapon list. It is the single clearest mechanical addition to the class so far.",
+      "impact": "One more weapon type competing for your main hand, and one more weapon skill to cap if you commit to it."
+    },
+    {
+      "title": "Each spec gets a sharper identity",
+      "cat": "Class",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Assassination is being pointed at poison damage, Subtlety at bleeds and stealth effects, and Combat keeps its straightforward upfront style.",
+      "impact": "The Classic answer — \"play Combat Swords\" — stops being automatic. Assassination and Subtlety are getting actual design attention for the first time."
+    },
+    {
+      "title": "Hit and Crit are unified — including poisons",
+      "cat": "Systems",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Spell, melee and ranged hit collapse into one Hit stat, and the same happens to crit. Blizzard called out that it covers every attack a character makes, poisons and traps included. The worked example was Lionheart Helm: +18 Strength, 2% hit and 2% crit applying everywhere.",
+      "impact": "Your gear no longer has dead stats on it, and your poison applications stop living on a separate table from your swings."
+    },
+    {
+      "title": "Weapon Skill survives, but tuned down per item",
+      "cat": "Systems",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Weapon Skill stays as a Classic stat. Blizzard says balancing will stop individual pieces from handing out excessive amounts of it.",
+      "impact": "Still cap your weapon skill. Do not expect one item to do half the job for you the way a couple of Classic pieces did."
+    },
+    {
+      "title": "Itemization is being deliberately \"unsolved\"",
+      "cat": "Gear",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Every dungeon boss has had its loot reviewed. Quests, world drops, professions and existing items are all being updated, with hundreds of new or adjusted drops and some effects tied to specific environments or creature types.",
+      "impact": "Do not build a Forever BiS list from Classic Era data. It will be wrong, and confidently wrong is worse than empty."
+    },
+    {
+      "title": "Talent trees keep their shape, lose their certainties",
+      "cat": "Class",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Three Classic-style trees, 51 points, but individual talents are redesigned and there is a new 16-point milestone to plan around.",
+      "impact": "Every talent split on this page is a Classic Era build. Treat them as history from 4 November onward."
+    },
+    {
+      "title": "Slower, more tactical combat",
+      "cat": "Systems",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Blizzard framed the combat goals as keeping classes simple and distinct, with slower pacing and group play where crowd control and threat genuinely matter.",
+      "impact": "Sap, Kick, Blind and Gouge stop being things you forgot you had. Rogue utility is priced in rather than tolerated."
+    },
+    {
+      "title": "Mutilate for Assassination",
+      "cat": "Class",
+      "status": "Demo footage",
+      "hue": "#FFB347",
+      "body": "A dual-wield strike generating multiple combo points was shown on the Assassination tree in the playable BlizzCon demo. This is community capture, not a published Blizzard ability page.",
+      "impact": "Promising, unconfirmed, and subject to change before launch. Do not plan a build around it yet."
+    },
+    {
+      "title": "Skyborne can be Rogues",
+      "cat": "Class",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "The new Skyborne race can play Rogue on both Alliance and Horde. Their racial toolkit includes a glide that lets them float safely down from height. Race access requires the Heroic Pack or higher.",
+      "impact": "A new racial spread to compare against Human sword skill, Orc stun resist and Night Elf stealth. Nobody has numbers yet."
+    },
+    {
+      "title": "Ability-by-ability Rogue breakdown",
+      "cat": "Unknown",
+      "status": "Not published",
+      "hue": "#8E8E9A",
+      "body": "Blizzard has published a full rework preview for Paladin. It has not done the same for Rogue, so there is no official list of changed Rogue abilities, ranks or values.",
+      "impact": "Anything you read claiming a specific Forever Rogue rotation right now is guessing. Check back after beta."
+    },
+    {
+      "title": "Raid and endgame content",
+      "cat": "Unknown",
+      "status": "Partial",
+      "hue": "#8E8E9A",
+      "body": "Two raids and nine dungeons are confirmed for launch, alongside three new zones plus the Skyborne starting zone. Encounter mechanics have not been detailed.",
+      "impact": "The raid notes on this page are Classic Era tiers. Forever boss strats land once beta testing produces them."
+    }
+  ],
+  "poisons": [
+    {
+      "name": "Instant Poison",
+      "where": "Main hand · Off hand",
+      "hue": "#7BE06B",
+      "hue2": "#2F7A2A",
+      "fill": "74%",
+      "tag": "Core",
+      "note": "Chance on hit for immediate damage. The default on both weapons for Combat, and it scales with how often you swing."
+    },
+    {
+      "name": "Deadly Poison",
+      "where": "Off hand",
+      "hue": "#5FC9F8",
+      "hue2": "#245F80",
+      "fill": "62%",
+      "tag": "Core",
+      "note": "Stacking damage over time, five stacks maximum. Assassination’s off-hand answer — applies on the swing, ticks for free."
+    },
+    {
+      "name": "Wound Poison",
+      "where": "Off hand · swap",
+      "hue": "#FFB347",
+      "hue2": "#8A5A15",
+      "fill": "44%",
+      "tag": "Situational",
+      "note": "Reduces healing received. Mostly a PvP tool, occasionally the right call on a healing add."
+    },
+    {
+      "name": "Crippling Poison",
+      "where": "Off hand · swap",
+      "hue": "#8FA3B8",
+      "hue2": "#3C4854",
+      "fill": "34%",
+      "tag": "Utility",
+      "note": "Movement slow. For kiting fixates and for PvP, never for your parse."
+    },
+    {
+      "name": "Mind-numbing Poison",
+      "where": "Off hand · swap",
+      "hue": "#C8A2FF",
+      "hue2": "#4B3474",
+      "fill": "28%",
+      "tag": "Utility",
+      "note": "Casting slow. Carry a few in case a caster add needs softening."
+    }
+  ],
+  "consumables": [
+    {
+      "n": "Elixir of the Mongoose",
+      "k": "Elixir",
+      "note": "Agility and crit. The default battle elixir for a raiding Rogue in Classic."
+    },
+    {
+      "n": "Elixir of Giants",
+      "k": "Elixir",
+      "note": "Strength. Goes in the guardian slot alongside Mongoose."
+    },
+    {
+      "n": "Elixir of Fortitude",
+      "k": "Elixir",
+      "note": "Health. Cheap insurance against one mistake."
+    },
+    {
+      "n": "Elixir of Superior Defense",
+      "s": true,
+      "k": "Elixir",
+      "note": "Armor. Progression-only, and only when you are dying to physical damage."
+    },
+    {
+      "n": "Elixir of Demonslaying",
+      "k": "Elixir",
+      "note": "Attack power against demons only. Mandatory on demon bosses, dead weight elsewhere."
+    },
+    {
+      "n": "Juju Might",
+      "s": true,
+      "k": "Zandalar",
+      "note": "Attack power. Stacks with your elixirs, which is the whole reason to farm it."
+    },
+    {
+      "n": "Juju Power",
+      "s": true,
+      "k": "Zandalar",
+      "note": "Strength. Same deal — extra stat outside the elixir slots."
+    },
+    {
+      "n": "Juju Flurry",
+      "s": true,
+      "k": "Zandalar",
+      "note": "Short haste burst. Line it up with Adrenaline Rush."
+    },
+    {
+      "n": "Juju Ember",
+      "k": "Zandalar",
+      "note": "Fire resistance. Pairs with a Greater Fire Protection Potion."
+    },
+    {
+      "n": "Winterfall Firewater",
+      "k": "Misc",
+      "note": "Attack power. The budget alternative when Juju Might runs dry."
+    },
+    {
+      "n": "Ground Scorpok Assay",
+      "k": "Misc",
+      "note": "Agility from Blasted Lands. Stacks with elixirs."
+    },
+    {
+      "n": "R.O.I.D.S.",
+      "k": "Misc",
+      "note": "Strength from Blasted Lands. Backup for Juju Power."
+    },
+    {
+      "n": "Elemental Sharpening Stone",
+      "k": "Stone",
+      "note": "Weapon stone, crit chance. Reapply between pulls, never mid-fight."
+    },
+    {
+      "n": "Dense Sharpening Stone",
+      "k": "Stone",
+      "note": "Flat weapon damage. The cheap fallback when Elemental is gone."
+    },
+    {
+      "n": "Blessed Sunfruit",
+      "k": "Food",
+      "note": "Strength food. Eat before the pull, not after the first wipe."
+    },
+    {
+      "n": "Grilled Squid",
+      "k": "Food",
+      "note": "Agility food. Competes with Sunfruit — sim which one your gear wants."
+    },
+    {
+      "n": "Smoked Desert Dumplings",
+      "k": "Food",
+      "note": "Strength food, quest-limited supply. Hoard them for progression."
+    },
+    {
+      "n": "Dragonbreath Chili",
+      "k": "Food",
+      "note": "Proc damage that scales with spell power — the one place spell power touches a Rogue. A parsing curiosity, not a build."
+    },
+    {
+      "n": "Rumsey Rum Black Label",
+      "k": "Food",
+      "note": "Stamina drink. Free, stacks with food, no reason to skip it."
+    },
+    {
+      "n": "Gordok Green Grog",
+      "k": "Food",
+      "note": "Agility and stamina. Cheap Dire Maul staple."
+    },
+    {
+      "n": "Flask of the Titans",
+      "s": true,
+      "k": "Flask",
+      "note": "Big health pool, survives death. Expensive — progression nights only."
+    },
+    {
+      "n": "Thistle Tea",
+      "k": "Potion",
+      "note": "100 energy instantly. Open with it, use it again on cooldown, never save it for a moment that never comes."
+    },
+    {
+      "n": "Free Action Potion",
+      "k": "Potion",
+      "note": "Immunity to movement impairment. Your answer to roots, slows and snares."
+    },
+    {
+      "n": "Living Action Potion",
+      "k": "Potion",
+      "note": "Free Action Potion that also clears a fear or charm. Rarer, better."
+    },
+    {
+      "n": "Limited Invulnerability Potion",
+      "k": "Potion",
+      "note": "Physical immunity for a few seconds. A real panic button."
+    },
+    {
+      "n": "Major Healing Potion",
+      "k": "Potion",
+      "note": "Self heal. Shares a cooldown with everything else useful, so plan it."
+    },
+    {
+      "n": "Restorative Potion",
+      "s": true,
+      "k": "Potion",
+      "note": "Clears a magic effect off yourself every few seconds. Saves healer globals."
+    },
+    {
+      "n": "Purification Potion",
+      "s": true,
+      "k": "Potion",
+      "note": "Dispels poison, disease, curse and magic. Very situational, very good when it is right."
+    },
+    {
+      "n": "Magic Resistance Potion",
+      "k": "Potion",
+      "note": "All-school resistance. Niche but occasionally the correct call."
+    },
+    {
+      "n": "Greater Fire Protection Potion",
+      "k": "Protection",
+      "note": "Absorbs fire damage. Molten Core and Blackwing Lair want it constantly."
+    },
+    {
+      "n": "Greater Nature Protection Potion",
+      "k": "Protection",
+      "note": "Nature absorb. Ahn’Qiraj, and Huhuran in particular."
+    },
+    {
+      "n": "Greater Shadow Protection Potion",
+      "k": "Protection",
+      "note": "Shadow absorb. Naxxramas and Nefarian."
+    },
+    {
+      "n": "Greater Arcane Protection Potion",
+      "k": "Protection",
+      "note": "Arcane absorb. Situational."
+    },
+    {
+      "n": "Greater Frost Protection Potion",
+      "k": "Protection",
+      "note": "Frost absorb. Sapphiron."
+    },
+    {
+      "n": "Goblin Sapper Charge",
+      "s": true,
+      "k": "Engineering",
+      "note": "Requires Engineering. Free damage on every cooldown and it hurts you a little."
+    },
+    {
+      "n": "Dense Dynamite",
+      "s": true,
+      "k": "Engineering",
+      "note": "Requires Engineering. Cheap filler damage when you cannot reach the target."
+    },
+    {
+      "n": "Thorium Grenade",
+      "k": "Engineering",
+      "note": "Requires Engineering. An extra interrupt-adjacent stun in your pocket."
+    },
+    {
+      "n": "Instant Poison",
+      "k": "Poison",
+      "note": "Core weapon poison for most builds. Apply before you leave the bank."
+    },
+    {
+      "n": "Deadly Poison",
+      "k": "Poison",
+      "note": "Stacking damage over time. Strong off-hand option, especially for Assassination."
+    },
+    {
+      "n": "Wound Poison",
+      "k": "Poison",
+      "note": "Reduces healing received. PvP tool, occasionally a PvE add answer."
+    },
+    {
+      "n": "Crippling Poison",
+      "k": "Poison",
+      "note": "Movement slow. For kiting and PvP, not for your parse."
+    },
+    {
+      "n": "Mind-numbing Poison",
+      "k": "Poison",
+      "note": "Casting slow. Carry a few for caster adds."
+    },
+    {
+      "n": "Flash Powder",
+      "k": "Misc",
+      "note": "Blind reagent. Keep a stack, nothing more."
+    },
+    {
+      "n": "Bogling Root",
+      "s": true,
+      "k": "Misc",
+      "note": "Small attack power buff, stacks with everything, annoying to macro."
+    },
+    {
+      "n": "Whipper Root Tuber",
+      "k": "Misc",
+      "note": "Health on a separate cooldown from potions. Sneaky good."
+    },
+    {
+      "n": "Night Dragon’s Breath",
+      "s": true,
+      "k": "Misc",
+      "note": "Mana for your healers is not your problem, but the shared cooldown is worth knowing."
+    }
+  ],
+  "buffGroups": [
+    {
+      "label": "World buffs",
+      "note": "Get them, keep them, do not die on trash.",
+      "items": [
+        {
+          "n": "Rallying Cry of the Dragonslayer"
+        },
+        {
+          "n": "Warchief’s Blessing"
+        },
+        {
+          "n": "Songflower Serenade"
+        },
+        {
+          "n": "Spirit of Zandalar"
+        },
+        {
+          "n": "Sayge’s Dark Fortune of Damage"
+        },
+        {
+          "n": "Fengus’ Ferocity"
+        },
+        {
+          "n": "Mol’dar’s Moxie"
+        },
+        {
+          "n": "Slip’kik’s Savvy"
+        }
+      ]
+    },
+    {
+      "label": "Raid buffs",
+      "note": "Nag your raid leader until these are assigned.",
+      "items": [
+        {
+          "n": "Improved Battle Shout"
+        },
+        {
+          "n": "Blessing of Might"
+        },
+        {
+          "n": "Blessing of Kings [A]"
+        },
+        {
+          "n": "Improved Mark of the Wild"
+        },
+        {
+          "n": "Power Word: Fortitude"
+        },
+        {
+          "n": "Grace of Air Totem [H]"
+        },
+        {
+          "n": "Strength of Earth Totem [H]"
+        },
+        {
+          "n": "Windfury Totem [H]",
+          "s": true
+        },
+        {
+          "n": "Trueshot Aura"
+        },
+        {
+          "n": "Leader of the Pack"
+        },
+        {
+          "n": "Blessing of Salvation",
+          "s": true
+        }
+      ]
+    },
+    {
+      "label": "Raid debuffs",
+      "note": "On the boss, or your damage is fiction.",
+      "items": [
+        {
+          "n": "Faerie Fire"
+        },
+        {
+          "n": "Curse of Recklessness"
+        },
+        {
+          "n": "Expose Armor"
+        },
+        {
+          "n": "Sunder Armor"
+        },
+        {
+          "n": "Gift of Arthas"
+        },
+        {
+          "n": "Improved Scorch",
+          "s": true
+        },
+        {
+          "n": "Hunter’s Mark"
+        },
+        {
+          "n": "Shadow Weaving",
+          "s": true
+        }
+      ]
+    }
+  ],
+  "gearSlots": [
+    "Head",
+    "Neck",
+    "Shoulders",
+    "Back",
+    "Chest",
+    "Wrists",
+    "Hands",
+    "Waist",
+    "Legs",
+    "Feet",
+    "Ring 1",
+    "Ring 2",
+    "Trinket 1",
+    "Trinket 2",
+    "Main hand",
+    "Off hand",
+    "Ranged"
+  ],
+  "raids": [
+    {
+      "name": "Molten Core",
+      "abbr": "MC",
+      "hue": "#8E3A22",
+      "tag": "Tier 1",
+      "summary": "Ten bosses, a lot of fire, and very little that specifically wants a Rogue.",
+      "prep": "Greater Fire Protection Potion on almost every pull. Juju Ember alongside it. Fire resistance gear is a tank problem, not yours.",
+      "phases": [
+        {
+          "n": "What targets you",
+          "lines": [
+            "Baron Geddon’s Living Bomb — run out of the raid immediately, every time.",
+            "Ragnaros knockback into the lava — hug the hitbox and watch your positioning.",
+            "Shazzrah and Lucifron curses need a decurse, not a Rogue solution."
+          ]
+        },
+        {
+          "n": "Where you win",
+          "lines": [
+            "Kick on Shazzrah’s Blink-teleport casts if your raid assigns interrupts.",
+            "Blade Flurry on the Core Rager and Flamewaker packs, not on single-target bosses.",
+            "Expose Armor uptime matters here more than your personal damage — the raid is melee-heavy."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Blackwing Lair",
+      "abbr": "BWL",
+      "hue": "#7A2A2A",
+      "tag": "Tier 2",
+      "summary": "The tier where Rogue utility and positioning finally start mattering.",
+      "prep": "Greater Fire Protection Potion for the drake wing. Greater Shadow Protection Potion for Nefarian. Bring a repair bot’s worth of gold.",
+      "phases": [
+        {
+          "n": "What targets you",
+          "lines": [
+            "Firemaw, Ebonroc and Flamegor — Shadow Flame is frontal, stay behind and never get turned around.",
+            "Wing Buffet knocks you out of melee. Expect it, do not panic, walk back in.",
+            "Nefarian’s Rogue class call disarms you — swap to a backup weapon set or throw for the duration.",
+            "Chromaggus breath types change per week. Learn your raid’s two."
+          ]
+        },
+        {
+          "n": "Where you win",
+          "lines": [
+            "Razorgore’s adds are pure Blade Flurry food.",
+            "Vaelastrasz is a pure single-target burn — this is your parse fight.",
+            "Broodlord Lashlayer’s Blast Wave punishes clumping; spread and keep uptime."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Temple of Ahn’Qiraj",
+      "abbr": "AQ40",
+      "hue": "#8E7A2A",
+      "tag": "Tier 2.5",
+      "summary": "Nature damage, add waves, and the best cleave tier for a Combat Rogue.",
+      "prep": "Greater Nature Protection Potion — non-negotiable for Princess Huhuran. Nature resistance gear if your guild asks for it.",
+      "phases": [
+        {
+          "n": "What targets you",
+          "lines": [
+            "Princess Huhuran’s Frenzy and Poison Bolt Volley — this is the Nature Protection Potion fight.",
+            "Twin Emperors teleport; melee must swap targets cleanly and not chase.",
+            "C’Thun’s eye tentacles will eat you if you stand still in the stomach.",
+            "Ouro’s emerge and burrow cycles — reposition, do not tunnel."
+          ]
+        },
+        {
+          "n": "Where you win",
+          "lines": [
+            "Fankriss and the Twins are heavy add fights. Blade Flurry earns its talent points here.",
+            "Viscidus needs frost damage and then a lot of fast melee hits — Rogues are the intended answer.",
+            "Silithid trash between bosses is where a Combat Rogue quietly triples the meter."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Naxxramas",
+      "abbr": "NAXX",
+      "hue": "#2A6E6E",
+      "tag": "Tier 3",
+      "summary": "The hardest Classic tier, and the one that actually respects a good Rogue.",
+      "prep": "Greater Shadow Protection Potion throughout. Greater Frost Protection Potion for Sapphiron. Frost resistance gear for the same.",
+      "phases": [
+        {
+          "n": "What targets you",
+          "lines": [
+            "Heigan’s dance — learn the safe zones, do not improvise.",
+            "Thaddius polarity swaps, every time, without being told.",
+            "Maexxna’s Web Wrap can take you out of the fight; know who is freeing you.",
+            "Loatheb only allows healing in tiny windows — do not take avoidable damage.",
+            "Grobbulus poison clouds spread if you stand in them."
+          ]
+        },
+        {
+          "n": "Where you win",
+          "lines": [
+            "Patchwerk is a pure burn with no mechanics for you at all. Parse fight.",
+            "Instructor Razuvious and the Four Horsemen reward precise positioning and cooldown discipline.",
+            "Gluth’s zombie waves and the Construct Quarter trash are Blade Flurry territory.",
+            "Kick on Noth’s Curse and the Blood Frenzy casts your raid assigns."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Onyxia’s Lair & world bosses",
+      "abbr": "ONY",
+      "hue": "#3A6E42",
+      "tag": "Outdoor",
+      "summary": "Onyxia, Azuregos, Kazzak, and the dragons of Nightmare. Mostly attendance checks.",
+      "prep": "Greater Fire Protection Potion for Onyxia. Nature protection for the Emerald dragons. A Free Action Potion is rarely wasted.",
+      "phases": [
+        {
+          "n": "What targets you",
+          "lines": [
+            "Onyxia phase 2 — you are on the ground doing nothing but dodging fire and killing whelps.",
+            "Onyxia’s tail sweep and Deep Breath. Stay off the tail, stay out of the lane.",
+            "Kazzak’s Mark of Kazzak on a caster is not your problem; his Twisted Reflection is."
+          ]
+        },
+        {
+          "n": "Where you win",
+          "lines": [
+            "Whelp waves in Onyxia phase 2 are Blade Flurry food.",
+            "Onyxia phase 3 is a stationary single-target burn — save your cooldowns for it.",
+            "World boss tagging fights reward stealth. Use it shamelessly."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Forever raids",
+      "abbr": "TBA",
+      "hue": "#2A4A6E",
+      "tag": "Awaiting beta",
+      "summary": "Two raids and nine dungeons confirmed at launch. No encounter detail published yet.",
+      "prep": "Nothing to prepare yet. Blizzard has confirmed the content exists but has not detailed a single encounter mechanic.",
+      "phases": [
+        {
+          "n": "What is confirmed",
+          "lines": [
+            "Two raids and nine dungeons at launch, per Blizzard’s What’s Next recap.",
+            "Three new or reimagined regions — Mount Hyjal, Shen’dralas and Riverglades — plus Zephras Isle for Skyborne.",
+            "Loot on every existing dungeon boss has been reviewed and adjusted."
+          ]
+        },
+        {
+          "n": "What is not",
+          "lines": [
+            "Boss names, mechanics, phase counts, interrupt assignments — none of it.",
+            "Whether Expose Armor keeps its current numbers or its current role.",
+            "Anything about Rogue-specific mechanics or class calls."
+          ]
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Swords or daggers?",
+      "a": "Swords in Classic, almost always. Sword Specialization gives you extra swings from both hands, Sinister Strike has no positional requirement, and no boss mechanic can accidentally delete your rotation by turning you around. Daggers have a higher ceiling on a stationary boss you can stay behind, and Backstab hits harder per global, but you pay for it every time the fight moves. If you are new to raiding, pick swords and stop reading guides about it."
+    },
+    {
+      "q": "Do I really need 300 weapon skill?",
+      "a": "Yes. Weapon skill reduces your miss chance against level 63 bosses and softens the glancing blow penalty that eats a large chunk of your white damage. It is one of the highest-value things on a piece of gear for a melee DPS in Classic. Forever keeps weapon skill as a stat but says individual items will no longer grant excessive amounts of it, so expect to source it from more pieces rather than fewer."
+    },
+    {
+      "q": "Which professions actually matter?",
+      "a": "Engineering, and it is not close. Goblin Sapper Charge is free damage on cooldown, Thorium Grenade is a pocket stun, and the trinkets and explosives all require the profession to use. Everything else is convenience or gold. Blizzard has confirmed professions are being updated for Forever, so this answer has a shelf life."
+    },
+    {
+      "q": "Does spell power affect poisons?",
+      "a": "No. Poisons do not scale with spell power in Classic. The only place spell power touches a Rogue is Dragonbreath Chili, which is a curiosity for people chasing the last fraction of a percent. What does change in Forever: Blizzard confirmed the unified Hit stat covers every attack including poisons, so your hit rating will feed poison applications in a way it does not today."
+    },
+    {
+      "q": "My raid leader says I have to run Expose Armor?",
+      "a": "They are right, and one Rogue should own it. A fully talented 5-point Expose Armor reduces more armor than five stacks of Sunder Armor, and it does it with one Rogue global instead of five Warrior ones. The catch is that Expose and Sunder do not stack, so the raid commits to one or the other — and if they picked you, track the debuff like it is your job, because it is."
+    },
+    {
+      "q": "What has Blizzard actually confirmed for Rogues in Forever?",
+      "a": "Three things, concretely. Rogues can use One-Handed Axes. Each spec is getting a sharper identity — Assassination toward poison damage, Subtlety toward bleeds and stealth, Combat staying upfront. And the talent trees keep their Classic shape while individual talents are redesigned around a new 16-point milestone. Mutilate appeared on the Assassination tree in the BlizzCon demo, but that is community capture from playable footage, not a published ability. Blizzard has published a full ability-by-ability rework preview for Paladin and has not yet done the same for Rogue."
+    },
+    {
+      "q": "How does unified Hit and Crit change my gearing?",
+      "a": "It removes the dead stats. In Classic, spell hit on a piece of gear is worthless to you and melee hit is worthless to a Mage. In Forever there is one Hit stat and one Crit stat covering every attack a character makes. Blizzard’s worked example was Lionheart Helm — plus 18 Strength, 2% hit and 2% crit, all of it applying to everything. The practical effect for you is that more items become plausible, and fewer of them are obviously other people’s loot."
+    },
+    {
+      "q": "Should I build a Forever BiS list now?",
+      "a": "No, and you should be suspicious of anyone who has. Blizzard has reviewed the loot on every dungeon boss and is updating quests, world drops, professions and existing items, with hundreds of new or adjusted drops and some effects tied to specific environments or creature types. The stated goal is to \"unsolve\" Classic. A Classic Era BiS list ported to Forever will be confidently wrong, which is worse than being empty."
+    }
+  ],
+  "tools": [
+    {
+      "kicker": "Start here",
+      "name": "Learn to sim",
+      "color": "#FFF468",
+      "body": "Classic WoWSims answers your gear questions better than any guide can, including this one. It is genuinely not complicated, and it takes an afternoon to learn once and then never wonder again.",
+      "cta": "Open WoWSims"
+    },
+    {
+      "kicker": "WeakAuras",
+      "name": "Comfy Rogue UI",
+      "color": "#B98BFF",
+      "body": "A full Rogue WeakAura suite. Shows only what you need to hold a rotation together — Slice and Dice, combo points, energy, cooldowns — with icons conditional on your talents. Every spec supported.",
+      "cta": "View on Wago"
+    },
+    {
+      "kicker": "Archive",
+      "name": "Macros & auras",
+      "color": "#5FC9F8",
+      "body": "Every macro and WeakAura from the archive. Weapon swaps, trinket stacking, interrupt announces — the unglamorous stuff that makes a clean rotation possible.",
+      "cta": "Browse the archive"
+    },
+    {
+      "kicker": "Community",
+      "name": "Rogue Classic Discord",
+      "color": "#7BE06B",
+      "body": "Where the sims get argued about before they end up on this page, and where the first real Forever beta data will show up. Ask questions there.",
+      "cta": "Join the Discord"
+    }
+  ],
+  "macros": [
+    {
+      "name": "Weapon set swap (Nefarian)",
+      "code": "#showtooltip\n/equipslot 16 Backup Main Hand\n/equipslot 17 Backup Off Hand"
+    },
+    {
+      "name": "Sapper without clipping a global",
+      "code": "#showtooltip Goblin Sapper Charge\n/use Goblin Sapper Charge\n/startattack"
+    },
+    {
+      "name": "Burst window",
+      "code": "#showtooltip Adrenaline Rush\n/cast Adrenaline Rush\n/use Thistle Tea\n/use Juju Flurry"
+    },
+    {
+      "name": "Expose Armor, 5CP only",
+      "code": "#showtooltip Expose Armor\n/cast [@target,harm] Expose Armor\n/sct Expose Armor up on %t"
+    }
+  ],
+  "leveling": [
+    {
+      "name": "Combat Swords",
+      "hue": "#8E7A2A",
+      "body": "The path of least resistance. Sinister Strike, Slice and Dice, Eviscerate, no positioning to think about. You arrive at 60 already knowing your raid rotation."
+    },
+    {
+      "name": "Daggers & stealth",
+      "hue": "#2E5F80",
+      "body": "Ambush openers, fewer fights taken, more fights won outright. Slower to gear, faster to move, and considerably more fun if you like picking your battles."
+    },
+    {
+      "name": "Skyborne Rogue",
+      "hue": "#2A4A6E",
+      "body": "Confirmed for Forever on both factions, starting on Zephras Isle with a glide racial. Requires the Heroic Pack or higher. Racial numbers are not public yet."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "16 Sep 2026",
+      "text": "Rebuilt for Classic Era as the baseline and added the Forever watch section. Removed all Season of Discovery content — runes, Scarlet Enclave, SoD-only consumables and abilities. Spec board now covers Combat Swords, Combat Daggers, Assassination and Subtlety."
+    },
+    {
+      "date": "14 Sep 2026",
+      "text": "Logged the BlizzCon Deep Dive: unified Hit and Crit covering poisons, weapon skill retained but tuned per item, and the full itemization pass across every dungeon boss."
+    },
+    {
+      "date": "12 Sep 2026",
+      "text": "Warcraft Forever announced at BlizzCon. Beta 17 September, launch 4 November, level cap staying at 60. Rogues confirmed to gain One-Handed Axes."
+    }
+  ],
+  "nav": [
+    {
+      "label": "START",
+      "items": [
+        {
+          "id": "overview",
+          "label": "Overview"
+        },
+        {
+          "id": "specs",
+          "label": "Spec board"
+        },
+        {
+          "id": "forever",
+          "label": "Forever watch"
+        }
+      ]
+    },
+    {
+      "label": "BUILD",
+      "items": [
+        {
+          "id": "talents",
+          "label": "Talents & weapons"
+        },
+        {
+          "id": "poisons",
+          "label": "Poisons"
+        },
+        {
+          "id": "rotation",
+          "label": "Rotation"
+        },
+        {
+          "id": "gear",
+          "label": "Gear"
+        }
+      ]
+    },
+    {
+      "label": "PREP",
+      "items": [
+        {
+          "id": "consumables",
+          "label": "Consumables"
+        },
+        {
+          "id": "buffs",
+          "label": "Buffs & debuffs"
+        }
+      ]
+    },
+    {
+      "label": "EXECUTE",
+      "items": [
+        {
+          "id": "iea",
+          "label": "Expose Armor duty"
+        },
+        {
+          "id": "raid",
+          "label": "Raids"
+        }
+      ]
+    },
+    {
+      "label": "REFERENCE",
+      "items": [
+        {
+          "id": "tools",
+          "label": "Tools & UI"
+        },
+        {
+          "id": "leveling",
+          "label": "Leveling"
+        },
+        {
+          "id": "faq",
+          "label": "FAQ"
+        },
+        {
+          "id": "changelog",
+          "label": "Changelog"
+        }
+      ]
+    }
+  ],
+  "themes": {
+    "subtle": {
+      "bg": "#101015",
+      "panel": "#17171E",
+      "panel2": "#1E1E26",
+      "line": "rgba(255,255,255,.11)",
+      "tex": "0",
+      "glowA": 0.3
+    },
+    "shadow": {
+      "bg": "#0B0B0D",
+      "panel": "#14141A",
+      "panel2": "#1B1B22",
+      "line": "rgba(255,255,255,.09)",
+      "tex": ".55",
+      "glowA": 0.55
+    },
+    "venom": {
+      "bg": "#06090A",
+      "panel": "#0E1413",
+      "panel2": "#131C19",
+      "line": "rgba(123,224,107,.16)",
+      "tex": "1",
+      "glowA": 0.8
+    }
+  }
+}

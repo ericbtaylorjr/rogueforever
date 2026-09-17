@@ -1,0 +1,32 @@
+import { leveling } from '../../content/content';
+import { SectionHeading } from '../ui/SectionHeading';
+
+export function Leveling() {
+  return (
+    <section id="leveling" aria-label="Leveling 1 to 60">
+      <SectionHeading id="leveling" />
+
+      <div className="grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,268px),1fr))]">
+        {leveling.map((l) => (
+          <article key={l.name} className="panel overflow-hidden">
+            <div
+              className="relative flex h-[78px] items-end p-[14px]"
+              style={{ background: `linear-gradient(140deg, ${l.hue}, #0A0A0C)` }}
+            >
+              <span
+                aria-hidden="true"
+                className="absolute inset-0"
+                style={{
+                  background:
+                    'repeating-linear-gradient(115deg, rgba(255,255,255,.055) 0 2px, transparent 2px 9px)',
+                }}
+              />
+              <h3 className="t-card-title relative text-ink">{l.name}</h3>
+            </div>
+            <p className="p-[14px] text-[12.5px] leading-[1.6] text-mute">{l.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
