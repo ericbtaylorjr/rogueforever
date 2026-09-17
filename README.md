@@ -1,4 +1,4 @@
-# Rogue DPS Compendium
+# Rogue DPS Handbook
 
 Single-page reference site for World of Warcraft Classic Rogues. Built from the
 Claude Design handoff package (`design_handoff_rogue_compendium`).

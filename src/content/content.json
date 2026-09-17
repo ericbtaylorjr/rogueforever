@@ -8,7 +8,7 @@
       "weapon": "Sword MH / Sword OH",
       "color": "#FFD966",
       "color2": "#A8862E",
-      "tier": "S",
+      "tier": "TBD",
       "role": "RAID ST",
       "tag": "Classic default"
     },
@@ -18,7 +18,7 @@
       "weapon": "Dagger MH / Dagger OH",
       "color": "#FF6B5E",
       "color2": "#A83C34",
-      "tier": "A",
+      "tier": "TBD",
       "role": "RAID ST",
       "tag": "Positional"
     },
@@ -28,7 +28,7 @@
       "weapon": "Dagger MH / Dagger OH",
       "color": "#5FC9F8",
       "color2": "#2E7FA8",
-      "tier": "A",
+      "tier": "TBD",
       "role": "RAID ST",
       "tag": "Poison / bleed"
     },
@@ -38,7 +38,7 @@
       "weapon": "Dagger MH / Dagger OH",
       "color": "#B98BFF",
       "color2": "#6F4FB8",
-      "tier": "C",
+      "tier": "TBD",
       "role": "PVP",
       "tag": "PvP in Classic"
     }
@@ -425,7 +425,7 @@
       }
     },
     "forever": {
-      "label": "Forever outlook",
+      "label": "Summary",
       "note": "BETA 17 SEP · LAUNCH 4 NOV · NO SIM OR LOG DATA EXISTS YET",
       "pending": true
     }
@@ -1250,12 +1250,8 @@
   ],
   "changelog": [
     {
-      "date": "16 Sep 2026",
-      "text": "Rebuilt for Classic Era as the baseline and added the Forever watch section. Removed all Season of Discovery content — runes, Scarlet Enclave, SoD-only consumables and abilities. Spec board now covers Combat Swords, Combat Daggers, Assassination and Subtlety."
-    },
-    {
-      "date": "14 Sep 2026",
-      "text": "Logged the BlizzCon Deep Dive: unified Hit and Crit covering poisons, weapon skill retained but tuned per item, and the full itemization pass across every dungeon boss."
+      "date": "17 Sep 2026",
+      "text": "Stood up the first iteration of the WoW Forever Rogue Handbook — spec board, talents, poisons, rotation, gear, consumables and the Forever watch, all in one place."
     },
     {
       "date": "12 Sep 2026",
@@ -1273,10 +1269,6 @@
         {
           "id": "specs",
           "label": "Spec board"
-        },
-        {
-          "id": "forever",
-          "label": "Forever watch"
         }
       ]
     },
@@ -1341,6 +1333,10 @@
         {
           "id": "faq",
           "label": "FAQ"
+        },
+        {
+          "id": "forever",
+          "label": "Forever watch"
         },
         {
           "id": "changelog",

@@ -9,9 +9,9 @@
  */
 
 export const hero = {
-  eyebrow: 'WORLD OF WARCRAFT CLASSIC',
+  eyebrow: 'WORLD OF WARCRAFT FOREVER',
   titleTop: 'Rogue DPS',
-  titleBottom: 'Compendium',
+  titleBottom: 'Handbook',
   lede: 'Everything a raiding Rogue needs, on one page. Community-built from sims, log analysis, and a lot of arguing in Discord. No ads, no twelve-page SEO detour before the actual answer.',
   support: {
     before: 'Built on Classic Era right now, with a running list of everything Blizzard has actually confirmed for ',
@@ -21,10 +21,9 @@ export const hero = {
   ctaPrimary: 'Pick a spec →',
   ctaGhost: 'What Forever changes',
   ladder: {
-    title: 'Spec ladder',
-    meta: 'CLASSIC ERA',
-    footnote:
-      'Tiers are Classic Era raid consensus, not a sim. Forever will reshuffle this — see Forever watch.',
+    title: 'Spec Meta',
+    meta: 'patch X.Y',
+    footnote: 'WoW Forever is currently in Beta. This will be updated as we learn more.',
   },
 } as const;
 
@@ -36,7 +35,7 @@ export const specBar = {
 
 /** Section headings. Nav labels are shorter — these are the on-page H2s. */
 export const headings: Record<string, string> = {
-  specs: 'Spec board',
+  specs: 'Spec Meta Breakdown',
   forever: 'Forever watch',
   talents: 'Talents & weapons',
   poisons: 'The poison rack',
@@ -184,8 +183,8 @@ export const search = {
 } as const;
 
 export const shell = {
-  wordmark: 'COMPENDIUM',
-  wordmarkSub: 'ROGUE',
+  wordmark: 'ROGUE HANDBOOK',
+  wordmarkSub: 'THE COMFY WIZARD',
   legend: { before: 'Droplet marks a ', strong: 'sweaty', after: ' tip' },
   openNav: 'Open navigation',
   closeNav: 'Close navigation',

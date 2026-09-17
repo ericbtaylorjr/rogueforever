@@ -20,7 +20,7 @@ export const config: CompendiumConfig = {
   intensity: 'shadow',
   accent: '#FFF468',
   showSweaty: true,
-  phaseLabel: 'Classic Era · Forever incoming',
+  phaseLabel: 'v 0.1',
   defaultSpec: 'cbsword',
 };
 

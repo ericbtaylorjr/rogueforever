@@ -30,8 +30,6 @@ export default function App() {
           <SpecBar />
           <SpecBoard />
           <Divider />
-          <ForeverWatch />
-          <Divider />
           <Talents />
           <Divider />
           <Poisons />
@@ -53,6 +51,8 @@ export default function App() {
           <Leveling />
           <Divider />
           <Faq />
+          <Divider />
+          <ForeverWatch />
           <Divider />
           <Changelog />
           <Footer />

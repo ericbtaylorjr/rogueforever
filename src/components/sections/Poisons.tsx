@@ -50,7 +50,7 @@ const tagStyle: Record<Poison['tag'], React.CSSProperties> = {
 export function Poisons() {
   return (
     <section id="poisons" aria-label="Poisons">
-      <SectionHeading id="poisons" tone="var(--venom)" />
+      <SectionHeading id="poisons" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{poisonsCopy.intro}</p>
 
