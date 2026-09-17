@@ -35,7 +35,7 @@ export const specBar = {
 
 /** Section headings. Nav labels are shorter — these are the on-page H2s. */
 export const headings: Record<string, string> = {
-  specs: 'Spec Meta Breakdown',
+  specs: 'Meta Breakdown',
   forever: 'Forever watch',
   talents: 'Talents & weapons',
   poisons: 'The poison rack',
@@ -63,7 +63,7 @@ export const specBoard = {
     heading: 'No Forever sim data exists yet',
     body: 'Beta opens 17 September and the game launches 4 November. Until logs exist there is nothing honest to rank. What we can do is tell you which direction each spec is pointing, based only on changes Blizzard has actually confirmed.',
   },
-  yourSpec: 'YOUR SPEC',
+  yourSpec: 'ACTIVE SPEC',
 } as const;
 
 export const forever = {
