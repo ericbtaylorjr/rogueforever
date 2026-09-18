@@ -59,7 +59,7 @@ export const specBoard = {
   intro: {
     before:
       'Classic Era raid consensus, scored as an index rather than a DPS figure — because a DPS number without a gear set, a fight length and a buff list attached is decoration. Sim your own character in ',
-    link: 'Classic WoWSims',
+    link: 'Forever WoWSims',
     after: ' and trust that instead.',
   },
   cols: { rank: 'RANK', index: 'INDEX · vs top' },
@@ -80,6 +80,13 @@ export const talents = {
   /** `{spec}` is replaced with the active spec name. */
   intro:
     'Showing {spec}. Classic Era builds — Forever redesigns individual talents and adds a new 16-point milestone, so treat every point below as provisional after 4 November.',
+  todoLabel: 'PLACEHOLDER',
+  todo: {
+    before: 'The talent splits and weapon details below are ',
+    strong: 'Classic Era placeholders',
+    after:
+      ', standing in until the Forever talent trees are published. They will be updated as information is gathered.',
+  },
   splitTitle: 'Talent split',
   weaponsTitle: 'Weapons & skill',
   skillCap: '300 SKILL',
@@ -99,9 +106,15 @@ export const poisonsCopy = {
     'Applied per weapon, consumed in charges, and the thing that separates a Rogue who prepared from one who turned up. Buy the reagents in bulk and stop apologising for the bank trips.',
   foreverCallout: {
     before: "Forever's unified Hit and Crit explicitly covers ",
-    strong: 'poisons and traps',
+    strong: 'poisons',
     after:
       '. In Classic your poison applications sit outside your melee hit table; in Forever the same hit rating on your gear feeds them. Assassination is the spec most likely to feel that.',
+  },
+  apCallout: {
+    before: 'Poison damage also scales with ',
+    strong: 'Attack Power',
+    after:
+      ' in Forever — a welcome change from Classic. Every spec applying poisons benefits, but Assassination leans on it the most.',
   },
 } as const;
 
@@ -115,20 +128,20 @@ export const rotation = {
 } as const;
 
 export const gear = {
-  simsLink: 'Open in Classic WoWSims ↗',
-  todoLabel: 'TODO',
+  simsLink: 'Open in Forever WoWSims ↗',
+  todoLabel: 'IN PROGRESS',
   todo: {
     before:
-      'Slot rows are wired and styled, item data is placeholder — drop your list in and every row fills, tooltips included. Worth holding off on a full Forever list: Blizzard has reviewed the loot on ',
-    strong: 'every',
+      'Slot rows are wired and styled, item data is placeholder. The Pre-raid BiS and Best in Slot lists will be built out over time as ',
+    strong: 'information is gathered and WoWSims APLs are solidified',
     after:
-      ' dungeon boss and is deliberately "unsolving" Classic BiS, so a Classic Era list will not survive contact with launch.',
+      '. They will be published once the research is done and there is enough solid data behind them to trust.',
   },
   cols: { slot: 'SLOT', item: 'ITEM', source: 'SOURCE', enchant: 'ENCHANT' },
   empty: 'No item set yet',
   tabs: [
-    { id: 'bis', label: 'Best in Slot' },
     { id: 'prebis', label: 'Pre-raid BiS' },
+    { id: 'bis', label: 'Best in Slot' },
   ],
 } as const;
 
@@ -136,26 +149,42 @@ export const consumablesCopy = {
   intro: 'The full bag, Classic Era. Hover anything for what it does.',
   sweatyNote: {
     strong: 'Droplets',
-    after: ' are the sweaty ones — real gains, real gold, real effort.',
+    after: ' are the sweaty ones — these are probably not worth it for most players.',
+  },
+  todoLabel: 'PLACEHOLDER',
+  todo: {
+    before: 'This list is ',
+    strong: 'Classic Era data, standing in until Forever consumables are known',
+    after:
+      '. Blizzard has confirmed reagents and effects are being reviewed, so expect additions, removals and rebalances. It will be replaced once the Forever list is available and validated.',
+  },
+} as const;
+
+export const buffsCopy = {
+  todoLabel: 'PLACEHOLDER',
+  todo: {
+    before: 'Buff and debuff values shown here are ',
+    strong: 'Classic Era baselines',
+    after:
+      '. Final balancing and stack/overlap rules for Forever are still TBD, so this list will be updated once they are confirmed and sims have been run against them.',
   },
 } as const;
 
 export const exposeArmor = {
   p1: {
     before:
-      'One Rogue on Expose Armor duty is standard, and it is the single most valuable thing you can do for a physical-heavy raid. It costs ',
-    strong: 'your',
-    after: ' damage. It gives the raid more than you lose, in almost every case.',
+      'Expose Armor and Sunder Armor now land on the exact same number, so the debuff is no longer a default Rogue assignment. It comes down to ',
+    strong: 'raid comp and who executes it more reliably',
+    after: ', not which class happens to own the ability.',
   },
-  p2: 'Expose vs Sunder is a settled argument that people keep re-litigating. A fully talented 5-point Expose Armor beats five stacks of Sunder — and it does it without eating five Warrior globals. The catch is that the two do not stack, so the raid picks one.',
+  p2: 'A fully talented 5-point Expose Armor used to beat five stacks of Sunder outright, which is why it defaulted to the Rogue. In Forever the two are tied — the Rogue talent no longer grants extra armor reduction beyond what Sunder already provides. The debuffs still do not stack, so the raid picks whichever player holds it more consistently, or if performance of one outweighs the other.',
   stats: [
     { val: '2,550', label: 'Expose Armor at 5CP, fully talented', tone: 'accent' },
-    { val: '2,250', label: 'Sunder Armor at 5 stacks', tone: 'mute' },
-    { val: '1,700', label: 'Untalented 5CP Expose — do not bother', tone: 'faint' },
+    { val: '2,550', label: 'Sunder Armor at 5 stacks', tone: 'accent' },
   ],
-  stepsTitle: 'Your job, in order',
+  stepsTitle: 'If it lands on you, the job is the same',
   steps: [
-    'Confirm the assignment before the pull. Expose and Sunder do not stack, so the raid runs one or the other — not both, not "whoever gets there first".',
+    'Confirm the assignment before the pull. Expose and Sunder do not stack, and with both landing at 2,550 the call comes down to comp and consistency, not class.',
     'Build to 5 combo points and land Expose Armor early. Do not open with it at 2CP because the pull felt rushed.',
     "Track the debuff timer on your own frames, not the raid's. Refresh it before it drops, not after somebody types in chat.",
     'Never let it fall during a movement phase. The raid feels it immediately, even when nobody says anything.',
@@ -164,7 +193,7 @@ export const exposeArmor = {
     before: 'Expose Armor must ',
     strong: 'only',
     after:
-      ' be cast at 5 combo points. A 3CP Expose is a wasted global and a worse debuff, and the raid has to live with it until it expires.',
+      ' be cast at 5 combo points. A 3CP Expose is a wasted global, wasted CP, and a worse debuff.',
   },
 } as const;
 

@@ -2,6 +2,7 @@ import { consumableCatCount, consumableCats, consumables } from '../../content/c
 import { consumablesCopy as copy } from '../../content/copy';
 import { dotFor } from '../../content/palette';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { FilterPill } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -24,6 +25,14 @@ export function Consumables() {
         <strong className="font-semibold text-venom">{copy.sweatyNote.strong}</strong>
         {copy.sweatyNote.after}
       </p>
+
+      <div className="mt-[16px]">
+        <Callout tone="accent" dashed label={copy.todoLabel}>
+          {copy.todo.before}
+          <strong className="font-semibold text-accent">{copy.todo.strong}</strong>
+          {copy.todo.after}
+        </Callout>
+      </div>
 
       <div
         role="group"

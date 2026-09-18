@@ -1,7 +1,6 @@
 import { gearSlots } from '../../content/content';
 import { gear as copy } from '../../content/copy';
 import { itemForSlot, qualityColor, wowheadUrl } from '../../content/gear';
-import { links } from '../../content/links';
 import type { GearSetId } from '../../content/types';
 import { useCompendium } from '../../state/CompendiumProvider';
 import { Callout } from '../ui/Callout';
@@ -75,14 +74,13 @@ export function Gear() {
           onChange={(id) => setGearSet(id as GearSetId)}
           label="Gear list"
         />
-        <a
-          href={links.wowsims}
-          target="_blank"
-          rel="noreferrer"
-          className="ml-auto text-[12.5px] font-semibold text-mute transition-colors hover:text-accent"
+        <button
+          type="button"
+          disabled
+          className="ml-auto cursor-not-allowed text-[12.5px] font-semibold text-mute opacity-50"
         >
           {copy.simsLink}
-        </a>
+        </button>
       </div>
 
       <div className="mt-[16px]">

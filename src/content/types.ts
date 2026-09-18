@@ -128,6 +128,7 @@ export interface Tool {
   color: string;
   body: string;
   cta: string;
+  disabled?: boolean;
 }
 
 export interface Macro {

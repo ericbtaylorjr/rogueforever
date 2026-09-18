@@ -7,8 +7,7 @@
  */
 export const links = {
   wowsims: 'https://wowsims.github.io/classic/',
-  weakauras: '#', // TODO: Comfy Rogue UI on Wago
-  macroArchive: '#', // TODO: macro + aura archive
+  weakauras: '#', // TODO: Comfy's UI addon package
   discord: '#', // TODO: Rogue Classic Discord invite
   tip: '#', // TODO: tip / support page
   youtube: '#', // TODO
@@ -26,8 +25,7 @@ export const socialHref: Record<string, string> = {
 /** Map a tool card's CTA to its destination. Keyed by the tool name in content.json. */
 export const toolHref: Record<string, string> = {
   'Learn to sim': links.wowsims,
-  'Comfy Rogue UI': links.weakauras,
-  'Macros & auras': links.macroArchive,
+  "Comfy's UI": links.weakauras,
   'Rogue Classic Discord': links.discord,
 };
 

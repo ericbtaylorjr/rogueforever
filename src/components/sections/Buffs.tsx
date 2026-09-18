@@ -1,5 +1,7 @@
 import { buffGroups } from '../../content/content';
+import { buffsCopy as copy } from '../../content/copy';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useTooltip } from '../ui/Tooltip';
@@ -12,7 +14,13 @@ export function Buffs() {
     <section id="buffs" aria-label="Buffs and debuffs">
       <SectionHeading id="buffs" />
 
-      <div className="grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,248px),1fr))]">
+      <Callout tone="accent" dashed label={copy.todoLabel}>
+        {copy.todo.before}
+        <strong className="font-semibold text-accent">{copy.todo.strong}</strong>
+        {copy.todo.after}
+      </Callout>
+
+      <div className="mt-[18px] grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,248px),1fr))]">
         {buffGroups.map((g) => {
           const items = g.items.filter((i) => sweaty || !i.s);
           return (

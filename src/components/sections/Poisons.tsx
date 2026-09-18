@@ -54,11 +54,16 @@ export function Poisons() {
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{poisonsCopy.intro}</p>
 
-      <div className="mt-[16px]">
+      <div className="mt-[16px] flex flex-col gap-[12px]">
         <Callout tone="sky">
           {poisonsCopy.foreverCallout.before}
           <strong className="font-semibold text-sky">{poisonsCopy.foreverCallout.strong}</strong>
           {poisonsCopy.foreverCallout.after}
+        </Callout>
+        <Callout tone="sky">
+          {poisonsCopy.apCallout.before}
+          <strong className="font-semibold text-sky">{poisonsCopy.apCallout.strong}</strong>
+          {poisonsCopy.apCallout.after}
         </Callout>
       </div>
 

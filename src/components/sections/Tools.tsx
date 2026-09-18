@@ -17,14 +17,24 @@ export function Tools() {
             </span>
             <h3 className="t-card-title mt-[8px] text-ink">{t.name}</h3>
             <p className="mt-[10px] flex-1 text-[12.5px] leading-[1.6] text-mute">{t.body}</p>
-            <a
-              href={toolHref[t.name] ?? '#'}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-[14px] rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute transition-colors hover:border-accent hover:bg-accent-dim hover:text-accent"
-            >
-              {t.cta}
-            </a>
+            {t.disabled ? (
+              <button
+                type="button"
+                disabled
+                className="mt-[14px] cursor-not-allowed rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute opacity-50"
+              >
+                {t.cta}
+              </button>
+            ) : (
+              <a
+                href={toolHref[t.name] ?? '#'}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-[14px] rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute transition-colors hover:border-accent hover:bg-accent-dim hover:text-accent"
+              >
+                {t.cta}
+              </a>
+            )}
           </article>
         ))}
       </div>

@@ -140,6 +140,14 @@ export function Talents() {
         {copy.intro.replace('{spec}', specById[spec].name)}
       </p>
 
+      <div className="mt-[16px]">
+        <Callout tone="accent" dashed label={copy.todoLabel}>
+          {copy.todo.before}
+          <strong className="font-semibold text-accent">{copy.todo.strong}</strong>
+          {copy.todo.after}
+        </Callout>
+      </div>
+
       <div className="mt-[18px] grid gap-[14px] stack:grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)]">
         <TalentSplit />
         <WeaponCard />

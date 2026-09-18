@@ -9,7 +9,7 @@
       "color": "#FFD966",
       "color2": "#A8862E",
       "tier": "TBD",
-      "role": "RAID ST",
+      "role": "Meta TBD",
       "tag": "Classic default"
     },
     {
@@ -19,7 +19,7 @@
       "color": "#FF6B5E",
       "color2": "#A83C34",
       "tier": "TBD",
-      "role": "RAID ST",
+      "role": "Meta TBD",
       "tag": "Positional"
     },
     {
@@ -29,7 +29,7 @@
       "color": "#5FC9F8",
       "color2": "#2E7FA8",
       "tier": "TBD",
-      "role": "RAID ST",
+      "role": "Meta TBD",
       "tag": "Poison / bleed"
     },
     {
@@ -39,7 +39,7 @@
       "color": "#B98BFF",
       "color2": "#6F4FB8",
       "tier": "TBD",
-      "role": "PVP",
+      "role": "Meta TBD",
       "tag": "PvP in Classic"
     }
   ],
@@ -872,36 +872,6 @@
   ],
   "buffGroups": [
     {
-      "label": "World buffs",
-      "note": "Get them, keep them, do not die on trash.",
-      "items": [
-        {
-          "n": "Rallying Cry of the Dragonslayer"
-        },
-        {
-          "n": "Warchief’s Blessing"
-        },
-        {
-          "n": "Songflower Serenade"
-        },
-        {
-          "n": "Spirit of Zandalar"
-        },
-        {
-          "n": "Sayge’s Dark Fortune of Damage"
-        },
-        {
-          "n": "Fengus’ Ferocity"
-        },
-        {
-          "n": "Mol’dar’s Moxie"
-        },
-        {
-          "n": "Slip’kik’s Savvy"
-        }
-      ]
-    },
-    {
       "label": "Raid buffs",
       "note": "Nag your raid leader until these are assigned.",
       "items": [
@@ -1076,28 +1046,12 @@
   ],
   "faqs": [
     {
-      "q": "Swords or daggers?",
-      "a": "Swords in Classic, almost always. Sword Specialization gives you extra swings from both hands, Sinister Strike has no positional requirement, and no boss mechanic can accidentally delete your rotation by turning you around. Daggers have a higher ceiling on a stationary boss you can stay behind, and Backstab hits harder per global, but you pay for it every time the fight moves. If you are new to raiding, pick swords and stop reading guides about it."
-    },
-    {
-      "q": "Do I really need 300 weapon skill?",
-      "a": "Yes. Weapon skill reduces your miss chance against level 63 bosses and softens the glancing blow penalty that eats a large chunk of your white damage. It is one of the highest-value things on a piece of gear for a melee DPS in Classic. Forever keeps weapon skill as a stat but says individual items will no longer grant excessive amounts of it, so expect to source it from more pieces rather than fewer."
-    },
-    {
-      "q": "Which professions actually matter?",
-      "a": "Engineering, and it is not close. Goblin Sapper Charge is free damage on cooldown, Thorium Grenade is a pocket stun, and the trinkets and explosives all require the profession to use. Everything else is convenience or gold. Blizzard has confirmed professions are being updated for Forever, so this answer has a shelf life."
-    },
-    {
       "q": "Does Spell Power affect poisons?",
       "a": "No. Poisons do not scale with Spell Power in Classic. The only place Spell Power touches a Rogue is Dragonbreath Chili, which is a curiosity for people chasing the last fraction of a percent. What does change in Forever: Blizzard confirmed the unified Hit stat covers every attack including poisons, so your hit rating will feed poison applications in a way it does not today."
     },
     {
       "q": "Does Attack Power affect poisons?",
       "a": "Yes. Instant Poison and Deadly Poison damage both scale with your Attack Power — confirmed by a dev on the Rogue Classic Discord. It is not a huge chunk of the total, but it is real, and it is one more reason a Rogue stacking Attack Power sees it show up everywhere on the damage meter, not just in white swings."
-    },
-    {
-      "q": "My raid leader says I have to run Expose Armor?",
-      "a": "They are right, and one Rogue should own it. A fully talented 5-point Expose Armor reduces more armor than five stacks of Sunder Armor, and it does it with one Rogue global instead of five Warrior ones. The catch is that Expose and Sunder do not stack, so the raid commits to one or the other — and if they picked you, track the debuff like it is your job, because it is."
     },
     {
       "q": "What has Blizzard actually confirmed for Rogues in Forever?",
@@ -1117,22 +1071,17 @@
       "kicker": "Start here",
       "name": "Learn to sim",
       "color": "#FFF468",
-      "body": "Classic WoWSims answers your gear questions better than any guide can, including this one. It is genuinely not complicated, and it takes an afternoon to learn once and then never wonder again.",
-      "cta": "Open WoWSims"
+      "body": "Forever WoWSims answers your gear questions better than any guide can, including this one. It is genuinely not complicated, and it takes an afternoon to learn once and then never wonder again.",
+      "cta": "Available Soon",
+      "disabled": true
     },
     {
-      "kicker": "WeakAuras",
-      "name": "Comfy Rogue UI",
+      "kicker": "Addons",
+      "name": "Comfy's UI",
       "color": "#B98BFF",
-      "body": "A full Rogue WeakAura suite. Shows only what you need to hold a rotation together — Slice and Dice, combo points, energy, cooldowns — with icons conditional on your talents. Every spec supported.",
-      "cta": "View on Wago"
-    },
-    {
-      "kicker": "Archive",
-      "name": "Macros & auras",
-      "color": "#5FC9F8",
-      "body": "Every macro and WeakAura from the archive. Weapon swaps, trinket stacking, interrupt announces — the unglamorous stuff that makes a clean rotation possible.",
-      "cta": "Browse the archive"
+      "body": "The complete UI addon package The Comfy Wizard actually plays with — heavily centered around Ellesmere UI, plus a handful of QoL addons, bundled into one drop-in setup.",
+      "cta": "Available Soon",
+      "disabled": true
     },
     {
       "kicker": "Community",
