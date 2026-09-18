@@ -38,11 +38,11 @@ export default function App() {
           <Divider />
           <Gear />
           <Divider />
+          <ExposeArmor />
+          <Divider />
           <Consumables />
           <Divider />
           <Buffs />
-          <Divider />
-          <ExposeArmor />
           <Divider />
           <Raids />
           <Divider />

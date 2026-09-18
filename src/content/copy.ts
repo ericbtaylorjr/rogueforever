@@ -170,8 +170,8 @@ export const exposeArmor = {
 
 export const raidsCopy = {
   intro:
-    'Rogue-only notes per tier. What to bring, what actually targets you, and where a Rogue quietly wins the fight. Tap a raid to open it.',
-  prepLabel: 'Bring',
+    "The three raids Blizzard has confirmed for Forever so far. Boss lists and Rogue notes aren't published yet — this tracks exactly what has and hasn't been said. Tap a raid to open it.",
+  prepLabel: 'Status',
 } as const;
 
 export const toolsCopy = {

@@ -466,7 +466,7 @@
     {
       "label": "Beta",
       "val": "17 Sep 2026",
-      "note": "Pre-purchase packs guarantee access",
+      "note": "Live now — testing runs through 21 Oct",
       "color": "#7FC4E8"
     },
     {
@@ -504,7 +504,7 @@
       "cat": "Systems",
       "status": "Confirmed",
       "hue": "#7BE06B",
-      "body": "Spell, melee and ranged hit collapse into one Hit stat, and the same happens to crit. Blizzard called out that it covers every attack a character makes, poisons and traps included. The worked example was Lionheart Helm: +18 Strength, 2% hit and 2% crit applying everywhere.",
+      "body": "Spell, melee and ranged hit collapse into one Hit stat, and the same happens to crit. Blizzard's BlizzCon deep dive named Rogues directly, saying the change \"helps hybrid specializations such as Retribution Paladins and Enhancement Shaman, while also letting Warriors, Hunters, and Rogues benefit when improving the reliability of tools such as Taunts, Poisons, and Traps.\" The worked example was Lionheart Helm: +18 Strength, 2% hit and 2% crit applying everywhere.",
       "impact": "Your gear no longer has dead stats on it, and your poison applications stop living on a separate table from your swings."
     },
     {
@@ -512,7 +512,7 @@
       "cat": "Systems",
       "status": "Confirmed",
       "hue": "#7BE06B",
-      "body": "Weapon Skill stays as a Classic stat. Blizzard says balancing will stop individual pieces from handing out excessive amounts of it.",
+      "body": "Blizzard's own wording from the deep dive: \"Weapon skill still works as it always has, but items with weapon skill offer less of it per item so they are not always the obvious best choice.\"",
       "impact": "Still cap your weapon skill. Do not expect one item to do half the job for you the way a couple of Classic pieces did."
     },
     {
@@ -560,16 +560,24 @@
       "cat": "Unknown",
       "status": "Not published",
       "hue": "#8E8E9A",
-      "body": "Blizzard has published a full rework preview for Paladin. It has not done the same for Rogue, so there is no official list of changed Rogue abilities, ranks or values.",
-      "impact": "Anything you read claiming a specific Forever Rogue rotation right now is guessing. Check back after beta."
+      "body": "Blizzard has published a full rework preview for Paladin and covered general systems affecting Rogues — Hit/Crit, Weapon Skill — in the BlizzCon deep dive. It still has not published a dedicated ability-by-ability breakdown for Rogue, and today's live Q&A did not add one.",
+      "impact": "Anything you read claiming a specific Forever Rogue rotation is either your own beta testing or still guessing. Trust the beta client over secondhand claims."
     },
     {
-      "title": "Raid and endgame content",
+      "title": "Raid and dungeon lineup is confirmed",
       "cat": "Unknown",
-      "status": "Partial",
-      "hue": "#8E8E9A",
-      "body": "Two raids and nine dungeons are confirmed for launch, alongside three new zones plus the Skyborne starting zone. Encounter mechanics have not been detailed.",
-      "impact": "The raid notes on this page are Classic Era tiers. Forever boss strats land once beta testing produces them."
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Blizzard's What's Next panel named the launch content: two raids — Hyjal Summit (20-player) and Barrow Deeps (10-player) — plus nine dungeons including Hall of Thanes, Ruins of Lordaeron and City of Dalaran, new zones Mount Hyjal, Shen'dralas and Riverglades, the Skyborne starting zone Zephras Isle, and a 15v15 PvP battleground, Darkspear Islands.",
+      "impact": "Names and counts are locked in, but encounter mechanics and loot tables are not. The raid notes on this page are still Classic Era tiers until beta testing produces real Forever strats."
+    },
+    {
+      "title": "Beta is live",
+      "cat": "Unknown",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "The Forever beta opened today, 17 September, right after the live developer Q&A. Opening-week access covers the Skyborne race and Zephras Isle zone, an initial level cap of 20 (raised to 30 later in the test), and two dungeons — Hall of Thanes and Ruins of Lordaeron. Testing runs through 21 October.",
+      "impact": "You can play a Rogue in Forever right now instead of only reading about it — just at a low level cap. Nothing past the opening test content is accessible yet."
     }
   ],
   "poisons": [
@@ -988,162 +996,79 @@
   ],
   "raids": [
     {
-      "name": "Molten Core",
-      "abbr": "MC",
-      "hue": "#8E3A22",
-      "tag": "Tier 1",
-      "summary": "Ten bosses, a lot of fire, and very little that specifically wants a Rogue.",
-      "prep": "Greater Fire Protection Potion on almost every pull. Juju Ember alongside it. Fire resistance gear is a tank problem, not yours.",
+      "name": "Hyjal Summit",
+      "abbr": "HS",
+      "hue": "#5C8A3A",
+      "tag": "Unlocks 9 Dec 2026",
+      "summary": "20-player raid at Mount Hyjal, set in the aftermath of Archimonde's defeat. Boss list not yet published.",
+      "prep": "Rogue strategies and tips will be updated as soon as this raid's content becomes available for testing.",
       "phases": [
         {
-          "n": "What targets you",
+          "n": "What Blizzard has confirmed",
           "lines": [
-            "Baron Geddon’s Living Bomb — run out of the raid immediately, every time.",
-            "Ragnaros knockback into the lava — hug the hitbox and watch your positioning.",
-            "Shazzrah and Lucifron curses need a decurse, not a Rogue solution."
+            "A 20-player raid, unlocking 9 December 2026 — five weeks after the 4 November launch.",
+            "Blizzard's own words: \"Mount Hyjal invites you to explore the aftermath of Archimonde's defeat, journey through Darkwhisper Gorge, and help shape the future of a recovering land.\"",
+            "Ships with new tier sets and a legendary reward, shared across the Hyjal Summit and Barrow Deeps raid wave."
           ]
         },
         {
-          "n": "Where you win",
+          "n": "Not yet published",
           "lines": [
-            "Kick on Shazzrah’s Blink-teleport casts if your raid assigns interrupts.",
-            "Blade Flurry on the Core Rager and Flamewaker packs, not on single-target bosses.",
-            "Expose Armor uptime matters here more than your personal damage — the raid is melee-heavy."
+            "Boss names and encounter count.",
+            "Loot tables and set bonuses.",
+            "Any Rogue-specific mechanics or class calls."
           ]
         }
       ]
     },
     {
-      "name": "Blackwing Lair",
-      "abbr": "BWL",
-      "hue": "#7A2A2A",
-      "tag": "Tier 2",
-      "summary": "The tier where Rogue utility and positioning finally start mattering.",
-      "prep": "Greater Fire Protection Potion for the drake wing. Greater Shadow Protection Potion for Nefarian. Bring a repair bot’s worth of gold.",
+      "name": "Barrow Deeps",
+      "abbr": "BD",
+      "hue": "#4A2E6E",
+      "tag": "Unlocks 9 Dec 2026",
+      "summary": "10-player raid. Blizzard has confirmed its size and unlock date; boss list not yet published.",
+      "prep": "Rogue strategies and tips will be updated as soon as this raid's content becomes available for testing.",
       "phases": [
         {
-          "n": "What targets you",
+          "n": "What Blizzard has confirmed",
           "lines": [
-            "Firemaw, Ebonroc and Flamegor — Shadow Flame is frontal, stay behind and never get turned around.",
-            "Wing Buffet knocks you out of melee. Expect it, do not panic, walk back in.",
-            "Nefarian’s Rogue class call disarms you — swap to a backup weapon set or throw for the duration.",
-            "Chromaggus breath types change per week. Learn your raid’s two."
+            "A 10-player raid — Blizzard describes it as \"a maximum-level 10-player challenge.\"",
+            "Unlocks 9 December 2026, alongside Hyjal Summit.",
+            "Ships with new tier sets and a legendary reward, shared across the Hyjal Summit and Barrow Deeps raid wave."
           ]
         },
         {
-          "n": "Where you win",
+          "n": "Not yet published",
           "lines": [
-            "Razorgore’s adds are pure Blade Flurry food.",
-            "Vaelastrasz is a pure single-target burn — this is your parse fight.",
-            "Broodlord Lashlayer’s Blast Wave punishes clumping; spread and keep uptime."
+            "Setting and lore beyond the raid's name — Blizzard's own recap doesn't describe it further.",
+            "Boss names and encounter count.",
+            "Loot tables, set bonuses and any Rogue-specific mechanics."
           ]
         }
       ]
     },
     {
-      "name": "Temple of Ahn’Qiraj",
-      "abbr": "AQ40",
-      "hue": "#8E7A2A",
-      "tag": "Tier 2.5",
-      "summary": "Nature damage, add waves, and the best cleave tier for a Combat Rogue.",
-      "prep": "Greater Nature Protection Potion — non-negotiable for Princess Huhuran. Nature resistance gear if your guild asks for it.",
-      "phases": [
-        {
-          "n": "What targets you",
-          "lines": [
-            "Princess Huhuran’s Frenzy and Poison Bolt Volley — this is the Nature Protection Potion fight.",
-            "Twin Emperors teleport; melee must swap targets cleanly and not chase.",
-            "C’Thun’s eye tentacles will eat you if you stand still in the stomach.",
-            "Ouro’s emerge and burrow cycles — reposition, do not tunnel."
-          ]
-        },
-        {
-          "n": "Where you win",
-          "lines": [
-            "Fankriss and the Twins are heavy add fights. Blade Flurry earns its talent points here.",
-            "Viscidus needs frost damage and then a lot of fast melee hits — Rogues are the intended answer.",
-            "Silithid trash between bosses is where a Combat Rogue quietly triples the meter."
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Naxxramas",
-      "abbr": "NAXX",
-      "hue": "#2A6E6E",
-      "tag": "Tier 3",
-      "summary": "The hardest Classic tier, and the one that actually respects a good Rogue.",
-      "prep": "Greater Shadow Protection Potion throughout. Greater Frost Protection Potion for Sapphiron. Frost resistance gear for the same.",
-      "phases": [
-        {
-          "n": "What targets you",
-          "lines": [
-            "Heigan’s dance — learn the safe zones, do not improvise.",
-            "Thaddius polarity swaps, every time, without being told.",
-            "Maexxna’s Web Wrap can take you out of the fight; know who is freeing you.",
-            "Loatheb only allows healing in tiny windows — do not take avoidable damage.",
-            "Grobbulus poison clouds spread if you stand in them."
-          ]
-        },
-        {
-          "n": "Where you win",
-          "lines": [
-            "Patchwerk is a pure burn with no mechanics for you at all. Parse fight.",
-            "Instructor Razuvious and the Four Horsemen reward precise positioning and cooldown discipline.",
-            "Gluth’s zombie waves and the Construct Quarter trash are Blade Flurry territory.",
-            "Kick on Noth’s Curse and the Blood Frenzy casts your raid assigns."
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Onyxia’s Lair & world bosses",
+      "name": "Onyxia's Lair",
       "abbr": "ONY",
-      "hue": "#3A6E42",
-      "tag": "Outdoor",
-      "summary": "Onyxia, Azuregos, Kazzak, and the dragons of Nightmare. Mostly attendance checks.",
-      "prep": "Greater Fire Protection Potion for Onyxia. Nature protection for the Emerald dragons. A Free Action Potion is rarely wasted.",
+      "hue": "#8E3A22",
+      "tag": "Unlocks 9 Dec 2026",
+      "summary": "Classic's 40-player raid returns as part of the December raid wave. Straight rerelease or rework is unconfirmed.",
+      "prep": "Rogue strategies and tips will be updated as soon as this raid's content becomes available for testing.",
       "phases": [
         {
-          "n": "What targets you",
+          "n": "What Blizzard has confirmed",
           "lines": [
-            "Onyxia phase 2 — you are on the ground doing nothing but dodging fire and killing whelps.",
-            "Onyxia’s tail sweep and Deep Breath. Stay off the tail, stay out of the lane.",
-            "Kazzak’s Mark of Kazzak on a caster is not your problem; his Twisted Reflection is."
+            "The 40-player raid returns as part of the raid wave unlocking 9 December 2026, per Blizzard's Forever roadmap.",
+            "Blizzard's written recap only frames it as \"a revamped iconic raid\" — it doesn't name Onyxia's Lair directly in that text, though the roadmap graphic does.",
+            "Whether the fight is a straight rerelease or a reworked encounter has not been said."
           ]
         },
         {
-          "n": "Where you win",
+          "n": "Not yet published",
           "lines": [
-            "Whelp waves in Onyxia phase 2 are Blade Flurry food.",
-            "Onyxia phase 3 is a stationary single-target burn — save your cooldowns for it.",
-            "World boss tagging fights reward stealth. Use it shamelessly."
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Forever raids",
-      "abbr": "TBA",
-      "hue": "#2A4A6E",
-      "tag": "Awaiting beta",
-      "summary": "Two raids and nine dungeons confirmed at launch. No encounter detail published yet.",
-      "prep": "Nothing to prepare yet. Blizzard has confirmed the content exists but has not detailed a single encounter mechanic.",
-      "phases": [
-        {
-          "n": "What is confirmed",
-          "lines": [
-            "Two raids and nine dungeons at launch, per Blizzard’s What’s Next recap.",
-            "Three new or reimagined regions — Mount Hyjal, Shen’dralas and Riverglades — plus Zephras Isle for Skyborne.",
-            "Loot on every existing dungeon boss has been reviewed and adjusted."
-          ]
-        },
-        {
-          "n": "What is not",
-          "lines": [
-            "Boss names, mechanics, phase counts, interrupt assignments — none of it.",
-            "Whether Expose Armor keeps its current numbers or its current role.",
-            "Anything about Rogue-specific mechanics or class calls."
+            "Any changes to Onyxia's phases, mechanics or loot.",
+            "Whether Forever's Hit/Crit and Weapon Skill changes alter the fight.",
+            "Rogue-specific notes — class call, tail positioning, whelp phase — for the Forever version."
           ]
         }
       ]
@@ -1163,8 +1088,12 @@
       "a": "Engineering, and it is not close. Goblin Sapper Charge is free damage on cooldown, Thorium Grenade is a pocket stun, and the trinkets and explosives all require the profession to use. Everything else is convenience or gold. Blizzard has confirmed professions are being updated for Forever, so this answer has a shelf life."
     },
     {
-      "q": "Does spell power affect poisons?",
-      "a": "No. Poisons do not scale with spell power in Classic. The only place spell power touches a Rogue is Dragonbreath Chili, which is a curiosity for people chasing the last fraction of a percent. What does change in Forever: Blizzard confirmed the unified Hit stat covers every attack including poisons, so your hit rating will feed poison applications in a way it does not today."
+      "q": "Does Spell Power affect poisons?",
+      "a": "No. Poisons do not scale with Spell Power in Classic. The only place Spell Power touches a Rogue is Dragonbreath Chili, which is a curiosity for people chasing the last fraction of a percent. What does change in Forever: Blizzard confirmed the unified Hit stat covers every attack including poisons, so your hit rating will feed poison applications in a way it does not today."
+    },
+    {
+      "q": "Does Attack Power affect poisons?",
+      "a": "Yes. Instant Poison and Deadly Poison damage both scale with your Attack Power — confirmed by a dev on the Rogue Classic Discord. It is not a huge chunk of the total, but it is real, and it is one more reason a Rogue stacking Attack Power sees it show up everywhere on the damage meter, not just in white swings."
     },
     {
       "q": "My raid leader says I have to run Expose Armor?",
@@ -1215,20 +1144,8 @@
   ],
   "macros": [
     {
-      "name": "Weapon set swap (Nefarian)",
+      "name": "Weapon set swap",
       "code": "#showtooltip\n/equipslot 16 Backup Main Hand\n/equipslot 17 Backup Off Hand"
-    },
-    {
-      "name": "Sapper without clipping a global",
-      "code": "#showtooltip Goblin Sapper Charge\n/use Goblin Sapper Charge\n/startattack"
-    },
-    {
-      "name": "Burst window",
-      "code": "#showtooltip Adrenaline Rush\n/cast Adrenaline Rush\n/use Thistle Tea\n/use Juju Flurry"
-    },
-    {
-      "name": "Expose Armor, 5CP only",
-      "code": "#showtooltip Expose Armor\n/cast [@target,harm] Expose Armor\n/sct Expose Armor up on %t"
     }
   ],
   "leveling": [
@@ -1290,6 +1207,10 @@
         {
           "id": "gear",
           "label": "Gear"
+        },
+        {
+          "id": "iea",
+          "label": "Expose Armor duty"
         }
       ]
     },
@@ -1309,10 +1230,6 @@
     {
       "label": "EXECUTE",
       "items": [
-        {
-          "id": "iea",
-          "label": "Expose Armor duty"
-        },
         {
           "id": "raid",
           "label": "Raids"
