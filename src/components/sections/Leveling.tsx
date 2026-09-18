@@ -1,4 +1,5 @@
 import { leveling } from '../../content/content';
+import { levelingCopy as copy } from '../../content/copy';
 import { SectionHeading } from '../ui/SectionHeading';
 
 export function Leveling() {
@@ -6,7 +7,9 @@ export function Leveling() {
     <section id="leveling" aria-label="Leveling 1 to 60">
       <SectionHeading id="leveling" />
 
-      <div className="grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,268px),1fr))]">
+      <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{copy.intro}</p>
+
+      <div className="mt-[18px] grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,268px),1fr))]">
         {leveling.map((l) => (
           <article key={l.name} className="panel overflow-hidden">
             <div

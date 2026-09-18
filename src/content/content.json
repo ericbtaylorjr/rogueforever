@@ -1107,11 +1107,6 @@
       "name": "Daggers & stealth",
       "hue": "#2E5F80",
       "body": "Ambush openers, fewer fights taken, more fights won outright. Slower to gear, faster to move, and considerably more fun if you like picking your battles."
-    },
-    {
-      "name": "Skyborne Rogue",
-      "hue": "#2A4A6E",
-      "body": "Confirmed for Forever on both factions, starting on Zephras Isle with a glide racial. Requires the Heroic Pack or higher. Racial numbers are not public yet."
     }
   ],
   "changelog": [
@@ -1146,26 +1141,18 @@
           "label": "Talents & weapons"
         },
         {
-          "id": "poisons",
-          "label": "Poisons"
-        },
-        {
-          "id": "rotation",
-          "label": "Rotation"
-        },
-        {
           "id": "gear",
           "label": "Gear"
-        },
-        {
-          "id": "iea",
-          "label": "Expose Armor duty"
         }
       ]
     },
     {
       "label": "PREP",
       "items": [
+        {
+          "id": "poisons",
+          "label": "Poisons"
+        },
         {
           "id": "consumables",
           "label": "Consumables"
@@ -1179,6 +1166,14 @@
     {
       "label": "EXECUTE",
       "items": [
+        {
+          "id": "rotation",
+          "label": "Rotation"
+        },
+        {
+          "id": "iea",
+          "label": "Expose Armor"
+        },
         {
           "id": "raid",
           "label": "Raids"

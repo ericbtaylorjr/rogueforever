@@ -1,0 +1,13 @@
+{
+  "name": "Rogue Handbook - WoW Forever",
+  "short_name": "Rogue Handbook",
+  "description": "A one-page reference for how to excel at the Rogue class in World of Warcraft Forever, curated by The Comfy Wizard.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0b0d",
+  "theme_color": "#0b0b0d",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

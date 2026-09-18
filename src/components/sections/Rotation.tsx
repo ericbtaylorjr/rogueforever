@@ -1,6 +1,7 @@
 import { specById, specDetail } from '../../content/content';
 import { rotation as copy } from '../../content/copy';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -18,6 +19,14 @@ export function Rotation() {
           {copy.showing.replace('{spec}', specById[spec].name)}
         </span>
       </p>
+
+      <div className="mt-[16px]">
+        <Callout tone="accent" dashed label={copy.todoLabel}>
+          {copy.todo.before}
+          <strong className="font-semibold text-accent">{copy.todo.strong}</strong>
+          {copy.todo.after}
+        </Callout>
+      </div>
 
       <div className="mt-[18px] grid gap-[14px] stack:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
         <ol className="panel px-[18px] py-[8px]">

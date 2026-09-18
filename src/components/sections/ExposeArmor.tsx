@@ -10,7 +10,7 @@ const toneVar: Record<string, string> = {
 
 export function ExposeArmor() {
   return (
-    <section id="iea" aria-label="Expose Armor duty">
+    <section id="iea" aria-label="Expose Armor">
       <SectionHeading id="iea" />
 
       <div className="grid gap-[14px] stack:grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)]">

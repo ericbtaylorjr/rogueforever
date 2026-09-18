@@ -47,7 +47,7 @@ export const headings: Record<string, string> = {
   gear: 'Gear',
   consumables: 'Consumables',
   buffs: 'Buffs & debuffs',
-  iea: 'Expose Armor duty',
+  iea: 'Expose Armor',
   raid: 'Raids',
   tools: 'Tools & UI',
   leveling: 'Leveling 1–60',
@@ -123,6 +123,13 @@ export const rotation = {
     "A priority list, top to bottom. If a line's conditions are met it fires and you start again from the top.",
   /** `{spec}` is replaced with the active spec name. */
   showing: '{spec} shown.',
+  todoLabel: 'PLACEHOLDER',
+  todo: {
+    before: 'This priority list is a ',
+    strong: 'placeholder rotation',
+    after:
+      ', standing in until real data is gathered and WoWSims APLs are established for Forever. It will be updated once that work is done.',
+  },
   openerTitle: 'Opener',
   neverTitle: 'Never do this',
 } as const;
@@ -207,6 +214,11 @@ export const toolsCopy = {
   macrosTitle: 'Macros worth stealing',
   copy: 'Copy',
   copied: 'Copied',
+} as const;
+
+export const levelingCopy = {
+  intro:
+    'All of these are viable ways to level a Rogue — pick based on your own preference, not a hard meta call. This will be updated once leveling builds are fleshed out during Beta.',
 } as const;
 
 export const search = {
