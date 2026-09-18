@@ -2,6 +2,7 @@ import { config } from '../../config';
 import { specs } from '../../content/content';
 import { hero } from '../../content/copy';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
 
 function PoisonDrip() {
@@ -33,6 +34,7 @@ function PoisonDrip() {
 
 function SpecLadder() {
   const { spec, setSpec } = useCompendium();
+  const { tone } = useTheme();
 
   return (
     <div className="panel px-[18px] pb-[8px] pt-[18px]">
@@ -52,14 +54,14 @@ function SpecLadder() {
               onClick={() => setSpec(s.id)}
               className="mb-[6px] flex items-center gap-[12px] rounded-[10px] px-[10px] py-[9px] transition-colors"
               style={{
-                border: on ? '1px solid rgba(255,244,104,.34)' : '1px solid transparent',
-                background: on ? 'rgba(255,244,104,.07)' : 'transparent',
+                border: on ? '1px solid rgba(var(--accent-rgb),.34)' : '1px solid transparent',
+                background: on ? 'rgba(var(--accent-rgb),.07)' : 'transparent',
               }}
             >
               <span
                 aria-hidden="true"
                 className="shrink-0 rounded-full"
-                style={{ width: 3, height: 26, background: s.color }}
+                style={{ width: 3, height: 26, background: tone(s.color, 3) }}
               />
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-[13.5px] font-semibold text-ink">
@@ -75,7 +77,7 @@ function SpecLadder() {
                     fontWeight: 900,
                     fontSize: 16,
                     lineHeight: 1,
-                    color: s.color,
+                    color: tone(s.color),
                   }}
                 >
                   {s.tier}

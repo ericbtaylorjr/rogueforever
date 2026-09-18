@@ -2,11 +2,13 @@ import { specBar } from '../../content/copy';
 import { specById, specs } from '../../content/content';
 import type { SpecId } from '../../content/types';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { useTheme } from '../../state/ThemeProvider';
 import { Droplet } from '../ui/Droplet';
 
 /** Sticky under the hero. Owns the two page-level controls. */
 export function SpecBar() {
   const { spec, setSpec, sweaty, toggleSweaty, isNarrow, isPhone } = useCompendium();
+  const { tone } = useTheme();
 
   return (
     <div
@@ -16,7 +18,7 @@ export function SpecBar() {
       <div
         className="flex flex-wrap items-center gap-[10px] rounded-[12px] border border-line"
         style={{
-          background: 'rgba(14,14,19,.94)',
+          background: 'var(--specbar-bg)',
           backdropFilter: 'blur(10px)',
           padding: isPhone ? '10px 12px' : '11px 16px',
         }}
@@ -26,7 +28,7 @@ export function SpecBar() {
             <span
               aria-hidden="true"
               className="pointer-events-none absolute left-[13px] top-1/2 size-[7px] shrink-0 -translate-y-1/2 rounded-full"
-              style={{ background: specById[spec].color }}
+              style={{ background: tone(specById[spec].color, 3) }}
             />
             <select
               aria-label={specBar.label}
@@ -35,7 +37,7 @@ export function SpecBar() {
               className="w-full appearance-none rounded-[20px] border bg-transparent py-[10px] pl-[27px] pr-[30px] text-[13px] font-semibold"
               style={{
                 borderColor: 'var(--accent)',
-                background: 'rgba(255,244,104,.13)',
+                background: 'rgba(var(--accent-rgb),.13)',
                 color: 'var(--accent)',
               }}
             >
@@ -71,7 +73,7 @@ export function SpecBar() {
                     style={{
                       padding: '7px 13px',
                       borderColor: on ? 'var(--accent)' : 'var(--line)',
-                      background: on ? 'rgba(255,244,104,.13)' : 'transparent',
+                      background: on ? 'rgba(var(--accent-rgb),.13)' : 'transparent',
                       color: on ? 'var(--accent)' : 'var(--mute)',
                       fontWeight: on ? 600 : 400,
                     }}
@@ -79,7 +81,7 @@ export function SpecBar() {
                     <span
                       aria-hidden="true"
                       className="size-[7px] shrink-0 rounded-full"
-                      style={{ background: s.color }}
+                      style={{ background: tone(s.color, 3) }}
                     />
                     {s.name}
                   </button>
@@ -98,7 +100,7 @@ export function SpecBar() {
           className="pill shrink-0 transition-colors"
           style={{
             padding: isPhone ? '10px 14px' : '7px 13px',
-            borderColor: sweaty ? 'rgba(123,224,107,.4)' : 'var(--line)',
+            borderColor: sweaty ? 'rgba(var(--venom-rgb),.4)' : 'var(--line)',
             color: sweaty ? 'var(--venom)' : 'var(--faint)',
           }}
         >

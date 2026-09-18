@@ -1,6 +1,7 @@
 import { poisons } from '../../content/content';
 import { poisonsCopy } from '../../content/copy';
 import type { Poison } from '../../content/types';
+import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -11,7 +12,7 @@ function Vial({ p }: { p: Poison }) {
       <div
         className="absolute inset-0 overflow-hidden"
         style={{
-          border: '1.5px solid rgba(255,255,255,.22)',
+          border: '1.5px solid rgba(var(--fg-rgb),.22)',
           borderRadius: '5px 5px 11px 11px',
         }}
       >
@@ -43,11 +44,12 @@ function Vial({ p }: { p: Poison }) {
 
 const tagStyle: Record<Poison['tag'], React.CSSProperties> = {
   Core: { background: 'var(--accent)', color: 'var(--accent-ink)', fontWeight: 600, border: '1px solid var(--accent)' },
-  Situational: { border: '1px solid rgba(255,179,71,.45)', color: '#FFB347' },
+  Situational: { border: '1px solid rgba(var(--amber-rgb),.45)', color: 'var(--amber)' },
   Utility: { border: '1px solid var(--line)', color: 'var(--faint)' },
 };
 
 export function Poisons() {
+  const { tone } = useTheme();
   return (
     <section id="poisons" aria-label="Poisons">
       <SectionHeading id="poisons" />
@@ -74,7 +76,7 @@ export function Poisons() {
               <Vial p={p} />
               <div className="min-w-0">
                 <h3 className="t-card-sub text-ink">{p.name}</h3>
-                <div className="t-eyebrow mt-[4px] text-[9px] tracking-[.13em]" style={{ color: p.hue }}>
+                <div className="t-eyebrow mt-[4px] text-[9px] tracking-[.13em]" style={{ color: tone(p.hue) }}>
                   {p.where}
                 </div>
               </div>

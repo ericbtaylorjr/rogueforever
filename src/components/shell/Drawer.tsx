@@ -48,7 +48,7 @@ export function Drawer() {
     <>
       <div
         className="fixed inset-0 z-[55]"
-        style={{ background: 'rgba(4,4,6,.74)', backdropFilter: 'blur(4px)' }}
+        style={{ background: 'var(--scrim-soft)', backdropFilter: 'blur(4px)' }}
         onClick={() => setDrawer(false)}
         aria-hidden="true"
       />
@@ -61,8 +61,8 @@ export function Drawer() {
         className="fixed left-0 top-0 z-[56] flex h-full flex-col animate-slide-in"
         style={{
           width: 'min(86vw, 300px)',
-          background: 'linear-gradient(180deg, #101015, #0A0A0C)',
-          borderRight: '1px solid rgba(255,255,255,.09)',
+          background: 'linear-gradient(180deg, var(--rail-a), var(--rail-b))',
+          borderRight: '1px solid var(--line)',
         }}
       >
         <div className="flex items-center gap-[12px] border-b border-line px-[16px] py-[14px]">

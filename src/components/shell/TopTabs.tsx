@@ -1,6 +1,7 @@
 import { nav } from '../../content/content';
 import { useCompendium } from '../../state/CompendiumProvider';
 import { SearchTrigger } from './SearchTrigger';
+import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 
 /**
@@ -14,7 +15,7 @@ export function TopTabs() {
   return (
     <header
       className="fixed left-0 right-0 top-0 z-[40] border-b border-line"
-      style={{ background: 'rgba(10,10,12,.95)', backdropFilter: 'blur(14px)' }}
+      style={{ background: 'var(--bar-bg)', backdropFilter: 'blur(14px)' }}
     >
       <div className="mx-auto flex max-w-[1420px] items-center gap-[18px] px-[30px] py-[12px]">
         <Wordmark size={28} />
@@ -32,7 +33,7 @@ export function TopTabs() {
                 }}
                 className="whitespace-nowrap rounded-[7px] px-[10px] py-[7px] text-[13px] transition-colors"
                 style={{
-                  background: on ? 'rgba(255,244,104,.1)' : 'transparent',
+                  background: on ? 'rgba(var(--accent-rgb),.1)' : 'transparent',
                   color: on ? 'var(--accent)' : 'var(--mute)',
                   fontWeight: on ? 600 : 400,
                 }}
@@ -42,8 +43,11 @@ export function TopTabs() {
             );
           })}
         </nav>
-        <div className="w-[220px] shrink-0">
-          <SearchTrigger />
+        <div className="flex w-[264px] shrink-0 items-stretch gap-[8px]">
+          <div className="min-w-0 flex-1">
+            <SearchTrigger />
+          </div>
+          <ThemeToggle />
         </div>
       </div>
     </header>

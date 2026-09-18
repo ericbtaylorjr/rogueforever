@@ -21,9 +21,9 @@ export function Raids() {
           return (
             <article
               key={r.name}
-              className="overflow-hidden rounded-[14px]"
+              className="sheet overflow-hidden rounded-[14px]"
               style={{
-                border: `1px solid ${open ? 'rgba(255,244,104,.34)' : 'var(--line)'}`,
+                border: `1px solid ${open ? 'rgba(var(--accent-rgb),.34)' : 'var(--line)'}`,
                 background: 'var(--panel)',
               }}
             >
@@ -39,12 +39,12 @@ export function Raids() {
                     aria-hidden="true"
                     className="grid size-[42px] shrink-0 place-items-center rounded-[10px]"
                     style={{
-                      background: `linear-gradient(140deg, ${r.hue}, #0A0A0C)`,
+                      background: `linear-gradient(140deg, ${r.hue}, var(--hue-end))`,
                       fontFamily: 'var(--font-display)',
                       fontWeight: 900,
                       fontStretch: '80%',
                       fontSize: 13,
-                      color: 'var(--ink)',
+                      color: 'var(--on-hue)',
                     }}
                   >
                     {r.abbr}

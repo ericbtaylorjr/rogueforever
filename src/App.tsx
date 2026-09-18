@@ -17,47 +17,50 @@ import { SpecBoard } from './components/sections/SpecBoard';
 import { Talents } from './components/sections/Talents';
 import { Tools } from './components/sections/Tools';
 import { CompendiumProvider } from './state/CompendiumProvider';
+import { ThemeProvider } from './state/ThemeProvider';
 import { Divider } from './components/ui/Divider';
 import { TooltipProvider } from './components/ui/Tooltip';
 
 /** One route, 15 anchored sections, everything else is in-page state. */
 export default function App() {
   return (
-    <CompendiumProvider>
-      <TooltipProvider>
-        <Shell>
-          <Overview />
-          <SpecBar />
-          <SpecBoard />
-          <Divider />
-          <Talents />
-          <Divider />
-          <Gear />
-          <Divider />
-          <Poisons />
-          <Divider />
-          <Consumables />
-          <Divider />
-          <Buffs />
-          <Divider />
-          <Rotation />
-          <Divider />
-          <ExposeArmor />
-          <Divider />
-          <Raids />
-          <Divider />
-          <Tools />
-          <Divider />
-          <Leveling />
-          <Divider />
-          <Faq />
-          <Divider />
-          <ForeverWatch />
-          <Divider />
-          <Changelog />
-          <Footer />
-        </Shell>
-      </TooltipProvider>
-    </CompendiumProvider>
+    <ThemeProvider>
+      <CompendiumProvider>
+        <TooltipProvider>
+          <Shell>
+            <Overview />
+            <SpecBar />
+            <SpecBoard />
+            <Divider />
+            <Talents />
+            <Divider />
+            <Gear />
+            <Divider />
+            <Poisons />
+            <Divider />
+            <Consumables />
+            <Divider />
+            <Buffs />
+            <Divider />
+            <Rotation />
+            <Divider />
+            <ExposeArmor />
+            <Divider />
+            <Raids />
+            <Divider />
+            <Tools />
+            <Divider />
+            <Leveling />
+            <Divider />
+            <Faq />
+            <Divider />
+            <ForeverWatch />
+            <Divider />
+            <Changelog />
+            <Footer />
+          </Shell>
+        </TooltipProvider>
+      </CompendiumProvider>
+    </ThemeProvider>
   );
 }

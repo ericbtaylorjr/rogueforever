@@ -2,6 +2,7 @@ import { foreverCatCount, foreverCats, foreverChanges, foreverDates } from '../.
 import { forever } from '../../content/copy';
 import type { ForeverStatus } from '../../content/types';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { useTheme } from '../../state/ThemeProvider';
 import { FilterPill } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -11,14 +12,14 @@ import { SectionHeading } from '../ui/SectionHeading';
  */
 const statusStyle: Record<ForeverStatus, React.CSSProperties> = {
   Confirmed: {
-    border: '1px solid rgba(123,224,107,.4)',
-    background: 'rgba(123,224,107,.15)',
-    color: '#7BE06B',
+    border: '1px solid rgba(var(--venom-rgb),.4)',
+    background: 'rgba(var(--venom-rgb),.15)',
+    color: 'var(--venom)',
   },
   'Demo footage': {
-    border: '1px solid rgba(255,179,71,.38)',
-    background: 'rgba(255,179,71,.12)',
-    color: '#FFB347',
+    border: '1px solid rgba(var(--amber-rgb),.38)',
+    background: 'rgba(var(--amber-rgb),.12)',
+    color: 'var(--amber)',
   },
   'Not published': { border: '1px solid var(--line)', color: 'var(--faint)' },
   Partial: { border: '1px solid var(--line)', color: 'var(--faint)' },
@@ -26,6 +27,7 @@ const statusStyle: Record<ForeverStatus, React.CSSProperties> = {
 
 export function ForeverWatch() {
   const { foreverFilter, setForeverFilter } = useCompendium();
+  const { tone } = useTheme();
   const shown = foreverChanges.filter((c) => foreverFilter === 'All' || c.cat === foreverFilter);
 
   return (
@@ -38,7 +40,7 @@ export function ForeverWatch() {
         {foreverDates.map((d) => (
           <div key={d.label} className="panel px-[15px] py-[14px]">
             <div className="t-eyebrow text-[9px] text-faint">{d.label}</div>
-            <div className="t-num mt-[7px] text-[17px]" style={{ color: d.color }}>
+            <div className="t-num mt-[7px] text-[17px]" style={{ color: tone(d.color) }}>
               {d.val}
             </div>
             <div className="mt-[5px] text-[11px] leading-[1.45] text-faint">{d.note}</div>
@@ -67,9 +69,9 @@ export function ForeverWatch() {
         {shown.map((c) => (
           <article
             key={c.title}
-            className="px-[16px] py-[14px]"
+            className="sheet px-[16px] py-[14px]"
             style={{
-              borderLeft: `2px solid ${c.hue}`,
+              borderLeft: `2px solid ${tone(c.hue, 3)}`,
               borderRadius: '0 12px 12px 0',
               background: 'var(--panel)',
             }}
@@ -97,7 +99,7 @@ export function ForeverWatch() {
             <p className="mt-[8px] max-w-[88ch] text-[13px] leading-[1.6] text-prose">{c.body}</p>
 
             <p className="mt-[8px] max-w-[88ch] text-[12.5px] leading-[1.55] text-mute">
-              <span className="font-semibold" style={{ color: c.hue }}>
+              <span className="font-semibold" style={{ color: tone(c.hue) }}>
                 {forever.impactPrefix}
               </span>{' '}
               {c.impact}

@@ -1,5 +1,6 @@
 import { NavList } from './NavList';
 import { SearchTrigger } from './SearchTrigger';
+import { ThemeToggle } from './ThemeToggle';
 import { SweatyLegend, Wordmark } from './Wordmark';
 
 /** Fixed 262px rail, ≥1100px only. */
@@ -8,14 +9,17 @@ export function Sidebar() {
     <aside
       className="fixed left-0 top-0 z-[40] flex h-full w-[262px] flex-col"
       style={{
-        background: 'linear-gradient(180deg, #101015, #0A0A0C)',
-        borderRight: '1px solid rgba(255,255,255,.09)',
+        background: 'linear-gradient(180deg, var(--rail-a), var(--rail-b))',
+        borderRight: '1px solid var(--line)',
       }}
     >
       <div className="border-b border-line px-[20px] pb-[16px] pt-[20px]">
         <Wordmark />
-        <div className="mt-[14px]">
-          <SearchTrigger />
+        <div className="mt-[14px] flex items-stretch gap-[8px]">
+          <div className="min-w-0 flex-1">
+            <SearchTrigger />
+          </div>
+          <ThemeToggle />
         </div>
       </div>
 

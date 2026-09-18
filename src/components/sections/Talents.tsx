@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { specById, specDetail } from '../../content/content';
 import { talents as copy } from '../../content/copy';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -10,6 +11,7 @@ const TOTAL_POINTS = 51;
 
 function TalentSplit() {
   const { spec } = useCompendium();
+  const { tone } = useTheme();
   const d = specDetail[spec];
   const [grown, setGrown] = useState(false);
 
@@ -26,19 +28,19 @@ function TalentSplit() {
       <div className="mt-[16px] grid grid-cols-3 gap-[12px]">
         {d.talents.map((t) => (
           <div key={t.name}>
-            <div className="t-num text-[26px] leading-none" style={{ color: t.color }}>
+            <div className="t-num text-[26px] leading-none" style={{ color: tone(t.color) }}>
               {t.pts}
             </div>
             <div className="mt-[6px] text-[11px] text-faint">{t.name}</div>
             <div
               className="mt-[8px] h-[4px] overflow-hidden rounded-full"
-              style={{ background: 'rgba(255,255,255,.06)' }}
+              style={{ background: 'rgba(var(--fg-rgb),.06)' }}
             >
               <div
                 className="h-full rounded-full"
                 style={{
                   width: grown ? `${(t.pts / TOTAL_POINTS) * 100}%` : '0%',
-                  background: t.color,
+                  background: tone(t.color, 3),
                   transition: 'width .6s cubic-bezier(.2,.8,.2,1)',
                 }}
               />

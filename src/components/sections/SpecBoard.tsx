@@ -5,6 +5,7 @@ import { specBoard } from '../../content/copy';
 import type { SimSetId, SpecId } from '../../content/types';
 import { hexA } from '../../lib/color';
 import { useCompendium, type SortKey } from '../../state/CompendiumProvider';
+import { useTheme } from '../../state/ThemeProvider';
 import { SegmentedTabs, Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -71,6 +72,7 @@ function YourSpecBadge() {
 
 function BarsView({ rows, simSet }: { rows: Row[]; simSet: SimSetId }) {
   const { spec } = useCompendium();
+  const { tone } = useTheme();
   const grown = useGrown(simSet);
 
   return (
@@ -80,10 +82,10 @@ function BarsView({ rows, simSet }: { rows: Row[]; simSet: SimSetId }) {
         return (
           <div
             key={r.id}
-            className="rounded-[12px] px-[14px] py-[12px]"
+            className="sheet rounded-[12px] px-[14px] py-[12px]"
             style={{
-              border: `1px solid ${mine ? 'rgba(255,244,104,.34)' : 'var(--line)'}`,
-              background: mine ? 'rgba(255,244,104,.06)' : 'var(--panel)',
+              border: `1px solid ${mine ? 'rgba(var(--accent-rgb),.34)' : 'var(--line)'}`,
+              background: mine ? 'rgba(var(--accent-rgb),.06)' : 'var(--panel)',
             }}
           >
             <div className="flex items-center gap-[10px]">
@@ -100,13 +102,13 @@ function BarsView({ rows, simSet }: { rows: Row[]; simSet: SimSetId }) {
 
             <div
               className="relative mt-[10px] h-[8px] overflow-hidden rounded-full"
-              style={{ background: 'rgba(255,255,255,.05)' }}
+              style={{ background: 'rgba(var(--fg-rgb),.05)' }}
             >
               <div
                 className="relative h-full overflow-hidden rounded-full"
                 style={{
                   width: grown ? `${r.pct}%` : '0%',
-                  background: `linear-gradient(90deg, ${r.color}, ${r.color2})`,
+                  background: `linear-gradient(90deg, ${tone(r.color, 3)}, ${tone(r.color2, 3)})`,
                   transition: 'width .65s cubic-bezier(.2,.8,.2,1)',
                 }}
               >
@@ -138,6 +140,7 @@ const GRID = '46px minmax(0,1.4fr) minmax(0,1.3fr) 84px 84px';
 
 function TableView({ rows }: { rows: Row[] }) {
   const { spec, sort, toggleSort } = useCompendium();
+  const { tone } = useTheme();
 
   const sorted = useMemo(() => {
     const dir = sort.dir === 'asc' ? 1 : -1;
@@ -188,7 +191,7 @@ function TableView({ rows }: { rows: Row[] }) {
               className="grid items-center border-b border-line/50 px-[14px] py-[11px] last:border-0"
               style={{
                 gridTemplateColumns: GRID,
-                background: mine ? 'rgba(255,244,104,.06)' : 'transparent',
+                background: mine ? 'rgba(var(--accent-rgb),.06)' : 'transparent',
               }}
             >
               <span role="cell" className="t-num text-[12px] text-faint">{r.rank}</span>
@@ -196,7 +199,7 @@ function TableView({ rows }: { rows: Row[] }) {
                 <span
                   aria-hidden="true"
                   className="size-[7px] shrink-0 rounded-full"
-                  style={{ background: r.color }}
+                  style={{ background: tone(r.color, 3) }}
                 />
                 <span className="truncate text-[13px] font-semibold text-ink">{r.name}</span>
               </span>
@@ -215,6 +218,7 @@ function TableView({ rows }: { rows: Row[] }) {
 
 function CardsView({ rows }: { rows: Row[] }) {
   const { spec } = useCompendium();
+  const { tone } = useTheme();
   return (
     <div className="grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,208px),1fr))]">
       {rows.map((r) => {
@@ -222,17 +226,17 @@ function CardsView({ rows }: { rows: Row[] }) {
         return (
           <div
             key={r.id}
-            className="rounded-[14px] p-[16px]"
+            className="sheet rounded-[14px] p-[16px]"
             style={{
-              border: `1px solid ${mine ? 'rgba(255,244,104,.34)' : 'var(--line)'}`,
-              background: mine ? 'rgba(255,244,104,.06)' : 'var(--panel)',
+              border: `1px solid ${mine ? 'rgba(var(--accent-rgb),.34)' : 'var(--line)'}`,
+              background: mine ? 'rgba(var(--accent-rgb),.06)' : 'var(--panel)',
             }}
           >
             <div className="flex items-start justify-between gap-[8px]">
               <span className="t-card-sub text-ink">{r.name}</span>
               {mine ? <YourSpecBadge /> : <Tag>{r.tag}</Tag>}
             </div>
-            <div className="t-num mt-[12px] text-[32px] leading-none" style={{ color: r.color }}>
+            <div className="t-num mt-[12px] text-[32px] leading-none" style={{ color: tone(r.color) }}>
               {r.idx}
             </div>
             <div className="mt-[6px] text-[11px] text-faint">{r.weapon}</div>
@@ -248,10 +252,11 @@ function CardsView({ rows }: { rows: Row[] }) {
 
 function ForeverPending() {
   const { isNarrow } = useCompendium();
+  const { tone } = useTheme();
   return (
     <div
-      className="rounded-[14px] p-[18px]"
-      style={{ border: '1px solid rgba(127,196,232,.24)', background: 'var(--panel)' }}
+      className="sheet rounded-[14px] p-[18px]"
+      style={{ border: '1px solid rgba(var(--sky-rgb),.24)', background: 'var(--panel)' }}
     >
       <div className="flex items-center gap-[9px]">
         <span
@@ -276,7 +281,7 @@ function ForeverPending() {
                 gridTemplateColumns: isNarrow ? '30px minmax(0,1fr)' : '30px minmax(0,190px) minmax(0,1fr)',
               }}
             >
-              <span aria-hidden="true" className="text-[13px]" style={{ color: o.arrowColor }}>
+              <span aria-hidden="true" className="text-[13px]" style={{ color: tone(o.arrowColor) }}>
                 {o.arrow}
               </span>
               <span className="text-[13.5px] font-semibold text-ink">{s.name}</span>

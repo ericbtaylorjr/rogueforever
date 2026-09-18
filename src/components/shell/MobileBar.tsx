@@ -1,5 +1,6 @@
 import { shell } from '../../content/copy';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 
 /** Fixed 58px top bar, <1100px. */
@@ -9,7 +10,7 @@ export function MobileBar() {
   return (
     <header
       className="fixed left-0 right-0 top-0 z-[45] flex h-[58px] items-center gap-[12px] border-b border-line px-[15px]"
-      style={{ background: 'rgba(10,10,12,.95)', backdropFilter: 'blur(14px)' }}
+      style={{ background: 'var(--bar-bg)', backdropFilter: 'blur(14px)' }}
     >
       <button
         type="button"
@@ -41,6 +42,8 @@ export function MobileBar() {
       >
         <span aria-hidden="true">⌕</span>
       </button>
+
+      <ThemeToggle size={44} />
     </header>
   );
 }

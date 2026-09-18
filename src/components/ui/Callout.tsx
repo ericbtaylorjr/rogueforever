@@ -1,12 +1,10 @@
 import type { ReactNode } from 'react';
-import { hexA } from '../../lib/color';
-
 type Tone = 'sky' | 'warn' | 'accent';
 
-const tones: Record<Tone, { hex: string; cssVar: string }> = {
-  sky: { hex: '#7FC4E8', cssVar: 'var(--sky)' },
-  warn: { hex: '#FF8A5B', cssVar: 'var(--warn)' },
-  accent: { hex: '#FFF468', cssVar: 'var(--accent)' },
+const tones: Record<Tone, { rgb: string; cssVar: string }> = {
+  sky: { rgb: 'var(--sky-rgb)', cssVar: 'var(--sky)' },
+  warn: { rgb: 'var(--warn-rgb)', cssVar: 'var(--warn)' },
+  accent: { rgb: 'var(--accent-rgb)', cssVar: 'var(--accent)' },
 };
 
 /** 2px left-bordered note. Used for Forever claims, warnings and TODOs. */
@@ -28,13 +26,13 @@ export function Callout({
       style={
         dashed
           ? {
-              border: `1px dashed ${hexA(t.hex, 0.45)}`,
+              border: `1px dashed rgba(${t.rgb}, .45)`,
               borderRadius: 12,
-              background: hexA(t.hex, 0.05),
+              background: `rgba(${t.rgb}, .05)`,
             }
           : {
               borderLeft: `2px solid ${t.cssVar}`,
-              background: hexA(t.hex, 0.07),
+              background: `rgba(${t.rgb}, .07)`,
             }
       }
     >

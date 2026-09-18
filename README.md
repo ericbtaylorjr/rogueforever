@@ -84,6 +84,27 @@ Known / accepted: the looping decorative animations (bar shimmer, poison drips, 
 dots) have no pause control beyond `prefers-reduced-motion` (WCAG 2.2.2). Not done yet:
 arrow-key navigation between FAQ/raid accordion headers (not required by WCAG).
 
+## Theming
+
+Dark is the default; light is a papyrus "bounty letter". Which one you get: a choice made
+with the sidebar toggle (`localStorage['rc:theme']`) → the device's `prefers-color-scheme`
+(followed live until the toggle is used) → dark. `public/theme-init.js` resolves this before
+first paint (no flash) and `src/state/ThemeProvider.tsx` owns it afterwards; both write
+`data-theme` on `<html>`. Note browsers report "light" for a device with *no* preference, so
+"unset" can't be told apart from "light" — that's a platform limit, not a bug.
+
+- **Tokens, not hex.** Every colour comes from a CSS variable defined twice in
+  `styles/index.css` (`:root` = dark, `:root[data-theme="light"]` = light). Tints are
+  `rgba(var(--accent-rgb), .1)` so they follow the theme. Don't hardcode colours in JSX.
+- **Content colours** (spec hues, poison hues, item quality) are authored for dark. Text or
+  bars that use them go through `useTheme().tone(hex)`, which darkens a colour just enough to
+  stay legible on parchment (identity in dark).
+- **Light contrast is measured against the worst paper pixel (`#cbb386`), not `--bg`.** The
+  grain and vignette darken the page by ~15%; text on bare paper must still clear 4.5:1
+  there. Change the texture, vignette or `--bg` and you must re-measure (render, sample the
+  darkest bare-paper pixels, check the text tokens).
+- `config.intensity` / `config.accent` only tune the dark theme (`lib/theme.ts`).
+
 ## Security
 
 Static site, no backend, no user input beyond a search box, no `dangerouslySetInnerHTML`,

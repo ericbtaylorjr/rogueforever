@@ -16,9 +16,9 @@ export function Faq() {
           return (
             <article
               key={f.q}
-              className="overflow-hidden rounded-[12px]"
+              className="sheet overflow-hidden rounded-[12px]"
               style={{
-                border: `1px solid ${open ? 'rgba(255,244,104,.3)' : 'var(--line)'}`,
+                border: `1px solid ${open ? 'rgba(var(--accent-rgb),.3)' : 'var(--line)'}`,
                 background: 'var(--panel)',
               }}
             >

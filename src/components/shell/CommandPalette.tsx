@@ -61,7 +61,7 @@ export function CommandPalette() {
     <div
       className="fixed inset-0 z-[80] flex justify-center px-[14px]"
       style={{
-        background: 'rgba(4,4,6,.76)',
+        background: 'var(--scrim)',
         backdropFilter: 'blur(6px)',
         paddingTop: 'min(9vh, 60px)',
       }}
@@ -72,7 +72,7 @@ export function CommandPalette() {
         aria-modal="true"
         aria-label={search.placeholder}
         className="h-fit w-full max-w-[620px] animate-rise overflow-hidden rounded-[14px] border border-line"
-        style={{ background: '#0D0D11', boxShadow: 'var(--shadow-palette)' }}
+        style={{ background: 'var(--surface-pop)', boxShadow: 'var(--palette-shadow)' }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-[10px] border-b border-line px-[16px] py-[13px] focus-within:shadow-[inset_0_-2px_0_var(--accent)]">

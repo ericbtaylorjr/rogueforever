@@ -34,7 +34,7 @@ export function Rotation() {
             <li
               key={a.name}
               className="flex items-baseline gap-[12px] py-[12px]"
-              style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(255,255,255,.05)' }}
+              style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(var(--fg-rgb),.05)' }}
             >
               <span className="t-num shrink-0 text-[12px] text-accent">
                 {String(i + 1).padStart(2, '0')}
@@ -69,8 +69,8 @@ export function Rotation() {
           </div>
 
           <div
-            className="rounded-[14px] p-[18px]"
-            style={{ border: '1px solid rgba(255,138,91,.22)', background: 'var(--panel)' }}
+            className="sheet rounded-[14px] p-[18px]"
+            style={{ border: '1px solid rgba(var(--warn-rgb),.22)', background: 'var(--panel)' }}
           >
             <span className="t-panel-label text-warn">{copy.neverTitle}</span>
             <ul className="mt-[12px] flex flex-col gap-[9px]">

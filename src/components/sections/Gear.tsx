@@ -3,6 +3,7 @@ import { gear as copy } from '../../content/copy';
 import { itemForSlot, qualityColor, wowheadUrl } from '../../content/gear';
 import type { GearSetId } from '../../content/types';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
 import { SegmentedTabs } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -18,7 +19,7 @@ function IconPlaceholder() {
       className="size-[22px] shrink-0 rounded-[4px] border border-line"
       style={{
         background:
-          'repeating-linear-gradient(135deg, rgba(255,255,255,.07) 0 2px, transparent 2px 6px)',
+          'repeating-linear-gradient(135deg, rgba(var(--fg-rgb),.07) 0 2px, transparent 2px 6px)',
       }}
     />
   );
@@ -27,6 +28,7 @@ function IconPlaceholder() {
 function GearRow({ slot, set }: { slot: string; set: GearSetId }) {
   const item = itemForSlot(set, slot);
   const { bind } = useTooltip();
+  const { tone } = useTheme();
 
   return (
     <div
@@ -45,7 +47,7 @@ function GearRow({ slot, set }: { slot: string; set: GearSetId }) {
             target="_blank"
             rel="noreferrer"
             className="flex min-w-0 items-center gap-[10px] text-[13px] font-semibold"
-            style={{ color: qualityColor[item.quality] }}
+            style={{ color: tone(qualityColor[item.quality]) }}
             {...bind({ name: item.name, kind: slot, note: item.source })}
           >
             <IconPlaceholder />

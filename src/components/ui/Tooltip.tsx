@@ -128,7 +128,7 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
           transform: `translate(${pos.x}px, ${pos.y}px)`,
           opacity: tip ? 1 : 0,
           visibility: tip ? 'visible' : 'hidden',
-          boxShadow: 'var(--shadow-tip)',
+          boxShadow: 'var(--tip-shadow)',
         }}
       >
         <div className="t-card-sub text-ink">{tip?.name}</div>

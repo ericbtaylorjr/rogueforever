@@ -3,6 +3,7 @@ import { config } from '../../config';
 import { shell } from '../../content/copy';
 import { themeVars } from '../../lib/theme';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { useTheme } from '../../state/ThemeProvider';
 import { CommandPalette } from './CommandPalette';
 import { Drawer } from './Drawer';
 import { MobileBar } from './MobileBar';
@@ -11,13 +12,14 @@ import { TopTabs } from './TopTabs';
 
 export function Shell({ children }: { children: ReactNode }) {
   const { isNarrow, isWide, isPhone } = useCompendium();
+  const { theme } = useTheme();
 
   // Below 1100px the nav is always the drawer, whatever navLayout says.
   const railNav = !isNarrow && config.navLayout === 'sidebar';
   const topNav = !isNarrow && config.navLayout === 'topTabs';
 
   return (
-    <div style={themeVars()}>
+    <div style={themeVars(theme)}>
       <a href="#main" className="skip-link">
         {shell.skipToContent}
       </a>

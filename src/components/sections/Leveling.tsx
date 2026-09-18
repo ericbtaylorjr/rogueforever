@@ -14,17 +14,19 @@ export function Leveling() {
           <article key={l.name} className="panel overflow-hidden">
             <div
               className="relative flex h-[78px] items-end p-[14px]"
-              style={{ background: `linear-gradient(140deg, ${l.hue}, #0A0A0C)` }}
+              style={{ background: `linear-gradient(140deg, ${l.hue}, var(--hue-end))` }}
             >
               <span
                 aria-hidden="true"
                 className="absolute inset-0"
                 style={{
                   background:
-                    'repeating-linear-gradient(115deg, rgba(255,255,255,.055) 0 2px, transparent 2px 9px)',
+                    'repeating-linear-gradient(115deg, rgba(var(--fg-rgb),.055) 0 2px, transparent 2px 9px)',
                 }}
               />
-              <h3 className="t-card-title relative text-ink">{l.name}</h3>
+              <h3 className="t-card-title relative" style={{ color: 'var(--on-hue)' }}>
+                {l.name}
+              </h3>
             </div>
             <p className="p-[14px] text-[12.5px] leading-[1.6] text-mute">{l.body}</p>
           </article>

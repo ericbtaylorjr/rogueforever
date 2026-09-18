@@ -38,13 +38,13 @@ export function CopyButton({
         style={
           done
             ? {
-                border: '1px solid rgba(123,224,107,.4)',
-                background: 'rgba(123,224,107,.1)',
+                border: '1px solid rgba(var(--venom-rgb),.4)',
+                background: 'rgba(var(--venom-rgb),.1)',
                 color: 'var(--venom)',
               }
             : {
-                border: '1px solid rgba(255,244,104,.4)',
-                background: 'rgba(255,244,104,.1)',
+                border: '1px solid rgba(var(--accent-rgb),.4)',
+                background: 'rgba(var(--accent-rgb),.1)',
                 color: 'var(--accent)',
               }
         }

@@ -32,7 +32,7 @@ export function NavList({ size = 'rail' }: { size?: 'rail' | 'touch' }) {
                       touch ? 'rounded-[8px] px-[11px] py-[12px] text-[14.5px]' : 'rounded-[7px] px-[8px] py-[7px] text-[13px]'
                     }`}
                     style={{
-                      background: on ? 'rgba(255,244,104,.1)' : 'transparent',
+                      background: on ? 'rgba(var(--accent-rgb),.1)' : 'transparent',
                       color: on ? 'var(--accent)' : 'var(--mute)',
                       fontWeight: on ? 600 : 400,
                     }}

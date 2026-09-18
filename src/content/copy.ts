@@ -217,8 +217,8 @@ export const levelingCopy = {
 } as const;
 
 export const search = {
-  trigger: 'Search everything',
-  placeholder: 'Search everything',
+  trigger: 'Search...',
+  placeholder: 'Search...',
   empty: "Nothing. Either it doesn't exist or it's not worth knowing.",
 } as const;
 
@@ -230,6 +230,11 @@ export const shell = {
   closeNav: 'Close navigation',
   openSearch: 'Open search',
   skipToContent: 'Skip to content',
+} as const;
+
+export const theme = {
+  toLight: 'Switch to light mode',
+  toDark: 'Switch to dark mode',
 } as const;
 
 export const footer = {
@@ -254,7 +259,7 @@ export const footer = {
   },
   shortcutsLabel: 'SHORTCUTS',
   shortcuts: [
-    { key: '⌘K', what: 'Search everything' },
+    { key: '⌘K', what: 'Search' },
     { key: 'ESC', what: 'Get out' },
   ],
 } as const;

@@ -2,6 +2,7 @@ import { consumableCatCount, consumableCats, consumables } from '../../content/c
 import { consumablesCopy as copy } from '../../content/copy';
 import { dotFor } from '../../content/palette';
 import { useCompendium } from '../../state/CompendiumProvider';
+import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { FilterPill } from '../ui/Pill';
@@ -11,6 +12,7 @@ import { useTooltip } from '../ui/Tooltip';
 export function Consumables() {
   const { consumeFilter, setConsumeFilter, sweaty } = useCompendium();
   const { bind } = useTooltip();
+  const { tone } = useTheme();
 
   const shown = consumables.filter(
     (c) => (consumeFilter === 'All' || c.k === consumeFilter) && (sweaty || !c.s),
@@ -64,7 +66,7 @@ export function Consumables() {
             <span
               aria-hidden="true"
               className="mt-[6px] size-[4px] shrink-0 rounded-full"
-              style={{ background: dotFor(c.k) }}
+              style={{ background: tone(dotFor(c.k), 3) }}
             />
             <span
               className="cursor-help text-[13px] text-prose underline decoration-line underline-offset-[3px] transition-colors hover:text-accent focus-visible:text-accent"

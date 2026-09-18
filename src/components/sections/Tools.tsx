@@ -1,10 +1,12 @@
 import { macros, tools } from '../../content/content';
 import { toolsCopy as copy } from '../../content/copy';
 import { toolHref } from '../../content/links';
+import { useTheme } from '../../state/ThemeProvider';
 import { CopyButton } from '../ui/CopyButton';
 import { SectionHeading } from '../ui/SectionHeading';
 
 export function Tools() {
+  const { tone } = useTheme();
   return (
     <section id="tools" aria-label="Tools and UI">
       <SectionHeading id="tools" />
@@ -12,7 +14,7 @@ export function Tools() {
       <div className="grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,252px),1fr))]">
         {tools.map((t) => (
           <article key={t.name} className="panel flex flex-col p-[18px]">
-            <span className="t-eyebrow text-[9.5px] tracking-[.14em]" style={{ color: t.color }}>
+            <span className="t-eyebrow text-[9.5px] tracking-[.14em]" style={{ color: tone(t.color) }}>
               {t.kicker}
             </span>
             <h3 className="t-card-title mt-[8px] text-ink">{t.name}</h3>
@@ -58,7 +60,7 @@ export function Tools() {
               </div>
               <pre
                 className="t-code mt-[10px] rounded-[8px] p-[11px] text-mute"
-                style={{ background: '#08080B' }}
+                style={{ background: 'var(--surface-deep)' }}
               >
                 {m.code}
               </pre>

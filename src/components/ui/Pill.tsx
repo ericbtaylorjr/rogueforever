@@ -1,5 +1,4 @@
 import { useRef, type KeyboardEvent, type ReactNode } from 'react';
-import { hexA } from '../../lib/color';
 
 /**
  * Category filter pill with a count. Forever watch uses `tone="sky"` to stay
@@ -18,7 +17,7 @@ export function FilterPill({
   tone?: 'accent' | 'sky';
   onSelect: () => void;
 }) {
-  const hex = tone === 'sky' ? '#7FC4E8' : '#FFF468';
+  const rgb = tone === 'sky' ? 'var(--sky-rgb)' : 'var(--accent-rgb)';
   const cssVar = tone === 'sky' ? 'var(--sky)' : 'var(--accent)';
   return (
     <button
@@ -28,7 +27,7 @@ export function FilterPill({
       className="pill px-[12px] py-[6px] text-[12px] transition-colors"
       style={
         selected
-          ? { borderColor: cssVar, background: hexA(hex, 0.13), color: cssVar, fontWeight: 600 }
+          ? { borderColor: cssVar, background: `rgba(${rgb}, .13)`, color: cssVar, fontWeight: 600 }
           : { color: 'var(--faint)' }
       }
     >
