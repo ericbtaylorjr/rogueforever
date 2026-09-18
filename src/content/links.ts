@@ -9,16 +9,18 @@ export const links = {
   wowsims: 'https://wowsims.github.io/classic/',
   weakauras: '#', // TODO: Comfy's UI addon package
   discord: '#', // TODO: Rogue Classic Discord invite
-  tip: '#', // TODO: tip / support page
-  youtube: '#', // TODO
-  tiktok: '#', // TODO
-  mail: '#', // TODO: mailto:
+  tip: 'https://streamelements.com/thecomfywizard-bba10/tip',
+  youtube: 'https://youtube.com/@thecomfywizard',
+  tiktok: 'https://www.tiktok.com/@thecomfywizard',
+  twitch: 'https://www.twitch.tv/thecomfywizard',
+  mail: 'mailto:TheComfyWizard@gmail.com',
   site: 'https://thecomfywizard.com',
 } as const;
 
 export const socialHref: Record<string, string> = {
   YT: links.youtube,
   TT: links.tiktok,
+  TWITCH: links.twitch,
   MAIL: links.mail,
 };
 

@@ -231,7 +231,13 @@ export const footer = {
     link: 'Send a tip',
     after: ' if this saved you a wipe.',
   },
-  socials: ['YT', 'TT', 'MAIL'],
+  socials: ['YT', 'TT', 'TWITCH', 'MAIL'],
+  socialTips: {
+    YT: { name: 'YouTube', note: 'Guides, VODs and clips — @thecomfywizard.' },
+    TT: { name: 'TikTok', note: 'Quick tips and highlights — @thecomfywizard.' },
+    TWITCH: { name: 'Twitch', note: 'Live streams — thecomfywizard.' },
+    MAIL: { name: 'Email', note: 'TheComfyWizard@gmail.com' },
+  },
   builtWithLabel: 'BUILT WITH',
   builtWith: {
     before: 'Community sims, log analysis, and a lot of smart folks in the ',

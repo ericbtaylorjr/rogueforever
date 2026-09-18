@@ -1,7 +1,18 @@
 import { footer as copy } from '../../content/copy';
 import { links, socialHref } from '../../content/links';
+import { MailIcon, PhoneIcon, TvIcon, VideoIcon } from '../ui/SocialIcons';
+import { useTooltip } from '../ui/Tooltip';
+
+const socialIcon: Record<string, (props: { size?: number }) => React.ReactElement> = {
+  YT: VideoIcon,
+  TT: PhoneIcon,
+  TWITCH: TvIcon,
+  MAIL: MailIcon,
+};
 
 export function Footer() {
+  const { bind } = useTooltip();
+
   return (
     <footer className="mt-[52px] grid gap-[26px] border-t border-line pt-[28px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,232px),1fr))]">
       <div>
@@ -18,22 +29,34 @@ export function Footer() {
         </div>
         <p className="mt-[10px] max-w-[42ch] text-[12.5px] leading-[1.6] text-faint">
           {copy.adFree.before}
-          <a href={links.tip} className="text-accent underline underline-offset-2">
+          <a
+            href={links.tip}
+            target="_blank"
+            rel="noreferrer"
+            className="text-accent underline underline-offset-2"
+          >
             {copy.adFree.link}
           </a>
           {copy.adFree.after}
         </p>
         <div className="mt-[14px] flex gap-[8px]">
-          {copy.socials.map((s) => (
-            <a
-              key={s}
-              href={socialHref[s]}
-              aria-label={s}
-              className="t-eyebrow grid size-[34px] place-items-center rounded-[8px] border border-line text-[9px] text-mute transition-colors hover:border-accent hover:text-accent"
-            >
-              {s}
-            </a>
-          ))}
+          {copy.socials.map((s) => {
+            const Icon = socialIcon[s];
+            const tip = copy.socialTips[s];
+            return (
+              <a
+                key={s}
+                href={socialHref[s]}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={tip.name}
+                className="grid size-[34px] place-items-center rounded-[8px] border border-line text-mute transition-colors hover:border-accent hover:text-accent"
+                {...bind({ name: tip.name, note: tip.note })}
+              >
+                <Icon size={16} />
+              </a>
+            );
+          })}
         </div>
       </div>
 
