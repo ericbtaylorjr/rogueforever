@@ -3,7 +3,6 @@ import { specById, specDetail } from '../../content/content';
 import { talents as copy } from '../../content/copy';
 import { useCompendium } from '../../state/CompendiumProvider';
 import { Callout } from '../ui/Callout';
-import { CopyButton } from '../ui/CopyButton';
 import { Droplet } from '../ui/Droplet';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -19,10 +18,6 @@ function TalentSplit() {
     const raf = requestAnimationFrame(() => setGrown(true));
     return () => cancelAnimationFrame(raf);
   }, [spec]);
-
-  const summary = `${specById[spec].name} — ${d.talents
-    .map((t) => `${t.name} ${t.pts}`)
-    .join(' / ')}\n${d.keyTalents.map((k) => `• ${k}`).join('\n')}`;
 
   return (
     <div className="panel flex flex-col p-[18px]">
@@ -68,15 +63,6 @@ function TalentSplit() {
           </li>
         ))}
       </ul>
-
-      <div className="mt-[16px]">
-        <CopyButton
-          copyKey={`talents-${spec}`}
-          text={summary}
-          label={copy.copyTalents}
-          copiedLabel={copy.copied}
-        />
-      </div>
     </div>
   );
 }
@@ -84,10 +70,6 @@ function TalentSplit() {
 function WeaponCard() {
   const { spec, sweaty } = useCompendium();
   const d = specDetail[spec];
-
-  const setup = `${specById[spec].name} — weapons\n${d.weapons
-    .map((w) => `${w.slot}: ${w.name} (${w.why})`)
-    .join('\n')}`;
 
   return (
     <div className="panel flex flex-col p-[18px]">
@@ -109,21 +91,12 @@ function WeaponCard() {
         ))}
       </div>
 
-      <div className="mt-[14px]">
+      <div className="mt-auto pt-[14px]">
         <Callout tone="sky">
           {copy.foreverCallout.before}
           <strong className="font-semibold text-sky">{copy.foreverCallout.strong}</strong>
           {copy.foreverCallout.after}
         </Callout>
-      </div>
-
-      <div className="mt-auto pt-[16px]">
-        <CopyButton
-          copyKey={`weapons-${spec}`}
-          text={setup}
-          label={copy.copyWeapons}
-          copiedLabel={copy.copied}
-        />
       </div>
     </div>
   );

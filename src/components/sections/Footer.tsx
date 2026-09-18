@@ -1,3 +1,4 @@
+import logo from '../../assets/logo-comfy-wizard.png';
 import { footer as copy } from '../../content/copy';
 import { links, socialHref } from '../../content/links';
 import { MailIcon, PhoneIcon, TvIcon, VideoIcon } from '../ui/SocialIcons';
@@ -15,48 +16,66 @@ export function Footer() {
 
   return (
     <footer className="mt-[52px] grid gap-[26px] border-t border-line pt-[28px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,232px),1fr))]">
-      <div>
-        <div
-          className="text-ink"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 900,
-            fontStretch: '74%',
-            fontSize: 17,
-          }}
+      <div className="flex items-start gap-[16px]">
+        <a
+          href={links.site}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={copy.brand}
+          className="group shrink-0 rounded-[14px] border border-line bg-[radial-gradient(circle_at_50%_40%,rgba(168,85,247,0.22),transparent_70%)] p-[6px] transition-colors hover:border-accent"
         >
-          {copy.brand}
-        </div>
-        <p className="mt-[10px] max-w-[42ch] text-[12.5px] leading-[1.6] text-faint">
-          {copy.adFree.before}
-          <a
-            href={links.tip}
-            target="_blank"
-            rel="noreferrer"
-            className="text-accent underline underline-offset-2"
+          <img
+            src={logo}
+            alt=""
+            width={78}
+            height={78}
+            loading="lazy"
+            className="block size-[78px] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] transition-transform duration-200 group-hover:-rotate-3 group-hover:scale-105"
+          />
+        </a>
+        <div className="min-w-0">
+          <div
+            className="text-ink"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 900,
+              fontStretch: '74%',
+              fontSize: 17,
+            }}
           >
-            {copy.adFree.link}
-          </a>
-          {copy.adFree.after}
-        </p>
-        <div className="mt-[14px] flex gap-[8px]">
-          {copy.socials.map((s) => {
-            const Icon = socialIcon[s];
-            const tip = copy.socialTips[s];
-            return (
-              <a
-                key={s}
-                href={socialHref[s]}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={tip.name}
-                className="grid size-[34px] place-items-center rounded-[8px] border border-line text-mute transition-colors hover:border-accent hover:text-accent"
-                {...bind({ name: tip.name, note: tip.note })}
-              >
-                <Icon size={16} />
-              </a>
-            );
-          })}
+            {copy.brand}
+          </div>
+          <p className="mt-[10px] max-w-[42ch] text-[12.5px] leading-[1.6] text-faint">
+            {copy.adFree.before}
+            <a
+              href={links.tip}
+              target="_blank"
+              rel="noreferrer"
+              className="text-accent underline underline-offset-2"
+            >
+              {copy.adFree.link}
+            </a>
+            {copy.adFree.after}
+          </p>
+          <div className="mt-[14px] flex gap-[8px]">
+            {copy.socials.map((s) => {
+              const Icon = socialIcon[s];
+              const tip = copy.socialTips[s];
+              return (
+                <a
+                  key={s}
+                  href={socialHref[s]}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={tip.name}
+                  className="grid size-[34px] place-items-center rounded-[8px] border border-line text-mute transition-colors hover:border-accent hover:text-accent"
+                  {...bind({ name: tip.name, note: tip.note })}
+                >
+                  <Icon size={16} />
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
 

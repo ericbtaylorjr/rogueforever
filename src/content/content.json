@@ -459,19 +459,19 @@
   "foreverDates": [
     {
       "label": "Announced",
-      "val": "12 Sep 2026",
+      "val": "Sep 12th, 2026",
       "note": "BlizzCon 2026 main stage",
       "color": "#A4A4B0"
     },
     {
       "label": "Beta",
-      "val": "17 Sep 2026",
-      "note": "Live now — testing runs through 21 Oct",
+      "val": "Sep 17th, 2026",
+      "note": "Live now — testing runs through Oct 21st",
       "color": "#7FC4E8"
     },
     {
       "label": "Launch",
-      "val": "4 Nov 2026",
+      "val": "Nov 4th, 2026",
       "note": "3pm Pacific, worldwide",
       "color": "#FFF468"
     },
@@ -529,7 +529,7 @@
       "status": "Confirmed",
       "hue": "#7BE06B",
       "body": "Three Classic-style trees, 51 points, but individual talents are redesigned and there is a new 16-point milestone to plan around.",
-      "impact": "Every talent split on this page is a Classic Era build. Treat them as history from 4 November onward."
+      "impact": "Every talent split on this page is a Classic Era build. Treat them as history from November 4th onward."
     },
     {
       "title": "Slower, more tactical combat",
@@ -576,7 +576,7 @@
       "cat": "Unknown",
       "status": "Confirmed",
       "hue": "#7BE06B",
-      "body": "The Forever beta opened today, 17 September, right after the live developer Q&A. Opening-week access covers the Skyborne race and Zephras Isle zone, an initial level cap of 20 (raised to 30 later in the test), and two dungeons — Hall of Thanes and Ruins of Lordaeron. Testing runs through 21 October.",
+      "body": "The Forever beta opened today, September 17th, right after the live developer Q&A. Opening-week access covers the Skyborne race and Zephras Isle zone, an initial level cap of 20 (raised to 30 later in the test), and two dungeons — Hall of Thanes and Ruins of Lordaeron. Testing runs through October 21st.",
       "impact": "You can play a Rogue in Forever right now instead of only reading about it — just at a low level cap. Nothing past the opening test content is accessible yet."
     }
   ],
@@ -969,14 +969,14 @@
       "name": "Hyjal Summit",
       "abbr": "HS",
       "hue": "#5C8A3A",
-      "tag": "Unlocks 9 Dec 2026",
+      "tag": "Unlocks Dec 9th, 2026",
       "summary": "20-player raid at Mount Hyjal, set in the aftermath of Archimonde's defeat. Boss list not yet published.",
       "prep": "Rogue strategies and tips will be updated as soon as this raid's content becomes available for testing.",
       "phases": [
         {
           "n": "What Blizzard has confirmed",
           "lines": [
-            "A 20-player raid, unlocking 9 December 2026 — five weeks after the 4 November launch.",
+            "A 20-player raid, unlocking December 9th, 2026 — five weeks after the November 4th launch.",
             "Blizzard's own words: \"Mount Hyjal invites you to explore the aftermath of Archimonde's defeat, journey through Darkwhisper Gorge, and help shape the future of a recovering land.\"",
             "Ships with new tier sets and a legendary reward, shared across the Hyjal Summit and Barrow Deeps raid wave."
           ]
@@ -995,7 +995,7 @@
       "name": "Barrow Deeps",
       "abbr": "BD",
       "hue": "#4A2E6E",
-      "tag": "Unlocks 9 Dec 2026",
+      "tag": "Unlocks Dec 9th, 2026",
       "summary": "10-player raid. Blizzard has confirmed its size and unlock date; boss list not yet published.",
       "prep": "Rogue strategies and tips will be updated as soon as this raid's content becomes available for testing.",
       "phases": [
@@ -1003,7 +1003,7 @@
           "n": "What Blizzard has confirmed",
           "lines": [
             "A 10-player raid — Blizzard describes it as \"a maximum-level 10-player challenge.\"",
-            "Unlocks 9 December 2026, alongside Hyjal Summit.",
+            "Unlocks December 9th, 2026, alongside Hyjal Summit.",
             "Ships with new tier sets and a legendary reward, shared across the Hyjal Summit and Barrow Deeps raid wave."
           ]
         },
@@ -1021,14 +1021,14 @@
       "name": "Onyxia's Lair",
       "abbr": "ONY",
       "hue": "#8E3A22",
-      "tag": "Unlocks 9 Dec 2026",
+      "tag": "Unlocks Dec 9th, 2026",
       "summary": "Classic's 40-player raid returns as part of the December raid wave. Straight rerelease or rework is unconfirmed.",
       "prep": "Rogue strategies and tips will be updated as soon as this raid's content becomes available for testing.",
       "phases": [
         {
           "n": "What Blizzard has confirmed",
           "lines": [
-            "The 40-player raid returns as part of the raid wave unlocking 9 December 2026, per Blizzard's Forever roadmap.",
+            "The 40-player raid returns as part of the raid wave unlocking December 9th, 2026, per Blizzard's Forever roadmap.",
             "Blizzard's written recap only frames it as \"a revamped iconic raid\" — it doesn't name Onyxia's Lair directly in that text, though the roadmap graphic does.",
             "Whether the fight is a straight rerelease or a reworked encounter has not been said."
           ]
@@ -1095,6 +1095,10 @@
     {
       "name": "Weapon set swap",
       "code": "#showtooltip\n/equipslot 16 Backup Main Hand\n/equipslot 17 Backup Off Hand"
+    },
+    {
+      "name": "Pickpocket (any skill from stealth)",
+      "code": "#showtooltip\n/cast Pick Pocket\n/cast Sinister Strike"
     }
   ],
   "leveling": [
@@ -1111,12 +1115,12 @@
   ],
   "changelog": [
     {
-      "date": "17 Sep 2026",
+      "date": "Sep 17th, 2026",
       "text": "Stood up the first iteration of the WoW Forever Rogue Handbook — spec board, talents, poisons, rotation, gear, consumables and the Forever watch, all in one place."
     },
     {
-      "date": "12 Sep 2026",
-      "text": "Warcraft Forever announced at BlizzCon. Beta 17 September, launch 4 November, level cap staying at 60. Rogues confirmed to gain One-Handed Axes."
+      "date": "Sep 12th, 2026",
+      "text": "Warcraft Forever announced at BlizzCon. Beta September 17th, launch November 4th, level cap staying at 60. Rogues confirmed to gain One-Handed Axes."
     }
   ],
   "nav": [

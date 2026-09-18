@@ -18,9 +18,9 @@ export const hero = {
   },
   lede: 'Everything a raiding Rogue needs, on one page. Community-built from sims, log analysis, and a lot of arguing in Discord. No ads, no twelve-page SEO detour before the actual answer.',
   support: {
-    before: 'Built on Classic Era right now, with a running list of everything Blizzard has actually confirmed for ',
+    before: 'Most of this is Classic Era placeholder content for now. As data is confirmed for ',
     link: 'Warcraft Forever',
-    after: '. Nothing on this page is a leak or a guess dressed up as fact — if it is not confirmed, it says so.',
+    after: ' and sims are analyzed, the Handbook will keep progressing. Nothing here is a leak or a guess dressed up as fact — if it is not confirmed, it says so.',
   },
   ctaPrimary: 'Pick a spec →',
   ctaGhost: 'What Forever changes',
@@ -56,16 +56,12 @@ export const headings: Record<string, string> = {
 };
 
 export const specBoard = {
-  intro: {
-    before:
-      'Classic Era raid consensus, scored as an index rather than a DPS figure — because a DPS number without a gear set, a fight length and a buff list attached is decoration. Sim your own character in ',
-    link: 'Forever WoWSims',
-    after: ' and trust that instead.',
-  },
+  intro:
+    "Establishing a real meta takes two things that don't exist yet: confirmed research and data from Forever itself, and WoWSims tooling actually built for it. Until both are done, any ranking here would be a guess wearing a number. Once that work is finished, a meta will be established and shared here — thanks for your patience while we get there.",
   cols: { rank: 'RANK', index: 'INDEX · vs top' },
   pending: {
     heading: 'No Forever sim data exists yet',
-    body: 'Beta opens 17 September and the game launches 4 November. Until logs exist there is nothing honest to rank. What we can do is tell you which direction each spec is pointing, based only on changes Blizzard has actually confirmed.',
+    body: 'Beta opens September 17th and the game launches November 4th. Until logs exist there is nothing honest to rank. What we can do is tell you which direction each spec is pointing, based only on changes Blizzard has actually confirmed.',
   },
   yourSpec: 'ACTIVE SPEC',
 } as const;
@@ -79,7 +75,7 @@ export const forever = {
 export const talents = {
   /** `{spec}` is replaced with the active spec name. */
   intro:
-    'Showing {spec}. Classic Era builds — Forever redesigns individual talents and adds a new 16-point milestone, so treat every point below as provisional after 4 November.',
+    'Showing {spec}. Classic Era builds — Forever redesigns individual talents and adds a new 16-point milestone, so treat every point below as provisional after November 4th.',
   todoLabel: 'PLACEHOLDER',
   todo: {
     before: 'The talent splits and weapon details below are ',
@@ -90,9 +86,6 @@ export const talents = {
   splitTitle: 'Talent split',
   weaponsTitle: 'Weapons & skill',
   skillCap: '300 SKILL',
-  copyTalents: 'Copy talent summary',
-  copyWeapons: 'Copy weapon setup',
-  copied: 'Copied',
   foreverCallout: {
     before: 'Forever adds ',
     strong: 'One-Handed Axes',

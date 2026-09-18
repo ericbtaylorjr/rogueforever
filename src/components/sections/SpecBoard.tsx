@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { config } from '../../config';
 import { foreverOutlook, specById, specIndex } from '../../content/content';
 import { specBoard } from '../../content/copy';
-import { links } from '../../content/links';
 import type { SimSetId, SpecId } from '../../content/types';
 import { hexA } from '../../lib/color';
 import { useCompendium, type SortKey } from '../../state/CompendiumProvider';
@@ -304,18 +303,7 @@ export function SpecBoard() {
     <section id="specs" aria-label="Spec board" className="pt-[44px]">
       <SectionHeading id="specs" />
 
-      <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
-        {specBoard.intro.before}
-        <a
-          href={links.wowsims}
-          target="_blank"
-          rel="noreferrer"
-          className="text-accent underline decoration-accent/40 underline-offset-2"
-        >
-          {specBoard.intro.link}
-        </a>
-        {specBoard.intro.after}
-      </p>
+      <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{specBoard.intro}</p>
 
       <div className="mt-[18px]">
         <SegmentedTabs

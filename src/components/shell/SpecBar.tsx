@@ -1,5 +1,6 @@
 import { specBar } from '../../content/copy';
-import { specs } from '../../content/content';
+import { specById, specs } from '../../content/content';
+import type { SpecId } from '../../content/types';
 import { useCompendium } from '../../state/CompendiumProvider';
 import { Droplet } from '../ui/Droplet';
 
@@ -20,46 +21,81 @@ export function SpecBar() {
           padding: isPhone ? '10px 12px' : '11px 16px',
         }}
       >
-        <span className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">
-          {specBar.label}
-        </span>
+        {isPhone ? (
+          <div className="relative min-w-0 flex-1">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute left-[13px] top-1/2 size-[7px] shrink-0 -translate-y-1/2 rounded-full"
+              style={{ background: specById[spec].color }}
+            />
+            <select
+              aria-label={specBar.label}
+              value={spec}
+              onChange={(e) => setSpec(e.target.value as SpecId)}
+              className="w-full appearance-none rounded-[20px] border bg-transparent py-[10px] pl-[27px] pr-[30px] text-[13px] font-semibold"
+              style={{
+                borderColor: 'var(--accent)',
+                background: 'rgba(255,244,104,.13)',
+                color: 'var(--accent)',
+              }}
+            >
+              {specs.map((s) => (
+                <option key={s.id} value={s.id} style={{ color: '#0B0B0D' }}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute right-[12px] top-1/2 -translate-y-1/2 text-[9px] text-accent"
+            >
+              ▾
+            </span>
+          </div>
+        ) : (
+          <>
+            <span className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">
+              {specBar.label}
+            </span>
 
-        <div role="group" aria-label={specBar.label} className="flex flex-wrap gap-[7px]">
-          {specs.map((s) => {
-            const on = s.id === spec;
-            return (
-              <button
-                key={s.id}
-                type="button"
-                aria-pressed={on}
-                onClick={() => setSpec(s.id)}
-                className="pill transition-colors"
-                style={{
-                  padding: isPhone ? '10px 14px' : '7px 13px',
-                  borderColor: on ? 'var(--accent)' : 'var(--line)',
-                  background: on ? 'rgba(255,244,104,.13)' : 'transparent',
-                  color: on ? 'var(--accent)' : 'var(--mute)',
-                  fontWeight: on ? 600 : 400,
-                }}
-              >
-                <span
-                  aria-hidden="true"
-                  className="size-[7px] shrink-0 rounded-full"
-                  style={{ background: s.color }}
-                />
-                {s.name}
-              </button>
-            );
-          })}
-        </div>
+            <div role="group" aria-label={specBar.label} className="flex flex-wrap gap-[7px]">
+              {specs.map((s) => {
+                const on = s.id === spec;
+                return (
+                  <button
+                    key={s.id}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => setSpec(s.id)}
+                    className="pill transition-colors"
+                    style={{
+                      padding: '7px 13px',
+                      borderColor: on ? 'var(--accent)' : 'var(--line)',
+                      background: on ? 'rgba(255,244,104,.13)' : 'transparent',
+                      color: on ? 'var(--accent)' : 'var(--mute)',
+                      fontWeight: on ? 600 : 400,
+                    }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="size-[7px] shrink-0 rounded-full"
+                      style={{ background: s.color }}
+                    />
+                    {s.name}
+                  </button>
+                );
+              })}
+            </div>
 
-        <span className="ml-auto" />
+            <span className="ml-auto" />
+          </>
+        )}
 
         <button
           type="button"
           aria-pressed={sweaty}
           onClick={toggleSweaty}
-          className="pill transition-colors"
+          className="pill shrink-0 transition-colors"
           style={{
             padding: isPhone ? '10px 14px' : '7px 13px',
             borderColor: sweaty ? 'rgba(123,224,107,.4)' : 'var(--line)',
