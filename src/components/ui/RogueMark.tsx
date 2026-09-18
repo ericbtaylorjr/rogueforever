@@ -4,7 +4,7 @@ export function RogueMark({ size = 30 }: { size?: number }) {
   return (
     <img
       src={logo}
-      alt="The Comfy Wizard"
+      alt=""
       width={size}
       height={size}
       className="shrink-0"

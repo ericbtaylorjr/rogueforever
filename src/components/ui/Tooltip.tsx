@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -29,7 +30,8 @@ interface TooltipApi {
     onBlur: () => void;
     onClick: (e: React.MouseEvent) => void;
     tabIndex: number;
-    'aria-describedby': string;
+    /** Only present while this element's tooltip is showing, so it never describes the wrong thing. */
+    'aria-describedby': string | undefined;
   };
 }
 
@@ -38,11 +40,14 @@ const Ctx = createContext<TooltipApi | null>(null);
 const INSET = 14;
 const GAP = 9;
 const TIP_ID = 'rc-tooltip';
+/** Grace period so the pointer can cross the gap onto the tooltip itself (WCAG 1.4.13 "hoverable"). */
+const HIDE_DELAY_MS = 160;
 
 export function TooltipProvider({ children }: { children: ReactNode }) {
   const [tip, setTip] = useState<TipState | null>(null);
   const [pos, setPos] = useState({ x: -9999, y: -9999 });
   const boxRef = useRef<HTMLDivElement>(null);
+  const hideTimer = useRef<number | undefined>(undefined);
 
   // Position after the content is measurable: below the anchor, flipped above
   // if it would fall off the bottom, clamped to a 14px viewport inset.
@@ -62,10 +67,31 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
   }, [tip]);
 
   const show = useCallback((el: Element, t: TipContent) => {
+    window.clearTimeout(hideTimer.current);
     setTip({ ...t, rect: el.getBoundingClientRect() });
   }, []);
 
-  const hide = useCallback(() => setTip(null), []);
+  const cancelHide = useCallback(() => window.clearTimeout(hideTimer.current), []);
+  const hide = useCallback(() => {
+    cancelHide();
+    setTip(null);
+  }, [cancelHide]);
+  const hideSoon = useCallback(() => {
+    cancelHide();
+    hideTimer.current = window.setTimeout(() => setTip(null), HIDE_DELAY_MS);
+  }, [cancelHide]);
+
+  // Dismissible without moving the pointer or focus (WCAG 1.4.13).
+  useEffect(() => {
+    if (!tip) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') hide();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [tip, hide]);
+
+  useEffect(() => () => window.clearTimeout(hideTimer.current), []);
 
   const api = useMemo<TooltipApi>(
     () => ({
@@ -74,7 +100,7 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
           if (e.pointerType === 'touch') return; // tap handles it
           show(e.currentTarget, t);
         },
-        onPointerLeave: hide,
+        onPointerLeave: hideSoon,
         onFocus: (e) => show(e.currentTarget, t),
         onBlur: hide,
         onClick: (e) => {
@@ -82,10 +108,10 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
           setTip((cur) => (cur && cur.name === t.name ? null : { ...t, rect: e.currentTarget.getBoundingClientRect() }));
         },
         tabIndex: 0,
-        'aria-describedby': TIP_ID,
+        'aria-describedby': tip?.name === t.name ? TIP_ID : undefined,
       }),
     }),
-    [hide, show],
+    [hide, hideSoon, show, tip?.name],
   );
 
   return (
@@ -95,11 +121,13 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
         id={TIP_ID}
         ref={boxRef}
         role="tooltip"
-        aria-live="polite"
-        className="pointer-events-none fixed left-0 top-0 z-[90] w-max max-w-[300px] rounded-[11px] border border-line bg-panel2 px-[13px] py-[11px] transition-opacity duration-[120ms]"
+        onPointerEnter={cancelHide}
+        onPointerLeave={hideSoon}
+        className="fixed left-0 top-0 z-[90] w-max max-w-[300px] rounded-[11px] border border-line bg-panel2 px-[13px] py-[11px] transition-[opacity,visibility] duration-[120ms]"
         style={{
           transform: `translate(${pos.x}px, ${pos.y}px)`,
           opacity: tip ? 1 : 0,
+          visibility: tip ? 'visible' : 'hidden',
           boxShadow: 'var(--shadow-tip)',
         }}
       >

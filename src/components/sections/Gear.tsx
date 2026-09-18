@@ -30,32 +30,41 @@ function GearRow({ slot, set }: { slot: string; set: GearSetId }) {
 
   return (
     <div
+      role="row"
       className="grid items-center border-t border-line px-[14px] py-[11px]"
       style={{ gridTemplateColumns: GRID }}
     >
-      <span className="t-eyebrow text-[10px] tracking-[.12em] text-faint">{slot}</span>
+      <span role="rowheader" className="t-eyebrow text-[10px] tracking-[.12em] text-faint">
+        {slot}
+      </span>
 
       {item ? (
-        <a
-          href={wowheadUrl(item.itemId)}
-          target="_blank"
-          rel="noreferrer"
-          className="flex min-w-0 items-center gap-[10px] text-[13px] font-semibold"
-          style={{ color: qualityColor[item.quality] }}
-          {...bind({ name: item.name, kind: slot, note: item.source })}
-        >
-          <IconPlaceholder />
-          <span className="truncate">{item.name}</span>
-        </a>
+        <div role="cell" className="min-w-0">
+          <a
+            href={wowheadUrl(item.itemId)}
+            target="_blank"
+            rel="noreferrer"
+            className="flex min-w-0 items-center gap-[10px] text-[13px] font-semibold"
+            style={{ color: qualityColor[item.quality] }}
+            {...bind({ name: item.name, kind: slot, note: item.source })}
+          >
+            <IconPlaceholder />
+            <span className="truncate">{item.name}</span>
+          </a>
+        </div>
       ) : (
-        <span className="flex min-w-0 items-center gap-[10px]">
+        <span role="cell" className="flex min-w-0 items-center gap-[10px]">
           <IconPlaceholder />
           <span className="truncate text-[12.5px] italic text-dim">{copy.empty}</span>
         </span>
       )}
 
-      <span className="truncate text-[12px] text-faint">{item?.source ?? '—'}</span>
-      <span className="truncate text-[12px] text-faint">{item?.enchant ?? '—'}</span>
+      <span role="cell" className="truncate text-[12px] text-faint">
+        {item?.source ?? '—'}
+      </span>
+      <span role="cell" className="truncate text-[12px] text-faint">
+        {item?.enchant ?? '—'}
+      </span>
     </div>
   );
 }
@@ -95,15 +104,21 @@ export function Gear() {
         id={`panel-${gearSet}`}
         role="tabpanel"
         aria-labelledby={`tab-${gearSet}`}
+        tabIndex={0}
         className="table-scroll panel mt-[16px]"
       >
-        <div style={{ minWidth: 600 }}>
+        <div role="table" aria-label={copy.tableLabel} style={{ minWidth: 600 }}>
           <div
+            role="row"
             className="grid items-center px-[14px] py-[10px]"
             style={{ gridTemplateColumns: GRID }}
           >
             {[copy.cols.slot, copy.cols.item, copy.cols.source, copy.cols.enchant].map((c) => (
-              <span key={c} className="t-eyebrow text-[9px] tracking-[.14em] text-faint">
+              <span
+                key={c}
+                role="columnheader"
+                className="t-eyebrow text-[9px] tracking-[.14em] text-faint"
+              >
                 {c}
               </span>
             ))}

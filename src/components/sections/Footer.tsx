@@ -85,7 +85,12 @@ export function Footer() {
         </div>
         <p className="mt-[10px] max-w-[42ch] text-[12.5px] leading-[1.6] text-faint">
           {copy.builtWith.before}
-          <a href={links.discord} className="text-accent underline underline-offset-2">
+          <a
+            href={links.discord}
+            target="_blank"
+            rel="noreferrer"
+            className="text-accent underline underline-offset-2"
+          >
             {copy.builtWith.link}
           </a>
           {copy.builtWith.after}

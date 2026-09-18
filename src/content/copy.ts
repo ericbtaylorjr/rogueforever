@@ -59,6 +59,7 @@ export const specBoard = {
   intro:
     "Establishing a real meta takes two things that don't exist yet: confirmed research and data from Forever itself, and WoWSims tooling actually built for it. Until both are done, any ranking here would be a guess wearing a number. Once that work is finished, a meta will be established and shared here — thanks for your patience while we get there.",
   cols: { rank: 'RANK', index: 'INDEX · vs top' },
+  tableLabel: 'Damage index by spec',
   pending: {
     heading: 'No Forever sim data exists yet',
     body: 'Beta opens September 17th and the game launches November 4th. Until logs exist there is nothing honest to rank. What we can do is tell you which direction each spec is pointing, based only on changes Blizzard has actually confirmed.',
@@ -138,6 +139,7 @@ export const gear = {
       '. They will be published once the research is done and there is enough solid data behind them to trust.',
   },
   cols: { slot: 'SLOT', item: 'ITEM', source: 'SOURCE', enchant: 'ENCHANT' },
+  tableLabel: 'Gear by slot',
   empty: 'No item set yet',
   tabs: [
     { id: 'prebis', label: 'Pre-raid BiS' },
@@ -227,6 +229,7 @@ export const shell = {
   openNav: 'Open navigation',
   closeNav: 'Close navigation',
   openSearch: 'Open search',
+  skipToContent: 'Skip to content',
 } as const;
 
 export const footer = {
@@ -252,7 +255,6 @@ export const footer = {
   shortcutsLabel: 'SHORTCUTS',
   shortcuts: [
     { key: '⌘K', what: 'Search everything' },
-    { key: '/', what: 'Same, fewer fingers' },
     { key: 'ESC', what: 'Get out' },
   ],
 } as const;

@@ -53,6 +53,7 @@ export function Tools() {
                   label={copy.copy}
                   copiedLabel={copy.copied}
                   variant="small"
+                  name={m.name}
                 />
               </div>
               <pre

@@ -18,7 +18,12 @@ export function CommandPalette() {
     if (!searchOpen) return;
     restoreTo.current = document.activeElement as HTMLElement | null;
     inputRef.current?.focus();
-    return () => restoreTo.current?.focus?.();
+    return () => {
+      // Leave focus alone if a jump already moved it into the page.
+      if (!document.activeElement || document.activeElement === document.body) {
+        restoreTo.current?.focus?.();
+      }
+    };
   }, [searchOpen]);
 
   // Keep the highlighted row in view when arrowing through a long list.
@@ -27,6 +32,12 @@ export function CommandPalette() {
       block: 'nearest',
     });
   }, [cursor]);
+
+  const optionId = (i: number) => `rc-search-opt-${i}`;
+  const status =
+    results.length === 0
+      ? search.empty
+      : `${results.length} result${results.length === 1 ? '' : 's'}`;
 
   if (!searchOpen) return null;
 
@@ -64,10 +75,17 @@ export function CommandPalette() {
         style={{ background: '#0D0D11', boxShadow: 'var(--shadow-palette)' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-[10px] border-b border-line px-[16px] py-[13px]">
+        <div className="flex items-center gap-[10px] border-b border-line px-[16px] py-[13px] focus-within:shadow-[inset_0_-2px_0_var(--accent)]">
           <span aria-hidden="true" className="text-[15px] text-faint">⌕</span>
           <input
             ref={inputRef}
+            role="combobox"
+            aria-expanded="true"
+            aria-controls="rc-search-list"
+            aria-autocomplete="list"
+            aria-activedescendant={results[cursor] ? optionId(cursor) : undefined}
+            autoComplete="off"
+            spellCheck={false}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={onKeyDown}
@@ -84,17 +102,30 @@ export function CommandPalette() {
           </button>
         </div>
 
+        <div role="status" aria-live="polite" className="sr-only">
+          {status}
+        </div>
+
         <div
           ref={listRef}
+          id="rc-search-list"
+          role="listbox"
+          aria-label={search.placeholder}
           className="overflow-y-auto"
           style={{ maxHeight: 'min(58vh, 440px)' }}
         >
           {results.length === 0 ? (
-            <p className="px-[16px] py-[22px] text-[13px] text-faint">{search.empty}</p>
+            <p aria-hidden="true" className="px-[16px] py-[22px] text-[13px] text-faint">
+              {search.empty}
+            </p>
           ) : (
             results.map((r, i) => (
               <a
                 key={`${r.kind}-${r.label}-${i}`}
+                id={optionId(i)}
+                role="option"
+                aria-selected={i === cursor}
+                tabIndex={-1}
                 href={`#${r.id}`}
                 data-cursor={i === cursor}
                 onMouseMove={() => setCursor(i)}

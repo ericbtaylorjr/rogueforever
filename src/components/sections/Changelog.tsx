@@ -26,7 +26,7 @@ export function Changelog() {
       </div>
 
       {pageCount > 1 && (
-        <div className="mt-[18px] flex items-center justify-center gap-[14px]">
+        <nav aria-label="Changelog pages" className="mt-[18px] flex items-center justify-center gap-[14px]">
           <button
             type="button"
             onClick={() => setPage((p) => Math.max(0, p - 1))}
@@ -35,7 +35,8 @@ export function Changelog() {
           >
             Prev
           </button>
-          <span className="t-num text-[11.5px] text-faint">
+          <span role="status" className="t-num text-[11.5px] text-faint">
+            <span className="sr-only">Page </span>
             {page + 1} / {pageCount}
           </span>
           <button
@@ -46,7 +47,7 @@ export function Changelog() {
           >
             Next
           </button>
-        </div>
+        </nav>
       )}
     </section>
   );

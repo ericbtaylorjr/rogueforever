@@ -10,11 +10,14 @@ export function CopyButton({
   label,
   copiedLabel = 'Copied',
   variant = 'block',
+  name,
 }: {
   copyKey: string;
   text: string;
   label: string;
   copiedLabel?: string;
+  /** What is being copied. Gives repeated buttons ("Copy" ×N) a unique accessible name. */
+  name?: string;
   variant?: 'block' | 'small';
 }) {
   const { copied, copy } = useCompendium();
@@ -26,25 +29,31 @@ export function CopyButton({
       : 'rounded-[6px] border px-[9px] py-[4px] text-[10.5px] font-semibold transition-colors';
 
   return (
-    <button
-      type="button"
-      onClick={() => copy(copyKey, text)}
-      className={base}
-      style={
-        done
-          ? {
-              border: '1px solid rgba(123,224,107,.4)',
-              background: 'rgba(123,224,107,.1)',
-              color: 'var(--venom)',
-            }
-          : {
-              border: '1px solid rgba(255,244,104,.4)',
-              background: 'rgba(255,244,104,.1)',
-              color: 'var(--accent)',
-            }
-      }
-    >
-      {done ? copiedLabel : label}
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={() => copy(copyKey, text)}
+        aria-label={name ? `${done ? copiedLabel : label} ${name}` : undefined}
+        className={base}
+        style={
+          done
+            ? {
+                border: '1px solid rgba(123,224,107,.4)',
+                background: 'rgba(123,224,107,.1)',
+                color: 'var(--venom)',
+              }
+            : {
+                border: '1px solid rgba(255,244,104,.4)',
+                background: 'rgba(255,244,104,.1)',
+                color: 'var(--accent)',
+              }
+        }
+      >
+        {done ? copiedLabel : label}
+      </button>
+      <span role="status" className="sr-only">
+        {done ? (name ? `${copiedLabel}: ${name}` : copiedLabel) : ''}
+      </span>
+    </>
   );
 }

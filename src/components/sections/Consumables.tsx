@@ -50,11 +50,11 @@ export function Consumables() {
         ))}
       </div>
 
-      <div
-        className="mt-[18px]"
-        style={{ columns: '232px', columnGap: 26 }}
-        aria-live="polite"
-      >
+      <p role="status" className="sr-only">
+        {`Showing ${shown.length} consumable${shown.length === 1 ? '' : 's'}`}
+      </p>
+
+      <div className="mt-[18px]" style={{ columns: '232px', columnGap: 26 }}>
         {shown.map((c) => (
           <div
             key={c.n}

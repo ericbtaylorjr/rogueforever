@@ -25,7 +25,7 @@ export function TopTabs() {
               <a
                 key={i.id}
                 href={`#${i.id}`}
-                aria-current={on ? 'true' : undefined}
+                aria-current={on ? 'location' : undefined}
                 onClick={(e) => {
                   e.preventDefault();
                   jump(i.id);

@@ -23,7 +23,7 @@ export function NavList({ size = 'rail' }: { size?: 'rail' | 'touch' }) {
                 <li key={item.id}>
                   <a
                     href={`#${item.id}`}
-                    aria-current={on ? 'true' : undefined}
+                    aria-current={on ? 'location' : undefined}
                     onClick={(e) => {
                       e.preventDefault();
                       jump(item.id);

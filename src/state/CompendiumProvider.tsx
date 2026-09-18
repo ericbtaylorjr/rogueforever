@@ -74,7 +74,9 @@ function readInitial(): { spec: SpecId; sweaty: boolean } {
   const fromUrl = new URLSearchParams(window.location.search).get('spec');
   let stored: { spec?: string; sweaty?: boolean } = {};
   try {
-    stored = JSON.parse(localStorage.getItem(STORE_KEY) ?? '{}');
+    // Storage is user-editable, so treat it as untrusted: anything that isn't a plain object is ignored.
+    const parsed: unknown = JSON.parse(localStorage.getItem(STORE_KEY) ?? '{}');
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) stored = parsed;
   } catch {
     /* ignore — preferences are a nicety, not a requirement */
   }
@@ -192,13 +194,8 @@ export function CompendiumProvider({ children }: { children: ReactNode }) {
         setDrawer(false);
         return;
       }
-      // `/` opens search, but never while the person is typing.
-      const tag = document.activeElement?.tagName ?? 'BODY';
-      if (e.key === '/' && !searchOpen && ['BODY', 'DIV', 'A', 'BUTTON'].includes(tag)) {
-        e.preventDefault();
-        setQuery('');
-        setSearchOpen(true);
-      }
+      // No bare-key shortcuts (e.g. `/`): WCAG 2.1.4 — they collide with speech input and
+      // can't be remapped here. Keep shortcuts behind a modifier.
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -215,20 +212,30 @@ export function CompendiumProvider({ children }: { children: ReactNode }) {
       if (!el) return;
       const offset = window.innerWidth < bp.rail ? scrollOffset.narrow : scrollOffset.desktop;
       const top = el.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
       setActive(id);
       window.history.replaceState(null, '', `#${id}`);
+      // scrollTo() doesn't move keyboard focus, so a keyboard or screen-reader user would
+      // be left behind in the nav. Park focus on the section without a second scroll.
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
     },
     [],
   );
 
   const copy = useCallback((key: string, text: string) => {
-    navigator.clipboard?.writeText(text).catch(() => {
-      /* clipboard can be blocked; the UI just won't confirm */
-    });
-    setCopied(key);
-    window.clearTimeout(copyTimer.current);
-    copyTimer.current = window.setTimeout(() => setCopied(''), COPY_RESET_MS);
+    // Only confirm once the clipboard actually accepted the text.
+    navigator.clipboard?.writeText(text).then(
+      () => {
+        setCopied(key);
+        window.clearTimeout(copyTimer.current);
+        copyTimer.current = window.setTimeout(() => setCopied(''), COPY_RESET_MS);
+      },
+      () => {
+        /* clipboard can be blocked; the UI just won't confirm */
+      },
+    );
   }, []);
 
   /** Selecting a spec must never move the page. */

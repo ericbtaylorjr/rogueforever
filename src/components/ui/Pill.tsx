@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useRef, type KeyboardEvent, type ReactNode } from 'react';
 import { hexA } from '../../lib/color';
 
 /**
@@ -34,7 +34,7 @@ export function FilterPill({
     >
       {label}
       {count !== undefined && (
-        <span className="t-num text-[10.5px] opacity-70">{count}</span>
+        <span className="t-num text-[10.5px]">{count}</span>
       )}
     </button>
   );
@@ -52,10 +52,28 @@ export function SegmentedTabs({
   onChange: (id: string) => void;
   label: string;
 }) {
+  const listRef = useRef<HTMLDivElement>(null);
+
+  // WAI-ARIA tabs: one tab stop, arrows/Home/End move between tabs (automatic activation).
+  const onKeyDown = (e: KeyboardEvent) => {
+    const i = tabs.findIndex((t) => t.id === value);
+    let next = -1;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % tabs.length;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + tabs.length) % tabs.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = tabs.length - 1;
+    if (next < 0) return;
+    e.preventDefault();
+    onChange(tabs[next].id);
+    listRef.current?.querySelectorAll<HTMLElement>('[role="tab"]')[next]?.focus();
+  };
+
   return (
     <div
+      ref={listRef}
       role="tablist"
       aria-label={label}
+      onKeyDown={onKeyDown}
       className="flex w-fit gap-1 rounded-[10px] border border-line bg-panel p-1"
     >
       {tabs.map((t) => {
@@ -65,7 +83,8 @@ export function SegmentedTabs({
             key={t.id}
             role="tab"
             aria-selected={on}
-            aria-controls={`panel-${t.id}`}
+            tabIndex={on ? 0 : -1}
+            aria-controls={on ? `panel-${t.id}` : undefined}
             id={`tab-${t.id}`}
             type="button"
             onClick={() => onChange(t.id)}

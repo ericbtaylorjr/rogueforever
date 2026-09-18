@@ -150,8 +150,8 @@ function TableView({ rows }: { rows: Row[] }) {
   }, [rows, sort]);
 
   return (
-    <div className="table-scroll panel">
-      <div style={{ minWidth: 560 }}>
+    <div className="table-scroll panel" tabIndex={0} role="region" aria-label={specBoard.tableLabel}>
+      <div role="table" aria-label={specBoard.tableLabel} style={{ minWidth: 560 }}>
         <div
           className="grid items-center border-b border-line px-[14px] py-[10px]"
           style={{ gridTemplateColumns: GRID }}
@@ -160,17 +160,21 @@ function TableView({ rows }: { rows: Row[] }) {
           {COLS.map((c) => {
             const on = sort.key === c.key;
             return (
-              <button
+              <div
                 key={c.key}
-                type="button"
-                onClick={() => toggleSort(c.key)}
+                role="columnheader"
                 aria-sort={on ? (sort.dir === 'asc' ? 'ascending' : 'descending') : 'none'}
-                className="t-eyebrow flex items-center gap-[4px] text-[9px] tracking-[.14em]"
-                style={{ color: on ? 'var(--accent)' : 'var(--faint)' }}
               >
-                {c.label}
-                {on && <span aria-hidden="true">{sort.dir === 'asc' ? '↑' : '↓'}</span>}
-              </button>
+                <button
+                  type="button"
+                  onClick={() => toggleSort(c.key)}
+                  className="t-eyebrow flex items-center gap-[4px] text-[9px] tracking-[.14em]"
+                  style={{ color: on ? 'var(--accent)' : 'var(--faint)' }}
+                >
+                  {c.label}
+                  {on && <span aria-hidden="true">{sort.dir === 'asc' ? '↑' : '↓'}</span>}
+                </button>
+              </div>
             );
           })}
         </div>
@@ -180,14 +184,15 @@ function TableView({ rows }: { rows: Row[] }) {
           return (
             <div
               key={r.id}
+              role="row"
               className="grid items-center border-b border-line/50 px-[14px] py-[11px] last:border-0"
               style={{
                 gridTemplateColumns: GRID,
                 background: mine ? 'rgba(255,244,104,.06)' : 'transparent',
               }}
             >
-              <span className="t-num text-[12px] text-faint">{r.rank}</span>
-              <span className="flex min-w-0 items-center gap-[8px]">
+              <span role="cell" className="t-num text-[12px] text-faint">{r.rank}</span>
+              <span role="cell" className="flex min-w-0 items-center gap-[8px]">
                 <span
                   aria-hidden="true"
                   className="size-[7px] shrink-0 rounded-full"
@@ -195,9 +200,9 @@ function TableView({ rows }: { rows: Row[] }) {
                 />
                 <span className="truncate text-[13px] font-semibold text-ink">{r.name}</span>
               </span>
-              <span className="truncate text-[12px] text-faint">{r.weapon}</span>
-              <span className="t-num text-[13.5px] text-ink">{r.idx}</span>
-              <span className="t-num text-[12.5px]" style={{ color: r.delta === 0 ? 'var(--accent)' : 'var(--mute)' }}>
+              <span role="cell" className="truncate text-[12px] text-faint">{r.weapon}</span>
+              <span role="cell" className="t-num text-[13.5px] text-ink">{r.idx}</span>
+              <span role="cell" className="t-num text-[12.5px]" style={{ color: r.delta === 0 ? 'var(--accent)' : 'var(--mute)' }}>
                 {r.delta === 0 ? '—' : r.delta}
               </span>
             </div>

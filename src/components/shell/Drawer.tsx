@@ -35,7 +35,10 @@ export function Drawer() {
     document.addEventListener('keydown', onKey);
     return () => {
       document.removeEventListener('keydown', onKey);
-      restoreTo.current?.focus?.();
+      // Leave focus alone if a jump already moved it into the page.
+      if (!document.activeElement || document.activeElement === document.body) {
+        restoreTo.current?.focus?.();
+      }
     };
   }, [drawer]);
 

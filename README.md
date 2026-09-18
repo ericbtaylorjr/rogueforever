@@ -61,20 +61,45 @@ authored them in markup.
   diagonal-hatch placeholder.
 - **Rogue class icon** is a hand-drawn stand-in, isolated in
   `components/ui/RogueMark.tsx`. Swapping it touches one file.
-- **External links** are all `#` placeholders in `src/content/links.ts`.
+- **External links**: only Comfy's UI is still a placeholder (`weakauras: '#'` in
+  `src/content/links.ts`); its card renders as a disabled "Coming Soon" button.
 - **Vite `base`** is `/`. For a GitHub Pages project site, set `VITE_BASE` to
   `/<repo-name>/` in `.github/workflows/deploy.yml`.
-- **Fonts** load from Google Fonts in `index.html`. Self-host before launch.
 
 ## Accessibility
 
-Covered: real ARIA on tabs, accordions, the palette dialog and the drawer; focus
-traps and focus restoration on both overlays; arrow-key + Enter navigation in the
-palette; tooltips answer focus and tap, not just hover; `prefers-reduced-motion`
-disables the six looping animations; 44px touch targets; live regions on the spec
-and filter changes.
+Target: WCAG 2.2 AA. Last audited with axe-core (0 violations at 1440px and 390px,
+including the palette and drawer open) plus a manual keyboard pass.
 
-Not done yet: arrow-key navigation between tabs and accordion headers.
+Covered: skip link and `<main>` landmark; nav jumps move keyboard focus to the target
+section and respect `prefers-reduced-motion`; tabs use roving tabindex with
+arrow/Home/End keys; the palette is a real combobox/listbox with a live result count;
+tooltips are dismissible (Esc), hoverable, and only set `aria-describedby` while showing
+(WCAG 1.4.13); focus is kept clear of the sticky bars (`scroll-padding-top`); the Gear
+table has table semantics and its scroll region is keyboard-reachable; copy buttons have
+unique names and announce success; no bare-key shortcuts (WCAG 2.1.4 — only Ctrl/⌘+K);
+text meets 4.5:1 (`--dim` is deliberately light — don't darken it back).
+
+Known / accepted: the looping decorative animations (bar shimmer, poison drips, pulsing
+dots) have no pause control beyond `prefers-reduced-motion` (WCAG 2.2.2). Not done yet:
+arrow-key navigation between FAQ/raid accordion headers (not required by WCAG).
+
+## Security
+
+Static site, no backend, no user input beyond a search box, no `dangerouslySetInnerHTML`,
+no third-party scripts, no runtime network requests. `npm audit` is clean.
+
+- **CSP** ships as a `<meta>` tag injected at build time (`vite.config.ts`); everything is
+  first-party, including fonts (`src/assets/fonts`, OFL). `style-src` needs
+  `'unsafe-inline'` for the design's inline styles; `script-src` does not.
+- **Limits of GitHub Pages:** it can't set response headers, so `frame-ancestors`
+  (clickjacking), HSTS and `X-Content-Type-Options` aren't available. If the site moves
+  behind Cloudflare/Netlify, set them there.
+- **External links** use `target="_blank"` with `rel="noreferrer"` (implies `noopener`).
+- **Stored data:** the URL `?spec=` param and localStorage are validated against the
+  known spec list; anything else is ignored.
+- **CI:** actions are pinned to commit SHAs, the workflow defaults to read-only, and only
+  the deploy job gets `pages`/`id-token` write. Dependabot keeps both up to date.
 
 ## Editorial rules the code enforces
 

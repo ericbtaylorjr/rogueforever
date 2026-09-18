@@ -8,7 +8,7 @@
 export const links = {
   wowsims: 'https://wowsims.github.io/classic/',
   weakauras: '#', // TODO: Comfy's UI addon package
-  discord: '#', // TODO: Rogue Classic Discord invite
+  discord: 'https://discord.gg/rKF9G7zusj',
   tip: 'https://streamelements.com/thecomfywizard-bba10/tip',
   youtube: 'https://youtube.com/@thecomfywizard',
   tiktok: 'https://www.tiktok.com/@thecomfywizard',

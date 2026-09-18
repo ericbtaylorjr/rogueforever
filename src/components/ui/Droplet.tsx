@@ -14,8 +14,7 @@ export function Droplet({
 }) {
   return (
     <span
-      role="img"
-      aria-label={title}
+      {...(title ? { role: 'img', 'aria-label': title } : { 'aria-hidden': true })}
       className={`inline-block shrink-0 ${className}`}
       style={{
         width: size,

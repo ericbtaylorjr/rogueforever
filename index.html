@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Rogue Handbook - WoW Forever</title>
     <meta
@@ -44,16 +45,13 @@
       content="A one-page reference for how to excel at the Rogue class in World of Warcraft Forever, curated by The Comfy Wizard."
     />
     <meta name="twitter:image" content="https://wowrogue.gg/og-image.png" />
-
-    <!-- TODO: self-host these for production (see README > Assets). -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
+    <noscript>
+      <p style="margin: 24px; font-family: system-ui, sans-serif; color: #ededf0">
+        The Rogue Handbook needs JavaScript to run. Please enable it and reload.
+      </p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

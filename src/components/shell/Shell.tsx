@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { config } from '../../config';
+import { shell } from '../../content/copy';
 import { themeVars } from '../../lib/theme';
 import { useCompendium } from '../../state/CompendiumProvider';
 import { CommandPalette } from './CommandPalette';
@@ -17,6 +18,9 @@ export function Shell({ children }: { children: ReactNode }) {
 
   return (
     <div style={themeVars()}>
+      <a href="#main" className="skip-link">
+        {shell.skipToContent}
+      </a>
       {railNav && <Sidebar />}
       {topNav && <TopTabs />}
       {isNarrow && (
@@ -27,7 +31,9 @@ export function Shell({ children }: { children: ReactNode }) {
       )}
 
       <main
-        className="relative z-[1]"
+        id="main"
+        tabIndex={-1}
+        className="relative z-[1] outline-none"
         style={{
           marginLeft: railNav ? 'var(--rail-w)' : undefined,
           paddingTop: isNarrow ? 'var(--topbar-h)' : topNav ? 62 : undefined,
