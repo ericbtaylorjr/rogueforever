@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { specById, specDetail } from '../../content/content';
 import { talents as copy } from '../../content/copy';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
@@ -10,7 +10,7 @@ import { SectionHeading } from '../ui/SectionHeading';
 const TOTAL_POINTS = 51;
 
 function TalentSplit() {
-  const { spec } = useCompendium();
+  const { spec } = useHandbook();
   const { tone } = useTheme();
   const d = specDetail[spec];
   const [grown, setGrown] = useState(false);
@@ -70,7 +70,7 @@ function TalentSplit() {
 }
 
 function WeaponCard() {
-  const { spec, sweaty } = useCompendium();
+  const { spec, sweaty } = useHandbook();
   const d = specDetail[spec];
 
   return (
@@ -105,7 +105,7 @@ function WeaponCard() {
 }
 
 export function Talents() {
-  const { spec } = useCompendium();
+  const { spec } = useHandbook();
 
   return (
     <section id="talents" aria-label="Talents and weapons">

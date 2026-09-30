@@ -460,124 +460,228 @@
     {
       "label": "Announced",
       "val": "Sep 12th, 2026",
-      "note": "BlizzCon 2026 main stage",
-      "color": "#A4A4B0"
+      "note": "BlizzCon 2026",
+      "color": "#A4A4B0",
+      "source": {
+        "label": "Carve a New Path announcement",
+        "url": "https://news.blizzard.com/en-us/article/24302093/carve-a-new-path-with-world-of-warcraft-forever"
+      }
     },
     {
       "label": "Beta",
       "val": "Sep 17th, 2026",
-      "note": "Live now — testing runs through Oct 21st",
-      "color": "#7FC4E8"
+      "note": "Testing runs through Oct 21st",
+      "color": "#7FC4E8",
+      "source": {
+        "label": "Beta Now Live",
+        "url": "https://news.blizzard.com/en-us/article/24304160/the-world-of-warcraft-forever-beta-now-live"
+      }
     },
     {
       "label": "Launch",
       "val": "Nov 4th, 2026",
-      "note": "3pm Pacific, worldwide",
-      "color": "#FFF468"
+      "note": "3pm Pacific, worldwide. Included with a WoW subscription",
+      "color": "#FFF468",
+      "source": {
+        "label": "What's Next panel recap",
+        "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap"
+      }
     },
     {
       "label": "Level cap",
       "val": "60",
-      "note": "No increases planned",
-      "color": "#A4A4B0"
+      "note": "Beta opened at 20, rising to 30 later in the test",
+      "color": "#A4A4B0",
+      "source": {
+        "label": "Beta Now Live",
+        "url": "https://news.blizzard.com/en-us/article/24304160/the-world-of-warcraft-forever-beta-now-live"
+      }
     }
   ],
   "foreverChanges": [
-    {
-      "title": "Rogues can use One-Handed Axes",
-      "cat": "Class",
-      "status": "Confirmed",
-      "hue": "#7BE06B",
-      "body": "Axes join Daggers, Swords, Maces, Fist Weapons, Bows, Crossbows and Thrown on the Rogue weapon list. It is the single clearest mechanical addition to the class so far.",
-      "impact": "One more weapon type competing for your main hand, and one more weapon skill to cap if you commit to it."
-    },
-    {
-      "title": "Each spec gets a sharper identity",
-      "cat": "Class",
-      "status": "Confirmed",
-      "hue": "#7BE06B",
-      "body": "Assassination is being pointed at poison damage, Subtlety at bleeds and stealth effects, and Combat keeps its straightforward upfront style.",
-      "impact": "The Classic answer — \"play Combat Swords\" — stops being automatic. Assassination and Subtlety are getting actual design attention for the first time."
-    },
     {
       "title": "Hit and Crit are unified — including poisons",
       "cat": "Systems",
       "status": "Confirmed",
       "hue": "#7BE06B",
-      "body": "Spell, melee and ranged hit collapse into one Hit stat, and the same happens to crit. Blizzard's BlizzCon deep dive named Rogues directly, saying the change \"helps hybrid specializations such as Retribution Paladins and Enhancement Shaman, while also letting Warriors, Hunters, and Rogues benefit when improving the reliability of tools such as Taunts, Poisons, and Traps.\" The worked example was Lionheart Helm: +18 Strength, 2% hit and 2% crit applying everywhere.",
-      "impact": "Your gear no longer has dead stats on it, and your poison applications stop living on a separate table from your swings."
+      "body": "Spell, melee and ranged hit chance are combined into one stat, and the same happens to critical chance. Blizzard named Rogues directly: the change \"helps hybrid specializations such as Retribution Paladins and Enhancement Shaman, while also letting Warriors, Hunters, and Rogues benefit when improving the reliability of tools such as Taunts, Poisons, and Traps.\"",
+      "impact": "Your gear no longer has dead stats on it, and your poison applications stop living on a separate table from your swings.",
+      "sources": [
+        {
+          "label": "Deep Dive panel recap",
+          "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap"
+        }
+      ]
     },
     {
       "title": "Weapon Skill survives, but tuned down per item",
       "cat": "Systems",
       "status": "Confirmed",
       "hue": "#7BE06B",
-      "body": "Blizzard's own wording from the deep dive: \"Weapon skill still works as it always has, but items with weapon skill offer less of it per item so they are not always the obvious best choice.\"",
-      "impact": "Still cap your weapon skill. Do not expect one item to do half the job for you the way a couple of Classic pieces did."
+      "body": "Blizzard's own wording: \"Weapon skill still works as it always has, but items with weapon skill offer less of it per item so they are not always the obvious best choice.\"",
+      "impact": "Still cap your weapon skill. Do not expect one item to do half the job for you the way a couple of Classic pieces did.",
+      "sources": [
+        {
+          "label": "Deep Dive panel recap",
+          "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap"
+        }
+      ]
+    },
+    {
+      "title": "New stat: fewer parries and dodges",
+      "cat": "Gear",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Among the reworked and added stats, Blizzard says \"some items can reduce the chance for attacks to be parried or dodged.\"",
+      "impact": "A new line to weigh on melee gear. How much it is worth against Hit and Agility is a question for sims, not guesswork. Anything attacking a boss from the front has the most to gain.",
+      "sources": [
+        {
+          "label": "Deep Dive panel recap",
+          "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap"
+        }
+      ]
     },
     {
       "title": "Itemization is being deliberately \"unsolved\"",
       "cat": "Gear",
       "status": "Confirmed",
       "hue": "#7BE06B",
-      "body": "Every dungeon boss has had its loot reviewed. Quests, world drops, professions and existing items are all being updated, with hundreds of new or adjusted drops and some effects tied to specific environments or creature types.",
-      "impact": "Do not build a Forever BiS list from Classic Era data. It will be wrong, and confidently wrong is worse than empty."
+      "body": "Every dungeon drop has been re-examined and hundreds of new drops added. Unique dungeon boss items are now blue quality, set bonuses are improved, quest rewards support more classes and roles, world-drop epics are improved, there are hundreds of new rare-creature drops and over 600 new profession recipes. Some new effects tie items to environments (Woodlands, Mountains, Deserts) or creature types, and trinkets lean toward situational effects.",
+      "impact": "Do not build a Forever BiS list from Classic Era data. It will be wrong, and confidently wrong is worse than empty.",
+      "sources": [
+        {
+          "label": "Deep Dive panel recap",
+          "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap"
+        }
+      ]
     },
     {
-      "title": "Talent trees keep their shape, lose their certainties",
+      "title": "Talent trees keep their shape, not all their talents",
       "cat": "Class",
       "status": "Confirmed",
       "hue": "#7BE06B",
-      "body": "Three Classic-style trees, 51 points, but individual talents are redesigned and there is a new 16-point milestone to plan around.",
-      "impact": "Every talent split on this page is a Classic Era build. Treat them as history from November 4th onward."
+      "body": "Trees keep a familiar structure and the same number of rows, with one-point milestone talents at 11, 21 and 31 points joined by a new 16-point milestone. Blizzard says some talents remain exactly as they were in patch 1.12, some have been adjusted or improved, and key class-buff talents become baseline.",
+      "impact": "Every talent split on this page is a Classic Era build. Blizzard has not published the Forever Rogue trees, so treat them as provisional.",
+      "sources": [
+        {
+          "label": "Deep Dive panel recap",
+          "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap"
+        }
+      ]
     },
     {
       "title": "Slower, more tactical combat",
       "cat": "Systems",
       "status": "Confirmed",
       "hue": "#7BE06B",
-      "body": "Blizzard framed the combat goals as keeping classes simple and distinct, with slower pacing and group play where crowd control and threat genuinely matter.",
-      "impact": "Sap, Kick, Blind and Gouge stop being things you forgot you had. Rogue utility is priced in rather than tolerated."
-    },
-    {
-      "title": "Mutilate for Assassination",
-      "cat": "Class",
-      "status": "Demo footage",
-      "hue": "#FFB347",
-      "body": "A dual-wield strike generating multiple combo points was shown on the Assassination tree in the playable BlizzCon demo. This is community capture, not a published Blizzard ability page.",
-      "impact": "Promising, unconfirmed, and subject to change before launch. Do not plan a build around it yet."
+      "body": "Combat stays rooted in Classic pacing: \"A solo player can expect an ordinary creature to take roughly 10–15 seconds to defeat.\" Crowd control keeps its place, damage dealers \"still need to respect Threat,\" and classes are meant to stay simple and distinct, each with its own strengths and weaknesses.",
+      "impact": "Sap, Kick, Blind and Gouge stop being things you forgot you had, and threat management is part of the job.",
+      "sources": [
+        {
+          "label": "Deep Dive panel recap",
+          "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap"
+        }
+      ]
     },
     {
       "title": "Skyborne can be Rogues",
       "cat": "Class",
       "status": "Confirmed",
       "hue": "#7BE06B",
-      "body": "The new Skyborne race can play Rogue on both Alliance and Horde. Their racial toolkit includes a glide that lets them float safely down from height. Race access requires the Heroic Pack or higher.",
-      "impact": "A new racial spread to compare against Human sword skill, Orc stun resist and Night Elf stealth. Nobody has numbers yet."
+      "body": "Both Skyborne factions, Windshaper (Horde) and High Order (Alliance), can be Rogues. Shared racials: Walk on Air (glide downward for 10 seconds), Wind Blessed (passive 1% melee, ranged and spell Haste) and Elemental Insight (5% more damage to Elementals). Windshaper adds Skysight (10% run speed); High Order adds Read Ley Line (100% more Health and Mana regeneration). The race requires the Skyborne Heroic Pack or higher.",
+      "impact": "A flat 1% Haste is the headline for a melee class, and there is nothing like it on the Classic racial list. Whether it beats Human or Orc weapon racials is a sim question.",
+      "sources": [
+        {
+          "label": "Meet the New Skyborne",
+          "url": "https://news.blizzard.com/en-us/article/24302071/wow-forever-meet-the-new-skyborne"
+        },
+        {
+          "label": "Pre-purchase upgrades",
+          "url": "https://worldofwarcraft.blizzard.com/en-gb/news/24301508"
+        }
+      ]
     },
     {
-      "title": "Ability-by-ability Rogue breakdown",
+      "title": "Account-wide Legacy System",
+      "cat": "Systems",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "A horizontal progression system built from Legacy Challenges, Perks and Rewards. Most players unlock it when their first character reaches level 25, and at launch each character can spend up to 16 Legacy Points. Perks are quality-of-life and efficiency boosts, not combat power. One, Working Overtime, raises skill-up chances in every tradeskill, including Lockpicking.",
+      "impact": "Your alts and your main share progress. None of it changes your damage, but Lockpicking gets easier to level.",
+      "sources": [
+        {
+          "label": "Legacy System",
+          "url": "https://news.blizzard.com/en-us/article/24307383/get-to-know-the-world-of-warcraft-forever-legacy-system"
+        }
+      ]
+    },
+    {
+      "title": "Raid and dungeon lineup",
+      "cat": "Content",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "Two raids: Hyjal Summit (20-player) and Barrow Deeps (10-player). Nine dungeons: Hall of Thanes, Ruins of Lordaeron, Whelgar's Excavation Site, City of Dalaran, Blackmaw Hold, Drowned City, Krol'dok Stronghold, Alcaz Prison and Shaper's Terrace. New zones Mount Hyjal, Shen'dralas, Riverglades and the Skyborne starting zone Zephras Isle, plus Darkspear Islands, a 15v15 battleground.",
+      "impact": "Names and counts are locked in, but encounter mechanics and loot tables are not. The raid notes on this page are still Classic Era tiers until real Forever strats exist.",
+      "sources": [
+        {
+          "label": "What's Next panel recap",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap"
+        }
+      ]
+    },
+    {
+      "title": "Beta: what is open",
+      "cat": "Beta",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "The beta opened September 17th with a level cap of 20, to be raised to 30 later in the test. Week one covered the Skyborne race and Zephras Isle, all zone content up to level 20, and two dungeons: Hall of Thanes (13–18) and Ruins of Lordaeron (15–20). More zones, dungeons and the new battleground open as the beta continues, and October 21st is the last full day of testing. Beta access comes with the Skyborne Epic Pack or higher.",
+      "impact": "You can play a Forever Rogue now, just not far. Blizzard has not announced a date for the level 30 raise.",
+      "sources": [
+        {
+          "label": "Beta Now Live",
+          "url": "https://news.blizzard.com/en-us/article/24304160/the-world-of-warcraft-forever-beta-now-live"
+        },
+        {
+          "label": "Pre-purchase upgrades",
+          "url": "https://worldofwarcraft.blizzard.com/en-gb/news/24301508"
+        }
+      ]
+    },
+    {
+      "title": "Beta notes: the Rogue changes so far",
+      "cat": "Beta",
+      "status": "Confirmed",
+      "hue": "#7BE06B",
+      "body": "The September 24th development notes have one Rogue entry: \"Sap now correctly flags the Rogue for PvP when used on a target that is PvP flagged.\" Talent resets are temporarily 1 silver for the beta. Two known issues affect Rogues: \"Item enhancements (such as Windfury or rogue poisons) cannot be tracked\" by the new Cooldown Manager, and \"Personal Resource Display doesn't show combo points.\"",
+      "impact": "Rogue talent and tuning changes you see reported from the beta are not in Blizzard's published notes. Test them in the client rather than trusting a screenshot.",
+      "sources": [
+        {
+          "label": "Beta development notes (Sep 24)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-september-24/2360696"
+        },
+        {
+          "label": "Beta known issues (Sep 24)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-known-issues-september-24/2352687"
+        }
+      ]
+    },
+    {
+      "title": "Rogue class preview",
       "cat": "Unknown",
       "status": "Not published",
       "hue": "#8E8E9A",
-      "body": "Blizzard has published a full rework preview for Paladin and covered general systems affecting Rogues — Hit/Crit, Weapon Skill — in the BlizzCon deep dive. It still has not published a dedicated ability-by-ability breakdown for Rogue, and today's live Q&A did not add one.",
-      "impact": "Anything you read claiming a specific Forever Rogue rotation is either your own beta testing or still guessing. Trust the beta client over secondhand claims."
-    },
-    {
-      "title": "Raid and dungeon lineup is confirmed",
-      "cat": "Unknown",
-      "status": "Confirmed",
-      "hue": "#7BE06B",
-      "body": "Blizzard's What's Next panel named the launch content: two raids — Hyjal Summit (20-player) and Barrow Deeps (10-player) — plus nine dungeons including Hall of Thanes, Ruins of Lordaeron and City of Dalaran, new zones Mount Hyjal, Shen'dralas and Riverglades, the Skyborne starting zone Zephras Isle, and a 15v15 PvP battleground, Darkspear Islands.",
-      "impact": "Names and counts are locked in, but encounter mechanics and loot tables are not. The raid notes on this page are still Classic Era tiers until beta testing produces real Forever strats."
-    },
-    {
-      "title": "Beta is live",
-      "cat": "Unknown",
-      "status": "Confirmed",
-      "hue": "#7BE06B",
-      "body": "The Forever beta opened today, September 17th, right after the live developer Q&A. Opening-week access covers the Skyborne race and Zephras Isle zone, an initial level cap of 20 (raised to 30 later in the test), and two dungeons — Hall of Thanes and Ruins of Lordaeron. Testing runs through October 21st.",
-      "impact": "You can play a Rogue in Forever right now instead of only reading about it — just at a low level cap. Nothing past the opening test content is accessible yet."
+      "body": "The Deep Dive went into Paladin changes ability by ability, but Blizzard has not published anything comparable for Rogue: no Rogue talent trees, spec direction, new abilities or weapon changes. Blizzard says more class and race detail is coming in future videos and articles.",
+      "impact": "Anything claiming a specific Forever Rogue rotation, spec identity or new ability is your own beta testing or someone else's guess. Trust the beta client over secondhand claims.",
+      "sources": [
+        {
+          "label": "Deep Dive panel recap",
+          "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap"
+        },
+        {
+          "label": "Beta development notes (Sep 24)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-september-24/2360696"
+        }
+      ]
     }
   ],
   "poisons": [
@@ -1069,7 +1173,7 @@
   "tools": [
     {
       "kicker": "Start here",
-      "name": "Learn to sim",
+      "name": "Learn WoWSims",
       "color": "#FFF468",
       "body": "Forever WoWSims answers your gear questions better than any guide can, including this one. It is genuinely not complicated, and it takes an afternoon to learn once and then never wonder again.",
       "cta": "Available Soon",
@@ -1079,9 +1183,7 @@
       "kicker": "Addons",
       "name": "Comfy's UI",
       "color": "#B98BFF",
-      "body": "The complete UI addon package The Comfy Wizard actually plays with — heavily centered around Ellesmere UI, plus a handful of QoL addons, bundled into one drop-in setup.",
-      "cta": "Coming Soon",
-      "disabled": true
+      "body": "The complete UI addon package The Comfy Wizard actually plays with — heavily centered around Ellesmere UI and adjustments to the WoW Edit Mode UI, for a clean, consistent, raid efficient design."
     },
     {
       "kicker": "Community",
@@ -1099,6 +1201,10 @@
     {
       "name": "Pickpocket (any skill from stealth)",
       "code": "#showtooltip\n/cast Pick Pocket\n/cast Sinister Strike"
+    },
+    {
+      "name": "Ranged attack (any type)",
+      "code": "#showtooltip\n/cast [equipped:Guns] Shoot Gun; [equipped:Bows] Shoot Bow; [equipped:Crossbows] Shoot Crossbow; [equipped:Thrown] Throw"
     }
   ],
   "leveling": [

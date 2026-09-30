@@ -23,11 +23,11 @@ src/
     content.ts               typed loader + derived filters/counts
     copy.ts                  prose extracted from the prototype markup
     types.ts                 content types incl. the real GearItem schema
-    gear.ts                  item data (intentionally empty) + quality colours
+    gear.ts                  BiS data (empty), leveling stat weights + milestones, colours
     links.ts                 every external URL — all TODO placeholders
     palette.ts               consumable category dot colours
     searchIndex.ts           ~126-entry command palette index
-  state/CompendiumProvider.tsx  all page state, scroll-spy, keyboard, persistence
+  state/HandbookProvider.tsx all page state, scroll-spy, keyboard, persistence
   components/shell/          sidebar, mobile bar, drawer, palette, spec bar, top tabs
   components/ui/             droplet, logo, callout, pills, copy button, tooltip
   components/sections/       the 15 sections, one file each
@@ -59,6 +59,9 @@ authored them in markup.
   an empty state. Fill `gearSets` in `src/content/gear.ts` and every row fills,
   Wowhead quality colouring and tooltips included. Item icons are a
   diagonal-hatch placeholder.
+- **Leveling tab** (Gear's default tab) shows per-spec stat priority with EP weights
+  and a level-ordered milestone item list. Both are Classic Era placeholders in
+  `statPriority` / `levelingItems` in `src/content/gear.ts`. Check item IDs before launch.
 - **Rogue class icon** is a hand-drawn stand-in, isolated in
   `components/ui/RogueMark.tsx`. Swapping it touches one file.
 - **External links**: only Comfy's UI is still a placeholder (`weakauras: '#'` in
@@ -126,5 +129,7 @@ no third-party scripts, no runtime network requests. `npm audit` is clean.
 
 - Every Forever claim carries a status, and only `Confirmed` reads as fact. The
   three badge treatments are in `ForeverWatch.tsx` — keep them distinct.
+- Forever Watch entries come only from official Blizzard sources (news.blizzard.com,
+  worldofwarcraft.blizzard.com, blue posts), and every entry links its `sources`.
 - The spec board is a 0–100 consensus index, never simulated DPS.
 - The sweaty marker is a CSS teardrop, never an emoji.

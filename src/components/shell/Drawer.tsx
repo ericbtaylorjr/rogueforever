@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { shell } from '../../content/copy';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { NavList } from './NavList';
 import { SweatyLegend, Wordmark } from './Wordmark';
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])';
 
 export function Drawer() {
-  const { drawer, setDrawer } = useCompendium();
+  const { drawer, setDrawer } = useHandbook();
   const panelRef = useRef<HTMLDivElement>(null);
   const restoreTo = useRef<HTMLElement | null>(null);
 

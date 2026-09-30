@@ -1,7 +1,8 @@
 import { config } from '../../config';
 import { specs } from '../../content/content';
 import { hero } from '../../content/copy';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { links } from '../../content/links';
+import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
 
@@ -33,7 +34,7 @@ function PoisonDrip() {
 }
 
 function SpecLadder() {
-  const { spec, setSpec } = useCompendium();
+  const { spec, setSpec } = useHandbook();
   const { tone } = useTheme();
 
   return (
@@ -97,7 +98,7 @@ function SpecLadder() {
 }
 
 export function Overview() {
-  const { jump } = useCompendium();
+  const { jump } = useHandbook();
 
   return (
     <section
@@ -132,7 +133,16 @@ export function Overview() {
 
       <div className="relative mt-[16px] max-w-[62ch]">
         <Callout tone="accent" dashed label={hero.disclaimer.label}>
-          {hero.disclaimer.text}
+          {hero.disclaimer.before}
+          <a
+            href={links.discord}
+            target="_blank"
+            rel="noreferrer"
+            className="text-accent underline underline-offset-2"
+          >
+            {hero.disclaimer.link}
+          </a>
+          {hero.disclaimer.after}
         </Callout>
       </div>
 
@@ -143,7 +153,14 @@ export function Overview() {
           <p className="t-lede text-lede">{hero.lede}</p>
           <p className="mt-[14px] max-w-[62ch] text-[14.5px] leading-[1.6] text-mute">
             {hero.support.before}
-            <span className="font-semibold text-sky">{hero.support.link}</span>
+            <a
+              href={links.discord}
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-sky underline underline-offset-2"
+            >
+              {hero.support.link}
+            </a>
             {hero.support.after}
           </p>
 

@@ -1,12 +1,12 @@
 import { raids } from '../../content/content';
 import { raidsCopy as copy } from '../../content/copy';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 
 export function Raids() {
-  const { openRaid, toggleRaid } = useCompendium();
+  const { openRaid, toggleRaid } = useHandbook();
 
   return (
     <section id="raid" aria-label="Raids">

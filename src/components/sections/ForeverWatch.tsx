@@ -1,7 +1,7 @@
 import { foreverCatCount, foreverCats, foreverChanges, foreverDates } from '../../content/content';
 import { forever } from '../../content/copy';
 import type { ForeverStatus } from '../../content/types';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { FilterPill } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -26,7 +26,7 @@ const statusStyle: Record<ForeverStatus, React.CSSProperties> = {
 };
 
 export function ForeverWatch() {
-  const { foreverFilter, setForeverFilter } = useCompendium();
+  const { foreverFilter, setForeverFilter } = useHandbook();
   const { tone } = useTheme();
   const shown = foreverChanges.filter((c) => foreverFilter === 'All' || c.cat === foreverFilter);
 
@@ -44,6 +44,15 @@ export function ForeverWatch() {
               {d.val}
             </div>
             <div className="mt-[5px] text-[11px] leading-[1.45] text-faint">{d.note}</div>
+            <a
+              href={d.source.url}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-[6px] inline-block text-[10.5px] text-sky underline underline-offset-2"
+            >
+              {forever.sourceLink}
+              <span className="sr-only">: {d.source.label}</span>
+            </a>
           </div>
         ))}
       </div>
@@ -103,6 +112,21 @@ export function ForeverWatch() {
                 {forever.impactPrefix}
               </span>{' '}
               {c.impact}
+            </p>
+
+            <p className="mt-[10px] flex flex-wrap items-baseline gap-x-[12px] gap-y-[4px] text-[11px]">
+              <span className="t-eyebrow text-[9px] tracking-[.12em] text-faint">{forever.sourcesLabel}</span>
+              {c.sources.map((src) => (
+                <a
+                  key={src.url}
+                  href={src.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sky underline underline-offset-2"
+                >
+                  {src.label} ↗
+                </a>
+              ))}
             </p>
           </article>
         ))}

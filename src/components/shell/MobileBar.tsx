@@ -1,11 +1,11 @@
 import { shell } from '../../content/copy';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 
 /** Fixed 58px top bar, <1100px. */
 export function MobileBar() {
-  const { setDrawer, setSearchOpen, setQuery, drawer } = useCompendium();
+  const { setDrawer, setSearchOpen, setQuery, drawer } = useHandbook();
 
   return (
     <header

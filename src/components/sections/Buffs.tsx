@@ -1,13 +1,13 @@
 import { buffGroups } from '../../content/content';
 import { buffsCopy as copy } from '../../content/copy';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useTooltip } from '../ui/Tooltip';
 
 export function Buffs() {
-  const { sweaty } = useCompendium();
+  const { sweaty } = useHandbook();
   const { bind } = useTooltip();
 
   return (

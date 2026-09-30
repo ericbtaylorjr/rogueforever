@@ -4,7 +4,7 @@ import { foreverOutlook, specById, specIndex } from '../../content/content';
 import { specBoard } from '../../content/copy';
 import type { SimSetId, SpecId } from '../../content/types';
 import { hexA } from '../../lib/color';
-import { useCompendium, type SortKey } from '../../state/CompendiumProvider';
+import { useHandbook, type SortKey } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { SegmentedTabs, Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -71,7 +71,7 @@ function YourSpecBadge() {
 }
 
 function BarsView({ rows, simSet }: { rows: Row[]; simSet: SimSetId }) {
-  const { spec } = useCompendium();
+  const { spec } = useHandbook();
   const { tone } = useTheme();
   const grown = useGrown(simSet);
 
@@ -139,7 +139,7 @@ const COLS: { key: SortKey; label: string }[] = [
 const GRID = '46px minmax(0,1.4fr) minmax(0,1.3fr) 84px 84px';
 
 function TableView({ rows }: { rows: Row[] }) {
-  const { spec, sort, toggleSort } = useCompendium();
+  const { spec, sort, toggleSort } = useHandbook();
   const { tone } = useTheme();
 
   const sorted = useMemo(() => {
@@ -217,7 +217,7 @@ function TableView({ rows }: { rows: Row[] }) {
 }
 
 function CardsView({ rows }: { rows: Row[] }) {
-  const { spec } = useCompendium();
+  const { spec } = useHandbook();
   const { tone } = useTheme();
   return (
     <div className="grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,208px),1fr))]">
@@ -251,7 +251,7 @@ function CardsView({ rows }: { rows: Row[] }) {
 }
 
 function ForeverPending() {
-  const { isNarrow } = useCompendium();
+  const { isNarrow } = useHandbook();
   const { tone } = useTheme();
   return (
     <div
@@ -300,7 +300,7 @@ function ForeverPending() {
 }
 
 export function SpecBoard() {
-  const { simSet, setSimSet } = useCompendium();
+  const { simSet, setSimSet } = useHandbook();
   const rows = useRows(simSet);
   const set = specIndex[simSet];
 

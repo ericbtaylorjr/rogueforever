@@ -4,7 +4,7 @@ import type { IntensityId, SpecId } from './content/types';
  * Build-time configuration, not end-user settings — there is no settings UI in
  * the design. Recommended ship values are the defaults below.
  */
-export interface CompendiumConfig {
+export interface HandbookConfig {
   navLayout: 'sidebar' | 'topTabs';
   simView: 'bars' | 'table' | 'cards';
   intensity: IntensityId;
@@ -14,13 +14,13 @@ export interface CompendiumConfig {
   defaultSpec: SpecId;
 }
 
-export const config: CompendiumConfig = {
+export const config: HandbookConfig = {
   navLayout: 'sidebar',
   simView: 'bars',
   intensity: 'shadow',
   accent: '#FFF468',
   showSweaty: true,
-  phaseLabel: 'v 0.1',
+  phaseLabel: 'v 1.60.1',
   defaultSpec: 'cbsword',
 };
 

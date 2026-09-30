@@ -1,12 +1,12 @@
 import { specById, specDetail } from '../../content/content';
 import { rotation as copy } from '../../content/copy';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { SectionHeading } from '../ui/SectionHeading';
 
 export function Rotation() {
-  const { spec, sweaty } = useCompendium();
+  const { spec, sweaty } = useHandbook();
   const d = specDetail[spec];
 
   return (

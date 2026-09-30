@@ -1,9 +1,9 @@
 import { faqs } from '../../content/content';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { SectionHeading } from '../ui/SectionHeading';
 
 export function Faq() {
-  const { openFaq, toggleFaq } = useCompendium();
+  const { openFaq, toggleFaq } = useHandbook();
 
   return (
     <section id="faq" aria-label="FAQ">

@@ -1,4 +1,4 @@
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 
 /**
  * Copy-to-clipboard with a 1600ms confirmation. Only one confirmation shows at
@@ -20,7 +20,7 @@ export function CopyButton({
   name?: string;
   variant?: 'block' | 'small';
 }) {
-  const { copied, copy } = useCompendium();
+  const { copied, copy } = useHandbook();
   const done = copied === copyKey;
 
   const base =

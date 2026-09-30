@@ -26,7 +26,7 @@ export const socialHref: Record<string, string> = {
 
 /** Map a tool card's CTA to its destination. Keyed by the tool name in content.json. */
 export const toolHref: Record<string, string> = {
-  'Learn to sim': links.wowsims,
+  'Learn WoWSims': links.wowsims,
   "Comfy's UI": links.weakauras,
   'Rogue Classic Discord': links.discord,
 };

@@ -18,7 +18,7 @@ export interface Sort {
   dir: 'asc' | 'desc';
 }
 
-interface CompendiumState {
+interface HandbookState {
   /* state */
   spec: SpecId;
   simSet: SimSetId;
@@ -54,11 +54,12 @@ interface CompendiumState {
   setSearchOpen: (open: boolean) => void;
   setQuery: (q: string) => void;
   setDrawer: (open: boolean) => void;
-  copy: (key: string, text: string) => void;
+  /** Resolves true once the clipboard accepted the text. */
+  copy: (key: string, text: string) => Promise<boolean>;
   jump: (id: string) => void;
 }
 
-const Ctx = createContext<CompendiumState | null>(null);
+const Ctx = createContext<HandbookState | null>(null);
 
 const COPY_RESET_MS = 1600;
 const STORE_KEY = 'rc:prefs';
@@ -87,13 +88,13 @@ function readInitial(): { spec: SpecId; sweaty: boolean } {
   };
 }
 
-export function CompendiumProvider({ children }: { children: ReactNode }) {
+export function HandbookProvider({ children }: { children: ReactNode }) {
   const initial = useRef(readInitial()).current;
 
   const [spec, setSpecState] = useState<SpecId>(initial.spec);
   const [simSet, setSimSet] = useState<SimSetId>('st');
   const [sort, setSort] = useState<Sort>({ key: 'idx', dir: 'desc' });
-  const [gearSet, setGearSet] = useState<GearSetId>('bis');
+  const [gearSet, setGearSet] = useState<GearSetId>('leveling');
   const [consumeFilter, setConsumeFilter] = useState('All');
   const [foreverFilter, setForeverFilter] = useState('All');
   const [sweaty, setSweaty] = useState(initial.sweaty);
@@ -226,15 +227,16 @@ export function CompendiumProvider({ children }: { children: ReactNode }) {
 
   const copy = useCallback((key: string, text: string) => {
     // Only confirm once the clipboard actually accepted the text.
-    navigator.clipboard?.writeText(text).then(
+    if (!navigator.clipboard) return Promise.resolve(false);
+    return navigator.clipboard.writeText(text).then(
       () => {
         setCopied(key);
         window.clearTimeout(copyTimer.current);
         copyTimer.current = window.setTimeout(() => setCopied(''), COPY_RESET_MS);
+        return true;
       },
-      () => {
-        /* clipboard can be blocked; the UI just won't confirm */
-      },
+      // Clipboard can be blocked; callers decide how to fall back.
+      () => false,
     );
   }, []);
 
@@ -245,7 +247,7 @@ export function CompendiumProvider({ children }: { children: ReactNode }) {
     setSort((s) => (s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'desc' }));
   }, []);
 
-  const value = useMemo<CompendiumState>(
+  const value = useMemo<HandbookState>(
     () => ({
       spec,
       simSet,
@@ -307,8 +309,8 @@ export function CompendiumProvider({ children }: { children: ReactNode }) {
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 
-export function useCompendium(): CompendiumState {
+export function useHandbook(): HandbookState {
   const ctx = useContext(Ctx);
-  if (!ctx) throw new Error('useCompendium must be used inside <CompendiumProvider>');
+  if (!ctx) throw new Error('useHandbook must be used inside <HandbookProvider>');
   return ctx;
 }

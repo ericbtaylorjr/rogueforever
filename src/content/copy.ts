@@ -13,14 +13,18 @@ export const hero = {
   titleTop: 'Rogue',
   titleBottom: 'Handbook',
   disclaimer: {
-    label: 'PLACEHOLDER',
-    text: 'Everything in this Handbook is placeholder until more Forever data is confirmed. Content will update as sim data, logs and official patch notes come in.',
+    label: 'Important:',
+    before:
+      'This guide covers information gathered for the level 30 Beta version of WoW Forever. As more is learned upon official release, it will be updated to reflect leveling and end game information accordingly. Please reach out with any feedback in the ',
+    link: 'Rogue Classic Discord',
+    after: '!',
   },
-  lede: 'Everything a raiding Rogue needs, on one page. Community-built from sims, log analysis, and a lot of arguing in Discord. No ads, no twelve-page SEO detour before the actual answer.',
+  lede: "Welcome! The Rogue Handbook is a quick, no-nonsense reference for playing a Rogue well in WoW Forever. Pick your spec and find what matters in one place: talents, rotation, gear, poisons and consumables, kept simple so you can check something between pulls and get back to the game.",
   support: {
-    before: 'Most of this is Classic Era placeholder content for now. As data is confirmed for ',
-    link: 'Warcraft Forever',
-    after: ' and sims are analyzed, the Handbook will keep progressing. Nothing here is a leak or a guess dressed up as fact — if it is not confirmed, it says so.',
+    before: 'Most of what you will find here comes from the ',
+    link: 'Rogue Classic Discord',
+    after:
+      ', where the community tests, sims and argues about all things Rogue. Come say hi there with any questions about playing a Rogue, or with feedback on the Handbook itself.',
   },
   ctaPrimary: 'Pick a spec →',
   ctaGhost: 'What Forever changes',
@@ -69,8 +73,10 @@ export const specBoard = {
 
 export const forever = {
   intro:
-    'Everything on this page becomes provisional the moment beta lands. Here is what Blizzard has actually said, separated from what the community pulled out of demo footage, separated again from what nobody knows yet.',
+    'Only what Blizzard has officially said: news posts, panel recaps and blue posts, each entry linked to its source. What Blizzard has not published yet is marked as such, and community findings stay out until Blizzard confirms them.',
   impactPrefix: 'What it means for you —',
+  sourcesLabel: 'Sources',
+  sourceLink: 'Source ↗',
 } as const;
 
 export const talents = {
@@ -131,17 +137,27 @@ export const rotation = {
 export const gear = {
   simsLink: 'Open in Forever WoWSims ↗',
   todoLabel: 'IN PROGRESS',
-  todo: {
-    before:
-      'Slot rows are wired and styled, item data is placeholder. The Pre-raid BiS and Best in Slot lists will be built out over time as ',
-    strong: 'information is gathered and WoWSims APLs are solidified',
-    after:
-      '. They will be published once the research is done and there is enough solid data behind them to trust.',
-  },
+  todo: 'The Pre-raid BiS and Best in Slot lists will be built out over time as information is gathered and WoWSims APLs are solidified. They will be published once the research is done and there is enough solid data behind them to trust.',
   cols: { slot: 'SLOT', item: 'ITEM', source: 'SOURCE', enchant: 'ENCHANT' },
   tableLabel: 'Gear by slot',
   empty: 'No item set yet',
+  leveling: {
+    todo: {
+      before: 'Stat weights and items are ',
+      strong: 'Classic Era placeholders',
+      after:
+        '. Forever re-itemizes dungeons, so this list will be rebuilt as the Beta is explored and sims are run.',
+    },
+    statsTitle: 'Stat priority',
+    statsMeta: 'EP · Agility = 1',
+    epLabel: 'EP',
+    itemsTitle: 'Leveling milestone gear',
+    cols: { level: 'LEVEL', slot: 'SLOT', item: 'ITEM', source: 'SOURCE', faction: 'FACTION' },
+    tableLabel: 'Leveling items by level',
+    empty: 'No leveling items listed for this spec yet',
+  },
   tabs: [
+    { id: 'leveling', label: 'Leveling' },
     { id: 'prebis', label: 'Pre-raid BiS' },
     { id: 'bis', label: 'Best in Slot' },
   ],
@@ -210,6 +226,51 @@ export const toolsCopy = {
   copy: 'Copy',
   copied: 'Copied',
 } as const;
+
+export const comfyUi = {
+  preview: {
+    open: "View Comfy's UI screenshot",
+    title: "Comfy's UI in game",
+    alt: "Comfy's UI in game: a Rogue in Loch Modan with the EllesmereUI unit frames, action bars, threat and damage meters, and a compact chat and minimap.",
+  },
+  close: 'Close',
+  copyCta: 'Copy Import String',
+  copying: 'Loading string…',
+  copiedMsg: 'Import string copied to your clipboard. Paste it in game with Ctrl+V.',
+  failedMsg:
+    "Your browser blocked clipboard access. Select the string below and copy it manually (Ctrl+C).",
+  stepsTitle: 'How to import',
+  profiles: [
+    {
+      id: 'ellesmere',
+      label: 'EllesmereUI Profile',
+      title: 'EllesmereUI Profile',
+      intro:
+        "This is the profile you import into EllesmereUI. It carries every EllesmereUI setting behind Comfy's UI, so your frames, bars and colours match the screenshot.",
+      steps: [
+        'Install EllesmereUI and log in to your character.',
+        'Open the EllesmereUI settings and go to Profiles.',
+        'Choose Import and paste the string with Ctrl+V.',
+        'Confirm the import, then reload your UI when prompted (or type /reload).',
+      ],
+    },
+    {
+      id: 'editmode',
+      label: 'Edit Mode Profile',
+      title: 'Edit Mode Profile',
+      intro:
+        "This is the layout you import into WoW's built-in Edit Mode. It places Blizzard's own frames (action bars, chat, minimap, buffs and so on) where they sit in Comfy's UI. Import the EllesmereUI profile first.",
+      steps: [
+        'Press Esc and choose Edit Mode.',
+        'In the Edit Mode window, open the Layout dropdown and choose Import.',
+        'Paste the string with Ctrl+V, give the layout a name and click Import.',
+        'Make sure the new layout is selected, then click Save and exit Edit Mode.',
+      ],
+    },
+  ],
+} as const;
+
+export type ComfyProfileId = (typeof comfyUi.profiles)[number]['id'];
 
 export const levelingCopy = {
   intro:

@@ -1,5 +1,5 @@
 import { nav } from '../../content/content';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { SearchTrigger } from './SearchTrigger';
 import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
@@ -9,7 +9,7 @@ import { Wordmark } from './Wordmark';
  * falls back to the drawer. Not the recommended ship configuration.
  */
 export function TopTabs() {
-  const { active, jump } = useCompendium();
+  const { active, jump } = useHandbook();
   const items = nav.flatMap((g) => g.items);
 
   return (

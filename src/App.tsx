@@ -16,7 +16,7 @@ import { Rotation } from './components/sections/Rotation';
 import { SpecBoard } from './components/sections/SpecBoard';
 import { Talents } from './components/sections/Talents';
 import { Tools } from './components/sections/Tools';
-import { CompendiumProvider } from './state/CompendiumProvider';
+import { HandbookProvider } from './state/HandbookProvider';
 import { ThemeProvider } from './state/ThemeProvider';
 import { Divider } from './components/ui/Divider';
 import { TooltipProvider } from './components/ui/Tooltip';
@@ -25,7 +25,7 @@ import { TooltipProvider } from './components/ui/Tooltip';
 export default function App() {
   return (
     <ThemeProvider>
-      <CompendiumProvider>
+      <HandbookProvider>
         <TooltipProvider>
           <Shell>
             <Overview />
@@ -60,7 +60,7 @@ export default function App() {
             <Footer />
           </Shell>
         </TooltipProvider>
-      </CompendiumProvider>
+      </HandbookProvider>
     </ThemeProvider>
   );
 }

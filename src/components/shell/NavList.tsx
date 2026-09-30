@@ -1,12 +1,12 @@
 import { nav } from '../../content/content';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 
 /**
  * Grouped section nav. `size="touch"` is the drawer variant — bigger targets.
  * Note: item counts were removed in a later design revision. Don't add them back.
  */
 export function NavList({ size = 'rail' }: { size?: 'rail' | 'touch' }) {
-  const { active, jump } = useCompendium();
+  const { active, jump } = useHandbook();
   const touch = size === 'touch';
 
   return (

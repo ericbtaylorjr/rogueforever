@@ -1,8 +1,8 @@
 import { search } from '../../content/copy';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 
 export function SearchTrigger() {
-  const { setSearchOpen, setQuery } = useCompendium();
+  const { setSearchOpen, setQuery } = useHandbook();
   return (
     <button
       type="button"

@@ -56,11 +56,18 @@ export interface ForeverOutlook {
   why: string;
 }
 
+/** An official Blizzard source (news.blizzard.com, worldofwarcraft.blizzard.com or a blue post). */
+export interface ForeverSource {
+  label: string;
+  url: string;
+}
+
 export interface ForeverDate {
   label: string;
   val: string;
   note: string;
   color: string;
+  source: ForeverSource;
 }
 
 /** Only `Confirmed` may be presented as fact. See README > Editorial rules. */
@@ -73,6 +80,8 @@ export interface ForeverChange {
   hue: string;
   body: string;
   impact: string;
+  /** Every entry cites at least one official Blizzard source. */
+  sources: ForeverSource[];
 }
 
 export interface Poison {
@@ -127,7 +136,8 @@ export interface Tool {
   name: string;
   color: string;
   body: string;
-  cta: string;
+  /** Link-out label. Omitted for cards with their own actions (Comfy's UI). */
+  cta?: string;
   disabled?: boolean;
 }
 
@@ -179,7 +189,26 @@ export interface GearItem {
   enchant?: string;
 }
 
-export type GearSetId = 'bis' | 'prebis';
+export type GearSetId = 'leveling' | 'prebis' | 'bis';
+
+/** One stat in a spec's priority, weighted in EP relative to Agility (= 1). */
+export interface StatWeight {
+  stat: string;
+  ep: number;
+}
+
+/** A stat priority reads left to right; `op` joins a stat to the one before it. */
+export interface StatPriority {
+  stats: (StatWeight & { op?: '>' | '=' })[];
+}
+
+export type Faction = 'Both' | 'Alliance' | 'Horde';
+
+/** A leveling milestone: an item worth chasing, and the level to aim for it by. */
+export interface LevelingItem extends Omit<GearItem, 'enchant'> {
+  level: number;
+  faction: Faction;
+}
 
 export interface Content {
   specs: Spec[];

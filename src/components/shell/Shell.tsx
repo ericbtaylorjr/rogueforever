@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { config } from '../../config';
 import { shell } from '../../content/copy';
 import { themeVars } from '../../lib/theme';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { CommandPalette } from './CommandPalette';
 import { Drawer } from './Drawer';
@@ -11,7 +11,7 @@ import { Sidebar } from './Sidebar';
 import { TopTabs } from './TopTabs';
 
 export function Shell({ children }: { children: ReactNode }) {
-  const { isNarrow, isWide, isPhone } = useCompendium();
+  const { isNarrow, isWide, isPhone } = useHandbook();
   const { theme } = useTheme();
 
   // Below 1100px the nav is always the drawer, whatever navLayout says.

@@ -1,7 +1,7 @@
 import { consumableCatCount, consumableCats, consumables } from '../../content/content';
 import { consumablesCopy as copy } from '../../content/copy';
 import { dotFor } from '../../content/palette';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
@@ -10,7 +10,7 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { useTooltip } from '../ui/Tooltip';
 
 export function Consumables() {
-  const { consumeFilter, setConsumeFilter, sweaty } = useCompendium();
+  const { consumeFilter, setConsumeFilter, sweaty } = useHandbook();
   const { bind } = useTooltip();
   const { tone } = useTheme();
 

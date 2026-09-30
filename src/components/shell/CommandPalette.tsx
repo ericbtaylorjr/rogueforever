@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { search } from '../../content/copy';
 import { searchEntries } from '../../content/searchIndex';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 
 export function CommandPalette() {
-  const { searchOpen, setSearchOpen, query, setQuery, jump } = useCompendium();
+  const { searchOpen, setSearchOpen, query, setQuery, jump } = useHandbook();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const restoreTo = useRef<HTMLElement | null>(null);

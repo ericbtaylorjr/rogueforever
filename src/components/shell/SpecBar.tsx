@@ -1,13 +1,13 @@
 import { specBar } from '../../content/copy';
 import { specById, specs } from '../../content/content';
 import type { SpecId } from '../../content/types';
-import { useCompendium } from '../../state/CompendiumProvider';
+import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { Droplet } from '../ui/Droplet';
 
 /** Sticky under the hero. Owns the two page-level controls. */
 export function SpecBar() {
-  const { spec, setSpec, sweaty, toggleSweaty, isNarrow, isPhone } = useCompendium();
+  const { spec, setSpec, sweaty, toggleSweaty, isNarrow, isPhone } = useHandbook();
   const { tone } = useTheme();
 
   return (
