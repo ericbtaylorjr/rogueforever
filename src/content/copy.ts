@@ -306,9 +306,9 @@ export const theme = {
 export const footer = {
   brand: 'THE COMFY WIZARD',
   adFree: {
-    before: 'Ad-free because ads are miserable. ',
+    before: 'Theorycrafter, Former Rank 1 Rogue, UI Engineer, and Girls Dad. ',
     link: 'Send a tip',
-    after: ' if this saved you a wipe.',
+    after: ' if you appreciate the work!',
   },
   socials: ['YT', 'TT', 'TWITCH', 'MAIL'],
   socialTips: {
@@ -321,12 +321,12 @@ export const footer = {
   builtWith: {
     before: 'Community sims, log analysis, and a lot of smart folks in the ',
     link: 'Rogue Classic Discord',
-    after: ". Corrections welcome — that's the whole point.",
+    after: ". Corrections welcome — we're always learning and improving.",
   },
   shortcutsLabel: 'SHORTCUTS',
   shortcuts: [
     { key: '⌘K', what: 'Search' },
-    { key: 'ESC', what: 'Get out' },
+    { key: 'ESC', what: 'Close modal' },
   ],
 } as const;
 
