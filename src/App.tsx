@@ -32,6 +32,8 @@ export default function App() {
             <SpecBar />
             <SpecBoard />
             <Divider />
+            <Leveling />
+            <Divider />
             <Talents />
             <Divider />
             <Gear />
@@ -49,8 +51,6 @@ export default function App() {
             <Raids />
             <Divider />
             <Tools />
-            <Divider />
-            <Leveling />
             <Divider />
             <Faq />
             <Divider />

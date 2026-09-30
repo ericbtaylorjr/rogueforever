@@ -3,426 +3,69 @@
   "$note": "Single source of truth for all page content. Every array here maps 1:1 to a const in the prototype logic class. Swap values here, not in markup.",
   "specs": [
     {
-      "id": "cbsword",
-      "name": "Combat Swords",
-      "weapon": "Sword MH / Sword OH",
-      "color": "#FFD966",
-      "color2": "#A8862E",
-      "tier": "TBD",
-      "role": "Meta TBD",
-      "tag": "Classic default"
-    },
-    {
-      "id": "cbdagger",
-      "name": "Combat Daggers",
-      "weapon": "Dagger MH / Dagger OH",
-      "color": "#FF6B5E",
-      "color2": "#A83C34",
-      "tier": "TBD",
-      "role": "Meta TBD",
-      "tag": "Positional"
-    },
-    {
-      "id": "assn",
-      "name": "Assassination",
-      "weapon": "Dagger MH / Dagger OH",
+      "id": "mutilate",
+      "name": "Mutilate",
+      "weapon": "Weapons TBD",
       "color": "#5FC9F8",
       "color2": "#2E7FA8",
       "tier": "TBD",
       "role": "Meta TBD",
-      "tag": "Poison / bleed"
+      "tag": "Assassination"
     },
     {
-      "id": "subt",
-      "name": "Subtlety",
-      "weapon": "Dagger MH / Dagger OH",
+      "id": "sinister",
+      "name": "Sinister Strike",
+      "weapon": "Weapons TBD",
+      "color": "#FF6B5E",
+      "color2": "#A83C34",
+      "tier": "TBD",
+      "role": "Meta TBD",
+      "tag": "Combat"
+    },
+    {
+      "id": "backstab",
+      "name": "Backstab",
+      "weapon": "Weapons TBD",
       "color": "#B98BFF",
       "color2": "#6F4FB8",
       "tier": "TBD",
       "role": "Meta TBD",
-      "tag": "PvP in Classic"
+      "tag": "Subtlety"
     }
   ],
   "specDetail": {
-    "cbsword": {
-      "talents": [
-        {
-          "name": "Assassination",
-          "pts": 15,
-          "color": "#8A8A96"
-        },
-        {
-          "name": "Combat",
-          "pts": 31,
-          "color": "#FFD966"
-        },
-        {
-          "name": "Subtlety",
-          "pts": 5,
-          "color": "#6E6E7A"
-        }
-      ],
-      "talentNote": "Deep Combat for Adrenaline Rush and Blade Flurry, with Assassination filler for Malice, Improved Eviscerate and Lethality. The Classic raid default, and the least positional spec in the game.",
-      "keyTalents": [
-        "Adrenaline Rush — your only real damage cooldown",
-        "Blade Flurry — cleave and a flat attack speed boost",
-        "Sword Specialization — extra swings, the reason swords win",
-        "Improved Sinister Strike — cheaper builder, more finishers"
-      ],
-      "weapons": [
-        {
-          "slot": "Main hand",
-          "name": "Fast sword",
-          "why": "more Sinister Strikes, more Instant Poison procs"
-        },
-        {
-          "slot": "Off hand",
-          "name": "Fast sword",
-          "why": "Sword Spec procs off both hands"
-        },
-        {
-          "slot": "Ranged",
-          "name": "Thrown or bow",
-          "why": "pulls and the occasional out-of-range global"
-        },
-        {
-          "slot": "Skill cap",
-          "name": "300 weapon skill",
-          "why": "reduces miss and glancing penalty",
-          "sweaty": true
-        }
-      ],
-      "apl": [
-        {
-          "name": "Slice and Dice",
-          "cond": "Missing, or under 2s remaining. Nothing else on this list matters if this drops."
-        },
-        {
-          "name": "Expose Armor",
-          "cond": "At 5 combo points, only if you are the assigned Expose Rogue and the debuff is falling off."
-        },
-        {
-          "name": "Adrenaline Rush",
-          "cond": "On cooldown, ideally inside a damage window and with energy already low."
-        },
-        {
-          "name": "Blade Flurry",
-          "cond": "Adds are in melee range. On a single target it is still an attack speed buff, so do not hoard it forever."
-        },
-        {
-          "name": "Eviscerate",
-          "cond": "At 5 combo points with Slice and Dice comfortably up."
-        },
-        {
-          "name": "Sinister Strike",
-          "cond": "Your builder. Cheap, no positioning, works from anywhere."
-        }
-      ],
-      "opener": [
-        "Thistle Tea",
-        "Sapper",
-        "Sinister Strike ×2",
-        "Slice and Dice",
-        "Sinister Strike ×5",
-        "Eviscerate"
-      ],
-      "nevers": [
-        "Clipping Slice and Dice to squeeze in one more builder.",
-        "Casting Expose Armor under 5 combo points.",
-        "Saving Adrenaline Rush for a perfect window that never arrives."
-      ]
+    "mutilate": {
+      "talentVariants": [],
+      "weapons": [],
+      "apl": [],
+      "opener": [],
+      "nevers": []
     },
-    "cbdagger": {
-      "talents": [
-        {
-          "name": "Assassination",
-          "pts": 20,
-          "color": "#8A8A96"
-        },
-        {
-          "name": "Combat",
-          "pts": 31,
-          "color": "#FF6B5E"
-        },
-        {
-          "name": "Subtlety",
-          "pts": 0,
-          "color": "#6E6E7A"
-        }
-      ],
-      "talentNote": "Combat core for the cooldowns, Assassination for Opportunity and Lethality. Higher ceiling than swords when you can stay behind the boss, and a much lower floor when you cannot.",
-      "keyTalents": [
-        "Dagger Specialization — crit chance with daggers",
-        "Opportunity — flat Backstab and Ambush damage",
-        "Adrenaline Rush — your only real damage cooldown",
-        "Blade Flurry — cleave plus attack speed"
-      ],
-      "weapons": [
-        {
-          "slot": "Main hand",
-          "name": "High-damage dagger",
-          "why": "Backstab scales off main hand weapon damage"
-        },
-        {
-          "slot": "Off hand",
-          "name": "Fast dagger",
-          "why": "poison procs and white damage only"
-        },
-        {
-          "slot": "Ranged",
-          "name": "Thrown or bow",
-          "why": "pulls and out-of-range filler"
-        },
-        {
-          "slot": "Skill cap",
-          "name": "300 weapon skill",
-          "why": "Backstab cannot miss what it cannot reach",
-          "sweaty": true
-        }
-      ],
-      "apl": [
-        {
-          "name": "Slice and Dice",
-          "cond": "Missing, or under 2s remaining."
-        },
-        {
-          "name": "Expose Armor",
-          "cond": "At 5 combo points, only if you are the assigned Expose Rogue."
-        },
-        {
-          "name": "Adrenaline Rush",
-          "cond": "On cooldown, aligned with a damage window."
-        },
-        {
-          "name": "Blade Flurry",
-          "cond": "Adds in melee range, or simply on cooldown for the attack speed."
-        },
-        {
-          "name": "Eviscerate",
-          "cond": "At 5 combo points with Slice and Dice up."
-        },
-        {
-          "name": "Backstab",
-          "cond": "Your builder. Behind the target only — this is the entire spec."
-        },
-        {
-          "name": "Sinister Strike",
-          "cond": "You have been forced in front of the boss and cannot fix it this global.",
-          "sweaty": true
-        }
-      ],
-      "opener": [
-        "Thistle Tea",
-        "Sapper",
-        "Backstab ×2",
-        "Slice and Dice",
-        "Backstab ×3",
-        "Eviscerate"
-      ],
-      "nevers": [
-        "Standing in front of the boss and calling it a rotation.",
-        "Backstabbing with a slow off-hand equipped in the main hand slot.",
-        "Letting Slice and Dice drop during a movement phase."
-      ]
+    "sinister": {
+      "talentVariants": [],
+      "weapons": [],
+      "apl": [],
+      "opener": [],
+      "nevers": []
     },
-    "assn": {
-      "talents": [
-        {
-          "name": "Assassination",
-          "pts": 30,
-          "color": "#5FC9F8"
-        },
-        {
-          "name": "Combat",
-          "pts": 21,
-          "color": "#8A8A96"
-        },
-        {
-          "name": "Subtlety",
-          "pts": 0,
-          "color": "#6E6E7A"
-        }
-      ],
-      "talentNote": "Deep Assassination for Improved Expose Armor, Lethality and Improved Poisons, with enough Combat to keep the cooldowns. The natural home for the Expose Armor assignment.",
-      "keyTalents": [
-        "Improved Expose Armor — the raid utility nobody else brings",
-        "Improved Poisons — higher application chance",
-        "Lethality — crit damage on your builders",
-        "Relentless Strikes — energy back on finishers"
-      ],
-      "weapons": [
-        {
-          "slot": "Main hand",
-          "name": "High-damage dagger",
-          "why": "Ambush and Backstab both scale off it"
-        },
-        {
-          "slot": "Off hand",
-          "name": "Fast dagger",
-          "why": "maximum poison applications"
-        },
-        {
-          "slot": "Ranged",
-          "name": "Thrown or bow",
-          "why": "pulls and out-of-range filler"
-        },
-        {
-          "slot": "Skill cap",
-          "name": "300 weapon skill",
-          "why": "and it now feeds poisons too, in Forever",
-          "sweaty": true
-        }
-      ],
-      "apl": [
-        {
-          "name": "Slice and Dice",
-          "cond": "Missing, or under 2s remaining."
-        },
-        {
-          "name": "Expose Armor",
-          "cond": "At 5 combo points. If you are Assassination you are very likely the Expose Rogue — own it."
-        },
-        {
-          "name": "Rupture",
-          "cond": "Not applied and the target will live longer than 12 seconds."
-        },
-        {
-          "name": "Eviscerate",
-          "cond": "At 5 combo points with Slice and Dice and Rupture both up."
-        },
-        {
-          "name": "Backstab",
-          "cond": "Your builder, from behind. Sinister Strike if the fight will not let you."
-        },
-        {
-          "name": "Re-apply poisons",
-          "cond": "Between pulls, every pull. Charges run out mid-raid and nobody warns you.",
-          "sweaty": true
-        }
-      ],
-      "opener": [
-        "Thistle Tea",
-        "Ambush",
-        "Slice and Dice",
-        "Backstab ×3",
-        "Expose Armor",
-        "Rupture"
-      ],
-      "nevers": [
-        "Eviscerating at 4 combo points because it felt close enough.",
-        "Taking the Expose assignment and then not tracking the debuff.",
-        "Raiding on empty poison charges."
-      ]
-    },
-    "subt": {
-      "talents": [
-        {
-          "name": "Assassination",
-          "pts": 15,
-          "color": "#8A8A96"
-        },
-        {
-          "name": "Combat",
-          "pts": 6,
-          "color": "#6E6E7A"
-        },
-        {
-          "name": "Subtlety",
-          "pts": 30,
-          "color": "#B98BFF"
-        }
-      ],
-      "talentNote": "A PvP tree in Classic Era, and honest about it. Preparation, Improved Kidney Shot and Hemorrhage are control tools, not a raid damage plan. Forever points this tree at bleeds and stealth, which is the most interesting thing to happen to it in twenty years.",
-      "keyTalents": [
-        "Preparation — resets your escape and burst cooldowns",
-        "Improved Kidney Shot — the stun that sets up everything",
-        "Hemorrhage — a builder that buffs the whole group’s physical damage",
-        "Premeditation — free combo points from stealth"
-      ],
-      "weapons": [
-        {
-          "slot": "Main hand",
-          "name": "High-damage dagger",
-          "why": "Ambush from stealth is the whole opener"
-        },
-        {
-          "slot": "Off hand",
-          "name": "Fast dagger",
-          "why": "poison applications between stuns"
-        },
-        {
-          "slot": "Ranged",
-          "name": "Thrown",
-          "why": "pulls and finishing runners"
-        },
-        {
-          "slot": "Skill cap",
-          "name": "300 weapon skill",
-          "why": "a missed opener is a lost duel",
-          "sweaty": true
-        }
-      ],
-      "apl": [
-        {
-          "name": "Ambush",
-          "cond": "From stealth, with Premeditation already used. This is your burst."
-        },
-        {
-          "name": "Kidney Shot",
-          "cond": "At 5 combo points, as the setup rather than the finisher."
-        },
-        {
-          "name": "Hemorrhage",
-          "cond": "Your builder. The debuff helps every physical attacker on your target."
-        },
-        {
-          "name": "Slice and Dice",
-          "cond": "Between control windows, if the target is going to live."
-        },
-        {
-          "name": "Preparation",
-          "cond": "After your escapes are down and you need a second opener."
-        },
-        {
-          "name": "Eviscerate",
-          "cond": "At 5 combo points when the kill is actually available.",
-          "sweaty": true
-        }
-      ],
-      "opener": [
-        "Premeditation",
-        "Ambush",
-        "Kidney Shot",
-        "Hemorrhage ×3",
-        "Eviscerate"
-      ],
-      "nevers": [
-        "Bringing this to a raid and being surprised by the damage meter.",
-        "Using Preparation before your cooldowns are actually spent.",
-        "Opening without checking for a nearby healer."
-      ]
+    "backstab": {
+      "talentVariants": [],
+      "weapons": [],
+      "apl": [],
+      "opener": [],
+      "nevers": []
     }
   },
   "specIndex": {
     "st": {
       "label": "Single target",
-      "note": "CLASSIC ERA RAID CONSENSUS INDEX · NOT A SIM · TOP SPEC = 100",
-      "rows": {
-        "cbsword": 100,
-        "cbdagger": 95,
-        "assn": 87,
-        "subt": 58
-      }
+      "note": "NO FOREVER SIM OR LOG DATA YET",
+      "pending": true
     },
     "cleave": {
       "label": "Cleave / adds",
-      "note": "CLASSIC ERA RAID CONSENSUS INDEX · BLADE FLURRY DOMINATES · TOP SPEC = 100",
-      "rows": {
-        "cbsword": 100,
-        "cbdagger": 96,
-        "assn": 74,
-        "subt": 52
-      }
+      "note": "NO FOREVER SIM OR LOG DATA YET",
+      "pending": true
     },
     "forever": {
       "label": "Summary",
@@ -430,32 +73,7 @@
       "pending": true
     }
   },
-  "foreverOutlook": [
-    {
-      "id": "assn",
-      "arrow": "▲",
-      "arrowColor": "#7BE06B",
-      "why": "Blizzard states Assassination now focuses on poison damage, and unified Hit/Crit explicitly covers poisons. Mutilate appeared in the BlizzCon demo. Most confirmed upside of the four."
-    },
-    {
-      "id": "subt",
-      "arrow": "▲",
-      "arrowColor": "#7BE06B",
-      "why": "Confirmed redirection toward bleeds and stealth effects, plus a new 16-point talent milestone. The spec that had the least to lose."
-    },
-    {
-      "id": "cbsword",
-      "arrow": "●",
-      "arrowColor": "#FFD966",
-      "why": "Blizzard says Combat keeps its upfront style. One-Handed Axes join the weapon list, which widens your options without changing the rotation."
-    },
-    {
-      "id": "cbdagger",
-      "arrow": "●",
-      "arrowColor": "#FFD966",
-      "why": "No confirmed change to Backstab positioning. Reworked itemization is the real variable — Classic dagger BiS will not survive the loot pass."
-    }
-  ],
+  "foreverOutlook": [],
   "foreverDates": [
     {
       "label": "Announced",
@@ -1209,14 +827,22 @@
   ],
   "leveling": [
     {
-      "name": "Combat Swords",
-      "hue": "#8E7A2A",
-      "body": "The path of least resistance. Sinister Strike, Slice and Dice, Eviscerate, no positioning to think about. You arrive at 60 already knowing your raid rotation."
+      "name": "Mutilate",
+      "spec": "mutilate",
+      "tree": "Deep Assassination",
+      "body": "Built entirely around Mutilate and your poisons. Every fight runs on Mutilate for fast combo points while poisons tick on everything you hit. Straightforward, hard-hitting, and at its best when you keep your poisons topped up."
     },
     {
-      "name": "Daggers & stealth",
-      "hue": "#2E5F80",
-      "body": "Ambush openers, fewer fights taken, more fights won outright. Slower to gear, faster to move, and considerably more fun if you like picking your battles."
+      "name": "Blade Flurry",
+      "spec": "sinister",
+      "tree": "Deep Combat",
+      "body": "Traditional Combat, centered on cleaving with Blade Flurry. Pull two or three mobs, turn on Blade Flurry and take them down together with the familiar Sinister Strike, Slice and Dice and Eviscerate loop. No positioning to worry about."
+    },
+    {
+      "name": "Improved Ambush",
+      "spec": "backstab",
+      "tree": "Subtlety hybrid",
+      "body": "A Subtlety hybrid built around a devastating opener. Stealth in, open with a big Ambush and finish most mobs before they can fight back, then reset and move on. Quick kills, less downtime, and more picking your battles."
     }
   ],
   "changelog": [
@@ -1247,8 +873,12 @@
       "label": "BUILD",
       "items": [
         {
+          "id": "leveling",
+          "label": "Leveling"
+        },
+        {
           "id": "talents",
-          "label": "Talents & weapons"
+          "label": "Talents"
         },
         {
           "id": "gear",
@@ -1296,10 +926,6 @@
         {
           "id": "tools",
           "label": "Tools & UI"
-        },
-        {
-          "id": "leveling",
-          "label": "Leveling"
         },
         {
           "id": "faq",

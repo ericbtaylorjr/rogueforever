@@ -21,7 +21,7 @@ export const config: HandbookConfig = {
   accent: '#FFF468',
   showSweaty: true,
   phaseLabel: 'v 1.60.1',
-  defaultSpec: 'cbsword',
+  defaultSpec: 'sinister',
 };
 
 /** Viewport thresholds. Kept in one place so CSS and JS can't drift apart. */

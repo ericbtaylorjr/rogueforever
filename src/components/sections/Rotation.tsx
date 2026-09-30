@@ -5,6 +5,29 @@ import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { SectionHeading } from '../ui/SectionHeading';
 
+/** Hatched stand-in rows for sections with no Forever data yet. */
+function Pending({ label, rows = 3 }: { label: string; rows?: number }) {
+  return (
+    <div className="flex flex-col gap-[10px]">
+      <p className="text-[12.5px] italic text-dim">
+        {label} · {copy.pending}
+      </p>
+      {Array.from({ length: rows }, (_, i) => (
+        <div
+          key={i}
+          aria-hidden="true"
+          className="h-[10px] rounded-full"
+          style={{
+            width: `${[78, 62, 70, 54][i % 4]}%`,
+            background:
+              'repeating-linear-gradient(135deg, rgba(var(--fg-rgb),.07) 0 2px, transparent 2px 6px)',
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export function Rotation() {
   const { spec, sweaty } = useHandbook();
   const d = specDetail[spec];
@@ -22,50 +45,60 @@ export function Rotation() {
 
       <div className="mt-[16px]">
         <Callout tone="accent" dashed label={copy.todoLabel}>
-          {copy.todo.before}
-          <strong className="font-semibold text-accent">{copy.todo.strong}</strong>
-          {copy.todo.after}
+          {copy.todo.replace('{spec}', specById[spec].name)}
         </Callout>
       </div>
 
       <div className="mt-[18px] grid gap-[14px] stack:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
-        <ol className="panel px-[18px] py-[8px]">
-          {d.apl.map((a, i) => (
-            <li
-              key={a.name}
-              className="flex items-baseline gap-[12px] py-[12px]"
-              style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(var(--fg-rgb),.05)' }}
-            >
-              <span className="t-num shrink-0 text-[12px] text-accent">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span className="min-w-0">
-                <span className="flex items-center gap-[8px]">
-                  <span className="text-[14.5px] font-semibold text-ink">{a.name}</span>
-                  {a.sweaty && sweaty && <Droplet />}
+        {!d.apl.length ? (
+          <div className="panel p-[18px]">
+            <Pending label={copy.aplPending} rows={4} />
+          </div>
+        ) : (
+          <ol className="panel px-[18px] py-[8px]">
+            {d.apl.map((a, i) => (
+              <li
+                key={a.name}
+                className="flex items-baseline gap-[12px] py-[12px]"
+                style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(var(--fg-rgb),.05)' }}
+              >
+                <span className="t-num shrink-0 text-[12px] text-accent">
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="mt-[3px] block text-[12.5px] leading-[1.55] text-mute">
-                  {a.cond}
+                <span className="min-w-0">
+                  <span className="flex items-center gap-[8px]">
+                    <span className="text-[14.5px] font-semibold text-ink">{a.name}</span>
+                    {a.sweaty && sweaty && <Droplet />}
+                  </span>
+                  <span className="mt-[3px] block text-[12.5px] leading-[1.55] text-mute">
+                    {a.cond}
+                  </span>
                 </span>
-              </span>
-            </li>
-          ))}
-        </ol>
+              </li>
+            ))}
+          </ol>
+        )}
 
         <div className="flex flex-col gap-[14px]">
           <div className="panel p-[18px]">
             <span className="t-panel-label text-ink">{copy.openerTitle}</span>
-            <ol className="mt-[14px] flex flex-wrap gap-[8px]">
-              {d.opener.map((o, i) => (
-                <li
-                  key={o}
-                  className="flex items-center gap-[8px] rounded-[8px] border border-line px-[10px] py-[7px] text-[12.5px] text-prose"
-                >
-                  <span className="t-num text-[10.5px] text-accent">{i + 1}</span>
-                  {o}
-                </li>
-              ))}
-            </ol>
+            {!d.opener.length ? (
+              <div className="mt-[14px]">
+                <Pending label={copy.openerPending} rows={2} />
+              </div>
+            ) : (
+              <ol className="mt-[14px] flex flex-wrap gap-[8px]">
+                {d.opener.map((o, i) => (
+                  <li
+                    key={o}
+                    className="flex items-center gap-[8px] rounded-[8px] border border-line px-[10px] py-[7px] text-[12.5px] text-prose"
+                  >
+                    <span className="t-num text-[10.5px] text-accent">{i + 1}</span>
+                    {o}
+                  </li>
+                ))}
+              </ol>
+            )}
           </div>
 
           <div
@@ -73,21 +106,27 @@ export function Rotation() {
             style={{ border: '1px solid rgba(var(--warn-rgb),.22)', background: 'var(--panel)' }}
           >
             <span className="t-panel-label text-warn">{copy.neverTitle}</span>
-            <ul className="mt-[12px] flex flex-col gap-[9px]">
-              {d.nevers.map((n) => (
-                <li
-                  key={n}
-                  className="flex items-baseline gap-[9px] text-[12.5px] leading-[1.55] text-prose"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="mt-[6px] size-[4px] shrink-0 rounded-full"
-                    style={{ background: 'var(--warn)' }}
-                  />
-                  {n}
-                </li>
-              ))}
-            </ul>
+            {!d.nevers.length ? (
+              <div className="mt-[12px]">
+                <Pending label={copy.neverPending} rows={2} />
+              </div>
+            ) : (
+              <ul className="mt-[12px] flex flex-col gap-[9px]">
+                {d.nevers.map((n) => (
+                  <li
+                    key={n}
+                    className="flex items-baseline gap-[9px] text-[12.5px] leading-[1.55] text-prose"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-[6px] size-[4px] shrink-0 rounded-full"
+                      style={{ background: 'var(--warn)' }}
+                    />
+                    {n}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>

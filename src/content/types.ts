@@ -1,4 +1,4 @@
-export type SpecId = 'cbsword' | 'cbdagger' | 'assn' | 'subt';
+export type SpecId = 'mutilate' | 'sinister' | 'backstab';
 
 export interface Spec {
   id: SpecId;
@@ -30,10 +30,27 @@ export interface AplRow {
   sweaty?: boolean;
 }
 
-export interface SpecDetail {
+/**
+ * One talent build for a spec. A spec can carry several, one per niche
+ * (e.g. raid single target, cleave, PvP); the Talents section switches between them.
+ */
+export interface TalentVariant {
+  /** Unique within its spec. */
+  id: string;
+  /** Short tab label, e.g. "Raid". */
+  name: string;
+  /** One line on when to pick this build over the others. */
+  niche: string;
   talents: TalentTree[];
   talentNote: string;
   keyTalents: string[];
+  /** Optional talent calculator link. */
+  link?: string;
+}
+
+/** Empty arrays render as "coming soon" placeholders until Forever data exists. */
+export interface SpecDetail {
+  talentVariants: TalentVariant[];
   weapons: WeaponRow[];
   apl: AplRow[];
   opener: string[];
@@ -148,8 +165,13 @@ export interface Macro {
 
 export interface LevelingPath {
   name: string;
-  hue: string;
+  /** Colours come from this spec, so the card matches the spec bar. */
+  spec: SpecId;
+  /** Short tree label shown above the name, e.g. "Deep Assassination". */
+  tree: string;
   body: string;
+  /** Talent build link. Omitted until the build exists; the button shows as coming soon. */
+  href?: string;
 }
 
 export interface ChangelogEntry {

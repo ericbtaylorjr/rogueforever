@@ -270,31 +270,33 @@ function ForeverPending() {
         {specBoard.pending.body}
       </p>
 
-      <div className="mt-[16px] flex flex-col gap-[10px]">
-        {foreverOutlook.map((o) => {
-          const s = specById[o.id];
-          return (
-            <div
-              key={o.id}
-              className="grid items-baseline gap-x-[10px] gap-y-[4px] border-t border-line pt-[10px]"
-              style={{
-                gridTemplateColumns: isNarrow ? '30px minmax(0,1fr)' : '30px minmax(0,190px) minmax(0,1fr)',
-              }}
-            >
-              <span aria-hidden="true" className="text-[13px]" style={{ color: tone(o.arrowColor) }}>
-                {o.arrow}
-              </span>
-              <span className="text-[13.5px] font-semibold text-ink">{s.name}</span>
-              <span
-                className="text-[12.5px] leading-[1.55] text-mute"
-                style={isNarrow ? { gridColumn: 2 } : undefined}
+      {foreverOutlook.length > 0 && (
+        <div className="mt-[16px] flex flex-col gap-[10px]">
+          {foreverOutlook.map((o) => {
+            const s = specById[o.id];
+            return (
+              <div
+                key={o.id}
+                className="grid items-baseline gap-x-[10px] gap-y-[4px] border-t border-line pt-[10px]"
+                style={{
+                  gridTemplateColumns: isNarrow ? '30px minmax(0,1fr)' : '30px minmax(0,190px) minmax(0,1fr)',
+                }}
               >
-                {o.why}
-              </span>
-            </div>
-          );
-        })}
-      </div>
+                <span aria-hidden="true" className="text-[13px]" style={{ color: tone(o.arrowColor) }}>
+                  {o.arrow}
+                </span>
+                <span className="text-[13.5px] font-semibold text-ink">{s.name}</span>
+                <span
+                  className="text-[12.5px] leading-[1.55] text-mute"
+                  style={isNarrow ? { gridColumn: 2 } : undefined}
+                >
+                  {o.why}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

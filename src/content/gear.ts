@@ -40,7 +40,7 @@ export const itemForSlot = (set: keyof typeof gearSets, slot: string): GearItem 
  * TODO: placeholder weights. Replace once Forever sims are run.
  */
 export const statPriority: Record<SpecId, StatPriority> = {
-  cbsword: {
+  sinister: {
     stats: [
       { stat: 'Agility', ep: 1 },
       { stat: 'Hit', ep: 0.9, op: '>' },
@@ -48,15 +48,7 @@ export const statPriority: Record<SpecId, StatPriority> = {
       { stat: 'Strength', ep: 0.5, op: '=' },
     ],
   },
-  cbdagger: {
-    stats: [
-      { stat: 'Agility', ep: 1 },
-      { stat: 'Hit', ep: 0.85, op: '>' },
-      { stat: 'Attack Power', ep: 0.5, op: '>' },
-      { stat: 'Strength', ep: 0.5, op: '=' },
-    ],
-  },
-  assn: {
+  mutilate: {
     stats: [
       { stat: 'Agility', ep: 1 },
       { stat: 'Hit', ep: 0.8, op: '>' },
@@ -64,7 +56,7 @@ export const statPriority: Record<SpecId, StatPriority> = {
       { stat: 'Strength', ep: 0.5, op: '=' },
     ],
   },
-  subt: {
+  backstab: {
     stats: [
       { stat: 'Agility', ep: 1 },
       { stat: 'Hit', ep: 0.75, op: '>' },
@@ -115,10 +107,9 @@ const levelingDaggers: LevelingItem[] = [
 const byLevel = (items: LevelingItem[]) => [...items].sort((a, b) => a.level - b.level);
 
 export const levelingItems: Record<SpecId, LevelingItem[]> = {
-  cbsword: byLevel([...levelingShared, ...levelingSwords]),
-  cbdagger: byLevel([...levelingShared, ...levelingDaggers]),
-  assn: byLevel([...levelingShared, ...levelingDaggers]),
-  subt: byLevel([...levelingShared, ...levelingDaggers]),
+  mutilate: byLevel([...levelingShared, ...levelingDaggers]),
+  sinister: byLevel([...levelingShared, ...levelingSwords]),
+  backstab: byLevel([...levelingShared, ...levelingDaggers]),
 };
 
 /** Faction badge colours, run through `tone()` for light mode. */

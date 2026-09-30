@@ -45,7 +45,7 @@ export const specBar = {
 export const headings: Record<string, string> = {
   specs: 'Meta Breakdown',
   forever: 'Forever watch',
-  talents: 'Talents & weapons',
+  talents: 'Level 60 Talents',
   poisons: 'The poison rack',
   rotation: 'Rotation',
   gear: 'Gear',
@@ -54,7 +54,7 @@ export const headings: Record<string, string> = {
   iea: 'Expose Armor',
   raid: 'Raids',
   tools: 'Tools & UI',
-  leveling: 'Leveling 1–60',
+  leveling: 'Level 30 Beta Builds',
   faq: 'FAQ',
   changelog: 'Changelog',
 };
@@ -66,7 +66,7 @@ export const specBoard = {
   tableLabel: 'Damage index by spec',
   pending: {
     heading: 'No Forever sim data exists yet',
-    body: 'Beta opens September 17th and the game launches November 4th. Until logs exist there is nothing honest to rank. What we can do is tell you which direction each spec is pointing, based only on changes Blizzard has actually confirmed.',
+    body: 'The beta opened September 17th and the game launches November 4th. Until sims and logs exist there is nothing honest to rank, so every spec stays unranked for now.',
   },
   yourSpec: 'ACTIVE SPEC',
 } as const;
@@ -82,22 +82,26 @@ export const forever = {
 export const talents = {
   /** `{spec}` is replaced with the active spec name. */
   intro:
-    'Showing {spec}. Classic Era builds — Forever redesigns individual talents and adds a new 16-point milestone, so treat every point below as provisional after November 4th.',
-  todoLabel: 'PLACEHOLDER',
-  todo: {
-    before: 'The talent splits and weapon details below are ',
-    strong: 'Classic Era placeholders',
-    after:
-      ', standing in until the Forever talent trees are published. They will be updated as information is gathered.',
-  },
+    'Showing {spec}. Some specs will carry more than one talent build, each tuned for a different niche. Switch between them with the build tabs.',
+  todoLabel: 'COMING SOON',
+  todo: 'Forever talent builds and weapon notes will be added here once the Forever Rogue trees are tested in the beta and sims are established. Blizzard has confirmed the trees keep a familiar shape with milestones at 11, 16, 21 and 31 points.',
+  buildsLabel: 'Talent build',
+  buildsPending: 'Builds coming soon',
+  buildsPendingNote:
+    'Each spec can list several builds here, one per niche (raid single target, cleave, PvP and so on). Pick one to see its point split and key talents.',
   splitTitle: 'Talent split',
+  /** Tree names are confirmed to carry over; the split is what is pending. */
+  trees: ['Assassination', 'Combat', 'Subtlety'],
+  keyTalentsPending: 'Key talents will be listed here.',
+  calculator: 'Open in talent calculator ↗',
   weaponsTitle: 'Weapons & skill',
-  skillCap: '300 SKILL',
+  weaponSlots: ['Main hand', 'Off hand', 'Ranged'],
+  tbd: 'TBD',
+  weaponsPending: 'Weapon picks will be added once Forever itemization is tested.',
   foreverCallout: {
-    before: 'Forever adds ',
-    strong: 'One-Handed Axes',
-    after:
-      ' to the Rogue weapon list — confirmed. Weapon Skill survives as a stat, but Blizzard says individual items will no longer hand out huge amounts of it.',
+    before: 'Blizzard: ',
+    strong: 'Weapon Skill still works as it always has',
+    after: ', but items with weapon skill offer less of it per item, so they are not always the obvious best choice.',
   },
 } as const;
 
@@ -123,15 +127,14 @@ export const rotation = {
     "A priority list, top to bottom. If a line's conditions are met it fires and you start again from the top.",
   /** `{spec}` is replaced with the active spec name. */
   showing: '{spec} shown.',
-  todoLabel: 'PLACEHOLDER',
-  todo: {
-    before: 'This priority list is a ',
-    strong: 'placeholder rotation',
-    after:
-      ', standing in until real data is gathered and WoWSims APLs are established for Forever. It will be updated once that work is done.',
-  },
+  todoLabel: 'COMING SOON',
+  todo: 'The {spec} priority list, opener and common mistakes will be added once real data is gathered and WoWSims APLs are established for Forever.',
+  pending: 'Coming soon',
+  aplPending: 'Priority list for this spec',
   openerTitle: 'Opener',
+  openerPending: 'Opening sequence',
   neverTitle: 'Never do this',
+  neverPending: 'Common mistakes to avoid',
 } as const;
 
 export const gear = {
@@ -274,7 +277,9 @@ export type ComfyProfileId = (typeof comfyUi.profiles)[number]['id'];
 
 export const levelingCopy = {
   intro:
-    'All of these are viable ways to level a Rogue — pick based on your own preference, not a hard meta call. This will be updated once leveling builds are fleshed out during Beta.',
+    "These are leveling builds made specifically for the level 30 WoW Forever beta. Each one is a viable way to level a Rogue within the beta's cap, so pick the playstyle you enjoy, not a hard meta call. This section will be updated with full 1–60 leveling builds once the game releases and the data has settled in.",
+  cta: 'View talent build',
+  comingSoon: 'Coming Soon',
 } as const;
 
 export const search = {
