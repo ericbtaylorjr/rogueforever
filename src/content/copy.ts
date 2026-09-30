@@ -200,7 +200,7 @@ export const exposeArmor = {
   },
   p2: 'A fully talented 5-point Expose Armor used to beat five stacks of Sunder outright, which is why it defaulted to the Rogue. In Forever the two are tied — the Rogue talent no longer grants extra armor reduction beyond what Sunder already provides. The debuffs still do not stack, so the raid picks whichever player holds it more consistently, or if performance of one outweighs the other.',
   stats: [
-    { val: '2,550', label: 'Expose Armor at 5CP, fully talented', tone: 'accent' },
+    { val: '2,550', label: 'Expose Armor at 5CP', tone: 'accent' },
     { val: '2,550', label: 'Sunder Armor at 5 stacks', tone: 'accent' },
   ],
   stepsTitle: 'If it lands on you, the job is the same',
