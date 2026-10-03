@@ -234,7 +234,7 @@ export const comfyUi = {
   preview: {
     open: "View Comfy's UI screenshot",
     title: "Comfy's UI in game",
-    alt: "Comfy's UI in game: a Rogue in Loch Modan with the EllesmereUI unit frames, action bars, threat and damage meters, and a compact chat and minimap.",
+    alt: "Comfy's UI in game: a Rogue fighting a Vicious Gray Bear in Hillsbrad Foothills, with the EllesmereUI unit frames, action bars, threat and damage meters, and a compact chat and minimap.",
   },
   close: 'Close',
   copyCta: 'Copy Import String',
