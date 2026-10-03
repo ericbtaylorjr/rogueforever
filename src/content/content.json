@@ -850,6 +850,10 @@
   ],
   "changelog": [
     {
+      "date": "Oct 3rd, 2026",
+      "text": "Fixed placeholder mail gear issue, updated level 30 talent builds, updated UI strings and preview. Still a lot of work to do, but getting there."
+    },
+    {
       "date": "Sep 17th, 2026",
       "text": "Stood up the first iteration of the WoW Forever Rogue Handbook — spec board, talents, poisons, rotation, gear, consumables and the Forever watch, all in one place."
     },
