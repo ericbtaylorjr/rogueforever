@@ -17,17 +17,3 @@ export function SpecChip() {
     </span>
   );
 }
-
-/** "Same for everyone": neutral counterpart to SpecChip. */
-export function AllSpecsChip() {
-  return (
-    <span className={`${BASE} border-line text-faint`}>
-      <span aria-hidden="true" className="flex gap-[2px]">
-        <span className="size-[5px] rounded-full bg-current opacity-70" />
-        <span className="size-[5px] rounded-full bg-current opacity-70" />
-        <span className="size-[5px] rounded-full bg-current opacity-70" />
-      </span>
-      {scope.allChip}
-    </span>
-  );
-}

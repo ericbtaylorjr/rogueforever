@@ -1,60 +1,18 @@
 import { specById, specDetail } from '../../content/content';
+import type { SpecDetail } from '../../content/types';
 import { rotation as copy } from '../../content/copy';
 import { useHandbook } from '../../state/HandbookProvider';
-import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { SectionHeading } from '../ui/SectionHeading';
 
-/** Hatched stand-in rows for sections with no Forever data yet. */
-function Pending({ label, rows = 3 }: { label: string; rows?: number }) {
+/** Priority list, opener and mistakes, once a spec has any of them. */
+function RotationDetail({ d, sweaty }: { d: SpecDetail; sweaty: boolean }) {
   return (
-    <div className="flex flex-col gap-[10px]">
-      <p className="text-[12.5px] italic text-dim">
-        {label} · {copy.pending}
-      </p>
-      {Array.from({ length: rows }, (_, i) => (
-        <div
-          key={i}
-          aria-hidden="true"
-          className="h-[10px] rounded-full"
-          style={{
-            width: `${[78, 62, 70, 54][i % 4]}%`,
-            background:
-              'repeating-linear-gradient(135deg, rgba(var(--fg-rgb),.07) 0 2px, transparent 2px 6px)',
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-export function Rotation() {
-  const { spec, sweaty } = useHandbook();
-  const d = specDetail[spec];
-
-  return (
-    <section id="rotation" aria-label="Rotation">
-      <SectionHeading id="rotation" scope="spec" />
-
-      <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
-        {copy.intro}{' '}
-        <span className="text-faint" aria-live="polite">
-          {copy.showing.replace('{spec}', specById[spec].name)}
-        </span>
-      </p>
-
-      <div className="mt-[16px]">
-        <Callout tone="accent" dashed label={copy.todoLabel}>
-          {copy.todo.replace('{spec}', specById[spec].name)}
-        </Callout>
-      </div>
+    <>
+      <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{copy.intro}</p>
 
       <div className="mt-[18px] grid gap-[14px] stack:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
-        {!d.apl.length ? (
-          <div className="panel p-[18px]">
-            <Pending label={copy.aplPending} rows={4} />
-          </div>
-        ) : (
+        {d.apl.length > 0 && (
           <ol className="panel px-[18px] py-[8px]">
             {d.apl.map((a, i) => (
               <li
@@ -82,11 +40,7 @@ export function Rotation() {
         <div className="flex flex-col gap-[14px]">
           <div className="panel p-[18px]">
             <span className="t-panel-label text-ink">{copy.openerTitle}</span>
-            {!d.opener.length ? (
-              <div className="mt-[14px]">
-                <Pending label={copy.openerPending} rows={2} />
-              </div>
-            ) : (
+            {d.opener.length > 0 && (
               <ol className="mt-[14px] flex flex-wrap gap-[8px]">
                 {d.opener.map((o, i) => (
                   <li
@@ -106,11 +60,7 @@ export function Rotation() {
             style={{ border: '1px solid rgba(var(--warn-rgb),.22)', background: 'var(--panel)' }}
           >
             <span className="t-panel-label text-warn">{copy.neverTitle}</span>
-            {!d.nevers.length ? (
-              <div className="mt-[12px]">
-                <Pending label={copy.neverPending} rows={2} />
-              </div>
-            ) : (
+            {d.nevers.length > 0 && (
               <ul className="mt-[12px] flex flex-col gap-[9px]">
                 {d.nevers.map((n) => (
                   <li
@@ -130,6 +80,26 @@ export function Rotation() {
           </div>
         </div>
       </div>
+    </>
+  );
+}
+
+export function Rotation() {
+  const { spec, sweaty } = useHandbook();
+  const d = specDetail[spec];
+  const hasData = d.apl.length > 0 || d.opener.length > 0 || d.nevers.length > 0;
+
+  return (
+    <section id="rotation" aria-label="Rotation">
+      <SectionHeading id="rotation" scope="spec" />
+
+      {!hasData ? (
+        <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute" aria-live="polite">
+          {copy.pending.replace('{spec}', specById[spec].name)}
+        </p>
+      ) : (
+        <RotationDetail d={d} sweaty={sweaty} />
+      )}
     </section>
   );
 }

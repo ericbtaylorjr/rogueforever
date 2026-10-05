@@ -42,7 +42,7 @@ function ProfileModal({ id, onClose }: { id: ComfyProfileId | null; onClose: () 
           <p className="text-[13px] leading-[1.65] text-prose">{profile.intro}</p>
 
           <div>
-            <h3 className="t-eyebrow text-[9.5px] tracking-[.14em] text-faint">{copy.stepsTitle}</h3>
+            <h3 className="t-eyebrow text-[10.5px] text-faint">{copy.stepsTitle}</h3>
             <ol className="mt-[10px] flex flex-col gap-[8px]">
               {profile.steps.map((step, i) => (
                 <li key={step} className="flex gap-[10px] text-[13px] leading-[1.55] text-prose">

@@ -3,6 +3,7 @@ import { gearSlots, specById } from '../../content/content';
 import { gear as copy } from '../../content/copy';
 import {
   factionColor,
+  gearSets,
   itemForSlot,
   levelingItems,
   qualityColor,
@@ -13,26 +14,13 @@ import type { Faction, GearItem, GearSetId, LevelingItem } from '../../content/t
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
+import { GameIcon } from '../ui/GameIcon';
 import { SegmentedTabs, Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useTooltip } from '../ui/Tooltip';
 
 const GRID = '104px minmax(0,1.5fr) minmax(0,1fr) 84px';
 const LEVELING_GRID = '62px 92px minmax(0,1.5fr) minmax(0,1fr) 88px';
-
-/** Diagonal-hatch stand-in until item icons are sourced. See README > Assets. */
-function IconPlaceholder() {
-  return (
-    <span
-      aria-hidden="true"
-      className="size-[22px] shrink-0 rounded-[4px] border border-line"
-      style={{
-        background:
-          'repeating-linear-gradient(135deg, rgba(var(--fg-rgb),.07) 0 2px, transparent 2px 6px)',
-      }}
-    />
-  );
-}
 
 function ItemLink({ item }: { item: Omit<GearItem, 'enchant'> }) {
   const { bind } = useTooltip();
@@ -46,7 +34,7 @@ function ItemLink({ item }: { item: Omit<GearItem, 'enchant'> }) {
       style={{ color: tone(qualityColor[item.quality]) }}
       {...bind({ name: item.name, kind: item.slot, note: item.source })}
     >
-      <IconPlaceholder />
+      <GameIcon name={`item:${item.itemId}`} size={24} />
       <span className="truncate">{item.name}</span>
     </a>
   );
@@ -61,7 +49,7 @@ function GearRow({ slot, set }: { slot: string; set: 'bis' | 'prebis' }) {
       className="grid items-center border-t border-line px-[14px] py-[11px]"
       style={{ gridTemplateColumns: GRID }}
     >
-      <span role="rowheader" className="t-eyebrow text-[10px] tracking-[.12em] text-faint">
+      <span role="rowheader" className="text-[12.5px] text-faint">
         {slot}
       </span>
 
@@ -71,7 +59,6 @@ function GearRow({ slot, set }: { slot: string; set: 'bis' | 'prebis' }) {
         </div>
       ) : (
         <span role="cell" className="flex min-w-0 items-center gap-[10px]">
-          <IconPlaceholder />
           <span className="truncate text-[12.5px] italic text-dim">{copy.empty}</span>
         </span>
       )}
@@ -103,7 +90,7 @@ function StatPriorityPanel() {
     <div className="panel p-[18px]">
       <div className="flex flex-wrap items-baseline justify-between gap-[10px]">
         <span className="t-panel-label text-ink">{copy.leveling.statsTitle}</span>
-        <span className="t-eyebrow text-[9px] text-faint">{copy.leveling.statsMeta}</span>
+        <span className="text-[12px] text-faint">{copy.leveling.statsMeta}</span>
       </div>
 
       <p
@@ -113,7 +100,7 @@ function StatPriorityPanel() {
         {stats.map((st, i) => (
           <span key={st.stat} aria-hidden="true" className="flex items-baseline gap-[10px]">
             {st.op && <span className="t-num text-[15px] text-faint">{st.op}</span>}
-            <span style={i === 0 ? { color: tone(s.color), textShadow: 'var(--glow)' } : { color: 'var(--ink)' }}>
+            <span style={{ color: i === 0 ? tone(s.color) : 'var(--ink)' }}>
               {st.stat}
             </span>
           </span>
@@ -168,7 +155,7 @@ function LevelingRow({ item }: { item: LevelingItem }) {
       <span role="rowheader" className="t-num text-[15px] text-accent">
         {item.level}
       </span>
-      <span role="cell" className="t-eyebrow truncate text-[10px] tracking-[.12em] text-faint">
+      <span role="cell" className="truncate text-[12.5px] text-faint">
         {item.slot}
       </span>
       <div role="cell" className="min-w-0">
@@ -184,13 +171,17 @@ function LevelingRow({ item }: { item: LevelingItem }) {
   );
 }
 
-function LevelingPanel() {
+/** `tabbed` only when the tab bar is shown, so the tabpanel role always has a tab to point at. */
+function LevelingPanel({ tabbed }: { tabbed: boolean }) {
   const { spec } = useHandbook();
   const items = levelingItems[spec];
   const c = copy.leveling.cols;
 
   return (
-    <div id="panel-leveling" role="tabpanel" aria-labelledby="tab-leveling" className="mt-[16px] flex flex-col gap-[16px]">
+    <div
+      className="mt-[16px] flex flex-col gap-[16px]"
+      {...(tabbed ? { id: 'panel-leveling', role: 'tabpanel', 'aria-labelledby': 'tab-leveling' } : {})}
+    >
       <StatPriorityPanel />
 
       <div className="panel">
@@ -208,7 +199,7 @@ function LevelingPanel() {
                 <span
                   key={h}
                   role="columnheader"
-                  className="t-eyebrow text-[9px] tracking-[.14em] text-faint"
+                  className="t-eyebrow text-[10.5px] text-faint"
                 >
                   {h}
                 </span>
@@ -232,48 +223,36 @@ function LevelingPanel() {
 
 export function Gear() {
   const { gearSet, setGearSet } = useHandbook();
+  // Only lists that have items get a tab; with just Leveling there is no tab bar at all.
+  const tabs = copy.tabs.filter((t) => t.id === 'leveling' || gearSets[t.id as 'bis' | 'prebis'].length);
+  const current = tabs.some((t) => t.id === gearSet) ? gearSet : 'leveling';
 
   return (
     <section id="gear" aria-label="Gear">
       <SectionHeading id="gear" scope="spec" />
 
-      <div className="flex flex-wrap items-center gap-[12px]">
-        <SegmentedTabs
-          tabs={copy.tabs as unknown as { id: string; label: string }[]}
-          value={gearSet}
-          onChange={(id) => setGearSet(id as GearSetId)}
-          label="Gear list"
-        />
-        <button
-          type="button"
-          disabled
-          className="ml-auto cursor-not-allowed text-[12.5px] font-semibold text-mute opacity-50"
-        >
-          {copy.simsLink}
-        </button>
-      </div>
+      {tabs.length > 1 && (
+        <div className="mb-[16px]">
+          <SegmentedTabs
+            tabs={tabs as unknown as { id: string; label: string }[]}
+            value={current}
+            onChange={(id) => setGearSet(id as GearSetId)}
+            label="Gear list"
+          />
+        </div>
+      )}
 
-      <div className="mt-[16px]">
-        {gearSet === 'leveling' ? (
-          <Callout tone="accent" dashed label={copy.todoLabel}>
-            {copy.leveling.todo.before}
-            <strong className="font-semibold text-accent">{copy.leveling.todo.strong}</strong>
-            {copy.leveling.todo.after}
-          </Callout>
-        ) : (
-          <Callout tone="accent" dashed label={copy.todoLabel}>
-            {copy.todo}
-          </Callout>
-        )}
-      </div>
+      <Callout tone="accent" quiet label={copy.status.label}>
+        {copy.status.text}
+      </Callout>
 
-      {gearSet === 'leveling' ? (
-        <LevelingPanel />
+      {current === 'leveling' ? (
+        <LevelingPanel tabbed={tabs.length > 1} />
       ) : (
         <div
-          id={`panel-${gearSet}`}
+          id={`panel-${current}`}
           role="tabpanel"
-          aria-labelledby={`tab-${gearSet}`}
+          aria-labelledby={`tab-${current}`}
           tabIndex={0}
           className="table-scroll panel mt-[16px]"
         >
@@ -284,17 +263,13 @@ export function Gear() {
               style={{ gridTemplateColumns: GRID }}
             >
               {[copy.cols.slot, copy.cols.item, copy.cols.source, copy.cols.enchant].map((c) => (
-                <span
-                  key={c}
-                  role="columnheader"
-                  className="t-eyebrow text-[9px] tracking-[.14em] text-faint"
-                >
+                <span key={c} role="columnheader" className="t-eyebrow text-[10.5px] text-faint">
                   {c}
                 </span>
               ))}
             </div>
             {gearSlots.map((slot) => (
-              <GearRow key={slot} slot={slot} set={gearSet} />
+              <GearRow key={slot} slot={slot} set={current} />
             ))}
           </div>
         </div>

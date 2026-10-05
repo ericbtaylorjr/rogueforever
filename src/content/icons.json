@@ -1,0 +1,437 @@
+{
+  "Elixir of the Mongoose": {
+    "id": 13452,
+    "icon": "inv_potion_32",
+    "kind": "item"
+  },
+  "Elixir of Giants": {
+    "id": 9206,
+    "icon": "inv_potion_61",
+    "kind": "item"
+  },
+  "Elixir of Fortitude": {
+    "id": 3825,
+    "icon": "inv_potion_43",
+    "kind": "item"
+  },
+  "Elixir of Superior Defense": {
+    "id": 13445,
+    "icon": "inv_potion_66",
+    "kind": "item"
+  },
+  "Elixir of Demonslaying": {
+    "id": 9224,
+    "icon": "inv_potion_27",
+    "kind": "item"
+  },
+  "Juju Might": {
+    "id": 12460,
+    "icon": "inv_misc_monsterscales_07",
+    "kind": "item"
+  },
+  "Juju Power": {
+    "id": 12451,
+    "icon": "inv_misc_monsterscales_11",
+    "kind": "item"
+  },
+  "Juju Flurry": {
+    "id": 12450,
+    "icon": "inv_misc_monsterscales_17",
+    "kind": "item"
+  },
+  "Juju Ember": {
+    "id": 12455,
+    "icon": "inv_misc_monsterscales_15",
+    "kind": "item"
+  },
+  "Winterfall Firewater": {
+    "id": 12820,
+    "icon": "inv_potion_92",
+    "kind": "item"
+  },
+  "Ground Scorpok Assay": {
+    "id": 8412,
+    "icon": "inv_misc_dust_02",
+    "kind": "item"
+  },
+  "R.O.I.D.S.": {
+    "id": 8410,
+    "icon": "inv_stone_15",
+    "kind": "item"
+  },
+  "Elemental Sharpening Stone": {
+    "id": 18262,
+    "icon": "inv_stone_02",
+    "kind": "item"
+  },
+  "Dense Sharpening Stone": {
+    "id": 12404,
+    "icon": "inv_stone_sharpeningstone_05",
+    "kind": "item"
+  },
+  "Blessed Sunfruit": {
+    "id": 13810,
+    "icon": "inv_misc_food_41",
+    "kind": "item"
+  },
+  "Grilled Squid": {
+    "id": 13928,
+    "icon": "inv_misc_fish_13",
+    "kind": "item"
+  },
+  "Smoked Desert Dumplings": {
+    "id": 20452,
+    "icon": "inv_misc_food_64",
+    "kind": "item"
+  },
+  "Dragonbreath Chili": {
+    "id": 12217,
+    "icon": "inv_drink_17",
+    "kind": "item"
+  },
+  "Rumsey Rum Black Label": {
+    "id": 21151,
+    "icon": "inv_drink_04",
+    "kind": "item"
+  },
+  "Gordok Green Grog": {
+    "id": 18269,
+    "icon": "inv_drink_03",
+    "kind": "item"
+  },
+  "Flask of the Titans": {
+    "id": 13510,
+    "icon": "inv_potion_62",
+    "kind": "item"
+  },
+  "Thistle Tea": {
+    "id": 7676,
+    "icon": "inv_drink_milk_05",
+    "kind": "item"
+  },
+  "Free Action Potion": {
+    "id": 5634,
+    "icon": "inv_potion_04",
+    "kind": "item"
+  },
+  "Living Action Potion": {
+    "id": 20008,
+    "icon": "inv_potion_07",
+    "kind": "item"
+  },
+  "Limited Invulnerability Potion": {
+    "id": 3387,
+    "icon": "inv_potion_62",
+    "kind": "item"
+  },
+  "Major Healing Potion": {
+    "id": 13446,
+    "icon": "inv_potion_54",
+    "kind": "item"
+  },
+  "Restorative Potion": {
+    "id": 9030,
+    "icon": "inv_potion_01",
+    "kind": "item"
+  },
+  "Purification Potion": {
+    "id": 13462,
+    "icon": "inv_potion_31",
+    "kind": "item"
+  },
+  "Magic Resistance Potion": {
+    "id": 9036,
+    "icon": "inv_potion_16",
+    "kind": "item"
+  },
+  "Greater Fire Protection Potion": {
+    "id": 13457,
+    "icon": "inv_potion_24",
+    "kind": "item"
+  },
+  "Greater Nature Protection Potion": {
+    "id": 13458,
+    "icon": "inv_potion_22",
+    "kind": "item"
+  },
+  "Greater Shadow Protection Potion": {
+    "id": 13459,
+    "icon": "inv_potion_23",
+    "kind": "item"
+  },
+  "Greater Arcane Protection Potion": {
+    "id": 13461,
+    "icon": "inv_potion_83",
+    "kind": "item"
+  },
+  "Greater Frost Protection Potion": {
+    "id": 13456,
+    "icon": "inv_potion_20",
+    "kind": "item"
+  },
+  "Goblin Sapper Charge": {
+    "id": 10646,
+    "icon": "spell_fire_selfdestruct",
+    "kind": "item"
+  },
+  "Dense Dynamite": {
+    "id": 18641,
+    "icon": "inv_misc_bomb_06",
+    "kind": "item"
+  },
+  "Thorium Grenade": {
+    "id": 15993,
+    "icon": "inv_misc_bomb_08",
+    "kind": "item"
+  },
+  "Instant Poison": {
+    "id": 6947,
+    "icon": "ability_poisons",
+    "kind": "item"
+  },
+  "Deadly Poison": {
+    "id": 2892,
+    "icon": "ability_rogue_dualweild",
+    "kind": "item"
+  },
+  "Wound Poison": {
+    "id": 10918,
+    "icon": "ability_poisonsting",
+    "kind": "item"
+  },
+  "Crippling Poison": {
+    "id": 3775,
+    "icon": "ability_poisonsting",
+    "kind": "item"
+  },
+  "Mind-numbing Poison": {
+    "id": 5237,
+    "icon": "spell_nature_nullifydisease",
+    "kind": "item"
+  },
+  "Flash Powder": {
+    "id": 5140,
+    "icon": "inv_misc_powder_purple",
+    "kind": "item"
+  },
+  "Bogling Root": {
+    "id": 5206,
+    "icon": "inv_misc_herb_07",
+    "kind": "item"
+  },
+  "Whipper Root Tuber": {
+    "id": 11951,
+    "icon": "inv_misc_food_55",
+    "kind": "item"
+  },
+  "Night Dragon\u2019s Breath": {
+    "id": 11952,
+    "icon": "inv_misc_food_45",
+    "kind": "item"
+  },
+  "Improved Battle Shout": {
+    "id": 12861,
+    "icon": "ability_warrior_battleshout",
+    "kind": "spell"
+  },
+  "Blessing of Might": {
+    "id": 19837,
+    "icon": "spell_holy_fistofjustice",
+    "kind": "spell"
+  },
+  "Improved Mark of the Wild": {
+    "id": 17055,
+    "icon": "spell_nature_regeneration",
+    "kind": "spell"
+  },
+  "Power Word: Fortitude": {
+    "id": 10938,
+    "icon": "spell_holy_wordfortitude",
+    "kind": "spell"
+  },
+  "Trueshot Aura": {
+    "id": 20906,
+    "icon": "ability_trueshot",
+    "kind": "spell"
+  },
+  "Leader of the Pack": {
+    "id": 17007,
+    "icon": "spell_nature_unyeildingstamina",
+    "kind": "spell"
+  },
+  "Blessing of Salvation": {
+    "id": 1038,
+    "icon": "spell_holy_sealofsalvation",
+    "kind": "spell"
+  },
+  "Faerie Fire": {
+    "id": 9907,
+    "icon": "spell_nature_faeriefire",
+    "kind": "spell"
+  },
+  "Curse of Recklessness": {
+    "id": 11717,
+    "icon": "spell_shadow_unholystrength",
+    "kind": "spell"
+  },
+  "Expose Armor": {
+    "id": 11198,
+    "icon": "ability_warrior_riposte",
+    "kind": "spell"
+  },
+  "Sunder Armor": {
+    "id": 11597,
+    "icon": "ability_warrior_sunder",
+    "kind": "spell"
+  },
+  "Gift of Arthas": {
+    "id": 11466,
+    "icon": "inv_potion_28",
+    "kind": "spell"
+  },
+  "Improved Scorch": {
+    "id": 11095,
+    "icon": "spell_fire_soulburn",
+    "kind": "spell"
+  },
+  "Hunter\u2019s Mark": {
+    "id": 1130,
+    "icon": "ability_hunter_snipershot",
+    "kind": "spell"
+  },
+  "Shadow Weaving": {
+    "id": 15334,
+    "icon": "spell_shadow_blackplague",
+    "kind": "spell"
+  },
+  "item:10400": {
+    "id": 10400,
+    "icon": "inv_pants_12",
+    "kind": "item"
+  },
+  "item:10399": {
+    "id": 10399,
+    "icon": "inv_chest_leather_08",
+    "kind": "item"
+  },
+  "item:10403": {
+    "id": 10403,
+    "icon": "inv_belt_26",
+    "kind": "item"
+  },
+  "item:6449": {
+    "id": 6449,
+    "icon": "inv_chest_cloth_15",
+    "kind": "item"
+  },
+  "item:2041": {
+    "id": 2041,
+    "icon": "inv_chest_leather_07",
+    "kind": "item"
+  },
+  "item:6469": {
+    "id": 6469,
+    "icon": "inv_weapon_bow_10",
+    "kind": "item"
+  },
+  "item:17713": {
+    "id": 17713,
+    "icon": "inv_jewelry_ring_17",
+    "kind": "item"
+  },
+  "item:15063": {
+    "id": 15063,
+    "icon": "inv_gauntlets_26",
+    "kind": "item"
+  },
+  "item:15062": {
+    "id": 15062,
+    "icon": "inv_pants_wolf",
+    "kind": "item"
+  },
+  "item:13404": {
+    "id": 13404,
+    "icon": "inv_misc_bandana_01",
+    "kind": "item"
+  },
+  "item:11815": {
+    "id": 11815,
+    "icon": "inv_jewelry_talisman_01",
+    "kind": "item"
+  },
+  "item:15411": {
+    "id": 15411,
+    "icon": "inv_jewelry_talisman_07",
+    "kind": "item"
+  },
+  "item:14637": {
+    "id": 14637,
+    "icon": "inv_chest_leather_03",
+    "kind": "item"
+  },
+  "item:12927": {
+    "id": 12927,
+    "icon": "inv_shoulder_10",
+    "kind": "item"
+  },
+  "item:5191": {
+    "id": 5191,
+    "icon": "inv_sword_24",
+    "kind": "item"
+  },
+  "item:6504": {
+    "id": 6504,
+    "icon": "inv_sword_16",
+    "kind": "item"
+  },
+  "item:9380": {
+    "id": 9380,
+    "icon": "inv_sword_43",
+    "kind": "item"
+  },
+  "item:12940": {
+    "id": 12940,
+    "icon": "inv_sword_43",
+    "kind": "item"
+  },
+  "item:12939": {
+    "id": 12939,
+    "icon": "inv_sword_40",
+    "kind": "item"
+  },
+  "item:5616": {
+    "id": 5616,
+    "icon": "inv_sword_31",
+    "kind": "item"
+  },
+  "item:13218": {
+    "id": 13218,
+    "icon": "inv_weapon_shortblade_16",
+    "kind": "item"
+  },
+  "item:12791": {
+    "id": 12791,
+    "icon": "inv_drink_10",
+    "kind": "item"
+  },
+  "Blessing of Kings": {
+    "id": 20217,
+    "icon": "spell_magic_magearmor",
+    "kind": "spell"
+  },
+  "Grace of Air Totem": {
+    "id": 25359,
+    "icon": "spell_nature_invisibilitytotem",
+    "kind": "spell"
+  },
+  "Strength of Earth Totem": {
+    "id": 25361,
+    "icon": "spell_nature_earthbindtotem",
+    "kind": "spell"
+  },
+  "Windfury Totem": {
+    "id": 8512,
+    "icon": "spell_nature_windfury",
+    "kind": "spell"
+  }
+}

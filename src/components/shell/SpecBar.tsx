@@ -32,7 +32,7 @@ export function SpecBar() {
           <SpecSelect />
         ) : (
           <>
-            <span className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">
+            <span className="t-eyebrow text-[10.5px] text-faint">
               {specBar.label}
             </span>
 

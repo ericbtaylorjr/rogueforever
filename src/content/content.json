@@ -618,7 +618,7 @@
           "n": "Blessing of Might"
         },
         {
-          "n": "Blessing of Kings [A]"
+          "n": "Blessing of Kings"
         },
         {
           "n": "Improved Mark of the Wild"
@@ -627,14 +627,13 @@
           "n": "Power Word: Fortitude"
         },
         {
-          "n": "Grace of Air Totem [H]"
+          "n": "Grace of Air Totem"
         },
         {
-          "n": "Strength of Earth Totem [H]"
+          "n": "Strength of Earth Totem"
         },
         {
-          "n": "Windfury Totem [H]",
-          "s": true
+          "n": "Windfury Totem"
         },
         {
           "n": "Trueshot Aura"
@@ -643,8 +642,7 @@
           "n": "Leader of the Pack"
         },
         {
-          "n": "Blessing of Salvation",
-          "s": true
+          "n": "Blessing of Salvation"
         }
       ]
     },
@@ -808,14 +806,14 @@
       "name": "Learn WoWSims",
       "color": "#FFF468",
       "body": "Forever WoWSims answers your gear questions better than any guide can, including this one. It is genuinely not complicated, and it takes an afternoon to learn once and then never wonder again.",
-      "cta": "Available Soon",
+      "cta": "Coming once Forever WoWSims is live.",
       "disabled": true
     },
     {
       "kicker": "Addons",
       "name": "Comfy's UI",
       "color": "#B98BFF",
-      "body": "The complete UI addon package The Comfy Wizard actually plays with — heavily centered around Ellesmere UI and adjustments to the WoW Edit Mode UI, for a clean, consistent, raid efficient design."
+      "body": "The UI I actually play with, built around EllesmereUI and a reworked Edit Mode layout. Clean, consistent and raid-ready."
     },
     {
       "kicker": "Community",
@@ -839,7 +837,7 @@
       "code": "#showtooltip\n/cast [equipped:Guns] Shoot Gun; [equipped:Bows] Shoot Bow; [equipped:Crossbows] Shoot Crossbow; [equipped:Thrown] Throw"
     },
     {
-      "name": "Click-to-apply Poisons",
+      "name": "MH/OH Weapon Apply",
       "code": "#showtooltip\n/use Instant Poison III;\n/use [button:1] 16; [button:2] 17;\n/click StaticPopup1Button1"
     }
   ],
@@ -934,6 +932,10 @@
         {
           "id": "raid",
           "label": "Raids"
+        },
+        {
+          "id": "pvp",
+          "label": "PvP"
         }
       ]
     },

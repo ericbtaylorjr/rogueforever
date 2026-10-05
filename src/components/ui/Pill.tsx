@@ -102,7 +102,7 @@ export function SegmentedTabs({
 export function Tag({ children, tone }: { children: ReactNode; tone?: string }) {
   return (
     <span
-      className="t-eyebrow rounded-[4px] border border-line px-[6px] py-[2px] text-[8.5px] tracking-[.13em] whitespace-nowrap"
+      className="t-eyebrow rounded-[4px] border border-line px-[6px] py-[2px] text-[10.5px] whitespace-nowrap"
       style={{ color: tone ?? 'var(--faint)' }}
     >
       {children}

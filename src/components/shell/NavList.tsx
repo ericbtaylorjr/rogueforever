@@ -17,11 +17,11 @@ export function NavList({ size = 'rail' }: { size?: 'rail' | 'touch' }) {
   const header = (group: NavGroup) =>
     group.scope === 'spec' ? (
       <div className="mb-[8px] px-[8px]">
-        <div className="t-eyebrow mb-[7px] text-[9px] tracking-[.2em] text-faint">{group.label}</div>
+        <div className="t-eyebrow mb-[7px] text-[10.5px] text-faint">{group.label}</div>
         <SpecSelect size={touch ? 'touch' : 'rail'} />
       </div>
     ) : (
-      <div className="t-eyebrow mb-[7px] px-[8px] text-[9px] tracking-[.2em] text-faint">{group.label}</div>
+      <div className="t-eyebrow mb-[7px] px-[8px] text-[10.5px] text-faint">{group.label}</div>
     );
 
   return (

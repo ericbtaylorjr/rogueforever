@@ -132,7 +132,7 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
         }}
       >
         <div className="t-card-sub text-ink">{tip?.name}</div>
-        {tip?.kind && <div className="t-eyebrow mt-[3px] text-[9px] text-accent">{tip.kind}</div>}
+        {tip?.kind && <div className="t-eyebrow mt-[3px] text-[10.5px] text-accent">{tip.kind}</div>}
         <div className="mt-[6px] text-[12px] leading-[1.55] text-mute">
           {tip?.note || tooltipFallback}
         </div>

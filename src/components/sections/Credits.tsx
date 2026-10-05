@@ -12,12 +12,8 @@ type Contributor = (typeof contributors)[number];
 /** The community block: who the Handbook is credited to, and a way in. */
 function Community() {
   return (
-    <div
-      className="panel relative overflow-hidden p-[20px] sm:p-[24px]"
-      style={{ background: 'radial-gradient(120% 140% at 100% 0%, rgba(var(--accent-rgb),.08), transparent 55%), var(--panel)' }}
-    >
-      <span className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">{copy.community.eyebrow}</span>
-      <h3 className="t-card-title mt-[6px] text-ink">{copy.community.title}</h3>
+    <div className="panel p-[20px] sm:p-[24px]">
+      <h3 className="t-card-title text-ink">{copy.community.title}</h3>
       <div className="mt-[12px] flex max-w-[72ch] flex-col gap-[10px]">
         {copy.community.body.map((p) => (
           <p key={p} className="text-[13.5px] leading-[1.65] text-prose">
@@ -29,8 +25,8 @@ function Community() {
         href={links.discord}
         target="_blank"
         rel="noreferrer"
-        className="mt-[18px] inline-flex items-center gap-[9px] rounded-[8px] px-[18px] py-[11px] text-[13px] font-semibold transition-transform hover:-translate-y-px"
-        style={{ background: 'var(--accent)', color: 'var(--accent-ink)', boxShadow: 'var(--glow)' }}
+        className="mt-[18px] inline-flex items-center gap-[9px] rounded-[8px] px-[18px] py-[11px] text-[13px] font-semibold transition-opacity hover:opacity-90"
+        style={{ background: 'var(--accent)', color: 'var(--accent-ink)' }}
       >
         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 12a8 8 0 01-11.8 7L4 20l1.1-4.6A8 8 0 1121 12z" />
@@ -46,7 +42,7 @@ function Community() {
 function Avatar({ c }: { c: Contributor }) {
   if (c.logo) {
     return (
-      <span className="grid size-[56px] shrink-0 place-items-center rounded-[12px] border border-line bg-[radial-gradient(circle_at_50%_40%,rgba(168,85,247,0.22),transparent_70%)]">
+      <span className="grid size-[56px] shrink-0 place-items-center rounded-[12px] border border-line">
         <img src={logo} alt="" width={46} height={46} loading="lazy" className="size-[46px] object-contain" />
       </span>
     );
@@ -80,7 +76,7 @@ function ContributorCard({ c }: { c: Contributor }) {
           >
             {c.name}
           </h4>
-          <span className="t-eyebrow mt-[3px] block text-[9px] tracking-[.16em] text-faint">{c.role}</span>
+          <span className="t-eyebrow mt-[3px] block text-[10.5px] text-faint">{c.role}</span>
         </div>
       </div>
 

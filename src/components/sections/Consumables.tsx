@@ -1,18 +1,16 @@
 import { consumableCatCount, consumableCats, consumables } from '../../content/content';
 import { consumablesCopy as copy } from '../../content/copy';
-import { dotFor } from '../../content/palette';
 import { useHandbook } from '../../state/HandbookProvider';
-import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { FilterPill } from '../ui/Pill';
+import { GameIcon } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useTooltip } from '../ui/Tooltip';
 
 export function Consumables() {
   const { consumeFilter, setConsumeFilter, sweaty } = useHandbook();
   const { bind } = useTooltip();
-  const { tone } = useTheme();
 
   const shown = consumables.filter(
     (c) => (consumeFilter === 'All' || c.k === consumeFilter) && (sweaty || !c.s),
@@ -29,10 +27,8 @@ export function Consumables() {
       </p>
 
       <div className="mt-[16px]">
-        <Callout tone="accent" dashed label={copy.todoLabel}>
-          {copy.todo.before}
-          <strong className="font-semibold text-accent">{copy.todo.strong}</strong>
-          {copy.todo.after}
+        <Callout tone="accent" quiet label={copy.status.label}>
+          {copy.status.text}
         </Callout>
       </div>
 
@@ -60,14 +56,10 @@ export function Consumables() {
         {shown.map((c) => (
           <div
             key={c.n}
-            className="flex items-baseline gap-[9px] py-[6px]"
+            className="flex items-center gap-[9px] py-[4px]"
             style={{ breakInside: 'avoid' }}
           >
-            <span
-              aria-hidden="true"
-              className="mt-[6px] size-[4px] shrink-0 rounded-full"
-              style={{ background: tone(dotFor(c.k), 3) }}
-            />
+            <GameIcon name={c.n} size={20} />
             <span
               className="cursor-help text-[13px] text-prose underline decoration-line underline-offset-[3px] transition-colors hover:text-accent focus-visible:text-accent"
               {...bind({ name: c.n, kind: c.s ? `${c.k} · sweaty` : c.k, note: c.note })}

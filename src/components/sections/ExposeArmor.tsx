@@ -1,12 +1,8 @@
+import { Fragment } from 'react';
 import { exposeArmor as copy } from '../../content/copy';
 import { Callout } from '../ui/Callout';
+import { GameIcon } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
-
-const toneVar: Record<string, string> = {
-  accent: 'var(--accent)',
-  mute: 'var(--mute)',
-  faint: 'var(--faint)',
-};
 
 export function ExposeArmor() {
   return (
@@ -22,14 +18,23 @@ export function ExposeArmor() {
           </p>
           <p className="mt-[12px] max-w-[70ch] text-[13.5px] leading-[1.6] text-mute">{copy.p2}</p>
 
-          <div className="mt-[18px] grid gap-[10px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,128px),1fr))]">
-            {copy.stats.map((s) => (
-              <div key={s.val} className="panel rounded-[11px] px-[15px] py-[14px]">
-                <div className="t-num text-[22px] leading-none" style={{ color: toneVar[s.tone] }}>
-                  {s.val}
-                </div>
-                <div className="mt-[7px] text-[11px] leading-[1.45] text-faint">{s.label}</div>
-              </div>
+          {/* Both debuffs land on the same number, so show them as an equation, not two tiles. */}
+          <div className="panel-inner mt-[18px] flex flex-wrap items-center gap-x-[16px] gap-y-[10px] px-[16px] py-[13px]">
+            {copy.stats.map((st, i) => (
+              <Fragment key={st.label}>
+                {i > 0 && (
+                  <span aria-hidden="true" className="t-num text-[18px] text-faint">
+                    =
+                  </span>
+                )}
+                <span className="flex items-center gap-[10px]">
+                  <GameIcon name={st.icon} size={30} />
+                  <span>
+                    <span className="t-num block text-[19px] leading-none text-ink">{st.val}</span>
+                    <span className="mt-[4px] block text-[11.5px] text-faint">{st.label}</span>
+                  </span>
+                </span>
+              </Fragment>
             ))}
           </div>
         </div>

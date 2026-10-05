@@ -19,7 +19,7 @@ export function Wordmark({ size = 30 }: { size?: number }) {
         >
           {shell.wordmark}
         </div>
-        <div className="t-eyebrow mt-[3px] text-[9px] tracking-[.18em] text-faint">
+        <div className="t-eyebrow mt-[3px] text-[10.5px] text-faint">
           {shell.wordmarkSub}
         </div>
       </div>

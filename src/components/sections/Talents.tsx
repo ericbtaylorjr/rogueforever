@@ -5,7 +5,6 @@ import type { LevelingPath, SpecId, TalentVariant } from '../../content/types';
 import { hexA } from '../../lib/color';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
-import { Callout } from '../ui/Callout';
 import { SegmentedTabs } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -13,21 +12,6 @@ const TOTAL_POINTS = 51;
 
 /** Tab ids share the page's tab namespace, so prefix them. */
 const tabId = (id: string) => `build-${id}`;
-
-/** Grey stand-in bar used by every "coming soon" state in this section. */
-function GhostBar({ width = '100%' }: { width?: string }) {
-  return (
-    <div
-      aria-hidden="true"
-      className="h-[10px] rounded-full"
-      style={{
-        width,
-        background:
-          'repeating-linear-gradient(135deg, rgba(var(--fg-rgb),.07) 0 2px, transparent 2px 6px)',
-      }}
-    />
-  );
-}
 
 /**
  * Point split, key talents and a calculator link for one build. Used for both
@@ -40,11 +24,11 @@ function BuildCard({
   total,
 }: {
   title: string;
-  variant: TalentVariant | undefined;
+  variant: TalentVariant;
   total?: number;
 }) {
   const { tone } = useTheme();
-  const points = total ?? variant?.talents.reduce((n, t) => n + t.pts, 0) ?? 0;
+  const points = total ?? variant.talents.reduce((n, t) => n + t.pts, 0);
   const [grown, setGrown] = useState(false);
 
   useEffect(() => {
@@ -53,14 +37,12 @@ function BuildCard({
     return () => cancelAnimationFrame(raf);
   }, [variant]);
 
-  // Until a build exists, show the three trees with no points so the intent reads.
-  const trees = variant?.talents ?? copy.trees.map((name) => ({ name, pts: 0, color: '' }));
+  const trees = variant.talents;
 
   return (
     <div className="panel flex flex-col p-[18px]">
       <div className="flex items-baseline justify-between gap-[10px]">
         <span className="t-panel-label text-ink">{title}</span>
-        {!variant && <span className="t-eyebrow text-[9px] text-faint">{copy.tbd}</span>}
       </div>
 
       <div className="mt-[16px] grid grid-cols-3 gap-[12px]">
@@ -68,32 +50,29 @@ function BuildCard({
           <div key={t.name}>
             <div
               className="t-num text-[26px] leading-none"
-              style={{ color: variant ? tone(t.color) : 'var(--dim)' }}
+              style={{ color: tone(t.color) }}
             >
-              {variant ? t.pts : '—'}
+              {t.pts}
             </div>
             <div className="mt-[6px] text-[11px] text-faint">{t.name}</div>
             <div
               className="mt-[8px] h-[4px] overflow-hidden rounded-full"
               style={{ background: 'rgba(var(--fg-rgb),.06)' }}
             >
-              {variant && (
-                <div
-                  className="h-full rounded-full"
-                  style={{
-                    width: grown && points ? `${(t.pts / points) * 100}%` : '0%',
-                    background: tone(t.color, 3),
-                    transition: 'width .6s cubic-bezier(.2,.8,.2,1)',
-                  }}
-                />
-              )}
+              <div
+                className="h-full rounded-full"
+                style={{
+                  width: grown && points ? `${(t.pts / points) * 100}%` : '0%',
+                  background: tone(t.color, 3),
+                  transition: 'width .6s cubic-bezier(.2,.8,.2,1)',
+                }}
+              />
             </div>
           </div>
         ))}
       </div>
 
-      {variant ? (
-        <>
+      <>
           <p className="mt-[16px] border-t border-line pt-[14px] text-[12.5px] leading-[1.6] text-mute">
             {variant.talentNote}
           </p>
@@ -119,15 +98,7 @@ function BuildCard({
               {copy.calculator}
             </a>
           )}
-        </>
-      ) : (
-        <div className="mt-[16px] flex flex-1 flex-col gap-[10px] border-t border-line pt-[14px]">
-          <p className="text-[12.5px] italic text-dim">{copy.keyTalentsPending}</p>
-          <GhostBar width="82%" />
-          <GhostBar width="64%" />
-          <GhostBar width="73%" />
-        </div>
-      )}
+      </>
     </div>
   );
 }
@@ -136,20 +107,17 @@ const SHARD = 'polygon(42% 0, 100% 0, 100% 100%, 0 100%)';
 
 /**
  * Card banner. Always a dark surface with light text in both themes, so spec
- * colours are used raw: a hard-cut colour shard on the right, a lit edge along
- * the bottom, and a faint scanline texture.
+ * colours are used raw: a hard-cut colour shard on the right and a spec-coloured
+ * edge along the bottom.
  */
-function Banner({ path }: { path: LevelingPath }) {
+function Banner({ path, tall = false }: { path: LevelingPath; tall?: boolean }) {
   const { color, color2 } = specById[path.spec];
 
   return (
-    <div className="relative h-[96px] overflow-hidden" style={{ background: 'var(--hue-end)' }}>
-      {/* Glow bleeding in from the shard. */}
-      <span
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{ background: `radial-gradient(90% 130% at 100% 0%, ${hexA(color, 0.4)}, transparent 62%)` }}
-      />
+    <div
+      className={`relative overflow-hidden ${tall ? 'min-h-[120px] stack:min-h-full' : 'h-[96px]'}`}
+      style={{ background: 'var(--hue-end)' }}
+    >
       {/* An offset copy of the shard peeking out behind it, so the two cuts stay parallel. */}
       <span
         aria-hidden="true"
@@ -162,23 +130,15 @@ function Banner({ path }: { path: LevelingPath }) {
         className="absolute inset-y-0 right-0 w-[44%]"
         style={{ clipPath: SHARD, background: `linear-gradient(160deg, ${color}, ${color2})` }}
       />
-      {/* Scanlines over everything for texture. */}
-      <span
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background: 'repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 4px)',
-        }}
-      />
       {/* Lit bottom edge. */}
       <span
         aria-hidden="true"
         className="absolute inset-x-0 bottom-0 h-[2px]"
-        style={{ background: color, boxShadow: `0 0 16px 1px ${hexA(color, 0.8)}` }}
+        style={{ background: color }}
       />
 
       <div className="relative flex h-full flex-col justify-end p-[14px] pb-[13px]">
-        <span className="t-eyebrow text-[9.5px] tracking-[.18em]" style={{ color }}>
+        <span className="t-eyebrow text-[10.5px]" style={{ color }}>
           {path.tree}
         </span>
         <h3 className="t-card-title mt-[4px]" style={{ color: 'var(--on-hue)' }}>
@@ -190,88 +150,103 @@ function Banner({ path }: { path: LevelingPath }) {
 }
 
 /**
- * The active spec's leveling build (level 30 beta for now): spec banner, why
- * it works, and the talent calculator link. Falls back to the placeholder card
- * when a spec has no build yet.
+ * The active spec's leveling build (level 30 beta for now): spec banner beside why it
+ * works and the talent calculator link. Renders nothing for a spec without one.
  */
 function LevelingCard() {
   const { spec } = useHandbook();
+  const [open, setOpen] = useState(false);
   const path = leveling.find((l) => l.spec === spec);
-  if (!path) return <BuildCard title={copy.levelingTitle} variant={undefined} />;
+  if (!path) return null;
+  const detailsId = `leveling-details-${spec}`;
 
   return (
-    <div className="panel flex flex-col p-[18px]">
-      <div className="flex items-baseline justify-between gap-[10px]">
-        <span className="t-panel-label text-ink">{copy.levelingTitle}</span>
-        <span className="t-eyebrow text-[9px] text-faint">{copy.levelingTag}</span>
-      </div>
-      <div className="mt-[14px] overflow-hidden rounded-[10px] border border-line">
-        <Banner path={path} />
-      </div>
-      <p className="mt-[14px] flex-1 text-[12.5px] leading-[1.6] text-mute">{path.body}</p>
-      <p className="mt-[10px] text-[11.5px] leading-[1.55] text-faint">{copy.levelingNote}</p>
-      <div className="mt-[14px]">
-        {path.href ? (
-          <a
-            href={path.href}
-            target="_blank"
-            rel="noreferrer"
-            className="block rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute transition-colors hover:border-accent hover:bg-accent-dim hover:text-accent"
-          >
-            {copy.levelingCta}
-          </a>
-        ) : (
+    // Compact by default so several builds stack without a wall of text. The banner
+    // stretches with the card, so opening the details reveals more of the graphic.
+    <div className="panel grid overflow-hidden stack:grid-cols-[minmax(0,28%)_minmax(0,1fr)]">
+      <Banner path={path} tall />
+      <div className="flex flex-col p-[18px]">
+        <div className="flex flex-wrap items-baseline justify-between gap-[10px]">
+          <span className="t-panel-label text-ink">{copy.levelingTitle}</span>
+          <span className="text-[12px] text-faint">{copy.levelingTag}</span>
+        </div>
+
+        <div
+          id={detailsId}
+          className="grid transition-[grid-template-rows] duration-300 ease-out"
+          style={{ gridTemplateRows: open ? '1fr' : '0fr' }}
+          inert={!open}
+        >
+          <div className="overflow-hidden">
+            <p className="mt-[10px] text-[13.5px] leading-[1.6] text-prose">{path.body}</p>
+            <p className="mt-[8px] text-[12.5px] leading-[1.55] text-mute">{copy.levelingNote}</p>
+          </div>
+        </div>
+
+        <div className="mt-[14px] flex flex-wrap items-center gap-x-[16px] gap-y-[8px]">
+          {path.href ? (
+            <a
+              href={path.href}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-[8px] border border-line px-[14px] py-[9px] text-[12.5px] font-semibold text-mute transition-colors hover:border-accent hover:bg-accent-dim hover:text-accent"
+            >
+              {copy.levelingCta} ↗
+            </a>
+          ) : (
+            <p className="text-[12.5px] italic text-dim">{copy.levelingComingSoon}</p>
+          )}
           <button
             type="button"
-            disabled
-            className="w-full cursor-not-allowed rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute opacity-50"
+            aria-expanded={open}
+            aria-controls={detailsId}
+            onClick={() => setOpen((o) => !o)}
+            className="flex items-center gap-[6px] text-[12.5px] font-semibold text-mute transition-colors hover:text-accent"
           >
-            {copy.levelingComingSoon}
+            {open ? copy.readLess : copy.readMore}
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              className="transition-transform duration-300"
+              style={{ transform: open ? 'rotate(180deg)' : 'none' }}
+            >
+              <path d="M2.5 4.5 6 8l3.5-3.5" />
+            </svg>
           </button>
-        )}
+        </div>
       </div>
     </div>
   );
 }
 
-/** Build tabs, or a disabled stand-in showing where they will go. */
+/** Build tabs for specs with more than one level 60 build. */
 function BuildPicker({
   variants,
   active,
   onPick,
 }: {
   variants: TalentVariant[];
-  active: TalentVariant | undefined;
+  active: TalentVariant;
   onPick: (id: string) => void;
 }) {
-  const { tone } = useTheme();
   const { spec } = useHandbook();
 
   return (
     <div className="flex flex-wrap items-center gap-x-[14px] gap-y-[8px]">
-      <span className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">{copy.buildsLabel}</span>
-      {variants.length ? (
-        <SegmentedTabs
-          tabs={variants.map((v) => ({ id: tabId(v.id), label: v.name }))}
-          value={tabId(active!.id)}
-          onChange={(id) => onPick(id.slice(tabId('').length))}
-          label={`${copy.buildsLabel}: ${specById[spec].name}`}
-        />
-      ) : (
-        <span
-          className="flex items-center gap-[8px] rounded-[10px] border border-dashed border-line px-[14px] py-[9px] text-[12.5px] font-semibold text-dim"
-        >
-          <span
-            aria-hidden="true"
-            className="size-[7px] rounded-full"
-            style={{ background: tone(specById[spec].color, 3) }}
-          />
-          {copy.buildsPending}
-        </span>
-      )}
-      <p className="basis-full text-[12.5px] leading-[1.55] text-mute">
-        {active ? active.niche : copy.buildsPendingNote}
-      </p>
+      <SegmentedTabs
+        tabs={variants.map((v) => ({ id: tabId(v.id), label: v.name }))}
+        value={tabId(active.id)}
+        onChange={(id) => onPick(id.slice(tabId('').length))}
+        label={`${copy.buildsLabel}: ${specById[spec].name}`}
+      />
+      <p className="basis-full text-[12.5px] leading-[1.55] text-mute">{active.niche}</p>
     </div>
   );
 }
@@ -299,30 +274,33 @@ export function Talents() {
       </p>
 
       <div className="mt-[16px]">
-        <Callout tone="accent" dashed label={copy.todoLabel}>
-          {copy.todo}
-        </Callout>
-      </div>
-
-      <div className="mt-[18px]">
-        <BuildPicker
-          variants={talentVariants}
-          active={active}
-          onPick={(id) => setPicked((p) => ({ ...p, [spec]: id }))}
-        />
-      </div>
-
-      <div className="mt-[14px] grid gap-[14px] stack:grid-cols-2">
-        <div
-          className="flex flex-col [&>*]:flex-1"
-          {...(active
-            ? { id: `panel-${tabId(active.id)}`, role: 'tabpanel', 'aria-labelledby': `tab-${tabId(active.id)}` }
-            : {})}
-        >
-          <BuildCard title={copy.endgameTitle} variant={active} total={TOTAL_POINTS} />
-        </div>
         <LevelingCard />
       </div>
+
+      <h3 className="t-card-sub mt-[28px] text-ink">{copy.endgameTitle}</h3>
+      {active ? (
+        <>
+          {talentVariants.length > 1 && (
+            <div className="mt-[12px]">
+              <BuildPicker
+                variants={talentVariants}
+                active={active}
+                onPick={(id) => setPicked((p) => ({ ...p, [spec]: id }))}
+              />
+            </div>
+          )}
+          <div
+            className="mt-[12px]"
+            id={`panel-${tabId(active.id)}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${tabId(active.id)}`}
+          >
+            <BuildCard title={copy.endgameTitle} variant={active} total={TOTAL_POINTS} />
+          </div>
+        </>
+      ) : (
+        <p className="mt-[6px] max-w-[70ch] text-[13.5px] leading-[1.6] text-mute">{copy.endgamePending}</p>
+      )}
     </section>
   );
 }

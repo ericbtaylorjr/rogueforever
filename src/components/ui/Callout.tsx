@@ -7,39 +7,35 @@ const tones: Record<Tone, { rgb: string; cssVar: string }> = {
   accent: { rgb: 'var(--accent-rgb)', cssVar: 'var(--accent)' },
 };
 
-/** 2px left-bordered note. Used for Forever claims, warnings and TODOs. */
+/**
+ * Left-ruled note for Forever claims, warnings and status lines. `quiet` drops the
+ * tint for status lines ("still Classic Era data…") so they read as an aside, not
+ * a banner. `label` is a short lead-in in the tone colour, written in sentence case.
+ */
 export function Callout({
   tone = 'sky',
-  dashed = false,
+  quiet = false,
   label,
   children,
 }: {
   tone?: Tone;
-  dashed?: boolean;
+  quiet?: boolean;
   label?: string;
   children: ReactNode;
 }) {
   const t = tones[tone];
   return (
     <div
-      className="rounded-r-[12px] px-[15px] py-[13px] text-[12.5px] leading-[1.6] text-prose"
-      style={
-        dashed
-          ? {
-              border: `1px dashed rgba(${t.rgb}, .45)`,
-              borderRadius: 12,
-              background: `rgba(${t.rgb}, .05)`,
-            }
-          : {
-              borderLeft: `2px solid ${t.cssVar}`,
-              background: `rgba(${t.rgb}, .07)`,
-            }
-      }
+      className="max-w-[88ch] rounded-r-[8px] px-[14px] py-[10px] text-[13px] leading-[1.6] text-prose"
+      style={{
+        borderLeft: `2px solid ${quiet ? `rgba(${t.rgb}, .55)` : t.cssVar}`,
+        background: quiet ? 'transparent' : `rgba(${t.rgb}, .07)`,
+      }}
     >
       {label && (
-        <span className="t-eyebrow mr-2 align-middle text-[9.5px]" style={{ color: t.cssVar }}>
+        <strong className="mr-[6px] font-semibold" style={{ color: t.cssVar }}>
           {label}
-        </span>
+        </strong>
       )}
       {children}
     </div>

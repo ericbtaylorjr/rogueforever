@@ -5,7 +5,7 @@ import { RogueMark } from '../ui/RogueMark';
 
 /**
  * A quiet sign-off. Who's behind the Handbook lives in Credits; the footer just
- * closes the page with thanks, a pointer back to Credits, and the shortcuts.
+ * closes the page with thanks and a pointer back to Credits.
  */
 export function Footer() {
   const { jump } = useHandbook();
@@ -48,17 +48,6 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="shrink-0">
-        <div className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">{copy.shortcutsLabel}</div>
-        <ul className="mt-[10px] flex flex-col gap-[8px]">
-          {copy.shortcuts.map((s) => (
-            <li key={s.key} className="flex items-center gap-[10px] text-[12px] text-faint">
-              <span className="key-chip t-num">{s.key}</span>
-              {s.what}
-            </li>
-          ))}
-        </ul>
-      </div>
     </footer>
   );
 }

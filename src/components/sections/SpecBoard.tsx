@@ -3,7 +3,6 @@ import { config } from '../../config';
 import { foreverOutlook, levelingIndex, specById, specIndex } from '../../content/content';
 import { specBoard } from '../../content/copy';
 import type { LevelingSetId, SimSetId, SpecId } from '../../content/types';
-import { hexA } from '../../lib/color';
 import { useHandbook, type SortKey } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { useSpecColor } from '../../state/useSpecColor';
@@ -64,7 +63,7 @@ function YourSpecBadge() {
   const c = useSpecColor();
   return (
     <span
-      className="t-eyebrow rounded-[4px] px-[6px] py-[2px] text-[8.5px] tracking-[.13em] whitespace-nowrap"
+      className="t-eyebrow rounded-[4px] px-[6px] py-[2px] text-[10.5px] whitespace-nowrap"
       style={{ background: c.soft, color: c.text, fontWeight: 600 }}
     >
       {specBoard.yourSpec}
@@ -114,15 +113,7 @@ function BarsView({ rows, simSet }: { rows: Row[]; simSet: SimSetId }) {
                   background: `linear-gradient(90deg, ${tone(r.color, 3)}, ${tone(r.color2, 3)})`,
                   transition: 'width .65s cubic-bezier(.2,.8,.2,1)',
                 }}
-              >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-y-0 w-[38%] animate-scan"
-                  style={{
-                    background: `linear-gradient(90deg, transparent, ${hexA('#FFFFFF', 0.28)}, transparent)`,
-                  }}
-                />
-              </div>
+              />
             </div>
           </div>
         );
@@ -175,7 +166,7 @@ function TableView({ rows }: { rows: Row[] }) {
                 <button
                   type="button"
                   onClick={() => toggleSort(c.key)}
-                  className="t-eyebrow flex items-center gap-[4px] text-[9px] tracking-[.14em]"
+                  className="t-eyebrow flex items-center gap-[4px] text-[10.5px]"
                   style={{ color: on ? 'var(--accent)' : 'var(--faint)' }}
                 >
                   {c.label}
@@ -264,11 +255,6 @@ function ForeverPending() {
       style={{ border: '1px solid rgba(var(--sky-rgb),.24)', background: 'var(--panel)' }}
     >
       <div className="flex items-center gap-[9px]">
-        <span
-          aria-hidden="true"
-          className="size-[8px] shrink-0 animate-pulse-dot rounded-full"
-          style={{ background: 'var(--sky)' }}
-        />
         <span className="t-panel-label text-sky">{specBoard.pending.heading}</span>
       </div>
       <p className="mt-[10px] max-w-[70ch] text-[13px] leading-[1.6] text-prose">
@@ -333,7 +319,7 @@ function LevelingMeta() {
         />
       </div>
 
-      <p className="t-eyebrow mt-[12px] text-[10.5px] tracking-[.14em] text-faint">{current.note}</p>
+      <p className="t-eyebrow mt-[12px] text-[10.5px] text-faint">{current.note}</p>
 
       <div id={`panel-${set}`} role="tabpanel" aria-labelledby={`tab-${set}`} className="mt-[14px]">
         <ForeverPending />
@@ -352,9 +338,24 @@ export function SpecBoard() {
     label: specIndex[k].label,
   }));
 
+  // Until any view has real data, the section is just the honest explanation: no tabs,
+  // no empty states. Filling in specIndex/levelingIndex brings the full UI back.
+  const anyData = [...Object.values(specIndex), ...Object.values(levelingIndex)].some((v) => !v.pending);
+  if (!anyData) {
+    return (
+      <section id="specs" aria-label="Meta breakdown" className="pt-[44px]">
+        <SectionHeading id="specs" />
+        <div className="flex max-w-[70ch] flex-col gap-[10px] text-[14px] leading-[1.6] text-mute">
+          <p>{specBoard.intro}</p>
+          <p>{specBoard.planned}</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="specs" aria-label="Meta breakdown" className="pt-[44px]">
-      <SectionHeading id="specs" scope="all" />
+      <SectionHeading id="specs" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{specBoard.intro}</p>
 
@@ -369,7 +370,7 @@ export function SpecBoard() {
         />
       </div>
 
-      <p className="t-eyebrow mt-[12px] text-[10.5px] tracking-[.14em] text-faint">{set.note}</p>
+      <p className="t-eyebrow mt-[12px] text-[10.5px] text-faint">{set.note}</p>
 
       <div id={`panel-${simSet}`} role="tabpanel" aria-labelledby={`tab-${simSet}`} className="mt-[14px]">
         {set.pending ? (

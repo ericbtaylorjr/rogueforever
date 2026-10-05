@@ -11,6 +11,7 @@ import { ForeverWatch } from './components/sections/ForeverWatch';
 import { Gear } from './components/sections/Gear';
 import { Overview } from './components/sections/Overview';
 import { Poisons } from './components/sections/Poisons';
+import { Pvp } from './components/sections/Pvp';
 import { Raids } from './components/sections/Raids';
 import { Rotation } from './components/sections/Rotation';
 import { SpecBoard } from './components/sections/SpecBoard';
@@ -52,6 +53,8 @@ export default function App() {
             <ExposeArmor />
             <Divider />
             <Raids />
+            <Divider />
+            <Pvp />
             <Divider />
             <Tools />
             <Divider />

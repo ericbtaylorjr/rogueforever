@@ -3,6 +3,7 @@ import { buffsCopy as copy } from '../../content/copy';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
+import { GameIcon } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useTooltip } from '../ui/Tooltip';
 
@@ -14,10 +15,8 @@ export function Buffs() {
     <section id="buffs" aria-label="Buffs and debuffs">
       <SectionHeading id="buffs" scope="all" />
 
-      <Callout tone="accent" dashed label={copy.todoLabel}>
-        {copy.todo.before}
-        <strong className="font-semibold text-accent">{copy.todo.strong}</strong>
-        {copy.todo.after}
+      <Callout tone="accent" quiet label={copy.status.label}>
+        {copy.status.text}
       </Callout>
 
       <div className="mt-[18px] grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,248px),1fr))]">
@@ -33,7 +32,8 @@ export function Buffs() {
 
               <ul className="mt-[12px] flex flex-col gap-[7px]">
                 {items.map((i) => (
-                  <li key={i.n} className="flex items-baseline gap-[8px]">
+                  <li key={i.n} className="flex items-center gap-[9px]">
+                    <GameIcon name={i.n} size={20} />
                     <span
                       className="cursor-help text-[12.5px] text-prose transition-colors hover:text-accent focus-visible:text-accent"
                       {...bind({ name: i.n, kind: g.label, note: '' })}

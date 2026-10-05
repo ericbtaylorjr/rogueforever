@@ -1,19 +1,25 @@
-import { config } from '../../config';
-import { specs } from '../../content/content';
+import logo from '../../assets/logo-comfy-wizard.png';
 import { hero } from '../../content/copy';
 import { links } from '../../content/links';
-import { hexA } from '../../lib/color';
 import { useHandbook } from '../../state/HandbookProvider';
-import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
+import { LinkedText } from '../ui/LinkedText';
+
+/** Accent line that fades out to the right. The hero's poison drips hang from one. */
+function TaperedRule({ className = '' }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`h-px w-full max-w-[520px] ${className}`}
+      style={{ background: 'linear-gradient(90deg, var(--accent), transparent)' }}
+    />
+  );
+}
 
 function PoisonDrip() {
   return (
     <div className="relative mt-[22px] h-[18px] w-full max-w-[520px]" aria-hidden="true">
-      <div
-        className="absolute left-0 top-0 h-px w-full"
-        style={{ background: 'linear-gradient(90deg, var(--accent), transparent)' }}
-      />
+      <TaperedRule className="absolute left-0 top-0" />
       {[
         { left: '18%', cls: 'animate-drip' },
         { left: '56%', cls: 'animate-drip-slow' },
@@ -34,67 +40,29 @@ function PoisonDrip() {
   );
 }
 
-function SpecLadder() {
-  const { spec, setSpec } = useHandbook();
-  const { tone } = useTheme();
-
+/** A short signed note from the curator, so the page opens with a person, not a dashboard. */
+function CuratorNote() {
   return (
-    <div className="panel px-[18px] pb-[8px] pt-[18px]">
-      <div className="mb-[14px] flex items-baseline justify-between">
-        <span className="t-panel-label text-ink">{hero.ladder.title}</span>
-        <span className="t-eyebrow text-[9px] text-faint">{hero.ladder.meta}</span>
+    <aside className="panel self-start p-[20px]">
+      <div className="flex items-center gap-[12px]">
+        <img
+          src={logo}
+          alt=""
+          width={44}
+          height={44}
+          className="size-[44px] shrink-0 rounded-[10px] border border-line object-contain p-[3px]"
+        />
+        <h2 className="t-card-sub text-ink">{hero.note.title}</h2>
       </div>
-
-      <div className="flex flex-col">
-        {specs.map((s) => {
-          const on = s.id === spec;
-          return (
-            <button
-              key={s.id}
-              type="button"
-              aria-pressed={on}
-              onClick={() => setSpec(s.id)}
-              className="mb-[6px] flex items-center gap-[12px] rounded-[10px] px-[10px] py-[9px] transition-colors"
-              style={{
-                border: on ? `1px solid ${hexA(s.color, 0.42)}` : '1px solid transparent',
-                background: on ? hexA(s.color, 0.1) : 'transparent',
-              }}
-            >
-              <span
-                aria-hidden="true"
-                className="shrink-0 rounded-full"
-                style={{ width: 3, height: 26, background: tone(s.color, 3) }}
-              />
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-[13.5px] font-semibold text-ink">
-                  {s.name}
-                </span>
-                <span className="block truncate text-[10.5px] text-faint">{s.weapon}</span>
-              </span>
-              <span className="shrink-0 text-right">
-                <span
-                  className="block"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 900,
-                    fontSize: 16,
-                    lineHeight: 1,
-                    color: tone(s.color),
-                  }}
-                >
-                  {s.tier}
-                </span>
-                <span className="t-eyebrow block text-[9px] text-faint">{s.role}</span>
-              </span>
-            </button>
-          );
-        })}
+      <div className="mt-[14px] flex flex-col gap-[10px] text-[13.5px] leading-[1.65] text-prose">
+        {hero.note.body.map((p) => (
+          <p key={p}>
+            <LinkedText text={p} links={{ 'Rank 1': links.rank1Logs }} />
+          </p>
+        ))}
       </div>
-
-      <p className="border-t border-line py-[12px] text-[11.5px] leading-[1.5] text-faint">
-        {hero.ladder.footnote}
-      </p>
-    </div>
+      <p className="mt-[14px] text-[13px] font-semibold text-mute">&ndash; {hero.note.sign}</p>
+    </aside>
   );
 }
 
@@ -108,32 +76,17 @@ export function Overview() {
       className="relative"
       style={{ padding: 'clamp(24px, 5.5vw, 58px) 0 10px' }}
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 size-[300px]"
-        style={{
-          background: 'radial-gradient(circle at 70% 30%, var(--accent-dim), transparent 62%)',
-          filter: 'blur(12px)',
-        }}
-      />
-
-      <div className="relative flex flex-wrap items-center gap-[10px]">
-        <span className="t-eyebrow text-[10px] tracking-[.22em] text-faint">{hero.eyebrow}</span>
-        <span aria-hidden="true" className="size-[4px] rounded-full" style={{ background: 'var(--dim)' }} />
-        <span className="t-eyebrow rounded-[20px] border border-accent px-[10px] py-[3px] text-[10px] text-accent">
-          {config.phaseLabel}
-        </span>
-      </div>
+      <p className="relative text-[13.5px] text-faint">{hero.eyebrow}</p>
 
       <h1 className="relative mt-[18px]">
         <span className="t-h1 block text-ink">{hero.titleTop}</span>
-        <span className="t-h1 block text-accent" style={{ textShadow: 'var(--glow)' }}>
+        <span className="t-h1 block text-accent">
           {hero.titleBottom}
         </span>
       </h1>
 
       <div className="relative mt-[16px] max-w-[62ch]">
-        <Callout tone="accent" dashed label={hero.disclaimer.label}>
+        <Callout tone="accent" label={hero.disclaimer.label}>
           {hero.disclaimer.before}
           <a
             href={links.discord}
@@ -158,7 +111,7 @@ export function Overview() {
               href={links.discord}
               target="_blank"
               rel="noreferrer"
-              className="font-semibold text-sky underline underline-offset-2"
+              className="text-accent underline underline-offset-2"
             >
               {hero.support.link}
             </a>
@@ -168,13 +121,9 @@ export function Overview() {
           <div className="mt-[22px] flex flex-wrap gap-[10px]">
             <button
               type="button"
-              onClick={() => jump('specs')}
-              className="rounded-[8px] px-[16px] py-[11px] text-[13px] font-semibold"
-              style={{
-                background: 'var(--accent)',
-                color: 'var(--accent-ink)',
-                boxShadow: 'var(--glow)',
-              }}
+              onClick={() => jump('talents')}
+              className="rounded-[8px] px-[16px] py-[11px] text-[13px] font-semibold transition-opacity hover:opacity-90"
+              style={{ background: 'var(--accent)', color: 'var(--accent-ink)' }}
             >
               {hero.ctaPrimary}
             </button>
@@ -188,8 +137,11 @@ export function Overview() {
           </div>
         </div>
 
-        <SpecLadder />
+        <CuratorNote />
       </div>
+
+      {/* Closes the overview before Meta Breakdown: same line as the hero's, no drips. */}
+      <TaperedRule className="mt-[48px]" />
     </section>
   );
 }

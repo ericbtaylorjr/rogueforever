@@ -136,7 +136,7 @@ export function CommandPalette() {
                 className="flex items-center gap-[12px] px-[16px] py-[9px] transition-colors"
                 style={{ background: i === cursor ? 'var(--panel2)' : 'transparent' }}
               >
-                <span className="t-eyebrow w-[78px] shrink-0 text-[9px] tracking-[.12em] text-faint">
+                <span className="t-eyebrow w-[78px] shrink-0 text-[10.5px] text-faint">
                   {r.kind}
                 </span>
                 <span className="flex-1 truncate text-[13.5px] text-ink">{r.label}</span>

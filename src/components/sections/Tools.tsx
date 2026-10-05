@@ -1,8 +1,8 @@
 import { macros, tools } from '../../content/content';
 import { toolsCopy as copy } from '../../content/copy';
-import { toolHref } from '../../content/links';
-import { useTheme } from '../../state/ThemeProvider';
+import { toolBodyLinks, toolHref } from '../../content/links';
 import { CopyButton } from '../ui/CopyButton';
+import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
 import { ComfyUiActions } from './ComfyUi';
 
@@ -18,7 +18,6 @@ const placement: Record<string, string> = {
 };
 
 export function Tools() {
-  const { tone } = useTheme();
   return (
     <section id="tools" aria-label="Tools and UI">
       <SectionHeading id="tools" />
@@ -27,24 +26,15 @@ export function Tools() {
         <div className="grid gap-[12px] @xl:grid-cols-2">
           {tools.map((t) => (
             <article key={t.name} className={`panel flex flex-col p-[18px] ${placement[t.name] ?? ''}`}>
-              <span className="t-eyebrow text-[9.5px] tracking-[.14em]" style={{ color: tone(t.color) }}>
-                {t.kicker}
-              </span>
-              <h3 className="t-card-title mt-[8px] text-ink">{t.name}</h3>
+              <h3 className="t-card-title text-ink">{t.name}</h3>
               {/* Comfy's UI lets its screenshot absorb spare height instead of the body text. */}
               <p className={`mt-[10px] text-[12.5px] leading-[1.6] text-mute ${t.name === "Comfy's UI" ? '' : 'flex-1'}`}>
-                {t.body}
+                <LinkedText text={t.body} links={toolBodyLinks[t.name]} />
               </p>
               {t.name === "Comfy's UI" ? (
                 <ComfyUiActions />
               ) : t.disabled ? (
-                <button
-                  type="button"
-                  disabled
-                  className="mt-[14px] cursor-not-allowed rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute opacity-50"
-                >
-                  {t.cta}
-                </button>
+                <p className="mt-[14px] text-[12.5px] italic text-dim">{t.cta}</p>
               ) : (
                 <a
                   href={toolHref[t.name] ?? '#'}

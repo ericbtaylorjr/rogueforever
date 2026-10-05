@@ -15,6 +15,8 @@ export const links = {
   twitch: 'https://www.twitch.tv/thecomfywizard',
   mail: 'mailto:TheComfyWizard@gmail.com',
   site: 'https://thecomfywizard.com',
+  ellesmereui: 'https://www.curseforge.com/wow/addons/ellesmereui',
+  rank1Logs: 'https://sod.warcraftlogs.com/character/us/crusader-strike/comfyrogue',
 } as const;
 
 /** Map a tool card's CTA to its destination. Keyed by the tool name in content.json. */
@@ -22,6 +24,11 @@ export const toolHref: Record<string, string> = {
   'Learn WoWSims': links.wowsims,
   "Comfy's UI": links.weakauras,
   'Rogue Classic Discord': links.discord,
+};
+
+/** Phrases inside a tool card's body text that link out. Keyed by tool name, then phrase. */
+export const toolBodyLinks: Record<string, Record<string, string>> = {
+  "Comfy's UI": { EllesmereUI: links.ellesmereui },
 };
 
 export const isPlaceholder = (href: string) => href === '#';

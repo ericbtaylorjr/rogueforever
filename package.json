@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit",
     "ellesmere": "node scripts/update-ellesmere.mjs",
-    "comfy-image": "node scripts/update-comfy-image.mjs"
+    "comfy-image": "node scripts/update-comfy-image.mjs",
+    "icons": "node scripts/fetch-icons.mjs"
   },
   "dependencies": {
     "react": "^19.3.0",

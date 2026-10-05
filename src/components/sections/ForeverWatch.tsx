@@ -39,7 +39,7 @@ export function ForeverWatch() {
       <div className="mt-[18px] grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,164px),1fr))]">
         {foreverDates.map((d) => (
           <div key={d.label} className="panel px-[15px] py-[14px]">
-            <div className="t-eyebrow text-[9px] text-faint">{d.label}</div>
+            <div className="text-[12px] font-semibold text-faint">{d.label}</div>
             <div className="t-num mt-[7px] text-[17px]" style={{ color: tone(d.color) }}>
               {d.val}
             </div>
@@ -97,10 +97,7 @@ export function ForeverWatch() {
               >
                 {c.title}
               </h3>
-              <span
-                className="t-eyebrow rounded-[4px] px-[7px] py-[2px] text-[9px] tracking-[.12em]"
-                style={statusStyle[c.status]}
-              >
+              <span className="rounded-[4px] px-[7px] py-[1px] text-[11.5px] font-semibold" style={statusStyle[c.status]}>
                 {c.status}
               </span>
             </div>
@@ -115,7 +112,7 @@ export function ForeverWatch() {
             </p>
 
             <p className="mt-[10px] flex flex-wrap items-baseline gap-x-[12px] gap-y-[4px] text-[11px]">
-              <span className="t-eyebrow text-[9px] tracking-[.12em] text-faint">{forever.sourcesLabel}</span>
+              <span className="text-faint">{forever.sourcesLabel}</span>
               {c.sources.map((src) => (
                 <a
                   key={src.url}

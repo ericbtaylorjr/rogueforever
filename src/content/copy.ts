@@ -10,34 +10,37 @@ import { links } from './links';
  */
 
 export const hero = {
-  eyebrow: 'WORLD OF WARCRAFT FOREVER',
+  eyebrow: 'A Rogue guide for World of Warcraft: Forever',
   titleTop: 'Rogue',
   titleBottom: 'Handbook',
   disclaimer: {
-    label: 'Important:',
+    label: 'Heads up:',
     before:
-      'This guide covers information gathered for the level 30 Beta version of WoW Forever. As more is learned upon official release, it will be updated to reflect leveling and end game information accordingly. Please reach out with any feedback in the ',
+      "everything here is based on the level 30 beta. I'll update leveling and endgame as the full game opens up. If something's off, tell me in the ",
     link: 'Rogue Classic Discord',
-    after: '!',
+    after: '.',
   },
-  lede: "Welcome! The Rogue Handbook is a quick, no-nonsense reference for playing a Rogue well in WoW Forever. Pick your spec and find what matters in one place: talents, rotation, gear, poisons and consumables, kept simple so you can check something between pulls and get back to the game.",
+  lede: 'The Rogue Handbook is a single, curated page with everything you need to play a Rogue well in WoW Forever: talents, gear, rotation, poisons, consumables and raids. No digging through threads, spreadsheets and old forum posts, just what actually matters, kept current as the game changes.',
   support: {
-    before: 'Most of what you will find here comes from the ',
+    before: 'Most of it is sourced from the ',
     link: 'Rogue Classic Discord',
     after:
-      ', where the community tests, sims and argues about all things Rogue. Come say hi there with any questions about playing a Rogue, or with feedback on the Handbook itself.',
+      " and the WoWSims data the community has built, tested and argued over together. If you have questions, comments or feedback about anything here, ping The Comfy Wizard in the Discord. Corrections are always welcome.",
   },
-  ctaPrimary: 'Pick a spec →',
+  ctaPrimary: 'Pick your spec',
   ctaGhost: 'What Forever changes',
-  ladder: {
-    title: 'Spec Meta',
-    meta: 'patch X.Y',
-    footnote: 'WoW Forever is currently in Beta. This will be updated as we learn more.',
+  note: {
+    title: 'A note from Comfy',
+    body: [
+      "I'm a long time Rogue player, theorycrafter, and peaked during Rank 1 SoD parsing. When learning, I found it best to write it down and that's where this Handbook was born.",
+      "My goal is to take all the data out there and provide it to the Rogue community in a clean, easy to understand format to serve both the diehard and more casual players. See y'all in Azeroth!",
+    ],
+    sign: 'The Comfy Wizard',
   },
 } as const;
 
 export const specBar = {
-  label: 'ACTIVE SPEC',
+  label: 'Active spec',
   phoneLabel: 'Guidance for',
   sweatyOn: 'Sweaty tips on',
   sweatyOff: 'Sweaty tips off',
@@ -46,16 +49,12 @@ export const specBar = {
 /** Spec zone vs. all-Rogue zone framing, plus the scope chips on section headings. */
 export const scope = {
   specChipPrefix: 'Spec',
-  allChip: 'All specs',
   zone: {
     label: 'Your spec guide',
-    eyebrow: 'YOUR SPEC GUIDE',
-    body: 'Talents, gear and rotation below follow the spec you pick. Switch spec and these sections change with it.',
+    before: 'Talents, gear and rotation below are for ',
+    after: '. Switch spec and they change with it.',
   },
-  allZone: {
-    eyebrow: 'FOR EVERY ROGUE',
-    body: 'Everything from here down applies whatever spec you play.',
-  },
+  allZone: 'Everything from here down is the same for every Rogue.',
 } as const;
 
 /** Section headings. Nav labels are shorter — these are the on-page H2s. */
@@ -70,6 +69,7 @@ export const headings: Record<string, string> = {
   buffs: 'Buffs & debuffs',
   iea: 'Expose Armor',
   raid: 'Raids',
+  pvp: 'PvP',
   tools: 'Tools & UI',
   faq: 'FAQ',
   changelog: 'Changelog',
@@ -78,12 +78,14 @@ export const headings: Record<string, string> = {
 
 export const specBoard = {
   intro:
-    "Establishing a real meta takes two things that don't exist yet: confirmed research and data from Forever itself, and WoWSims tooling actually built for it. Until both are done, any ranking here would be a guess wearing a number. Once that work is finished, a meta will be established and shared here — thanks for your patience while we get there.",
+    "There's no meta yet, and I'd rather show nothing than a guess. Ranking specs honestly needs real data from Forever and WoWSims built for it, and neither exists yet.",
+  planned:
+    'Once they do, this is where the rankings go: single target and cleave at 60, plus questing and dungeons while leveling.',
   cols: { rank: 'RANK', index: 'INDEX · vs top' },
   tableLabel: 'Damage index by spec',
   pending: {
-    heading: 'No Forever sim data exists yet',
-    body: 'The beta opened September 17th and the game launches November 4th. Until sims and logs exist there is nothing honest to rank, so every spec stays unranked for now.',
+    heading: 'No Forever sim data yet',
+    body: 'The beta opened September 17th and the game launches November 4th. Until sims and logs exist there is nothing honest to rank.',
   },
   yourSpec: 'YOUR SPEC',
   subheadings: { endgame: 'Level 60', leveling: 'Leveling' },
@@ -91,84 +93,71 @@ export const specBoard = {
 
 export const forever = {
   intro:
-    'Only what Blizzard has officially said: news posts, panel recaps and blue posts, each entry linked to its source. What Blizzard has not published yet is marked as such, and community findings stay out until Blizzard confirms them.',
-  impactPrefix: 'What it means for you —',
-  sourcesLabel: 'Sources',
+    "Only what Blizzard has officially said, from news posts, panel recaps and blue posts, each linked to its source. Anything Blizzard hasn't published is marked as such, and community findings stay out until Blizzard confirms them.",
+  impactPrefix: 'What it means for you:',
+  sourcesLabel: 'Sources:',
   sourceLink: 'Source ↗',
 } as const;
 
 export const talents = {
   /** `{spec}` is replaced with the active spec name. */
-  intro:
-    'Showing {spec}. Some specs will carry more than one talent build, each tuned for a different niche. Switch between them with the build tabs.',
-  todoLabel: 'COMING SOON',
-  todo: 'Forever talent builds will be added here once the Forever Rogue trees are tested in the beta and sims are established. Blizzard has confirmed the trees keep a familiar shape with milestones at 11, 16, 21 and 31 points.',
+  intro: 'Builds for {spec}.',
   buildsLabel: 'Talent build',
-  buildsPending: 'Builds coming soon',
-  buildsPendingNote:
-    'Each spec can list several builds here, one per niche (raid single target, cleave, PvP and so on). Pick one to see its point split and key talents.',
   endgameTitle: 'Level 60 builds',
-  levelingTitle: 'Leveling builds',
-  levelingTag: 'LEVEL 30 BETA',
+  endgamePending:
+    "Not yet. The Forever trees aren't final, though Blizzard says they keep the familiar milestones at 11, 16, 21 and 31 points. I'll post level 60 builds once they've been tested.",
+  levelingTitle: 'Leveling build',
+  levelingTag: 'Level 30 beta',
   levelingNote:
-    "Made for the level 30 beta: a viable way to level within the cap, so pick the playstyle you enjoy. Full 1–60 leveling builds will follow once the game releases and the data settles.",
+    'Built for the level 30 beta cap. Any of the three specs levels fine, so play the one you enjoy. Full 1 to 60 builds come after launch.',
   levelingCta: 'View talent build',
-  levelingComingSoon: 'Coming Soon',
+  readMore: 'Read more',
+  readLess: 'Show less',
+  levelingComingSoon: 'Coming soon',
   /** Tree names are confirmed to carry over; the split is what is pending. */
   trees: ['Assassination', 'Combat', 'Subtlety'],
-  keyTalentsPending: 'Key talents will be listed here.',
   calculator: 'Open in talent calculator ↗',
-  tbd: 'TBD',
 } as const;
 
 export const poisonsCopy = {
   intro:
-    'Applied per weapon, consumed in charges, and the thing that separates a Rogue who prepared from one who turned up. Buy the reagents in bulk and stop apologising for the bank trips.',
-  foreverCallout: {
-    before: "Forever's unified Hit and Crit explicitly covers ",
-    strong: 'poisons',
-    after:
-      '. In Classic your poison applications sit outside your melee hit table; in Forever the same hit rating on your gear feeds them. Assassination is the spec most likely to feel that.',
-  },
-  apCallout: {
-    before: 'Poison damage also scales with ',
-    strong: 'Attack Power',
-    after:
-      ' in Forever — a welcome change from Classic. Every spec applying poisons benefits, but Assassination leans on it the most.',
-  },
+    "Poisons go on each weapon and wear off in charges. Buy the reagents in bulk so you aren't running to a vendor halfway through a dungeon.",
+  foreverTitle: 'What changes in Forever',
+  forever: [
+    {
+      before: 'Unified Hit and Crit now cover ',
+      strong: 'poisons',
+      after: ". In Classic your poisons ignored your melee hit; in Forever the hit on your gear feeds them too.",
+    },
+    {
+      before: 'Poison damage scales with ',
+      strong: 'Attack Power',
+      after: '. Every spec benefits, Assassination most of all.',
+    },
+  ],
 } as const;
 
 export const rotation = {
   intro:
-    "A priority list, top to bottom. If a line's conditions are met it fires and you start again from the top.",
+    "A priority list, top to bottom. If a line's conditions are met, press it and start again from the top.",
   /** `{spec}` is replaced with the active spec name. */
-  showing: '{spec} shown.',
-  todoLabel: 'COMING SOON',
-  todo: 'The {spec} priority list, opener and common mistakes will be added once real data is gathered and WoWSims APLs are established for Forever.',
-  pending: 'Coming soon',
-  aplPending: 'Priority list for this spec',
+  pending:
+    "I haven't written the {spec} priority list, opener or common mistakes yet. They go up once Forever has real logs and WoWSims APLs to check them against.",
   openerTitle: 'Opener',
-  openerPending: 'Opening sequence',
   neverTitle: 'Never do this',
-  neverPending: 'Common mistakes to avoid',
 } as const;
 
 export const gear = {
-  simsLink: 'Open in Forever WoWSims ↗',
-  todoLabel: 'IN PROGRESS',
-  todo: 'The Pre-raid BiS and Best in Slot lists will be built out over time as information is gathered and WoWSims APLs are solidified. They will be published once the research is done and there is enough solid data behind them to trust.',
+  status: {
+    label: 'Placeholder:',
+    text: "these are Classic Era picks and weights standing in for now. Forever reworks dungeon loot, so expect this to change as the beta opens up.",
+  },
   cols: { slot: 'SLOT', item: 'ITEM', source: 'SOURCE', enchant: 'ENCHANT' },
   tableLabel: 'Gear by slot',
   empty: 'No item set yet',
   leveling: {
-    todo: {
-      before: 'Stat weights and items are ',
-      strong: 'Classic Era placeholders',
-      after:
-        '. Forever re-itemizes dungeons, so this list will be rebuilt as the Beta is explored and sims are run.',
-    },
     statsTitle: 'Stat priority',
-    statsMeta: 'EP · Agility = 1',
+    statsMeta: 'Weights relative to Agility',
     epLabel: 'EP',
     itemsTitle: 'Leveling milestone gear',
     cols: { level: 'LEVEL', slot: 'SLOT', item: 'ITEM', source: 'SOURCE', faction: 'FACTION' },
@@ -183,27 +172,21 @@ export const gear = {
 } as const;
 
 export const consumablesCopy = {
-  intro: 'The full bag, Classic Era. Hover anything for what it does.',
+  intro: 'The full bag. Hover anything to see what it does.',
   sweatyNote: {
     strong: 'Droplets',
-    after: ' are the sweaty ones — these are probably not worth it for most players.',
+    after: " mark the sweaty ones, which most players can skip.",
   },
-  todoLabel: 'PLACEHOLDER',
-  todo: {
-    before: 'This list is ',
-    strong: 'Classic Era data, standing in until Forever consumables are known',
-    after:
-      '. Blizzard has confirmed reagents and effects are being reviewed, so expect additions, removals and rebalances. It will be replaced once the Forever list is available and validated.',
+  status: {
+    label: 'Placeholder:',
+    text: "this is the Classic Era list. Blizzard is reviewing reagents and effects for Forever, so expect additions, removals and rebalances. I'll swap it out once the Forever list is known.",
   },
 } as const;
 
 export const buffsCopy = {
-  todoLabel: 'PLACEHOLDER',
-  todo: {
-    before: 'Buff and debuff values shown here are ',
-    strong: 'Classic Era baselines',
-    after:
-      '. Final balancing and stack/overlap rules for Forever are still TBD, so this list will be updated once they are confirmed and sims have been run against them.',
+  status: {
+    label: 'Placeholder:',
+    text: "these are Classic Era baselines. Forever's balancing and stacking rules aren't settled, so I'll update this once they are and the sims have run.",
   },
 } as const;
 
@@ -214,10 +197,10 @@ export const exposeArmor = {
     strong: 'raid comp and who executes it more reliably',
     after: ', not which class happens to own the ability.',
   },
-  p2: 'A fully talented 5-point Expose Armor used to beat five stacks of Sunder outright, which is why it defaulted to the Rogue. In Forever the two are tied — the Rogue talent no longer grants extra armor reduction beyond what Sunder already provides. The debuffs still do not stack, so the raid picks whichever player holds it more consistently, or if performance of one outweighs the other.',
+  p2: 'A fully talented 5-point Expose Armor used to beat five stacks of Sunder outright, which is why it defaulted to the Rogue. In Forever the two are tied: the Rogue talent no longer grants extra armor reduction beyond what Sunder already provides. The debuffs still do not stack, so the raid picks whichever player holds it more consistently, or if performance of one outweighs the other.',
   stats: [
-    { val: '2,550', label: 'Expose Armor at 5CP', tone: 'accent' },
-    { val: '2,550', label: 'Sunder Armor at 5 stacks', tone: 'accent' },
+    { val: '2,550', label: 'Expose Armor, 5 combo points', icon: 'Expose Armor' },
+    { val: '2,550', label: 'Sunder Armor, 5 stacks', icon: 'Sunder Armor' },
   ],
   stepsTitle: 'If it lands on you, the job is the same',
   steps: [
@@ -236,8 +219,15 @@ export const exposeArmor = {
 
 export const raidsCopy = {
   intro:
-    "The three raids Blizzard has confirmed for Forever so far. Boss lists and Rogue notes aren't published yet — this tracks exactly what has and hasn't been said. Tap a raid to open it.",
-  prepLabel: 'Status',
+    "The three raids Blizzard has confirmed for Forever so far. Boss lists and Rogue notes aren't out yet, so this only tracks what has actually been said.",
+  prepLabel: 'Status:',
+} as const;
+
+export const pvpCopy = {
+  body: [
+    "This isn't a full PvP guide. Plenty of Rogues in the community know PvP far better than I do, and they're the ones worth learning it from.",
+    "Over time I'll add the basics here and link out to the more detailed resources and people who really know their stuff.",
+  ],
 } as const;
 
 export const toolsCopy = {
@@ -314,11 +304,10 @@ export const theme = {
 
 export const credits = {
   community: {
-    eyebrow: 'COMMUNITY',
     title: 'Rogue Classic Discord',
     body: [
-      'Much of what you read in this Handbook is credited to the Rogue Classic Discord. The community there tests, sims, logs and debates every corner of the class, and this guide is built on that collective work.',
-      'Taking part is what keeps the Handbook honest. Feedback in the Discord catches mistakes, puts guidance through real testing, and makes sure the guide keeps serving the community as well as it can. Questions, corrections and fresh findings are all welcome.',
+      "Most of what's in this Handbook comes from the Rogue Classic Discord. The people there test, sim, log and argue about every corner of the class, and this guide stands on that work.",
+      "It's also what keeps the guide honest. Feedback there catches mistakes and gets advice properly tested before it lands here. Questions, corrections and new findings are all welcome.",
     ],
     cta: 'Join the Discord',
   },
@@ -379,21 +368,16 @@ export const socialMeta = {
 export const footer = {
   brand: 'Rogue Handbook',
   closing: {
-    before: 'The Rogue Handbook is curated by ',
+    before: 'Curated by ',
     curator: 'The Comfy Wizard',
     after:
-      ', built on the collective hard work of the Rogue Classic community. Thank you to everyone who contributes. Here is to the WoW Forever journey together, representing Rogues across Azeroth.',
+      ', built on the hard work of the Rogue Classic community. Thank you to everyone who contributes. Here is to the WoW Forever journey together, representing Rogues across Azeroth.',
   },
   tip: {
-    before: " If you'd like to contribute to operational costs, feel free to ",
+    before: " If you'd like to help with running costs, feel free to ",
     link: 'send a tip',
-    after: '!',
+    after: '.',
   },
-  shortcutsLabel: 'SHORTCUTS',
-  shortcuts: [
-    { key: '⌘K', what: 'Search' },
-    { key: 'ESC', what: 'Close modal' },
-  ],
 } as const;
 
-export const tooltipFallback = 'No note yet — add one and it shows up here.';
+export const tooltipFallback = 'No note yet.';

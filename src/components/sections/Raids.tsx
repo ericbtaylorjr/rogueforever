@@ -2,7 +2,6 @@ import { raids } from '../../content/content';
 import { raidsCopy as copy } from '../../content/copy';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
-import { Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 
 export function Raids() {
@@ -65,7 +64,7 @@ export function Raids() {
                       >
                         {r.name}
                       </span>
-                      <Tag>{r.tag}</Tag>
+                      <span className="text-[12px] text-faint">{r.tag}</span>
                     </span>
                     <span className="mt-[4px] block text-[12px] leading-[1.5] text-faint">
                       {r.summary}
@@ -91,9 +90,7 @@ export function Raids() {
                   <div className="mt-[14px] grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,268px),1fr))]">
                     {r.phases.map((p) => (
                       <div key={p.n} className="panel-inner p-[15px]">
-                        <span className="t-eyebrow text-[9.5px] tracking-[.14em] text-accent">
-                          {p.n}
-                        </span>
+                        <h4 className="text-[13px] font-semibold text-ink">{p.n}</h4>
                         <ul className="mt-[10px] flex flex-col gap-[8px]">
                           {p.lines.map((l) => (
                             <li

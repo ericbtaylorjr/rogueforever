@@ -31,12 +31,13 @@ export function SpecZone({ children }: { children: ReactNode }) {
           background: `linear-gradient(180deg, ${c.mark}, ${c.line} 85%, transparent)`,
         }}
       />
-      <div className="mb-[8px]">
-        <div className="t-eyebrow text-[9.5px] tracking-[.18em]" style={{ color: c.text }}>
-          {scope.zone.eyebrow}
-        </div>
-        <p className="mt-[7px] max-w-[70ch] text-[13px] leading-[1.6] text-mute">{scope.zone.body}</p>
-      </div>
+      <p className="mb-[6px] max-w-[70ch] text-[13.5px] leading-[1.6] text-mute">
+        {scope.zone.before}
+        <strong className="font-semibold" style={{ color: c.text }}>
+          {c.spec.name}
+        </strong>
+        {scope.zone.after}
+      </p>
       <SpecBar />
       {/* Plain (accent) divider: it closes the zone header, it isn't a break between spec sections. */}
       <Divider plain />
@@ -47,10 +48,5 @@ export function SpecZone({ children }: { children: ReactNode }) {
 
 /** Marks the hand-off from spec guidance to content that's the same for every Rogue. */
 export function AllRoguesBanner() {
-  return (
-    <div className="flex flex-wrap items-baseline gap-x-[10px] gap-y-[4px] mb-[34px] rounded-[12px] border border-line px-[16px] py-[12px]">
-      <span className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">{scope.allZone.eyebrow}</span>
-      <span className="text-[12.5px] leading-[1.55] text-mute">{scope.allZone.body}</span>
-    </div>
-  );
+  return <p className="mb-[30px] max-w-[70ch] text-[13.5px] leading-[1.6] text-mute">{scope.allZone}</p>;
 }
