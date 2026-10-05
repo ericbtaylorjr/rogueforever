@@ -7,14 +7,14 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { readableOnLight } from '../lib/tone';
+import { readableOnDark, readableOnLight } from '../lib/tone';
 
 export type Theme = 'light' | 'dark';
 
 interface ThemeState {
   theme: Theme;
   toggleTheme: () => void;
-  /** Content colour → a version that's legible in the current theme (identity in dark). */
+  /** Content colour → a version that's legible in the current theme. */
   tone: (hex: string, min?: number) => string;
 }
 
@@ -34,7 +34,7 @@ function readStored(): Theme | null {
   }
 }
 
-/** Device setting, defaulting to dark when it can't tell us. Mirrors public/theme-init.js. */
+/** Device setting, defaulting to dark when it can't tell us. Mirrors src/theme-init.js. */
 function deviceTheme(): Theme {
   try {
     return window.matchMedia(LIGHT_QUERY).matches ? 'light' : 'dark';
@@ -88,7 +88,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     () => ({
       theme,
       toggleTheme,
-      tone: (hex, min) => (theme === 'light' ? readableOnLight(hex, min) : hex),
+      tone: (hex, min) => (theme === 'light' ? readableOnLight(hex, min) : readableOnDark(hex, min)),
     }),
     [theme, toggleTheme],
   );

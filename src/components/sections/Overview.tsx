@@ -1,4 +1,4 @@
-import logo from '../../assets/logo-comfy-wizard.png';
+import logo from '../../assets/logo-comfy-wizard.webp';
 import { hero } from '../../content/copy';
 import { links } from '../../content/links';
 import { useHandbook } from '../../state/HandbookProvider';

@@ -80,8 +80,10 @@ authored them in markup.
 
 ## Accessibility
 
-Target: WCAG 2.2 AA. Last audited with axe-core (0 violations at 1440px and 390px,
-including the palette and drawer open) plus a manual keyboard pass.
+Target: WCAG 2.2 AA. Last audited October 2026 with axe-core 4 (0 violations at 1440px and
+390px, dark and light, with the palette, drawer, profile modal, an open FAQ and an expanded
+leveling build), a 160-stop keyboard walk (every stop shows a focus ring) and Lighthouse
+(Accessibility 100).
 
 Covered: skip link and `<main>` landmark; nav jumps move keyboard focus to the target
 section and respect `prefers-reduced-motion`; tabs use roving tabindex with
@@ -90,17 +92,35 @@ tooltips are dismissible (Esc), hoverable, and only set `aria-describedby` while
 (WCAG 1.4.13); focus is kept clear of the sticky bars (`scroll-padding-top`); the Gear
 table has table semantics and its scroll region is keyboard-reachable; copy buttons have
 unique names and announce success; no bare-key shortcuts (WCAG 2.1.4 — only Ctrl/⌘+K);
-text meets 4.5:1 (`--dim` is deliberately light — don't darken it back).
+text meets 4.5:1 (`--dim` is deliberately light — don't darken it back). Content colours go
+through `useTheme().tone()` in both themes: on parchment it darkens them, on dark it lightens
+the few that fall short (WoW's rare blue and epic purple), so item names always clear 4.5:1.
 
-Known / accepted: the looping decorative animations (bar shimmer, poison drips, pulsing
-dots) have no pause control beyond `prefers-reduced-motion` (WCAG 2.2.2). Not done yet:
+Known / accepted: the hero's looping poison drips have no pause control beyond
+`prefers-reduced-motion` (WCAG 2.2.2). Not done yet:
 arrow-key navigation between FAQ/raid accordion headers (not required by WCAG).
+
+## Performance
+
+Last measured October 2026 with Lighthouse 12 against the production build: desktop
+Performance 100 (LCP 0.7s, CLS 0), throttled mobile 96–99 (LCP 2.0–2.7s, TBT ≤40ms), about
+380 KiB transferred. Keep it that way:
+
+- **Size images for their display size.** Images are WebP at about 3× their CSS size
+  (crisp on high-density phones). Don't ship source art; `sharp` is a dev dependency
+  for resizing.
+- **Game icons** load lazily from `public/icons/` (~1–3 KB each).
+- **The theme script is inlined** at build (see Security), so first paint waits only on the
+  one small stylesheet.
+- The remaining Lighthouse notes (unused JS in the single bundle, ~1,100 DOM nodes) are
+  expected for a one-page app this size. Pre-rendering the HTML at build is the next lever
+  if mobile LCP ever needs to drop further.
 
 ## Theming
 
 Dark is the default; light is a papyrus "bounty letter". Which one you get: a choice made
 with the sidebar toggle (`localStorage['rc:theme']`) → the device's `prefers-color-scheme`
-(followed live until the toggle is used) → dark. `public/theme-init.js` resolves this before
+(followed live until the toggle is used) → dark. `src/theme-init.js` (inlined into `index.html` at build, allowed by its CSP hash) resolves this before
 first paint (no flash) and `src/state/ThemeProvider.tsx` owns it afterwards; both write
 `data-theme` on `<html>`. Note browsers report "light" for a device with *no* preference, so
 "unset" can't be told apart from "light" — that's a platform limit, not a bug.
@@ -123,8 +143,10 @@ Static site, no backend, no user input beyond a search box, no `dangerouslySetIn
 no third-party scripts, no runtime network requests. `npm audit` is clean.
 
 - **CSP** ships as a `<meta>` tag injected at build time (`vite.config.ts`); everything is
-  first-party, including fonts (`src/assets/fonts`, OFL). `style-src` needs
-  `'unsafe-inline'` for the design's inline styles; `script-src` does not.
+  first-party, including fonts (`src/assets/fonts`, OFL) and game icons. `style-src` needs
+  `'unsafe-inline'` for the design's inline styles; `script-src` does not. The one inline
+  script (the pre-paint theme script) is allowed by its exact SHA-256 hash, computed from
+  `src/theme-init.js` at build, so any other inline script is still refused.
 - **Limits of GitHub Pages:** it can't set response headers, so `frame-ancestors`
   (clickjacking), HSTS and `X-Content-Type-Options` aren't available. If the site moves
   behind Cloudflare/Netlify, set them there.

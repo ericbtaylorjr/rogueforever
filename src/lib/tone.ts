@@ -2,7 +2,9 @@
  * Content colours (spec hues, poison hues, item qualities…) are authored for the dark
  * theme: bright pastels that vanish on parchment. `readable()` keeps a colour's hue but
  * darkens it until it clears `min`:1 against the worst-case light surface, so a spec still
- * "looks like" its colour and text/bars stay legible. Dark theme passes colours through.
+ * "looks like" its colour and text/bars stay legible. `readableOnDark()` is the mirror for
+ * the dark theme: it only lightens the few authored colours that fall short (WoW's rare blue
+ * and epic purple), so most colours pass through untouched.
  */
 
 /**
@@ -10,6 +12,9 @@
  * see styles/index.css) and panel2. Panels are lighter, so they pass whenever these do.
  */
 const LIGHT_SURFACES = ['#cbb386', '#eee1b9'];
+
+/** Lightest dark-theme surface text sits on, across all intensities (subtle panel2). */
+const DARK_SURFACES = ['#1e1e26'];
 
 const toRgb = (hex: string): [number, number, number] => {
   const h = hex.replace('#', '');
@@ -86,6 +91,26 @@ export function readableOnLight(hex: string, min = 4.5): string {
     const hue = s0 < 0.08 ? 30 : h;
     for (let l = l0; l >= 0; l -= 0.01) {
       out = hslToHex(hue, s, l);
+      if (ok(out)) break;
+    }
+  }
+  cache.set(key, out);
+  return out;
+}
+
+/** Lighten `hex` (keeping its hue) until it reaches `min`:1 on every dark surface. */
+export function readableOnDark(hex: string, min = 4.5): string {
+  if (!/^#[0-9a-f]{3,6}$/i.test(hex)) return hex;
+  const key = `dark|${hex}|${min}`;
+  const hit = cache.get(key);
+  if (hit) return hit;
+
+  const ok = (c: string) => DARK_SURFACES.every((bg) => contrast(c, bg) >= min);
+  let out = hex;
+  if (!ok(hex)) {
+    const [h, s, l0] = rgbToHsl(toRgb(hex));
+    for (let l = l0; l <= 1; l += 0.01) {
+      out = hslToHex(h, s, l);
       if (ok(out)) break;
     }
   }

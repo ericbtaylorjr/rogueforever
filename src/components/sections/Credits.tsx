@@ -1,4 +1,4 @@
-import logo from '../../assets/logo-comfy-wizard.png';
+import logo from '../../assets/logo-comfy-wizard.webp';
 import { contributors, credits as copy, socialMeta } from '../../content/copy';
 import { isPlaceholder, links } from '../../content/links';
 import { MailIcon, PhoneIcon, TvIcon, VideoIcon } from '../ui/SocialIcons';

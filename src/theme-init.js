@@ -1,5 +1,5 @@
 /*
- * Runs before first paint (blocking, first-party so the CSP allows it) so the page never
+ * Runs before first paint (inlined into index.html at build and allowed by its CSP hash) so the page never
  * flashes the wrong theme. Order of precedence: a choice the visitor made with the toggle,
  * then the device setting, then dark. Keep the logic in sync with src/state/ThemeProvider.tsx.
  */

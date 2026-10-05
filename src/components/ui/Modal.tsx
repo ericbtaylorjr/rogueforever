@@ -60,7 +60,8 @@ export function Modal({
             <button
               type="button"
               onClick={onClose}
-              aria-label={closeLabel}
+              // Includes the visible "Esc" so speech-control users can say what they see (WCAG 2.5.3).
+              aria-label={`Esc, ${closeLabel.toLowerCase()}`}
               className="key-chip t-num transition-colors hover:text-mute"
             >
               ESC

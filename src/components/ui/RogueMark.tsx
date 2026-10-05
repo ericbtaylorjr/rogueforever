@@ -1,4 +1,4 @@
-import logo from '../../assets/icon-rogue.png';
+import logo from '../../assets/icon-rogue.webp';
 
 export function RogueMark({ size = 30 }: { size?: number }) {
   return (

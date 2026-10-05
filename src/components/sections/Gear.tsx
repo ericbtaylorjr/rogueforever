@@ -93,10 +93,11 @@ function StatPriorityPanel() {
         <span className="text-[12px] text-faint">{copy.leveling.statsMeta}</span>
       </div>
 
-      <p
-        className="mt-[14px] flex flex-wrap items-baseline gap-x-[10px] gap-y-[4px] text-[19px] font-bold leading-tight"
-        aria-label={stats.map((st) => `${st.op ? `${st.op === '>' ? 'then' : 'equal to'} ` : ''}${st.stat}`).join(' ')}
-      >
+      <p className="mt-[14px] flex flex-wrap items-baseline gap-x-[10px] gap-y-[4px] text-[19px] font-bold leading-tight">
+        {/* Screen readers get the priority as words; the symbols below are visual only. */}
+        <span className="sr-only">
+          {stats.map((st) => `${st.op ? `${st.op === '>' ? 'then' : 'equal to'} ` : ''}${st.stat}`).join(' ')}
+        </span>
         {stats.map((st, i) => (
           <span key={st.stat} aria-hidden="true" className="flex items-baseline gap-[10px]">
             {st.op && <span className="t-num text-[15px] text-faint">{st.op}</span>}
