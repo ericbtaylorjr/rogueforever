@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { config } from '../../config';
-import { foreverOutlook, specById, specIndex } from '../../content/content';
+import { foreverOutlook, levelingIndex, specById, specIndex } from '../../content/content';
 import { specBoard } from '../../content/copy';
-import type { SimSetId, SpecId } from '../../content/types';
+import type { LevelingSetId, SimSetId, SpecId } from '../../content/types';
 import { hexA } from '../../lib/color';
 import { useHandbook, type SortKey } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
@@ -301,6 +301,42 @@ function ForeverPending() {
   );
 }
 
+function SubHeading({ children }: { children: string }) {
+  return <h3 className="t-card-title mt-[26px] text-ink">{children}</h3>;
+}
+
+/** Leveling meta: placeholder tabs until there is data to rank. */
+function LevelingMeta() {
+  const [set, setSet] = useState<LevelingSetId>('questing');
+  const current = levelingIndex[set];
+
+  const tabs = (Object.keys(levelingIndex) as LevelingSetId[]).map((k) => ({
+    id: k,
+    label: levelingIndex[k].label,
+  }));
+
+  return (
+    <>
+      <SubHeading>{specBoard.subheadings.leveling}</SubHeading>
+
+      <div className="mt-[14px]">
+        <SegmentedTabs
+          tabs={tabs}
+          value={set}
+          onChange={(id) => setSet(id as LevelingSetId)}
+          label="Leveling meta view"
+        />
+      </div>
+
+      <p className="t-eyebrow mt-[12px] text-[10.5px] tracking-[.14em] text-faint">{current.note}</p>
+
+      <div id={`panel-${set}`} role="tabpanel" aria-labelledby={`tab-${set}`} className="mt-[14px]">
+        <ForeverPending />
+      </div>
+    </>
+  );
+}
+
 export function SpecBoard() {
   const { simSet, setSimSet } = useHandbook();
   const rows = useRows(simSet);
@@ -312,12 +348,14 @@ export function SpecBoard() {
   }));
 
   return (
-    <section id="specs" aria-label="Spec board" className="pt-[44px]">
+    <section id="specs" aria-label="Meta breakdown" className="pt-[44px]">
       <SectionHeading id="specs" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{specBoard.intro}</p>
 
-      <div className="mt-[18px]">
+      <SubHeading>{specBoard.subheadings.endgame}</SubHeading>
+
+      <div className="mt-[14px]">
         <SegmentedTabs
           tabs={tabs}
           value={simSet}
@@ -339,6 +377,8 @@ export function SpecBoard() {
           <BarsView rows={rows} simSet={simSet} />
         )}
       </div>
+
+      <LevelingMeta />
     </section>
   );
 }

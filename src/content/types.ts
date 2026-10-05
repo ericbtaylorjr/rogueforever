@@ -58,6 +58,7 @@ export interface SpecDetail {
 }
 
 export type SimSetId = 'st' | 'cleave' | 'forever';
+export type LevelingSetId = 'questing' | 'dungeons' | 'levelingSummary';
 
 export interface SimSet {
   label: string;
@@ -236,6 +237,7 @@ export interface Content {
   specs: Spec[];
   specDetail: Record<SpecId, SpecDetail>;
   specIndex: Record<SimSetId, SimSet>;
+  levelingIndex: Record<LevelingSetId, SimSet>;
   foreverOutlook: ForeverOutlook[];
   foreverDates: ForeverDate[];
   foreverChanges: ForeverChange[];

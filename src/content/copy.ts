@@ -69,6 +69,7 @@ export const specBoard = {
     body: 'The beta opened September 17th and the game launches November 4th. Until sims and logs exist there is nothing honest to rank, so every spec stays unranked for now.',
   },
   yourSpec: 'ACTIVE SPEC',
+  subheadings: { endgame: 'Level 60', leveling: 'Leveling' },
 } as const;
 
 export const forever = {

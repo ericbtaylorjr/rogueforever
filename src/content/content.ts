@@ -11,6 +11,7 @@ export const {
   specs,
   specDetail,
   specIndex,
+  levelingIndex,
   foreverOutlook,
   foreverDates,
   foreverChanges,

@@ -73,6 +73,23 @@
       "pending": true
     }
   },
+  "levelingIndex": {
+    "questing": {
+      "label": "Questing",
+      "note": "NO FOREVER SIM OR LOG DATA YET",
+      "pending": true
+    },
+    "dungeons": {
+      "label": "Dungeons",
+      "note": "NO FOREVER SIM OR LOG DATA YET",
+      "pending": true
+    },
+    "levelingSummary": {
+      "label": "Summary",
+      "note": "BETA 17 SEP · LAUNCH 4 NOV · NO SIM OR LOG DATA EXISTS YET",
+      "pending": true
+    }
+  },
   "foreverOutlook": [],
   "foreverDates": [
     {
@@ -872,7 +889,7 @@
         },
         {
           "id": "specs",
-          "label": "Spec board"
+          "label": "Meta breakdown"
         }
       ]
     },

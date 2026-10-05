@@ -46,7 +46,7 @@ export const searchIndex: SearchEntry[] = [
   })),
   ...faqs.map((f) => ({ kind: 'FAQ', label: f.q, id: 'faq', section: 'FAQ' })),
   ...macros.map((m) => ({ kind: 'Macro', label: m.name, id: 'tools', section: 'Tools' })),
-  ...specs.map((s) => ({ kind: 'Spec', label: s.name, id: 'specs', section: 'Spec board' })),
+  ...specs.map((s) => ({ kind: 'Spec', label: s.name, id: 'specs', section: 'Meta breakdown' })),
 ];
 
 const EMPTY_QUERY_RESULTS = 9;
