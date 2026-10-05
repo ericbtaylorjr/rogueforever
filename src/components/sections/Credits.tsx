@@ -92,7 +92,8 @@ function ContributorCard({ c }: { c: Contributor }) {
         {c.socials.map((s) => {
           const Icon = socialIcon[s.kind];
           const name = socialMeta[s.kind].name;
-          const label = `${c.name} on ${name}`;
+          // Email reads better as the address itself than "X on Email".
+          const label = s.href.startsWith('mailto:') ? `Email ${s.href.slice('mailto:'.length)}` : `${c.name} on ${name}`;
           return isPlaceholder(s.href) ? (
             <span
               key={s.kind}

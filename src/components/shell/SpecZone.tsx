@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { scope } from '../../content/copy';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useSpecColor } from '../../state/useSpecColor';
+import { Divider } from '../ui/Divider';
 import { SpecBar } from './SpecBar';
 
 /**
@@ -24,20 +25,22 @@ export function SpecZone({ children }: { children: ReactNode }) {
     >
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[40px] top-[64px] w-[2px] rounded-full transition-colors"
+        className="pointer-events-none absolute bottom-[40px] top-[4px] w-[2px] rounded-full transition-colors"
         style={{
           left: gutter,
           background: `linear-gradient(180deg, ${c.mark}, ${c.line} 85%, transparent)`,
         }}
       />
-      <SpecBar />
-      <p className="mb-[6px] mt-[14px] max-w-[70ch] text-[12.5px] leading-[1.55] text-mute">
-        <span className="t-eyebrow mr-[8px] text-[9.5px] tracking-[.18em]" style={{ color: c.text }}>
+      <div className="mb-[8px]">
+        <div className="t-eyebrow text-[9.5px] tracking-[.18em]" style={{ color: c.text }}>
           {scope.zone.eyebrow}
-        </span>
-        {scope.zone.body}
-      </p>
-      <div className="pt-[30px]">{children}</div>
+        </div>
+        <p className="mt-[7px] max-w-[70ch] text-[13px] leading-[1.6] text-mute">{scope.zone.body}</p>
+      </div>
+      <SpecBar />
+      {/* Plain (accent) divider: it closes the zone header, it isn't a break between spec sections. */}
+      <Divider plain />
+      {children}
     </div>
   );
 }

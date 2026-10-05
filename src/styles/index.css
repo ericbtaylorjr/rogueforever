@@ -492,7 +492,7 @@
     background: var(--line);
   }
   /* Inside the spec zone the slash takes the active spec's colour. */
-  .spec-zone .divider::after {
+  .spec-zone .divider:not(.divider-plain)::after {
     background: var(--spec-mark);
   }
   .divider::after {
