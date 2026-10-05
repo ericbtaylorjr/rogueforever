@@ -1,11 +1,11 @@
 import { specBar } from '../../content/copy';
 import { specs } from '../../content/content';
-import type { SpecId } from '../../content/types';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { useSpecColor } from '../../state/useSpecColor';
 import { hexA } from '../../lib/color';
 import { Droplet } from '../ui/Droplet';
+import { SpecSelect } from '../ui/SpecSelect';
 
 /** Sticky inside the spec zone. Owns the spec picker and the sweaty-tips toggle. */
 export function SpecBar() {
@@ -29,37 +29,7 @@ export function SpecBar() {
         }}
       >
         {isPhone ? (
-          <div className="relative min-w-0 flex-1">
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute left-[13px] top-1/2 size-[7px] shrink-0 -translate-y-1/2 rounded-full"
-              style={{ background: c.mark }}
-            />
-            <select
-              aria-label={specBar.label}
-              value={spec}
-              onChange={(e) => setSpec(e.target.value as SpecId)}
-              className="w-full appearance-none rounded-[20px] border bg-transparent py-[10px] pl-[27px] pr-[30px] text-[13px] font-semibold"
-              style={{
-                borderColor: c.line,
-                background: c.soft,
-                color: c.text,
-              }}
-            >
-              {specs.map((s) => (
-                <option key={s.id} value={s.id} style={{ color: '#0B0B0D' }}>
-                  {s.name}
-                </option>
-              ))}
-            </select>
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute right-[12px] top-1/2 -translate-y-1/2 text-[9px]"
-              style={{ color: c.text }}
-            >
-              ▾
-            </span>
-          </div>
+          <SpecSelect />
         ) : (
           <>
             <span className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">

@@ -56,7 +56,6 @@ export const scope = {
     eyebrow: 'FOR EVERY ROGUE',
     body: 'Everything from here down applies whatever spec you play.',
   },
-  navSwitch: 'Switch spec',
 } as const;
 
 /** Section headings. Nav labels are shorter — these are the on-page H2s. */

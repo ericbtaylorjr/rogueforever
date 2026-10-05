@@ -1,49 +1,12 @@
-import { nav, specs } from '../../content/content';
-import { scope } from '../../content/copy';
+import { nav } from '../../content/content';
 import type { NavGroup } from '../../content/types';
 import { useHandbook } from '../../state/HandbookProvider';
-import { useTheme } from '../../state/ThemeProvider';
 import { useSpecColor } from '../../state/useSpecColor';
-
-/** Compact spec switcher for the spec group header: one dot per spec. */
-function SpecDots({ touch }: { touch: boolean }) {
-  const { spec, setSpec } = useHandbook();
-  const { tone } = useTheme();
-  return (
-    <div role="group" aria-label={scope.navSwitch} className="ml-auto flex gap-[2px]">
-      {specs.map((s) => {
-        const on = s.id === spec;
-        return (
-          <button
-            key={s.id}
-            type="button"
-            aria-label={s.name}
-            aria-pressed={on}
-            title={s.name}
-            onClick={() => setSpec(s.id)}
-            className={`grid place-items-center rounded-full ${touch ? 'size-[36px]' : 'size-[22px]'}`}
-          >
-            <span
-              aria-hidden="true"
-              className="rounded-full transition-all"
-              style={{
-                width: on ? 10 : 7,
-                height: on ? 10 : 7,
-                background: tone(s.color, 3),
-                opacity: on ? 1 : 0.45,
-                boxShadow: on ? `0 0 0 2px var(--bg), 0 0 0 3px ${tone(s.color, 3)}` : undefined,
-              }}
-            />
-          </button>
-        );
-      })}
-    </div>
-  );
-}
+import { SpecSelect } from '../ui/SpecSelect';
 
 /**
  * Grouped section nav. `size="touch"` is the drawer variant — bigger targets.
- * The spec-scoped group is labelled with the active spec and drawn in its colour.
+ * The spec-scoped group opens with the spec dropdown, and its items are drawn in the spec's colour.
  * Note: item counts were removed in a later design revision. Don't add them back.
  */
 export function NavList({ size = 'rail' }: { size?: 'rail' | 'touch' }) {
@@ -53,18 +16,9 @@ export function NavList({ size = 'rail' }: { size?: 'rail' | 'touch' }) {
 
   const header = (group: NavGroup) =>
     group.scope === 'spec' ? (
-      <div className="mb-[6px] pl-[8px]">
-        <div className="flex items-center">
-          <span className="t-eyebrow text-[9px] tracking-[.2em] text-faint">{group.label}</span>
-          <SpecDots touch={touch} />
-        </div>
-        <div
-          className={`flex items-center gap-[7px] font-semibold ${touch ? 'text-[14px]' : 'text-[12.5px]'}`}
-          style={{ color: c.text }}
-        >
-          <span aria-hidden="true" className="size-[7px] rounded-full" style={{ background: c.mark }} />
-          {c.spec.name}
-        </div>
+      <div className="mb-[8px] px-[8px]">
+        <div className="t-eyebrow mb-[7px] text-[9px] tracking-[.2em] text-faint">{group.label}</div>
+        <SpecSelect size={touch ? 'touch' : 'rail'} />
       </div>
     ) : (
       <div className="t-eyebrow mb-[7px] px-[8px] text-[9px] tracking-[.2em] text-faint">{group.label}</div>
