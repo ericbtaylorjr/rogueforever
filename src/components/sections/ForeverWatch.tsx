@@ -86,15 +86,7 @@ export function ForeverWatch() {
             }}
           >
             <div className="flex flex-wrap items-center gap-[10px]">
-              <h3
-                className="text-ink"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 800,
-                  fontStretch: '84%',
-                  fontSize: 15.5,
-                }}
-              >
+              <h3 className="t-card-sub text-ink">
                 {c.title}
               </h3>
               <span className="rounded-[4px] px-[7px] py-[1px] text-[11.5px] font-semibold" style={statusStyle[c.status]}>

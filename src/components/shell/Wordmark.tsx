@@ -10,7 +10,7 @@ export function Wordmark({ size = 30 }: { size?: number }) {
         <div
           className="text-ink"
           style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--font-brand)',
             fontWeight: 900,
             fontStretch: '72%',
             fontSize: 16,

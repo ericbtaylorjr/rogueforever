@@ -39,7 +39,7 @@ export function Raids() {
                     className="grid size-[42px] shrink-0 place-items-center rounded-[10px]"
                     style={{
                       background: `linear-gradient(140deg, ${r.hue}, var(--hue-end))`,
-                      fontFamily: 'var(--font-display)',
+                      fontFamily: 'var(--font-brand)',
                       fontWeight: 900,
                       fontStretch: '80%',
                       fontSize: 13,
@@ -51,19 +51,7 @@ export function Raids() {
 
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-center gap-[10px]">
-                      <span
-                        className="text-ink"
-                        style={{
-                          fontFamily: 'var(--font-display)',
-                          fontWeight: 900,
-                          fontStretch: '76%',
-                          fontSize: 22,
-                          lineHeight: 1.05,
-                          textTransform: 'uppercase',
-                        }}
-                      >
-                        {r.name}
-                      </span>
+                      <span className="t-card-title text-ink">{r.name}</span>
                       <span className="text-[12px] text-faint">{r.tag}</span>
                     </span>
                     <span className="mt-[4px] block text-[12px] leading-[1.5] text-faint">

@@ -59,7 +59,7 @@ export const scope = {
 
 /** Section headings. Nav labels are shorter — these are the on-page H2s. */
 export const headings: Record<string, string> = {
-  specs: 'Meta Breakdown',
+  specs: 'Meta breakdown',
   forever: 'Forever watch',
   talents: 'Talents',
   poisons: 'The poison rack',

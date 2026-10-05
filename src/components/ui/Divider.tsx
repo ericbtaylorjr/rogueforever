@@ -1,4 +1,7 @@
-/** Dagger-slash rule between sections. `plain` keeps the accent colour inside the spec zone. */
-export function Divider({ plain = false }: { plain?: boolean }) {
-  return <div className={plain ? 'divider divider-plain' : 'divider'} role="presentation" />;
+/**
+ * Dagger-slash rule between sections. Accent coloured on shared content; inside the
+ * spec zone it takes the active spec's colour (see .spec-zone in styles/index.css).
+ */
+export function Divider() {
+  return <div className="divider" role="presentation" />;
 }

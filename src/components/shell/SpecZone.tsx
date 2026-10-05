@@ -39,8 +39,7 @@ export function SpecZone({ children }: { children: ReactNode }) {
         {scope.zone.after}
       </p>
       <SpecBar />
-      {/* Plain (accent) divider: it closes the zone header, it isn't a break between spec sections. */}
-      <Divider plain />
+      <Divider />
       {children}
     </div>
   );

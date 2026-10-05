@@ -22,6 +22,25 @@ const inlineThemeInit = (): Plugin => ({
 });
 
 /**
+ * Preload the fonts the first screen paints with (hero title + intro text), so the largest
+ * paint doesn't wait for the stylesheet to discover them. Filenames are hashed, hence a plugin.
+ */
+const PRELOAD_FONTS = ['archivo-var-latin', 'alegreya-sans-400-latin'];
+
+const preloadFonts = (): Plugin => ({
+  name: 'preload-fonts',
+  apply: 'build',
+  transformIndexHtml: (_html, ctx) =>
+    Object.keys(ctx.bundle ?? {})
+      .filter((file) => file.endsWith('.woff2') && PRELOAD_FONTS.some((f) => file.includes(`/${f}-`)))
+      .map((file) => ({
+        tag: 'link',
+        attrs: { rel: 'preload', href: `/${file}`, as: 'font', type: 'font/woff2', crossorigin: '' },
+        injectTo: 'head' as const,
+      })),
+});
+
+/**
  * GitHub Pages can't set response headers, so the CSP ships as a <meta> tag.
  * Everything is first-party (fonts included). `style-src` needs 'unsafe-inline'
  * because the design sets many inline style attributes; `script-src` does not
@@ -57,5 +76,5 @@ const contentSecurityPolicy = (): Plugin => ({
 // Served from the wowrogue.gg custom domain root, so base stays '/'.
 export default defineConfig({
   base: '/',
-  plugins: [react(), tailwindcss(), inlineThemeInit(), contentSecurityPolicy()],
+  plugins: [react(), tailwindcss(), inlineThemeInit(), preloadFonts(), contentSecurityPolicy()],
 });

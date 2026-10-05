@@ -17,7 +17,7 @@ export function Footer() {
         <div className="min-w-0">
           <div
             className="text-ink"
-            style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontStretch: '74%', fontSize: 15, lineHeight: 1.2 }}
+            style={{ fontFamily: 'var(--font-brand)', fontWeight: 900, fontStretch: '74%', fontSize: 15, lineHeight: 1.2 }}
           >
             {copy.brand}
           </div>
