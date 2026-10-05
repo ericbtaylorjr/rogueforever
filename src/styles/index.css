@@ -72,6 +72,7 @@
   --dim: #8a8a96; /* was #6e6e7a (3.6:1); 5:1 on panels, clears 4.5:1 for text */
 
   --venom: #7be06b;
+  --sweat: #5fc9f8; /* sweaty-tip marker */
   --warn: #ff8a5b;
   --sky: #7fc4e8;
 
@@ -85,6 +86,7 @@
   /* Channel triplets, so tints can be written rgba(var(--accent-rgb), .1) and follow the theme. */
   --accent-rgb: 255, 244, 104;
   --venom-rgb: 123, 224, 107;
+  --sweat-rgb: 95, 201, 248;
   --sky-rgb: 127, 196, 232;
   --warn-rgb: 255, 138, 91;
   --amber: #ffb347;
@@ -141,6 +143,8 @@
 
   --venom: #225015;
   --venom-rgb: 34, 80, 21;
+  --sweat: #1b5d80; /* 5.3:1 on the light background */
+  --sweat-rgb: 27, 93, 128;
   --warn: #7b3009;
   --warn-rgb: 123, 48, 9;
   --sky: #18496d;
@@ -221,6 +225,7 @@
   --color-accent-dim: var(--accent-dim);
   --color-accent-ink: var(--accent-ink);
   --color-venom: var(--venom);
+  --color-sweat: var(--sweat);
   --color-warn: var(--warn);
   --color-sky: var(--sky);
   --color-amber: var(--amber);
@@ -485,6 +490,10 @@
     height: 1px;
     margin: 52px 0;
     background: var(--line);
+  }
+  /* Inside the spec zone the slash takes the active spec's colour. */
+  .spec-zone .divider::after {
+    background: var(--spec-mark);
   }
   .divider::after {
     content: "";

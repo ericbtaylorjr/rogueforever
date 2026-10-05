@@ -10,7 +10,7 @@ export function Raids() {
 
   return (
     <section id="raid" aria-label="Raids">
-      <SectionHeading id="raid" />
+      <SectionHeading id="raid" scope="all" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{copy.intro}</p>
 

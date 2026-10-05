@@ -1,14 +1,17 @@
 import { specBar } from '../../content/copy';
-import { specById, specs } from '../../content/content';
+import { specs } from '../../content/content';
 import type { SpecId } from '../../content/types';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
+import { useSpecColor } from '../../state/useSpecColor';
+import { hexA } from '../../lib/color';
 import { Droplet } from '../ui/Droplet';
 
-/** Sticky under the hero. Owns the two page-level controls. */
+/** Sticky inside the spec zone. Owns the spec picker and the sweaty-tips toggle. */
 export function SpecBar() {
   const { spec, setSpec, sweaty, toggleSweaty, isNarrow, isPhone } = useHandbook();
   const { tone } = useTheme();
+  const c = useSpecColor();
 
   return (
     <div
@@ -16,8 +19,10 @@ export function SpecBar() {
       style={{ top: isNarrow ? 58 : 0 }}
     >
       <div
-        className="flex flex-wrap items-center gap-[10px] rounded-[12px] border border-line"
+        className="flex flex-wrap items-center gap-[10px] rounded-[12px] border transition-colors"
         style={{
+          borderColor: c.line,
+          boxShadow: `inset 3px 0 0 ${c.mark}`,
           background: 'var(--specbar-bg)',
           backdropFilter: 'blur(10px)',
           padding: isPhone ? '10px 12px' : '11px 16px',
@@ -28,7 +33,7 @@ export function SpecBar() {
             <span
               aria-hidden="true"
               className="pointer-events-none absolute left-[13px] top-1/2 size-[7px] shrink-0 -translate-y-1/2 rounded-full"
-              style={{ background: tone(specById[spec].color, 3) }}
+              style={{ background: c.mark }}
             />
             <select
               aria-label={specBar.label}
@@ -36,9 +41,9 @@ export function SpecBar() {
               onChange={(e) => setSpec(e.target.value as SpecId)}
               className="w-full appearance-none rounded-[20px] border bg-transparent py-[10px] pl-[27px] pr-[30px] text-[13px] font-semibold"
               style={{
-                borderColor: 'var(--accent)',
-                background: 'rgba(var(--accent-rgb),.13)',
-                color: 'var(--accent)',
+                borderColor: c.line,
+                background: c.soft,
+                color: c.text,
               }}
             >
               {specs.map((s) => (
@@ -49,7 +54,8 @@ export function SpecBar() {
             </select>
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute right-[12px] top-1/2 -translate-y-1/2 text-[9px] text-accent"
+              className="pointer-events-none absolute right-[12px] top-1/2 -translate-y-1/2 text-[9px]"
+              style={{ color: c.text }}
             >
               ▾
             </span>
@@ -72,9 +78,9 @@ export function SpecBar() {
                     className="pill transition-colors"
                     style={{
                       padding: '7px 13px',
-                      borderColor: on ? 'var(--accent)' : 'var(--line)',
-                      background: on ? 'rgba(var(--accent-rgb),.13)' : 'transparent',
-                      color: on ? 'var(--accent)' : 'var(--mute)',
+                      borderColor: on ? hexA(s.color, 0.42) : 'var(--line)',
+                      background: on ? hexA(s.color, 0.12) : 'transparent',
+                      color: on ? tone(s.color) : 'var(--mute)',
                       fontWeight: on ? 600 : 400,
                     }}
                   >
@@ -100,11 +106,11 @@ export function SpecBar() {
           className="pill shrink-0 transition-colors"
           style={{
             padding: isPhone ? '10px 14px' : '7px 13px',
-            borderColor: sweaty ? 'rgba(var(--venom-rgb),.4)' : 'var(--line)',
-            color: sweaty ? 'var(--venom)' : 'var(--faint)',
+            borderColor: sweaty ? 'rgba(var(--sweat-rgb),.4)' : 'var(--line)',
+            color: sweaty ? 'var(--sweat)' : 'var(--faint)',
           }}
         >
-          <Droplet size={8} color={sweaty ? 'var(--venom)' : 'var(--dim)'} title="" />
+          <Droplet size={8} color={sweaty ? 'var(--sweat)' : 'var(--dim)'} title="" />
           {sweaty ? specBar.sweatyOn : specBar.sweatyOff}
         </button>
       </div>

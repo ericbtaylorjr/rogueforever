@@ -20,11 +20,11 @@ export function Consumables() {
 
   return (
     <section id="consumables" aria-label="Consumables">
-      <SectionHeading id="consumables" />
+      <SectionHeading id="consumables" scope="all" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
         {copy.intro}{' '}
-        <strong className="font-semibold text-venom">{copy.sweatyNote.strong}</strong>
+        <strong className="font-semibold text-sweat">{copy.sweatyNote.strong}</strong>
         {copy.sweatyNote.after}
       </p>
 

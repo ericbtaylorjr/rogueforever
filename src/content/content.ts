@@ -36,6 +36,11 @@ export const specById = Object.fromEntries(specs.map((s) => [s.id, s])) as Recor
 
 export const sectionIds = nav.flatMap((g) => g.items.map((i) => i.id));
 
+/** Sections whose content follows the active spec. */
+export const specSectionIds = new Set(
+  nav.filter((g) => g.scope === 'spec').flatMap((g) => g.items.map((i) => i.id)),
+);
+
 export const sectionLabels = Object.fromEntries(
   nav.flatMap((g) => g.items.map((i) => [i.id, i.label] as const)),
 ) as Record<string, string>;

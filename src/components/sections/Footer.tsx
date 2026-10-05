@@ -1,106 +1,55 @@
-import logo from '../../assets/logo-comfy-wizard.png';
 import { footer as copy } from '../../content/copy';
-import { links, socialHref } from '../../content/links';
-import { MailIcon, PhoneIcon, TvIcon, VideoIcon } from '../ui/SocialIcons';
-import { useTooltip } from '../ui/Tooltip';
+import { links } from '../../content/links';
+import { useHandbook } from '../../state/HandbookProvider';
+import { RogueMark } from '../ui/RogueMark';
 
-const socialIcon: Record<string, (props: { size?: number }) => React.ReactElement> = {
-  YT: VideoIcon,
-  TT: PhoneIcon,
-  TWITCH: TvIcon,
-  MAIL: MailIcon,
-};
-
+/**
+ * A quiet sign-off. Who's behind the Handbook lives in Credits; the footer just
+ * closes the page with thanks, a pointer back to Credits, and the shortcuts.
+ */
 export function Footer() {
-  const { bind } = useTooltip();
+  const { jump } = useHandbook();
 
   return (
-    <footer className="mt-[52px] grid gap-[26px] border-t border-line pt-[28px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,232px),1fr))]">
-      <div className="flex items-start gap-[16px]">
-        <a
-          href={links.site}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={copy.brand}
-          className="group shrink-0 rounded-[14px] border border-line bg-[radial-gradient(circle_at_50%_40%,rgba(168,85,247,0.22),transparent_70%)] p-[6px] transition-colors hover:border-accent"
-        >
-          <img
-            src={logo}
-            alt=""
-            width={78}
-            height={78}
-            loading="lazy"
-            className="block size-[78px] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] transition-transform duration-200 group-hover:-rotate-3 group-hover:scale-105"
-          />
-        </a>
+    <footer className="mt-[52px] flex flex-wrap items-start justify-between gap-x-[40px] gap-y-[22px] border-t border-line pt-[26px]">
+      <div className="flex min-w-0 max-w-[64ch] flex-1 basis-[320px] items-start gap-[14px]">
+        <RogueMark size={30} />
         <div className="min-w-0">
           <div
             className="text-ink"
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontWeight: 900,
-              fontStretch: '74%',
-              fontSize: 17,
-            }}
+            style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontStretch: '74%', fontSize: 15, lineHeight: 1.2 }}
           >
             {copy.brand}
           </div>
-          <p className="mt-[10px] max-w-[42ch] text-[12.5px] leading-[1.6] text-faint">
-            {copy.adFree.before}
+          <p className="mt-[6px] text-[12.5px] leading-[1.65] text-faint">
+            {copy.closing.before}
+            <a
+              href="#credits"
+              onClick={(e) => {
+                e.preventDefault();
+                jump('credits');
+              }}
+              className="text-mute underline decoration-line underline-offset-2 transition-colors hover:text-accent"
+            >
+              {copy.closing.curator}
+            </a>
+            {copy.closing.after}
+            {copy.tip.before}
             <a
               href={links.tip}
               target="_blank"
               rel="noreferrer"
               className="text-accent underline underline-offset-2"
             >
-              {copy.adFree.link}
+              {copy.tip.link}
             </a>
-            {copy.adFree.after}
+            {copy.tip.after}
           </p>
-          <div className="mt-[14px] flex gap-[8px]">
-            {copy.socials.map((s) => {
-              const Icon = socialIcon[s];
-              const tip = copy.socialTips[s];
-              return (
-                <a
-                  key={s}
-                  href={socialHref[s]}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={tip.name}
-                  className="grid size-[34px] place-items-center rounded-[8px] border border-line text-mute transition-colors hover:border-accent hover:text-accent"
-                  {...bind({ name: tip.name, note: tip.note })}
-                >
-                  <Icon size={16} />
-                </a>
-              );
-            })}
-          </div>
         </div>
       </div>
 
-      <div>
-        <div className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">
-          {copy.builtWithLabel}
-        </div>
-        <p className="mt-[10px] max-w-[42ch] text-[12.5px] leading-[1.6] text-faint">
-          {copy.builtWith.before}
-          <a
-            href={links.discord}
-            target="_blank"
-            rel="noreferrer"
-            className="text-accent underline underline-offset-2"
-          >
-            {copy.builtWith.link}
-          </a>
-          {copy.builtWith.after}
-        </p>
-      </div>
-
-      <div>
-        <div className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">
-          {copy.shortcutsLabel}
-        </div>
+      <div className="shrink-0">
+        <div className="t-eyebrow text-[9.5px] tracking-[.18em] text-faint">{copy.shortcutsLabel}</div>
         <ul className="mt-[10px] flex flex-col gap-[8px]">
           {copy.shortcuts.map((s) => (
             <li key={s.key} className="flex items-center gap-[10px] text-[12px] text-faint">

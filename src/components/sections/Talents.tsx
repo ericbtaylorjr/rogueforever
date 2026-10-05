@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { specById, specDetail } from '../../content/content';
+import { leveling, specById, specDetail } from '../../content/content';
 import { talents as copy } from '../../content/copy';
-import type { SpecId, TalentVariant } from '../../content/types';
+import type { LevelingPath, SpecId, TalentVariant } from '../../content/types';
+import { hexA } from '../../lib/color';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
-import { Droplet } from '../ui/Droplet';
 import { SegmentedTabs } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -29,8 +29,22 @@ function GhostBar({ width = '100%' }: { width?: string }) {
   );
 }
 
-function TalentSplit({ variant }: { variant: TalentVariant | undefined }) {
+/**
+ * Point split, key talents and a calculator link for one build. Used for both
+ * the level 60 and the leveling card. `total` is the points available at the
+ * build's level; bars default to the build's own total.
+ */
+function BuildCard({
+  title,
+  variant,
+  total,
+}: {
+  title: string;
+  variant: TalentVariant | undefined;
+  total?: number;
+}) {
   const { tone } = useTheme();
+  const points = total ?? variant?.talents.reduce((n, t) => n + t.pts, 0) ?? 0;
   const [grown, setGrown] = useState(false);
 
   useEffect(() => {
@@ -45,7 +59,7 @@ function TalentSplit({ variant }: { variant: TalentVariant | undefined }) {
   return (
     <div className="panel flex flex-col p-[18px]">
       <div className="flex items-baseline justify-between gap-[10px]">
-        <span className="t-panel-label text-ink">{copy.splitTitle}</span>
+        <span className="t-panel-label text-ink">{title}</span>
         {!variant && <span className="t-eyebrow text-[9px] text-faint">{copy.tbd}</span>}
       </div>
 
@@ -67,7 +81,7 @@ function TalentSplit({ variant }: { variant: TalentVariant | undefined }) {
                 <div
                   className="h-full rounded-full"
                   style={{
-                    width: grown ? `${(t.pts / TOTAL_POINTS) * 100}%` : '0%',
+                    width: grown && points ? `${(t.pts / points) * 100}%` : '0%',
                     background: tone(t.color, 3),
                     transition: 'width .6s cubic-bezier(.2,.8,.2,1)',
                   }}
@@ -118,46 +132,103 @@ function TalentSplit({ variant }: { variant: TalentVariant | undefined }) {
   );
 }
 
-function WeaponCard() {
-  const { spec, sweaty } = useHandbook();
-  const { weapons } = specDetail[spec];
+const SHARD = 'polygon(42% 0, 100% 0, 100% 100%, 0 100%)';
+
+/**
+ * Card banner. Always a dark surface with light text in both themes, so spec
+ * colours are used raw: a hard-cut colour shard on the right, a lit edge along
+ * the bottom, and a faint scanline texture.
+ */
+function Banner({ path }: { path: LevelingPath }) {
+  const { color, color2 } = specById[path.spec];
+
+  return (
+    <div className="relative h-[96px] overflow-hidden" style={{ background: 'var(--hue-end)' }}>
+      {/* Glow bleeding in from the shard. */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{ background: `radial-gradient(90% 130% at 100% 0%, ${hexA(color, 0.4)}, transparent 62%)` }}
+      />
+      {/* An offset copy of the shard peeking out behind it, so the two cuts stay parallel. */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-y-0 right-0 w-[44%]"
+        style={{ clipPath: SHARD, background: hexA(color, 0.5), transform: 'translateX(-14px)' }}
+      />
+      {/* The shard: angled cut on the leading edge, spec gradient inside. */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-y-0 right-0 w-[44%]"
+        style={{ clipPath: SHARD, background: `linear-gradient(160deg, ${color}, ${color2})` }}
+      />
+      {/* Scanlines over everything for texture. */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background: 'repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 4px)',
+        }}
+      />
+      {/* Lit bottom edge. */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 h-[2px]"
+        style={{ background: color, boxShadow: `0 0 16px 1px ${hexA(color, 0.8)}` }}
+      />
+
+      <div className="relative flex h-full flex-col justify-end p-[14px] pb-[13px]">
+        <span className="t-eyebrow text-[9.5px] tracking-[.18em]" style={{ color }}>
+          {path.tree}
+        </span>
+        <h3 className="t-card-title mt-[4px]" style={{ color: 'var(--on-hue)' }}>
+          {path.name}
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * The active spec's leveling build (level 30 beta for now): spec banner, why
+ * it works, and the talent calculator link. Falls back to the placeholder card
+ * when a spec has no build yet.
+ */
+function LevelingCard() {
+  const { spec } = useHandbook();
+  const path = leveling.find((l) => l.spec === spec);
+  if (!path) return <BuildCard title={copy.levelingTitle} variant={undefined} />;
 
   return (
     <div className="panel flex flex-col p-[18px]">
       <div className="flex items-baseline justify-between gap-[10px]">
-        <span className="t-panel-label text-ink">{copy.weaponsTitle}</span>
-        {!weapons.length && <span className="t-eyebrow text-[9px] text-faint">{copy.tbd}</span>}
+        <span className="t-panel-label text-ink">{copy.levelingTitle}</span>
+        <span className="t-eyebrow text-[9px] text-faint">{copy.levelingTag}</span>
       </div>
-
-      <div className="mt-[14px] flex flex-col">
-        {weapons.length
-          ? weapons.map((w) => (
-              <div key={w.slot} className="border-t border-line py-[12px] first:border-0 first:pt-0">
-                <div className="t-eyebrow text-[9px] tracking-[.14em] text-faint">{w.slot}</div>
-                <div className="mt-[5px] flex items-center gap-[8px]">
-                  <span className="text-[13.5px] font-semibold text-ink">{w.name}</span>
-                  {w.sweaty && sweaty && <Droplet />}
-                </div>
-                <div className="mt-[3px] text-[11.5px] leading-[1.5] text-faint">{w.why}</div>
-              </div>
-            ))
-          : copy.weaponSlots.map((slot) => (
-              <div key={slot} className="border-t border-line py-[12px] first:border-0 first:pt-0">
-                <div className="t-eyebrow text-[9px] tracking-[.14em] text-faint">{slot}</div>
-                <div className="mt-[8px]">
-                  <GhostBar width="58%" />
-                </div>
-              </div>
-            ))}
-        {!weapons.length && <p className="mt-[4px] text-[12px] italic text-dim">{copy.weaponsPending}</p>}
+      <div className="mt-[14px] overflow-hidden rounded-[10px] border border-line">
+        <Banner path={path} />
       </div>
-
-      <div className="mt-auto pt-[14px]">
-        <Callout tone="sky">
-          {copy.foreverCallout.before}
-          <strong className="font-semibold text-sky">{copy.foreverCallout.strong}</strong>
-          {copy.foreverCallout.after}
-        </Callout>
+      <p className="mt-[14px] flex-1 text-[12.5px] leading-[1.6] text-mute">{path.body}</p>
+      <p className="mt-[10px] text-[11.5px] leading-[1.55] text-faint">{copy.levelingNote}</p>
+      <div className="mt-[14px]">
+        {path.href ? (
+          <a
+            href={path.href}
+            target="_blank"
+            rel="noreferrer"
+            className="block rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute transition-colors hover:border-accent hover:bg-accent-dim hover:text-accent"
+          >
+            {copy.levelingCta}
+          </a>
+        ) : (
+          <button
+            type="button"
+            disabled
+            className="w-full cursor-not-allowed rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute opacity-50"
+          >
+            {copy.levelingComingSoon}
+          </button>
+        )}
       </div>
     </div>
   );
@@ -216,7 +287,7 @@ export function Talents() {
 
   return (
     <section id="talents" aria-label="Talents">
-      <SectionHeading id="talents" />
+      <SectionHeading id="talents" scope="spec" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute" aria-live="polite">
         {introBefore}
@@ -241,14 +312,16 @@ export function Talents() {
         />
       </div>
 
-      <div
-        className="mt-[14px] grid gap-[14px] stack:grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)]"
-        {...(active
-          ? { id: `panel-${tabId(active.id)}`, role: 'tabpanel', 'aria-labelledby': `tab-${tabId(active.id)}` }
-          : {})}
-      >
-        <TalentSplit variant={active} />
-        <WeaponCard />
+      <div className="mt-[14px] grid gap-[14px] stack:grid-cols-2">
+        <div
+          className="flex flex-col [&>*]:flex-1"
+          {...(active
+            ? { id: `panel-${tabId(active.id)}`, role: 'tabpanel', 'aria-labelledby': `tab-${tabId(active.id)}` }
+            : {})}
+        >
+          <BuildCard title={copy.endgameTitle} variant={active} total={TOTAL_POINTS} />
+        </div>
+        <LevelingCard />
       </div>
     </section>
   );

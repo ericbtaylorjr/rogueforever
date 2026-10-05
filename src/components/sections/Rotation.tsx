@@ -34,7 +34,7 @@ export function Rotation() {
 
   return (
     <section id="rotation" aria-label="Rotation">
-      <SectionHeading id="rotation" />
+      <SectionHeading id="rotation" scope="spec" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
         {copy.intro}{' '}

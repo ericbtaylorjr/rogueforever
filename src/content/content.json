@@ -4,53 +4,50 @@
   "specs": [
     {
       "id": "mutilate",
-      "name": "Mutilate",
+      "name": "Assassination",
       "weapon": "Weapons TBD",
-      "color": "#5FC9F8",
-      "color2": "#2E7FA8",
+      "color": "#7BE06B",
+      "color2": "#3D8A34",
       "tier": "TBD",
       "role": "Meta TBD",
-      "tag": "Assassination"
+      "tag": "Mutilate"
     },
     {
       "id": "sinister",
-      "name": "Sinister Strike",
+      "name": "Combat",
       "weapon": "Weapons TBD",
       "color": "#FF6B5E",
       "color2": "#A83C34",
       "tier": "TBD",
       "role": "Meta TBD",
-      "tag": "Combat"
+      "tag": "Sinister Strike"
     },
     {
       "id": "backstab",
-      "name": "Backstab",
+      "name": "Subtlety",
       "weapon": "Weapons TBD",
       "color": "#B98BFF",
       "color2": "#6F4FB8",
       "tier": "TBD",
       "role": "Meta TBD",
-      "tag": "Subtlety"
+      "tag": "Backstab"
     }
   ],
   "specDetail": {
     "mutilate": {
       "talentVariants": [],
-      "weapons": [],
       "apl": [],
       "opener": [],
       "nevers": []
     },
     "sinister": {
       "talentVariants": [],
-      "weapons": [],
       "apl": [],
       "opener": [],
       "nevers": []
     },
     "backstab": {
       "talentVariants": [],
-      "weapons": [],
       "apl": [],
       "opener": [],
       "nevers": []
@@ -840,6 +837,10 @@
     {
       "name": "Ranged attack (any type)",
       "code": "#showtooltip\n/cast [equipped:Guns] Shoot Gun; [equipped:Bows] Shoot Bow; [equipped:Crossbows] Shoot Crossbow; [equipped:Thrown] Throw"
+    },
+    {
+      "name": "Click-to-apply Poisons",
+      "code": "#showtooltip\n/use Instant Poison III;\n/use [button:1] 16; [button:2] 17;\n/click StaticPopup1Button1"
     }
   ],
   "leveling": [
@@ -894,12 +895,9 @@
       ]
     },
     {
-      "label": "BUILD",
+      "label": "YOUR SPEC",
+      "scope": "spec",
       "items": [
-        {
-          "id": "leveling",
-          "label": "Leveling"
-        },
         {
           "id": "talents",
           "label": "Talents"
@@ -907,11 +905,15 @@
         {
           "id": "gear",
           "label": "Gear"
+        },
+        {
+          "id": "rotation",
+          "label": "Rotation"
         }
       ]
     },
     {
-      "label": "PREP",
+      "label": "ALL ROGUES",
       "items": [
         {
           "id": "poisons",
@@ -924,15 +926,6 @@
         {
           "id": "buffs",
           "label": "Buffs & debuffs"
-        }
-      ]
-    },
-    {
-      "label": "EXECUTE",
-      "items": [
-        {
-          "id": "rotation",
-          "label": "Rotation"
         },
         {
           "id": "iea",
@@ -962,6 +955,10 @@
         {
           "id": "changelog",
           "label": "Changelog"
+        },
+        {
+          "id": "credits",
+          "label": "Credits"
         }
       ]
     }

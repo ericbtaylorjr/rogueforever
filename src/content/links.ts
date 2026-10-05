@@ -17,13 +17,6 @@ export const links = {
   site: 'https://thecomfywizard.com',
 } as const;
 
-export const socialHref: Record<string, string> = {
-  YT: links.youtube,
-  TT: links.tiktok,
-  TWITCH: links.twitch,
-  MAIL: links.mail,
-};
-
 /** Map a tool card's CTA to its destination. Keyed by the tool name in content.json. */
 export const toolHref: Record<string, string> = {
   'Learn WoWSims': links.wowsims,

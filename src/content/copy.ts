@@ -1,3 +1,4 @@
+import { links } from './links';
 /**
  * Prose copy, extracted verbatim from the design prototype.
  *
@@ -37,15 +38,32 @@ export const hero = {
 
 export const specBar = {
   label: 'ACTIVE SPEC',
+  phoneLabel: 'Guidance for',
   sweatyOn: 'Sweaty tips on',
   sweatyOff: 'Sweaty tips off',
+} as const;
+
+/** Spec zone vs. all-Rogue zone framing, plus the scope chips on section headings. */
+export const scope = {
+  specChipPrefix: 'Spec',
+  allChip: 'All specs',
+  zone: {
+    label: 'Your spec guide',
+    eyebrow: 'YOUR SPEC GUIDE',
+    body: 'Talents, gear and rotation below follow the spec you pick. Switch spec and these sections change with it.',
+  },
+  allZone: {
+    eyebrow: 'FOR EVERY ROGUE',
+    body: 'Everything from here down applies whatever spec you play.',
+  },
+  navSwitch: 'Switch spec',
 } as const;
 
 /** Section headings. Nav labels are shorter — these are the on-page H2s. */
 export const headings: Record<string, string> = {
   specs: 'Meta Breakdown',
   forever: 'Forever watch',
-  talents: 'Level 60 Talents',
+  talents: 'Talents',
   poisons: 'The poison rack',
   rotation: 'Rotation',
   gear: 'Gear',
@@ -54,9 +72,9 @@ export const headings: Record<string, string> = {
   iea: 'Expose Armor',
   raid: 'Raids',
   tools: 'Tools & UI',
-  leveling: 'Level 30 Beta Builds',
   faq: 'FAQ',
   changelog: 'Changelog',
+  credits: 'Credits',
 };
 
 export const specBoard = {
@@ -68,7 +86,7 @@ export const specBoard = {
     heading: 'No Forever sim data exists yet',
     body: 'The beta opened September 17th and the game launches November 4th. Until sims and logs exist there is nothing honest to rank, so every spec stays unranked for now.',
   },
-  yourSpec: 'ACTIVE SPEC',
+  yourSpec: 'YOUR SPEC',
   subheadings: { endgame: 'Level 60', leveling: 'Leveling' },
 } as const;
 
@@ -85,25 +103,23 @@ export const talents = {
   intro:
     'Showing {spec}. Some specs will carry more than one talent build, each tuned for a different niche. Switch between them with the build tabs.',
   todoLabel: 'COMING SOON',
-  todo: 'Forever talent builds and weapon notes will be added here once the Forever Rogue trees are tested in the beta and sims are established. Blizzard has confirmed the trees keep a familiar shape with milestones at 11, 16, 21 and 31 points.',
+  todo: 'Forever talent builds will be added here once the Forever Rogue trees are tested in the beta and sims are established. Blizzard has confirmed the trees keep a familiar shape with milestones at 11, 16, 21 and 31 points.',
   buildsLabel: 'Talent build',
   buildsPending: 'Builds coming soon',
   buildsPendingNote:
     'Each spec can list several builds here, one per niche (raid single target, cleave, PvP and so on). Pick one to see its point split and key talents.',
-  splitTitle: 'Talent split',
+  endgameTitle: 'Level 60 builds',
+  levelingTitle: 'Leveling builds',
+  levelingTag: 'LEVEL 30 BETA',
+  levelingNote:
+    "Made for the level 30 beta: a viable way to level within the cap, so pick the playstyle you enjoy. Full 1–60 leveling builds will follow once the game releases and the data settles.",
+  levelingCta: 'View talent build',
+  levelingComingSoon: 'Coming Soon',
   /** Tree names are confirmed to carry over; the split is what is pending. */
   trees: ['Assassination', 'Combat', 'Subtlety'],
   keyTalentsPending: 'Key talents will be listed here.',
   calculator: 'Open in talent calculator ↗',
-  weaponsTitle: 'Weapons & skill',
-  weaponSlots: ['Main hand', 'Off hand', 'Ranged'],
   tbd: 'TBD',
-  weaponsPending: 'Weapon picks will be added once Forever itemization is tested.',
-  foreverCallout: {
-    before: 'Blizzard: ',
-    strong: 'Weapon Skill still works as it always has',
-    after: ', but items with weapon skill offer less of it per item, so they are not always the obvious best choice.',
-  },
 } as const;
 
 export const poisonsCopy = {
@@ -276,13 +292,6 @@ export const comfyUi = {
 
 export type ComfyProfileId = (typeof comfyUi.profiles)[number]['id'];
 
-export const levelingCopy = {
-  intro:
-    "These are leveling builds made specifically for the level 30 WoW Forever beta. Each one is a viable way to level a Rogue within the beta's cap, so pick the playstyle you enjoy, not a hard meta call. This section will be updated with full 1–60 leveling builds once the game releases and the data has settled in.",
-  cta: 'View talent build',
-  comingSoon: 'Coming Soon',
-} as const;
-
 export const search = {
   trigger: 'Search...',
   placeholder: 'Search...',
@@ -292,7 +301,7 @@ export const search = {
 export const shell = {
   wordmark: 'ROGUE HANDBOOK',
   wordmarkSub: 'THE COMFY WIZARD',
-  legend: { before: 'Droplet marks a ', strong: 'sweaty', after: ' tip' },
+  legend: { before: 'Droplet marks a ', strong: 'sweaty', after: ' tip', on: 'On', off: 'Off' },
   openNav: 'Open navigation',
   closeNav: 'Close navigation',
   openSearch: 'Open search',
@@ -304,25 +313,82 @@ export const theme = {
   toDark: 'Switch to dark mode',
 } as const;
 
+export const credits = {
+  community: {
+    eyebrow: 'COMMUNITY',
+    title: 'Rogue Classic Discord',
+    body: [
+      'Much of what you read in this Handbook is credited to the Rogue Classic Discord. The community there tests, sims, logs and debates every corner of the class, and this guide is built on that collective work.',
+      'Taking part is what keeps the Handbook honest. Feedback in the Discord catches mistakes, puts guidance through real testing, and makes sure the guide keeps serving the community as well as it can. Questions, corrections and fresh findings are all welcome.',
+    ],
+    cta: 'Join the Discord',
+  },
+  contributorsTitle: 'Contributors',
+  contributorsIntro: 'The people who put the Handbook together.',
+  linkPending: 'Link coming soon',
+} as const;
+
+/** Each contributor's socials: keys into `socialMeta`. `href: '#'` renders as a pending link. */
+export const contributors: {
+  name: string;
+  role: string;
+  bio: string;
+  /** Uses the Comfy Wizard logo; everyone else gets an initials placeholder. */
+  logo?: boolean;
+  socials: { kind: 'YT' | 'TT' | 'TWITCH' | 'MAIL'; href: string }[];
+}[] = [
+  {
+    name: 'The Comfy Wizard',
+    role: 'Curator',
+    bio: 'Theorycrafter, Former Rank 1 Rogue, UI Engineer, and Girls Dad.',
+    logo: true,
+    socials: [
+      { kind: 'YT', href: links.youtube },
+      { kind: 'TT', href: links.tiktok },
+      { kind: 'TWITCH', href: links.twitch },
+      { kind: 'MAIL', href: links.mail },
+    ],
+  },
+  // TODO: placeholder bios and links until each contributor sends theirs.
+  {
+    name: 'TheBackstabi',
+    role: 'Contributor',
+    bio: 'Bio coming soon. Helps research, test and review the guidance in this Handbook.',
+    socials: [{ kind: 'YT', href: '#' }],
+  },
+  {
+    name: 'Ra',
+    role: 'Contributor',
+    bio: 'Bio coming soon. Helps research, test and review the guidance in this Handbook.',
+    socials: [{ kind: 'YT', href: '#' }],
+  },
+  {
+    name: 'Anhak',
+    role: 'Contributor',
+    bio: 'Bio coming soon. Helps research, test and review the guidance in this Handbook.',
+    socials: [{ kind: 'YT', href: '#' }],
+  },
+];
+
+export const socialMeta = {
+  YT: { name: 'YouTube' },
+  TT: { name: 'TikTok' },
+  TWITCH: { name: 'Twitch' },
+  MAIL: { name: 'Email' },
+} as const;
+
 export const footer = {
-  brand: 'THE COMFY WIZARD',
-  adFree: {
-    before: 'Theorycrafter, Former Rank 1 Rogue, UI Engineer, and Girls Dad. ',
-    link: 'Send a tip',
-    after: ' if you appreciate the work!',
+  brand: 'Rogue Handbook',
+  closing: {
+    before: 'The Rogue Handbook is curated by ',
+    curator: 'The Comfy Wizard',
+    after:
+      ', built on the collective hard work of the Rogue Classic community. Thank you to everyone who contributes. Here is to the WoW Forever journey together, representing Rogues across Azeroth.',
   },
-  socials: ['YT', 'TT', 'TWITCH', 'MAIL'],
-  socialTips: {
-    YT: { name: 'YouTube', note: 'Guides, VODs and clips — @thecomfywizard.' },
-    TT: { name: 'TikTok', note: 'Quick tips and highlights — @thecomfywizard.' },
-    TWITCH: { name: 'Twitch', note: 'Live streams — thecomfywizard.' },
-    MAIL: { name: 'Email', note: 'TheComfyWizard@gmail.com' },
-  },
-  builtWithLabel: 'BUILT WITH',
-  builtWith: {
-    before: 'Community sims, log analysis, and a lot of smart folks in the ',
-    link: 'Rogue Classic Discord',
-    after: ". Corrections welcome — we're always learning and improving.",
+  tip: {
+    before: " If you'd like to contribute to operational costs, feel free to ",
+    link: 'send a tip',
+    after: '!',
   },
   shortcutsLabel: 'SHORTCUTS',
   shortcuts: [

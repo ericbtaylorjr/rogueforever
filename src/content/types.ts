@@ -17,13 +17,6 @@ export interface TalentTree {
   color: string;
 }
 
-export interface WeaponRow {
-  slot: string;
-  name: string;
-  why: string;
-  sweaty?: boolean;
-}
-
 export interface AplRow {
   name: string;
   cond: string;
@@ -51,7 +44,6 @@ export interface TalentVariant {
 /** Empty arrays render as "coming soon" placeholders until Forever data exists. */
 export interface SpecDetail {
   talentVariants: TalentVariant[];
-  weapons: WeaponRow[];
   apl: AplRow[];
   opener: string[];
   nevers: string[];
@@ -164,6 +156,7 @@ export interface Macro {
   code: string;
 }
 
+/** A spec's leveling build, shown in the Talents section's Leveling builds card. */
 export interface LevelingPath {
   name: string;
   /** Colours come from this spec, so the card matches the spec bar. */
@@ -182,6 +175,8 @@ export interface ChangelogEntry {
 
 export interface NavGroup {
   label: string;
+  /** `spec`: these sections change with the active spec and take its colour. */
+  scope?: 'spec';
   items: { id: string; label: string }[];
 }
 

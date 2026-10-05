@@ -235,7 +235,7 @@ export function Gear() {
 
   return (
     <section id="gear" aria-label="Gear">
-      <SectionHeading id="gear" />
+      <SectionHeading id="gear" scope="spec" />
 
       <div className="flex flex-wrap items-center gap-[12px]">
         <SegmentedTabs

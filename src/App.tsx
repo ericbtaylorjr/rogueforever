@@ -1,14 +1,14 @@
 import { Shell } from './components/shell/Shell';
-import { SpecBar } from './components/shell/SpecBar';
+import { AllRoguesBanner, SpecZone } from './components/shell/SpecZone';
 import { Buffs } from './components/sections/Buffs';
 import { Changelog } from './components/sections/Changelog';
+import { Credits } from './components/sections/Credits';
 import { Consumables } from './components/sections/Consumables';
 import { ExposeArmor } from './components/sections/ExposeArmor';
 import { Faq } from './components/sections/Faq';
 import { Footer } from './components/sections/Footer';
 import { ForeverWatch } from './components/sections/ForeverWatch';
 import { Gear } from './components/sections/Gear';
-import { Leveling } from './components/sections/Leveling';
 import { Overview } from './components/sections/Overview';
 import { Poisons } from './components/sections/Poisons';
 import { Raids } from './components/sections/Raids';
@@ -21,7 +21,10 @@ import { ThemeProvider } from './state/ThemeProvider';
 import { Divider } from './components/ui/Divider';
 import { TooltipProvider } from './components/ui/Tooltip';
 
-/** One route, 15 anchored sections, everything else is in-page state. */
+/**
+ * One route, anchored sections, everything else is in-page state. Sections that
+ * follow the active spec live in <SpecZone>; the rest apply to every Rogue.
+ */
 export default function App() {
   return (
     <ThemeProvider>
@@ -29,22 +32,22 @@ export default function App() {
         <TooltipProvider>
           <Shell>
             <Overview />
-            <SpecBar />
             <SpecBoard />
             <Divider />
-            <Leveling />
+            <SpecZone>
+              <Talents />
+              <Divider />
+              <Gear />
+              <Divider />
+              <Rotation />
+            </SpecZone>
             <Divider />
-            <Talents />
-            <Divider />
-            <Gear />
-            <Divider />
+            <AllRoguesBanner />
             <Poisons />
             <Divider />
             <Consumables />
             <Divider />
             <Buffs />
-            <Divider />
-            <Rotation />
             <Divider />
             <ExposeArmor />
             <Divider />
@@ -57,6 +60,8 @@ export default function App() {
             <ForeverWatch />
             <Divider />
             <Changelog />
+            <Divider />
+            <Credits />
             <Footer />
           </Shell>
         </TooltipProvider>

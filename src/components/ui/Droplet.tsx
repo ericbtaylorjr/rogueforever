@@ -3,7 +3,7 @@
  */
 export function Droplet({
   size = 8,
-  color = 'var(--venom)',
+  color = 'var(--sweat)',
   className = '',
   title = 'Sweaty tip',
 }: {

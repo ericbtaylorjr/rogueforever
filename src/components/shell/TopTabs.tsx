@@ -1,5 +1,6 @@
-import { nav } from '../../content/content';
+import { nav, specSectionIds } from '../../content/content';
 import { useHandbook } from '../../state/HandbookProvider';
+import { useSpecColor } from '../../state/useSpecColor';
 import { SearchTrigger } from './SearchTrigger';
 import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
@@ -11,6 +12,7 @@ import { Wordmark } from './Wordmark';
 export function TopTabs() {
   const { active, jump } = useHandbook();
   const items = nav.flatMap((g) => g.items);
+  const c = useSpecColor();
 
   return (
     <header
@@ -22,6 +24,7 @@ export function TopTabs() {
         <nav aria-label="Sections" className="flex flex-1 gap-[2px] overflow-x-auto">
           {items.map((i) => {
             const on = active === i.id;
+            const mine = specSectionIds.has(i.id);
             return (
               <a
                 key={i.id}
@@ -31,13 +34,14 @@ export function TopTabs() {
                   e.preventDefault();
                   jump(i.id);
                 }}
-                className="whitespace-nowrap rounded-[7px] px-[10px] py-[7px] text-[13px] transition-colors"
+                className="flex items-center gap-[6px] whitespace-nowrap rounded-[7px] px-[10px] py-[7px] text-[13px] transition-colors"
                 style={{
-                  background: on ? 'rgba(var(--accent-rgb),.1)' : 'transparent',
-                  color: on ? 'var(--accent)' : 'var(--mute)',
+                  background: on ? (mine ? c.soft : 'rgba(var(--accent-rgb),.1)') : 'transparent',
+                  color: on ? (mine ? c.text : 'var(--accent)') : 'var(--mute)',
                   fontWeight: on ? 600 : 400,
                 }}
               >
+                {mine && <span aria-hidden="true" className="size-[6px] rounded-full" style={{ background: c.mark }} />}
                 {i.label}
               </a>
             );

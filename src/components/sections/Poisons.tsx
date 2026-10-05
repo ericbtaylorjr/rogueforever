@@ -52,7 +52,7 @@ export function Poisons() {
   const { tone } = useTheme();
   return (
     <section id="poisons" aria-label="Poisons">
-      <SectionHeading id="poisons" />
+      <SectionHeading id="poisons" scope="all" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{poisonsCopy.intro}</p>
 

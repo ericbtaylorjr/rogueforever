@@ -6,6 +6,7 @@ import type { LevelingSetId, SimSetId, SpecId } from '../../content/types';
 import { hexA } from '../../lib/color';
 import { useHandbook, type SortKey } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
+import { useSpecColor } from '../../state/useSpecColor';
 import { SegmentedTabs, Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -60,10 +61,11 @@ function useGrown(dep: unknown): boolean {
 }
 
 function YourSpecBadge() {
+  const c = useSpecColor();
   return (
     <span
       className="t-eyebrow rounded-[4px] px-[6px] py-[2px] text-[8.5px] tracking-[.13em] whitespace-nowrap"
-      style={{ background: 'var(--accent)', color: 'var(--accent-ink)', fontWeight: 600 }}
+      style={{ background: c.soft, color: c.text, fontWeight: 600 }}
     >
       {specBoard.yourSpec}
     </span>
@@ -71,6 +73,7 @@ function YourSpecBadge() {
 }
 
 function BarsView({ rows, simSet }: { rows: Row[]; simSet: SimSetId }) {
+  const c = useSpecColor();
   const { spec } = useHandbook();
   const { tone } = useTheme();
   const grown = useGrown(simSet);
@@ -84,8 +87,8 @@ function BarsView({ rows, simSet }: { rows: Row[]; simSet: SimSetId }) {
             key={r.id}
             className="sheet rounded-[12px] px-[14px] py-[12px]"
             style={{
-              border: `1px solid ${mine ? 'rgba(var(--accent-rgb),.34)' : 'var(--line)'}`,
-              background: mine ? 'rgba(var(--accent-rgb),.06)' : 'var(--panel)',
+              border: `1px solid ${mine ? c.line : 'var(--line)'}`,
+              background: mine ? c.soft : 'var(--panel)',
             }}
           >
             <div className="flex items-center gap-[10px]">
@@ -139,6 +142,7 @@ const COLS: { key: SortKey; label: string }[] = [
 const GRID = '46px minmax(0,1.4fr) minmax(0,1.3fr) 84px 84px';
 
 function TableView({ rows }: { rows: Row[] }) {
+  const c = useSpecColor();
   const { spec, sort, toggleSort } = useHandbook();
   const { tone } = useTheme();
 
@@ -191,7 +195,7 @@ function TableView({ rows }: { rows: Row[] }) {
               className="grid items-center border-b border-line/50 px-[14px] py-[11px] last:border-0"
               style={{
                 gridTemplateColumns: GRID,
-                background: mine ? 'rgba(var(--accent-rgb),.06)' : 'transparent',
+                background: mine ? c.soft : 'transparent',
               }}
             >
               <span role="cell" className="t-num text-[12px] text-faint">{r.rank}</span>
@@ -217,6 +221,7 @@ function TableView({ rows }: { rows: Row[] }) {
 }
 
 function CardsView({ rows }: { rows: Row[] }) {
+  const c = useSpecColor();
   const { spec } = useHandbook();
   const { tone } = useTheme();
   return (
@@ -228,8 +233,8 @@ function CardsView({ rows }: { rows: Row[] }) {
             key={r.id}
             className="sheet rounded-[14px] p-[16px]"
             style={{
-              border: `1px solid ${mine ? 'rgba(var(--accent-rgb),.34)' : 'var(--line)'}`,
-              background: mine ? 'rgba(var(--accent-rgb),.06)' : 'var(--panel)',
+              border: `1px solid ${mine ? c.line : 'var(--line)'}`,
+              background: mine ? c.soft : 'var(--panel)',
             }}
           >
             <div className="flex items-start justify-between gap-[8px]">
@@ -349,7 +354,7 @@ export function SpecBoard() {
 
   return (
     <section id="specs" aria-label="Meta breakdown" className="pt-[44px]">
-      <SectionHeading id="specs" />
+      <SectionHeading id="specs" scope="all" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{specBoard.intro}</p>
 

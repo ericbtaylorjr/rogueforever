@@ -12,7 +12,7 @@ export function Buffs() {
 
   return (
     <section id="buffs" aria-label="Buffs and debuffs">
-      <SectionHeading id="buffs" />
+      <SectionHeading id="buffs" scope="all" />
 
       <Callout tone="accent" dashed label={copy.todoLabel}>
         {copy.todo.before}

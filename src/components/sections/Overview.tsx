@@ -2,6 +2,7 @@ import { config } from '../../config';
 import { specs } from '../../content/content';
 import { hero } from '../../content/copy';
 import { links } from '../../content/links';
+import { hexA } from '../../lib/color';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { Callout } from '../ui/Callout';
@@ -55,8 +56,8 @@ function SpecLadder() {
               onClick={() => setSpec(s.id)}
               className="mb-[6px] flex items-center gap-[12px] rounded-[10px] px-[10px] py-[9px] transition-colors"
               style={{
-                border: on ? '1px solid rgba(var(--accent-rgb),.34)' : '1px solid transparent',
-                background: on ? 'rgba(var(--accent-rgb),.07)' : 'transparent',
+                border: on ? `1px solid ${hexA(s.color, 0.42)}` : '1px solid transparent',
+                background: on ? hexA(s.color, 0.1) : 'transparent',
               }}
             >
               <span
