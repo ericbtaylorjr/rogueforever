@@ -67,11 +67,24 @@ const STORE_KEY = 'rc:prefs';
 const isSpecId = (v: string | null): v is SpecId =>
   !!v && specs.some((s) => s.id === (v as SpecId));
 
+/** Spec ids before the rename to tree names. Old shared links and saved prefs still resolve. */
+const LEGACY_SPEC: Record<string, SpecId> = {
+  mutilate: 'assassination',
+  sinister: 'combat',
+  backstab: 'subtlety',
+};
+
+const toSpecId = (v: string | null | undefined): SpecId | null => {
+  if (!v) return null;
+  const id = LEGACY_SPEC[v] ?? v;
+  return isSpecId(id) ? id : null;
+};
+
 function readInitial(): { spec: SpecId; sweaty: boolean } {
   const fallback = { spec: config.defaultSpec, sweaty: config.showSweaty };
   if (typeof window === 'undefined') return fallback;
 
-  // URL wins over storage, so shared links land on the right spec.
+  // URL wins (shared links land on their spec), then the spec picked last visit, then the default.
   const fromUrl = new URLSearchParams(window.location.search).get('spec');
   let stored: { spec?: string; sweaty?: boolean } = {};
   try {
@@ -83,7 +96,7 @@ function readInitial(): { spec: SpecId; sweaty: boolean } {
   }
 
   return {
-    spec: isSpecId(fromUrl) ? fromUrl : isSpecId(stored.spec ?? null) ? (stored.spec as SpecId) : fallback.spec,
+    spec: toSpecId(fromUrl) ?? toSpecId(stored.spec) ?? fallback.spec,
     sweaty: typeof stored.sweaty === 'boolean' ? stored.sweaty : fallback.sweaty,
   };
 }
@@ -152,8 +165,8 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       /* ignore */
     }
     const url = new URL(window.location.href);
-    if (spec === config.defaultSpec) url.searchParams.delete('spec');
-    else url.searchParams.set('spec', spec);
+    // Always explicit, so every link (default included) names its spec.
+    url.searchParams.set('spec', spec);
     window.history.replaceState(null, '', url);
   }, [spec, sweaty]);
 

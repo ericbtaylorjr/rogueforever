@@ -1,4 +1,4 @@
-export type SpecId = 'mutilate' | 'sinister' | 'backstab';
+export type SpecId = 'assassination' | 'combat' | 'subtlety';
 
 export interface Spec {
   id: SpecId;

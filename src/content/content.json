@@ -3,7 +3,7 @@
   "$note": "Single source of truth for all page content. Every array here maps 1:1 to a const in the prototype logic class. Swap values here, not in markup.",
   "specs": [
     {
-      "id": "mutilate",
+      "id": "assassination",
       "name": "Assassination",
       "weapon": "Weapons TBD",
       "color": "#7BE06B",
@@ -13,7 +13,7 @@
       "tag": "Mutilate"
     },
     {
-      "id": "sinister",
+      "id": "combat",
       "name": "Combat",
       "weapon": "Weapons TBD",
       "color": "#FF6B5E",
@@ -23,7 +23,7 @@
       "tag": "Sinister Strike"
     },
     {
-      "id": "backstab",
+      "id": "subtlety",
       "name": "Subtlety",
       "weapon": "Weapons TBD",
       "color": "#B98BFF",
@@ -34,19 +34,19 @@
     }
   ],
   "specDetail": {
-    "mutilate": {
+    "assassination": {
       "talentVariants": [],
       "apl": [],
       "opener": [],
       "nevers": []
     },
-    "sinister": {
+    "combat": {
       "talentVariants": [],
       "apl": [],
       "opener": [],
       "nevers": []
     },
-    "backstab": {
+    "subtlety": {
       "talentVariants": [],
       "apl": [],
       "opener": [],
@@ -846,21 +846,21 @@
   "leveling": [
     {
       "name": "Mutilate",
-      "spec": "mutilate",
+      "spec": "assassination",
       "href": "https://www.wowhead.com/forever/talent-calc/rogue/v202532210001401_t0_l30/0BcccDgccffEmnnnnq",
       "tree": "Deep Assassination",
       "body": "Built entirely around Mutilate and your poisons. Every fight runs on Mutilate for fast combo points while poisons tick on everything you hit. Straightforward, hard-hitting, and at its best when you keep your poisons topped up."
     },
     {
       "name": "Blade Flurry",
-      "spec": "sinister",
+      "spec": "combat",
       "href": "https://www.wowhead.com/forever/talent-calc/rogue/v2-3200332110141_t0_l30/1EhGjmnnnnp",
       "tree": "Deep Combat",
       "body": "Traditional Combat, centered on cleaving with Blade Flurry. Pull two or three mobs, turn on Blade Flurry and take them down together with the familiar Sinister Strike, Slice and Dice and Eviscerate loop. No positioning to worry about."
     },
     {
       "name": "Improved Ambush",
-      "spec": "backstab",
+      "spec": "subtlety",
       "href": "https://www.wowhead.com/forever/talent-calc/rogue/v202-32003201-3020003_t0_l30/2CaaaG1B0B1AEffh",
       "tree": "Subtlety hybrid",
       "body": "A Subtlety hybrid built around a devastating opener. Stealth in, open with a big Ambush and finish most mobs before they can fight back, then reset and move on. Quick kills, less downtime, and more picking your battles."

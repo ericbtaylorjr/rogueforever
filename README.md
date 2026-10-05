@@ -120,8 +120,11 @@ no third-party scripts, no runtime network requests. `npm audit` is clean.
   (clickjacking), HSTS and `X-Content-Type-Options` aren't available. If the site moves
   behind Cloudflare/Netlify, set them there.
 - **External links** use `target="_blank"` with `rel="noreferrer"` (implies `noopener`).
-- **Stored data:** the URL `?spec=` param and localStorage are validated against the
-  known spec list; anything else is ignored.
+- **Stored data:** the spec is always in the URL (`?spec=`) and also saved to localStorage so
+  returning visitors land on their last spec. Resolution order: URL → last saved spec →
+  Combat. Both are validated against the known spec list (`assassination`, `combat`,
+  `subtlety`; the old `mutilate`, `sinister`, `backstab` ids are mapped to them); anything
+  else is ignored.
 - **CI:** actions are pinned to commit SHAs, the workflow defaults to read-only, and only
   the deploy job gets `pages`/`id-token` write. Dependabot keeps both up to date.
 
