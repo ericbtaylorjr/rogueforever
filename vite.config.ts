@@ -25,7 +25,7 @@ const inlineThemeInit = (): Plugin => ({
  * Preload the fonts the first screen paints with (hero title + intro text), so the largest
  * paint doesn't wait for the stylesheet to discover them. Filenames are hashed, hence a plugin.
  */
-const PRELOAD_FONTS = ['archivo-var-latin', 'alegreya-sans-400-latin'];
+const PRELOAD_FONTS = ['archivo-var-latin', 'source-sans-var-latin'];
 
 const preloadFonts = (): Plugin => ({
   name: 'preload-fonts',

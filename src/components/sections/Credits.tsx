@@ -54,7 +54,7 @@ function Avatar({ c }: { c: Contributor }) {
       className="grid size-[56px] shrink-0 place-items-center rounded-[12px] border border-line text-[17px] text-mute"
       style={{
         fontFamily: 'var(--font-display)',
-        fontWeight: 700,
+        fontWeight: 600,
         background: 'linear-gradient(150deg, rgba(var(--fg-rgb),.07), rgba(var(--fg-rgb),.02))',
       }}
     >
@@ -72,7 +72,7 @@ function ContributorCard({ c }: { c: Contributor }) {
         <div className="min-w-0">
           <h4
             className="truncate text-ink"
-            style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18, lineHeight: 1.1 }}
+            style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 17, lineHeight: 1.1 }}
           >
             {c.name}
           </h4>

@@ -14,39 +14,25 @@
   src: url("../assets/fonts/archivo-var-latin.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Alegreya";
+  font-family: "Literata";
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400 800;
   font-display: swap;
-  src: url("../assets/fonts/alegreya-var-latin.woff2") format("woff2");
+  src: url("../assets/fonts/literata-var-latin.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Alegreya Sans";
+  font-family: "Source Sans 3";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400 700;
   font-display: swap;
-  src: url("../assets/fonts/alegreya-sans-400-latin.woff2") format("woff2");
+  src: url("../assets/fonts/source-sans-var-latin.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Alegreya Sans";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("../assets/fonts/alegreya-sans-500-latin.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Alegreya Sans";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../assets/fonts/alegreya-sans-700-latin.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Alegreya Sans";
+  font-family: "Source Sans 3";
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url("../assets/fonts/alegreya-sans-italic-400-latin.woff2") format("woff2");
+  src: url("../assets/fonts/source-sans-italic-400-latin.woff2") format("woff2");
 }
 @font-face {
   font-family: "IBM Plex Mono";
@@ -251,11 +237,11 @@
   --color-sky: var(--sky);
   --color-amber: var(--amber);
 
-  /* Archivo is the brand only (hero title, wordmark, raid badges). Headings are the Alegreya
-     serif and body its sister Alegreya Sans, so the page reads like one book. */
+  /* Archivo is the brand only (hero title, wordmark, raid badges). Headings are the Literata
+     book serif; body is Source Sans 3, built for reading on screens. */
   --font-brand: "Archivo", system-ui, sans-serif;
-  --font-display: "Alegreya", Georgia, serif;
-  --font-sans: "Alegreya Sans", system-ui, sans-serif;
+  --font-display: "Literata", Georgia, serif;
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   /* Design breakpoints. Named for what they do, not for t-shirt sizes. */
@@ -306,19 +292,9 @@
     font-family: var(--font-sans);
     font-size: 14px;
     line-height: 1.55;
-    /* Alegreya Sans is narrow with a small x-height; size it up a touch (and open the spacing
-       slightly) so small text stays legible at the px sizes in the markup. Lining figures keep
-       numbers scannable in a reference guide. */
-    font-size-adjust: 0.54;
-    letter-spacing: 0.006em;
-    word-spacing: 0.06em;
+    /* Lining figures keep numbers scannable in a reference guide. */
     font-variant-numeric: lining-nums;
     -webkit-font-smoothing: antialiased;
-  }
-
-  /* Alegreya Sans's bold has an even narrower word space ("Pick your spec" ran together). */
-  :where(strong, b, .font-semibold, .font-bold) {
-    word-spacing: 0.14em;
   }
 
   /* Page texture — fixed dot grid, never interactive. */
@@ -400,7 +376,6 @@
 @layer components {
   .t-h1 {
     font-family: var(--font-brand);
-    font-size-adjust: none;
     font-weight: 900;
     font-stretch: 68%;
     font-size: clamp(50px, 9vw, 116px);
@@ -412,30 +387,31 @@
 
   .t-h2 {
     font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(27px, 3.4vw, 38px);
-    line-height: 1.1;
-    letter-spacing: -0.005em;
+    font-weight: 700;
+    font-size: clamp(26px, 3.2vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -0.012em;
     margin: 0;
   }
 
   .t-card-title {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 1.15;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.008em;
   }
 
   .t-card-sub {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 15.5px;
   }
 
   .t-panel-label {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 15.5px;
   }
 
   /* Small caps label for data and nav headings. Deliberately not monospace. */
@@ -462,13 +438,13 @@
   .t-lede {
     font-size: 17px;
     line-height: 1.62;
-    max-width: 62ch;
+    max-width: 34em;
   }
 
   /* Aligned figures in the body face. Monospace is reserved for code and key chips. */
   .t-num {
     font-family: var(--font-sans);
-    font-weight: 700;
+    font-weight: 600;
     font-variant-numeric: lining-nums tabular-nums;
   }
 

@@ -105,7 +105,7 @@ export function Overview() {
       <div className="mt-[26px] grid gap-[26px] hero:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
         <div>
           <p className="t-lede text-lede">{hero.lede}</p>
-          <p className="mt-[14px] max-w-[62ch] text-[14.5px] leading-[1.6] text-mute">
+          <p className="mt-[14px] max-w-[37em] text-[14.5px] leading-[1.6] text-mute">
             {hero.support.before}
             <a
               href={links.discord}

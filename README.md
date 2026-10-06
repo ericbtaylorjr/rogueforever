@@ -43,12 +43,11 @@ the `intensity` / `accent` build config work without a second stylesheet.
 **Display type is CSS component classes** (`.t-h1`, `.t-h2`, `.t-card-title`, …)
 rather than piles of arbitrary utilities, so the values are easier to tune in one place.
 
-**Typography:** headings use the Alegreya serif (`--font-display`) and body text its sister
-Alegreya Sans (`--font-sans`), mixed case, so the page reads like one book. Condensed
+**Typography:** headings use the Literata book serif (`--font-display`) and body text
+Source Sans 3 (`--font-sans`), mixed case: a reference book rather than a dashboard. Condensed
 uppercase Archivo (`--font-brand`) is reserved for the brand: the hero title, the wordmark
 and the raid badges. IBM Plex Mono is only for code and key chips; numbers use the body
-face with tabular lining figures (`.t-num`). The body sets `font-size-adjust` because
-Alegreya Sans has a small x-height. Keep monospace out of labels.
+face with tabular lining figures (`.t-num`). Keep monospace out of labels.
 
 **Breakpoints are named for what they do**: `stack:` (900px), `hero:` (980px),
 `rail:` (1100px), `wide:` (1600px). Layout switches the design drives from JS
@@ -118,7 +117,7 @@ Performance 100 (LCP 0.7s, CLS 0), throttled mobile 96–97 (LCP 2.4–2.6s, TBT
 - **Game icons** load lazily from `public/icons/` (~1–3 KB each).
 - **The theme script is inlined** at build (see Security), so first paint waits only on the
   one small stylesheet.
-- **First-screen fonts are preloaded** (Archivo for the hero, Alegreya Sans regular for the
+- **First-screen fonts are preloaded** (Archivo for the hero, Source Sans 3 for the
   intro) by the `preload-fonts` plugin in `vite.config.ts`. Update `PRELOAD_FONTS` if the
   hero's fonts change.
 - The remaining Lighthouse notes (unused JS in the single bundle, ~1,100 DOM nodes) are
