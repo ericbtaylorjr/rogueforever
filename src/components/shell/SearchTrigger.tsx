@@ -15,7 +15,7 @@ export function SearchTrigger() {
     >
       <span aria-hidden="true" className="text-[13px]">⌕</span>
       <span className="flex-1 text-left">{search.trigger}</span>
-      <span className="key-chip t-num">⌘K</span>
+      <span className="key-chip">Ctrl K</span>
     </button>
   );
 }

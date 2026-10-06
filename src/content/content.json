@@ -328,7 +328,7 @@
     },
     {
       "name": "Deadly Poison",
-      "where": "Off hand",
+      "where": "Main hand · Off hand",
       "hue": "#5FC9F8",
       "hue2": "#245F80",
       "fill": "62%",

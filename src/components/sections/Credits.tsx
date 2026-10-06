@@ -1,6 +1,7 @@
 import logo from '../../assets/logo-comfy-wizard.webp';
 import { contributors, credits as copy, socialMeta } from '../../content/copy';
 import { isPlaceholder, links } from '../../content/links';
+import { LinkedText } from '../ui/LinkedText';
 import { MailIcon, PhoneIcon, TvIcon, VideoIcon } from '../ui/SocialIcons';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useTooltip } from '../ui/Tooltip';
@@ -38,8 +39,20 @@ function Community() {
   );
 }
 
-/** Logo for the curator, initials on a tinted tile for everyone else (placeholders for now). */
+/** Logo for the curator, a portrait for contributors who sent one, otherwise initials. */
 function Avatar({ c }: { c: Contributor }) {
+  if (c.avatar) {
+    return (
+      <img
+        src={c.avatar}
+        alt=""
+        width={56}
+        height={56}
+        loading="lazy"
+        className="size-[56px] shrink-0 rounded-[12px] border border-line object-cover"
+      />
+    );
+  }
   if (c.logo) {
     return (
       <span className="grid size-[56px] shrink-0 place-items-center rounded-[12px] border border-line">
@@ -81,7 +94,7 @@ function ContributorCard({ c }: { c: Contributor }) {
       </div>
 
       <p className="mt-[12px] flex-1 text-[12.5px] leading-[1.6] text-mute">
-        {c.bio}
+        <LinkedText text={c.bio} links={c.bioLinks} />
       </p>
 
       <div className="mt-[14px] flex gap-[8px]">

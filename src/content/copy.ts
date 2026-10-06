@@ -1,3 +1,6 @@
+import avatarAnhak from '../assets/avatars/anhak.webp';
+import avatarBackstabi from '../assets/avatars/backstabi.webp';
+import avatarRa from '../assets/avatars/ra.webp';
 import { links } from './links';
 /**
  * Prose copy, extracted verbatim from the design prototype.
@@ -321,14 +324,18 @@ export const contributors: {
   name: string;
   role: string;
   bio: string;
-  /** Uses the Comfy Wizard logo; everyone else gets an initials placeholder. */
+  /** Phrases in `bio` to link, opening in a new tab. */
+  bioLinks?: Record<string, string>;
+  /** Uses the Comfy Wizard logo. */
   logo?: boolean;
+  /** Square portrait (src/assets/avatars, 168px WebP). Without one, initials stand in. */
+  avatar?: string;
   socials: { kind: 'YT' | 'TT' | 'TWITCH' | 'MAIL'; href: string }[];
 }[] = [
   {
     name: 'The Comfy Wizard',
     role: 'Curator',
-    bio: 'Theorycrafter, Former Rank 1 Rogue, UI Engineer, and Girls Dad.',
+    bio: 'Rogue theorycrafter, UI Engineer, WoWSims contributor, Former Rank 1 Rogue, and Girls Dad.',
     logo: true,
     socials: [
       { kind: 'YT', href: links.youtube },
@@ -341,19 +348,23 @@ export const contributors: {
   {
     name: 'TheBackstabi',
     role: 'Contributor',
-    bio: 'Bio coming soon. Helps research, test and review the guidance in this Handbook.',
+    avatar: avatarBackstabi,
+    bio: "WoWSims contributor, Rogue enthusiast. It's a frog.",
     socials: [{ kind: 'YT', href: '#' }],
   },
   {
     name: 'Ra',
     role: 'Contributor',
-    bio: 'Bio coming soon. Helps research, test and review the guidance in this Handbook.',
+    avatar: avatarRa,
+    bio: 'I was #2 DPS on our Sapphiron kill in Vanilla Naxx.',
+    bioLinks: { 'Sapphiron kill': 'https://www.youtube.com/watch?v=po7Vl8p9sUw' },
     socials: [{ kind: 'YT', href: '#' }],
   },
   {
     name: 'Anhak',
     role: 'Contributor',
-    bio: 'Bio coming soon. Helps research, test and review the guidance in this Handbook.',
+    avatar: avatarAnhak,
+    bio: 'Felstriker hater & Cat dad.',
     socials: [{ kind: 'YT', href: '#' }],
   },
 ];
@@ -378,6 +389,12 @@ export const footer = {
     link: 'send a tip',
     after: '.',
   },
+  shortcutsLabel: 'Shortcuts',
+  // Most players are on Windows, so show Ctrl. ⌘K works too (see HandbookProvider).
+  shortcuts: [
+    { key: 'Ctrl K', what: 'Search' },
+    { key: 'Esc', what: 'Close a window' },
+  ],
 } as const;
 
 export const tooltipFallback = 'No note yet.';
