@@ -248,6 +248,7 @@ export const comfyUi = {
   close: 'Close',
   copyCta: 'Copy Import String',
   copying: 'Loading string…',
+  lastUpdated: 'Last updated',
   copiedMsg: 'Import string copied to your clipboard. Paste it in game with Ctrl+V.',
   failedMsg:
     "Your browser blocked clipboard access. Select the string below and copy it manually (Ctrl+C).",
