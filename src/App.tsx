@@ -49,6 +49,7 @@ export default function App() {
             </SpecZone>
             <Divider />
             <AllRoguesBanner />
+            <Divider />
             <Races />
             <Divider />
             <Poisons />

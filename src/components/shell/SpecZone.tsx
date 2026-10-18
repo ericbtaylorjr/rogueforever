@@ -3,6 +3,7 @@ import { scope } from '../../content/copy';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useSpecColor } from '../../state/useSpecColor';
 import { Divider } from '../ui/Divider';
+import { Tip } from '../ui/Tip';
 import { SpecBar } from './SpecBar';
 
 /**
@@ -32,13 +33,15 @@ export function SpecZone({ children }: { children: ReactNode }) {
         }}
       />
       <SpecBar />
-      <p className="mt-[4px] max-w-[70ch] text-[13.5px] leading-[1.6] text-mute">
-        {scope.zone.before}
-        <strong className="font-semibold" style={{ color: c.text }}>
-          {c.spec.name}
-        </strong>
-        {scope.zone.after}
-      </p>
+      <div className="mt-[4px]">
+        <Tip spec label={false}>
+          {scope.zone.before}
+          <strong className="font-semibold" style={{ color: c.text }}>
+            {c.spec.name}
+          </strong>
+          {scope.zone.after}
+        </Tip>
+      </div>
       <Divider />
       {children}
     </div>
@@ -47,5 +50,9 @@ export function SpecZone({ children }: { children: ReactNode }) {
 
 /** Marks the hand-off from spec guidance to content that's the same for every Rogue. */
 export function AllRoguesBanner() {
-  return <p className="mb-[30px] max-w-[70ch] text-[13.5px] leading-[1.6] text-mute">{scope.allZone}</p>;
+  return (
+    <Tip label={false}>
+      {scope.allZone}
+    </Tip>
+  );
 }

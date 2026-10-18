@@ -22,7 +22,10 @@ export function Consumables() {
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
         {copy.intro}{' '}
-        <strong className="font-semibold text-sweat">{copy.sweatyNote.strong}</strong>
+        {copy.sweatyNote.lead}
+        <Droplet size={8} title={copy.sweatyNote.icon} className="align-[-1px]" />
+        {copy.sweatyNote.before}
+        <span className="font-semibold text-sweat">{copy.sweatyNote.strong}</span>
         {copy.sweatyNote.after}
       </p>
 

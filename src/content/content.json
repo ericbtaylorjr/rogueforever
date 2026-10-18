@@ -536,7 +536,7 @@
       "hue2": "#2F7A2A",
       "fill": "74%",
       "tag": "Core",
-      "note": "Chance on hit for immediate damage. The default on both weapons for Combat, and it scales with how often you swing."
+      "note": "Chance on hit for immediate damage. Usually applied on one weapon, but sometimes optimal on both for shorter encounters on some specs."
     },
     {
       "name": "Deadly Poison",
@@ -545,7 +545,7 @@
       "hue2": "#245F80",
       "fill": "62%",
       "tag": "Core",
-      "note": "Stacking damage over time, five stacks maximum. Assassination’s off-hand answer — applies on the swing, ticks for free."
+      "note": "Stacking damage over time, five stacks maximum. Optimal on one weapon for longer encounters."
     },
     {
       "name": "Wound Poison",
@@ -563,7 +563,7 @@
       "hue2": "#3C4854",
       "fill": "34%",
       "tag": "Utility",
-      "note": "Movement slow. For kiting fixates and for PvP, never for your parse."
+      "note": "Movement slow. For kiting fixates and for PvP, occasionally used to manage add cleave as a raid utility."
     },
     {
       "name": "Mind-numbing Poison",
@@ -572,7 +572,7 @@
       "hue2": "#4B3474",
       "fill": "28%",
       "tag": "Utility",
-      "note": "Casting slow. Carry a few in case a caster add needs softening."
+      "note": "Cast time slow. Occasionally used as a raid utility for ease of interrupts."
     }
   ],
   "consumables": [
@@ -1053,8 +1053,8 @@
       "code": "#showtooltip\n/cast [equipped:Guns] Shoot Gun; [equipped:Bows] Shoot Bow; [equipped:Crossbows] Shoot Crossbow; [equipped:Thrown] Throw"
     },
     {
-      "name": "MH/OH Weapon Apply",
-      "code": "#showtooltip\n/use Instant Poison III;\n/use [button:1] 16; [button:2] 17;\n/click StaticPopup1Button1"
+      "name": "MH/OH Weapon Imbue Apply",
+      "code": "#showtooltip\n/use Instant Poison VI;\n/use [button:1] 16; [button:2] 17;\n/click StaticPopup1Button1"
     }
   ],
   "leveling": [

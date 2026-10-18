@@ -1,9 +1,10 @@
-import { poisons } from '../../content/content';
+import { poisons, specById } from '../../content/content';
 import { poisonsCopy as copy } from '../../content/copy';
 import type { Poison } from '../../content/types';
 import { useTheme } from '../../state/ThemeProvider';
 import { GameIcon, wowheadFor } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
+import { Tip } from '../ui/Tip';
 
 /** How much each poison matters, said plainly rather than as a badge. */
 const tagTone: Record<Poison['tag'], string> = {
@@ -47,6 +48,7 @@ function PoisonRow({ p }: { p: Poison }) {
 }
 
 export function Poisons() {
+  const { tone } = useTheme();
   return (
     <section id="poisons" aria-label="Poisons">
       <SectionHeading id="poisons" scope="all" />
@@ -59,17 +61,28 @@ export function Poisons() {
         ))}
       </ul>
 
-      <div className="mt-[16px] max-w-[88ch] border-l-2 border-sky pl-[14px]">
-        <h3 className="text-[13px] font-semibold text-sky">{copy.foreverTitle}</h3>
-        <ul className="mt-[6px] flex flex-col gap-[6px]">
-          {copy.forever.map((f) => (
-            <li key={f.strong} className="text-[13px] leading-[1.6] text-prose">
-              {f.before}
-              <strong className="font-semibold text-ink">{f.strong}</strong>
-              {f.after}
-            </li>
-          ))}
-        </ul>
+      <div className="mt-[16px]">
+        <Tip label={copy.foreverTitle}>
+          <ul className="mt-[6px] flex flex-col gap-[6px]">
+            {copy.forever.map((line, i) => (
+              <li key={i}>
+                {line.map((part, j) =>
+                  typeof part === 'string' ? (
+                    part
+                  ) : 'strong' in part ? (
+                    <strong key={j} className="font-semibold text-ink">
+                      {part.strong}
+                    </strong>
+                  ) : (
+                    <strong key={j} className="font-semibold" style={{ color: tone(specById[part.spec].color) }}>
+                      {specById[part.spec].name}
+                    </strong>
+                  ),
+                )}
+              </li>
+            ))}
+          </ul>
+        </Tip>
       </div>
     </section>
   );

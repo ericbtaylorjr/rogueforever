@@ -19,7 +19,7 @@ export const hero = {
   disclaimer: {
     label: 'Heads up:',
     before:
-      "everything here is based on the level 30 beta. I'll update leveling and endgame as the full game opens up. If something's off, tell me in the ",
+      "everything here is based on the level 30 beta. I'll update leveling and endgame as the full game opens up. If something's off, let us know in the ",
     link: 'Rogue Classic Discord',
     after: '.',
   },
@@ -57,7 +57,7 @@ export const scope = {
     before: 'Talents, stats, gear and rotation below are for ',
     after: '. If you change the Active Spec, then all the contextual information will change as well.',
   },
-  allZone: 'Everything from here down is the same for every Rogue.',
+  allZone: 'Everything from here down is the same for all Rogue specs and no longer relative to your Active Spec.',
 } as const;
 
 /** Section headings. Nav labels are shorter — these are the on-page H2s. */
@@ -112,17 +112,21 @@ export const forever = {
   sourceLink: 'Source ↗',
 } as const;
 
+/** Lead-ins for <Tip>. */
+export const tips = {
+  label: 'Tip:',
+  sweatyLabel: 'Sweaty tip:',
+} as const;
+
 export const talents = {
   intro: 'Level 60 builds for your active spec. Meta breakdown has how every build ranks across all three specs.',
   endgameTitle: 'Level 60 builds',
   endgamePending:
     "Not yet. The Forever trees aren't final, though Blizzard says they keep the familiar milestones at 11, 16, 21 and 31 points. I'll post level 60 builds once they've been tested.",
   buildsLabel: 'Level 60 builds for this spec',
-  /** Shown only with sweaty tips on. */
-  murderTip: {
-    label: 'Sweaty tip:',
-    text: "most of these builds take 2/2 Murder. For encounters without Humanoids or Giants it does nothing, so swap those points into a couple of other offensive talents. Most players can set and forget, but if you're squeezing out every bit of damage, it's worth the respec.",
-  },
+  /** A sweaty tip: shown only with sweaty tips on. */
+  murderTip:
+    "most of these builds take 2/2 Murder. For encounters without Humanoids or Giants it does nothing, so swap those points into a couple of other offensive talents. Most players can set and forget, but if you're squeezing out every bit of damage, it's worth the respec.",
   /** Tree names are confirmed to carry over; the split is what is pending. */
   trees: ['Assassination', 'Combat', 'Subtlety'],
   calculator: 'Open in talent calculator ↗',
@@ -132,14 +136,11 @@ export const racesCopy = {
   intro:
     'A general picture of the race meta, observed from WoWSims data. Some races pull ahead on shorter encounters and others on longer ones. A few races deal increased damage to certain mob types, so they generally perform better in encounters against those types. And as your gear improves, stat caps can come into play and change how much a race brings.',
   learnMore: 'Learn more about racials on Wowhead ↗',
-  tip: {
-    label: 'Tip:',
-    text: "every race is within about 1% of the others, and some will be better in certain raids. Don't stress about choosing wrong. If you enjoy the vibes of one, play it.",
-  },
+  tip: "Every race is within about 1% of the others, and some will be better in certain raids. Don't stress about choosing wrong. If you enjoy the vibes of one, play it.",
   listTitle: 'Racial meta',
   listLabel: 'Races ranked by meta grade',
   sheet: {
-    text: "For how each race performs for every spec at different encounter lengths, see Anhak's Racial Spreadsheet.",
+    text: "To review each race's performance at varying encounter durations and per spec, please review Anhak's Racial Spreadsheet.",
     link: "Anhak's Racial Spreadsheet",
   },
 } as const;
@@ -147,18 +148,27 @@ export const racesCopy = {
 export const poisonsCopy = {
   intro:
     "Poisons go on each weapon and wear off in charges. Buy the reagents in bulk so you aren't running to a vendor halfway through a dungeon.",
-  foreverTitle: 'What changes in Forever',
+  foreverTitle: 'Updated in Forever',
+  /** Each line is plain text, `{ strong }` for bold, or `{ spec }` for a spec name in its colour. */
   forever: [
-    {
-      before: 'Unified Hit and Crit now cover ',
-      strong: 'poisons',
-      after: ". In Classic your poisons ignored your melee hit; in Forever the hit on your gear feeds them too.",
-    },
-    {
-      before: 'Poison damage scales with ',
-      strong: 'Attack Power',
-      after: '. Every spec benefits, Assassination most of all.',
-    },
+    [
+      'Unified Hit and Crit now cover ',
+      { strong: 'Poisons' },
+      '. In Classic your poisons ignored your ',
+      { strong: 'Melee Hit' },
+      '; in Forever the ',
+      { strong: 'Hit' },
+      ' on your gear feeds them too.',
+    ],
+    [
+      'Poison damage scales slightly with ',
+      { strong: 'Attack Power' },
+      ', but not with ',
+      { strong: 'Spell Power' },
+      '. Every spec benefits from this, ',
+      { spec: 'assassination' },
+      ' most of all.',
+    ],
   ],
 } as const;
 
@@ -208,9 +218,13 @@ export const gear = {
 
 export const consumablesCopy = {
   intro: 'The full bag. Hover anything to see what it does.',
+  /** The droplet icon stands in for the word "Droplet" (and is read as it). */
   sweatyNote: {
-    strong: 'Droplets',
-    after: " mark the sweaty ones, which most players can skip.",
+    lead: 'The ',
+    icon: 'Droplet',
+    before: ' represents the ',
+    strong: 'sweaty',
+    after: ' consumables, which most players can skip, as they may be too expensive or difficult to acquire to justify the effort for.',
   },
   status: {
     label: 'Placeholder:',

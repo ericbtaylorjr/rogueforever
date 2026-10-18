@@ -5,9 +5,8 @@ import type { TalentVariant } from '../../content/types';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { BUILD_CARD_ID, BuildList, useActiveBuild } from '../ui/BuildList';
-import { Callout } from '../ui/Callout';
-import { Droplet } from '../ui/Droplet';
 import { SectionHeading } from '../ui/SectionHeading';
+import { Tip } from '../ui/Tip';
 
 const TOTAL_POINTS = 51;
 
@@ -102,7 +101,7 @@ function BuildCard({
 }
 
 export function Talents() {
-  const { spec, sweaty } = useHandbook();
+  const { spec } = useHandbook();
   const { talentVariants } = specDetail[spec];
   const active = useActiveBuild(spec);
 
@@ -121,11 +120,11 @@ export function Talents() {
           />
         </div>
       )}
-      {active && sweaty && (
-        <div className="mt-[12px]">
-          <Callout tone="accent" label={copy.murderTip.label} icon={<Droplet size={8} title="" />}>
-            {copy.murderTip.text}
-          </Callout>
+      {active && (
+        <div className="mt-[12px] empty:hidden">
+          <Tip sweaty>
+            {copy.murderTip}
+          </Tip>
         </div>
       )}
       {active ? (

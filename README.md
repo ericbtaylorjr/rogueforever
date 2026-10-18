@@ -54,6 +54,12 @@ face with tabular lining figures (`.t-num`). Keep monospace out of labels.
 (drawer, scroll offset, Forever outlook rows) read the same numbers from
 `src/config.ts` so CSS and JS can't drift.
 
+**Tips use `<Tip>`** (`components/ui/Tip.tsx`), never a hand-styled `<Callout>`. The
+colour says who a tip is for: yellow (default) for every Rogue, blue with the droplet
+(`sweaty`) for sweaty tips, and the active spec's colour (`spec`) for tips that only
+apply to that spec. A `spec` tip can also be `sweaty`. Sweaty tips hide themselves when
+sweaty tips are off. `<Callout>` stays for statuses, warnings and Forever claims.
+
 **Copy never lives in JSX.** `content.json` covers every data array; the hero,
 section intros, callouts and footer are in `copy.ts` because the prototype
 authored them in markup.

@@ -1,7 +1,7 @@
 import { races } from '../../content/content';
 import { racesCopy as copy } from '../../content/copy';
 import { links, wowsimsLink } from '../../content/links';
-import { Callout } from '../ui/Callout';
+import { Tip } from '../ui/Tip';
 import { GradeBadge } from '../ui/GradeBadge';
 import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -25,7 +25,7 @@ export function Races() {
       </a>
 
       <div className="mt-[14px]">
-        <Callout label={copy.tip.label}>{copy.tip.text}</Callout>
+        <Tip>{copy.tip}</Tip>
       </div>
 
       {/* Plain ruled rows, not bordered cards: this list is read-only, unlike the build lists. */}
