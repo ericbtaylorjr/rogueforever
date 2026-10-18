@@ -35,19 +35,178 @@
   ],
   "specDetail": {
     "assassination": {
-      "talentVariants": [],
+      "talentVariants": [
+        {
+          "id": "mutilate-venom",
+          "grade": "C",
+          "rank": 6,
+          "name": "Mutilate Venom",
+          "talents": [
+            {
+              "name": "Assassination",
+              "pts": 31,
+              "color": "#7BE06B"
+            },
+            {
+              "name": "Combat",
+              "pts": 20,
+              "color": "#FF6B5E"
+            },
+            {
+              "name": "Subtlety",
+              "pts": 0,
+              "color": "#B98BFF"
+            }
+          ],
+          "talentNote": "This build revolves around keeping the Venom buff up at all times and using Mutilate as your main builder, with an emphasis on poison damage.",
+          "keyTalents": [],
+          "link": "https://www.wowhead.com/forever/talent-calc/rogue/v200532310151501031-302303202014_t0_r95/0CDffgfEjmnnnnqnkkkskksst1AccFDGJmnnnn"
+        }
+      ],
       "apl": [],
       "opener": [],
       "nevers": []
     },
     "combat": {
-      "talentVariants": [],
+      "talentVariants": [
+        {
+          "id": "combat-mutilate",
+          "grade": "A",
+          "rank": 3,
+          "name": "Combat Mutilate",
+          "talents": [
+            {
+              "name": "Assassination",
+              "pts": 21,
+              "color": "#7BE06B"
+            },
+            {
+              "name": "Combat",
+              "pts": 28,
+              "color": "#FF6B5E"
+            },
+            {
+              "name": "Subtlety",
+              "pts": 0,
+              "color": "#B98BFF"
+            }
+          ],
+          "talentNote": "A variation of the Assassination Mutilate build. It drops Venom in favor of leaning further into Combat talents.",
+          "keyTalents": [],
+          "link": "https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-302303202015142_t0_r95/0CDffgfEjmnnnnq1AccFDGJmnnnnpqqqqRn"
+        },
+        {
+          "id": "combat-sinister-strike",
+          "grade": "S",
+          "rank": 2,
+          "name": "Combat Sinister Strike",
+          "talents": [
+            {
+              "name": "Assassination",
+              "pts": 18,
+              "color": "#7BE06B"
+            },
+            {
+              "name": "Combat",
+              "pts": 33,
+              "color": "#FF6B5E"
+            },
+            {
+              "name": "Subtlety",
+              "pts": 0,
+              "color": "#B98BFF"
+            }
+          ],
+          "talentNote": "The traditional Classic Rogue Combat build: Sinister Strike as your builder and Eviscerate as your spender.",
+          "keyTalents": [],
+          "link": "https://www.wowhead.com/forever/talent-calc/rogue/v2005323101012-32030320201515231_t0_r95/1BAFDGJmNpqqqRqqstss0CDffgfEjmnn"
+        },
+        {
+          "id": "combat-backstab",
+          "grade": "S",
+          "rank": 1,
+          "name": "Combat Backstab",
+          "talents": [
+            {
+              "name": "Assassination",
+              "pts": 16,
+              "color": "#7BE06B"
+            },
+            {
+              "name": "Combat",
+              "pts": 33,
+              "color": "#FF6B5E"
+            },
+            {
+              "name": "Subtlety",
+              "pts": 2,
+              "color": "#B98BFF"
+            }
+          ],
+          "talentNote": "A Backstab variant of the Sinister Strike build. It swaps to a dagger in the main hand and uses Backstab as the builder.",
+          "keyTalents": [],
+          "link": "https://www.wowhead.com/forever/talent-calc/rogue/v2005322103-32030320201515231-002_t0_r95/2C1ABFDGJmnnnnpqqqqRqnstss0CDffgEjjj"
+        }
+      ],
       "apl": [],
       "opener": [],
       "nevers": []
     },
     "subtlety": {
-      "talentVariants": [],
+      "talentVariants": [
+        {
+          "id": "subtlety-backstab",
+          "grade": "B",
+          "rank": 5,
+          "name": "Subtlety Backstab",
+          "talents": [
+            {
+              "name": "Assassination",
+              "pts": 12,
+              "color": "#7BE06B"
+            },
+            {
+              "name": "Combat",
+              "pts": 8,
+              "color": "#FF6B5E"
+            },
+            {
+              "name": "Subtlety",
+              "pts": 31,
+              "color": "#B98BFF"
+            }
+          ],
+          "talentNote": "The traditional Subtlety Backstab build, focused on bleed damage.",
+          "keyTalents": [],
+          "link": "https://www.wowhead.com/forever/talent-calc/rogue/v20053031-3203-4320203300013211051_t0_r95/2aaaaBCEGHnPsrQVw1BAD0CDFg"
+        },
+        {
+          "id": "subtlety-hemo",
+          "grade": "A",
+          "rank": 4,
+          "name": "Subtlety Hemo",
+          "talents": [
+            {
+              "name": "Assassination",
+              "pts": 20,
+              "color": "#7BE06B"
+            },
+            {
+              "name": "Combat",
+              "pts": 0,
+              "color": "#FF6B5E"
+            },
+            {
+              "name": "Subtlety",
+              "pts": 31,
+              "color": "#B98BFF"
+            }
+          ],
+          "talentNote": "A variant of the Subtlety Backstab build that uses Hemorrhage as the builder instead. It leans on a slow main hand rather than a dagger.",
+          "keyTalents": [],
+          "link": "https://www.wowhead.com/forever/talent-calc/rogue/v2005323101014--4320203300013211501_t0_r95/2aaaaBCEGHnPsrQ0CDFg2Tw0Ejmnnnn"
+        }
+      ],
       "apl": [],
       "opener": [],
       "nevers": []
@@ -314,6 +473,48 @@
           "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-september-24/2360696"
         }
       ]
+    }
+  ],
+  "races": [
+    {
+      "name": "Skyborn",
+      "grade": "S",
+      "note": "Overall seems the best, and deals increased damage to Elementals. May lose value with Haste gear later on."
+    },
+    {
+      "name": "Orc",
+      "grade": "S",
+      "note": "Strong choice for short encounters."
+    },
+    {
+      "name": "Gnome",
+      "grade": "S",
+      "note": "Strong choice for short encounters."
+    },
+    {
+      "name": "Human",
+      "grade": "A",
+      "note": "May lose value if Crit Cap becomes a concern later on."
+    },
+    {
+      "name": "Undead",
+      "grade": "A",
+      "note": "Nothing overly special here, an average choice."
+    },
+    {
+      "name": "Night Elf",
+      "grade": "A",
+      "note": "May lose value if Crit Cap becomes a concern later on."
+    },
+    {
+      "name": "Troll",
+      "grade": "B",
+      "note": "Overall seems the worst, but deals increased damage to Beasts."
+    },
+    {
+      "name": "Dwarf",
+      "grade": null,
+      "note": "Meta unknown due to a crit bug currently."
     }
   ],
   "poisons": [
@@ -798,6 +999,10 @@
     {
       "q": "Should I build a Forever BiS list now?",
       "a": "No, and you should be suspicious of anyone who has. Blizzard has reviewed the loot on every dungeon boss and is updating quests, world drops, professions and existing items, with hundreds of new or adjusted drops and some effects tied to specific environments or creature types. The stated goal is to \"unsolve\" Classic. A Classic Era BiS list ported to Forever will be confidently wrong, which is worse than being empty."
+    },
+    {
+      "q": "Do I need to care about swing timers?",
+      "a": "No. Blizzard has explicitly confirmed, and in-game testing backs it up, that extra-swing effects like Windfury, Hack and Slash, Thrash Blade and Hand of Justice no longer reset your swing timer. That means there is nothing to gain from timing your special attacks around your auto-attacks. Doing it changes nothing about your DPS, so press your buttons when they are ready and spend the attention elsewhere."
     }
   ],
   "tools": [
@@ -866,6 +1071,10 @@
   ],
   "changelog": [
     {
+      "date": "Oct 18th, 2026",
+      "text": "Reworked the Talents section around projected level 60 builds for every spec, graded and ranked in a new Spec Meta list in Meta breakdown. Also added a Racial meta to the All Rogues section."
+    },
+    {
       "date": "Oct 3rd, 2026",
       "text": "Fixed placeholder mail gear issue, updated level 30 talent builds, updated UI strings and preview. Still a lot of work to do, but getting there."
     },
@@ -901,6 +1110,10 @@
           "label": "Talents"
         },
         {
+          "id": "stats",
+          "label": "Stats"
+        },
+        {
           "id": "gear",
           "label": "Gear"
         },
@@ -913,6 +1126,10 @@
     {
       "label": "ALL ROGUES",
       "items": [
+        {
+          "id": "races",
+          "label": "Races"
+        },
         {
           "id": "poisons",
           "label": "Poisons"

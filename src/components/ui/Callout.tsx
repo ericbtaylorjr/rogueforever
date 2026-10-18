@@ -11,16 +11,19 @@ const tones: Record<Tone, { rgb: string; cssVar: string }> = {
  * Left-ruled note for Forever claims, warnings and status lines. `quiet` drops the
  * tint for status lines ("still Classic Era data…") so they read as an aside, not
  * a banner. `label` is a short lead-in in the tone colour, written in sentence case.
+ * `icon` sits just before the label, e.g. the droplet on a sweaty tip.
  */
 export function Callout({
   tone = 'sky',
   quiet = false,
   label,
+  icon,
   children,
 }: {
   tone?: Tone;
   quiet?: boolean;
   label?: string;
+  icon?: ReactNode;
   children: ReactNode;
 }) {
   const t = tones[tone];
@@ -32,6 +35,7 @@ export function Callout({
         background: quiet ? 'transparent' : `rgba(${t.rgb}, .07)`,
       }}
     >
+      {icon && <span className="mr-[6px] inline-flex align-[1px]">{icon}</span>}
       {label && (
         <strong className="mr-[6px] font-semibold" style={{ color: t.cssVar }}>
           {label}

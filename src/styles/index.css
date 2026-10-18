@@ -108,6 +108,8 @@
   --rail-b: #0a0a0c;
   --bar-bg: rgba(10, 10, 12, 0.95);
   --specbar-bg: rgba(14, 14, 19, 0.94);
+  /* Only while the spec bar is stuck, so content scrolling under it reads as depth. */
+  --specbar-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.75);
   --scrim: rgba(4, 4, 6, 0.76);
   --scrim-soft: rgba(4, 4, 6, 0.74);
   /* Banners (raids, leveling) are always a dark gradient with light text on it. */
@@ -169,6 +171,7 @@
   --rail-b: #dfcb96;
   --bar-bg: rgba(232, 218, 178, 0.96);
   --specbar-bg: rgba(243, 232, 200, 0.95);
+  --specbar-shadow: 0 10px 22px -12px rgba(60, 36, 8, 0.45);
   --scrim: rgba(48, 30, 10, 0.6);
   --scrim-soft: rgba(48, 30, 10, 0.56);
   --hue-end: #24170a;

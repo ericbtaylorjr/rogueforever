@@ -35,33 +35,54 @@ export const itemForSlot = (set: keyof typeof gearSets, slot: string): GearItem 
   gearSets[set].find((i) => i.slot === slot);
 
 /**
- * Leveling stat priority per spec. EP is relative to Agility = 1.
+ * Leveling stat priority per spec. EP is relative to each spec's `relativeTo` stat (= 1).
  *
- * TODO: placeholder weights. Replace once Forever sims are run.
+ * Weights come from WoWSims EP runs against current BiS gear.
  */
 export const statPriority: Record<SpecId, StatPriority> = {
   combat: {
+    relativeTo: 'Attack Power',
     stats: [
-      { stat: 'Agility', ep: 1 },
-      { stat: 'Hit', ep: 0.9, op: '>' },
-      { stat: 'Attack Power', ep: 0.5, op: '>' },
-      { stat: 'Strength', ep: 0.5, op: '=' },
+      { stat: 'Hit Rating', ep: 2.43 },
+      { stat: 'Expertise Rating', ep: 2.28, op: '>' },
+      { stat: 'Agility', ep: 1.95, op: '>' },
+      { stat: 'Haste Rating', ep: 1.73, op: '>' },
+      { stat: 'Crit Rating', ep: 1.68, op: '>' },
+      { stat: 'Strength', ep: 1.1, op: '>' },
+      { stat: 'Attack Power', ep: 1, op: '>' },
+      { stat: 'Armor Penetration', ep: 0.43, op: '>' },
+      { stat: 'Spell Piercing', ep: 0.21, op: '>' },
+      { stat: 'Stamina', ep: 0, op: '>' },
     ],
   },
   assassination: {
+    relativeTo: 'Attack Power',
     stats: [
-      { stat: 'Agility', ep: 1 },
-      { stat: 'Hit', ep: 0.8, op: '>' },
-      { stat: 'Attack Power', ep: 0.5, op: '>' },
-      { stat: 'Strength', ep: 0.5, op: '=' },
+      { stat: 'Expertise Rating', ep: 2.78 },
+      { stat: 'Hit Rating', ep: 2.73, op: '>' },
+      { stat: 'Agility', ep: 2.08, op: '>' },
+      { stat: 'Crit Rating', ep: 2.03, op: '>' },
+      { stat: 'Haste Rating', ep: 1.95, op: '>' },
+      { stat: 'Strength', ep: 1.1, op: '>' },
+      { stat: 'Attack Power', ep: 1, op: '>' },
+      { stat: 'Spell Piercing', ep: 0.65, op: '>' },
+      { stat: 'Armor Penetration', ep: 0.4, op: '>' },
+      { stat: 'Stamina', ep: 0, op: '>' },
     ],
   },
   subtlety: {
+    relativeTo: 'Attack Power',
     stats: [
-      { stat: 'Agility', ep: 1 },
-      { stat: 'Hit', ep: 0.75, op: '>' },
-      { stat: 'Attack Power', ep: 0.55, op: '>' },
-      { stat: 'Strength', ep: 0.55, op: '=' },
+      { stat: 'Hit Rating', ep: 2.24 },
+      { stat: 'Expertise Rating', ep: 2.24, op: '=' },
+      { stat: 'Agility', ep: 1.96, op: '>' },
+      { stat: 'Crit Rating', ep: 1.71, op: '>' },
+      { stat: 'Haste Rating', ep: 1.48, op: '>' },
+      { stat: 'Strength', ep: 1.1, op: '>' },
+      { stat: 'Attack Power', ep: 1, op: '>' },
+      { stat: 'Armor Penetration', ep: 0.36, op: '>' },
+      { stat: 'Spell Piercing', ep: 0.21, op: '>' },
+      { stat: 'Stamina', ep: 0, op: '>' },
     ],
   },
 };

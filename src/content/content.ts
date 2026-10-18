@@ -15,6 +15,7 @@ export const {
   foreverOutlook,
   foreverDates,
   foreverChanges,
+  races,
   poisons,
   consumables,
   buffGroups,
@@ -44,6 +45,11 @@ export const specSectionIds = new Set(
 export const sectionLabels = Object.fromEntries(
   nav.flatMap((g) => g.items.map((i) => [i.id, i.label] as const)),
 ) as Record<string, string>;
+
+/** Every level 60 build across all specs, best first. */
+export const rankedBuilds = (Object.keys(specDetail) as SpecId[])
+  .flatMap((spec) => specDetail[spec].talentVariants.map((variant) => ({ spec, variant })))
+  .sort((a, b) => a.variant.rank - b.variant.rank);
 
 /** Category filters, derived rather than hardcoded so new data shows up. */
 export const consumableCats = ['All', ...new Set(consumables.map((c) => c.k))];

@@ -1,6 +1,6 @@
 import logo from '../../assets/logo-comfy-wizard.webp';
 import { contributors, credits as copy, socialMeta } from '../../content/copy';
-import { isPlaceholder, links } from '../../content/links';
+import { isPlaceholder, links, wowsimsLink } from '../../content/links';
 import { LinkedText } from '../ui/LinkedText';
 import { MailIcon, PhoneIcon, TvIcon, VideoIcon } from '../ui/SocialIcons';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -94,7 +94,7 @@ function ContributorCard({ c }: { c: Contributor }) {
       </div>
 
       <p className="mt-[12px] flex-1 text-[12.5px] leading-[1.6] text-mute">
-        <LinkedText text={c.bio} links={c.bioLinks} />
+        <LinkedText text={c.bio} links={{ ...wowsimsLink, ...c.bioLinks }} />
       </p>
 
       <div className="mt-[14px] flex gap-[8px]">

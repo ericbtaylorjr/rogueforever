@@ -62,11 +62,16 @@ authored them in markup.
 
 - **Gear table** renders 17 slot rows against the real `GearItem` schema and shows
   an empty state. Fill `gearSets` in `src/content/gear.ts` and every row fills,
-  Wowhead quality colouring, tooltips and icons included. Until a list has items its
-  tab is hidden; with only Leveling filled there's no tab bar at all.
-- **Leveling tab** (Gear's default tab) shows per-spec stat priority with EP weights
-  and a level-ordered milestone item list. Both are Classic Era placeholders in
-  `statPriority` / `levelingItems` in `src/content/gear.ts`. Check item IDs before launch.
+  Wowhead quality colouring, tooltips and icons included. All three tabs (Leveling,
+  Pre-raid BiS, Best in Slot) always show; a list with no items shows a "Coming soon"
+  note (`gear.comingSoon` in `copy.ts`) instead of an empty table.
+- **Leveling tab** (Gear's default tab) shows a level-ordered milestone item list, a
+  Classic Era placeholder in `levelingItems` in `src/content/gear.ts`. Check item IDs
+  before launch. Stat priority (`statPriority`) has its own Stats section.
+- **Level 60 builds** live in `specDetail[spec].talentVariants`. Each build's `grade`
+  (S–D) and `rank` (1 = best, across every spec) drive the Spec Meta list in Meta
+  breakdown (every spec) and the build list in Talents (active spec only). Leveling
+  builds are not shown; the `leveling` data is kept for later.
 - **Empty sections say so in one line** instead of showing placeholder UI. Meta
   Breakdown, Rotation and Talents' level 60 builds each render a short note until
   their data exists (`specIndex`/`levelingIndex`, `specDetail[spec].apl/opener/nevers`,

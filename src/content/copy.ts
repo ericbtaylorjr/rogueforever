@@ -54,8 +54,8 @@ export const scope = {
   specChipPrefix: 'Spec',
   zone: {
     label: 'Your spec guide',
-    before: 'Talents, gear and rotation below are for ',
-    after: '. Switch spec and they change with it.',
+    before: 'Talents, stats, gear and rotation below are for ',
+    after: '. If you change the Active Spec, then all the contextual information will change as well.',
   },
   allZone: 'Everything from here down is the same for every Rogue.',
 } as const;
@@ -65,6 +65,8 @@ export const headings: Record<string, string> = {
   specs: 'Meta breakdown',
   forever: 'Forever watch',
   talents: 'Talents',
+  stats: 'Stats',
+  races: 'Races',
   poisons: 'The poison rack',
   rotation: 'Rotation',
   gear: 'Gear',
@@ -81,9 +83,10 @@ export const headings: Record<string, string> = {
 
 export const specBoard = {
   intro:
-    "There's no meta yet, and I'd rather show nothing than a guess. Ranking specs honestly needs real data from Forever and WoWSims built for it, and neither exists yet.",
-  planned:
-    'Once they do, this is where the rankings go: single target and cleave at 60, plus questing and dungeons while leveling.',
+    "The builds below are the current projected meta, based on WoWSims research and the current beta game data. Expect this list to change through launch as more data comes in.",
+  rankingTitle: 'Spec Meta',
+  rankingMeta: 'Level 60 · end game',
+  rankingLabel: 'Level 60 end game builds, ranked',
   cols: { rank: 'RANK', index: 'INDEX · vs top' },
   tableLabel: 'Damage index by spec',
   pending: {
@@ -92,6 +95,12 @@ export const specBoard = {
   },
   yourSpec: 'YOUR SPEC',
   subheadings: { endgame: 'Level 60', leveling: 'Leveling' },
+} as const;
+
+/** Shared by the build lists in Meta breakdown and Talents. */
+export const buildList = {
+  gradeLabel: 'Grade',
+  ungraded: 'Not graded',
 } as const;
 
 export const forever = {
@@ -103,23 +112,35 @@ export const forever = {
 } as const;
 
 export const talents = {
-  /** `{spec}` is replaced with the active spec name. */
-  intro: 'Builds for {spec}.',
-  buildsLabel: 'Talent build',
+  intro: 'Level 60 builds for your active spec. Meta breakdown has how every build ranks across all three specs.',
   endgameTitle: 'Level 60 builds',
   endgamePending:
     "Not yet. The Forever trees aren't final, though Blizzard says they keep the familiar milestones at 11, 16, 21 and 31 points. I'll post level 60 builds once they've been tested.",
-  levelingTitle: 'Leveling build',
-  levelingTag: 'Level 30 beta',
-  levelingNote:
-    'Built for the level 30 beta cap. Any of the three specs levels fine, so play the one you enjoy. Full 1 to 60 builds come after launch.',
-  levelingCta: 'View talent build',
-  readMore: 'Read more',
-  readLess: 'Show less',
-  levelingComingSoon: 'Coming soon',
+  buildsLabel: 'Level 60 builds for this spec',
+  /** Shown only with sweaty tips on. */
+  murderTip: {
+    label: 'Sweaty tip:',
+    text: "most of these builds take 2/2 Murder. For encounters without Humanoids or Giants it does nothing, so swap those points into a couple of other offensive talents. Most players can set and forget, but if you're squeezing out every bit of damage, it's worth the respec.",
+  },
   /** Tree names are confirmed to carry over; the split is what is pending. */
   trees: ['Assassination', 'Combat', 'Subtlety'],
   calculator: 'Open in talent calculator ↗',
+} as const;
+
+export const racesCopy = {
+  intro:
+    'A general picture of the race meta, observed from WoWSims data. Some races pull ahead on shorter encounters and others on longer ones. A few races deal increased damage to certain mob types, so they generally perform better in encounters against those types. And as your gear improves, stat caps can come into play and change how much a race brings.',
+  learnMore: 'Learn more about racials on Wowhead ↗',
+  tip: {
+    label: 'Tip:',
+    text: "every race is within about 1% of the others, and some will be better in certain raids. Don't stress about choosing wrong. If you enjoy the vibes of one, play it.",
+  },
+  listTitle: 'Racial meta',
+  listLabel: 'Races ranked by meta grade',
+  sheet: {
+    text: "For how each race performs for every spec at different encounter lengths, see Anhak's Racial Spreadsheet.",
+    link: "Anhak's Racial Spreadsheet",
+  },
 } as const;
 
 export const poisonsCopy = {
@@ -150,18 +171,28 @@ export const rotation = {
   neverTitle: 'Never do this',
 } as const;
 
+export const stats = {
+  intro:
+    'These weights are relative to current BiS gear, so expect them to shift slightly as your gear changes. For more accurate values, run the EP calculator in WoWSims with your current gear setup.',
+  statsTitle: 'Stat priority',
+  statsMeta: 'Weights relative to',
+  epLabel: 'EP',
+} as const;
+
 export const gear = {
   status: {
     label: 'Placeholder:',
-    text: "these are Classic Era picks and weights standing in for now. Forever reworks dungeon loot, so expect this to change as the beta opens up.",
+    text: "these are Classic Era picks standing in for now. Forever reworks dungeon loot, so expect this to change as the beta opens up.",
   },
   cols: { slot: 'SLOT', item: 'ITEM', source: 'SOURCE', enchant: 'ENCHANT' },
   tableLabel: 'Gear by slot',
   empty: 'No item set yet',
+  /** Shown on a list tab until it has items. */
+  comingSoon: {
+    title: 'Coming soon',
+    text: "This gear hasn't been discovered yet. Forever reworks loot across the game, so this list gets filled in during the opening weeks of launch as we learn more.",
+  },
   leveling: {
-    statsTitle: 'Stat priority',
-    statsMeta: 'Weights relative to Agility',
-    epLabel: 'EP',
     itemsTitle: 'Leveling milestone gear',
     cols: { level: 'LEVEL', slot: 'SLOT', item: 'ITEM', source: 'SOURCE', faction: 'FACTION' },
     tableLabel: 'Leveling items by level',

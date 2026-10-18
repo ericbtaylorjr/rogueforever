@@ -1,11 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import { config } from '../../config';
-import { foreverOutlook, levelingIndex, specById, specIndex } from '../../content/content';
+import { foreverOutlook, levelingIndex, rankedBuilds, specById, specIndex } from '../../content/content';
 import { specBoard } from '../../content/copy';
 import type { LevelingSetId, SimSetId, SpecId } from '../../content/types';
 import { useHandbook, type SortKey } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { useSpecColor } from '../../state/useSpecColor';
+import { wowsimsLink } from '../../content/links';
+import { BuildList } from '../ui/BuildList';
+import { LinkedText } from '../ui/LinkedText';
 import { SegmentedTabs, Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -296,6 +299,22 @@ function SubHeading({ children }: { children: string }) {
   return <h3 className="t-card-title mt-[26px] text-ink">{children}</h3>;
 }
 
+/** Every level 60 build across all specs. Picking one switches the active spec to it. */
+function SpecMeta() {
+  if (!rankedBuilds.length) return null;
+  return (
+    <div className="panel mt-[16px] p-[18px]">
+      <div className="flex flex-wrap items-baseline justify-between gap-[10px]">
+        <span className="t-panel-label text-ink">{specBoard.rankingTitle}</span>
+        <span className="text-[12px] text-faint">{specBoard.rankingMeta}</span>
+      </div>
+      <div className="mt-[14px]">
+        <BuildList builds={rankedBuilds} label={specBoard.rankingLabel} showSpec />
+      </div>
+    </div>
+  );
+}
+
 /** Leveling meta: placeholder tabs until there is data to rank. */
 function LevelingMeta() {
   const [set, setSet] = useState<LevelingSetId>('questing');
@@ -345,10 +364,10 @@ export function SpecBoard() {
     return (
       <section id="specs" aria-label="Meta breakdown" className="pt-[44px]">
         <SectionHeading id="specs" />
-        <div className="flex max-w-[70ch] flex-col gap-[10px] text-[14px] leading-[1.6] text-mute">
-          <p>{specBoard.intro}</p>
-          <p>{specBoard.planned}</p>
-        </div>
+        <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
+          <LinkedText text={specBoard.intro} links={wowsimsLink} />
+        </p>
+        <SpecMeta />
       </section>
     );
   }
@@ -357,7 +376,11 @@ export function SpecBoard() {
     <section id="specs" aria-label="Meta breakdown" className="pt-[44px]">
       <SectionHeading id="specs" />
 
-      <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{specBoard.intro}</p>
+      <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
+        <LinkedText text={specBoard.intro} links={wowsimsLink} />
+      </p>
+
+      <SpecMeta />
 
       <SubHeading>{specBoard.subheadings.endgame}</SubHeading>
 

@@ -31,14 +31,14 @@ export function SpecZone({ children }: { children: ReactNode }) {
           background: `linear-gradient(180deg, ${c.mark}, ${c.line} 85%, transparent)`,
         }}
       />
-      <p className="mb-[6px] max-w-[70ch] text-[13.5px] leading-[1.6] text-mute">
+      <SpecBar />
+      <p className="mt-[4px] max-w-[70ch] text-[13.5px] leading-[1.6] text-mute">
         {scope.zone.before}
         <strong className="font-semibold" style={{ color: c.text }}>
           {c.spec.name}
         </strong>
         {scope.zone.after}
       </p>
-      <SpecBar />
       <Divider />
       {children}
     </div>

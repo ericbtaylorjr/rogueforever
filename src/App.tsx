@@ -12,9 +12,11 @@ import { Gear } from './components/sections/Gear';
 import { Overview } from './components/sections/Overview';
 import { Poisons } from './components/sections/Poisons';
 import { Pvp } from './components/sections/Pvp';
+import { Races } from './components/sections/Races';
 import { Raids } from './components/sections/Raids';
 import { Rotation } from './components/sections/Rotation';
 import { SpecBoard } from './components/sections/SpecBoard';
+import { Stats } from './components/sections/Stats';
 import { Talents } from './components/sections/Talents';
 import { Tools } from './components/sections/Tools';
 import { HandbookProvider } from './state/HandbookProvider';
@@ -38,12 +40,16 @@ export default function App() {
             <SpecZone>
               <Talents />
               <Divider />
+              <Stats />
+              <Divider />
               <Gear />
               <Divider />
               <Rotation />
             </SpecZone>
             <Divider />
             <AllRoguesBanner />
+            <Races />
+            <Divider />
             <Poisons />
             <Divider />
             <Consumables />

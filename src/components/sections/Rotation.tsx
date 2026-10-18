@@ -1,8 +1,10 @@
 import { specById, specDetail } from '../../content/content';
 import type { SpecDetail } from '../../content/types';
 import { rotation as copy } from '../../content/copy';
+import { wowsimsLink } from '../../content/links';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Droplet } from '../ui/Droplet';
+import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
 
 /** Priority list, opener and mistakes, once a spec has any of them. */
@@ -95,7 +97,7 @@ export function Rotation() {
 
       {!hasData ? (
         <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute" aria-live="polite">
-          {copy.pending.replace('{spec}', specById[spec].name)}
+          <LinkedText text={copy.pending.replace('{spec}', specById[spec].name)} links={wowsimsLink} />
         </p>
       ) : (
         <RotationDetail d={d} sweaty={sweaty} />

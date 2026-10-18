@@ -1,6 +1,6 @@
 import logo from '../../assets/logo-comfy-wizard.webp';
 import { hero } from '../../content/copy';
-import { links } from '../../content/links';
+import { links, wowsimsLink } from '../../content/links';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { LinkedText } from '../ui/LinkedText';
@@ -115,7 +115,7 @@ export function Overview() {
             >
               {hero.support.link}
             </a>
-            {hero.support.after}
+            <LinkedText text={hero.support.after} links={wowsimsLink} />
           </p>
 
           <div className="mt-[22px] flex flex-wrap gap-[10px]">

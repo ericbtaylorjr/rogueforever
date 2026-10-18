@@ -6,6 +6,7 @@ import {
   macros,
   nav,
   poisons,
+  races,
   raids,
   specs,
 } from './content';
@@ -36,6 +37,7 @@ export const searchIndex: SearchEntry[] = [
   ...buffGroups.flatMap((g) =>
     g.items.map((i) => ({ kind: 'Buff', label: i.n, id: 'buffs', section: g.label })),
   ),
+  ...races.map((r) => ({ kind: 'Race', label: r.name, id: 'races', section: 'Races' })),
   ...poisons.map((p) => ({ kind: 'Poison', label: p.name, id: 'poisons', section: 'Poisons' })),
   ...raids.map((r) => ({ kind: 'Raid', label: r.name, id: 'raid', section: r.tag })),
   ...foreverChanges.map((c) => ({

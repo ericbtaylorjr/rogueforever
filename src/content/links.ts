@@ -6,7 +6,7 @@
  * pretending to work.
  */
 export const links = {
-  wowsims: 'https://wowsims.github.io/classic/',
+  wowsims: 'https://www.wowsims.com/forever/rogue/dps/',
   weakauras: '#', // TODO: Comfy's UI addon package
   discord: 'https://discord.gg/rKF9G7zusj',
   tip: 'https://streamelements.com/thecomfywizard-bba10/tip',
@@ -16,8 +16,14 @@ export const links = {
   mail: 'mailto:TheComfyWizard@gmail.com',
   site: 'https://thecomfywizard.com',
   ellesmereui: 'https://www.curseforge.com/wow/addons/ellesmereui',
+  wowheadRacials: 'https://www.wowhead.com/forever/guide/new-race-class-combinations',
+  anhakRacials:
+    'https://docs.google.com/spreadsheets/d/1UkeR_x3OsEWXG90JhOm59Lb3MpRPYfQVfd2x4Ok9NOY/edit?gid=1328799785#gid=1328799785',
   rank1Logs: 'https://sod.warcraftlogs.com/character/us/crusader-strike/comfyrogue',
 } as const;
+
+/** Every mention of WoWSims in copy links here; pass to <LinkedText>. */
+export const wowsimsLink = { WoWSims: links.wowsims };
 
 /** Map a tool card's CTA to its destination. Keyed by the tool name in content.json. */
 export const toolHref: Record<string, string> = {
@@ -28,6 +34,7 @@ export const toolHref: Record<string, string> = {
 
 /** Phrases inside a tool card's body text that link out. Keyed by tool name, then phrase. */
 export const toolBodyLinks: Record<string, Record<string, string>> = {
+  'Learn WoWSims': wowsimsLink,
   "Comfy's UI": { EllesmereUI: links.ellesmereui },
 };
 

@@ -21,6 +21,8 @@ export interface Sort {
 interface HandbookState {
   /* state */
   spec: SpecId;
+  /** Chosen level 60 build per spec; a spec without one shows its best-ranked build. */
+  builds: Partial<Record<SpecId, string>>;
   simSet: SimSetId;
   sort: Sort;
   gearSet: GearSetId;
@@ -43,6 +45,8 @@ interface HandbookState {
 
   /* actions */
   setSpec: (id: SpecId) => void;
+  /** Switch to `spec` and show its build `id`. */
+  pickBuild: (spec: SpecId, id: string) => void;
   setSimSet: (id: SimSetId) => void;
   toggleSort: (key: SortKey) => void;
   setGearSet: (id: GearSetId) => void;
@@ -105,6 +109,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const initial = useRef(readInitial()).current;
 
   const [spec, setSpecState] = useState<SpecId>(initial.spec);
+  const [builds, setBuilds] = useState<Partial<Record<SpecId, string>>>({});
   const [simSet, setSimSet] = useState<SimSetId>('st');
   const [sort, setSort] = useState<Sort>({ key: 'idx', dir: 'desc' });
   const [gearSet, setGearSet] = useState<GearSetId>('leveling');
@@ -255,6 +260,10 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
 
   /** Selecting a spec must never move the page. */
   const setSpec = useCallback((id: SpecId) => setSpecState(id), []);
+  const pickBuild = useCallback((id: SpecId, build: string) => {
+    setSpecState(id);
+    setBuilds((b) => ({ ...b, [id]: build }));
+  }, []);
 
   const toggleSort = useCallback((key: SortKey) => {
     setSort((s) => (s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'desc' }));
@@ -263,6 +272,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const value = useMemo<HandbookState>(
     () => ({
       spec,
+      builds,
       simSet,
       sort,
       gearSet,
@@ -281,6 +291,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       isNarrow,
       isWide: vw >= bp.wide,
       setSpec,
+      pickBuild,
       setSimSet,
       toggleSort,
       setGearSet,
@@ -297,6 +308,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     }),
     [
       spec,
+      builds,
       simSet,
       sort,
       gearSet,
@@ -313,6 +325,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       vw,
       isNarrow,
       setSpec,
+      pickBuild,
       toggleSort,
       copy,
       jump,

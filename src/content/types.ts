@@ -23,17 +23,21 @@ export interface AplRow {
   sweaty?: boolean;
 }
 
+export type MetaGrade = 'S' | 'A' | 'B' | 'C' | 'D';
+
 /**
- * One talent build for a spec. A spec can carry several, one per niche
- * (e.g. raid single target, cleave, PvP); the Talents section switches between them.
+ * One talent build for a spec. A spec can carry several; the Talents section's
+ * build ranking lists every spec's builds and switches between them.
  */
 export interface TalentVariant {
   /** Unique within its spec. */
   id: string;
   /** Short tab label, e.g. "Raid". */
   name: string;
-  /** One line on when to pick this build over the others. */
-  niche: string;
+  /** Meta grade, S best to D worst. */
+  grade: MetaGrade;
+  /** Position in the level 60 build ranking across every spec, 1 = best. */
+  rank: number;
   talents: TalentTree[];
   talentNote: string;
   keyTalents: string[];
@@ -209,7 +213,7 @@ export interface GearItem {
 
 export type GearSetId = 'leveling' | 'prebis' | 'bis';
 
-/** One stat in a spec's priority, weighted in EP relative to Agility (= 1). */
+/** One stat in a spec's priority, weighted in EP relative to the priority's `relativeTo` stat (= 1). */
 export interface StatWeight {
   stat: string;
   ep: number;
@@ -217,6 +221,8 @@ export interface StatWeight {
 
 /** A stat priority reads left to right; `op` joins a stat to the one before it. */
 export interface StatPriority {
+  /** The stat every EP is measured against. */
+  relativeTo: string;
   stats: (StatWeight & { op?: '>' | '=' })[];
 }
 
@@ -228,6 +234,15 @@ export interface LevelingItem extends Omit<GearItem, 'enchant'> {
   faction: Faction;
 }
 
+/** One race in the race meta list. */
+export interface Race {
+  name: string;
+  /** `null` while a race can't be graded yet. */
+  grade: MetaGrade | null;
+  /** One line on what the race brings, or why it can't be graded. */
+  note: string;
+}
+
 export interface Content {
   specs: Spec[];
   specDetail: Record<SpecId, SpecDetail>;
@@ -236,6 +251,7 @@ export interface Content {
   foreverOutlook: ForeverOutlook[];
   foreverDates: ForeverDate[];
   foreverChanges: ForeverChange[];
+  races: Race[];
   poisons: Poison[];
   consumables: Consumable[];
   buffGroups: BuffGroup[];
