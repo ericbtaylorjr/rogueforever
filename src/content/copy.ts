@@ -106,7 +106,7 @@ export const buildList = {
 
 export const forever = {
   intro:
-    "Only what Blizzard has officially said, from news posts, panel recaps and blue posts, each linked to its source. Anything Blizzard hasn't published is marked as such, and community findings stay out until Blizzard confirms them.",
+    "Only what Blizzard has officially said, from news posts, panel recaps, blue posts and developer interviews, each linked to its source. Anything Blizzard hasn't published is marked as such, and community findings stay out until Blizzard confirms them.",
   impactPrefix: 'What it means for you:',
   sourcesLabel: 'Sources:',
   sourceLink: 'Source ↗',
