@@ -9,6 +9,7 @@ import { Faq } from './components/sections/Faq';
 import { Footer } from './components/sections/Footer';
 import { ForeverWatch } from './components/sections/ForeverWatch';
 import { Gear } from './components/sections/Gear';
+import { Macros } from './components/sections/Macros';
 import { Overview } from './components/sections/Overview';
 import { Poisons } from './components/sections/Poisons';
 import { Pvp } from './components/sections/Pvp';
@@ -63,6 +64,8 @@ export default function App() {
             <Pvp />
             <Divider />
             <Tools />
+            <Divider />
+            <Macros />
             <Divider />
             <Faq />
             <Divider />

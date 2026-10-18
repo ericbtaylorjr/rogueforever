@@ -47,7 +47,7 @@ export const searchIndex: SearchEntry[] = [
     section: c.status,
   })),
   ...faqs.map((f) => ({ kind: 'FAQ', label: f.q, id: 'faq', section: 'FAQ' })),
-  ...macros.map((m) => ({ kind: 'Macro', label: m.name, id: 'tools', section: 'Tools' })),
+  ...macros.map((m) => ({ kind: 'Macro', label: m.name, id: 'macros', section: 'Macros' })),
   ...specs.map((s) => ({ kind: 'Spec', label: s.name, id: 'specs', section: 'Meta breakdown' })),
 ];
 

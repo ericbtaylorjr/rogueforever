@@ -76,6 +76,7 @@ export const headings: Record<string, string> = {
   raid: 'Raids',
   pvp: 'PvP',
   tools: 'Tools & UI',
+  macros: 'Macros',
   faq: 'FAQ',
   changelog: 'Changelog',
   credits: 'Credits',
@@ -264,8 +265,8 @@ export const pvpCopy = {
   ],
 } as const;
 
-export const toolsCopy = {
-  macrosTitle: 'Macros worth stealing',
+export const macrosCopy = {
+  intro: 'Here are some helpful Rogue macros which should help improve your performance or quality of life.',
   copy: 'Copy',
   copied: 'Copied',
 } as const;

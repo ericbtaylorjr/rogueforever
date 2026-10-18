@@ -1,7 +1,5 @@
-import { macros, tools } from '../../content/content';
-import { toolsCopy as copy } from '../../content/copy';
+import { tools } from '../../content/content';
 import { toolBodyLinks, toolHref } from '../../content/links';
-import { CopyButton } from '../ui/CopyButton';
 import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
 import { ComfyUiActions } from './ComfyUi';
@@ -46,34 +44,6 @@ export function Tools() {
                 </a>
               )}
             </article>
-          ))}
-        </div>
-      </div>
-
-      <div className="panel mt-[16px] p-[18px]">
-        <span className="t-panel-label text-ink">{copy.macrosTitle}</span>
-
-        <div className="mt-[14px] grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
-          {macros.map((m, i) => (
-            <div key={m.name} className="panel-inner p-[14px]">
-              <div className="flex items-center justify-between gap-[10px]">
-                <span className="text-[12.5px] font-semibold text-ink">{m.name}</span>
-                <CopyButton
-                  copyKey={`macro-${i}`}
-                  text={m.code}
-                  label={copy.copy}
-                  copiedLabel={copy.copied}
-                  variant="small"
-                  name={m.name}
-                />
-              </div>
-              <pre
-                className="t-code mt-[10px] rounded-[8px] p-[11px] text-mute"
-                style={{ background: 'var(--surface-deep)' }}
-              >
-                {m.code}
-              </pre>
-            </div>
           ))}
         </div>
       </div>

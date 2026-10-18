@@ -42,8 +42,17 @@ export function Races() {
             >
               <GradeBadge grade={r.grade} />
               <span className="min-w-0">
-                <span className="block text-[13.5px] font-semibold text-ink">{r.name}</span>
-                <span className="mt-[2px] block text-[12.5px] leading-[1.5] text-mute">{r.note}</span>
+                {/* Racials run inline after the name and wrap under it; the note sits a clear
+                    step further down so it reads as a separate line, not more of the summary. */}
+                <span className="block text-[12px] leading-[1.4] text-faint">
+                  <span className="text-[13.5px] font-semibold text-ink">{r.name}</span>
+                  <span aria-hidden="true" className="mx-[8px] text-dim">|</span>
+                  <span className="sr-only">: </span>
+                  {r.racials}
+                </span>
+                <span className="mt-[8px] block text-[13px] leading-[1.5] text-prose">
+                  <LinkedText text={r.note} links={r.noteLinks} />
+                </span>
               </span>
             </li>
           ))}

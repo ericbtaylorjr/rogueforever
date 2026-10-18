@@ -237,10 +237,14 @@ export interface LevelingItem extends Omit<GearItem, 'enchant'> {
 /** One race in the race meta list. */
 export interface Race {
   name: string;
+  /** Short summary of the race's racial abilities. */
+  racials: string;
   /** `null` while a race can't be graded yet. */
   grade: MetaGrade | null;
   /** One line on what the race brings, or why it can't be graded. */
   note: string;
+  /** Phrases inside `note` that link out, phrase to URL. */
+  noteLinks?: Record<string, string>;
 }
 
 export interface Content {
