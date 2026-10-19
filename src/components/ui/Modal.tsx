@@ -16,7 +16,7 @@ export function Modal({
   onClose: () => void;
   title: string;
   closeLabel: string;
-  size?: 'md' | 'xl';
+  size?: 'md' | 'lg' | 'xl';
   children: ReactNode;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -47,7 +47,7 @@ export function Modal({
       // A click on the dialog element itself (not its content) is a backdrop click.
       onClick={(e) => e.target === e.currentTarget && onClose()}
       className={`m-auto w-[calc(100%-32px)] animate-rise overflow-hidden rounded-[14px] border border-line p-0 text-ink backdrop:bg-[var(--scrim)] backdrop:backdrop-blur-[6px] ${
-        size === 'xl' ? 'max-w-[1200px]' : 'max-w-[560px]'
+        size === 'xl' ? 'max-w-[1200px]' : size === 'lg' ? 'max-w-[680px]' : 'max-w-[560px]'
       }`}
       style={{ background: 'var(--surface-pop)', boxShadow: 'var(--palette-shadow)' }}
     >

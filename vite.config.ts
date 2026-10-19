@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import { config } from './src/config';
 
 /**
  * The pre-paint theme script (src/theme-init.js) is inlined into index.html so it doesn't
@@ -44,17 +45,26 @@ const preloadFonts = (): Plugin => ({
  * GitHub Pages can't set response headers, so the CSP ships as a <meta> tag.
  * Everything is first-party (fonts included). `style-src` needs 'unsafe-inline'
  * because the design sets many inline style attributes; `script-src` does not
- * (the one inline script is pinned by hash, above).
+ * (the one inline script is pinned by hash, above). Google Analytics hosts are added
+ * only when `config.analyticsId` is set.
  * Build-only: the dev server injects inline scripts + a websocket for HMR.
  * `frame-ancestors` can't be set from a meta tag — see README > Security.
  */
+/** Google Analytics hosts, allowed only when an analytics ID is set (src/lib/analytics.ts). */
+const ga = config.analyticsId
+  ? {
+      script: ' https://www.googletagmanager.com',
+      beacon: ' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com',
+    }
+  : { script: '', beacon: '' };
+
 const csp = [
   "default-src 'self'",
-  `script-src 'self' ${themeInitHash}`,
+  `script-src 'self' ${themeInitHash}${ga.script}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
+  `img-src 'self' data:${ga.beacon}`,
   "font-src 'self'",
-  "connect-src 'self'",
+  `connect-src 'self'${ga.beacon}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'none'",

@@ -7,6 +7,9 @@
  */
 export const links = {
   wowsims: 'https://www.wowsims.com/forever/rogue/dps/',
+  googleAnalyticsData: 'https://policies.google.com/technologies/partner-sites',
+  googlePrivacy: 'https://policies.google.com/privacy',
+  githubPrivacy: 'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
   weakauras: '#', // TODO: Comfy's UI addon package
   discord: 'https://discord.gg/rKF9G7zusj',
   tip: 'https://streamelements.com/thecomfywizard-bba10/tip',
@@ -21,6 +24,14 @@ export const links = {
     'https://docs.google.com/spreadsheets/d/1UkeR_x3OsEWXG90JhOm59Lb3MpRPYfQVfd2x4Ok9NOY/edit?gid=1328799785#gid=1328799785',
   rank1Logs: 'https://sod.warcraftlogs.com/character/us/crusader-strike/comfyrogue',
 } as const;
+
+/** Phrases in the privacy policy that link out; pass to <LinkedText>. */
+export const privacyLinks = {
+  'TheComfyWizard@gmail.com': links.mail,
+  'how Google uses this data': links.googleAnalyticsData,
+  'Google Privacy Policy': links.googlePrivacy,
+  "GitHub's privacy statement": links.githubPrivacy,
+};
 
 /** Every mention of WoWSims in copy links here; pass to <LinkedText>. */
 export const wowsimsLink = { WoWSims: links.wowsims };

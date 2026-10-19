@@ -423,8 +423,92 @@ export const socialMeta = {
   MAIL: { name: 'Email' },
 } as const;
 
+export const consent = {
+  regionLabel: 'Cookie consent',
+  title: 'Cookies, only if you say so',
+  body:
+    "I'd like to use Google Analytics to see which specs, builds and sections get used, so I know what to improve next. It sets cookies, and it doesn't load unless you allow it. No ad tracking either way.",
+  learnMore: 'How Google uses this data',
+  privacy: 'Privacy policy',
+  accept: 'Allow analytics',
+  decline: 'No thanks',
+  close: 'Close',
+  current: { granted: 'Right now: analytics allowed.', denied: 'Right now: analytics off.' },
+};
+
+/**
+ * Privacy policy, opened from the footer and the cookie banner (and by #privacy).
+ * Keep it true to the code: src/lib/analytics.ts, the localStorage keys and vite.config.ts.
+ * Bump `updated` whenever the substance changes.
+ */
+export const privacy = {
+  title: 'Privacy policy',
+  close: 'Close privacy policy',
+  updated: 'Last updated October 19, 2026',
+  intro:
+    "Short version: the Handbook doesn't have accounts, forms or ads. It remembers a few preferences in your browser, and it only uses Google Analytics if you allow it on the cookie banner.",
+  sections: [
+    {
+      heading: 'Who runs this',
+      body: [
+        'The Rogue Handbook (wowrogue.gg) is a fan project curated by The Comfy Wizard. For anything privacy related, email TheComfyWizard@gmail.com.',
+      ],
+    },
+    {
+      heading: 'What stays in your browser',
+      body: [
+        "Three small settings are saved in your browser's local storage: your spec and sweaty preference (rc:prefs), light or dark theme (rc:theme), and your cookie choice with the date you made it (rc:consent). They never leave your device, and clearing your site data removes them.",
+        'The search box runs entirely in your browser. Nothing you type is sent anywhere.',
+      ],
+    },
+    {
+      heading: 'Analytics, only with your consent',
+      body: [
+        "If you pick \"Allow analytics\", the Handbook loads Google Analytics 4 to see how the guide gets used: pages viewed, which specs and builds are picked, the sweaty toggle, section jumps from the nav or search, and which macros are copied. Google also records things like your browser, device, screen size, the site that sent you here, and a rough location (country and city) worked out from your IP address. Google Analytics 4 doesn't store the IP address itself.",
+        'It sets two cookies, _ga and _ga_2X22ZZJLFJ, which last up to 2 years so a returning visit can be told apart from a new one. Advertising features and ad personalisation are switched off.',
+        'Google processes this data on the Handbook\'s behalf and may handle it outside your country, including in the United States. See how Google uses this data and the Google Privacy Policy.',
+        "If you don't allow it, or your browser sends a Global Privacy Control signal, Google Analytics never loads and no cookies are set. The legal basis for analytics is your consent, which you can withdraw at any time.",
+      ],
+    },
+    {
+      heading: 'Hosting',
+      body: [
+        "The site is hosted on GitHub Pages. Like most hosts, GitHub may log basic request data such as IP addresses for security and reliability. See GitHub's privacy statement. Fonts and game icons are served from the site itself, so no other services load when you visit.",
+      ],
+    },
+    {
+      heading: 'Links to other sites',
+      body: [
+        'The Handbook links out to places like the Rogue Classic Discord, WoWSims, Wowhead, YouTube, Twitch and the tip page. Those sites have their own privacy policies, which apply once you leave.',
+      ],
+    },
+    {
+      heading: 'Your choices and rights',
+      body: [
+        'You can change your cookie choice any time with Cookie settings in the footer. Switching analytics off stops it and deletes the Google Analytics cookies.',
+        'Depending on where you live (for example under the GDPR in the EU and UK, or in California), you may have the right to access, correct or delete your data, and to object to its use. Analytics data is pseudonymous, so it usually can\'t be traced back to you, but email TheComfyWizard@gmail.com and it will be handled. You can also complain to your local data protection authority.',
+      ],
+    },
+    {
+      heading: 'Children',
+      body: ["The Handbook isn't aimed at children under 13 and doesn't knowingly collect their data."],
+    },
+    {
+      heading: 'Changes',
+      body: ['If this policy changes, the date at the top changes with it.'],
+    },
+  ],
+} as const;
+
 export const footer = {
   brand: 'Rogue Handbook',
+  cookieSettings: 'Cookie settings',
+  privacyPolicy: 'Privacy policy',
+  /** Bottom bar: the Handbook is a fan project. Keep both lines. */
+  disclaimer:
+    'The Rogue Handbook has zero affiliation with Blizzard Entertainment. It is a 100% community driven fan project.',
+  trademark:
+    'World of Warcraft and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.',
   closing: {
     before: 'Curated by ',
     curator: 'The Comfy Wizard',

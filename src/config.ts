@@ -12,6 +12,8 @@ export interface HandbookConfig {
   showSweaty: boolean;
   phaseLabel: string;
   defaultSpec: SpecId;
+  /** GA4 measurement ID (`G-…`). Public by design, so it lives here. Empty turns analytics off. */
+  analyticsId: string;
 }
 
 export const config: HandbookConfig = {
@@ -22,6 +24,7 @@ export const config: HandbookConfig = {
   showSweaty: true,
   phaseLabel: 'v 1.60.1',
   defaultSpec: 'combat',
+  analyticsId: 'G-2X22ZZJLFJ',
 };
 
 /** Viewport thresholds. Kept in one place so CSS and JS can't drift apart. */

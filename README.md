@@ -159,7 +159,22 @@ first paint (no flash) and `src/state/ThemeProvider.tsx` owns it afterwards; bot
 ## Security
 
 Static site, no backend, no user input beyond a search box, no `dangerouslySetInnerHTML`,
-no third-party scripts, no runtime network requests. `npm audit` is clean.
+no third-party scripts beyond optional Google Analytics (below). `npm audit` is clean.
+
+- **Analytics:** Google Analytics 4 runs only when `analyticsId` in `src/config.ts` holds a
+  `G-…` measurement ID, only in production builds, and only after the visitor allows it on
+  the consent banner (`ConsentBanner.tsx`). Until then nothing from Google loads. Declining
+  or a Global Privacy Control signal keeps it off; the choice (`localStorage['rc:consent']`)
+  lasts 12 months, can be changed from the footer's "Cookie settings", and withdrawing it
+  clears GA's cookies. Ad storage and ad signals are always denied. `src/lib/analytics.ts`
+  loads gtag.js (no inline snippet), and the build adds Google's hosts to the CSP only while
+  an ID is set.
+  Custom events: `spec_select`, `build_select`, `sweaty_toggle`, `section_jump`, `copy`.
+- **Privacy policy** lives in `copy.ts` (`privacy`) and opens in a dialog from the footer, the
+  consent banner, or a `#privacy` link. It describes the code as it stands (storage keys, GA
+  events and cookies, hosting), so update it, and its `updated` date, whenever those change.
+- **Fan-project disclaimer:** the footer's bottom bar states the Handbook has no affiliation
+  with Blizzard Entertainment, plus the standard trademark line. Keep both.
 
 - **CSP** ships as a `<meta>` tag injected at build time (`vite.config.ts`); everything is
   first-party, including fonts (`src/assets/fonts`, OFL) and game icons. `style-src` needs

@@ -5,8 +5,10 @@ import { themeVars } from '../../lib/theme';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { CommandPalette } from './CommandPalette';
+import { ConsentBanner } from './ConsentBanner';
 import { Drawer } from './Drawer';
 import { MobileBar } from './MobileBar';
+import { PrivacyPolicy } from './PrivacyPolicy';
 import { Sidebar } from './Sidebar';
 import { TopTabs } from './TopTabs';
 
@@ -52,6 +54,8 @@ export function Shell({ children }: { children: ReactNode }) {
         </div>
       </main>
 
+      <ConsentBanner />
+      <PrivacyPolicy />
       <CommandPalette />
     </div>
   );

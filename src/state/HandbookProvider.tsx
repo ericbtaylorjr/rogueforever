@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from 'react';
 import { bp, config, scrollOffset } from '../config';
+import { track } from '../lib/analytics';
 import { sectionIds, specs } from '../content/content';
 import type { GearSetId, SimSetId, SpecId } from '../content/types';
 
@@ -36,6 +37,8 @@ interface HandbookState {
   active: string;
   copied: string;
   drawer: boolean;
+  /** Privacy policy window. Also opened by landing on #privacy. */
+  privacyOpen: boolean;
   vw: number;
 
   /* derived viewport flags */
@@ -58,6 +61,7 @@ interface HandbookState {
   setSearchOpen: (open: boolean) => void;
   setQuery: (q: string) => void;
   setDrawer: (open: boolean) => void;
+  setPrivacyOpen: (open: boolean) => void;
   /** Resolves true once the clipboard accepted the text. */
   copy: (key: string, text: string) => Promise<boolean>;
   jump: (id: string) => void;
@@ -67,6 +71,7 @@ const Ctx = createContext<HandbookState | null>(null);
 
 const COPY_RESET_MS = 1600;
 const STORE_KEY = 'rc:prefs';
+const PRIVACY_HASH = '#privacy';
 
 const isSpecId = (v: string | null): v is SpecId =>
   !!v && specs.some((s) => s.id === (v as SpecId));
@@ -123,6 +128,9 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const [active, setActive] = useState(sectionIds[0]);
   const [copied, setCopied] = useState('');
   const [drawer, setDrawer] = useState(false);
+  const [privacyOpen, setPrivacyOpenState] = useState(
+    () => typeof window !== 'undefined' && window.location.hash === PRIVACY_HASH,
+  );
   const [vw, setVw] = useState(() => (typeof window === 'undefined' ? 1440 : window.innerWidth));
 
   const isNarrow = vw < bp.rail;
@@ -222,6 +230,13 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => () => window.clearTimeout(copyTimer.current), []);
 
+  /* #privacy is a shareable link to the policy, so follow it on hash changes too. */
+  useEffect(() => {
+    const onHash = () => window.location.hash === PRIVACY_HASH && setPrivacyOpenState(true);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
   /* ----- actions ----- */
   const jump = useCallback(
     (id: string) => {
@@ -234,6 +249,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
       setActive(id);
+      track('section_jump', { section: id });
       window.history.replaceState(null, '', `#${id}`);
       // scrollTo() doesn't move keyboard focus, so a keyboard or screen-reader user would
       // be left behind in the nav. Park focus on the section without a second scroll.
@@ -249,6 +265,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     return navigator.clipboard.writeText(text).then(
       () => {
         setCopied(key);
+        track('copy', { item: key });
         window.clearTimeout(copyTimer.current);
         copyTimer.current = window.setTimeout(() => setCopied(''), COPY_RESET_MS);
         return true;
@@ -258,11 +275,24 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
+  /** Opening names it in the URL so it can be shared; closing drops the hash again. */
+  const setPrivacyOpen = useCallback((open: boolean) => {
+    setPrivacyOpenState(open);
+    const url = new URL(window.location.href);
+    if (open) url.hash = PRIVACY_HASH;
+    else if (url.hash === PRIVACY_HASH) url.hash = '';
+    window.history.replaceState(null, '', url);
+  }, []);
+
   /** Selecting a spec must never move the page. */
-  const setSpec = useCallback((id: SpecId) => setSpecState(id), []);
+  const setSpec = useCallback((id: SpecId) => {
+    setSpecState(id);
+    track('spec_select', { spec: id });
+  }, []);
   const pickBuild = useCallback((id: SpecId, build: string) => {
     setSpecState(id);
     setBuilds((b) => ({ ...b, [id]: build }));
+    track('build_select', { spec: id, build });
   }, []);
 
   const toggleSort = useCallback((key: SortKey) => {
@@ -286,6 +316,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       active,
       copied,
       drawer,
+      privacyOpen,
       vw,
       isPhone: vw < bp.phone,
       isNarrow,
@@ -297,12 +328,16 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       setGearSet,
       setConsumeFilter,
       setForeverFilter,
-      toggleSweaty: () => setSweaty((s) => !s),
+      toggleSweaty: () => {
+        setSweaty(!sweaty);
+        track('sweaty_toggle', { enabled: !sweaty });
+      },
       toggleRaid: (i) => setOpenRaid((o) => (o === i ? -1 : i)),
       toggleFaq: (i) => setOpenFaq((o) => (o === i ? -1 : i)),
       setSearchOpen,
       setQuery,
       setDrawer,
+      setPrivacyOpen,
       copy,
       jump,
     }),
@@ -322,10 +357,12 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       active,
       copied,
       drawer,
+      privacyOpen,
       vw,
       isNarrow,
       setSpec,
       pickBuild,
+      setPrivacyOpen,
       toggleSort,
       copy,
       jump,
