@@ -294,7 +294,7 @@ export const exposeArmor = {
 
 export const raidsCopy = {
   intro:
-    "The three raids Blizzard has confirmed for Forever so far. Boss lists and Rogue notes aren't out yet, so this only tracks what has actually been said.",
+    "The three raids that unlock December 9th, 2026. Blizzard has published their sizes, locations, boss counts and the Onyxia attunement. Boss names and Rogue notes aren't out yet, so this section only tracks what Blizzard has said.",
   prepLabel: 'Status:',
 } as const;
 
