@@ -6,7 +6,7 @@ import { useTheme } from '../../state/ThemeProvider';
 import { useSpecColor } from '../../state/useSpecColor';
 import { hexA } from '../../lib/color';
 import { Droplet } from '../ui/Droplet';
-import { SpecSelect } from '../ui/SpecSelect';
+import { BuildSelect, SpecSelect } from '../ui/SpecSelect';
 
 /** True while the element after `sentinel` is pinned at `top` px. */
 function useStuck(top: number) {
@@ -27,7 +27,7 @@ function useStuck(top: number) {
   return { sentinel, on };
 }
 
-/** Sticky inside the spec zone. Owns the spec picker and the sweaty-tips toggle. */
+/** Sticky inside the spec zone. Owns the spec and build pickers and the sweaty-tips toggle. */
 export function SpecBar() {
   const { spec, setSpec, sweaty, toggleSweaty, isNarrow, isPhone } = useHandbook();
   const { tone } = useTheme();
@@ -54,7 +54,10 @@ export function SpecBar() {
           }}
         >
           {isPhone ? (
-            <SpecSelect />
+            <div className="flex w-full gap-[8px]">
+              <SpecSelect />
+              <BuildSelect />
+            </div>
           ) : (
             <>
               <span className="t-eyebrow text-[10.5px] text-faint">
@@ -89,6 +92,13 @@ export function SpecBar() {
                   );
                 })}
               </div>
+
+              <span aria-hidden="true" className="mx-[4px] h-[22px] w-px bg-line" />
+
+              <span className="t-eyebrow text-[10.5px] text-faint">
+                {specBar.buildLabel}
+              </span>
+              <BuildSelect size="rail" grow={false} />
 
               <span className="ml-auto" />
             </>

@@ -7,13 +7,13 @@ import { Tip } from '../ui/Tip';
 import { SpecBar } from './SpecBar';
 
 /**
- * Everything that follows the active spec. The spec bar is sticky *within this
+ * Everything that follows the active spec and build. The spec bar is sticky *within this
  * wrapper*, so it scrolls away once you leave the spec sections — the page
  * itself shows what the picker controls. A rail in the spec's colour runs the
  * length of the zone.
  */
 export function SpecZone({ children }: { children: ReactNode }) {
-  const { isPhone, isNarrow } = useHandbook();
+  const { build, isPhone, isNarrow } = useHandbook();
   const c = useSpecColor();
   const gutter = isPhone ? -9 : isNarrow ? -13 : -17;
 
@@ -37,7 +37,7 @@ export function SpecZone({ children }: { children: ReactNode }) {
         <Tip spec label={false}>
           {scope.zone.before}
           <strong className="font-semibold" style={{ color: c.text }}>
-            {c.spec.name}
+            {c.spec.name} · {build.name}
           </strong>
           {scope.zone.after}
         </Tip>

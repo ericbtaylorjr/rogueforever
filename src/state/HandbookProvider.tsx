@@ -11,8 +11,9 @@ import {
 import { bp, config, scrollOffset } from '../config';
 import { setTrackContext, track } from '../lib/analytics';
 import { noteJump, useSectionViews } from '../lib/sectionViews';
+import { buildForSwitch, defaultBuild, findBuild } from '../content/builds';
 import { sectionIds, specs } from '../content/content';
-import type { GearSetId, SimSetId, SpecId } from '../content/types';
+import type { Build, GearSetId, SimSetId, SpecId } from '../content/types';
 
 export type SortKey = 'rank' | 'name' | 'weapon' | 'idx' | 'delta';
 export interface Sort {
@@ -23,8 +24,8 @@ export interface Sort {
 interface HandbookState {
   /* state */
   spec: SpecId;
-  /** Chosen level 60 build per spec; a spec without one shows its best-ranked build. */
-  builds: Partial<Record<SpecId, string>>;
+  /** The active spec's build. Talents, Stats, Gear and Rotation all show this. */
+  build: Build;
   simSet: SimSetId;
   sort: Sort;
   gearSet: GearSetId;
@@ -48,8 +49,9 @@ interface HandbookState {
   isWide: boolean;
 
   /* actions */
+  /** Switches spec and lands on its matching build (see `buildForSwitch`). */
   setSpec: (id: SpecId) => void;
-  /** Switch to `spec` and show its build `id`. */
+  /** Switch to `spec` and make its build `id` active. */
   pickBuild: (spec: SpecId, id: string) => void;
   setSimSet: (id: SimSetId) => void;
   toggleSort: (key: SortKey) => void;
@@ -90,13 +92,14 @@ const toSpecId = (v: string | null | undefined): SpecId | null => {
   return isSpecId(id) ? id : null;
 };
 
-function readInitial(): { spec: SpecId; sweaty: boolean } {
+function readInitial(): { spec: SpecId; build?: string; sweaty: boolean } {
   const fallback = { spec: config.defaultSpec, sweaty: config.showSweaty };
   if (typeof window === 'undefined') return fallback;
 
-  // URL wins (shared links land on their spec), then the spec picked last visit, then the default.
-  const fromUrl = new URLSearchParams(window.location.search).get('spec');
-  let stored: { spec?: string; sweaty?: boolean } = {};
+  // URL wins (shared links land on their spec and build), then last visit's, then the default.
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get('spec');
+  let stored: { spec?: string; build?: string; sweaty?: boolean } = {};
   try {
     // Storage is user-editable, so treat it as untrusted: anything that isn't a plain object is ignored.
     const parsed: unknown = JSON.parse(localStorage.getItem(STORE_KEY) ?? '{}');
@@ -105,8 +108,13 @@ function readInitial(): { spec: SpecId; sweaty: boolean } {
     /* ignore — preferences are a nicety, not a requirement */
   }
 
+  const urlSpec = toSpecId(fromUrl);
+  const spec = urlSpec ?? toSpecId(stored.spec) ?? fallback.spec;
+  // A build only counts for the spec it came with; findBuild drops anything that isn't one.
+  const wanted = urlSpec ? params.get('build') : spec === toSpecId(stored.spec) ? stored.build : null;
   return {
-    spec: toSpecId(fromUrl) ?? toSpecId(stored.spec) ?? fallback.spec,
+    spec,
+    build: findBuild(spec, typeof wanted === 'string' ? wanted : null)?.id,
     sweaty: typeof stored.sweaty === 'boolean' ? stored.sweaty : fallback.sweaty,
   };
 }
@@ -115,10 +123,14 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const initial = useRef(readInitial()).current;
 
   const [spec, setSpecState] = useState<SpecId>(initial.spec);
-  const [builds, setBuilds] = useState<Partial<Record<SpecId, string>>>({});
+  /** Build picked per spec. A spec with none (or a stale id) shows its best-ranked build. */
+  const [builds, setBuilds] = useState<Partial<Record<SpecId, string>>>(
+    initial.build ? { [initial.spec]: initial.build } : {},
+  );
+  const build = findBuild(spec, builds[spec]) ?? defaultBuild(spec);
   const [simSet, setSimSetState] = useState<SimSetId>('st');
   const [sort, setSort] = useState<Sort>({ key: 'idx', dir: 'desc' });
-  const [gearSet, setGearSetState] = useState<GearSetId>('leveling');
+  const [gearSet, setGearSetState] = useState<GearSetId>('prebis');
   const [consumeFilter, setConsumeFilterState] = useState('All');
   const [foreverFilter, setForeverFilterState] = useState('All');
   const [sweaty, setSweaty] = useState(initial.sweaty);
@@ -174,18 +186,22 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   /* ----- persistence ----- */
   useEffect(() => {
     try {
-      localStorage.setItem(STORE_KEY, JSON.stringify({ spec, sweaty }));
+      localStorage.setItem(STORE_KEY, JSON.stringify({ spec, build: build.id, sweaty }));
     } catch {
       /* ignore */
     }
     const url = new URL(window.location.href);
-    // Always explicit, so every link (default included) names its spec.
+    // Always explicit, so every link (default included) names its spec and build.
     url.searchParams.set('spec', spec);
+    url.searchParams.set('build', build.id);
     window.history.replaceState(null, '', url);
-  }, [spec, sweaty]);
+  }, [spec, build.id, sweaty]);
 
   /* ----- analytics ----- */
-  useEffect(() => setTrackContext({ active_spec: spec, sweaty_mode: sweaty }), [spec, sweaty]);
+  useEffect(
+    () => setTrackContext({ active_spec: spec, active_build: build.id, sweaty_mode: sweaty }),
+    [spec, build.id, sweaty],
+  );
   useSectionViews(sectionIds);
 
   /* Search opens from a button, the mobile bar or Ctrl K; count every way in here. */
@@ -296,14 +312,18 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /** Selecting a spec must never move the page. */
-  const setSpec = useCallback((id: SpecId) => {
+  const setSpec = useCallback(
+    (id: SpecId) => {
+      setSpecState(id);
+      setBuilds((b) => ({ ...b, [id]: buildForSwitch(id, build, b[id]).id }));
+      track('spec_select', { spec: id });
+    },
+    [build],
+  );
+  const pickBuild = useCallback((id: SpecId, buildId: string) => {
     setSpecState(id);
-    track('spec_select', { spec: id });
-  }, []);
-  const pickBuild = useCallback((id: SpecId, build: string) => {
-    setSpecState(id);
-    setBuilds((b) => ({ ...b, [id]: build }));
-    track('build_select', { spec: id, build });
+    setBuilds((b) => ({ ...b, [id]: buildId }));
+    track('build_select', { spec: id, build: buildId });
   }, []);
 
   const setGearSet = useCallback((id: GearSetId) => {
@@ -331,7 +351,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const value = useMemo<HandbookState>(
     () => ({
       spec,
-      builds,
+      build,
       simSet,
       sort,
       gearSet,
@@ -372,7 +392,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     }),
     [
       spec,
-      builds,
+      build,
       simSet,
       sort,
       gearSet,

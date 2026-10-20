@@ -9,7 +9,7 @@
  * CSP in vite.config.ts). Re-run after adding consumables, poisons, buffs or gear.
  * Names Wowhead can't resolve are listed at the end and simply render without an icon.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const root = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
@@ -18,7 +18,13 @@ const ITEM = 3;
 const SPELL = 6;
 
 const content = JSON.parse(readFileSync(root('src/content/content.json'), 'utf8'));
-const gearSrc = readFileSync(root('src/content/gear.ts'), 'utf8');
+// Item ids live in gear.ts (shared leveling lists) and in each build's own gear lists.
+const gearSrc = [
+  'src/content/gear.ts',
+  ...readdirSync(root('src/content/builds')).map((f) => `src/content/builds/${f}`),
+]
+  .map((p) => readFileSync(root(p), 'utf8'))
+  .join('\n');
 const manifestPath = root('src/content/icons.json');
 const prev = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
 
@@ -32,7 +38,7 @@ const wanted = [
   // Named in prose sections (copy.ts), not in content.json.
   ...['Expose Armor', 'Sunder Armor'].map((name) => ({ name, type: SPELL })),
 ];
-const gearIds = [...gearSrc.matchAll(/itemId: (\d+)/g)].map((m) => Number(m[1]));
+const gearIds = [...new Set([...gearSrc.matchAll(/itemId: (\d+)/g)].map((m) => Number(m[1])))];
 
 async function search(name, type) {
   const url = `https://www.wowhead.com/classic/search/suggestions-template?q=${encodeURIComponent(clean(name))}`;

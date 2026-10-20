@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { specById } from '../../content/content';
 import { stats as copy } from '../../content/copy';
-import { statPriority } from '../../content/gear';
 import { wowsimsLink } from '../../content/links';
 import type { StatWeight } from '../../content/types';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
+import { Tip } from '../ui/Tip';
 
 /** Stamina sims to 0 EP, which reads as worthless; show it as a token 0.01 instead. */
 const displayEp = ({ stat, ep }: StatWeight) => (stat === 'Stamina' && ep === 0 ? 0.01 : ep);
 
 function StatPriorityPanel() {
-  const { spec } = useHandbook();
+  const { spec, build } = useHandbook();
   const { tone } = useTheme();
-  const { stats, relativeTo } = statPriority[spec];
+  const { stats, relativeTo } = build.stats;
   const maxEp = Math.max(...stats.map((st) => st.ep));
   const s = specById[spec];
   const [grown, setGrown] = useState(false);
@@ -24,7 +24,7 @@ function StatPriorityPanel() {
     setGrown(false);
     const raf = requestAnimationFrame(() => setGrown(true));
     return () => cancelAnimationFrame(raf);
-  }, [spec]);
+  }, [build]);
 
   return (
     <div className="panel p-[18px]">
@@ -90,6 +90,10 @@ export function Stats() {
 
       <div className="mt-[16px]">
         <StatPriorityPanel />
+      </div>
+
+      <div className="mt-[14px]">
+        <Tip>{copy.placeholderTip}</Tip>
       </div>
     </section>
   );

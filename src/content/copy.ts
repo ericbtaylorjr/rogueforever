@@ -44,6 +44,7 @@ export const hero = {
 
 export const specBar = {
   label: 'Active spec',
+  buildLabel: 'Build',
   phoneLabel: 'Guidance for',
   sweatyOn: 'Sweaty tips on',
   sweatyOff: 'Sweaty tips off',
@@ -55,7 +56,7 @@ export const scope = {
   zone: {
     label: 'Your spec guide',
     before: 'Talents, stats, gear and rotation below are for ',
-    after: '. If you change the Active Spec, then all the contextual information will change as well.',
+    after: '. If you change the Active Spec or Build, then all the contextual information will change as well.',
   },
   allZone: 'Everything from here down is the same for all Rogue specs and no longer relative to your Active Spec.',
 } as const;
@@ -95,7 +96,21 @@ export const specBoard = {
     body: 'The beta opened September 17th and the game launches November 4th. Until sims and logs exist there is nothing honest to rank.',
   },
   yourSpec: 'YOUR SPEC',
-  subheadings: { endgame: 'Level 60', leveling: 'Leveling' },
+  phaseLabel: 'Meta breakdown view',
+  phaseTabs: { endgame: 'End Game', leveling: 'Leveling' },
+  leveling: {
+    meta: 'Leveling',
+    questing: { title: 'Questing', label: 'Leveling builds for questing, ranked' },
+    dungeons: { title: 'Dungeons', label: 'Leveling builds for dungeons, ranked' },
+    /** Follows the "Tip:" label. */
+    tip: 'the leveling builds are currently under development and will be posted prior to launch.',
+  },
+} as const;
+
+/** Build categories, as the build pickers and Talents lists group them. */
+export const buildPhases = {
+  endgame: 'Level 60',
+  leveling: 'Leveling',
 } as const;
 
 /** Shared by the build lists in Meta breakdown and Talents. */
@@ -119,11 +134,13 @@ export const tips = {
 } as const;
 
 export const talents = {
-  intro: 'Level 60 builds for your active spec. Meta breakdown has how every build ranks across all three specs.',
+  intro: 'Level 60 and leveling builds for your active spec. Pick one here or from the Build menu above. Meta breakdown has how every level 60 build ranks across all three specs.',
   endgameTitle: 'Level 60 builds',
-  endgamePending:
-    "Not yet. The Forever trees aren't final, though Blizzard says they keep the familiar milestones at 11, 16, 21 and 31 points. I'll post level 60 builds once they've been tested.",
+  levelingTitle: 'Leveling builds',
   buildsLabel: 'Level 60 builds for this spec',
+  levelingLabel: 'Leveling builds for this spec',
+  /** A build with no talents or note yet. */
+  buildPending: "This build hasn't been written up yet. It goes up once it's been tested.",
   /** A sweaty tip: shown only with sweaty tips on. */
   murderTip:
     "most of these builds take 2/2 Murder. For encounters without Humanoids or Giants it does nothing, so swap those points into a couple of other offensive talents. Most players can set and forget, but if you're squeezing out every bit of damage, it's worth the respec.",
@@ -175,7 +192,7 @@ export const poisonsCopy = {
 export const rotation = {
   intro:
     "A priority list, top to bottom. If a line's conditions are met, press it and start again from the top.",
-  /** `{spec}` is replaced with the active spec name. */
+  /** `{spec}` is replaced with the active spec and build, e.g. "Combat Backstab". */
   pending:
     "I haven't written the {spec} priority list, opener or common mistakes yet. They go up once Forever has real logs and WoWSims APLs to check them against.",
   openerTitle: 'Opener',
@@ -185,6 +202,8 @@ export const rotation = {
 export const stats = {
   intro:
     'These weights are relative to current BiS gear, so expect them to shift slightly as your gear changes. For more accurate values, run the EP calculator in WoWSims with your current gear setup.',
+  /** Follows the "Tip:" label. Shown for every build until real weights are in. */
+  placeholderTip: 'these stats are placeholders and will be updated prior to launch.',
   statsTitle: 'Stat priority',
   statsMeta: 'Weights relative to',
   epLabel: 'EP',
@@ -207,10 +226,10 @@ export const gear = {
     itemsTitle: 'Leveling milestone gear',
     cols: { level: 'LEVEL', slot: 'SLOT', item: 'ITEM', source: 'SOURCE', faction: 'FACTION' },
     tableLabel: 'Leveling items by level',
-    empty: 'No leveling items listed for this spec yet',
+    empty: 'No leveling items listed for this build yet',
   },
+  /** Level 60 builds only; leveling builds show their milestone list instead. */
   tabs: [
-    { id: 'leveling', label: 'Leveling' },
     { id: 'prebis', label: 'Pre-raid BiS' },
     { id: 'bis', label: 'Best in Slot' },
   ],
@@ -457,7 +476,7 @@ export const privacy = {
     {
       heading: 'What stays in your browser',
       body: [
-        "Three small settings are saved in your browser's local storage: your spec and sweaty preference (rc:prefs), light or dark theme (rc:theme), and your cookie choice with the date you made it (rc:consent). They never leave your device, and clearing your site data removes them.",
+        "Three small settings are saved in your browser's local storage: your spec, build and sweaty preference (rc:prefs), light or dark theme (rc:theme), and your cookie choice with the date you made it (rc:consent). They never leave your device, and clearing your site data removes them.",
         "Search runs in your browser. Unless you've allowed analytics (below), nothing you type into it leaves your device.",
       ],
     },
@@ -470,7 +489,7 @@ export const privacy = {
     {
       heading: 'Analytics, only with your consent',
       body: [
-        "If you pick \"Allow analytics\", the Handbook loads Google Analytics 4 to see how the guide gets used: which sections you look at and for how long, which specs and builds you pick, the tabs, filters, raids, FAQs and tooltips you open, what you search for, and which macros you copy. Each of these is tagged with your current spec and sweaty setting. Google also records things like your browser, device, screen size, the site that sent you here, and a rough location (country and city) worked out from your IP address. Google Analytics 4 doesn't store the IP address itself.",
+        "If you pick \"Allow analytics\", the Handbook loads Google Analytics 4 to see how the guide gets used: which sections you look at and for how long, which specs and builds you pick, the tabs, filters, raids, FAQs and tooltips you open, what you search for, and which macros you copy. Each of these is tagged with your current spec, build and sweaty setting. Google also records things like your browser, device, screen size, the site that sent you here, and a rough location (country and city) worked out from your IP address. Google Analytics 4 doesn't store the IP address itself.",
         'It sets two cookies, _ga and _ga_2X22ZZJLFJ, which last up to 2 years so a returning visit can be told apart from a new one. Advertising features and ad personalisation are switched off.',
         'Google processes this data on the Handbook\'s behalf and may handle it outside your country, including in the United States. See how Google uses this data and the Google Privacy Policy.',
         "If you don't allow it, or your browser sends a Global Privacy Control signal, Google Analytics never loads and no cookies are set. The legal basis for analytics is your consent, which you can withdraw at any time.",

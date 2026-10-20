@@ -1,5 +1,5 @@
-import { rankedBuilds, specById } from '../../content/content';
-import type { SpecId, TalentVariant } from '../../content/types';
+import { specById } from '../../content/content';
+import type { Build } from '../../content/types';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { useSpecColor } from '../../state/useSpecColor';
@@ -8,44 +8,39 @@ import { GradeBadge } from './GradeBadge';
 /** The Talents build card, which every build list controls. */
 export const BUILD_CARD_ID = 'build-card';
 
-/** The build a spec is showing: the one picked for it, else its best-ranked. */
-export function useActiveBuild(spec: SpecId): TalentVariant | undefined {
-  const { builds } = useHandbook();
-  const ranked = rankedBuilds.filter((b) => b.spec === spec).map((b) => b.variant);
-  return ranked.find((v) => v.id === builds[spec]) ?? ranked[0];
-}
-
 /**
- * Ranked level 60 builds with their meta grade. Picking one switches to its spec
- * and shows it in the Talents build card. `showSpec` labels each row with its spec,
- * for lists that mix specs.
+ * Builds as a pickable list, each led by its meta grade. Picking one makes it the
+ * active build, switching spec if needed. `showSpec` labels each row with its spec,
+ * for lists that mix specs. `bySpec` names each row by its spec alone, for lists
+ * where every build shares a name (one per spec, like the Questing ranking).
  */
 export function BuildList({
   builds,
   label,
   showSpec = false,
+  bySpec = false,
 }: {
-  builds: { spec: SpecId; variant: TalentVariant }[];
+  builds: Build[];
   label: string;
   showSpec?: boolean;
+  bySpec?: boolean;
 }) {
-  const { spec, pickBuild } = useHandbook();
+  const { spec, build: active, pickBuild } = useHandbook();
   const { tone } = useTheme();
   const c = useSpecColor();
-  const active = useActiveBuild(spec);
 
   return (
     <ol aria-label={label} className="flex flex-col gap-[6px]">
-      {builds.map(({ spec: id, variant: v }) => {
-        const on = id === spec && v.id === active?.id;
-        const s = specById[id];
+      {builds.map((b) => {
+        const on = b.spec === spec && b.id === active.id;
+        const s = specById[b.spec];
         return (
-          <li key={`${id}-${v.id}`}>
+          <li key={`${b.spec}-${b.id}`}>
             <button
               type="button"
               aria-pressed={on}
               aria-controls={BUILD_CARD_ID}
-              onClick={() => pickBuild(id, v.id)}
+              onClick={() => pickBuild(b.spec, b.id)}
               className="grid w-full items-center gap-[12px] rounded-[10px] border px-[12px] py-[9px] text-left transition-colors hover:border-accent"
               style={{
                 gridTemplateColumns: '30px minmax(0,1fr) auto',
@@ -53,10 +48,22 @@ export function BuildList({
                 background: on ? c.soft : 'transparent',
               }}
             >
-              <GradeBadge grade={v.grade} />
+              <GradeBadge grade={b.grade} />
               <span className="min-w-0">
-                <span className="block truncate text-[13.5px] font-semibold text-ink">{v.name}</span>
-                {showSpec && (
+                {bySpec ? (
+                  <span className="flex items-center gap-[7px] text-[13.5px] font-semibold text-ink">
+                    <span
+                      aria-hidden="true"
+                      className="size-[7px] shrink-0 rounded-full"
+                      style={{ background: tone(s.color, 3) }}
+                    />
+                    <span className="truncate">{s.name}</span>
+                    <span className="sr-only"> {b.name}</span>
+                  </span>
+                ) : (
+                  <span className="block truncate text-[13.5px] font-semibold text-ink">{b.name}</span>
+                )}
+                {showSpec && !bySpec && (
                   <span className="flex items-center gap-[6px] text-[11px] text-faint">
                     <span
                       aria-hidden="true"
@@ -68,7 +75,7 @@ export function BuildList({
                 )}
               </span>
               <span className="t-num text-[12px] text-faint">
-                {v.talents.map((t) => t.pts).join(' / ')}
+                {b.talents.map((t) => t.pts).join(' / ')}
               </span>
             </button>
           </li>

@@ -1,5 +1,5 @@
-import { specById, specDetail } from '../../content/content';
-import type { SpecDetail } from '../../content/types';
+import { specById } from '../../content/content';
+import type { Rotation as RotationData } from '../../content/types';
 import { rotation as copy } from '../../content/copy';
 import { wowsimsLink } from '../../content/links';
 import { useHandbook } from '../../state/HandbookProvider';
@@ -8,7 +8,7 @@ import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
 
 /** Priority list, opener and mistakes, once a spec has any of them. */
-function RotationDetail({ d, sweaty }: { d: SpecDetail; sweaty: boolean }) {
+function RotationDetail({ d, sweaty }: { d: RotationData; sweaty: boolean }) {
   return (
     <>
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">{copy.intro}</p>
@@ -87,8 +87,8 @@ function RotationDetail({ d, sweaty }: { d: SpecDetail; sweaty: boolean }) {
 }
 
 export function Rotation() {
-  const { spec, sweaty } = useHandbook();
-  const d = specDetail[spec];
+  const { spec, build, sweaty } = useHandbook();
+  const d = build.rotation;
   const hasData = d.apl.length > 0 || d.opener.length > 0 || d.nevers.length > 0;
 
   return (
@@ -97,7 +97,7 @@ export function Rotation() {
 
       {!hasData ? (
         <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute" aria-live="polite">
-          <LinkedText text={copy.pending.replace('{spec}', specById[spec].name)} links={wowsimsLink} />
+          <LinkedText text={copy.pending.replace('{spec}', `${specById[spec].name} ${build.name}`)} links={wowsimsLink} />
         </p>
       ) : (
         <RotationDetail d={d} sweaty={sweaty} />

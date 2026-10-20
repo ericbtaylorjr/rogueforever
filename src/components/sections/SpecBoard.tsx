@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { config } from '../../config';
-import { foreverOutlook, levelingIndex, rankedBuilds, specById, specIndex } from '../../content/content';
+import { rankedBuilds, rankedLeveling } from '../../content/builds';
+import { foreverOutlook, levelingIndex, specById, specIndex } from '../../content/content';
 import { specBoard } from '../../content/copy';
-import type { LevelingSetId, SimSetId, SpecId } from '../../content/types';
+import type { Build, BuildPhase, LevelingSetId, SimSetId, SpecId } from '../../content/types';
+import { track } from '../../lib/analytics';
 import { useHandbook, type SortKey } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { useSpecColor } from '../../state/useSpecColor';
@@ -11,6 +13,7 @@ import { BuildList } from '../ui/BuildList';
 import { LinkedText } from '../ui/LinkedText';
 import { SegmentedTabs, Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
+import { Tip } from '../ui/Tip';
 
 interface Row {
   id: SpecId;
@@ -295,28 +298,86 @@ function ForeverPending() {
   );
 }
 
-function SubHeading({ children }: { children: string }) {
-  return <h3 className="t-card-title mt-[26px] text-ink">{children}</h3>;
-}
-
-/** Every level 60 build across all specs. Picking one switches the active spec to it. */
-function SpecMeta() {
-  if (!rankedBuilds.length) return null;
+/** One ranked list of builds across every spec, in a titled card. */
+function RankingCard({
+  title,
+  meta,
+  label,
+  builds,
+  bySpec = false,
+}: {
+  title: string;
+  meta: string;
+  label: string;
+  builds: Build[];
+  bySpec?: boolean;
+}) {
+  if (!builds.length) return null;
   return (
-    <div className="panel mt-[16px] p-[18px]">
+    <div className="panel p-[18px]">
       <div className="flex flex-wrap items-baseline justify-between gap-[10px]">
-        <span className="t-panel-label text-ink">{specBoard.rankingTitle}</span>
-        <span className="text-[12px] text-faint">{specBoard.rankingMeta}</span>
+        <span className="t-panel-label text-ink">{title}</span>
+        <span className="text-[12px] text-faint">{meta}</span>
       </div>
       <div className="mt-[14px]">
-        <BuildList builds={rankedBuilds} label={specBoard.rankingLabel} showSpec />
+        <BuildList builds={builds} label={label} showSpec bySpec={bySpec} />
       </div>
     </div>
   );
 }
 
-/** Leveling meta: placeholder tabs until there is data to rank. */
-function LevelingMeta() {
+/** Level 60: every spec's builds in one ranking, then the damage index once sims exist. */
+function EndgameMeta({ sims }: { sims: boolean }) {
+  const { simSet, setSimSet } = useHandbook();
+  const rows = useRows(simSet);
+  const set = specIndex[simSet];
+
+  const tabs = (Object.keys(specIndex) as SimSetId[]).map((k) => ({
+    id: k,
+    label: specIndex[k].label,
+  }));
+
+  return (
+    <>
+      <RankingCard
+        title={specBoard.rankingTitle}
+        meta={specBoard.rankingMeta}
+        label={specBoard.rankingLabel}
+        builds={rankedBuilds}
+      />
+
+      {sims && (
+        <>
+          <div className="mt-[26px]">
+            <SegmentedTabs
+              tabs={tabs}
+              value={simSet}
+              onChange={(id) => setSimSet(id as SimSetId)}
+              label="Damage index view"
+            />
+          </div>
+
+          <p className="t-eyebrow mt-[12px] text-[10.5px] text-faint">{set.note}</p>
+
+          <div id={`panel-${simSet}`} role="tabpanel" aria-labelledby={`tab-${simSet}`} className="mt-[14px]">
+            {set.pending ? (
+              <ForeverPending />
+            ) : config.simView === 'table' ? (
+              <TableView rows={rows} />
+            ) : config.simView === 'cards' ? (
+              <CardsView rows={rows} />
+            ) : (
+              <BarsView rows={rows} simSet={simSet} />
+            )}
+          </div>
+        </>
+      )}
+    </>
+  );
+}
+
+/** Leveling: Questing and Dungeons ranked side by side, then the leveling sims once they exist. */
+function LevelingMeta({ sims }: { sims: boolean }) {
   const [set, setSet] = useState<LevelingSetId>('questing');
   const current = levelingIndex[set];
 
@@ -327,50 +388,62 @@ function LevelingMeta() {
 
   return (
     <>
-      <SubHeading>{specBoard.subheadings.leveling}</SubHeading>
-
-      <div className="mt-[14px]">
-        <SegmentedTabs
-          tabs={tabs}
-          value={set}
-          onChange={(id) => setSet(id as LevelingSetId)}
-          label="Leveling meta view"
+      <div className="grid gap-[14px] stack:grid-cols-2">
+        <RankingCard
+          title={specBoard.leveling.questing.title}
+          meta={specBoard.leveling.meta}
+          label={specBoard.leveling.questing.label}
+          builds={rankedLeveling('questing')}
+          bySpec
+        />
+        <RankingCard
+          title={specBoard.leveling.dungeons.title}
+          meta={specBoard.leveling.meta}
+          label={specBoard.leveling.dungeons.label}
+          builds={rankedLeveling('dungeons')}
+          bySpec
         />
       </div>
 
-      <p className="t-eyebrow mt-[12px] text-[10.5px] text-faint">{current.note}</p>
-
-      <div id={`panel-${set}`} role="tabpanel" aria-labelledby={`tab-${set}`} className="mt-[14px]">
-        <ForeverPending />
+      <div className="mt-[14px]">
+        <Tip>{specBoard.leveling.tip}</Tip>
       </div>
+
+      {sims && (
+        <>
+          <div className="mt-[26px]">
+            <SegmentedTabs
+              tabs={tabs}
+              value={set}
+              onChange={(id) => setSet(id as LevelingSetId)}
+              label="Leveling meta view"
+            />
+          </div>
+
+          <p className="t-eyebrow mt-[12px] text-[10.5px] text-faint">{current.note}</p>
+
+          <div id={`panel-${set}`} role="tabpanel" aria-labelledby={`tab-${set}`} className="mt-[14px]">
+            <ForeverPending />
+          </div>
+        </>
+      )}
     </>
   );
 }
 
 export function SpecBoard() {
-  const { simSet, setSimSet } = useHandbook();
-  const rows = useRows(simSet);
-  const set = specIndex[simSet];
+  const [phase, setPhaseState] = useState<BuildPhase>('endgame');
+  const setPhase = (id: BuildPhase) => {
+    setPhaseState(id);
+    track('meta_tab', { tab: id });
+  };
 
-  const tabs = (Object.keys(specIndex) as SimSetId[]).map((k) => ({
-    id: k,
-    label: specIndex[k].label,
-  }));
+  // Until any view has real data, the sim views stay hidden: no tabs, no empty states.
+  // Filling in specIndex/levelingIndex brings them back.
+  const sims = [...Object.values(specIndex), ...Object.values(levelingIndex)].some((v) => !v.pending);
 
-  // Until any view has real data, the section is just the honest explanation: no tabs,
-  // no empty states. Filling in specIndex/levelingIndex brings the full UI back.
-  const anyData = [...Object.values(specIndex), ...Object.values(levelingIndex)].some((v) => !v.pending);
-  if (!anyData) {
-    return (
-      <section id="specs" aria-label="Meta breakdown" className="pt-[44px]">
-        <SectionHeading id="specs" />
-        <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
-          <LinkedText text={specBoard.intro} links={wowsimsLink} />
-        </p>
-        <SpecMeta />
-      </section>
-    );
-  }
+  // Leveling comes first, in the order you play; End Game stays the default view.
+  const tabs = (['leveling', 'endgame'] as const).map((id) => ({ id, label: specBoard.phaseTabs[id] }));
 
   return (
     <section id="specs" aria-label="Meta breakdown" className="pt-[44px]">
@@ -380,34 +453,18 @@ export function SpecBoard() {
         <LinkedText text={specBoard.intro} links={wowsimsLink} />
       </p>
 
-      <SpecMeta />
-
-      <SubHeading>{specBoard.subheadings.endgame}</SubHeading>
-
-      <div className="mt-[14px]">
+      <div className="mt-[16px]">
         <SegmentedTabs
           tabs={tabs}
-          value={simSet}
-          onChange={(id) => setSimSet(id as SimSetId)}
-          label="Damage index view"
+          value={phase}
+          onChange={(id) => setPhase(id as BuildPhase)}
+          label={specBoard.phaseLabel}
         />
       </div>
 
-      <p className="t-eyebrow mt-[12px] text-[10.5px] text-faint">{set.note}</p>
-
-      <div id={`panel-${simSet}`} role="tabpanel" aria-labelledby={`tab-${simSet}`} className="mt-[14px]">
-        {set.pending ? (
-          <ForeverPending />
-        ) : config.simView === 'table' ? (
-          <TableView rows={rows} />
-        ) : config.simView === 'cards' ? (
-          <CardsView rows={rows} />
-        ) : (
-          <BarsView rows={rows} simSet={simSet} />
-        )}
+      <div id={`panel-${phase}`} role="tabpanel" aria-labelledby={`tab-${phase}`} className="mt-[16px]">
+        {phase === 'endgame' ? <EndgameMeta sims={sims} /> : <LevelingMeta sims={sims} />}
       </div>
-
-      <LevelingMeta />
     </section>
   );
 }

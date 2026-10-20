@@ -1,13 +1,6 @@
 import { gearSlots } from '../../content/content';
 import { gear as copy } from '../../content/copy';
-import {
-  factionColor,
-  gearSets,
-  itemForSlot,
-  levelingItems,
-  qualityColor,
-  wowheadUrl,
-} from '../../content/gear';
+import { factionColor, qualityColor, wowheadUrl } from '../../content/gear';
 import type { Faction, GearItem, GearSetId, LevelingItem } from '../../content/types';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
@@ -38,8 +31,8 @@ function ItemLink({ item }: { item: Omit<GearItem, 'enchant'> }) {
   );
 }
 
-function GearRow({ slot, set }: { slot: string; set: 'bis' | 'prebis' }) {
-  const item = itemForSlot(set, slot);
+function GearRow({ slot, items }: { slot: string; items: GearItem[] }) {
+  const item = items.find((i) => i.slot === slot);
 
   return (
     <div
@@ -102,18 +95,11 @@ function LevelingRow({ item }: { item: LevelingItem }) {
   );
 }
 
-function LevelingPanel() {
-  const { spec } = useHandbook();
-  const items = levelingItems[spec];
+function LevelingPanel({ items }: { items: LevelingItem[] }) {
   const c = copy.leveling.cols;
 
   return (
-    <div
-      className="mt-[16px] flex flex-col gap-[16px]"
-      id="panel-leveling"
-      role="tabpanel"
-      aria-labelledby="tab-leveling"
-    >
+    <div className="mt-[16px] flex flex-col gap-[16px]">
       <div className="panel">
         <div className="px-[18px] pt-[16px] pb-[6px]">
           <span className="t-panel-label text-ink">{copy.leveling.itemsTitle}</span>
@@ -151,13 +137,13 @@ function LevelingPanel() {
   );
 }
 
-export function Gear() {
+/** Pre-raid BiS and BiS tabs for a level 60 build. A list with no items says it's coming. */
+function EndgameGear({ gear }: { gear: Record<GearSetId, GearItem[]> }) {
   const { gearSet: current, setGearSet } = useHandbook();
+  const items = gear[current];
 
   return (
-    <section id="gear" aria-label="Gear">
-      <SectionHeading id="gear" scope="spec" />
-
+    <>
       <div className="mb-[16px]">
         <SegmentedTabs
           tabs={copy.tabs as unknown as { id: string; label: string }[]}
@@ -167,14 +153,7 @@ export function Gear() {
         />
       </div>
 
-      {current === 'leveling' ? (
-        <>
-          <Callout tone="accent" quiet label={copy.status.label}>
-            {copy.status.text}
-          </Callout>
-          <LevelingPanel />
-        </>
-      ) : !gearSets[current].length ? (
+      {!items.length ? (
         <div
           id={`panel-${current}`}
           role="tabpanel"
@@ -205,10 +184,32 @@ export function Gear() {
               ))}
             </div>
             {gearSlots.map((slot) => (
-              <GearRow key={slot} slot={slot} set={current} />
+              <GearRow key={slot} slot={slot} items={items} />
             ))}
           </div>
         </div>
+      )}
+    </>
+  );
+}
+
+/** Follows the active build: milestone items while leveling, pre-raid BiS and BiS at 60. */
+export function Gear() {
+  const { build } = useHandbook();
+
+  return (
+    <section id="gear" aria-label="Gear">
+      <SectionHeading id="gear" scope="spec" />
+
+      {build.phase === 'leveling' ? (
+        <>
+          <Callout tone="accent" quiet label={copy.status.label}>
+            {copy.status.text}
+          </Callout>
+          <LevelingPanel items={build.gear} />
+        </>
+      ) : (
+        <EndgameGear gear={build.gear} />
       )}
     </section>
   );

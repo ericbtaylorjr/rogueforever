@@ -1,23 +1,4 @@
-import type {
-  GearItem,
-  ItemQuality,
-  LevelingItem,
-  SpecId,
-  StatPriority,
-} from './types';
-
-/**
- * Item data, intentionally empty.
- *
- * Blizzard has confirmed a full itemization pass across every dungeon boss for
- * Forever, so a Classic Era BiS list would be wrong at launch. The table is
- * data-driven and renders an empty state until these arrays are filled — drop
- * items in and every row fills, tooltips included.
- */
-export const gearSets: Record<'bis' | 'prebis', GearItem[]> = {
-  bis: [],
-  prebis: [],
-};
+import type { ItemQuality, LevelingItem } from './types';
 
 /** Wowhead-style quality colours. */
 export const qualityColor: Record<ItemQuality, string> = {
@@ -31,70 +12,14 @@ export const qualityColor: Record<ItemQuality, string> = {
 
 export const wowheadUrl = (itemId: number) => `https://www.wowhead.com/classic/item=${itemId}`;
 
-export const itemForSlot = (set: keyof typeof gearSets, slot: string): GearItem | undefined =>
-  gearSets[set].find((i) => i.slot === slot);
-
-/**
- * Leveling stat priority per spec. EP is relative to each spec's `relativeTo` stat (= 1).
- *
- * Weights come from WoWSims EP runs against current BiS gear.
- */
-export const statPriority: Record<SpecId, StatPriority> = {
-  combat: {
-    relativeTo: 'Attack Power',
-    stats: [
-      { stat: 'Hit Rating', ep: 2.43 },
-      { stat: 'Expertise Rating', ep: 2.28, op: '>' },
-      { stat: 'Agility', ep: 1.95, op: '>' },
-      { stat: 'Haste Rating', ep: 1.73, op: '>' },
-      { stat: 'Crit Rating', ep: 1.68, op: '>' },
-      { stat: 'Strength', ep: 1.1, op: '>' },
-      { stat: 'Attack Power', ep: 1, op: '>' },
-      { stat: 'Armor Penetration', ep: 0.43, op: '>' },
-      { stat: 'Spell Piercing', ep: 0.21, op: '>' },
-      { stat: 'Stamina', ep: 0, op: '>' },
-    ],
-  },
-  assassination: {
-    relativeTo: 'Attack Power',
-    stats: [
-      { stat: 'Expertise Rating', ep: 2.78 },
-      { stat: 'Hit Rating', ep: 2.73, op: '>' },
-      { stat: 'Agility', ep: 2.08, op: '>' },
-      { stat: 'Crit Rating', ep: 2.03, op: '>' },
-      { stat: 'Haste Rating', ep: 1.95, op: '>' },
-      { stat: 'Strength', ep: 1.1, op: '>' },
-      { stat: 'Attack Power', ep: 1, op: '>' },
-      { stat: 'Spell Piercing', ep: 0.65, op: '>' },
-      { stat: 'Armor Penetration', ep: 0.4, op: '>' },
-      { stat: 'Stamina', ep: 0, op: '>' },
-    ],
-  },
-  subtlety: {
-    relativeTo: 'Attack Power',
-    stats: [
-      { stat: 'Hit Rating', ep: 2.24 },
-      { stat: 'Expertise Rating', ep: 2.24, op: '=' },
-      { stat: 'Agility', ep: 1.96, op: '>' },
-      { stat: 'Crit Rating', ep: 1.71, op: '>' },
-      { stat: 'Haste Rating', ep: 1.48, op: '>' },
-      { stat: 'Strength', ep: 1.1, op: '>' },
-      { stat: 'Attack Power', ep: 1, op: '>' },
-      { stat: 'Armor Penetration', ep: 0.36, op: '>' },
-      { stat: 'Spell Piercing', ep: 0.21, op: '>' },
-      { stat: 'Stamina', ep: 0, op: '>' },
-    ],
-  },
-};
-
 /*
- * Leveling milestones. Armour and accessories are shared; weapons follow the
- * spec's weapon type.
+ * Leveling milestone building blocks. Each leveling build in `builds/` picks
+ * its own list from these: armour and accessories, plus the weapons it uses.
  *
  * TODO: placeholder list built from Classic Era. Forever re-itemizes dungeons,
  * so verify every item, level and item ID before this goes live.
  */
-const levelingShared: LevelingItem[] = [
+export const levelingShared: LevelingItem[] = [
   { level: 18, slot: 'Legs', itemId: 10400, name: 'Blackened Defias Leggings', quality: 'uncommon', source: 'The Deadmines', faction: 'Both' },
   { level: 20, slot: 'Chest', itemId: 10399, name: 'Blackened Defias Armor', quality: 'rare', source: 'The Deadmines', faction: 'Both' },
   { level: 17, slot: 'Waist', itemId: 10403, name: 'Blackened Defias Belt', quality: 'uncommon', source: 'The Deadmines', faction: 'Both' },
@@ -111,7 +36,7 @@ const levelingShared: LevelingItem[] = [
   { level: 60, slot: 'Shoulders', itemId: 12927, name: 'Truestrike Shoulders', quality: 'rare', source: 'Upper Blackrock Spire', faction: 'Both' },
 ];
 
-const levelingSwords: LevelingItem[] = [
+export const levelingSwords: LevelingItem[] = [
   { level: 19, slot: 'Main hand', itemId: 5191, name: 'Cruel Barb', quality: 'rare', source: 'The Deadmines', faction: 'Both' },
   { level: 25, slot: 'Main hand', itemId: 6504, name: 'Wingblade', quality: 'rare', source: 'Quest: Leaders of the Fang', faction: 'Horde' },
   { level: 45, slot: 'Main hand', itemId: 9380, name: "Jang'thraze the Protector", quality: 'rare', source: "Zul'Farrak", faction: 'Both' },
@@ -119,19 +44,11 @@ const levelingSwords: LevelingItem[] = [
   { level: 58, slot: 'Off hand', itemId: 12939, name: "Dal'Rend's Tribal Guardian", quality: 'rare', source: 'Upper Blackrock Spire', faction: 'Both' },
 ];
 
-const levelingDaggers: LevelingItem[] = [
+export const levelingDaggers: LevelingItem[] = [
   { level: 42, slot: 'Main hand', itemId: 5616, name: 'Gutwrencher', quality: 'rare', source: 'Shadowfang Keep', faction: 'Both' },
   { level: 56, slot: 'Off hand', itemId: 13218, name: 'Fang of the Crystal Spider', quality: 'rare', source: 'Lower Blackrock Spire', faction: 'Both' },
   { level: 50, slot: 'Main hand', itemId: 12791, name: 'Barman Shanker', quality: 'rare', source: 'Blackrock Depths', faction: 'Both' },
 ];
-
-const byLevel = (items: LevelingItem[]) => [...items].sort((a, b) => a.level - b.level);
-
-export const levelingItems: Record<SpecId, LevelingItem[]> = {
-  assassination: byLevel([...levelingShared, ...levelingDaggers]),
-  combat: byLevel([...levelingShared, ...levelingSwords]),
-  subtlety: byLevel([...levelingShared, ...levelingDaggers]),
-};
 
 /** Faction badge colours, run through `tone()` for light mode. */
 export const factionColor: Record<'Alliance' | 'Horde', string> = {

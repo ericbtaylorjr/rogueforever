@@ -23,35 +23,59 @@ export interface AplRow {
   sweaty?: boolean;
 }
 
-export type MetaGrade = 'S' | 'A' | 'B' | 'C' | 'D';
+/** S best to D worst. `X` is a placeholder for a build that hasn't been graded yet. */
+export type MetaGrade = 'S' | 'A' | 'B' | 'C' | 'D' | 'X';
 
-/**
- * One talent build for a spec. A spec can carry several; the Talents section's
- * build ranking lists every spec's builds and switches between them.
- */
-export interface TalentVariant {
-  /** Unique within its spec. */
+/** Priority list, opener and mistakes. Empty arrays render as a "coming soon" note. */
+export interface Rotation {
+  apl: AplRow[];
+  opener: string[];
+  nevers: string[];
+}
+
+/** Level 60 end game, or the road there. Leveling builds swap Gear to milestone items. */
+export type BuildPhase = 'endgame' | 'leveling';
+
+interface BuildBase {
+  /** Unique within its spec; goes in the URL as `?build=`. */
   id: string;
-  /** Short tab label, e.g. "Raid". */
+  spec: SpecId;
+  /** Short label. The spec is shown beside it, so no spec prefix: "Backstab", not "Combat Backstab". */
   name: string;
-  /** Meta grade, S best to D worst. */
+  /** Meta grade, S best to D worst, or the `X` placeholder. */
   grade: MetaGrade;
-  /** Position in the level 60 build ranking across every spec, 1 = best. */
+  /** Position in its Meta breakdown ranking across every spec, 1 = best. */
   rank: number;
+  /** Empty until the build is worked out; the Talents card then shows only its note. */
   talents: TalentTree[];
   talentNote: string;
   keyTalents: string[];
   /** Optional talent calculator link. */
   link?: string;
+  stats: StatPriority;
+  rotation: Rotation;
 }
 
-/** Empty arrays render as "coming soon" placeholders until Forever data exists. */
-export interface SpecDetail {
-  talentVariants: TalentVariant[];
-  apl: AplRow[];
-  opener: string[];
-  nevers: string[];
+/** A level 60 build: ranked against every spec's level 60 builds, geared from pre-raid BiS to BiS. */
+export interface EndgameBuild extends BuildBase {
+  phase: 'endgame';
+  gear: Record<GearSetId, GearItem[]>;
 }
+
+export type LevelingActivity = 'questing' | 'dungeons';
+
+/** A leveling build, geared by milestone items and ranked against every spec's builds for the same activity. */
+export interface LevelingBuild extends BuildBase {
+  phase: 'leveling';
+  activity: LevelingActivity;
+  gear: LevelingItem[];
+}
+
+/**
+ * Everything the spec sections show comes from the active build: Talents, Stats,
+ * Gear and Rotation. Builds that agree on something share the same constant.
+ */
+export type Build = EndgameBuild | LevelingBuild;
 
 export type SimSetId = 'st' | 'cleave' | 'forever';
 export type LevelingSetId = 'questing' | 'dungeons' | 'levelingSummary';
@@ -160,18 +184,6 @@ export interface Macro {
   code: string;
 }
 
-/** A spec's leveling build, shown in the Talents section's Leveling builds card. */
-export interface LevelingPath {
-  name: string;
-  /** Colours come from this spec, so the card matches the spec bar. */
-  spec: SpecId;
-  /** Short tree label shown above the name, e.g. "Deep Assassination". */
-  tree: string;
-  body: string;
-  /** Talent build link. Omitted until the build exists; the button shows as coming soon. */
-  href?: string;
-}
-
 export interface ChangelogEntry {
   date: string;
   text: string;
@@ -211,7 +223,7 @@ export interface GearItem {
   enchant?: string;
 }
 
-export type GearSetId = 'leveling' | 'prebis' | 'bis';
+export type GearSetId = 'prebis' | 'bis';
 
 /** One stat in a spec's priority, weighted in EP relative to the priority's `relativeTo` stat (= 1). */
 export interface StatWeight {
@@ -249,7 +261,6 @@ export interface Race {
 
 export interface Content {
   specs: Spec[];
-  specDetail: Record<SpecId, SpecDetail>;
   specIndex: Record<SimSetId, SimSet>;
   levelingIndex: Record<LevelingSetId, SimSet>;
   foreverOutlook: ForeverOutlook[];
@@ -264,7 +275,6 @@ export interface Content {
   faqs: Faq[];
   tools: Tool[];
   macros: Macro[];
-  leveling: LevelingPath[];
   changelog: ChangelogEntry[];
   nav: NavGroup[];
   themes: Record<IntensityId, Theme>;

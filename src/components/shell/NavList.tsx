@@ -2,11 +2,11 @@ import { nav } from '../../content/content';
 import type { NavGroup } from '../../content/types';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useSpecColor } from '../../state/useSpecColor';
-import { SpecSelect } from '../ui/SpecSelect';
+import { BuildSelect, SpecSelect } from '../ui/SpecSelect';
 
 /**
  * Grouped section nav. `size="touch"` is the drawer variant — bigger targets.
- * The spec-scoped group opens with the spec dropdown, and its items are drawn in the spec's colour.
+ * The spec-scoped group opens with the spec and build dropdowns, and its items are drawn in the spec's colour.
  * Note: item counts were removed in a later design revision. Don't add them back.
  */
 export function NavList({ size = 'rail' }: { size?: 'rail' | 'touch' }) {
@@ -18,7 +18,10 @@ export function NavList({ size = 'rail' }: { size?: 'rail' | 'touch' }) {
     group.scope === 'spec' ? (
       <div className="mb-[8px] px-[8px]">
         <div className="t-eyebrow mb-[7px] text-[10.5px] text-faint">{group.label}</div>
-        <SpecSelect size={touch ? 'touch' : 'rail'} />
+        <div className="flex flex-col gap-[6px]">
+          <SpecSelect size={touch ? 'touch' : 'rail'} />
+          <BuildSelect size={touch ? 'touch' : 'rail'} />
+        </div>
       </div>
     ) : (
       <div className="t-eyebrow mb-[7px] px-[8px] text-[10.5px] text-faint">{group.label}</div>
