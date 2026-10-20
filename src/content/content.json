@@ -794,6 +794,62 @@
       ]
     }
   ],
+  "professions": [
+    {
+      "name": "Engineering",
+      "kind": "Primary",
+      "grade": "S",
+      "note": "Explosives like Dense Dynamite and Goblin Sapper Charges add burst on cleave and AoE pulls, and grenades and gadgets are a big edge in PvP. In Classic it was the strongest Rogue profession, so it is the one to beat until Forever recipes are known."
+    },
+    {
+      "name": "Leatherworking",
+      "kind": "Primary",
+      "grade": "A",
+      "note": "Crafts leather armor you actually wear. In Classic the Devilsaur set carried Rogues into raids, and the new recipes are likely to keep leather crafting relevant."
+    },
+    {
+      "name": "Skinning",
+      "kind": "Gathering",
+      "grade": "B",
+      "note": "The natural pair for Leatherworking, and steady gold while leveling since you are killing beasts anyway."
+    },
+    {
+      "name": "Alchemy",
+      "kind": "Primary",
+      "grade": "B",
+      "note": "Makes your own potions, elixirs and flasks, which cuts the cost of raiding. No Rogue-specific perks, so its value is mostly gold saved."
+    },
+    {
+      "name": "Enchanting",
+      "kind": "Primary",
+      "grade": "B",
+      "note": "Lets you enchant your own gear and sell enchants. In Classic there were no enchanter-only bonuses, so it is convenience and income rather than damage."
+    },
+    {
+      "name": "Mining",
+      "kind": "Gathering",
+      "grade": "C",
+      "note": "Feeds Engineering and Blacksmithing. Good gold early, but brings nothing to your damage on its own."
+    },
+    {
+      "name": "Herbalism",
+      "kind": "Gathering",
+      "grade": "C",
+      "note": "Feeds Alchemy and sells well. Like the other gathering professions, it pays for your consumables rather than adding power."
+    },
+    {
+      "name": "Blacksmithing",
+      "kind": "Primary",
+      "grade": "C",
+      "note": "Mostly plate and weapons for other classes in Classic, with few Rogue items worth crafting. Worth a second look if Forever adds leather-friendly or Rogue weapon recipes."
+    },
+    {
+      "name": "Tailoring",
+      "kind": "Primary",
+      "grade": "D",
+      "note": "Cloth armor and bags. Little for a Rogue beyond selling bags."
+    }
+  ],
   "gearSlots": [
     "Head",
     "Neck",
@@ -1031,6 +1087,10 @@
         {
           "id": "buffs",
           "label": "Buffs & debuffs"
+        },
+        {
+          "id": "professions",
+          "label": "Professions"
         },
         {
           "id": "iea",

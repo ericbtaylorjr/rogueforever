@@ -73,6 +73,7 @@ export const headings: Record<string, string> = {
   gear: 'Gear',
   consumables: 'Consumables',
   buffs: 'Buffs & debuffs',
+  professions: 'Professions',
   iea: 'Expose Armor',
   raid: 'Raids',
   pvp: 'PvP',
@@ -233,6 +234,12 @@ export const gear = {
     { id: 'prebis', label: 'Pre-raid BiS' },
     { id: 'bis', label: 'Best in Slot' },
   ],
+} as const;
+
+export const professionsCopy = {
+  tip: "this is still being determined. Forever adds hundreds of new profession recipes, so expect a much clearer picture some time into launch, once recipes have been discovered and simulations have been run.",
+  listTitle: 'Profession meta',
+  listLabel: 'Professions ranked by meta grade',
 } as const;
 
 export const consumablesCopy = {

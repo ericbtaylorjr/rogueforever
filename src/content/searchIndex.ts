@@ -6,6 +6,7 @@ import {
   macros,
   nav,
   poisons,
+  professions,
   races,
   raids,
   specs,
@@ -21,8 +22,8 @@ export interface SearchEntry {
 }
 
 /**
- * ~126 entries: every nav section, consumable, buff/debuff, poison, raid,
- * Forever change, FAQ, macro and spec. Built once at module load.
+ * ~140 entries: every nav section, consumable, buff/debuff, profession, poison,
+ * raid, Forever change, FAQ, macro and spec. Built once at module load.
  */
 export const searchIndex: SearchEntry[] = [
   ...nav.flatMap((g) =>
@@ -37,6 +38,7 @@ export const searchIndex: SearchEntry[] = [
   ...buffGroups.flatMap((g) =>
     g.items.map((i) => ({ kind: 'Buff', label: i.n, id: 'buffs', section: g.label })),
   ),
+  ...professions.map((p) => ({ kind: 'Profession', label: p.name, id: 'professions', section: 'Professions' })),
   ...races.map((r) => ({ kind: 'Race', label: r.name, id: 'races', section: 'Races' })),
   ...poisons.map((p) => ({ kind: 'Poison', label: p.name, id: 'poisons', section: 'Poisons' })),
   ...raids.map((r) => ({ kind: 'Raid', label: r.name, id: 'raid', section: r.tag })),

@@ -12,6 +12,7 @@ import { Gear } from './components/sections/Gear';
 import { Macros } from './components/sections/Macros';
 import { Overview } from './components/sections/Overview';
 import { Poisons } from './components/sections/Poisons';
+import { Professions } from './components/sections/Professions';
 import { Pvp } from './components/sections/Pvp';
 import { Races } from './components/sections/Races';
 import { Raids } from './components/sections/Raids';
@@ -57,6 +58,8 @@ export default function App() {
             <Consumables />
             <Divider />
             <Buffs />
+            <Divider />
+            <Professions />
             <Divider />
             <ExposeArmor />
             <Divider />

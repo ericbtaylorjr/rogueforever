@@ -18,6 +18,7 @@ export const {
   poisons,
   consumables,
   buffGroups,
+  professions,
   gearSlots,
   raids,
   faqs,

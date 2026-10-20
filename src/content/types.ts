@@ -259,6 +259,16 @@ export interface Race {
   noteLinks?: Record<string, string>;
 }
 
+/** One profession in the profession meta list. */
+export interface Profession {
+  name: string;
+  kind: 'Primary' | 'Gathering';
+  /** `null` while a profession can't be graded yet. */
+  grade: MetaGrade | null;
+  /** One line on what the profession brings a Rogue. */
+  note: string;
+}
+
 export interface Content {
   specs: Spec[];
   specIndex: Record<SimSetId, SimSet>;
@@ -270,6 +280,7 @@ export interface Content {
   poisons: Poison[];
   consumables: Consumable[];
   buffGroups: BuffGroup[];
+  professions: Profession[];
   gearSlots: string[];
   raids: Raid[];
   faqs: Faq[];
