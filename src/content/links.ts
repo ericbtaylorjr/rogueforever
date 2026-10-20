@@ -9,6 +9,7 @@ export const links = {
   wowsims: 'https://www.wowsims.com/forever/rogue/dps/',
   googleAnalyticsData: 'https://policies.google.com/technologies/partner-sites',
   googlePrivacy: 'https://policies.google.com/privacy',
+  cloudflarePrivacy: 'https://www.cloudflare.com/privacypolicy/',
   githubPrivacy: 'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
   weakauras: '#', // TODO: Comfy's UI addon package
   discord: 'https://discord.gg/rKF9G7zusj',
@@ -31,6 +32,7 @@ export const privacyLinks = {
   'how Google uses this data': links.googleAnalyticsData,
   'Google Privacy Policy': links.googlePrivacy,
   "GitHub's privacy statement": links.githubPrivacy,
+  "Cloudflare's privacy policy": links.cloudflarePrivacy,
 };
 
 /** Every mention of WoWSims in copy links here; pass to <LinkedText>. */

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { search } from '../../content/copy';
 import { searchEntries } from '../../content/searchIndex';
+import { track } from '../../lib/analytics';
 import { useHandbook } from '../../state/HandbookProvider';
 
 export function CommandPalette() {
@@ -11,6 +12,35 @@ export function CommandPalette() {
   const [cursor, setCursor] = useState(0);
 
   const results = useMemo(() => searchEntries(query), [query]);
+
+  /*
+   * One GA4 `search` event per search that had a term, sent when the palette closes: what was
+   * typed, how many results it found, and what was picked ('' if nothing was). GA reads
+   * `search_term` into its built-in search terms report.
+   */
+  const searchRef = useRef({ term: '', results: 0, picked: '', position: 0 });
+  searchRef.current.term = query.trim();
+  searchRef.current.results = results.length;
+  useEffect(() => {
+    if (!searchOpen) return;
+    searchRef.current.picked = '';
+    searchRef.current.position = 0;
+    return () => {
+      const s = searchRef.current;
+      if (!s.term) return;
+      track('search', {
+        search_term: s.term,
+        results: s.results,
+        picked: s.picked,
+        ...(s.picked && { position: s.position }),
+      });
+    };
+  }, [searchOpen]);
+  const pick = (i: number) => {
+    searchRef.current.picked = results[i].id;
+    searchRef.current.position = i + 1;
+    jump(results[i].id);
+  };
 
   useEffect(() => setCursor(0), [query]);
 
@@ -50,7 +80,7 @@ export function CommandPalette() {
       setCursor((c) => Math.max(c - 1, 0));
     } else if (e.key === 'Enter' && results[cursor]) {
       e.preventDefault();
-      jump(results[cursor].id);
+      pick(cursor);
     } else if (e.key === 'Tab') {
       // Nothing else in here is focusable; keep focus on the input.
       e.preventDefault();
@@ -131,7 +161,7 @@ export function CommandPalette() {
                 onMouseMove={() => setCursor(i)}
                 onClick={(e) => {
                   e.preventDefault();
-                  jump(r.id);
+                  pick(i);
                 }}
                 className="flex items-center gap-[12px] px-[16px] py-[9px] transition-colors"
                 style={{ background: i === cursor ? 'var(--panel2)' : 'transparent' }}

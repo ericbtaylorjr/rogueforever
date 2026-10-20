@@ -46,7 +46,7 @@ const preloadFonts = (): Plugin => ({
  * Everything is first-party (fonts included). `style-src` needs 'unsafe-inline'
  * because the design sets many inline style attributes; `script-src` does not
  * (the one inline script is pinned by hash, above). Google Analytics hosts are added
- * only when `config.analyticsId` is set.
+ * only when `config.analyticsId` is set, Cloudflare's only when `config.cfBeaconToken` is.
  * Build-only: the dev server injects inline scripts + a websocket for HMR.
  * `frame-ancestors` can't be set from a meta tag — see README > Security.
  */
@@ -58,13 +58,18 @@ const ga = config.analyticsId
     }
   : { script: '', beacon: '' };
 
+/** Cloudflare Web Analytics hosts, allowed only when a beacon token is set (see cfBeacon below). */
+const cf = config.cfBeaconToken
+  ? { script: ' https://static.cloudflareinsights.com', beacon: ' https://cloudflareinsights.com' }
+  : { script: '', beacon: '' };
+
 const csp = [
   "default-src 'self'",
-  `script-src 'self' ${themeInitHash}${ga.script}`,
+  `script-src 'self' ${themeInitHash}${ga.script}${cf.script}`,
   "style-src 'self' 'unsafe-inline'",
   `img-src 'self' data:${ga.beacon}`,
   "font-src 'self'",
-  `connect-src 'self'${ga.beacon}`,
+  `connect-src 'self'${ga.beacon}${cf.beacon}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'none'",
@@ -83,8 +88,34 @@ const contentSecurityPolicy = (): Plugin => ({
   ],
 });
 
+/**
+ * Cloudflare Web Analytics: cookieless, aggregate visit counts for everyone (it stores nothing
+ * on the device, so it sits outside the consent banner, unlike GA). Build-only, so local dev
+ * isn't counted. An external script with a data attribute, not inline, so the CSP holds.
+ * `spa: false`: the page rewrites its URL for ?spec= and #section, and those aren't new visits.
+ */
+const cfBeacon = (): Plugin => ({
+  name: 'cloudflare-web-analytics',
+  apply: 'build',
+  transformIndexHtml: () =>
+    config.cfBeaconToken
+      ? [
+          {
+            tag: 'script',
+            attrs: {
+              // Cloudflare's current snippet loads it as a module (deferred by default).
+              type: 'module',
+              src: 'https://static.cloudflareinsights.com/beacon.min.js',
+              'data-cf-beacon': JSON.stringify({ token: config.cfBeaconToken, spa: false }),
+            },
+            injectTo: 'body' as const,
+          },
+        ]
+      : [],
+});
+
 // Served from the wowrogue.gg custom domain root, so base stays '/'.
 export default defineConfig({
   base: '/',
-  plugins: [react(), tailwindcss(), inlineThemeInit(), preloadFonts(), contentSecurityPolicy()],
+  plugins: [react(), tailwindcss(), inlineThemeInit(), preloadFonts(), contentSecurityPolicy(), cfBeacon()],
 });

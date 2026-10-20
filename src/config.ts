@@ -14,6 +14,11 @@ export interface HandbookConfig {
   defaultSpec: SpecId;
   /** GA4 measurement ID (`G-…`). Public by design, so it lives here. Empty turns analytics off. */
   analyticsId: string;
+  /**
+   * Cloudflare Web Analytics site token. Cookieless visit counts for every visitor, so no
+   * consent is asked for it. Public by design (it ships in the page). Empty turns it off.
+   */
+  cfBeaconToken: string;
 }
 
 export const config: HandbookConfig = {
@@ -25,6 +30,7 @@ export const config: HandbookConfig = {
   phaseLabel: 'v 1.60.1',
   defaultSpec: 'combat',
   analyticsId: 'G-2X22ZZJLFJ',
+  cfBeaconToken: '464cb912098a449fb507327176b98dbd',
 };
 
 /** Viewport thresholds. Kept in one place so CSS and JS can't drift apart. */

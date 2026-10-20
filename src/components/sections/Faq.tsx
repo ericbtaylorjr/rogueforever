@@ -1,4 +1,5 @@
 import { faqs } from '../../content/content';
+import { track } from '../../lib/analytics';
 import { useHandbook } from '../../state/HandbookProvider';
 import { SectionHeading } from '../ui/SectionHeading';
 
@@ -21,7 +22,10 @@ export function Faq() {
                   type="button"
                   aria-expanded={open}
                   aria-controls={panelId}
-                  onClick={() => toggleFaq(i)}
+                  onClick={() => {
+                    if (!open) track('faq_open', { question: f.q });
+                    toggleFaq(i);
+                  }}
                   className="group flex w-full items-baseline gap-[14px] py-[15px] text-left"
                 >
                   <span className="flex-1 text-[15px] font-semibold text-ink transition-colors group-hover:text-accent">

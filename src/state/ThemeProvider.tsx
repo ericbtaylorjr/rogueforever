@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { track } from '../lib/analytics';
 import { readableOnDark, readableOnLight } from '../lib/tone';
 
 export type Theme = 'light' | 'dark';
@@ -82,6 +83,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       /* a preference, not a requirement */
     }
     setTheme(next);
+    track('theme_toggle', { theme: next });
   }, [theme]);
 
   const value = useMemo<ThemeState>(

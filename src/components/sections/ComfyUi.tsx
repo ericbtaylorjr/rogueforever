@@ -3,6 +3,7 @@ import preview from '../../assets/comfy-ui-preview.webp';
 import thumb from '../../assets/comfy-ui-thumb.webp';
 import { comfyUi as copy, type ComfyProfileId } from '../../content/copy';
 import updated from '../../content/imports/updated.json';
+import { track } from '../../lib/analytics';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Modal } from '../ui/Modal';
 
@@ -137,7 +138,10 @@ export function ComfyUiActions() {
     <>
       <button
         type="button"
-        onClick={() => setPreviewOpen(true)}
+        onClick={() => {
+          setPreviewOpen(true);
+          track('comfy_preview_open');
+        }}
         aria-label={copy.preview.open}
         // aspect-video is the minimum; flex-1 lets it grow when the card is stretched, cropping to fill.
         className="group relative mt-[14px] block aspect-video flex-1 overflow-hidden rounded-[8px] border border-line transition-colors hover:border-accent"
@@ -164,7 +168,10 @@ export function ComfyUiActions() {
           <button
             key={p.id}
             type="button"
-            onClick={() => setProfile(p.id)}
+            onClick={() => {
+              setProfile(p.id);
+              track('comfy_profile_open', { profile: p.id });
+            }}
             className="rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute transition-colors hover:border-accent hover:bg-accent-dim hover:text-accent"
           >
             {p.label}

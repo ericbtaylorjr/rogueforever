@@ -9,7 +9,8 @@ import {
   type ReactNode,
 } from 'react';
 import { bp, config, scrollOffset } from '../config';
-import { track } from '../lib/analytics';
+import { setTrackContext, track } from '../lib/analytics';
+import { noteJump, useSectionViews } from '../lib/sectionViews';
 import { sectionIds, specs } from '../content/content';
 import type { GearSetId, SimSetId, SpecId } from '../content/types';
 
@@ -115,11 +116,11 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
 
   const [spec, setSpecState] = useState<SpecId>(initial.spec);
   const [builds, setBuilds] = useState<Partial<Record<SpecId, string>>>({});
-  const [simSet, setSimSet] = useState<SimSetId>('st');
+  const [simSet, setSimSetState] = useState<SimSetId>('st');
   const [sort, setSort] = useState<Sort>({ key: 'idx', dir: 'desc' });
-  const [gearSet, setGearSet] = useState<GearSetId>('leveling');
-  const [consumeFilter, setConsumeFilter] = useState('All');
-  const [foreverFilter, setForeverFilter] = useState('All');
+  const [gearSet, setGearSetState] = useState<GearSetId>('leveling');
+  const [consumeFilter, setConsumeFilterState] = useState('All');
+  const [foreverFilter, setForeverFilterState] = useState('All');
   const [sweaty, setSweaty] = useState(initial.sweaty);
   const [openRaid, setOpenRaid] = useState(0);
   const [openFaq, setOpenFaq] = useState(-1);
@@ -182,6 +183,15 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     url.searchParams.set('spec', spec);
     window.history.replaceState(null, '', url);
   }, [spec, sweaty]);
+
+  /* ----- analytics ----- */
+  useEffect(() => setTrackContext({ active_spec: spec, sweaty_mode: sweaty }), [spec, sweaty]);
+  useSectionViews(sectionIds);
+
+  /* Search opens from a button, the mobile bar or Ctrl K; count every way in here. */
+  useEffect(() => {
+    if (searchOpen) track('search_open');
+  }, [searchOpen]);
 
   /* ----- scroll spy ----- */
   useEffect(() => {
@@ -250,6 +260,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
       setActive(id);
       track('section_jump', { section: id });
+      noteJump(id);
       window.history.replaceState(null, '', `#${id}`);
       // scrollTo() doesn't move keyboard focus, so a keyboard or screen-reader user would
       // be left behind in the nav. Park focus on the section without a second scroll.
@@ -295,7 +306,25 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     track('build_select', { spec: id, build });
   }, []);
 
+  const setGearSet = useCallback((id: GearSetId) => {
+    setGearSetState(id);
+    track('gear_tab', { tab: id });
+  }, []);
+  const setSimSet = useCallback((id: SimSetId) => {
+    setSimSetState(id);
+    track('sim_set', { set: id });
+  }, []);
+  const setConsumeFilter = useCallback((cat: string) => {
+    setConsumeFilterState(cat);
+    track('filter_select', { list: 'consumables', filter: cat });
+  }, []);
+  const setForeverFilter = useCallback((cat: string) => {
+    setForeverFilterState(cat);
+    track('filter_select', { list: 'forever', filter: cat });
+  }, []);
+
   const toggleSort = useCallback((key: SortKey) => {
+    track('table_sort', { column: key });
     setSort((s) => (s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'desc' }));
   }, []);
 
@@ -363,6 +392,10 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       setSpec,
       pickBuild,
       setPrivacyOpen,
+      setGearSet,
+      setSimSet,
+      setConsumeFilter,
+      setForeverFilter,
       toggleSort,
       copy,
       jump,

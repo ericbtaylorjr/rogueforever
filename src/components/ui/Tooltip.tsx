@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from 'react';
 import { tooltipFallback } from '../../content/copy';
+import { track } from '../../lib/analytics';
 
 export interface TipContent {
   name: string;
@@ -42,6 +43,8 @@ const GAP = 9;
 const TIP_ID = 'rc-tooltip';
 /** Grace period so the pointer can cross the gap onto the tooltip itself (WCAG 1.4.13 "hoverable"). */
 const HIDE_DELAY_MS = 160;
+/** How long a tooltip must stay up to count as read (`tooltip_view`). */
+const TIP_READ_MS = 700;
 
 export function TooltipProvider({ children }: { children: ReactNode }) {
   const [tip, setTip] = useState<TipState | null>(null);
@@ -92,6 +95,15 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
   }, [tip, hide]);
 
   useEffect(() => () => window.clearTimeout(hideTimer.current), []);
+
+  /* Count a tooltip as read once it has stayed up a moment; a pointer sweeping across icons isn't.
+     Keyed on the name, so re-positioning the same tooltip isn't a new read. */
+  useEffect(() => {
+    if (!tip) return;
+    const { name, kind } = tip;
+    const t = window.setTimeout(() => track('tooltip_view', { name, kind: kind ?? '' }), TIP_READ_MS);
+    return () => window.clearTimeout(t);
+  }, [tip?.name]);
 
   const api = useMemo<TooltipApi>(
     () => ({

@@ -159,7 +159,14 @@ first paint (no flash) and `src/state/ThemeProvider.tsx` owns it afterwards; bot
 ## Security
 
 Static site, no backend, no user input beyond a search box, no `dangerouslySetInnerHTML`,
-no third-party scripts beyond optional Google Analytics (below). `npm audit` is clean.
+no third-party scripts beyond analytics (below). `npm audit` is clean.
+
+- **Visit counts:** Cloudflare Web Analytics runs for every visitor once `cfBeaconToken` in
+  `src/config.ts` holds the site token. It's cookieless and stores nothing on the device, so
+  it isn't behind the consent banner. The `cloudflare-web-analytics` plugin in
+  `vite.config.ts` adds the script tag at build (never in dev) and its hosts to the CSP. It
+  reports totals only: visits, page views, referrers, countries, devices, page speed. Read
+  them in Cloudflare → Analytics & Logs → Web Analytics.
 
 - **Analytics:** Google Analytics 4 runs only when `analyticsId` in `src/config.ts` holds a
   `G-…` measurement ID, only in production builds, and only after the visitor allows it on
@@ -168,8 +175,7 @@ no third-party scripts beyond optional Google Analytics (below). `npm audit` is 
   lasts 12 months, can be changed from the footer's "Cookie settings", and withdrawing it
   clears GA's cookies. Ad storage and ad signals are always denied. `src/lib/analytics.ts`
   loads gtag.js (no inline snippet), and the build adds Google's hosts to the CSP only while
-  an ID is set.
-  Custom events: `spec_select`, `build_select`, `sweaty_toggle`, `section_jump`, `copy`.
+  an ID is set. Events and how to read them: see Analytics below.
 - **Privacy policy** lives in `copy.ts` (`privacy`) and opens in a dialog from the footer, the
   consent banner, or a `#privacy` link. It describes the code as it stands (storage keys, GA
   events and cookies, hosting), so update it, and its `updated` date, whenever those change.
@@ -192,6 +198,67 @@ no third-party scripts beyond optional Google Analytics (below). `npm audit` is 
   else is ignored.
 - **CI:** actions are pinned to commit SHAs, the workflow defaults to read-only, and only
   the deploy job gets `pages`/`id-token` write. Dependabot keeps both up to date.
+
+## Analytics
+
+Every event goes through `track()` in `src/lib/analytics.ts`, which sends nothing without
+consent and nothing outside production. In `npm run dev`, after you click "Allow analytics",
+events print to the browser console as `[analytics] <event> {…}` instead, so new tracking can
+be checked without polluting the numbers.
+
+Every event also carries `active_spec` and `sweaty_mode`, so anything can be split by spec.
+
+| Event | Fires when | Parameters |
+| --- | --- | --- |
+| `section_view` | a section has been on screen for 2s or more (sent when it leaves view, the tab is hidden, or the page closes) | `section`, `seconds`, `via` (`nav`/`scroll`), `nth_section` |
+| `section_jump` | a section is opened from the nav, search or an in-page link | `section` |
+| `spec_select` | a spec is picked | `spec` |
+| `build_select` | a build is picked | `spec`, `build` |
+| `sweaty_toggle` | sweaty mode is switched | `enabled` |
+| `gear_tab` | a Gear tab is picked | `tab` |
+| `filter_select` | a Consumables or Forever watch filter is picked | `list`, `filter` |
+| `raid_open` / `faq_open` | a raid or FAQ entry is expanded | `raid` / `question` |
+| `tooltip_view` | a tooltip stays up 0.7s | `name`, `kind` |
+| `search_open` | search opens, by any route | — |
+| `search` | search closes after a term was typed | `search_term`, `results`, `picked`, `position` |
+| `copy` | a macro (or other copy button) is copied | `item` |
+| `theme_toggle` | light/dark is switched | `theme` |
+| `comfy_preview_open` / `comfy_profile_open` | the Comfy's UI preview or an import string opens | — / `profile` |
+| `sim_set` / `table_sort` | the sim table changes set or sort | `set` / `column` |
+
+`section_view` measures what is actually read: a section counts while it fills at least half
+the screen (or half of it shows, if it's shorter than that). Returning to a section counts
+again, so its event count is views. Logic lives in `src/lib/sectionViews.ts`.
+
+**GA setup (one time).** GA ignores custom parameters until they're registered, and never
+backfills, so do this before you rely on the data.
+
+1. **Admin → Custom definitions → Create custom dimension**, scope *Event*, one per
+   parameter, with the parameter name as the dimension name: `section`, `via`,
+   `nth_section`, `active_spec`, `sweaty_mode`, `spec`, `build`, `enabled`, `tab`, `list`,
+   `filter`, `raid`, `question`, `name`, `kind`, `picked`, `item`, `theme`, `profile`, `set`,
+   `column`. (`search_term` is built in.)
+2. **Custom metrics**, scope *Event*: `seconds` (unit: Seconds), `results` and `position`
+   (unit: Standard).
+3. **Admin → Data streams → your stream → Enhanced measurement**: keep page views and
+   outbound clicks on. Turn **Site search off**: the Handbook sends its own `search` event,
+   and GA's would look for a URL query that never exists here.
+
+**Reading it** (Explore → blank exploration):
+
+- **What gets read:** Free form. Rows `section`, values *Event count* and *Average seconds*
+  (or `seconds` ÷ event count), filter *Event name = section_view*. Add `active_spec` as a
+  column to compare specs, or `via` to see what's found by scrolling versus the nav.
+- **Reading order:** Free form with rows `nth_section` then `section`, filtered to
+  `section_view`: which section is usually read first, second, and so on. (Path exploration
+  only shows event names, not their parameters, so it's better for the order of actions,
+  e.g. `spec_select` → `build_select` → `copy`.)
+- **How far people get:** Funnel exploration, open funnel, steps `section_view` where
+  `section` = `overview` → `talents` → `stats` → `gear` → `rotation`.
+- **What people click:** Free form, rows *Event name*, then drill into `filter`, `raid`,
+  `question` or `name` (tooltips).
+- **What people look for:** Reports → Engagement → Events → `search`, or a free form on
+  `search_term` with `results` (zero results = missing content) and `picked`.
 
 ## Editorial rules the code enforces
 

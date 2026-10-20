@@ -159,7 +159,31 @@ export function initAnalytics(): void {
   if (state.choice === 'granted') load();
 }
 
-/** Send a custom event. Safe to call anywhere: a no-op without consent or outside production. */
-export function track(event: string, params?: Record<string, string | number | boolean>): void {
-  if (sending && state.choice === 'granted') window.gtag?.('event', event, params);
+/* ----- events ----- */
+
+type Params = Record<string, string | number | boolean>;
+
+/** GA4 drops parameter values over 100 characters. */
+const MAX_VALUE = 100;
+
+/**
+ * Sent with every event, so any interaction can be split by who did it ("do Subtlety
+ * players read Poisons?"). Kept current by HandbookProvider.
+ */
+let context: Params = {};
+export function setTrackContext(next: Params): void {
+  context = next;
+}
+
+/**
+ * Send a custom event. Safe to call anywhere: a no-op without consent or outside production.
+ * In dev, consented events are logged to the console instead, so new tracking can be checked
+ * without polluting the numbers. Every event and parameter is listed in README > Analytics.
+ */
+export function track(event: string, params?: Params): void {
+  if (state.choice !== 'granted') return;
+  const all: Params = { ...context, ...params };
+  for (const [k, v] of Object.entries(all)) if (typeof v === 'string') all[k] = v.slice(0, MAX_VALUE);
+  if (sending) window.gtag?.('event', event, all);
+  else if (import.meta.env.DEV && analyticsConfigured) console.debug('[analytics]', event, all);
 }

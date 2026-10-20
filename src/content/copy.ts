@@ -446,7 +446,7 @@ export const privacy = {
   close: 'Close privacy policy',
   updated: 'Last updated October 19, 2026',
   intro:
-    "Short version: the Handbook doesn't have accounts, forms or ads. It remembers a few preferences in your browser, and it only uses Google Analytics if you allow it on the cookie banner.",
+    "Short version: the Handbook doesn't have accounts, forms or ads. It remembers a few preferences in your browser, counts visits without cookies, and only uses Google Analytics if you allow it on the cookie banner.",
   sections: [
     {
       heading: 'Who runs this',
@@ -458,13 +458,19 @@ export const privacy = {
       heading: 'What stays in your browser',
       body: [
         "Three small settings are saved in your browser's local storage: your spec and sweaty preference (rc:prefs), light or dark theme (rc:theme), and your cookie choice with the date you made it (rc:consent). They never leave your device, and clearing your site data removes them.",
-        'The search box runs entirely in your browser. Nothing you type is sent anywhere.',
+        "Search runs in your browser. Unless you've allowed analytics (below), nothing you type into it leaves your device.",
+      ],
+    },
+    {
+      heading: 'Visit counts, without cookies',
+      body: [
+        'To know roughly how many people use the Handbook, every visit is counted with Cloudflare Web Analytics. It sets no cookies, stores nothing on your device and doesn\'t track you across visits or sites. It records the page, the site that sent you here, your country, and your browser, device type and operating system, plus how fast the page loaded. Cloudflare only uses this to produce the totals the Handbook sees. See Cloudflare\'s privacy policy.',
       ],
     },
     {
       heading: 'Analytics, only with your consent',
       body: [
-        "If you pick \"Allow analytics\", the Handbook loads Google Analytics 4 to see how the guide gets used: pages viewed, which specs and builds are picked, the sweaty toggle, section jumps from the nav or search, and which macros are copied. Google also records things like your browser, device, screen size, the site that sent you here, and a rough location (country and city) worked out from your IP address. Google Analytics 4 doesn't store the IP address itself.",
+        "If you pick \"Allow analytics\", the Handbook loads Google Analytics 4 to see how the guide gets used: which sections you look at and for how long, which specs and builds you pick, the tabs, filters, raids, FAQs and tooltips you open, what you search for, and which macros you copy. Each of these is tagged with your current spec and sweaty setting. Google also records things like your browser, device, screen size, the site that sent you here, and a rough location (country and city) worked out from your IP address. Google Analytics 4 doesn't store the IP address itself.",
         'It sets two cookies, _ga and _ga_2X22ZZJLFJ, which last up to 2 years so a returning visit can be told apart from a new one. Advertising features and ad personalisation are switched off.',
         'Google processes this data on the Handbook\'s behalf and may handle it outside your country, including in the United States. See how Google uses this data and the Google Privacy Policy.',
         "If you don't allow it, or your browser sends a Global Privacy Control signal, Google Analytics never loads and no cookies are set. The legal basis for analytics is your consent, which you can withdraw at any time.",
@@ -473,7 +479,7 @@ export const privacy = {
     {
       heading: 'Hosting',
       body: [
-        "The site is hosted on GitHub Pages. Like most hosts, GitHub may log basic request data such as IP addresses for security and reliability. See GitHub's privacy statement. Fonts and game icons are served from the site itself, so no other services load when you visit.",
+        "The site is hosted on GitHub Pages. Like most hosts, GitHub may log basic request data such as IP addresses for security and reliability. See GitHub's privacy statement. Fonts and game icons are served from the site itself. Apart from Cloudflare's visit counter, and Google Analytics if you allow it, no other services load when you visit.",
       ],
     },
     {

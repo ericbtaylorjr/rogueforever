@@ -1,5 +1,6 @@
 import { raids } from '../../content/content';
 import { raidsCopy as copy } from '../../content/copy';
+import { track } from '../../lib/analytics';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -31,7 +32,10 @@ export function Raids() {
                   type="button"
                   aria-expanded={open}
                   aria-controls={panelId}
-                  onClick={() => toggleRaid(i)}
+                  onClick={() => {
+                    if (!open) track('raid_open', { raid: r.name });
+                    toggleRaid(i);
+                  }}
                   className="flex w-full items-center gap-[14px] p-[16px] text-left"
                 >
                   <span
