@@ -11,8 +11,8 @@ const ICON_SHARE = 0.64;
 
 /**
  * The build's talent trees as the in-game talent window draws them, from a decoded
- * calculator link (`decodeTalentLink`). Display only: hover or focus a talent for its
- * Wowhead tooltip. Wide cards show all three trees; narrow ones show one at a time,
+ * calculator link (`decodeTalentLink`). Hover or focus a talent for its Wowhead tooltip;
+ * click it to open that talent on Wowhead. Wide cards show all three trees; narrow ones show one at a time,
  * picked from the point split above it (the same bars leveling builds show).
  */
 export function TalentPreview({ ranks, colors }: { ranks: number[][]; colors: TreePoints[] }) {
@@ -67,7 +67,7 @@ function Tree({ tree, ranks, spent, hidden }: { tree: TalentTreeData; ranks: num
   const byId = new Map(tree.talents.map((t, i) => [t.id, i]));
   /** One tab stop per tree; arrow keys move between its talents (roving tabindex). */
   const [cursor, setCursor] = useState(0);
-  const refs = useRef<(HTMLSpanElement | null)[]>([]);
+  const refs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const move = (to: number) => {
     setCursor(to);
@@ -129,12 +129,15 @@ function Tree({ tree, ranks, spent, hidden }: { tree: TalentTreeData; ranks: num
             const state = pts === 0 ? 'off' : pts === t.max ? 'max' : 'part';
             const rank = Math.max(pts, 1);
             return (
-              <span
+              <a
                 key={t.id}
                 ref={(el) => {
                   refs.current[i] = el;
                 }}
-                role="img"
+                // The page Wowhead's own calculator links each talent to, at this rank.
+                href={`https://www.wowhead.com/forever/spell=${t.spells[rank - 1]}?def=${t.def}&rank=${rank}`}
+                target="_blank"
+                rel="noreferrer"
                 aria-label={copy.talentLabel(t.name, pts, t.max)}
                 className={`tt-talent tt-${state}`}
                 style={{ gridRow: t.row + 1, gridColumn: t.col + 1 }}
@@ -152,7 +155,7 @@ function Tree({ tree, ranks, spent, hidden }: { tree: TalentTreeData; ranks: num
                     {pts}
                   </span>
                 )}
-              </span>
+              </a>
             );
           })}
         </div>

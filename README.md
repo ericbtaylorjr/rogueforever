@@ -133,8 +133,8 @@ through `useTheme().tone()` in both themes: on parchment it darkens them, on dar
 the few that fall short (WoW's rare blue and epic purple), so item names always clear 4.5:1.
 
 Talent trees (`ui/TalentTree.tsx`): one tab stop per tree, arrow keys move between talents
-(up/down to the nearest talent in the next row, Home/End); each talent reads as "Malice, 5 of
-5", and its tooltip starts with the rank text from `talent-trees.json`, so screen readers hear
+(up/down to the nearest talent in the next row, Home/End); each talent is a link to its
+Wowhead page at the build's rank (new tab), reads as "Malice, 5 of 5", and its tooltip starts with the rank text from `talent-trees.json`, so screen readers hear
 the description on focus before Wowhead's live tooltip loads. The card title is an `h3` and
 each tree an `h4` with its points. The window stays dark in both themes, so its focus ring is
 white rather than the accent (the light theme's dark red would be ~1.8:1 there). In Windows
