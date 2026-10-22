@@ -1,4 +1,4 @@
-import type { IntensityId, SpecId } from './content/types';
+import type { IntensityId, SpecId } from './content/types.ts';
 
 /**
  * Build-time configuration, not end-user settings — there is no settings UI in

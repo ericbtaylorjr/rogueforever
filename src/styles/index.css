@@ -348,6 +348,12 @@
       scroll-padding-top: 136px;
     }
   }
+  /* The spec bar is that sticky bar, so it always sits inside the padding. Cancel it for
+     the bar's own controls, or focusing one (a click on the Build dropdown, a Tab) makes
+     the browser scroll the page to "reveal" a control that's already on screen. */
+  .specbar * {
+    scroll-margin-top: -136px;
+  }
 
   button {
     font: inherit;

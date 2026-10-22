@@ -119,6 +119,15 @@ function readInitial(): { spec: SpecId; build?: string; sweaty: boolean } {
   };
 }
 
+/** Where a section's top sits once scrolled to: just under the sticky header. */
+const sectionOffset = () => (window.innerWidth < bp.rail ? scrollOffset.narrow : scrollOffset.desktop);
+
+function scrollToSection(el: HTMLElement) {
+  const top = el.getBoundingClientRect().top + window.scrollY - sectionOffset();
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+
 export function HandbookProvider({ children }: { children: ReactNode }) {
   const initial = useRef(readInitial()).current;
 
@@ -263,6 +272,29 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
+  /*
+   * Switching spec or build adds and removes content above whatever you're reading, so
+   * the page shifts by a different amount every time. Instead, settle on the top of the
+   * section you were in once the new build has rendered, the same way every time.
+   */
+  const pendingSection = useRef<string | null>(null);
+  const holdSection = () => {
+    const line = sectionOffset() + 1;
+    let current: string | null = null;
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= line) current = id;
+    }
+    pendingSection.current = current;
+  };
+  useEffect(() => {
+    const id = pendingSection.current;
+    pendingSection.current = null;
+    const el = id && document.getElementById(id);
+    // Only when you're into the section; at its top (or above it) there's nothing to fix.
+    if (el && el.getBoundingClientRect().top < sectionOffset() - 1) scrollToSection(el);
+  }, [spec, build.id]);
+
   /* ----- actions ----- */
   const jump = useCallback(
     (id: string) => {
@@ -270,10 +302,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       setSearchOpen(false);
       const el = document.getElementById(id);
       if (!el) return;
-      const offset = window.innerWidth < bp.rail ? scrollOffset.narrow : scrollOffset.desktop;
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+      scrollToSection(el);
       setActive(id);
       track('section_jump', { section: id });
       noteJump(id);
@@ -311,9 +340,9 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     window.history.replaceState(null, '', url);
   }, []);
 
-  /** Selecting a spec must never move the page. */
   const setSpec = useCallback(
     (id: SpecId) => {
+      holdSection();
       setSpecState(id);
       setBuilds((b) => ({ ...b, [id]: buildForSwitch(id, build, b[id]).id }));
       track('spec_select', { spec: id });
@@ -321,6 +350,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     [build],
   );
   const pickBuild = useCallback((id: SpecId, buildId: string) => {
+    holdSection();
     setSpecState(id);
     setBuilds((b) => ({ ...b, [id]: buildId }));
     track('build_select', { spec: id, build: buildId });

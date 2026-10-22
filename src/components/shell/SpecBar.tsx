@@ -40,7 +40,7 @@ export function SpecBar() {
       {/* Sits where the bar rests; once it scrolls past the bar's sticky line, the bar is stuck. */}
       <div ref={stuck.sentinel} aria-hidden="true" className="h-px -mb-px" />
       <div
-        className="sticky z-[30] py-[10px]"
+        className="specbar sticky z-[30] py-[10px]"
         style={{ top }}
       >
         <div

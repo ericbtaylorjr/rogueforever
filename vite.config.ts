@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import { config } from './src/config';
+import { config } from './src/config.ts';
 
 /**
  * The pre-paint theme script (src/theme-init.js) is inlined into index.html so it doesn't
