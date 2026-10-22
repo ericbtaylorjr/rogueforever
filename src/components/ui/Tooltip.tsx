@@ -21,6 +21,12 @@ export interface TipContent {
   note?: string;
   /** Show Wowhead's live tooltip for this item or spell, with `kind` and `note` beneath it. */
   wowhead?: WowheadRef;
+  /**
+   * Shown until Wowhead's tooltip arrives (or if it never does) in place of `note`.
+   * Screen readers read the tooltip on focus, before the live one loads, so this is
+   * what they hear: keep it the real description.
+   */
+  fallback?: string;
 }
 
 interface TipState extends TipContent {
@@ -165,7 +171,7 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
             <div className="t-card-sub text-ink">{tip?.name}</div>
             {tip?.kind && <div className="t-eyebrow mt-[3px] text-[10.5px] text-accent">{tip.kind}</div>}
             <div className="mt-[6px] text-[12px] leading-[1.55] text-mute">
-              {tip?.note || tooltipFallback}
+              {tip?.fallback || tip?.note || tooltipFallback}
             </div>
           </>
         )}

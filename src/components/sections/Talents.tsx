@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
 import { buildsFor } from '../../content/builds';
+import { specById } from '../../content/content';
 import { talents as copy } from '../../content/copy';
 import type { Build } from '../../content/types';
+import { decodeTalentLink } from '../../lib/talentCalc';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { BUILD_CARD_ID, BuildList } from '../ui/BuildList';
 import { SectionHeading } from '../ui/SectionHeading';
+import { TalentPreview } from '../ui/TalentTree';
 import { Tip } from '../ui/Tip';
 
 const TOTAL_POINTS = 51;
 
 /**
- * Point split, key talents and a calculator link for one build. Level 60 bars are
- * out of the 51 points available at 60; leveling bars use the build's own total.
- * A build with no talents or note yet says so instead.
+ * Point split, key talents and a calculator link for one build. Level 60 builds draw
+ * their talent trees from the calculator link; leveling builds (for now) show bars,
+ * out of the build's own total. A build with no talents or note yet says so instead.
  */
 function BuildCard({ build }: { build: Build }) {
   const { tone } = useTheme();
@@ -29,18 +32,33 @@ function BuildCard({ build }: { build: Build }) {
 
   const trees = build.talents;
   const pending = !trees.length && !build.talentNote;
+  // Level 60 only for now; leveling links decode the same way when they're wanted.
+  const ranks = build.phase === 'endgame' ? decodeTalentLink(build.link) : null;
 
   return (
     <div className="panel flex flex-col p-[18px]">
       <div className="flex items-baseline justify-between gap-[10px]">
-        <span className="t-panel-label text-ink">{build.name}</span>
+        <h3 className="t-panel-label text-ink">
+          {specById[build.spec].name} {build.name}
+        </h3>
       </div>
+
+      {build.talentNote && (
+        <p className="mt-[10px] max-w-[70ch] text-[12.5px] leading-[1.6] text-mute">{build.talentNote}</p>
+      )}
 
       {pending && (
         <p className="mt-[10px] max-w-[70ch] text-[13px] leading-[1.6] text-mute">{copy.buildPending}</p>
       )}
 
-      {trees.length > 0 && (
+      {ranks && (
+        <div className="mt-[16px]">
+          {/* Keyed so a new build starts on its own main tree. */}
+          <TalentPreview key={`${build.spec}-${build.id}`} ranks={ranks} colors={trees} />
+        </div>
+      )}
+
+      {!ranks && trees.length > 0 && (
         <div className="mt-[16px] grid grid-cols-3 gap-[12px]">
           {trees.map((t) => (
             <div key={t.name}>
@@ -69,15 +87,6 @@ function BuildCard({ build }: { build: Build }) {
         </div>
       )}
 
-      {build.talentNote && (
-        <p
-          className={`text-[12.5px] leading-[1.6] text-mute ${
-            trees.length ? 'mt-[16px] border-t border-line pt-[14px]' : 'mt-[10px]'
-          }`}
-        >
-          {build.talentNote}
-        </p>
-      )}
       <ul className="mt-[12px] flex flex-1 flex-col gap-[8px] empty:hidden">
         {build.keyTalents.map((k) => (
           <li key={k} className="flex items-baseline gap-[9px] text-[12.5px] leading-[1.5] text-prose">

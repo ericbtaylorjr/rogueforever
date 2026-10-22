@@ -573,6 +573,233 @@
     overscroll-behavior-x: contain;
   }
 
+  /* Talent tree preview (ui/TalentTree): the in-game talent window, dark in both themes.
+     Gold frame = talent maxed, green = partly ranked, desaturated = not taken. */
+  .tt-frame {
+    display: grid;
+    max-width: 1000px;
+    margin-inline: auto;
+    overflow: hidden;
+    border: 1px solid #4a3b22;
+    border-radius: 8px;
+    background: #0d0b09;
+    box-shadow:
+      inset 0 0 0 1px rgba(0, 0, 0, 0.8),
+      0 2px 10px rgba(0, 0, 0, 0.35);
+  }
+  .tt-tree {
+    position: relative;
+    min-width: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  /* Darken the art at the edges, as the game does, so the icons carry the tree. */
+  .tt-tree::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.55) 85%),
+      linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.12) 22%, rgba(0, 0, 0, 0.45));
+  }
+  .tt-tree + .tt-tree {
+    border-left: 1px solid #3a2f1c;
+  }
+  .tt-head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 12px 18px;
+    background: linear-gradient(rgba(10, 8, 6, 0.75), rgba(10, 8, 6, 0.35));
+  }
+  /* The orange glow under each tree's name. */
+  .tt-head::after {
+    content: '';
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #b8742a 25%, #e0a04a 50%, #b8742a 75%, transparent);
+    box-shadow: 0 -6px 16px 2px rgba(214, 120, 30, 0.35);
+  }
+  .tt-spec {
+    position: relative;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+  }
+  .tt-spec img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #8a6a36;
+    box-shadow: 0 0 0 1px #000, 0 0 10px rgba(214, 120, 30, 0.35);
+    object-fit: cover;
+  }
+  .tt-badge {
+    position: absolute;
+    right: -9px;
+    bottom: -7px;
+    min-width: 19px;
+    padding: 1px 4px;
+    border: 1px solid #8a6a36;
+    border-radius: 3px;
+    background: #0b0907;
+    color: #ffd100;
+    font-size: 11px;
+    line-height: 15px;
+    text-align: center;
+  }
+  .tt-name {
+    font-family: var(--font-display);
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #f2e8d5;
+    text-shadow: 0 1px 2px #000;
+  }
+  .tt-body {
+    position: relative;
+    padding: 6% 11% 8%;
+  }
+  .tt-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    aspect-ratio: 4 / 7;
+  }
+  .tt-arrows {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .tt-arrows line {
+    stroke: #7d7d7d;
+    stroke-width: 2.5px;
+    vector-effect: non-scaling-stroke;
+  }
+  .tt-arrows polygon {
+    fill: #7d7d7d;
+  }
+  .tt-arrows .tt-lit line {
+    stroke: #e5b72c;
+  }
+  .tt-arrows .tt-lit polygon {
+    fill: #e5b72c;
+  }
+  .tt-talent {
+    position: relative;
+    align-self: center;
+    justify-self: center;
+    width: 64%;
+    aspect-ratio: 1;
+    /* So the rank number scales with the icon. */
+    container-type: inline-size;
+    border-radius: 6px;
+    border: 2px solid #5c5c5c;
+    background: #000;
+    box-shadow:
+      0 0 0 1px #000,
+      0 2px 4px rgba(0, 0, 0, 0.6);
+    cursor: help;
+  }
+  .tt-talent img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+  .tt-off {
+    border-color: #3d3d3d;
+  }
+  .tt-off img {
+    filter: grayscale(1) brightness(0.42) contrast(1.05);
+  }
+  .tt-part {
+    border-color: #2bd42b;
+    box-shadow:
+      0 0 0 1px #000,
+      0 0 8px rgba(43, 212, 43, 0.35);
+  }
+  .tt-max {
+    border-color: #f2cc2e;
+    box-shadow:
+      0 0 0 1px #000,
+      0 0 8px rgba(242, 204, 46, 0.35);
+  }
+  .tt-rank {
+    position: absolute;
+    right: -3px;
+    bottom: -5px;
+    font-family: var(--font-sans);
+    font-size: clamp(12px, 42cqw, 20px);
+    font-weight: 700;
+    line-height: 1;
+    paint-order: stroke fill;
+    -webkit-text-stroke: 3px #000;
+    pointer-events: none;
+  }
+  .tt-part .tt-rank {
+    color: #2bf02b;
+  }
+  .tt-max .tt-rank {
+    color: #ffd100;
+  }
+  /* The window is dark in both themes, so the light theme's dark accent ring would vanish
+     here. White with a dark halo reads on the art and against the gold and green frames. */
+  .tt-talent:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+    box-shadow:
+      0 0 0 1px #000,
+      0 0 0 6px rgba(0, 0, 0, 0.85);
+  }
+
+  /* Windows High Contrast flattens every frame to one colour and blots the outlined rank
+     numbers, so give each state its own system colour and line style instead. */
+  @media (forced-colors: active) {
+    .tt-talent {
+      border-color: CanvasText;
+    }
+    .tt-max {
+      border: 3px solid Highlight;
+    }
+    .tt-part {
+      border: 3px dashed Highlight;
+    }
+    .tt-off {
+      border-color: GrayText;
+    }
+    .tt-rank {
+      -webkit-text-stroke: 0;
+      padding: 0 2px;
+      border-radius: 2px;
+      background: Canvas;
+      color: CanvasText;
+    }
+    .tt-arrows line {
+      stroke: GrayText;
+    }
+    .tt-arrows polygon {
+      fill: GrayText;
+    }
+    .tt-arrows .tt-lit line {
+      stroke: Highlight;
+    }
+    .tt-arrows .tt-lit polygon {
+      fill: Highlight;
+    }
+    .tt-talent:focus-visible {
+      outline-color: Highlight;
+    }
+  }
+
   /* Wowhead tooltip markup (lib/wowhead), restyled to sit in our tooltip box.
      The --wh-* colours are set inline by Tooltip, toned for the current theme. */
   .wh-tip {

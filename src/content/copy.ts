@@ -148,6 +148,14 @@ export const talents = {
   /** Tree names are confirmed to carry over; the split is what is pending. */
   trees: ['Assassination', 'Combat', 'Subtlety'],
   calculator: 'Open in talent calculator ↗',
+  /** Tree preview: narrow cards show one tree, picked with the point split. */
+  treePicker: 'Talent tree to show',
+  treeLabel: (tree: string) => `${tree} talents. Arrow keys move between talents.`,
+  treePoints: (points: number) => `${points} ${points === 1 ? 'point' : 'points'}`,
+  /** Read after the number on the narrow-screen tree tabs: "31 points in Assassination". */
+  pointsIn: (points: number) => (points === 1 ? 'point in' : 'points in'),
+  talentLabel: (name: string, points: number, max: number) => `${name}, ${points} of ${max}`,
+  rankLine: (points: number, max: number) => `Rank ${points}/${max}`,
 } as const;
 
 export const racesCopy = {

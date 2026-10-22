@@ -13,6 +13,11 @@ export type WowheadKind = 'item' | 'spell';
 export interface WowheadRef {
   kind: WowheadKind;
   id: number;
+  /**
+   * A talent's spell, shown the way Wowhead's talent calculator shows it: the text for
+   * `rank` (from talent definition `def`) under a "Rank points/max" line.
+   */
+  talent?: { def: number; rank: number; points: number; max: number };
 }
 
 export interface WowheadTip {
@@ -22,7 +27,8 @@ export interface WowheadTip {
 
 const API = 'https://nether.wowhead.com';
 
-export const wowheadKey = (ref: WowheadRef) => `${ref.kind}:${ref.id}`;
+export const wowheadKey = ({ kind, id, talent: t }: WowheadRef) =>
+  t ? `${kind}:${id}:${t.def}:${t.rank}:${t.points}/${t.max}` : `${kind}:${id}`;
 
 /** One request per entity per page load; failures resolve to `null` and are retried next load. */
 const cache = new Map<string, Promise<WowheadTip | null>>();
@@ -37,12 +43,16 @@ export function loadWowheadTip(ref: WowheadRef): Promise<WowheadTip | null> {
   return hit;
 }
 
-async function fetchTip({ kind, id }: WowheadRef): Promise<WowheadTip | null> {
+async function fetchTip({ kind, id, talent }: WowheadRef): Promise<WowheadTip | null> {
   try {
-    const res = await fetch(`${API}/forever/tooltip/${kind}/${id}`);
+    const query = talent ? `?def=${talent.def}&rank=${talent.rank}` : '';
+    const res = await fetch(`${API}/forever/tooltip/${kind}/${id}${query}`);
     if (!res.ok) return null;
     const data = (await res.json()) as { tooltip?: string; error?: string };
-    return data.tooltip && !data.error ? { html: sanitize(data.tooltip) } : null;
+    if (!data.tooltip || data.error) return null;
+    const tip = sanitize(data.tooltip);
+    if (talent) setRankLine(tip, `Rank ${talent.points}/${talent.max}`);
+    return { html: tip.innerHTML };
   } catch {
     return null; // Offline or blocked: the tooltip keeps our own note.
   }
@@ -57,12 +67,20 @@ const DROPPED_TAGS = new Set(['SCRIPT', 'STYLE', 'TEMPLATE', 'NOSCRIPT', 'IFRAME
 /** Class names are only ever hooks for styles/index.css (`.wh-tip …`). */
 const SAFE_CLASS = /^[\w-]+$/;
 
-function sanitize(html: string): string {
+function sanitize(html: string): HTMLDivElement {
   // DOMParser builds an inert document: nothing in it runs or loads.
   const doc = new DOMParser().parseFromString(html, 'text/html');
   const out = document.createElement('div');
   copyChildren(doc.body, out);
-  return out.innerHTML;
+  return out;
+}
+
+/** Wowhead's spell tooltip says "Rank 1" (or nothing); the calculator says "Rank 3/5" under the header lines. */
+function setRankLine(tip: HTMLElement, text: string) {
+  const line = tip.querySelector('.whtt-rank') ?? tip.querySelector('td')?.appendChild(document.createElement('div'));
+  if (!line) return;
+  line.className = 'q0';
+  line.textContent = text;
 }
 
 function copyChildren(from: Node, to: Node) {

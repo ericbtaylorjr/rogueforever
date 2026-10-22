@@ -1,0 +1,1139 @@
+{
+  "source": "https://nether.wowhead.com/forever/data/talents-classic",
+  "trees": [
+    {
+      "id": 182,
+      "name": "Assassination",
+      "icon": "ability_rogue_eviscerate",
+      "talents": [
+        {
+          "id": 105742,
+          "name": "Improved Gouge",
+          "row": 0,
+          "col": 0,
+          "icon": "ability_gouge",
+          "max": 3,
+          "spells": [
+            13741,
+            13741,
+            13741
+          ],
+          "def": 135272,
+          "text": [
+            "Increases the duration of your Gouge ability by 0.5 sec.",
+            "Increases the duration of your Gouge ability by 1 sec.",
+            "Increases the duration of your Gouge ability by 1.5 sec."
+          ],
+          "requires": [],
+          "tierPoints": 0
+        },
+        {
+          "id": 105723,
+          "name": "Remorseless Attacks",
+          "row": 0,
+          "col": 1,
+          "icon": "ability_fiegndead",
+          "max": 2,
+          "spells": [
+            14144,
+            14144
+          ],
+          "def": 135253,
+          "text": [
+            "After killing a non-trivial enemy, gives you a 20% increased critical strike chance on your next Sinister Strike, Backstab, Ambush, Mutilate, or Ghostly Strike. Lasts 20 sec.",
+            "After killing a non-trivial enemy, gives you a 40% increased critical strike chance on your next Sinister Strike, Backstab, Ambush, Mutilate, or Ghostly Strike. Lasts 20 sec."
+          ],
+          "requires": [],
+          "tierPoints": 0
+        },
+        {
+          "id": 105722,
+          "name": "Malice",
+          "row": 0,
+          "col": 2,
+          "icon": "ability_racial_bloodrage",
+          "max": 5,
+          "spells": [
+            14138,
+            14138,
+            14138,
+            14138,
+            14138
+          ],
+          "def": 135252,
+          "text": [
+            "Increases your critical strike chance with all attacks and Poisons by 1%.",
+            "Increases your critical strike chance with all attacks and Poisons by 2%.",
+            "Increases your critical strike chance with all attacks and Poisons by 3%.",
+            "Increases your critical strike chance with all attacks and Poisons by 4%.",
+            "Increases your critical strike chance with all attacks and Poisons by 5%."
+          ],
+          "requires": [],
+          "tierPoints": 0
+        },
+        {
+          "id": 105721,
+          "name": "Ruthlessness",
+          "row": 1,
+          "col": 0,
+          "icon": "ability_druid_disembowel",
+          "max": 3,
+          "spells": [
+            14156,
+            14156,
+            14156
+          ],
+          "def": 135251,
+          "text": [
+            "Gives your finishing moves a 20% chance to add a Combo Point to your target.",
+            "Gives your finishing moves a 40% chance to add a Combo Point to your target.",
+            "Gives your finishing moves a 60% chance to add a Combo Point to your target."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105720,
+          "name": "Murder",
+          "row": 1,
+          "col": 1,
+          "icon": "spell_shadow_deathscream",
+          "max": 2,
+          "spells": [
+            14158,
+            14158
+          ],
+          "def": 135250,
+          "text": [
+            "Increases all damage dealt by 2% against Humanoid and Giant targets.",
+            "Increases all damage dealt by 4% against Humanoid and Giant targets."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105739,
+          "name": "Improved Slice and Dice",
+          "row": 1,
+          "col": 3,
+          "icon": "ability_rogue_slicedice",
+          "max": 3,
+          "spells": [
+            14165,
+            14165,
+            14165
+          ],
+          "def": 135269,
+          "text": [
+            "Increases the duration of your Slice and Dice ability by 15%.",
+            "Increases the duration of your Slice and Dice ability by 30%.",
+            "Increases the duration of your Slice and Dice ability by 45%."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105759,
+          "name": "Relentless Strikes",
+          "row": 2,
+          "col": 0,
+          "icon": "ability_warrior_decisivestrike",
+          "max": 1,
+          "spells": [
+            14179
+          ],
+          "def": 135289,
+          "text": [
+            "Your finishing moves have a 20% chance per Combo Point to restore 25 Energy."
+          ],
+          "requires": [],
+          "tierPoints": 10
+        },
+        {
+          "id": 105717,
+          "name": "Improved Expose Armor",
+          "row": 2,
+          "col": 1,
+          "icon": "ability_warrior_riposte",
+          "max": 2,
+          "spells": [
+            14168,
+            14168
+          ],
+          "def": 135247,
+          "text": [
+            "Reduces the Energy cost of your Expose Armor ability by 5, and refunds 1 Combo Point when cast with 5 Combo Points.",
+            "Reduces the Energy cost of your Expose Armor ability by 10, and refunds 2 Combo Points when cast with 5 Combo Points."
+          ],
+          "requires": [],
+          "tierPoints": 10
+        },
+        {
+          "id": 105716,
+          "name": "Lethality",
+          "row": 2,
+          "col": 2,
+          "icon": "ability_criticalstrike",
+          "max": 5,
+          "spells": [
+            14128,
+            14128,
+            14128,
+            14128,
+            14128
+          ],
+          "def": 135246,
+          "text": [
+            "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 4%.",
+            "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 8%.",
+            "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 12%.",
+            "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 16%.",
+            "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 20%."
+          ],
+          "requires": [
+            {
+              "id": 105722,
+              "ranks": 5
+            }
+          ],
+          "tierPoints": 10
+        },
+        {
+          "id": 105714,
+          "name": "Vile Poisons",
+          "row": 3,
+          "col": 0,
+          "icon": "ability_rogue_feigndeath",
+          "max": 5,
+          "spells": [
+            16513,
+            16513,
+            16513,
+            16513,
+            16513
+          ],
+          "def": 135244,
+          "text": [
+            "Increases the damage dealt by your poisons by 4% and gives your poisons an additional 8% chance to resist dispel effects.",
+            "Increases the damage dealt by your poisons by 8% and gives your poisons an additional 16% chance to resist dispel effects.",
+            "Increases the damage dealt by your poisons by 12% and gives your poisons an additional 24% chance to resist dispel effects.",
+            "Increases the damage dealt by your poisons by 16% and gives your poisons an additional 32% chance to resist dispel effects.",
+            "Increases the damage dealt by your poisons by 20% and gives your poisons an additional 40% chance to resist dispel effects."
+          ],
+          "requires": [],
+          "tierPoints": 15
+        },
+        {
+          "id": 105715,
+          "name": "Cold Blood",
+          "row": 3,
+          "col": 1,
+          "icon": "spell_ice_lament",
+          "max": 1,
+          "spells": [
+            14177
+          ],
+          "def": 135245,
+          "text": [
+            "When activated, increases the critical strike chance of your next Sinister Strike, Backstab, Ambush, Eviscerate, or Mutilate by 100%."
+          ],
+          "requires": [],
+          "tierPoints": 15
+        },
+        {
+          "id": 105713,
+          "name": "Improved Poisons",
+          "row": 3,
+          "col": 2,
+          "icon": "ability_poisons",
+          "max": 5,
+          "spells": [
+            14113,
+            14113,
+            14113,
+            14113,
+            14113
+          ],
+          "def": 135243,
+          "text": [
+            "Increases the chance to apply Poisons to your target by 2%, and gives Poison applications a 10% chance to not consume a charge.",
+            "Increases the chance to apply Poisons to your target by 4%, and gives Poison applications a 20% chance to not consume a charge.",
+            "Increases the chance to apply Poisons to your target by 6%, and gives Poison applications a 30% chance to not consume a charge.",
+            "Increases the chance to apply Poisons to your target by 8%, and gives Poison applications a 40% chance to not consume a charge.",
+            "Increases the chance to apply Poisons to your target by 10%, and gives Poison applications a 50% chance to not consume a charge."
+          ],
+          "requires": [],
+          "tierPoints": 15
+        },
+        {
+          "id": 105718,
+          "name": "Vigor",
+          "row": 4,
+          "col": 0,
+          "icon": "spell_nature_earthbindtotem",
+          "max": 2,
+          "spells": [
+            14983,
+            14983
+          ],
+          "def": 135248,
+          "text": [
+            "Increases your maximum Energy by 5.",
+            "Increases your maximum Energy by 10."
+          ],
+          "requires": [],
+          "tierPoints": 20
+        },
+        {
+          "id": 105709,
+          "name": "Mutilate",
+          "row": 4,
+          "col": 1,
+          "icon": "ability_rogue_deadlybrew",
+          "max": 1,
+          "spells": [
+            1310707
+          ],
+          "def": 135239,
+          "text": [
+            "Instantly attacks with both weapons for 75% weapon damage plus an additional 17 with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo Points."
+          ],
+          "requires": [],
+          "tierPoints": 20
+        },
+        {
+          "id": 105711,
+          "name": "Improved Kidney Shot",
+          "row": 4,
+          "col": 2,
+          "icon": "ability_rogue_kidneyshot",
+          "max": 2,
+          "spells": [
+            14174,
+            14174
+          ],
+          "def": 135241,
+          "text": [
+            "Enemies Stunned by your Kidney Shot ability take 5% increased damage from your poisons and attacks.",
+            "Enemies Stunned by your Kidney Shot ability take 10% increased damage from your poisons and attacks."
+          ],
+          "requires": [],
+          "tierPoints": 20
+        },
+        {
+          "id": 105710,
+          "name": "Seal Fate",
+          "row": 5,
+          "col": 2,
+          "icon": "spell_shadow_chilltouch",
+          "max": 5,
+          "spells": [
+            14186,
+            14186,
+            14186,
+            14186,
+            14186
+          ],
+          "def": 135240,
+          "text": [
+            "Your critical strikes from abilities that add Combo Points have a 20% chance to add an additional Combo Point.",
+            "Your critical strikes from abilities that add Combo Points have a 40% chance to add an additional Combo Point.",
+            "Your critical strikes from abilities that add Combo Points have a 60% chance to add an additional Combo Point.",
+            "Your critical strikes from abilities that add Combo Points have a 80% chance to add an additional Combo Point.",
+            "Your critical strikes from abilities that add Combo Points have a 100% chance to add an additional Combo Point."
+          ],
+          "requires": [],
+          "tierPoints": 25
+        },
+        {
+          "id": 105712,
+          "name": "Venom",
+          "row": 6,
+          "col": 1,
+          "icon": "inv_sword_31",
+          "max": 1,
+          "spells": [
+            1310703
+          ],
+          "def": 135242,
+          "text": [
+            "Finishing move that increases the damage of your Poisons by 30% and your chance to apply Poisons by 10%. Lasts longer per combo point: 1 point : 9 sec 2 points: 12 sec 3 points: 15 sec 4 points: 18 sec 5 points: 21 sec"
+          ],
+          "requires": [
+            {
+              "id": 105709,
+              "ranks": 1
+            }
+          ],
+          "tierPoints": 30
+        }
+      ]
+    },
+    {
+      "id": 181,
+      "name": "Combat",
+      "icon": "ability_backstab",
+      "talents": [
+        {
+          "id": 105708,
+          "name": "Improved Eviscerate",
+          "row": 0,
+          "col": 0,
+          "icon": "ability_rogue_eviscerate",
+          "max": 3,
+          "spells": [
+            14162,
+            14162,
+            14162
+          ],
+          "def": 135238,
+          "text": [
+            "Increases the damage done by your Eviscerate ability by 7%.",
+            "Increases the damage done by your Eviscerate ability by 13%.",
+            "Increases the damage done by your Eviscerate ability by 20%."
+          ],
+          "requires": [],
+          "tierPoints": 0
+        },
+        {
+          "id": 105741,
+          "name": "Improved Sinister Strike",
+          "row": 0,
+          "col": 1,
+          "icon": "spell_shadow_ritualofsacrifice",
+          "max": 2,
+          "spells": [
+            13732,
+            13732
+          ],
+          "def": 135271,
+          "text": [
+            "Reduces the Energy cost of your Sinister Strike ability by 3.",
+            "Reduces the Energy cost of your Sinister Strike ability by 5."
+          ],
+          "requires": [],
+          "tierPoints": 0
+        },
+        {
+          "id": 113398,
+          "name": "Lightning Reflexes",
+          "row": 0,
+          "col": 2,
+          "icon": "spell_nature_invisibilty",
+          "max": 5,
+          "spells": [
+            13712,
+            13712,
+            13712,
+            13712,
+            13712
+          ],
+          "def": 145370,
+          "text": [
+            "Increases your Dodge chance by 1%.",
+            "Increases your Dodge chance by 2%.",
+            "Increases your Dodge chance by 3%.",
+            "Increases your Dodge chance by 4%.",
+            "Increases your Dodge chance by 5%."
+          ],
+          "requires": [],
+          "tierPoints": 0
+        },
+        {
+          "id": 105719,
+          "name": "Puncturing Wounds",
+          "row": 1,
+          "col": 0,
+          "icon": "ability_backstab",
+          "max": 3,
+          "spells": [
+            1224716,
+            1224716,
+            1224716
+          ],
+          "def": 135249,
+          "text": [
+            "Increases the critical strike chance of your Backstab by 10% and your Mutilate by 5%, and gives Backstab a 15% chance to add an additional Combo Point.",
+            "Increases the critical strike chance of your Backstab by 20% and your Mutilate by 10%, and gives Backstab a 30% chance to add an additional Combo Point.",
+            "Increases the critical strike chance of your Backstab by 30% and your Mutilate by 15%, and gives Backstab a 45% chance to add an additional Combo Point."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105738,
+          "name": "Deflection",
+          "row": 1,
+          "col": 1,
+          "icon": "ability_parry",
+          "max": 3,
+          "spells": [
+            13713,
+            13713,
+            13713
+          ],
+          "def": 135268,
+          "text": [
+            "Increases your Parry chance by 2%.",
+            "Increases your Parry chance by 4%.",
+            "Increases your Parry chance by 6%."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105737,
+          "name": "Precision",
+          "row": 1,
+          "col": 2,
+          "icon": "ability_marksmanship",
+          "max": 3,
+          "spells": [
+            13705,
+            13705,
+            13705
+          ],
+          "def": 135267,
+          "text": [
+            "Improves your chance to hit by 1%.",
+            "Improves your chance to hit by 2%.",
+            "Improves your chance to hit by 3%."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105736,
+          "name": "Endurance",
+          "row": 2,
+          "col": 0,
+          "icon": "spell_shadow_shadowward",
+          "max": 2,
+          "spells": [
+            13742,
+            13742
+          ],
+          "def": 135266,
+          "text": [
+            "Reduces the cooldown of your Sprint and Evasion abilities by 30%.",
+            "Reduces the cooldown of your Sprint and Evasion abilities by 60%."
+          ],
+          "requires": [],
+          "tierPoints": 10
+        },
+        {
+          "id": 105735,
+          "name": "Riposte",
+          "row": 2,
+          "col": 1,
+          "icon": "ability_warrior_challange",
+          "max": 1,
+          "spells": [
+            14251
+          ],
+          "def": 135265,
+          "text": [
+            "A strike that becomes active after parrying an opponent's attack. This attack deals 150% weapon damage and disarms the target for 6 sec."
+          ],
+          "requires": [
+            {
+              "id": 105738,
+              "ranks": 3
+            }
+          ],
+          "tierPoints": 10
+        },
+        {
+          "id": 105732,
+          "name": "Improved Sprint",
+          "row": 2,
+          "col": 3,
+          "icon": "ability_rogue_sprint",
+          "max": 2,
+          "spells": [
+            13743,
+            13743
+          ],
+          "def": 135262,
+          "text": [
+            "Gives a 50% chance to remove all movement impairing effects when you activate your Sprint ability.",
+            "Gives a 100% chance to remove all movement impairing effects when you activate your Sprint ability."
+          ],
+          "requires": [],
+          "tierPoints": 10
+        },
+        {
+          "id": 105733,
+          "name": "Improved Kick",
+          "row": 3,
+          "col": 0,
+          "icon": "ability_kick",
+          "max": 2,
+          "spells": [
+            13754,
+            13754
+          ],
+          "def": 135263,
+          "text": [
+            "Gives your Kick ability a 50% chance to Silence the target for 2 sec.",
+            "Gives your Kick ability a 100% chance to Silence the target for 2 sec."
+          ],
+          "requires": [],
+          "tierPoints": 15
+        },
+        {
+          "id": 108100,
+          "name": "Flawless Execution",
+          "row": 3,
+          "col": 1,
+          "icon": "inv_sword_35",
+          "max": 1,
+          "spells": [
+            1310711
+          ],
+          "def": 138268,
+          "text": [
+            "Reduces the Energy cost of your Eviscerate ability by 10."
+          ],
+          "requires": [],
+          "tierPoints": 15
+        },
+        {
+          "id": 105740,
+          "name": "Dual Wield Specialization",
+          "row": 3,
+          "col": 2,
+          "icon": "ability_dualwield",
+          "max": 5,
+          "spells": [
+            13715,
+            13715,
+            13715,
+            13715,
+            13715
+          ],
+          "def": 135270,
+          "text": [
+            "Increases the damage done by your off-hand weapon by 5%.",
+            "Increases the damage done by your off-hand weapon by 10%.",
+            "Increases the damage done by your off-hand weapon by 15%.",
+            "Increases the damage done by your off-hand weapon by 20%.",
+            "Increases the damage done by your off-hand weapon by 25%."
+          ],
+          "requires": [
+            {
+              "id": 105737,
+              "ranks": 3
+            }
+          ],
+          "tierPoints": 15
+        },
+        {
+          "id": 105728,
+          "name": "Blade Flurry",
+          "row": 4,
+          "col": 1,
+          "icon": "ability_warrior_punishingblow",
+          "max": 1,
+          "spells": [
+            13877
+          ],
+          "def": 135258,
+          "text": [
+            "Increases your melee attack speed by 20% and your melee attacks strike an additional nearby opponent. Lasts 15 sec."
+          ],
+          "requires": [],
+          "tierPoints": 20
+        },
+        {
+          "id": 105727,
+          "name": "Hack and Slash",
+          "row": 4,
+          "col": 2,
+          "icon": "inv_sword_27",
+          "max": 5,
+          "spells": [
+            13960,
+            13960,
+            13960,
+            13960,
+            13960
+          ],
+          "def": 135257,
+          "text": [
+            "Gives your melee weapon attacks a benefit depending on the weapon. Axe/Sword: Your successful melee attacks have a 1% chance to trigger an extra attack on the target. Dagger/Fist: Increases your critical strike chance by 1%. Mace: Your attacks ignore 3% of your target's armor.",
+            "Gives your melee weapon attacks a benefit depending on the weapon. Axe/Sword: Your successful melee attacks have a 2% chance to trigger an extra attack on the target. Dagger/Fist: Increases your critical strike chance by 2%. Mace: Your attacks ignore 6% of your target's armor.",
+            "Gives your melee weapon attacks a benefit depending on the weapon. Axe/Sword: Your successful melee attacks have a 3% chance to trigger an extra attack on the target. Dagger/Fist: Increases your critical strike chance by 3%. Mace: Your attacks ignore 9% of your target's armor.",
+            "Gives your melee weapon attacks a benefit depending on the weapon. Axe/Sword: Your successful melee attacks have a 4% chance to trigger an extra attack on the target. Dagger/Fist: Increases your critical strike chance by 4%. Mace: Your attacks ignore 12% of your target's armor.",
+            "Gives your melee weapon attacks a benefit depending on the weapon. Axe/Sword: Your successful melee attacks have a 5% chance to trigger an extra attack on the target. Dagger/Fist: Increases your critical strike chance by 5%. Mace: Your attacks ignore 15% of your target's armor."
+          ],
+          "requires": [],
+          "tierPoints": 20
+        },
+        {
+          "id": 105726,
+          "name": "Weapon Expertise",
+          "row": 5,
+          "col": 1,
+          "icon": "spell_holy_blessingofstrength",
+          "max": 2,
+          "spells": [
+            30919,
+            30919
+          ],
+          "def": 135256,
+          "text": [
+            "Reduces the chance for your attacks to be Dodged or Parried by 1%.",
+            "Reduces the chance for your attacks to be Dodged or Parried by 2%."
+          ],
+          "requires": [
+            {
+              "id": 105728,
+              "ranks": 1
+            }
+          ],
+          "tierPoints": 25
+        },
+        {
+          "id": 105730,
+          "name": "Aggression",
+          "row": 5,
+          "col": 2,
+          "icon": "ability_racial_avatar",
+          "max": 3,
+          "spells": [
+            18427,
+            18427,
+            18427
+          ],
+          "def": 135260,
+          "text": [
+            "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 2%.",
+            "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 4%.",
+            "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 6%."
+          ],
+          "requires": [],
+          "tierPoints": 25
+        },
+        {
+          "id": 105724,
+          "name": "Adrenaline Rush",
+          "row": 6,
+          "col": 1,
+          "icon": "spell_shadow_shadowworddominate",
+          "max": 1,
+          "spells": [
+            13750
+          ],
+          "def": 135254,
+          "text": [
+            "Increases your Energy regeneration rate by 100% for 15 sec."
+          ],
+          "requires": [],
+          "tierPoints": 30
+        }
+      ]
+    },
+    {
+      "id": 183,
+      "name": "Subtlety",
+      "icon": "ability_stealth",
+      "talents": [
+        {
+          "id": 105756,
+          "name": "Camouflage",
+          "row": 0,
+          "col": 0,
+          "icon": "ability_stealth",
+          "max": 5,
+          "spells": [
+            13975,
+            13975,
+            13975,
+            13975,
+            13975
+          ],
+          "def": 135286,
+          "text": [
+            "Reduces your speed penalty from your Stealth ability by 3% and reduces its cooldown by 2 sec.",
+            "Reduces your speed penalty from your Stealth ability by 6% and reduces its cooldown by 3 sec.",
+            "Reduces your speed penalty from your Stealth ability by 9% and reduces its cooldown by 4 sec.",
+            "Reduces your speed penalty from your Stealth ability by 12% and reduces its cooldown by 5 sec.",
+            "Reduces your speed penalty from your Stealth ability by 15% and reduces its cooldown by 6 sec."
+          ],
+          "requires": [],
+          "tierPoints": 0
+        },
+        {
+          "id": 105761,
+          "name": "Master of Deception",
+          "row": 0,
+          "col": 1,
+          "icon": "spell_shadow_charm",
+          "max": 3,
+          "spells": [
+            13958,
+            13958,
+            13958
+          ],
+          "def": 135291,
+          "text": [
+            "Reduces the chance enemies have to detect you while in Stealth mode as if you were 1 levels higher.",
+            "Reduces the chance enemies have to detect you while in Stealth mode as if you were 2 levels higher.",
+            "Reduces the chance enemies have to detect you while in Stealth mode as if you were 3 levels higher."
+          ],
+          "requires": [],
+          "tierPoints": 0
+        },
+        {
+          "id": 105760,
+          "name": "Opportunity",
+          "row": 0,
+          "col": 2,
+          "icon": "ability_warrior_warcry",
+          "max": 2,
+          "spells": [
+            14057,
+            14057
+          ],
+          "def": 135290,
+          "text": [
+            "Increases the damage dealt by your Backstab, Garrote, Ambush, and Mutilate abilities by 5%.",
+            "Increases the damage dealt by your Backstab, Garrote, Ambush, and Mutilate abilities by 10%."
+          ],
+          "requires": [],
+          "tierPoints": 0
+        },
+        {
+          "id": 105751,
+          "name": "Setup",
+          "row": 1,
+          "col": 0,
+          "icon": "spell_nature_mirrorimage",
+          "max": 3,
+          "spells": [
+            13983,
+            13983,
+            13983
+          ],
+          "def": 135281,
+          "text": [
+            "Gives you a 33% chance to add a Combo Point to your target after Dodging one of their attacks or fully resisting one of their spells.",
+            "Gives you a 67% chance to add a Combo Point to your target after Dodging one of their attacks or fully resisting one of their spells.",
+            "Gives you a 100% chance to add a Combo Point to your target after Dodging one of their attacks or fully resisting one of their spells."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105753,
+          "name": "Elusiveness",
+          "row": 1,
+          "col": 1,
+          "icon": "spell_magic_lesserinvisibilty",
+          "max": 2,
+          "spells": [
+            13981,
+            13981
+          ],
+          "def": 135283,
+          "text": [
+            "Reduces the cooldown of your Vanish and Blind abilities by 45 sec.",
+            "Reduces the cooldown of your Vanish and Blind abilities by 90 sec."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105757,
+          "name": "Dirty Tricks",
+          "row": 1,
+          "col": 2,
+          "icon": "ability_sap",
+          "max": 2,
+          "spells": [
+            1224782,
+            1224782
+          ],
+          "def": 135287,
+          "text": [
+            "Reduces the Energy cost of your Sap and Blind abilities by 25%.",
+            "Reduces the Energy cost of your Sap and Blind abilities by 50%."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105749,
+          "name": "Improved Ambush",
+          "row": 1,
+          "col": 3,
+          "icon": "ability_rogue_ambush",
+          "max": 3,
+          "spells": [
+            14079,
+            14079,
+            14079
+          ],
+          "def": 135279,
+          "text": [
+            "Increases the critical strike chance of your Ambush ability by 15%.",
+            "Increases the critical strike chance of your Ambush ability by 30%.",
+            "Increases the critical strike chance of your Ambush ability by 45%."
+          ],
+          "requires": [],
+          "tierPoints": 5
+        },
+        {
+          "id": 105755,
+          "name": "Initiative",
+          "row": 2,
+          "col": 0,
+          "icon": "spell_shadow_fumble",
+          "max": 3,
+          "spells": [
+            13976,
+            13976,
+            13976
+          ],
+          "def": 135285,
+          "text": [
+            "Gives you a 33% chance to add an additional combo point to your target when using your Ambush, Garrote, or Cheap Shot ability.",
+            "Gives you a 67% chance to add an additional combo point to your target when using your Ambush, Garrote, or Cheap Shot ability.",
+            "Gives you a 100% chance to add an additional combo point to your target when using your Ambush, Garrote, or Cheap Shot ability."
+          ],
+          "requires": [],
+          "tierPoints": 10
+        },
+        {
+          "id": 105754,
+          "name": "Ghostly Strike",
+          "row": 2,
+          "col": 1,
+          "icon": "spell_shadow_curse",
+          "max": 1,
+          "spells": [
+            14278
+          ],
+          "def": 135284,
+          "text": [
+            "A strike that deals 125% (180% if a Dagger is equipped in your Main Hand) weapon damage and increases your chance to dodge by 15% for 7 sec. Awards 1 combo point."
+          ],
+          "requires": [],
+          "tierPoints": 10
+        },
+        {
+          "id": 110868,
+          "name": "Improved Distract",
+          "row": 2,
+          "col": 2,
+          "icon": "ability_rogue_distract",
+          "max": 2,
+          "spells": [
+            14084,
+            14084
+          ],
+          "def": 142620,
+          "text": [
+            "Increases the radius of your Distract ability by 3 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional 1 levels lower.",
+            "Increases the radius of your Distract ability by 5 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional 2 levels lower."
+          ],
+          "requires": [],
+          "tierPoints": 10
+        },
+        {
+          "id": 105747,
+          "name": "Heightened Senses",
+          "row": 3,
+          "col": 0,
+          "icon": "ability_ambush",
+          "max": 2,
+          "spells": [
+            30894,
+            30894
+          ],
+          "def": 135277,
+          "text": [
+            "Increases your Stealth detection as if you were 1 levels higher and reduces your chance to be hit by spells and ranged attacks by 2%.",
+            "Increases your Stealth detection as if you were 3 levels higher and reduces your chance to be hit by spells and ranged attacks by 4%."
+          ],
+          "requires": [],
+          "tierPoints": 15
+        },
+        {
+          "id": 105743,
+          "name": "Premeditation",
+          "row": 3,
+          "col": 1,
+          "icon": "spell_shadow_possession",
+          "max": 1,
+          "spells": [
+            14183
+          ],
+          "def": 135273,
+          "text": [
+            "Adds 2 Combo Points to your target. You must add to or use those combo points within 20 sec or the combo points are lost."
+          ],
+          "requires": [],
+          "tierPoints": 15
+        },
+        {
+          "id": 105752,
+          "name": "Serrated Blades",
+          "row": 3,
+          "col": 2,
+          "icon": "inv_sword_17",
+          "max": 3,
+          "spells": [
+            14171,
+            14171,
+            14171
+          ],
+          "def": 135282,
+          "text": [
+            "Causes your attacks to ignore 3% of your target's Armor and increases the damage dealt by your Rupture ability by 10%.",
+            "Causes your attacks to ignore 6% of your target's Armor and increases the damage dealt by your Rupture ability by 20%.",
+            "Causes your attacks to ignore 9% of your target's Armor and increases the damage dealt by your Rupture ability by 30%."
+          ],
+          "requires": [],
+          "tierPoints": 15
+        },
+        {
+          "id": 105745,
+          "name": "Dirty Deeds",
+          "row": 4,
+          "col": 0,
+          "icon": "spell_shadow_summonsuccubus",
+          "max": 2,
+          "spells": [
+            14082,
+            14082
+          ],
+          "def": 135275,
+          "text": [
+            "Reduces the Energy cost of your Cheap Shot and Garrote abilities by 10, and your Garrote ability no longer requires you to be behind your target.",
+            "Reduces the Energy cost of your Cheap Shot and Garrote abilities by 20, and your Garrote ability no longer requires you to be behind your target."
+          ],
+          "requires": [],
+          "tierPoints": 20
+        },
+        {
+          "id": 105746,
+          "name": "Preparation",
+          "row": 4,
+          "col": 1,
+          "icon": "spell_shadow_antishadow",
+          "max": 1,
+          "spells": [
+            14185
+          ],
+          "def": 135276,
+          "text": [
+            "When activated, this ability immediately finishes the cooldown on your other Rogue abilities."
+          ],
+          "requires": [],
+          "tierPoints": 20
+        },
+        {
+          "id": 105748,
+          "name": "Hemorrhage",
+          "row": 4,
+          "col": 2,
+          "icon": "spell_shadow_lifedrain",
+          "max": 1,
+          "spells": [
+            16511
+          ],
+          "def": 135278,
+          "text": [
+            "An instant strike that deals 100% weapon damage (145% if a Dagger is equipped) and causes the target to take 15% increased Rupture damage from the Rogue. Lasts 15 sec. Awards 1 Combo Point."
+          ],
+          "requires": [
+            {
+              "id": 105752,
+              "ranks": 3
+            }
+          ],
+          "tierPoints": 20
+        },
+        {
+          "id": 110867,
+          "name": "Quietus",
+          "row": 5,
+          "col": 0,
+          "icon": "ability_rogue_garrote",
+          "max": 5,
+          "spells": [
+            1310728,
+            1310728,
+            1310728,
+            1310728,
+            1310728
+          ],
+          "def": 142619,
+          "text": [
+            "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 2% more damage against targets below 35% health.",
+            "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 4% more damage against targets below 35% health.",
+            "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 6% more damage against targets below 35% health.",
+            "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 8% more damage against targets below 35% health.",
+            "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 10% more damage against targets below 35% health."
+          ],
+          "requires": [
+            {
+              "id": 105745,
+              "ranks": 2
+            }
+          ],
+          "tierPoints": 25
+        },
+        {
+          "id": 105750,
+          "name": "Cutthroat",
+          "row": 5,
+          "col": 2,
+          "icon": "classicon_rogue",
+          "max": 5,
+          "spells": [
+            462708,
+            462708,
+            462708,
+            462708,
+            462708
+          ],
+          "def": 135280,
+          "text": [
+            "Your Backstab has a 3% chance to cause your next Ambush within 10 sec to not require Stealth.",
+            "Your Backstab has a 6% chance to cause your next Ambush within 10 sec to not require Stealth.",
+            "Your Backstab has a 9% chance to cause your next Ambush within 10 sec to not require Stealth.",
+            "Your Backstab has a 12% chance to cause your next Ambush within 10 sec to not require Stealth.",
+            "Your Backstab has a 15% chance to cause your next Ambush within 10 sec to not require Stealth."
+          ],
+          "requires": [],
+          "tierPoints": 25
+        },
+        {
+          "id": 110866,
+          "name": "Thousand Cuts",
+          "row": 6,
+          "col": 1,
+          "icon": "ability_rogue_rupture",
+          "max": 1,
+          "spells": [
+            1310721
+          ],
+          "def": 142618,
+          "text": [
+            "When your Rupture ability deals periodic damage, the Energy cost of your next Hemorrhage or Backstab ability within 10 sec is reduced by 3, stacking up to 5 times."
+          ],
+          "requires": [
+            {
+              "id": 105746,
+              "ranks": 1
+            }
+          ],
+          "tierPoints": 30
+        }
+      ]
+    }
+  ]
+}
