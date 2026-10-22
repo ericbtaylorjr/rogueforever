@@ -486,10 +486,10 @@
     {
       "n": "Elixir of the Mongoose",
       "k": "Elixir",
-      "note": "Agility and crit. The default battle elixir for a raiding Rogue in Classic."
+      "note": "Agility and crit. The default battle elixir for a raiding Rogue."
     },
     {
-      "n": "Elixir of Giants",
+      "n": "Elixir of Greater Strength",
       "k": "Elixir",
       "note": "Strength. Goes in the guardian slot alongside Mongoose."
     },
@@ -499,14 +499,14 @@
       "note": "Health. Cheap insurance against one mistake."
     },
     {
-      "n": "Elixir of Superior Defense",
+      "n": "Elixir of Greater Defense",
       "s": true,
       "k": "Elixir",
       "note": "Armor. Progression-only, and only when you are dying to physical damage."
     },
     {
-      "n": "Elixir of Demonslaying",
-      "k": "Elixir",
+      "n": "Potion of Demon Slaying",
+      "k": "Potion",
       "note": "Attack power against demons only. Mandatory on demon bosses, dead weight elsewhere."
     },
     {
@@ -761,7 +761,7 @@
           "n": "Leader of the Pack"
         },
         {
-          "n": "Blessing of Salvation"
+          "n": "Salvation"
         }
       ]
     },
@@ -1050,6 +1050,10 @@
     }
   ],
   "changelog": [
+    {
+      "date": "Oct 22nd, 2026",
+      "text": "Redesigned Leveling Milestone Gear section for leveling builds and populated with currently unencrypted milestone items worth picking up. List will be updated as more gear is unencrypted during launch. Sweep of Accessibility, Performance, and Security improvements. Added custom Wowhead tooltip integration."
+    },
     {
       "date": "Oct 18th, 2026",
       "text": "Reworked the Talents section around projected level 60 builds for every spec, graded and ranked in a new Spec Meta list in Meta breakdown. Also added a Racial meta to the All Rogues section."

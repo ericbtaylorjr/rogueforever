@@ -566,6 +566,79 @@
     overflow: auto;
     overscroll-behavior-x: contain;
   }
+
+  /* Wowhead tooltip markup (lib/wowhead), restyled to sit in our tooltip box.
+     The --wh-* colours are set inline by Tooltip, toned for the current theme. */
+  .wh-tip {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .wh-tip table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .wh-tip td,
+  .wh-tip th {
+    padding: 0;
+    vertical-align: top;
+    text-align: left;
+    font-weight: inherit;
+  }
+  .wh-tip th {
+    padding-left: 16px;
+    text-align: right;
+  }
+  .wh-tip table + table {
+    margin-top: 2px;
+  }
+  /* The item or spell name heads the tooltip. */
+  .wh-tip > table:first-child > tbody > tr > td > b:first-child,
+  .wh-tip b.whtt-name {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .wh-tip .indent {
+    padding-left: 10px;
+  }
+  .wh-tip .q {
+    color: var(--wh-gold);
+  }
+  .wh-tip .q0,
+  .wh-tip .wowhead-tooltip-requirements {
+    color: var(--wh-q0);
+  }
+  .wh-tip .q1 {
+    color: var(--ink);
+  }
+  .wh-tip .q2 {
+    color: var(--wh-q2);
+  }
+  .wh-tip .q3 {
+    color: var(--wh-q3);
+  }
+  .wh-tip .q4 {
+    color: var(--wh-q4);
+  }
+  .wh-tip .q5 {
+    color: var(--wh-q5);
+  }
+  .wh-tip .c4 {
+    color: var(--wh-rogue);
+  }
+  .wh-tip .whtt-sellprice {
+    color: var(--mute);
+  }
+  .wh-tip .moneygold::after {
+    content: 'g';
+  }
+  .wh-tip .moneysilver::after {
+    content: 's';
+  }
+  .wh-tip .moneycopper::after {
+    content: 'c';
+  }
 }
 
 /* --------------------------------------------------------------------------- */

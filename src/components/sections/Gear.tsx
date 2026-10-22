@@ -1,13 +1,13 @@
 import { gearSlots } from '../../content/content';
 import { gear as copy } from '../../content/copy';
-import { factionColor, qualityColor, wowheadUrl } from '../../content/gear';
+import { factionColor, levelingBrackets, qualityColor, wowheadUrl } from '../../content/gear';
 import type { Faction, GearItem, GearSetId, LevelingItem } from '../../content/types';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
-import { Callout } from '../ui/Callout';
 import { GameIcon } from '../ui/GameIcon';
 import { SegmentedTabs, Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
+import { Tip } from '../ui/Tip';
 import { useTooltip } from '../ui/Tooltip';
 
 const GRID = '104px minmax(0,1.5fr) minmax(0,1fr) 84px';
@@ -23,7 +23,7 @@ function ItemLink({ item }: { item: Omit<GearItem, 'enchant'> }) {
       rel="noreferrer"
       className="flex min-w-0 items-center gap-[10px] text-[13px] font-semibold"
       style={{ color: tone(qualityColor[item.quality]) }}
-      {...bind({ name: item.name, kind: item.slot, note: item.source })}
+      {...bind({ name: item.name, kind: item.slot, note: item.source, wowhead: { kind: 'item', id: item.itemId } })}
     >
       <GameIcon name={`item:${item.itemId}`} size={24} />
       <span className="truncate">{item.name}</span>
@@ -95,44 +95,67 @@ function LevelingRow({ item }: { item: LevelingItem }) {
   );
 }
 
-function LevelingPanel({ items }: { items: LevelingItem[] }) {
+function LevelingHeader() {
   const c = copy.leveling.cols;
+  return (
+    <div role="row" className="grid items-center px-[14px] py-[10px]" style={{ gridTemplateColumns: LEVELING_GRID }}>
+      {[c.level, c.slot, c.item, c.source, c.faction].map((h) => (
+        <span key={h} role="columnheader" className="t-eyebrow text-[10.5px] text-faint">
+          {h}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** One level range of milestones, e.g. 21–40. Items are already sorted by level. */
+function LevelingBracket({ from, to, items }: { from: number; to: number; items: LevelingItem[] }) {
+  const range = `${from}–${to}`;
 
   return (
-    <div className="mt-[16px] flex flex-col gap-[16px]">
-      <div className="panel">
-        <div className="px-[18px] pt-[16px] pb-[6px]">
-          <span className="t-panel-label text-ink">{copy.leveling.itemsTitle}</span>
-        </div>
-        <div tabIndex={0} className="table-scroll">
-          <div role="table" aria-label={copy.leveling.tableLabel} style={{ minWidth: 640 }}>
-            <div
-              role="row"
-              className="grid items-center px-[14px] py-[10px]"
-              style={{ gridTemplateColumns: LEVELING_GRID }}
-            >
-              {[c.level, c.slot, c.item, c.source, c.faction].map((h) => (
-                <span
-                  key={h}
-                  role="columnheader"
-                  className="t-eyebrow text-[10.5px] text-faint"
-                >
-                  {h}
-                </span>
-              ))}
+    <div className="panel">
+      <div className="px-[18px] pt-[16px] pb-[6px]">
+        <h4 className="t-panel-label text-ink">
+          {copy.leveling.bracket} <span className="t-num text-accent">{range}</span>
+        </h4>
+      </div>
+      <div tabIndex={0} className="table-scroll">
+        <div role="table" aria-label={`${copy.leveling.tableLabel}, ${copy.leveling.bracket.toLowerCase()} ${range}`} style={{ minWidth: 640 }}>
+          <LevelingHeader />
+          {items.length ? (
+            items.map((item) => <LevelingRow key={`${item.level}-${item.itemId}-${item.slot}`} item={item} />)
+          ) : (
+            <div role="row" className="border-t border-line px-[14px] py-[14px]">
+              <span role="cell" className="text-[12.5px] italic text-dim">
+                {copy.leveling.bracketEmpty}
+              </span>
             </div>
-            {items.length ? (
-              items.map((item) => <LevelingRow key={`${item.level}-${item.itemId}`} item={item} />)
-            ) : (
-              <div role="row" className="border-t border-line px-[14px] py-[14px]">
-                <span role="cell" className="text-[12.5px] italic text-dim">
-                  {copy.leveling.empty}
-                </span>
-              </div>
-            )}
-          </div>
+          )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function LevelingPanel({ items }: { items: LevelingItem[] }) {
+  return (
+    <div className="mt-[16px] flex flex-col gap-[16px]">
+      {/* Headings, so screen reader users can jump between brackets. */}
+      <h3 className="t-panel-label text-ink">{copy.leveling.itemsTitle}</h3>
+      {items.length ? (
+        levelingBrackets.map(({ from, to }) => (
+          <LevelingBracket
+            key={from}
+            from={from}
+            to={to}
+            items={items.filter((i) => i.level >= from && i.level <= to)}
+          />
+        ))
+      ) : (
+        <div className="panel px-[18px] py-[16px]">
+          <span className="text-[12.5px] italic text-dim">{copy.leveling.empty}</span>
+        </div>
+      )}
     </div>
   );
 }
@@ -203,9 +226,7 @@ export function Gear() {
 
       {build.phase === 'leveling' ? (
         <>
-          <Callout tone="accent" quiet label={copy.status.label}>
-            {copy.status.text}
-          </Callout>
+          <Tip>{copy.status.text}</Tip>
           <LevelingPanel items={build.gear} />
         </>
       ) : (

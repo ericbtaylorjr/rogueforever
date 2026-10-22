@@ -1,6 +1,6 @@
 # Rogue DPS Handbook
 
-Single-page reference site for World of Warcraft Classic Rogues. Built from the
+Single-page reference site for World of Warcraft Forever Rogues. Built from the
 Claude Design handoff package (`design_handoff_rogue_compendium`).
 
 React 19 + Vite 8 + TypeScript + Tailwind CSS 4.3, deployed to GitHub Pages.
@@ -82,14 +82,15 @@ authored them in markup.
   an empty state. Fill a level 60 build's `gear.prebis`/`gear.bis` and every row fills,
   Wowhead quality colouring, tooltips and icons included. A list with no items shows a
   "Coming soon" note (`gear.comingSoon` in `copy.ts`) instead of an empty table.
-- **Leveling milestones** are Classic Era placeholders built from the shared lists in
-  `src/content/gear.ts`. Check item IDs before launch.
+- **Leveling milestones** come from `src/content/leveling-gear.json`, generated from
+  Wowhead's Forever database by `scripts/gear-research` (see its README for how to rerun
+  it as items are decrypted). Hand fixes go in `scripts/gear-research/curation.json`.
 - **Empty sections say so in one line** instead of showing placeholder UI. Meta
   Breakdown, Rotation and a build's Talents card each render a short note until
   their data exists (`specIndex`/`levelingIndex`, a build's `rotation`, `talents` and
   `talentNote`); filling the data brings the full layout back with no code change.
 - **Game icons** for poisons, consumables, buffs, gear and Expose/Sunder Armor are
-  self-hosted in `public/icons/`, resolved by name through Wowhead's search
+  self-hosted in `public/icons/`, resolved by name through Wowhead's Forever search
   (`scripts/fetch-icons.mjs`, run with `npm run icons`). Re-run it after adding
   anything; a name it can't resolve just renders without an icon. Icons are
   Blizzard game art, used as fan-site reference material.
@@ -102,16 +103,17 @@ authored them in markup.
 
 ## Accessibility
 
-Target: WCAG 2.2 AA. Last audited October 2026 with axe-core 4 (0 violations at 1440px and
-390px, dark and light, with the palette, drawer, profile modal, an open FAQ and an expanded
-leveling build), a 160-stop keyboard walk (every stop shows a focus ring) and Lighthouse
-(Accessibility 100).
+Target: WCAG 2.2 AA. Last audited 22 October 2026 with axe-core 4.10 (0 violations at 1440px
+and 390px, dark and light, on an endgame build, the Combat and Subtlety leveling builds with
+their milestone gear tables, and an open Wowhead tooltip), a 274-stop keyboard walk (every
+stop shows a focus ring) and Lighthouse 12 (Accessibility 100). Earlier audits also covered
+the palette, drawer, profile modal and an open FAQ.
 
 Covered: skip link and `<main>` landmark; nav jumps move keyboard focus to the target
 section and respect `prefers-reduced-motion`; tabs use roving tabindex with
 arrow/Home/End keys; the palette is a real combobox/listbox with a live result count;
-tooltips are dismissible (Esc), hoverable, and only set `aria-describedby` while showing
-(WCAG 1.4.13); focus is kept clear of the sticky bars (`scroll-padding-top`); the Gear
+tooltips are dismissible (Esc), persistent while their trigger is hovered or focused, and only
+set `aria-describedby` while showing; focus is kept clear of the sticky bars (`scroll-padding-top`); the Gear
 table has table semantics and its scroll region is keyboard-reachable; copy buttons have
 unique names and announce success; no bare-key shortcuts (WCAG 2.1.4 — only Ctrl/⌘+K);
 text meets 4.5:1 (`--dim` is deliberately light — don't darken it back). Content colours go
@@ -119,25 +121,32 @@ through `useTheme().tone()` in both themes: on parchment it darkens them, on dar
 the few that fall short (WoW's rare blue and epic purple), so item names always clear 4.5:1.
 
 Known / accepted: the hero's looping poison drips have no pause control beyond
-`prefers-reduced-motion` (WCAG 2.2.2). Not done yet:
+`prefers-reduced-motion` (WCAG 2.2.2). Tooltips are deliberately **not hoverable** (WCAG
+1.4.13): moving the pointer off the trigger hides them, so the next item in a list shows its
+own tooltip instead of being covered. Their content is display only, and every item and spell
+with a tooltip also links to its Wowhead page. Not done yet:
 arrow-key navigation between FAQ/raid accordion headers (not required by WCAG).
 
 ## Performance
 
-Last measured October 2026 with Lighthouse 12 against the production build: desktop
-Performance 100 (LCP 0.7s, CLS 0), throttled mobile 96–97 (LCP 2.4–2.6s, TBT ≤40ms), about
-410 KiB transferred. Keep it that way:
+Last measured 22 October 2026 with Lighthouse 12 against the production build: desktop
+Performance 100 (LCP 0.7s, CLS 0), throttled mobile 94–95 (LCP 2.8–2.9s, TBT ≤100ms; the
+LCP element is the intro paragraph waiting on its font), about 435 KiB transferred. The
+October baseline was 96–97 / 2.4–2.6s on a different machine. Keep it that way:
 
 - **Size images for their display size.** Images are WebP at about 3× their CSS size
   (crisp on high-density phones). Don't ship source art; `sharp` is a dev dependency
   for resizing.
 - **Game icons** load lazily from `public/icons/` (~1–3 KB each).
+- **Wowhead tooltip data** loads only when a tooltip first opens, one small JSON request per
+  item, cached for the page's life (`src/lib/wowhead.ts`).
 - **The theme script is inlined** at build (see Security), so first paint waits only on the
   one small stylesheet.
 - **First-screen fonts are preloaded** (Archivo for the hero, Source Sans 3 for the
   intro) by the `preload-fonts` plugin in `vite.config.ts`. Update `PRELOAD_FONTS` if the
   hero's fonts change.
-- The remaining Lighthouse notes (unused JS in the single bundle, ~1,100 DOM nodes) are
+- The remaining Lighthouse notes (unused JS in the single bundle; ~1,450 DOM nodes, ~2,150
+  on a leveling build with its three milestone gear tables) are
   expected for a one-page app this size. Pre-rendering the HTML at build is the next lever
   if mobile LCP ever needs to drop further.
 
@@ -164,8 +173,15 @@ first paint (no flash) and `src/state/ThemeProvider.tsx` owns it afterwards; bot
 
 ## Security
 
-Static site, no backend, no user input beyond a search box, no `dangerouslySetInnerHTML`,
-no third-party scripts beyond analytics (below). `npm audit` is clean.
+Static site, no backend, no user input beyond a search box, no third-party scripts beyond
+analytics (below). `npm audit` is clean.
+
+- **Wowhead tooltips:** item and spell tooltips fetch JSON from `nether.wowhead.com`
+  (Forever data only) the first time each one opens, so the CSP
+  allows that host in `connect-src` only. Wowhead's tooltip HTML is the one use of
+  `dangerouslySetInnerHTML`: `src/lib/wowhead.ts` rebuilds it through a tag allowlist,
+  turns links into plain text, keeps only `class` attributes, and drops everything else.
+  The tooltip is display only (`pointer-events: none`); clicking the item itself opens Wowhead.
 
 - **Visit counts:** Cloudflare Web Analytics runs for every visitor once `cfBeaconToken` in
   `src/config.ts` holds the site token. It's cookieless and stores nothing on the device, so

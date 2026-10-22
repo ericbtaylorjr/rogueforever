@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /**
- * Resolve every item/spell the page names to its Wowhead (Classic) id + icon, download
+ * Resolve every item/spell the page names to its Wowhead (Forever) id + icon, download
  * the icons into public/icons/, and write src/content/icons.json.
  *
  *   npm run icons
+ *   npm run icons -- --fresh   # re-resolve everything instead of keeping known ids
  *
  * Icons are self-hosted so the page makes no third-party requests at runtime (see the
  * CSP in vite.config.ts). Re-run after adding consumables, poisons, buffs or gear.
@@ -26,7 +27,8 @@ const gearSrc = [
   .map((p) => readFileSync(root(p), 'utf8'))
   .join('\n');
 const manifestPath = root('src/content/icons.json');
-const prev = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
+const fresh = process.argv.includes('--fresh');
+const prev = !fresh && existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
 
 /** Display names carry faction tags like "[A]"; Wowhead doesn't. */
 const clean = (n) => n.replace(/\s*\[[AH]\]\s*$/, '').replace(/[’‘]/g, "'").trim();
@@ -38,10 +40,15 @@ const wanted = [
   // Named in prose sections (copy.ts), not in content.json.
   ...['Expose Armor', 'Sunder Armor'].map((name) => ({ name, type: SPELL })),
 ];
-const gearIds = [...new Set([...gearSrc.matchAll(/itemId: (\d+)/g)].map((m) => Number(m[1])))];
+// Generated leveling lists (scripts/gear-research) live in JSON.
+const levelingJson = JSON.parse(readFileSync(root('src/content/leveling-gear.json'), 'utf8'));
+const levelingItems = ['shared', 'slow', 'daggers'].flatMap((k) => levelingJson[k] ?? []);
+const gearIds = [
+  ...new Set([...[...gearSrc.matchAll(/itemId: (\d+)/g)].map((m) => Number(m[1])), ...levelingItems.map((i) => i.itemId)]),
+];
 
 async function search(name, type) {
-  const url = `https://www.wowhead.com/classic/search/suggestions-template?q=${encodeURIComponent(clean(name))}`;
+  const url = `https://www.wowhead.com/forever/search/suggestions-template?q=${encodeURIComponent(clean(name))}`;
   const res = await fetch(url, { headers: UA });
   if (!res.ok) return null;
   const { results = [] } = await res.json();
@@ -51,10 +58,10 @@ async function search(name, type) {
 }
 
 async function tooltip(id) {
-  const res = await fetch(`https://nether.wowhead.com/tooltip/item/${id}?dataEnv=4&locale=0`, { headers: UA });
+  const res = await fetch(`https://nether.wowhead.com/forever/tooltip/item/${id}`, { headers: UA });
   if (!res.ok) return null;
   const d = await res.json();
-  return d.icon ? { id, icon: d.icon, kind: 'item' } : null;
+  return d.icon && !d.error ? { id, icon: d.icon, kind: 'item' } : null;
 }
 
 async function download(icon) {
@@ -82,6 +89,25 @@ for (const id of gearIds) {
 }
 for (const icon of new Set(Object.values(manifest).map((m) => m.icon))) await download(icon);
 
+// Item links are coloured from the `quality` written in gear.ts; Wowhead's tooltip colours the
+// name from its own data. Check they agree so a link never shows one colour and its tooltip another.
+const QUALITIES = ['poor', 'common', 'uncommon', 'rare', 'epic', 'legendary'];
+const authored = [
+  ...[...gearSrc.matchAll(/itemId: (\d+), name: (['"])(.*?)\2, quality: '(\w+)'/g)],
+  ...levelingItems.map((i) => [null, String(i.itemId), null, i.name, i.quality]),
+];
+const wrongQuality = [];
+for (const [, id, , name, quality] of new Map(authored.map((m) => [m[1], m])).values()) {
+  const res = await fetch(`https://nether.wowhead.com/forever/tooltip/item/${id}`, { headers: UA });
+  const d = res.ok ? await res.json() : {};
+  const actual = QUALITIES[d.quality];
+  if (actual && actual !== quality) wrongQuality.push(`${name} (${id}) is ${actual}, not ${quality}`);
+}
+
 writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`Resolved ${Object.keys(manifest).length} names; ${new Set(Object.values(manifest).map((m) => m.icon)).size} icons in public/icons/.`);
 if (missed.length) console.log(`Not found (render without an icon): ${missed.join(', ')}`);
+if (wrongQuality.length) {
+  console.log(`Quality doesn't match Wowhead Forever, fix it in gear.ts, builds/ or by rerunning scripts/gear-research:\n  ${wrongQuality.join('\n  ')}`);
+  process.exitCode = 1;
+}

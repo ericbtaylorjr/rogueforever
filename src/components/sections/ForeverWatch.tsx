@@ -103,7 +103,8 @@ export function ForeverWatch() {
               {c.impact}
             </p>
 
-            <p className="mt-[10px] flex flex-wrap items-baseline gap-x-[12px] gap-y-[4px] text-[11px]">
+            {/* Links get vertical padding so each is a 24px tap target even when they wrap (WCAG 2.5.8). */}
+            <p className="mt-[6px] flex flex-wrap items-baseline gap-x-[12px] text-[11px]">
               <span className="text-faint">{forever.sourcesLabel}</span>
               {c.sources.map((src) => (
                 <a
@@ -111,7 +112,7 @@ export function ForeverWatch() {
                   href={src.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-sky underline underline-offset-2"
+                  className="inline-block py-[4px] text-sky underline underline-offset-2"
                 >
                   {src.label} ↗
                 </a>

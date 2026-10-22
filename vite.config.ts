@@ -43,7 +43,8 @@ const preloadFonts = (): Plugin => ({
 
 /**
  * GitHub Pages can't set response headers, so the CSP ships as a <meta> tag.
- * Everything is first-party (fonts included). `style-src` needs 'unsafe-inline'
+ * Everything is first-party (fonts included), apart from Wowhead's tooltip API, which
+ * live item and spell tooltips fetch JSON from (src/lib/wowhead.ts). `style-src` needs 'unsafe-inline'
  * because the design sets many inline style attributes; `script-src` does not
  * (the one inline script is pinned by hash, above). Google Analytics hosts are added
  * only when `config.analyticsId` is set, Cloudflare's only when `config.cfBeaconToken` is.
@@ -69,7 +70,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   `img-src 'self' data:${ga.beacon}`,
   "font-src 'self'",
-  `connect-src 'self'${ga.beacon}${cf.beacon}`,
+  `connect-src 'self' https://nether.wowhead.com${ga.beacon}${cf.beacon}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'none'",

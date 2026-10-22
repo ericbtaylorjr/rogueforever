@@ -1,4 +1,4 @@
-import { levelingShared, levelingSwords } from '../gear';
+import { levelingShared, levelingSlowWeapons } from '../gear';
 import type { Build, StatPriority } from '../types';
 import { byLevel, noEndgameGear, noRotation, points } from './shared';
 
@@ -19,7 +19,7 @@ const stats: StatPriority = {
   ],
 };
 
-const levelingGear = byLevel([...levelingShared, ...levelingSwords]);
+const levelingGear = byLevel(levelingShared, levelingSlowWeapons);
 
 export const combat: Build[] = [
   {

@@ -3,7 +3,7 @@ import { buffsCopy as copy } from '../../content/copy';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
-import { GameIcon } from '../ui/GameIcon';
+import { GameIcon, WowheadLink, wowheadRefFor } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useTooltip } from '../ui/Tooltip';
 
@@ -34,12 +34,11 @@ export function Buffs() {
                 {items.map((i) => (
                   <li key={i.n} className="flex items-center gap-[9px]">
                     <GameIcon name={i.n} size={20} />
-                    <span
-                      className="cursor-help text-[12.5px] text-prose transition-colors hover:text-accent focus-visible:text-accent"
-                      {...bind({ name: i.n, kind: g.label, note: '' })}
-                    >
-                      {i.n}
-                    </span>
+                    <WowheadLink
+                      name={i.n}
+                      className="text-[12.5px] text-prose transition-colors hover:text-accent focus-visible:text-accent"
+                      {...bind({ name: i.n, kind: g.label, note: '', wowhead: wowheadRefFor(i.n) })}
+                    />
                     {i.s && sweaty && <Droplet size={7} />}
                   </li>
                 ))}

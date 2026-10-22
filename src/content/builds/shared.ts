@@ -16,5 +16,14 @@ export const noRotation: Rotation = { apl: [], opener: [], nevers: [] };
  */
 export const noEndgameGear: Record<GearSetId, GearItem[]> = { prebis: [], bis: [] };
 
-/** Leveling milestones in the order you reach them. */
-export const byLevel = (items: LevelingItem[]) => [...items].sort((a, b) => a.level - b.level);
+/** Leveling milestones from one or more lists, in the order you reach them. An item in two lists for the same slot shows once. */
+export const byLevel = (...lists: LevelingItem[][]) => {
+  const seen = new Set<string>();
+  return lists
+    .flat()
+    .filter((i) => {
+      const key = `${i.itemId}:${i.slot}`;
+      return !seen.has(key) && seen.add(key);
+    })
+    .sort((a, b) => a.level - b.level);
+};

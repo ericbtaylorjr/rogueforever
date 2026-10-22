@@ -1,0 +1,639 @@
+{
+  "generated": "2026-10-22",
+  "shared": [
+    {
+      "level": 12,
+      "slot": "Waist",
+      "itemId": 252428,
+      "name": "Brawler's Leather Belt",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 15,
+      "slot": "Chest",
+      "itemId": 252490,
+      "name": "Brawler's Leather Armor",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 16,
+      "slot": "Ranged",
+      "itemId": 285292,
+      "name": "Dull Sawblade",
+      "quality": "rare",
+      "source": "The Deadmines (Sneed's Shredder)",
+      "faction": "Both"
+    },
+    {
+      "level": 17,
+      "slot": "Feet",
+      "itemId": 252439,
+      "name": "Brawler's Leather Boots",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 17,
+      "slot": "Legs",
+      "itemId": 10410,
+      "name": "Leggings of the Fang",
+      "quality": "rare",
+      "source": "Wailing Caverns (Lord Cobrahn)",
+      "faction": "Both"
+    },
+    {
+      "level": 17,
+      "slot": "Ring",
+      "itemId": 284715,
+      "name": "First Mate Band",
+      "quality": "rare",
+      "source": "The Deadmines (Mr. Smite)",
+      "faction": "Both"
+    },
+    {
+      "level": 18,
+      "slot": "Back",
+      "itemId": 6449,
+      "name": "Glowing Lizardscale Cloak",
+      "quality": "rare",
+      "source": "Wailing Caverns (Skum)",
+      "faction": "Both"
+    },
+    {
+      "level": 18,
+      "slot": "Ring",
+      "itemId": 5351,
+      "name": "Bounty Hunter's Ring",
+      "quality": "uncommon",
+      "source": "Quest: Hezrul Bloodmark",
+      "faction": "Horde"
+    },
+    {
+      "level": 20,
+      "slot": "Hands",
+      "itemId": 7348,
+      "name": "Fletcher's Gloves",
+      "quality": "uncommon",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 21,
+      "slot": "Ring",
+      "itemId": 1076,
+      "name": "Defias Renegade Ring",
+      "quality": "rare",
+      "source": "The Stockade",
+      "faction": "Alliance"
+    },
+    {
+      "level": 23,
+      "slot": "Ring",
+      "itemId": 277210,
+      "name": "Pyrewood Signet Ring",
+      "quality": "rare",
+      "source": "Quest: The Horn of Xelthos",
+      "faction": "Both"
+    },
+    {
+      "level": 25,
+      "slot": "Head",
+      "itemId": 252512,
+      "name": "Brawler's Leather Helm",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 25,
+      "slot": "Legs",
+      "itemId": 9509,
+      "name": "Petrolspill Leggings",
+      "quality": "rare",
+      "source": "Gnomeregan",
+      "faction": "Both"
+    },
+    {
+      "level": 25,
+      "slot": "Shoulders",
+      "itemId": 2264,
+      "name": "Mantle of Thieves",
+      "quality": "rare",
+      "source": "Razorfen Kraul",
+      "faction": "Both"
+    },
+    {
+      "level": 28,
+      "slot": "Ranged",
+      "itemId": 273029,
+      "name": "Golemsight Long Gun",
+      "quality": "rare",
+      "source": "Excavation Site (Relic Guardian)",
+      "faction": "Both"
+    },
+    {
+      "level": 30,
+      "slot": "Chest",
+      "itemId": 7374,
+      "name": "Dusky Leather Armor",
+      "quality": "uncommon",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 30,
+      "slot": "Neck",
+      "itemId": 7731,
+      "name": "Ghostshard Talisman",
+      "quality": "rare",
+      "source": "Scarlet Monastery (Azshir the Sleepless)",
+      "faction": "Both"
+    },
+    {
+      "level": 30,
+      "slot": "Ring",
+      "itemId": 7686,
+      "name": "Ironspine's Eye",
+      "quality": "rare",
+      "source": "Scarlet Monastery (Ironspine)",
+      "faction": "Both"
+    },
+    {
+      "level": 30,
+      "slot": "Waist",
+      "itemId": 252520,
+      "name": "Skulker's Leather Belt",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 32,
+      "slot": "Back",
+      "itemId": 2805,
+      "name": "Yeti Fur Cloak",
+      "quality": "uncommon",
+      "source": "Quest: Bartolo's Yeti Fur Cloak",
+      "faction": "Alliance"
+    },
+    {
+      "level": 33,
+      "slot": "Shoulders",
+      "itemId": 7755,
+      "name": "Flintrock Shoulders",
+      "quality": "rare",
+      "source": "Scarlet Monastery",
+      "faction": "Both"
+    },
+    {
+      "level": 35,
+      "slot": "Hands",
+      "itemId": 252525,
+      "name": "Skulker's Leather Gloves",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 35,
+      "slot": "Legs",
+      "itemId": 9624,
+      "name": "Triprunner Dungarees",
+      "quality": "rare",
+      "source": "Quest, Gnomeregan",
+      "faction": "Both"
+    },
+    {
+      "level": 37,
+      "slot": "Wrists",
+      "itemId": 19508,
+      "name": "Branded Leather Bracers",
+      "quality": "rare",
+      "source": "Scarlet Monastery (High Inquisitor Fairbanks)",
+      "faction": "Both"
+    },
+    {
+      "level": 38,
+      "slot": "Head",
+      "itemId": 10008,
+      "name": "White Bandit Mask",
+      "quality": "uncommon",
+      "source": "Tailoring",
+      "faction": "Both"
+    },
+    {
+      "level": 42,
+      "slot": "Feet",
+      "itemId": 12470,
+      "name": "Sandstalker Ankleguards",
+      "quality": "rare",
+      "source": "Zul'Farrak (Zerillis)",
+      "faction": "Both"
+    },
+    {
+      "level": 42,
+      "slot": "Shoulders",
+      "itemId": 252535,
+      "name": "Skulker's Leather Shoulder",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 47,
+      "slot": "Ring",
+      "itemId": 9533,
+      "name": "Masons Fraternity Ring",
+      "quality": "rare",
+      "source": "Quest: Divino-matic Rod",
+      "faction": "Both"
+    },
+    {
+      "level": 49,
+      "slot": "Ring",
+      "itemId": 17713,
+      "name": "Blackstone Ring",
+      "quality": "rare",
+      "source": "Maraudon (Princess Theradras)",
+      "faction": "Both"
+    },
+    {
+      "level": 50,
+      "slot": "Trinket",
+      "itemId": 249469,
+      "name": "Frozen Heart of the Mountain",
+      "quality": "rare",
+      "source": "Enchanting",
+      "faction": "Both"
+    },
+    {
+      "level": 51,
+      "slot": "Neck",
+      "itemId": 19159,
+      "name": "Woven Ivy Necklace",
+      "quality": "rare",
+      "source": "Quest: Wanted: Vile Priestess Hexx and Her Minions",
+      "faction": "Horde"
+    },
+    {
+      "level": 52,
+      "slot": "Head",
+      "itemId": 13404,
+      "name": "Mask of the Unforgiven",
+      "quality": "rare",
+      "source": "Stratholme (The Unforgiven)",
+      "faction": "Both"
+    },
+    {
+      "level": 52,
+      "slot": "Legs",
+      "itemId": 15065,
+      "name": "Warbear Woolies",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 52,
+      "slot": "Shoulders",
+      "itemId": 22241,
+      "name": "Dark Warder's Pauldrons",
+      "quality": "rare",
+      "source": "Blackrock Depths (Warder Stilgiss)",
+      "faction": "Both"
+    },
+    {
+      "level": 53,
+      "slot": "Hands",
+      "itemId": 15063,
+      "name": "Devilsaur Gauntlets",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 53,
+      "slot": "Waist",
+      "itemId": 19044,
+      "name": "Might of the Timbermaw",
+      "quality": "rare",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 54,
+      "slot": "Feet",
+      "itemId": 16711,
+      "name": "Shadowcraft Boots",
+      "quality": "rare",
+      "source": "Scholomance (Rattlegore)",
+      "faction": "Both"
+    },
+    {
+      "level": 54,
+      "slot": "Ranged",
+      "itemId": 12651,
+      "name": "Blackcrow",
+      "quality": "rare",
+      "source": "Blackrock Spire (Shadow Hunter Vosh'gajin)",
+      "faction": "Both"
+    },
+    {
+      "level": 56,
+      "slot": "Chest",
+      "itemId": 252483,
+      "name": "Dawn Armor",
+      "quality": "epic",
+      "source": "Leatherworking",
+      "faction": "Both"
+    },
+    {
+      "level": 58,
+      "slot": "Back",
+      "itemId": 13340,
+      "name": "Cape of the Black Baron",
+      "quality": "rare",
+      "source": "Stratholme (Baron Rivendare)",
+      "faction": "Both"
+    },
+    {
+      "level": 58,
+      "slot": "Neck",
+      "itemId": 22659,
+      "name": "Medallion of the Dawn",
+      "quality": "epic",
+      "source": "Quest, Eastern Plaguelands",
+      "faction": "Both"
+    },
+    {
+      "level": 58,
+      "slot": "Wrists",
+      "itemId": 22668,
+      "name": "Bracers of Subterfuge",
+      "quality": "epic",
+      "source": "Quest, Eastern Plaguelands",
+      "faction": "Both"
+    }
+  ],
+  "slow": [
+    {
+      "level": 13,
+      "slot": "Main hand",
+      "itemId": 270256,
+      "name": "Durgen's Crescent Axe",
+      "quality": "rare",
+      "source": "Hall of Thanes (Durgen Dirgehammer)",
+      "faction": "Both"
+    },
+    {
+      "level": 13,
+      "slot": "Off hand",
+      "itemId": 1936,
+      "name": "Goblin Screwdriver",
+      "quality": "rare",
+      "source": "The Deadmines (Goblin Engineer)",
+      "faction": "Both"
+    },
+    {
+      "level": 18,
+      "slot": "Main hand",
+      "itemId": 6633,
+      "name": "Butcher's Slicer",
+      "quality": "rare",
+      "source": "Shadowfang Keep (Razorclaw the Butcher)",
+      "faction": "Both"
+    },
+    {
+      "level": 19,
+      "slot": "Off hand",
+      "itemId": 5191,
+      "name": "Cruel Barb",
+      "quality": "rare",
+      "source": "The Deadmines (Edwin VanCleef)",
+      "faction": "Both"
+    },
+    {
+      "level": 23,
+      "slot": "Off hand",
+      "itemId": 2941,
+      "name": "Prison Shank",
+      "quality": "rare",
+      "source": "The Stockade (Bruegal Ironknuckle)",
+      "faction": "Alliance"
+    },
+    {
+      "level": 24,
+      "slot": "Main hand",
+      "itemId": 1454,
+      "name": "Axe of the Enforcer",
+      "quality": "rare",
+      "source": "Blackfathom Deeps",
+      "faction": "Both"
+    },
+    {
+      "level": 26,
+      "slot": "Off hand",
+      "itemId": 776,
+      "name": "Vendetta",
+      "quality": "rare",
+      "source": "Razorfen Kraul",
+      "faction": "Both"
+    },
+    {
+      "level": 30,
+      "slot": "Main hand",
+      "itemId": 7687,
+      "name": "Ironspine's Fist",
+      "quality": "rare",
+      "source": "Scarlet Monastery (Ironspine)",
+      "faction": "Both"
+    },
+    {
+      "level": 32,
+      "slot": "Off hand",
+      "itemId": 10571,
+      "name": "Ebony Boneclub",
+      "quality": "rare",
+      "source": "Razorfen Downs",
+      "faction": "Both"
+    },
+    {
+      "level": 37,
+      "slot": "Off hand",
+      "itemId": 10772,
+      "name": "Glutton's Cleaver",
+      "quality": "rare",
+      "source": "Razorfen Downs (Glutton)",
+      "faction": "Both"
+    },
+    {
+      "level": 38,
+      "slot": "Main hand",
+      "itemId": 9401,
+      "name": "Nordic Longshank",
+      "quality": "rare",
+      "source": "Uldaman (Baelog)",
+      "faction": "Both"
+    },
+    {
+      "level": 42,
+      "slot": "Off hand",
+      "itemId": 10823,
+      "name": "Vanquisher's Sword",
+      "quality": "rare",
+      "source": "Quest, Razorfen Downs",
+      "faction": "Both"
+    },
+    {
+      "level": 45,
+      "slot": "Main hand",
+      "itemId": 9639,
+      "name": "The Hand of Antu'sul",
+      "quality": "rare",
+      "source": "Zul'Farrak (Antu'sul)",
+      "faction": "Both"
+    },
+    {
+      "level": 50,
+      "slot": "Off hand",
+      "itemId": 12774,
+      "name": "Dawn's Edge",
+      "quality": "rare",
+      "source": "Blacksmithing",
+      "faction": "Both"
+    },
+    {
+      "level": 51,
+      "slot": "Main hand",
+      "itemId": 11817,
+      "name": "Lord General's Sword",
+      "quality": "rare",
+      "source": "Blackrock Depths (General Angerforge)",
+      "faction": "Both"
+    },
+    {
+      "level": 58,
+      "slot": "Main hand",
+      "itemId": 22384,
+      "name": "Persuader",
+      "quality": "epic",
+      "source": "Blacksmithing",
+      "faction": "Both"
+    },
+    {
+      "level": 58,
+      "slot": "Off hand",
+      "itemId": 12783,
+      "name": "Heartseeker",
+      "quality": "rare",
+      "source": "Blacksmithing",
+      "faction": "Both"
+    }
+  ],
+  "daggers": [
+    {
+      "level": 13,
+      "slot": "Main hand",
+      "itemId": 1936,
+      "name": "Goblin Screwdriver",
+      "quality": "rare",
+      "source": "The Deadmines (Goblin Engineer)",
+      "faction": "Both"
+    },
+    {
+      "level": 16,
+      "slot": "Off hand",
+      "itemId": 6448,
+      "name": "Tail Spike",
+      "quality": "rare",
+      "source": "Wailing Caverns (Skum)",
+      "faction": "Both"
+    },
+    {
+      "level": 19,
+      "slot": "Main hand",
+      "itemId": 1935,
+      "name": "Assassin's Blade",
+      "quality": "rare",
+      "source": "Shadowfang Keep",
+      "faction": "Both"
+    },
+    {
+      "level": 23,
+      "slot": "Off hand",
+      "itemId": 2941,
+      "name": "Prison Shank",
+      "quality": "rare",
+      "source": "The Stockade (Bruegal Ironknuckle)",
+      "faction": "Alliance"
+    },
+    {
+      "level": 26,
+      "slot": "Off hand",
+      "itemId": 776,
+      "name": "Vendetta",
+      "quality": "rare",
+      "source": "Razorfen Kraul",
+      "faction": "Both"
+    },
+    {
+      "level": 27,
+      "slot": "Main hand",
+      "itemId": 9453,
+      "name": "Toxic Revenger",
+      "quality": "rare",
+      "source": "Gnomeregan (Viscous Fallout)",
+      "faction": "Both"
+    },
+    {
+      "level": 32,
+      "slot": "Off hand",
+      "itemId": 5756,
+      "name": "Sliverblade",
+      "quality": "rare",
+      "source": "Scarlet Monastery",
+      "faction": "Both"
+    },
+    {
+      "level": 33,
+      "slot": "Main hand",
+      "itemId": 6331,
+      "name": "Howling Blade",
+      "quality": "rare",
+      "source": "City of Dalaran (Skhowl)",
+      "faction": "Both"
+    },
+    {
+      "level": 38,
+      "slot": "Off hand",
+      "itemId": 10761,
+      "name": "Coldrage Dagger",
+      "quality": "rare",
+      "source": "Razorfen Downs (Amnennar the Coldbringer)",
+      "faction": "Both"
+    },
+    {
+      "level": 43,
+      "slot": "Main hand",
+      "itemId": 9467,
+      "name": "Gahz'rilla Fang",
+      "quality": "rare",
+      "source": "Zul'Farrak (Gahz'rilla)",
+      "faction": "Both"
+    },
+    {
+      "level": 58,
+      "slot": "Main hand",
+      "itemId": 12783,
+      "name": "Heartseeker",
+      "quality": "rare",
+      "source": "Blacksmithing",
+      "faction": "Both"
+    }
+  ]
+}

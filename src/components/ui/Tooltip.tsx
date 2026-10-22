@@ -10,12 +10,17 @@ import {
   type ReactNode,
 } from 'react';
 import { tooltipFallback } from '../../content/copy';
+import { qualityColor } from '../../content/gear';
 import { track } from '../../lib/analytics';
+import { loadWowheadTip, wowheadKey, type WowheadRef, type WowheadTip } from '../../lib/wowhead';
+import { useTheme } from '../../state/ThemeProvider';
 
 export interface TipContent {
   name: string;
   kind?: string;
   note?: string;
+  /** Show Wowhead's live tooltip for this item or spell, with `kind` and `note` beneath it. */
+  wowhead?: WowheadRef;
 }
 
 interface TipState extends TipContent {
@@ -41,8 +46,6 @@ const Ctx = createContext<TooltipApi | null>(null);
 const INSET = 14;
 const GAP = 9;
 const TIP_ID = 'rc-tooltip';
-/** Grace period so the pointer can cross the gap onto the tooltip itself (WCAG 1.4.13 "hoverable"). */
-const HIDE_DELAY_MS = 160;
 /** How long a tooltip must stay up to count as read (`tooltip_view`). */
 const TIP_READ_MS = 700;
 
@@ -50,7 +53,22 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
   const [tip, setTip] = useState<TipState | null>(null);
   const [pos, setPos] = useState({ x: -9999, y: -9999 });
   const boxRef = useRef<HTMLDivElement>(null);
-  const hideTimer = useRef<number | undefined>(undefined);
+  const { tone } = useTheme();
+  /** Wowhead's tooltip for the showing tip, once it arrives. Keyed so a late reply never lands on the wrong tip. */
+  const [wh, setWh] = useState<{ key: string; tip: WowheadTip } | null>(null);
+  const whKey = tip?.wowhead ? wowheadKey(tip.wowhead) : null;
+  const whTip = wh && wh.key === whKey ? wh.tip : null;
+
+  useEffect(() => {
+    if (!tip?.wowhead || !whKey) return;
+    let live = true;
+    loadWowheadTip(tip.wowhead).then((t) => {
+      if (live && t) setWh({ key: whKey, tip: t });
+    });
+    return () => {
+      live = false;
+    };
+  }, [whKey]);
 
   // Position after the content is measurable: below the anchor, flipped above
   // if it would fall off the bottom, clamped to a 14px viewport inset.
@@ -67,22 +85,12 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
     if (y + height > window.innerHeight - 12) y = Math.max(12, r.top - height - GAP);
 
     setPos({ x, y });
-  }, [tip]);
+  }, [tip, whTip]);
 
   const show = useCallback((el: Element, t: TipContent) => {
-    window.clearTimeout(hideTimer.current);
     setTip({ ...t, rect: el.getBoundingClientRect() });
   }, []);
-
-  const cancelHide = useCallback(() => window.clearTimeout(hideTimer.current), []);
-  const hide = useCallback(() => {
-    cancelHide();
-    setTip(null);
-  }, [cancelHide]);
-  const hideSoon = useCallback(() => {
-    cancelHide();
-    hideTimer.current = window.setTimeout(() => setTip(null), HIDE_DELAY_MS);
-  }, [cancelHide]);
+  const hide = useCallback(() => setTip(null), []);
 
   // Dismissible without moving the pointer or focus (WCAG 1.4.13).
   useEffect(() => {
@@ -93,8 +101,6 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [tip, hide]);
-
-  useEffect(() => () => window.clearTimeout(hideTimer.current), []);
 
   /* Count a tooltip as read once it has stayed up a moment; a pointer sweeping across icons isn't.
      Keyed on the name, so re-positioning the same tooltip isn't a new read. */
@@ -112,7 +118,8 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
           if (e.pointerType === 'touch') return; // tap handles it
           show(e.currentTarget, t);
         },
-        onPointerLeave: hideSoon,
+        // Gone the moment the pointer leaves, so the next item down can show its own.
+        onPointerLeave: hide,
         onFocus: (e) => show(e.currentTarget, t),
         onBlur: hide,
         onClick: (e) => {
@@ -123,7 +130,7 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
         'aria-describedby': tip?.name === t.name ? TIP_ID : undefined,
       }),
     }),
-    [hide, hideSoon, show, tip?.name],
+    [hide, show, tip?.name],
   );
 
   return (
@@ -133,9 +140,8 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
         id={TIP_ID}
         ref={boxRef}
         role="tooltip"
-        onPointerEnter={cancelHide}
-        onPointerLeave={hideSoon}
-        className="fixed left-0 top-0 z-[90] w-max max-w-[300px] rounded-[11px] border border-line bg-panel2 px-[13px] py-[11px] transition-[opacity,visibility] duration-[120ms]"
+        // Display only: the pointer passes straight through to whatever is underneath.
+        className="pointer-events-none fixed left-0 top-0 z-[90] w-max max-w-[min(320px,calc(100vw-28px))] rounded-[11px] border border-line bg-panel2 px-[13px] py-[11px] transition-[opacity,visibility] duration-[120ms]"
         style={{
           transform: `translate(${pos.x}px, ${pos.y}px)`,
           opacity: tip ? 1 : 0,
@@ -143,14 +149,42 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
           boxShadow: 'var(--tip-shadow)',
         }}
       >
-        <div className="t-card-sub text-ink">{tip?.name}</div>
-        {tip?.kind && <div className="t-eyebrow mt-[3px] text-[10.5px] text-accent">{tip.kind}</div>}
-        <div className="mt-[6px] text-[12px] leading-[1.55] text-mute">
-          {tip?.note || tooltipFallback}
-        </div>
+        {whTip ? (
+          <>
+            {/* Sanitized in lib/wowhead before it gets here. */}
+            <div className="wh-tip" style={wowheadColors(tone)} dangerouslySetInnerHTML={{ __html: whTip.html }} />
+            {(tip?.kind || tip?.note) && (
+              <div className="mt-[9px] border-t border-line pt-[8px]">
+                {tip.kind && <div className="t-eyebrow text-[10.5px] text-accent">{tip.kind}</div>}
+                {tip.note && <div className="mt-[4px] text-[12px] leading-[1.55] text-mute">{tip.note}</div>}
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            <div className="t-card-sub text-ink">{tip?.name}</div>
+            {tip?.kind && <div className="t-eyebrow mt-[3px] text-[10.5px] text-accent">{tip.kind}</div>}
+            <div className="mt-[6px] text-[12px] leading-[1.55] text-mute">
+              {tip?.note || tooltipFallback}
+            </div>
+          </>
+        )}
       </div>
     </Ctx.Provider>
   );
+}
+
+/** Wowhead's colour classes (q0–q5 quality, q for its gold text, c4 for Rogue), made legible in the current theme. */
+function wowheadColors(tone: (hex: string) => string): React.CSSProperties {
+  return {
+    '--wh-q0': tone(qualityColor.poor),
+    '--wh-q2': tone(qualityColor.uncommon),
+    '--wh-q3': tone(qualityColor.rare),
+    '--wh-q4': tone(qualityColor.epic),
+    '--wh-q5': tone(qualityColor.legendary),
+    '--wh-gold': tone('#FFD100'),
+    '--wh-rogue': tone('#FFF468'),
+  } as React.CSSProperties;
 }
 
 export function useTooltip(): TooltipApi {

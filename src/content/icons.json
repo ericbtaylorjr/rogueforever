@@ -4,22 +4,22 @@
     "icon": "inv_potion_32",
     "kind": "item"
   },
-  "Elixir of Giants": {
+  "Elixir of Greater Strength": {
     "id": 9206,
-    "icon": "inv_potion_61",
+    "icon": "inv_potion_59",
     "kind": "item"
   },
   "Elixir of Fortitude": {
-    "id": 3825,
-    "icon": "inv_potion_43",
+    "id": 250334,
+    "icon": "inv_potion_44",
     "kind": "item"
   },
-  "Elixir of Superior Defense": {
+  "Elixir of Greater Defense": {
     "id": 13445,
     "icon": "inv_potion_66",
     "kind": "item"
   },
-  "Elixir of Demonslaying": {
+  "Potion of Demon Slaying": {
     "id": 9224,
     "icon": "inv_potion_27",
     "kind": "item"
@@ -141,7 +141,7 @@
   },
   "Magic Resistance Potion": {
     "id": 9036,
-    "icon": "inv_potion_16",
+    "icon": "inv_potion_120",
     "kind": "item"
   },
   "Greater Fire Protection Potion": {
@@ -196,7 +196,7 @@
   },
   "Wound Poison": {
     "id": 10918,
-    "icon": "ability_poisonsting",
+    "icon": "inv_misc_herb_16",
     "kind": "item"
   },
   "Crippling Poison": {
@@ -224,23 +224,28 @@
     "icon": "inv_misc_food_55",
     "kind": "item"
   },
-  "Night Dragon\u2019s Breath": {
+  "Night Dragon’s Breath": {
     "id": 11952,
     "icon": "inv_misc_food_45",
     "kind": "item"
   },
   "Improved Battle Shout": {
-    "id": 12861,
+    "id": 12858,
     "icon": "ability_warrior_battleshout",
     "kind": "spell"
   },
   "Blessing of Might": {
-    "id": 19837,
+    "id": 25291,
     "icon": "spell_holy_fistofjustice",
     "kind": "spell"
   },
+  "Blessing of Kings": {
+    "id": 20217,
+    "icon": "spell_magic_magearmor",
+    "kind": "spell"
+  },
   "Improved Mark of the Wild": {
-    "id": 17055,
+    "id": 17054,
     "icon": "spell_nature_regeneration",
     "kind": "spell"
   },
@@ -249,8 +254,23 @@
     "icon": "spell_holy_wordfortitude",
     "kind": "spell"
   },
+  "Grace of Air Totem": {
+    "id": 25359,
+    "icon": "spell_nature_invisibilitytotem",
+    "kind": "spell"
+  },
+  "Strength of Earth Totem": {
+    "id": 25361,
+    "icon": "spell_nature_earthbindtotem",
+    "kind": "spell"
+  },
+  "Windfury Totem": {
+    "id": 8512,
+    "icon": "spell_nature_windfury",
+    "kind": "spell"
+  },
   "Trueshot Aura": {
-    "id": 20906,
+    "id": 1299348,
     "icon": "ability_trueshot",
     "kind": "spell"
   },
@@ -259,7 +279,7 @@
     "icon": "spell_nature_unyeildingstamina",
     "kind": "spell"
   },
-  "Blessing of Salvation": {
+  "Salvation": {
     "id": 1038,
     "icon": "spell_holy_sealofsalvation",
     "kind": "spell"
@@ -285,8 +305,8 @@
     "kind": "spell"
   },
   "Gift of Arthas": {
-    "id": 11466,
-    "icon": "inv_potion_28",
+    "id": 11374,
+    "icon": "spell_nature_nullifydisease",
     "kind": "spell"
   },
   "Improved Scorch": {
@@ -294,29 +314,44 @@
     "icon": "spell_fire_soulburn",
     "kind": "spell"
   },
-  "Hunter\u2019s Mark": {
-    "id": 1130,
+  "Hunter’s Mark": {
+    "id": 14324,
     "icon": "ability_hunter_snipershot",
     "kind": "spell"
   },
   "Shadow Weaving": {
-    "id": 15334,
+    "id": 15257,
     "icon": "spell_shadow_blackplague",
     "kind": "spell"
   },
-  "item:10400": {
-    "id": 10400,
-    "icon": "inv_pants_12",
+  "item:252428": {
+    "id": 252428,
+    "icon": "inv_belt_04",
     "kind": "item"
   },
-  "item:10399": {
-    "id": 10399,
-    "icon": "inv_chest_leather_08",
+  "item:252490": {
+    "id": 252490,
+    "icon": "inv_chest_leather_07",
     "kind": "item"
   },
-  "item:10403": {
-    "id": 10403,
-    "icon": "inv_belt_26",
+  "item:285292": {
+    "id": 285292,
+    "icon": "inv_misc_sawblade_01",
+    "kind": "item"
+  },
+  "item:252439": {
+    "id": 252439,
+    "icon": "inv_boots_09",
+    "kind": "item"
+  },
+  "item:10410": {
+    "id": 10410,
+    "icon": "inv_pants_11",
+    "kind": "item"
+  },
+  "item:284715": {
+    "id": 284715,
+    "icon": "inv_jewelry_ring_01",
     "kind": "item"
   },
   "item:6449": {
@@ -324,14 +359,109 @@
     "icon": "inv_chest_cloth_15",
     "kind": "item"
   },
-  "item:2041": {
-    "id": 2041,
-    "icon": "inv_chest_leather_07",
+  "item:5351": {
+    "id": 5351,
+    "icon": "inv_jewelry_ring_01",
     "kind": "item"
   },
-  "item:6469": {
-    "id": 6469,
-    "icon": "inv_weapon_bow_10",
+  "item:7348": {
+    "id": 7348,
+    "icon": "inv_gauntlets_05",
+    "kind": "item"
+  },
+  "item:1076": {
+    "id": 1076,
+    "icon": "inv_jewelry_ring_02",
+    "kind": "item"
+  },
+  "item:277210": {
+    "id": 277210,
+    "icon": "inv_jewelry_ring_02",
+    "kind": "item"
+  },
+  "item:252512": {
+    "id": 252512,
+    "icon": "inv_helmet_15",
+    "kind": "item"
+  },
+  "item:9509": {
+    "id": 9509,
+    "icon": "inv_pants_08",
+    "kind": "item"
+  },
+  "item:2264": {
+    "id": 2264,
+    "icon": "inv_shoulder_08",
+    "kind": "item"
+  },
+  "item:273029": {
+    "id": 273029,
+    "icon": "inv_musket_02",
+    "kind": "item"
+  },
+  "item:7374": {
+    "id": 7374,
+    "icon": "inv_chest_leather_03",
+    "kind": "item"
+  },
+  "item:7731": {
+    "id": 7731,
+    "icon": "inv_jewelry_necklace_06",
+    "kind": "item"
+  },
+  "item:7686": {
+    "id": 7686,
+    "icon": "inv_jewelry_ring_04",
+    "kind": "item"
+  },
+  "item:252520": {
+    "id": 252520,
+    "icon": "inv_belt_37b",
+    "kind": "item"
+  },
+  "item:2805": {
+    "id": 2805,
+    "icon": "inv_misc_cape_04",
+    "kind": "item"
+  },
+  "item:7755": {
+    "id": 7755,
+    "icon": "inv_shoulder_13",
+    "kind": "item"
+  },
+  "item:252525": {
+    "id": 252525,
+    "icon": "inv_gauntlets_22",
+    "kind": "item"
+  },
+  "item:9624": {
+    "id": 9624,
+    "icon": "inv_pants_08",
+    "kind": "item"
+  },
+  "item:19508": {
+    "id": 19508,
+    "icon": "inv_bracer_11",
+    "kind": "item"
+  },
+  "item:10008": {
+    "id": 10008,
+    "icon": "inv_helmet_30",
+    "kind": "item"
+  },
+  "item:12470": {
+    "id": 12470,
+    "icon": "inv_bracer_04",
+    "kind": "item"
+  },
+  "item:252535": {
+    "id": 252535,
+    "icon": "inv_shoulders_mail_warfrontsforsaken_d_01",
+    "kind": "item"
+  },
+  "item:9533": {
+    "id": 9533,
+    "icon": "inv_jewelry_ring_03",
     "kind": "item"
   },
   "item:17713": {
@@ -339,14 +469,14 @@
     "icon": "inv_jewelry_ring_17",
     "kind": "item"
   },
-  "item:15063": {
-    "id": 15063,
-    "icon": "inv_gauntlets_26",
+  "item:249469": {
+    "id": 249469,
+    "icon": "inv_misc_gem_sapphire_01",
     "kind": "item"
   },
-  "item:15062": {
-    "id": 15062,
-    "icon": "inv_pants_wolf",
+  "item:19159": {
+    "id": 19159,
+    "icon": "inv_misc_herb_15",
     "kind": "item"
   },
   "item:13404": {
@@ -354,24 +484,69 @@
     "icon": "inv_misc_bandana_01",
     "kind": "item"
   },
-  "item:11815": {
-    "id": 11815,
-    "icon": "inv_jewelry_talisman_01",
+  "item:15065": {
+    "id": 15065,
+    "icon": "inv_pants_wolf",
     "kind": "item"
   },
-  "item:15411": {
-    "id": 15411,
-    "icon": "inv_jewelry_talisman_07",
+  "item:22241": {
+    "id": 22241,
+    "icon": "inv_shoulder_07",
     "kind": "item"
   },
-  "item:14637": {
-    "id": 14637,
-    "icon": "inv_chest_leather_03",
+  "item:15063": {
+    "id": 15063,
+    "icon": "inv_gauntlets_26",
     "kind": "item"
   },
-  "item:12927": {
-    "id": 12927,
-    "icon": "inv_shoulder_10",
+  "item:19044": {
+    "id": 19044,
+    "icon": "inv_belt_09",
+    "kind": "item"
+  },
+  "item:16711": {
+    "id": 16711,
+    "icon": "inv_boots_08",
+    "kind": "item"
+  },
+  "item:12651": {
+    "id": 12651,
+    "icon": "inv_weapon_crossbow_04",
+    "kind": "item"
+  },
+  "item:252483": {
+    "id": 252483,
+    "icon": "inv_chest_leather_08",
+    "kind": "item"
+  },
+  "item:13340": {
+    "id": 13340,
+    "icon": "inv_misc_cape_20",
+    "kind": "item"
+  },
+  "item:22659": {
+    "id": 22659,
+    "icon": "inv_jewelry_amulet_04",
+    "kind": "item"
+  },
+  "item:22668": {
+    "id": 22668,
+    "icon": "inv_bracer_04",
+    "kind": "item"
+  },
+  "item:270256": {
+    "id": 270256,
+    "icon": "inv_axe_18",
+    "kind": "item"
+  },
+  "item:1936": {
+    "id": 1936,
+    "icon": "inv_weapon_shortblade_05",
+    "kind": "item"
+  },
+  "item:6633": {
+    "id": 6633,
+    "icon": "inv_sword_16",
     "kind": "item"
   },
   "item:5191": {
@@ -379,59 +554,104 @@
     "icon": "inv_sword_24",
     "kind": "item"
   },
-  "item:6504": {
-    "id": 6504,
-    "icon": "inv_sword_16",
+  "item:2941": {
+    "id": 2941,
+    "icon": "inv_weapon_shortblade_18",
     "kind": "item"
   },
-  "item:9380": {
-    "id": 9380,
-    "icon": "inv_sword_43",
+  "item:1454": {
+    "id": 1454,
+    "icon": "inv_axe_21",
     "kind": "item"
   },
-  "item:12940": {
-    "id": 12940,
-    "icon": "inv_sword_43",
+  "item:776": {
+    "id": 776,
+    "icon": "inv_weapon_shortblade_02",
     "kind": "item"
   },
-  "item:12939": {
-    "id": 12939,
-    "icon": "inv_sword_40",
+  "item:7687": {
+    "id": 7687,
+    "icon": "inv_hammer_19",
     "kind": "item"
   },
-  "item:5616": {
-    "id": 5616,
-    "icon": "inv_sword_31",
+  "item:10571": {
+    "id": 10571,
+    "icon": "inv_misc_bone_10",
     "kind": "item"
   },
-  "item:13218": {
-    "id": 13218,
-    "icon": "inv_weapon_shortblade_16",
+  "item:10772": {
+    "id": 10772,
+    "icon": "inv_axe_23",
     "kind": "item"
   },
-  "item:12791": {
-    "id": 12791,
-    "icon": "inv_drink_10",
+  "item:9401": {
+    "id": 9401,
+    "icon": "inv_sword_24",
     "kind": "item"
   },
-  "Blessing of Kings": {
-    "id": 20217,
-    "icon": "spell_magic_magearmor",
-    "kind": "spell"
+  "item:10823": {
+    "id": 10823,
+    "icon": "inv_sword_35",
+    "kind": "item"
   },
-  "Grace of Air Totem": {
-    "id": 25359,
-    "icon": "spell_nature_invisibilitytotem",
-    "kind": "spell"
+  "item:9639": {
+    "id": 9639,
+    "icon": "inv_mace_11",
+    "kind": "item"
   },
-  "Strength of Earth Totem": {
-    "id": 25361,
-    "icon": "spell_nature_earthbindtotem",
-    "kind": "spell"
+  "item:12774": {
+    "id": 12774,
+    "icon": "inv_axe_05",
+    "kind": "item"
   },
-  "Windfury Totem": {
-    "id": 8512,
-    "icon": "spell_nature_windfury",
-    "kind": "spell"
+  "item:11817": {
+    "id": 11817,
+    "icon": "inv_sword_25",
+    "kind": "item"
+  },
+  "item:22384": {
+    "id": 22384,
+    "icon": "inv_hammer_08",
+    "kind": "item"
+  },
+  "item:12783": {
+    "id": 12783,
+    "icon": "inv_sword_17",
+    "kind": "item"
+  },
+  "item:6448": {
+    "id": 6448,
+    "icon": "inv_weapon_shortblade_10",
+    "kind": "item"
+  },
+  "item:1935": {
+    "id": 1935,
+    "icon": "inv_weapon_shortblade_24",
+    "kind": "item"
+  },
+  "item:9453": {
+    "id": 9453,
+    "icon": "inv_weapon_shortblade_02",
+    "kind": "item"
+  },
+  "item:5756": {
+    "id": 5756,
+    "icon": "inv_weapon_shortblade_24",
+    "kind": "item"
+  },
+  "item:6331": {
+    "id": 6331,
+    "icon": "inv_weapon_shortblade_15",
+    "kind": "item"
+  },
+  "item:10761": {
+    "id": 10761,
+    "icon": "inv_sword_34",
+    "kind": "item"
+  },
+  "item:9467": {
+    "id": 9467,
+    "icon": "inv_misc_monsterfang_01",
+    "kind": "item"
   }
 }

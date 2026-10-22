@@ -1,0 +1,11 @@
+{
+  "_readme": "Hand corrections rank.mjs applies on every run. exclude: [{id, why}] drops an item. level: {id: n} overrides the level shown. source: {id: text} overrides the Source column. include: [{list: shared|slow|daggers, item: LevelingItem}] adds an item the data can't find (e.g. just decrypted). allow: [id] lets a vendor or rare-spawn drop count as chaseable. faction: {id: Alliance|Horde} fixes quest rewards whose quest is faction-only but the item isn't marked.",
+  "exclude": [],
+  "level": {},
+  "source": {},
+  "include": [],
+  "allow": [],
+  "faction": {
+    "19120": "Horde"
+  }
+}

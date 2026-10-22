@@ -18,24 +18,29 @@ export function ExposeArmor() {
           </p>
           <p className="mt-[12px] max-w-[70ch] text-[13.5px] leading-[1.6] text-mute">{copy.p2}</p>
 
-          {/* Both debuffs land on the same number, so show them as an equation, not two tiles. */}
-          <div className="panel-inner mt-[18px] flex flex-wrap items-center gap-x-[16px] gap-y-[10px] px-[16px] py-[13px]">
-            {copy.stats.map((st, i) => (
-              <Fragment key={st.label}>
-                {i > 0 && (
-                  <span aria-hidden="true" className="t-num text-[18px] text-faint">
-                    =
+          {/* Both debuffs land on the same number, so show them as an equation, not two tiles.
+              Inline when the box fits the whole equation (~440px), otherwise stacked top to
+              bottom, never half-wrapped with Sunder alone on the second line. */}
+          <div className="@container mt-[18px]">
+            <div className="panel-inner flex flex-col items-start gap-[8px] px-[16px] py-[13px] @[30rem]:flex-row @[30rem]:items-center @[30rem]:gap-[16px]">
+              {copy.stats.map((st, i) => (
+                <Fragment key={st.label}>
+                  {i > 0 && (
+                    // Stacked, the "=" sits under the icon's centre.
+                    <span aria-hidden="true" className="t-num w-[30px] text-center text-[18px] text-faint @[30rem]:w-auto">
+                      =
+                    </span>
+                  )}
+                  <span className="flex shrink-0 items-center gap-[10px]">
+                    <GameIcon name={st.icon} size={30} />
+                    <span>
+                      <span className="t-num block text-[19px] leading-none text-ink">{st.val}</span>
+                      <span className="mt-[4px] block text-[11.5px] text-faint">{st.label}</span>
+                    </span>
                   </span>
-                )}
-                <span className="flex items-center gap-[10px]">
-                  <GameIcon name={st.icon} size={30} />
-                  <span>
-                    <span className="t-num block text-[19px] leading-none text-ink">{st.val}</span>
-                    <span className="mt-[4px] block text-[11.5px] text-faint">{st.label}</span>
-                  </span>
-                </span>
-              </Fragment>
-            ))}
+                </Fragment>
+              ))}
+            </div>
           </div>
         </div>
 

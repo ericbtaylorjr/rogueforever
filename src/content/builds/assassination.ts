@@ -19,7 +19,7 @@ const stats: StatPriority = {
   ],
 };
 
-const levelingGear = byLevel([...levelingShared, ...levelingDaggers]);
+const levelingGear = byLevel(levelingShared, levelingDaggers);
 
 export const assassination: Build[] = [
   {

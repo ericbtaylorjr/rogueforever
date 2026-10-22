@@ -2,9 +2,10 @@ import { poisons, specById } from '../../content/content';
 import { poisonsCopy as copy } from '../../content/copy';
 import type { Poison } from '../../content/types';
 import { useTheme } from '../../state/ThemeProvider';
-import { GameIcon, wowheadFor } from '../ui/GameIcon';
+import { GameIcon, wowheadFor, wowheadRefFor } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Tip } from '../ui/Tip';
+import { useTooltip } from '../ui/Tooltip';
 
 /** How much each poison matters, said plainly rather than as a badge. */
 const tagTone: Record<Poison['tag'], string> = {
@@ -16,6 +17,7 @@ const tagTone: Record<Poison['tag'], string> = {
 /** One row of the rack: icon, name and where it goes, then what it's for. */
 function PoisonRow({ p }: { p: Poison }) {
   const { tone } = useTheme();
+  const { bind } = useTooltip();
   const href = wowheadFor(p.name);
   return (
     <li className="grid gap-x-[18px] gap-y-[6px] border-t border-line px-[18px] py-[14px] first:border-0 stack:grid-cols-[minmax(0,240px)_minmax(0,1fr)_72px] stack:items-center">
@@ -28,6 +30,7 @@ function PoisonRow({ p }: { p: Poison }) {
               target="_blank"
               rel="noreferrer"
               className="t-card-sub text-ink decoration-line underline-offset-[3px] hover:underline"
+              {...bind({ name: p.name, kind: p.where, wowhead: wowheadRefFor(p.name) })}
             >
               {p.name}
             </a>

@@ -5,3 +5,6 @@ dist
 .vite
 *.tsbuildinfo
 *:Zone.Identifier
+
+# Gear research cache (scripts/gear-research), rebuilt by scan.mjs
+scripts/gear-research/cache

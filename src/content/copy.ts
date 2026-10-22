@@ -104,7 +104,7 @@ export const specBoard = {
     questing: { title: 'Questing', label: 'Leveling builds for questing, ranked' },
     dungeons: { title: 'Dungeons', label: 'Leveling builds for dungeons, ranked' },
     /** Follows the "Tip:" label. */
-    tip: 'the leveling builds are currently under development and will be posted prior to launch.',
+    tip: 'The leveling builds are currently under development and will be posted prior to launch.',
   },
 } as const;
 
@@ -144,7 +144,7 @@ export const talents = {
   buildPending: "This build hasn't been written up yet. It goes up once it's been tested.",
   /** A sweaty tip: shown only with sweaty tips on. */
   murderTip:
-    "most of these builds take 2/2 Murder. For encounters without Humanoids or Giants it does nothing, so swap those points into a couple of other offensive talents. Most players can set and forget, but if you're squeezing out every bit of damage, it's worth the respec.",
+    "Most of these builds take 2/2 Murder. For encounters without Humanoids or Giants it does nothing, so swap those points into a couple of other offensive talents. Most players can set and forget, but if you're squeezing out every bit of damage, it's worth the respec.",
   /** Tree names are confirmed to carry over; the split is what is pending. */
   trees: ['Assassination', 'Combat', 'Subtlety'],
   calculator: 'Open in talent calculator ↗',
@@ -204,16 +204,16 @@ export const stats = {
   intro:
     'These weights are relative to current BiS gear, so expect them to shift slightly as your gear changes. For more accurate values, run the EP calculator in WoWSims with your current gear setup.',
   /** Follows the "Tip:" label. Shown for every build until real weights are in. */
-  placeholderTip: 'these stats are placeholders and will be updated prior to launch.',
+  placeholderTip: 'These stats are placeholders and will be updated prior to launch.',
   statsTitle: 'Stat priority',
   statsMeta: 'Weights relative to',
   epLabel: 'EP',
 } as const;
 
 export const gear = {
+  /** Rendered with <Tip>, which adds the "Tip:" label. */
   status: {
-    label: 'Placeholder:',
-    text: "these are Classic Era picks standing in for now. Forever reworks dungeon loot, so expect this to change as the beta opens up.",
+    text: "This is an early list. It leaves out some items we know exist but are still encrypted. Those will be added during launch, and this list will be updated as they appear.",
   },
   cols: { slot: 'SLOT', item: 'ITEM', source: 'SOURCE', enchant: 'ENCHANT' },
   tableLabel: 'Gear by slot',
@@ -227,6 +227,9 @@ export const gear = {
     itemsTitle: 'Leveling milestone gear',
     cols: { level: 'LEVEL', slot: 'SLOT', item: 'ITEM', source: 'SOURCE', faction: 'FACTION' },
     tableLabel: 'Leveling items by level',
+    /** Precedes a bracket's level range, as in "Levels 21–40". */
+    bracket: 'Levels',
+    bracketEmpty: 'Nothing worth chasing in this range yet',
     empty: 'No leveling items listed for this build yet',
   },
   /** Level 60 builds only; leveling builds show their milestone list instead. */
@@ -237,7 +240,7 @@ export const gear = {
 } as const;
 
 export const professionsCopy = {
-  tip: "this is still being determined. Forever adds hundreds of new profession recipes, so expect a much clearer picture some time into launch, once recipes have been discovered and simulations have been run.",
+  tip: "This is still being determined. Forever adds hundreds of new profession recipes, so expect a much clearer picture some time into launch, once recipes have been discovered and simulations have been run.",
   listTitle: 'Profession meta',
   listLabel: 'Professions ranked by meta grade',
 } as const;
@@ -254,14 +257,14 @@ export const consumablesCopy = {
   },
   status: {
     label: 'Placeholder:',
-    text: "this is the Classic Era list. Blizzard is reviewing reagents and effects for Forever, so expect additions, removals and rebalances. I'll swap it out once the Forever list is known.",
+    text: "This is an early list. Blizzard is reviewing reagents and effects for Forever, so expect additions, removals and rebalances. I'll update it once the final list is known.",
   },
 } as const;
 
 export const buffsCopy = {
   status: {
     label: 'Placeholder:',
-    text: "these are Classic Era baselines. Forever's balancing and stacking rules aren't settled, so I'll update this once they are and the sims have run.",
+    text: "These are early baselines. Forever's balancing and stacking rules aren't settled, so I'll update this once they are and the sims have run.",
   },
 } as const;
 
@@ -470,7 +473,7 @@ export const consent = {
 export const privacy = {
   title: 'Privacy policy',
   close: 'Close privacy policy',
-  updated: 'Last updated October 19, 2026',
+  updated: 'Last updated October 21, 2026',
   intro:
     "Short version: the Handbook doesn't have accounts, forms or ads. It remembers a few preferences in your browser, counts visits without cookies, and only uses Google Analytics if you allow it on the cookie banner.",
   sections: [
@@ -505,7 +508,13 @@ export const privacy = {
     {
       heading: 'Hosting',
       body: [
-        "The site is hosted on GitHub Pages. Like most hosts, GitHub may log basic request data such as IP addresses for security and reliability. See GitHub's privacy statement. Fonts and game icons are served from the site itself. Apart from Cloudflare's visit counter, and Google Analytics if you allow it, no other services load when you visit.",
+        "The site is hosted on GitHub Pages. Like most hosts, GitHub may log basic request data such as IP addresses for security and reliability. See GitHub's privacy statement. Fonts and game icons are served from the site itself. Apart from Cloudflare's visit counter, Wowhead tooltips (below), and Google Analytics if you allow it, no other services load when you visit.",
+      ],
+    },
+    {
+      heading: 'Wowhead tooltips',
+      body: [
+        "When you hover or tap an item or spell, the Handbook asks Wowhead for that tooltip's details so they stay current. That request goes from your browser to Wowhead, so Wowhead sees your IP address and browser, as with any site you visit. It sets no cookies and loads no Wowhead scripts. See Wowhead's privacy policy.",
       ],
     },
     {

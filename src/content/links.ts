@@ -10,6 +10,7 @@ export const links = {
   googleAnalyticsData: 'https://policies.google.com/technologies/partner-sites',
   googlePrivacy: 'https://policies.google.com/privacy',
   cloudflarePrivacy: 'https://www.cloudflare.com/privacypolicy/',
+  wowheadPrivacy: 'https://www.wowhead.com/privacy',
   githubPrivacy: 'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
   weakauras: '#', // TODO: Comfy's UI addon package
   discord: 'https://discord.gg/rKF9G7zusj',
@@ -33,6 +34,7 @@ export const privacyLinks = {
   'Google Privacy Policy': links.googlePrivacy,
   "GitHub's privacy statement": links.githubPrivacy,
   "Cloudflare's privacy policy": links.cloudflarePrivacy,
+  "Wowhead's privacy policy": links.wowheadPrivacy,
 };
 
 /** Every mention of WoWSims in copy links here; pass to <LinkedText>. */

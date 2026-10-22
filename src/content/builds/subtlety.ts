@@ -1,4 +1,4 @@
-import { levelingDaggers, levelingShared } from '../gear';
+import { levelingDaggers, levelingShared, levelingSlowWeapons } from '../gear';
 import type { Build, StatPriority } from '../types';
 import { byLevel, noEndgameGear, noRotation, points } from './shared';
 
@@ -19,7 +19,8 @@ const stats: StatPriority = {
   ],
 };
 
-const levelingGear = byLevel([...levelingShared, ...levelingDaggers]);
+/** Hemorrhage works with any weapon, and Ambush only needs a dagger in the main hand, so Subtlety gets every weapon list. */
+const levelingGear = byLevel(levelingShared, levelingSlowWeapons, levelingDaggers);
 
 export const subtlety: Build[] = [
   {

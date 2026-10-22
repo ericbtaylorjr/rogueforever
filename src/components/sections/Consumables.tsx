@@ -4,7 +4,7 @@ import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { FilterPill } from '../ui/Pill';
-import { GameIcon } from '../ui/GameIcon';
+import { GameIcon, WowheadLink, wowheadRefFor } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useTooltip } from '../ui/Tooltip';
 
@@ -63,12 +63,11 @@ export function Consumables() {
             style={{ breakInside: 'avoid' }}
           >
             <GameIcon name={c.n} size={20} />
-            <span
-              className="cursor-help text-[13px] text-prose underline decoration-line underline-offset-[3px] transition-colors hover:text-accent focus-visible:text-accent"
-              {...bind({ name: c.n, kind: c.s ? `${c.k} · sweaty` : c.k, note: c.note })}
-            >
-              {c.n}
-            </span>
+            <WowheadLink
+              name={c.n}
+              className="text-[13px] text-prose underline decoration-line underline-offset-[3px] transition-colors hover:text-accent focus-visible:text-accent"
+              {...bind({ name: c.n, kind: c.s ? `${c.k} · sweaty` : c.k, note: c.note, wowhead: wowheadRefFor(c.n) })}
+            />
             {c.s && sweaty && <Droplet size={7} />}
           </div>
         ))}
