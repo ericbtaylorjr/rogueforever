@@ -12,18 +12,21 @@ export const BUILD_CARD_ID = 'build-card';
  * Builds as a pickable list, each led by its meta grade. Picking one makes it the
  * active build, switching spec if needed. `showSpec` labels each row with its spec,
  * for lists that mix specs. `bySpec` names each row by its spec alone, for lists
- * where every build shares a name (one per spec, like the Questing ranking).
+ * where every build shares a name (one per spec, like the Questing ranking). `stay`
+ * keeps the page still on a pick, for lists that sit right above the content they swap.
  */
 export function BuildList({
   builds,
   label,
   showSpec = false,
   bySpec = false,
+  stay = false,
 }: {
   builds: Build[];
   label: string;
   showSpec?: boolean;
   bySpec?: boolean;
+  stay?: boolean;
 }) {
   const { spec, build: active, pickBuild } = useHandbook();
   const { tone } = useTheme();
@@ -40,7 +43,7 @@ export function BuildList({
               type="button"
               aria-pressed={on}
               aria-controls={BUILD_CARD_ID}
-              onClick={() => pickBuild(b.spec, b.id)}
+              onClick={() => pickBuild(b.spec, b.id, { stay })}
               className="grid w-full items-center gap-[12px] rounded-[10px] border px-[12px] py-[9px] text-left transition-colors hover:border-accent"
               style={{
                 gridTemplateColumns: '30px minmax(0,1fr) auto',

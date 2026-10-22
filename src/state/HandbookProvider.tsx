@@ -51,8 +51,8 @@ interface HandbookState {
   /* actions */
   /** Switches spec and lands on its matching build (see `buildForSwitch`). */
   setSpec: (id: SpecId) => void;
-  /** Switch to `spec` and make its build `id` active. */
-  pickBuild: (spec: SpecId, id: string) => void;
+  /** Switch to `spec` and make its build `id` active. `stay` skips settling on the section top. */
+  pickBuild: (spec: SpecId, id: string, opts?: { stay?: boolean }) => void;
   setSimSet: (id: SimSetId) => void;
   toggleSort: (key: SortKey) => void;
   setGearSet: (id: GearSetId) => void;
@@ -349,8 +349,9 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     },
     [build],
   );
-  const pickBuild = useCallback((id: SpecId, buildId: string) => {
-    holdSection();
+  const pickBuild = useCallback((id: SpecId, buildId: string, opts?: { stay?: boolean }) => {
+    if (opts?.stay) pendingSection.current = null;
+    else holdSection();
     setSpecState(id);
     setBuilds((b) => ({ ...b, [id]: buildId }));
     track('build_select', { spec: id, build: buildId });
