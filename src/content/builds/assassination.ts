@@ -33,7 +33,7 @@ export const assassination: Build[] = [
     talentNote:
       'This build revolves around keeping the Venom buff up at all times and using Mutilate as your main builder, with an emphasis on poison damage.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310151501031-302303202014_t0_r95/0CDffgfEjmnnnnqnkkkskksst1AccFDGJmnnnn',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310131501051-302303202014_t5/0CDEFgjnnnnq1AccDF0kkkmnSt1GJmnnnn',
     stats,
     gear: noEndgameGear,
     rotation: noRotation,

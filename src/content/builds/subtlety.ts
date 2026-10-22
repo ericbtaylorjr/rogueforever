@@ -33,7 +33,7 @@ export const subtlety: Build[] = [
     talents: points(12, 8, 31),
     talentNote: 'The traditional Subtlety Backstab build, focused on bleed damage.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v20053031-3203-4320203300013211051_t0_r95/2aaaaBCEGHnPsrQVw1BAD0CDFg',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v20053031-3203-1323200310213211501_t5/2CBaEDHjnPMsrQTw0CDFg1ABD',
     stats,
     gear: noEndgameGear,
     rotation: noRotation,
@@ -49,7 +49,7 @@ export const subtlety: Build[] = [
     talentNote:
       'A variant of the Subtlety Backstab build that uses Hemorrhage as the builder instead. It leans on a slow main hand rather than a dagger.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101014--4320203300013211501_t0_r95/2aaaaBCEGHnPsrQ0CDFg2Tw0Ejmnnnn',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101005--1323200310213211501_t5/2CBaEDHjnPMsrQTw0CDEFgjN',
     stats,
     gear: noEndgameGear,
     rotation: noRotation,

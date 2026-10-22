@@ -29,11 +29,11 @@ export const combat: Build[] = [
     name: 'Mutilate',
     grade: 'A',
     rank: 3,
-    talents: points(21, 28, 0),
+    talents: points(21, 29, 1),
     talentNote:
       'A variation of the Assassination Mutilate build. It drops Venom in favor of leaning further into Combat talents.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-302303202015142_t0_r95/0CDffgfEjmnnnnq1AccFDGJmnnnnpqqqqRn',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-320303202015152-001_t5/0CDEFgjm1ABDFGJmNQpR0nn2c0nnq',
     stats,
     gear: noEndgameGear,
     rotation: noRotation,
@@ -49,7 +49,7 @@ export const combat: Build[] = [
     talentNote:
       'The traditional Classic Rogue Combat build: Sinister Strike as your builder and Eviscerate as your spender.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101012-32030320201515231_t0_r95/1BAFDGJmNpqqqRqqstss0CDffgfEjmnn',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101012-32030320201515231_t5/0CDEFgjm1ABDFGJmNQpRSt0nn',
     stats,
     gear: noEndgameGear,
     rotation: noRotation,
@@ -65,7 +65,7 @@ export const combat: Build[] = [
     talentNote:
       'A Backstab variant of the Sinister Strike build. It swaps to a dagger in the main hand and uses Backstab as the builder.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005322103-32030320201515231-002_t0_r95/2C1ABFDGJmnnnnpqqqqRqnstss0CDffgEjjj',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101-32030320201515231-002_t5/0CDe2C0eFgjm1ABDFGJmNQpRSt',
     stats,
     gear: noEndgameGear,
     rotation: noRotation,
