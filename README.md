@@ -121,8 +121,9 @@ their milestone gear tables, and an open Wowhead tooltip), a 274-stop keyboard w
 stop shows a focus ring) and Lighthouse 12 (Accessibility 100). Earlier audits also covered
 the palette, drawer, profile modal and an open FAQ.
 
-Covered: skip link and `<main>` landmark; nav jumps move keyboard focus to the target
-section and respect `prefers-reduced-motion`; tabs use roving tabindex with
+Covered: skip link and `<main>` landmark; nav jumps and shared section links
+(`?spec=combat&build=backstab#talents`, scrolled to once the page has loaded) move keyboard
+focus to the target section and respect `prefers-reduced-motion`; tabs use roving tabindex with
 arrow/Home/End keys; the palette is a real combobox/listbox with a live result count;
 tooltips are dismissible (Esc), persistent while their trigger is hovered or focused, and only
 set `aria-describedby` while showing; focus is kept clear of the sticky bars (`scroll-padding-top`); the Gear

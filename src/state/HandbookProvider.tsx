@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -121,6 +122,29 @@ function readInitial(): { spec: SpecId; build?: string; sweaty: boolean } {
 
 /** Where a section's top sits once scrolled to: just under the sticky header. */
 const sectionOffset = () => (window.innerWidth < bp.rail ? scrollOffset.narrow : scrollOffset.desktop);
+
+/**
+ * The section a shared link points at (`?spec=combat&build=backstab#talents`), read once
+ * before anything renders. Left to itself, the browser races React for it: sometimes the
+ * section isn't drawn yet and the page stays at the top, sometimes it jumps there with no
+ * animation. So the hash is held back here and the deep-link effect does the scrolling.
+ */
+const linkedSection = (() => {
+  if (typeof window === 'undefined') return null;
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (!sectionIds.includes(id)) return null;
+  window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  return id;
+})();
+
+/**
+ * scrollTo() doesn't move keyboard focus, so a keyboard or screen-reader user would be left
+ * where they were. Park focus on the section without a second scroll.
+ */
+function focusSection(el: HTMLElement) {
+  if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+  el.focus({ preventScroll: true });
+}
 
 function scrollToSection(el: HTMLElement) {
   const top = el.getBoundingClientRect().top + window.scrollY - sectionOffset();
@@ -307,13 +331,43 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       track('section_jump', { section: id });
       noteJump(id);
       window.history.replaceState(null, '', `#${id}`);
-      // scrollTo() doesn't move keyboard focus, so a keyboard or screen-reader user would
-      // be left behind in the nav. Park focus on the section without a second scroll.
-      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
-      el.focus({ preventScroll: true });
+      focusSection(el);
     },
     [],
   );
+
+  /*
+   * A shared link to a section scrolls there once the page has loaded and its fonts have
+   * settled. Until then the section goes without its id: Chrome remembers the link's
+   * fragment and re-applies it (instantly) on every layout until the page has loaded,
+   * which would cut the animated scroll short. Runs before the first paint, so the
+   * browser never sees the id early.
+   */
+  useLayoutEffect(() => {
+    const id = linkedSection;
+    const el = id && document.getElementById(id);
+    if (!id || !el) return;
+    el.removeAttribute('id');
+    let live = true;
+    const loaded =
+      document.readyState === 'complete'
+        ? Promise.resolve()
+        : new Promise((done) => window.addEventListener('load', done, { once: true }));
+    Promise.all([loaded, document.fonts.ready]).then(() => {
+      if (!live) return;
+      el.id = id;
+      requestAnimationFrame(() => {
+        scrollToSection(el);
+        setActive(id);
+        focusSection(el);
+        window.history.replaceState(null, '', `#${id}`);
+      });
+    });
+    return () => {
+      live = false;
+      el.id = id;
+    };
+  }, []);
 
   const copy = useCallback((key: string, text: string) => {
     // Only confirm once the clipboard actually accepted the text.
