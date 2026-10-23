@@ -3,7 +3,7 @@ import { specById } from '../../content/content';
 import { stats as copy } from '../../content/copy';
 import { wowsimsLink } from '../../content/links';
 import type { StatWeight } from '../../content/types';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useShownBuild } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -13,11 +13,11 @@ import { Tip } from '../ui/Tip';
 const displayEp = ({ stat, ep }: StatWeight) => (stat === 'Stamina' && ep === 0 ? 0.01 : ep);
 
 function StatPriorityPanel() {
-  const { spec, build } = useHandbook();
+  const build = useShownBuild();
   const { tone } = useTheme();
   const { stats, relativeTo } = build.stats;
   const maxEp = Math.max(...stats.map((st) => st.ep));
-  const s = specById[spec];
+  const s = specById[build.spec];
   const [grown, setGrown] = useState(false);
 
   useEffect(() => {

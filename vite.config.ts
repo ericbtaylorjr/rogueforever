@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { join, relative, resolve } from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
@@ -117,8 +118,40 @@ const cfBeacon = (): Plugin => ({
       : [],
 });
 
+/**
+ * Writes dist/sw.js (src/sw.js plus this build's file lists), which src/main.tsx registers.
+ * `assets` are the hashed build files, `shell` the ones index.html starts with, `files`
+ * everything else the site serves that a page asks for (art, icons, favicons). The lists
+ * change with each deploy, so each deploy's worker replaces the last and prunes its cache.
+ */
+const SW_SKIP = /^(index\.html|sw\.js|CNAME|robots\.txt|sitemap\.xml)$/;
+
+const serviceWorker = (): Plugin => {
+  let outDir = '';
+  return {
+    name: 'service-worker',
+    apply: 'build',
+    configResolved: (c) => {
+      outDir = resolve(c.root, c.build.outDir);
+    },
+    closeBundle: () => {
+      const all = readdirSync(outDir, { recursive: true, withFileTypes: true })
+        .filter((f) => f.isFile())
+        .map((f) => `/${relative(outDir, join(f.parentPath, f.name)).split('\\').join('/')}`);
+      const html = readFileSync(join(outDir, 'index.html'), 'utf8');
+      const build = {
+        shell: [...new Set([...html.matchAll(/(?:src|href)="(\/assets\/[^"]+)"/g)].map((m) => m[1]))],
+        assets: all.filter((f) => f.startsWith('/assets/')),
+        files: all.filter((f) => !f.startsWith('/assets/') && !SW_SKIP.test(f.slice(1))),
+      };
+      const src = readFileSync(new URL('./src/sw.js', import.meta.url), 'utf8');
+      writeFileSync(join(outDir, 'sw.js'), `const BUILD = ${JSON.stringify(build)};\n${src}`);
+    },
+  };
+};
+
 // Served from the wowrogue.gg custom domain root, so base stays '/'.
 export default defineConfig({
   base: '/',
-  plugins: [react(), tailwindcss(), inlineThemeInit(), preloadFonts(), contentSecurityPolicy(), cfBeacon()],
+  plugins: [react(), tailwindcss(), inlineThemeInit(), preloadFonts(), contentSecurityPolicy(), cfBeacon(), serviceWorker()],
 });

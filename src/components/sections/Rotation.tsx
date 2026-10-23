@@ -2,7 +2,7 @@ import { specById } from '../../content/content';
 import type { Rotation as RotationData } from '../../content/types';
 import { rotation as copy } from '../../content/copy';
 import { wowsimsLink } from '../../content/links';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useHandbook, useShownBuild } from '../../state/HandbookProvider';
 import { Droplet } from '../ui/Droplet';
 import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -87,7 +87,9 @@ function RotationDetail({ d, sweaty }: { d: RotationData; sweaty: boolean }) {
 }
 
 export function Rotation() {
-  const { spec, build, sweaty } = useHandbook();
+  const { sweaty } = useHandbook();
+  const build = useShownBuild();
+  const { spec } = build;
   const d = build.rotation;
   const hasData = d.apl.length > 0 || d.opener.length > 0 || d.nevers.length > 0;
 

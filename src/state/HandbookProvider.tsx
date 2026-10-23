@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useDeferredValue,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -514,4 +515,14 @@ export function useHandbook(): HandbookState {
   const ctx = useContext(Ctx);
   if (!ctx) throw new Error('useHandbook must be used inside <HandbookProvider>');
   return ctx;
+}
+
+/**
+ * The active build, for what a pick changes beyond the build lists themselves: the Talents
+ * card, the Meta Breakdown's phase, Stats, Gear and Rotation. A pick first repaints the
+ * lists, then this catches up in a render React can interrupt, so the click answers with
+ * one small paint, not a page-sized one (INP).
+ */
+export function useShownBuild(): Build {
+  return useDeferredValue(useHandbook().build);
 }

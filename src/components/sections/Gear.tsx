@@ -2,7 +2,7 @@ import { gearSlots } from '../../content/content';
 import { gear as copy } from '../../content/copy';
 import { factionColor, levelingBrackets, qualityColor, wowheadUrl } from '../../content/gear';
 import type { Faction, GearItem, GearSetId, LevelingItem } from '../../content/types';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useHandbook, useShownBuild } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { GameIcon } from '../ui/GameIcon';
 import { SegmentedTabs, Tag } from '../ui/Pill';
@@ -218,7 +218,7 @@ function EndgameGear({ gear }: { gear: Record<GearSetId, GearItem[]> }) {
 
 /** Follows the active build: milestone items while leveling, pre-raid BiS and BiS at 60. */
 export function Gear() {
-  const { build } = useHandbook();
+  const build = useShownBuild();
 
   return (
     <section id="gear" aria-label="Gear">

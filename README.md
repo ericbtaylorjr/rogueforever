@@ -179,6 +179,24 @@ React DOM) has downloaded and rendered. Keep it that way:
   22 KB, Literata 86 → 56 KB; see `src/assets/fonts/LICENSE.md`). A new weight or width
   outside those ranges needs the fonts re-instanced from the Google Fonts files, and the
   `@font-face` ranges in `styles/index.css` updated.
+- **Repeat visits load from a service worker** (`src/sw.js`, written to `dist/sw.js` with
+  the build's file lists by the `service-worker` plugin in `vite.config.ts`). GitHub Pages
+  serves everything with a 10-minute `max-age`, so without it a returning visitor
+  re-checks every script, font and icon with the server first. The page is network-first
+  (a deploy shows on the next load; the last copy opens offline), hashed `/assets/` are
+  cache-first, and other site files are served from the cache and refreshed behind it.
+  Each deploy's worker prunes files the build no longer has. Cross-origin requests
+  (Wowhead, analytics) aren't touched. **To switch it off**, replace `src/sw.js` with one
+  that calls `self.registration.unregister()` on activate and deploy it; removing
+  the file alone leaves installed workers running.
+- **A build pick paints the lists first.** Picking a build re-renders the Talents card and
+  the Stats, Gear and Rotation sections, which on a slow phone took ~200–330ms before the
+  click painted (Cloudflare INP). They read the build through `useShownBuild()`
+  (`useDeferredValue`), so the click paints the button state at once and the rest
+  follows in an interruptible render (~100ms worst case at 10× CPU). Anything new that
+  follows the build and sits below the lists should use it too.
+- **Talent tree backgrounds are re-encoded** (mozjpeg, progressive, ~24 → ~11 KB each) by
+  `npm run talents` when it downloads them.
 - **Cloudflare's analytics beacon loads at `fetchpriority="low"`**, so it doesn't compete
   with the app's own JS. Its "legacy JavaScript" and short cache Lighthouse notes are
   Cloudflare's, not ours.

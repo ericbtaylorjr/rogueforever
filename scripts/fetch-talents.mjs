@@ -13,6 +13,7 @@
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const root = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 const UA = { 'User-Agent': 'Mozilla/5.0 (rogue-handbook talent fetch)' };
@@ -58,10 +59,18 @@ const plain = (html) =>
     .replace(/\s+/g, ' ')
     .trim();
 
-async function download(url, file) {
+async function download(url, file, { recompress = false } = {}) {
   if (existsSync(file)) return;
-  writeFileSync(file, Buffer.from(await (await get(url)).arrayBuffer()));
+  const bytes = Buffer.from(await (await get(url)).arrayBuffer());
+  writeFileSync(file, recompress ? await recompressJpeg(bytes) : bytes);
 }
+
+/**
+ * Wowhead's tree backgrounds come as heavy baseline JPEGs (~24KB each). Re-encoded with
+ * mozjpeg they're under half that and look the same (PSNR ~40dB), and progressive, so
+ * they draw in coarse-to-fine instead of top to bottom. The icons are already small.
+ */
+const recompressJpeg = (bytes) => sharp(bytes).jpeg({ quality: 85, mozjpeg: true, progressive: true }).toBuffer();
 
 async function refresh() {
   const data = await loadCalcData();
@@ -94,7 +103,9 @@ async function refresh() {
   const icons = new Set(trees.flatMap((t) => [t.icon, ...t.talents.map((x) => x.icon)]));
   for (const icon of icons) await download(`${IMG}/icons/large/${icon}.jpg`, root(`public/talents/${icon}.jpg`));
   for (const t of trees)
-    await download(`${IMG}/talents/backgrounds/classicplus/${t.id}.jpg`, root(`public/talents/bg-${t.id}.jpg`));
+    await download(`${IMG}/talents/backgrounds/classicplus/${t.id}.jpg`, root(`public/talents/bg-${t.id}.jpg`), {
+      recompress: true,
+    });
 
   writeFileSync(outPath, `${JSON.stringify({ source: DATA_URL, trees }, null, 2)}\n`);
   console.log(`Wrote ${trees.map((t) => `${t.name} ${t.talents.length}`).join(', ')} talents; ${icons.size} icons.`);

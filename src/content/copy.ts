@@ -490,13 +490,13 @@ export const consent = {
 
 /**
  * Privacy policy, opened from the footer and the cookie banner (and by #privacy).
- * Keep it true to the code: src/lib/analytics.ts, the localStorage keys and vite.config.ts.
+ * Keep it true to the code: src/lib/analytics.ts, the localStorage keys, src/sw.js and vite.config.ts.
  * Bump `updated` whenever the substance changes.
  */
 export const privacy = {
   title: 'Privacy policy',
   close: 'Close privacy policy',
-  updated: 'Last updated October 21, 2026',
+  updated: 'Last updated October 23, 2026',
   intro:
     "Short version: the Handbook doesn't have accounts, forms or ads. It remembers a few preferences in your browser, counts visits without cookies, and only uses Google Analytics if you allow it on the cookie banner.",
   sections: [
@@ -510,6 +510,7 @@ export const privacy = {
       heading: 'What stays in your browser',
       body: [
         "Three small settings are saved in your browser's local storage: your spec, build and sweaty preference (rc:prefs), light or dark theme (rc:theme), and your cookie choice with the date you made it (rc:consent). They never leave your device, and clearing your site data removes them.",
+        "So repeat visits load faster, your browser also keeps a copy of the Handbook's own files (its page, scripts, styles, fonts and images) in its cache storage. They're the same files every visitor downloads, they hold nothing about you, and clearing your site data removes them too.",
         "Search runs in your browser. Unless you've allowed analytics (below), nothing you type into it leaves your device.",
       ],
     },

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { buildsFor } from '../../content/builds';
 import { points as treePoints } from '../../content/builds/shared';
 import { specById } from '../../content/content';
 import { talents as copy } from '../../content/copy';
 import type { Build } from '../../content/types';
 import { decodeTalentLink, decodeTalentOrder } from '../../lib/talentCalc';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useHandbook, useShownBuild } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { BUILD_CARD_ID, BuildList } from '../ui/BuildList';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -19,7 +19,7 @@ const TOTAL_POINTS = 51;
  * from the calculator link; leveling builds also list its talent order. Without a link,
  * the build's own point split shows as bars. A build with no talents or note yet says so instead.
  */
-function BuildCard({ build }: { build: Build }) {
+const BuildCard = memo(function BuildCard({ build }: { build: Build }) {
   const { tone } = useTheme();
   const total = build.phase === 'endgame' ? TOTAL_POINTS : undefined;
   const points = total ?? build.talents.reduce((n, t) => n + t.pts, 0);
@@ -116,10 +116,12 @@ function BuildCard({ build }: { build: Build }) {
       )}
     </div>
   );
-}
+});
 
 export function Talents() {
-  const { spec, build } = useHandbook();
+  const { spec } = useHandbook();
+  // The lists show a pick straight away; the card below follows a frame later (useShownBuild).
+  const build = useShownBuild();
   const list = buildsFor(spec);
   const endgame = list.filter((b) => b.phase === 'endgame');
   const leveling = list.filter((b) => b.phase === 'leveling');

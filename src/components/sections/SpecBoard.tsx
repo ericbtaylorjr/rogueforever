@@ -5,7 +5,7 @@ import { foreverOutlook, levelingIndex, specById, specIndex } from '../../conten
 import { specBoard } from '../../content/copy';
 import type { Build, BuildPhase, LevelingSetId, SimSetId, SpecId } from '../../content/types';
 import { track } from '../../lib/analytics';
-import { useHandbook, type SortKey } from '../../state/HandbookProvider';
+import { useHandbook, useShownBuild, type SortKey } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { useSpecColor } from '../../state/useSpecColor';
 import { wowsimsLink } from '../../content/links';
@@ -432,7 +432,7 @@ function LevelingMeta({ sims }: { sims: boolean }) {
 }
 
 export function SpecBoard() {
-  const { build } = useHandbook();
+  const build = useShownBuild();
   // Opens on the active build's kind (a deep link to a leveling build shows the leveling
   // meta) and follows it when the build changes; the tabs still switch it by hand.
   const [phase, setPhaseState] = useState<BuildPhase>(build.phase);
