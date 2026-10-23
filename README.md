@@ -95,7 +95,7 @@ authored them in markup.
   (`scripts/fetch-icons.mjs`, run with `npm run icons`). Re-run it after adding
   anything; a name it can't resolve just renders without an icon. Icons are
   Blizzard game art, used as fan-site reference material.
-- **Talent trees** in a level 60 build's Talents card are drawn from its calculator
+- **Talent trees** in a build's Talents card are drawn from its calculator
   `link` alone: paste a Wowhead Forever talent calculator link
   (`https://www.wowhead.com/forever/talent-calc/rogue/v2…`) into the build and the tree
   follows. `src/lib/talentCalc.ts` decodes it (one digit per talent, row by row, trees
@@ -104,8 +104,11 @@ authored them in markup.
   talent icons and tree art in `public/talents/`. That command also checks every build's
   link against the trees; `npm run talents -- --check` does only the check. Re-run it
   when Forever's talents change. A link that doesn't fit the trees falls back to the
-  point split bars. Leveling builds keep the bars for now (their links decode the same
-  way; the `phase === 'endgame'` check in `Talents.tsx` is the only gate).
+  point split bars. Leveling builds also list the link's **talent order** (the part after
+  the trees' `/`, Wowhead's "Talent Order"): a digit picks the tree, each letter is one
+  talent in it (`abcdefghjkmnpqrstvwxyz`, row then column), lowercase spends one point
+  and uppercase fills it to max; `decodeTalentOrder` reads it, from level 10, one point a
+  level, and the check makes sure it ends on the link's ranks.
 - **Rogue class icon** is a hand-drawn stand-in, isolated in
   `components/ui/RogueMark.tsx`. Swapping it touches one file.
 - **External links**: only Comfy's UI is still a placeholder (`weakauras: '#'` in
@@ -137,7 +140,9 @@ Talent trees (`ui/TalentTree.tsx`): one tab stop per tree, arrow keys move betwe
 (up/down to the nearest talent in the next row, Home/End); each talent is a link to its
 Wowhead page at the build's rank (new tab), reads as "Malice, 5 of 5", and its tooltip starts with the rank text from `talent-trees.json`, so screen readers hear
 the description on focus before Wowhead's live tooltip loads. The card title is an `h3` and
-each tree an `h4` with its points. The window stays dark in both themes, so its focus ring is
+each tree an `h4` with its points. A leveling build's talent order is an `ol` with one tab
+stop (arrow keys, Home/End); each line is the same kind of link and tooltip, read as
+"Levels 14 to 16: Lightning Reflexes, 3 of 5, Combat". The window stays dark in both themes, so its focus ring is
 white rather than the accent (the light theme's dark red would be ~1.8:1 there). In Windows
 High Contrast, maxed talents get a solid frame, partly ranked a dashed one, untaken grey.
 Maxed vs partly ranked is otherwise shown by frame colour (gold/green) as in-game; the rank

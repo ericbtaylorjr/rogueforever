@@ -1,7 +1,7 @@
 import { useRef, useState, type KeyboardEvent } from 'react';
 import { talents as copy } from '../../content/copy';
 import type { TalentTree as TreePoints } from '../../content/types';
-import { talentTrees, type Talent, type TalentTreeData } from '../../lib/talentCalc';
+import { talentTrees, type Talent, type TalentStep, type TalentTreeData } from '../../lib/talentCalc';
 import { useTheme } from '../../state/ThemeProvider';
 import { useTooltip } from './Tooltip';
 
@@ -160,6 +160,106 @@ function Tree({ tree, ranks, spent, hidden }: { tree: TalentTreeData; ranks: num
           })}
         </div>
       </div>
+    </div>
+  );
+}
+
+/**
+ * The level-by-level order to learn a build's talents in (`decodeTalentOrder`), as
+ * Wowhead's calculator lists it below the trees, with consecutive points in one talent
+ * on one line. Each line is the talent's Wowhead link and tooltip, at the rank it ends on.
+ */
+export function TalentOrder({ steps, colors }: { steps: TalentStep[]; colors: TreePoints[] }) {
+  const { bind } = useTooltip();
+  const { tone } = useTheme();
+  const intro = copy.orderIntro;
+  /** One tab stop for the list; arrow keys move along it (roving tabindex). */
+  const [cursor, setCursor] = useState(0);
+  const refs = useRef<(HTMLAnchorElement | null)[]>([]);
+
+  const move = (to: number) => {
+    setCursor(to);
+    refs.current[to]?.focus();
+  };
+  const onKey = (e: KeyboardEvent, i: number) => {
+    const last = steps.length - 1;
+    const to = {
+      ArrowDown: Math.min(i + 1, last),
+      ArrowRight: Math.min(i + 1, last),
+      ArrowUp: Math.max(i - 1, 0),
+      ArrowLeft: Math.max(i - 1, 0),
+      Home: 0,
+      End: last,
+    }[e.key];
+    if (to === undefined) return;
+    e.preventDefault();
+    move(to);
+  };
+
+  return (
+    <div className="mt-[18px]">
+      <h4 className="t-card-sub text-ink">{copy.orderTitle}</h4>
+      <p className="mt-[4px] max-w-[70ch] text-[12px] leading-[1.55] text-faint">
+        {intro.text} {intro.before}
+        <a
+          href={intro.href}
+          target="_blank"
+          rel="noreferrer"
+          className="text-accent underline underline-offset-2"
+          {...bind({ name: intro.link, wowhead: { kind: 'spell', id: intro.spellId }, fallback: intro.fallback })}
+        >
+          {intro.link}
+        </a>
+        {intro.after}
+      </p>
+      <ol aria-label={copy.orderLabel} className="mt-[10px] columns-[15.5rem] gap-x-[22px]">
+        {steps.map((s, i) => {
+          const { talent: t, rank } = s;
+          const tree = talentTrees[s.tree].name;
+          const color = colors.find((c) => c.name === tree)?.color ?? '#FFD100';
+          return (
+            <li key={`${s.from}-${t.id}`} className="break-inside-avoid">
+              <a
+                ref={(el) => {
+                  refs.current[i] = el;
+                }}
+                href={`https://www.wowhead.com/forever/spell=${t.spells[rank - 1]}?def=${t.def}&rank=${rank}`}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={copy.stepLabel(s.from, s.to, t.name, rank, t.max, tree)}
+                className="flex items-center gap-[8px] rounded-[6px] px-[5px] py-[3px] text-[12px] leading-[1.35] transition-colors hover:bg-[rgba(var(--fg-rgb),.05)]"
+                {...bind({
+                  name: t.name,
+                  wowhead: { kind: 'spell', id: t.spells[rank - 1], talent: { def: t.def, rank, points: rank, max: t.max } },
+                  fallback: `${copy.rankLine(rank, t.max)}. ${t.text[rank - 1]}`,
+                })}
+                tabIndex={i === cursor ? 0 : -1}
+                onKeyDown={(e) => onKey(e, i)}
+              >
+                <span className="t-num w-[38px] shrink-0 text-faint" aria-hidden="true">
+                  {s.from === s.to ? s.from : `${s.from}–${s.to}`}
+                </span>
+                {/* Ringed in its tree's colour. */}
+                <img
+                  src={ICON(t.icon)}
+                  alt=""
+                  width={18}
+                  height={18}
+                  loading="lazy"
+                  className="size-[18px] shrink-0 rounded-[3px] border"
+                  style={{ borderColor: tone(color) }}
+                />
+                <span className="min-w-0 flex-1 truncate text-prose" aria-hidden="true">
+                  {t.name}
+                </span>
+                <span className="t-num shrink-0 text-mute" aria-hidden="true">
+                  {rank}/{t.max}
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }

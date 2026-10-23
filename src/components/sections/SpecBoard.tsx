@@ -406,7 +406,7 @@ function LevelingMeta({ sims }: { sims: boolean }) {
       </div>
 
       <div className="mt-[14px]">
-        <Tip>{specBoard.leveling.tip}</Tip>
+        <Tip label={false}>{specBoard.leveling.tip}</Tip>
       </div>
 
       {sims && (
@@ -432,7 +432,11 @@ function LevelingMeta({ sims }: { sims: boolean }) {
 }
 
 export function SpecBoard() {
-  const [phase, setPhaseState] = useState<BuildPhase>('endgame');
+  const { build } = useHandbook();
+  // Opens on the active build's kind (a deep link to a leveling build shows the leveling
+  // meta) and follows it when the build changes; the tabs still switch it by hand.
+  const [phase, setPhaseState] = useState<BuildPhase>(build.phase);
+  useEffect(() => setPhaseState(build.phase), [build.phase]);
   const setPhase = (id: BuildPhase) => {
     setPhaseState(id);
     track('meta_tab', { tab: id });
@@ -442,7 +446,7 @@ export function SpecBoard() {
   // Filling in specIndex/levelingIndex brings them back.
   const sims = [...Object.values(specIndex), ...Object.values(levelingIndex)].some((v) => !v.pending);
 
-  // Leveling comes first, in the order you play; End Game stays the default view.
+  // Leveling comes first, in the order you play.
   const tabs = (['leveling', 'endgame'] as const).map((id) => ({ id, label: specBoard.phaseTabs[id] }));
 
   return (

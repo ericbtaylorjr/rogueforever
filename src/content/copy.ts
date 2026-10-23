@@ -103,8 +103,8 @@ export const specBoard = {
     meta: 'Leveling',
     questing: { title: 'Questing', label: 'Leveling builds for questing, ranked' },
     dungeons: { title: 'Dungeons', label: 'Leveling builds for dungeons, ranked' },
-    /** Follows the "Tip:" label. */
-    tip: 'The leveling builds are currently under development and will be posted prior to launch.',
+    /** Shown as a tip without the "Tip:" label. */
+    tip: "This meta projection is extremely early. We need more launch data to really understand which builds pull ahead and which fall behind, so expect it to be updated throughout the launch period.",
   },
 } as const;
 
@@ -156,6 +156,21 @@ export const talents = {
   pointsIn: (points: number) => (points === 1 ? 'point in' : 'points in'),
   talentLabel: (name: string, points: number, max: number) => `${name}, ${points} of ${max}`,
   rankLine: (points: number, max: number) => `Rank ${points}/${max}`,
+  /** Leveling builds: the calculator's learning order, below the trees. */
+  orderTitle: 'Talent order',
+  /** `link` is the Talented perk, linked to Wowhead with its tooltip. */
+  orderIntro: {
+    text: 'One point per level from 10. Each line shows the level(s) and the rank the talent reaches.',
+    before: 'If you have unlocked the ',
+    link: 'Talented',
+    after: ' Legacy perk, you start gaining talent points at level 5 instead of 10 (same max of 51).',
+    href: 'https://www.wowhead.com/forever/spell=1225474/talented',
+    spellId: 1225474,
+    fallback: 'Legacy perk: start gaining talent points at level 5 instead of 10.',
+  },
+  orderLabel: 'Talent order by level. Arrow keys move between talents.',
+  stepLabel: (from: number, to: number, name: string, rank: number, max: number, tree: string) =>
+    `${from === to ? `Level ${from}` : `Levels ${from} to ${to}`}: ${name}, ${rank} of ${max}, ${tree}`,
 } as const;
 
 export const racesCopy = {

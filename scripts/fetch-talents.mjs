@@ -101,6 +101,9 @@ async function refresh() {
   return trees;
 }
 
+/** Talent letters in a learning order (Crockford base32 without the digits). */
+const ORDER_LETTERS = 'abcdefghjkmnpqrstvwxyz';
+
 /** Same rules as src/lib/talentCalc.ts. */
 function check(trees) {
   const src = readdirSync(root('src/content/builds'))
@@ -125,6 +128,28 @@ function check(trees) {
         });
         totals.push(sum);
       });
+    }
+    const order = link.match(/\/talent-calc\/rogue\/v2[0-9-]*[^/]*\/([0-9a-zA-Z]+)/)?.[1];
+    if (m && order) {
+      // Same rules as decodeTalentOrder: the learning order has to finish on the link's ranks.
+      const got = trees.map((t) => t.talents.map(() => 0));
+      let tree = 0;
+      for (const ch of order) {
+        if (/[0-9]/.test(ch)) {
+          tree = +ch;
+          continue;
+        }
+        const j = ORDER_LETTERS.indexOf(ch.toLowerCase());
+        const t = trees[tree]?.talents[j];
+        if (!t) {
+          problems.push(`order: no talent for "${ch}"`);
+          break;
+        }
+        got[tree][j] = ch === ch.toUpperCase() ? t.max : got[tree][j] + 1;
+      }
+      const want = m[1].split('-').map((d) => [...d].map(Number));
+      const off = got.some((r, i) => r.some((n, j) => n !== (want[i]?.[j] ?? 0)));
+      if (off) problems.push("talent order doesn't add up to the link's ranks");
     }
     if (problems.length) bad++;
     console.log(`${problems.length ? '✗' : '✓'} ${totals.join('/').padEnd(9)} ${link.split('/talent-calc/')[1]}${problems.length ? `\n    ${problems.join('; ')}` : ''}`);

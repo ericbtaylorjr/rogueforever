@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 import { buildsFor } from '../../content/builds';
+import { points as treePoints } from '../../content/builds/shared';
 import { specById } from '../../content/content';
 import { talents as copy } from '../../content/copy';
 import type { Build } from '../../content/types';
-import { decodeTalentLink } from '../../lib/talentCalc';
+import { decodeTalentLink, decodeTalentOrder } from '../../lib/talentCalc';
 import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { BUILD_CARD_ID, BuildList } from '../ui/BuildList';
 import { SectionHeading } from '../ui/SectionHeading';
-import { TalentPreview } from '../ui/TalentTree';
+import { TalentOrder, TalentPreview } from '../ui/TalentTree';
 import { Tip } from '../ui/Tip';
 
 const TOTAL_POINTS = 51;
 
 /**
- * Point split, key talents and a calculator link for one build. Level 60 builds draw
- * their talent trees from the calculator link; leveling builds (for now) show bars,
- * out of the build's own total. A build with no talents or note yet says so instead.
+ * Point split, key talents and a calculator link for one build. The talent trees come
+ * from the calculator link; leveling builds also list its talent order. Without a link,
+ * the build's own point split shows as bars. A build with no talents or note yet says so instead.
  */
 function BuildCard({ build }: { build: Build }) {
   const { tone } = useTheme();
@@ -32,8 +33,10 @@ function BuildCard({ build }: { build: Build }) {
 
   const trees = build.talents;
   const pending = !trees.length && !build.talentNote;
-  // Level 60 only for now; leveling links decode the same way when they're wanted.
-  const ranks = build.phase === 'endgame' ? decodeTalentLink(build.link) : null;
+  const ranks = decodeTalentLink(build.link);
+  const order = build.phase === 'leveling' ? decodeTalentOrder(build.link) : null;
+  // Leveling builds don't list a point split; the trees still want their colours.
+  const colors = trees.length ? trees : treePoints(0, 0, 0);
 
   return (
     <div className="panel flex flex-col p-[18px]">
@@ -54,9 +57,11 @@ function BuildCard({ build }: { build: Build }) {
       {ranks && (
         <div className="mt-[16px]">
           {/* Keyed so a new build starts on its own main tree. */}
-          <TalentPreview key={`${build.spec}-${build.id}`} ranks={ranks} colors={trees} />
+          <TalentPreview key={`${build.spec}-${build.id}`} ranks={ranks} colors={colors} />
         </div>
       )}
+
+      {order && <TalentOrder key={`${build.spec}-${build.id}`} steps={order} colors={colors} />}
 
       {!ranks && trees.length > 0 && (
         <div className="mt-[16px] grid grid-cols-3 gap-[12px]">
