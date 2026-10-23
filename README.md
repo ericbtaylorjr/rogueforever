@@ -158,9 +158,10 @@ arrow-key navigation between FAQ/raid accordion headers (not required by WCAG).
 ## Performance
 
 Last measured 22 October 2026 with Lighthouse 12 against the production build: desktop
-Performance 100 (LCP 0.7s, CLS 0), throttled mobile 94–95 (LCP 2.8–2.9s, TBT ≤100ms; the
-LCP element is the intro paragraph waiting on its font), about 435 KiB transferred. The
-October baseline was 96–97 / 2.4–2.6s on a different machine. Keep it that way:
+Performance 100 (LCP 0.7s, CLS 0), throttled mobile 97 (LCP 2.4s, TBT ≤60ms), about
+355 KiB transferred. Under the same throttling in Chrome itself (4× CPU, 1.6 Mbps), mobile
+LCP is ~1.8s: the intro paragraph, painted once the JS bundle (135 KB gzipped, most of it
+React DOM) has downloaded and rendered. Keep it that way:
 
 - **Size images for their display size.** Images are WebP at about 3× their CSS size
   (crisp on high-density phones). Don't ship source art; `sharp` is a dev dependency
@@ -172,11 +173,26 @@ October baseline was 96–97 / 2.4–2.6s on a different machine. Keep it that w
   one small stylesheet.
 - **First-screen fonts are preloaded** (Archivo for the hero, Source Sans 3 for the
   intro) by the `preload-fonts` plugin in `vite.config.ts`. Update `PRELOAD_FONTS` if the
-  hero's fonts change.
+  hero's fonts change. On a slow connection they share bandwidth with the JS bundle, so
+  keep them small.
+- **Archivo and Literata are instanced** to the axis ranges the site uses (Archivo 90 →
+  22 KB, Literata 86 → 56 KB; see `src/assets/fonts/LICENSE.md`). A new weight or width
+  outside those ranges needs the fonts re-instanced from the Google Fonts files, and the
+  `@font-face` ranges in `styles/index.css` updated.
+- **Cloudflare's analytics beacon loads at `fetchpriority="low"`**, so it doesn't compete
+  with the app's own JS. Its "legacy JavaScript" and short cache Lighthouse notes are
+  Cloudflare's, not ours.
 - The remaining Lighthouse notes (unused JS in the single bundle; ~1,450 DOM nodes, ~2,150
   on a leveling build with its three milestone gear tables) are
-  expected for a one-page app this size. Pre-rendering the HTML at build is the next lever
-  if mobile LCP ever needs to drop further.
+  expected for a one-page app this size.
+- **Not done, on purpose:** `content-visibility: auto` on later sections saves ~100ms of
+  mobile LCP but makes section positions estimates, which breaks the deep-link and
+  build-switch scrolling. Pre-rendering the HTML at build would paint the hero without
+  waiting for JS, but the first render depends on the theme, viewport width, URL and
+  remembered build, so a snapshot would flash or shift for many visitors unless every one
+  of those moves to CSS or post-hydration state. Swapping React for Preact (`preact/compat`)
+  would cut ~50 KB gzipped from the bundle; it's the cheapest remaining win, but needs a
+  full regression pass.
 
 ## Theming
 

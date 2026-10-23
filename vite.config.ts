@@ -106,6 +106,8 @@ const cfBeacon = (): Plugin => ({
             attrs: {
               // Cloudflare's current snippet loads it as a module (deferred by default).
               type: 'module',
+              // Analytics shouldn't share the first-load bandwidth the app's own JS needs.
+              fetchpriority: 'low',
               src: 'https://static.cloudflareinsights.com/beacon.min.js',
               'data-cf-beacon': JSON.stringify({ token: config.cfBeaconToken, spa: false }),
             },

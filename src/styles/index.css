@@ -8,15 +8,16 @@
 @font-face {
   font-family: "Archivo";
   font-style: normal;
-  font-weight: 400 900;
-  font-stretch: 62% 125%;
+  /* Instanced to what the site uses (src/assets/fonts/LICENSE.md). */
+  font-weight: 900;
+  font-stretch: 68% 80%;
   font-display: swap;
   src: url("../assets/fonts/archivo-var-latin.woff2") format("woff2");
 }
 @font-face {
   font-family: "Literata";
   font-style: normal;
-  font-weight: 400 800;
+  font-weight: 400 700;
   font-display: swap;
   src: url("../assets/fonts/literata-var-latin.woff2") format("woff2");
 }
