@@ -42,8 +42,6 @@ interface TooltipApi {
     onBlur: () => void;
     onClick: (e: React.MouseEvent) => void;
     tabIndex: number;
-    /** Only present while this element's tooltip is showing, so it never describes the wrong thing. */
-    'aria-describedby': string | undefined;
   };
 }
 
@@ -93,10 +91,24 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
     setPos({ x, y });
   }, [tip, whTip]);
 
+  /**
+   * The element whose tooltip is showing. It gets `aria-describedby` set directly, only
+   * while it's showing (so it never describes the wrong thing), instead of through `bind`'s
+   * props: that keeps `bind` the same on every show, so a hover re-renders the tooltip
+   * alone, not every component on the page that has one.
+   */
+  const anchor = useRef<Element | null>(null);
   const show = useCallback((el: Element, t: TipContent) => {
+    if (anchor.current !== el) anchor.current?.removeAttribute('aria-describedby');
+    anchor.current = el;
+    el.setAttribute('aria-describedby', TIP_ID);
     setTip({ ...t, rect: el.getBoundingClientRect() });
   }, []);
-  const hide = useCallback(() => setTip(null), []);
+  const hide = useCallback(() => {
+    anchor.current?.removeAttribute('aria-describedby');
+    anchor.current = null;
+    setTip(null);
+  }, []);
 
   // Dismissible without moving the pointer or focus (WCAG 1.4.13).
   useEffect(() => {
@@ -130,13 +142,13 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
         onBlur: hide,
         onClick: (e) => {
           // Touch + keyboard path: toggle rather than hover.
-          setTip((cur) => (cur && cur.name === t.name ? null : { ...t, rect: e.currentTarget.getBoundingClientRect() }));
+          if (anchor.current === e.currentTarget) hide();
+          else show(e.currentTarget, t);
         },
         tabIndex: 0,
-        'aria-describedby': tip?.name === t.name ? TIP_ID : undefined,
       }),
     }),
-    [hide, show, tip?.name],
+    [hide, show],
   );
 
   return (
