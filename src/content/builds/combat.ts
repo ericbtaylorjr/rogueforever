@@ -78,11 +78,11 @@ export const combat: Build[] = [
     name: 'Questing',
     grade: 'S',
     rank: 1,
-    talents: points(18, 33, 0),
+    talents: points(17, 34, 0),
     talentNote:
       'Traditional Combat, centered on cleaving with Blade Flurry. Pull two or three mobs, turn on Blade Flurry and take them down together with the familiar Sinister Strike, Slice and Dice and Eviscerate loop. No positioning to worry about.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202532310101-02403321001515231_t0/1B0B1cccEffhfGcmnnnnpQRsstsn0cccEFgDccmj',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v232232310001-32003321201515231_t0/1B0BA1AffEhfGjmnnnnpqqqqRs0F1sst0ddgdEcmc1qnj',
     stats,
     gear: levelingGear,
     rotation: noRotation,
