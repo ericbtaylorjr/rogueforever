@@ -1,0 +1,18 @@
+{
+  "_note": "Per build APL settings, matching the WoWSims preset build. vars override the APL's const value variables (the sim's Simple rotation sets Use Backstab and Use Expose Armor this way). mh is the main hand weapon type.",
+  "combat/sinister-strike": {
+    "wowsimsPreset": "Combat SS",
+    "vars": { "Use Backstab": false, "Use Expose Armor": false },
+    "mh": "sword"
+  },
+  "combat/backstab": {
+    "wowsimsPreset": "Combat BS",
+    "vars": { "Use Backstab": true, "Use Expose Armor": false },
+    "mh": "dagger"
+  },
+  "combat/mutilate": {
+    "wowsimsPreset": "Combat Muti",
+    "vars": { "Use Backstab": false, "Use Expose Armor": false },
+    "mh": "dagger"
+  }
+}

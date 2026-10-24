@@ -1,5 +1,5 @@
 import { levelingShared, levelingSlowWeapons } from '../gear';
-import type { Build, StatPriority } from '../types';
+import type { Build, Rotation, StatPriority } from '../types';
 import { byLevel, noEndgameGear, noRotation, points } from './shared';
 
 /** WoWSims EP against current BiS gear. EP is relative to `relativeTo` (= 1). */
@@ -20,6 +20,84 @@ const stats: StatPriority = {
 };
 
 const levelingGear = byLevel(levelingShared, levelingSlowWeapons);
+
+/**
+ * The WoWSims Rogue APL as the "Combat SS" preset runs it (Use Backstab off, sword main
+ * hand). Regenerate the source rows with `npm run apl -- combat/sinister-strike`.
+ */
+const sinisterStrikeRotation: Rotation = {
+  apl: [
+    {
+      name: 'Garrote',
+      cond: 'While stealthed (the pull and right after Vanish) with under 5 combo points and Garrote not already ticking. You need to be behind the target.',
+    },
+    {
+      name: 'Vanish',
+      cond: 'Garrote has worn off, you have the energy for a new one, you are under 5 combo points and Slice and Dice has more than 2s left. Garrote straight after.',
+      sweaty: true,
+    },
+    {
+      name: 'Trinkets',
+      cond: 'On cooldown. Trolls use Berserking on cooldown too.',
+    },
+    {
+      name: 'Adrenaline Rush',
+      cond: "On cooldown once Slice and Dice is up. Night Elves hold it until Elune's Light is also ready.",
+    },
+    {
+      name: 'Racial cooldown',
+      cond: "Orc: Blood Fury right after Adrenaline Rush, or on cooldown while Adrenaline Rush is 1.9 min or more away. Night Elf: Elune's Light right before Adrenaline Rush, or on cooldown while it is 1.9 min or more away. Gnome: pool to 90 energy, then Eureka! during Adrenaline Rush or whenever Adrenaline Rush is further away than Eureka!'s cooldown.",
+    },
+    {
+      name: 'Potion',
+      cond: 'While Blade Flurry is up, which means right at the pull.',
+    },
+    {
+      name: 'Thistle Tea',
+      cond: 'At 15 energy or less with under 3 combo points. Gnomes during Eureka!: at 25 energy or less, at any combo points.',
+    },
+    {
+      name: 'Blade Flurry',
+      cond: 'On cooldown, unless Slice and Dice has 2s or less left.',
+    },
+    {
+      name: 'Slice and Dice',
+      cond: 'Only once it has fallen off, at any number of combo points. Skip it in the last 6s of the fight.',
+    },
+    {
+      name: 'Cold Blood',
+      cond: "At 5 combo points with Slice and Dice above 2s, right before Eviscerate. Night Elves skip it during Elune's Light.",
+    },
+    {
+      name: 'Eviscerate',
+      cond: 'At 5 combo points. Also at 4 when Slice and Dice has 2 to 6s left, and at 3 or more in the last 6s of the fight.',
+    },
+    {
+      name: 'Sinister Strike',
+      cond: 'Under 5 combo points. In the last 2s of Slice and Dice, only at 0 combo points or 75+ energy, so you have the energy to reapply it. Gnomes hold it while pooling for Eureka!.',
+    },
+  ],
+  opener: [
+    'Sprint (-3s)',
+    'Blade Flurry (-2s)',
+    'Stealth (-1s)',
+    'Garrote',
+    'Potion',
+    'Slice and Dice',
+    'Adrenaline Rush',
+    'Sinister Strike to 5',
+    'Cold Blood',
+    'Eviscerate',
+  ],
+  nevers: [
+    'Refreshing Slice and Dice early. Let it fall off, then reapply it straight away.',
+    'Building in the last 2s of Slice and Dice under 75 energy. Pool for the refresh instead.',
+    'Using Adrenaline Rush without Slice and Dice up.',
+    'Eviscerating under 5 combo points outside the Slice and Dice and end of fight windows.',
+    'Using Rupture. This build never casts it.',
+    'Drinking Thistle Tea above 15 energy or at 3+ combo points.',
+  ],
+};
 
 export const combat: Build[] = [
   {
@@ -52,7 +130,7 @@ export const combat: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101012-32030320201515231_t5/0CDEFgjm1ABDFGJmNQpRSt0nn',
     stats,
     gear: noEndgameGear,
-    rotation: noRotation,
+    rotation: sinisterStrikeRotation,
   },
   {
     id: 'backstab',

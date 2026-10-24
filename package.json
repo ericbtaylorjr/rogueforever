@@ -12,7 +12,8 @@
     "editmode": "node scripts/update-profile.mjs editmode",
     "comfy-image": "node scripts/update-comfy-image.mjs",
     "icons": "node scripts/fetch-icons.mjs",
-    "talents": "node scripts/fetch-talents.mjs"
+    "talents": "node scripts/fetch-talents.mjs",
+    "apl": "node scripts/apl/resolve.mjs"
   },
   "dependencies": {
     "react": "^19.3.0",
