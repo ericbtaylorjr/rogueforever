@@ -8,7 +8,7 @@ export const points = (assassination: number, combat: number, subtlety: number):
 ];
 
 /** A rotation that hasn't been written yet. */
-export const noRotation: Rotation = { apl: [], opener: [], nevers: [] };
+export const noRotation: Rotation = { opener: [], steps: [], tips: [] };
 
 /**
  * Level 60 gear that hasn't been listed yet. Blizzard has confirmed a full

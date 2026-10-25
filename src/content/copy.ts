@@ -215,12 +215,15 @@ export const poisonsCopy = {
 
 export const rotation = {
   intro:
-    "A priority list, top to bottom. If a line's conditions are met, press it and start again from the top.",
+    'Start with the opener, then repeat the rotation for the rest of the fight. The pro tips cover your cooldowns, items and the finer points. This entire rotation is derived directly from its WoWSims APL rotation used in the sims.',
   /** `{spec}` is replaced with the active spec and build, e.g. "Combat Backstab". */
   pending:
-    "I haven't written the {spec} priority list, opener or common mistakes yet. They go up once Forever has real logs and WoWSims APLs to check them against.",
+    "I haven't written the {spec} rotation, opener or pro tips yet. They go up once Forever has real logs and WoWSims APLs to check them against.",
   openerTitle: 'Opener',
-  neverTitle: 'Never do this',
+  stepsTitle: 'Rotation',
+  /** Closes the rotation list. */
+  repeat: 'Then back to step 1.',
+  tipsTitle: 'Pro tips',
 } as const;
 
 export const stats = {

@@ -17,20 +17,26 @@ export interface TalentTree {
   color: string;
 }
 
-export interface AplRow {
-  name: string;
-  cond: string;
+/** One button in the rotation loop, with an optional short "when" or "how long". */
+export interface RotationStep {
+  press: string;
+  note?: string;
+}
+
+/** Something to do well: cooldowns, items and the finer points the loop leaves out. */
+export interface ProTip {
+  text: string;
   sweaty?: boolean;
 }
 
 /** S best to D worst. `X` is a placeholder for a build that hasn't been graded yet. */
 export type MetaGrade = 'S' | 'A' | 'B' | 'C' | 'D' | 'X';
 
-/** Priority list, opener and mistakes. Empty arrays render as a "coming soon" note. */
+/** Opener, the repeating rotation and pro tips. Empty arrays render as a "coming soon" note. */
 export interface Rotation {
-  apl: AplRow[];
   opener: string[];
-  nevers: string[];
+  steps: RotationStep[];
+  tips: ProTip[];
 }
 
 /** Level 60 end game, or the road there. Leveling builds swap Gear to milestone items. */

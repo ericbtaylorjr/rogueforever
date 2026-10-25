@@ -40,6 +40,28 @@ const wanted = [
   // Named in prose sections (copy.ts), not in content.json.
   ...['Expose Armor', 'Sunder Armor'].map((name) => ({ name, type: SPELL })),
 ];
+/**
+ * Named in build rotations (src/content/builds). Pinned by id, since a name search can land
+ * on another rank: these are the ranks WoWSims casts (scripts/apl/spells.json).
+ */
+const pinned = [
+  ['Sprint', 11305],
+  ['Stealth', 1787],
+  ['Garrote', 11290],
+  ['Vanish', 1857],
+  ['Evasion', 5277],
+  ['Slice and Dice', 6774],
+  ['Sinister Strike', 11294],
+  ['Eviscerate', 11300],
+  ['Cold Blood', 14177],
+  ['Blade Flurry', 13877],
+  ['Adrenaline Rush', 13750],
+  ['Blood Fury', 20572],
+  ["Elune's Light", 1259799],
+  ['Eureka!', 1259812],
+  ['Berserking', 20554],
+].map(([name, id]) => ({ name, id, kind: 'spell' }));
+pinned.push({ name: 'Major Frenzy Potion', id: 250943, kind: 'item' });
 // Generated leveling lists (scripts/gear-research) live in JSON.
 const levelingJson = JSON.parse(readFileSync(root('src/content/leveling-gear.json'), 'utf8'));
 const levelingItems = ['shared', 'slow', 'daggers'].flatMap((k) => levelingJson[k] ?? []);
@@ -57,11 +79,11 @@ async function search(name, type) {
   return hit ? { id: hit.id, icon: hit.icon, kind: hit.type === SPELL ? 'spell' : 'item' } : null;
 }
 
-async function tooltip(id) {
-  const res = await fetch(`https://nether.wowhead.com/forever/tooltip/item/${id}`, { headers: UA });
+async function tooltip(id, kind = 'item') {
+  const res = await fetch(`https://nether.wowhead.com/forever/tooltip/${kind}/${id}`, { headers: UA });
   if (!res.ok) return null;
   const d = await res.json();
-  return d.icon && !d.error ? { id, icon: d.icon, kind: 'item' } : null;
+  return d.icon && !d.error ? { id, icon: d.icon, kind } : null;
 }
 
 async function download(icon) {
@@ -80,6 +102,11 @@ for (const w of wanted) {
   const hit = prev[w.name] ?? (await search(w.name, w.type));
   if (hit) manifest[w.name] = hit;
   else missed.push(w.name);
+}
+for (const p of pinned) {
+  const hit = prev[p.name]?.id === p.id ? prev[p.name] : await tooltip(p.id, p.kind);
+  if (hit) manifest[p.name] = hit;
+  else missed.push(p.name);
 }
 for (const id of gearIds) {
   const key = `item:${id}`;

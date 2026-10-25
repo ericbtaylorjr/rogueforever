@@ -324,6 +324,86 @@
     "icon": "spell_shadow_blackplague",
     "kind": "spell"
   },
+  "Sprint": {
+    "id": 11305,
+    "icon": "ability_rogue_sprint",
+    "kind": "spell"
+  },
+  "Stealth": {
+    "id": 1787,
+    "icon": "ability_stealth",
+    "kind": "spell"
+  },
+  "Garrote": {
+    "id": 11290,
+    "icon": "ability_rogue_garrote",
+    "kind": "spell"
+  },
+  "Vanish": {
+    "id": 1857,
+    "icon": "ability_vanish",
+    "kind": "spell"
+  },
+  "Evasion": {
+    "id": 5277,
+    "icon": "spell_shadow_shadowward",
+    "kind": "spell"
+  },
+  "Slice and Dice": {
+    "id": 6774,
+    "icon": "ability_rogue_slicedice",
+    "kind": "spell"
+  },
+  "Sinister Strike": {
+    "id": 11294,
+    "icon": "spell_shadow_ritualofsacrifice",
+    "kind": "spell"
+  },
+  "Eviscerate": {
+    "id": 11300,
+    "icon": "ability_rogue_eviscerate",
+    "kind": "spell"
+  },
+  "Cold Blood": {
+    "id": 14177,
+    "icon": "spell_ice_lament",
+    "kind": "spell"
+  },
+  "Blade Flurry": {
+    "id": 13877,
+    "icon": "ability_warrior_punishingblow",
+    "kind": "spell"
+  },
+  "Adrenaline Rush": {
+    "id": 13750,
+    "icon": "spell_shadow_shadowworddominate",
+    "kind": "spell"
+  },
+  "Blood Fury": {
+    "id": 20572,
+    "icon": "racial_orc_berserkerstrength",
+    "kind": "spell"
+  },
+  "Elune's Light": {
+    "id": 1259799,
+    "icon": "spell_nature_moonglow",
+    "kind": "spell"
+  },
+  "Eureka!": {
+    "id": 1259812,
+    "icon": "inv_gnometoy",
+    "kind": "spell"
+  },
+  "Berserking": {
+    "id": 20554,
+    "icon": "racial_troll_berserk",
+    "kind": "spell"
+  },
+  "Major Frenzy Potion": {
+    "id": 250943,
+    "icon": "inv_potione_6",
+    "kind": "item"
+  },
   "item:252428": {
     "id": 252428,
     "icon": "inv_belt_04",
