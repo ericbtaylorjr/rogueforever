@@ -1,6 +1,7 @@
 import { levelingDaggers, levelingShared } from '../gear';
-import type { Build, StatPriority } from '../types';
-import { byLevel, noEndgameGear, noRotation, points } from './shared';
+import type { Build, Rotation, StatPriority } from '../types';
+import { mutilateRotation } from './combat';
+import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } from './shared';
 
 /** WoWSims EP against current BiS gear. EP is relative to `relativeTo` (= 1). */
 const stats: StatPriority = {
@@ -21,6 +22,39 @@ const stats: StatPriority = {
 
 const levelingGear = byLevel(levelingShared, levelingDaggers);
 
+/**
+ * The WoWSims Rogue APL as the "Asn Muti" preset runs it (daggers in both hands):
+ * `npm run apl -- assassination/mutilate-venom`. Mutilate adds 2 combo points, so the APL
+ * Eviscerates at 4 and Cold Blood only fires at 5. Venom goes up at 3+ combo points.
+ */
+const mutilateVenomRotation: Rotation = {
+  opener: [
+    'Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
+    'Mutilate',
+    'Slice and Dice',
+    'Mutilate to 3CP',
+    'Venom',
+    'Mutilate to 4CP',
+    'Eviscerate',
+  ],
+  steps: [
+    sliceAndDiceStep,
+    { press: 'Venom', note: 'Once it has fallen off, with 3 or more combo points.' },
+    { press: 'Mutilate', note: 'Until you have 4 or more combo points. Needs a dagger in both hands.' },
+    { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
+    { press: 'Eviscerate', note: 'With 4 or 5 combo points.' },
+  ],
+  tips: [
+    tip.meleeUptime,
+    tip.trinkets,
+    ...racialTips({ adrenalineRush: false }),
+    tip.thistleTea,
+    tip.pool('Mutilate'),
+    tip.vanishGarrote,
+    tip.fightEnd(),
+  ],
+};
+
 export const assassination: Build[] = [
   {
     id: 'mutilate-venom',
@@ -36,7 +70,7 @@ export const assassination: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310131501051-302303202014_t5/0CDEFgjnnnnq1AccDF0kkkmnSt1GJmnnnn',
     stats,
     gear: noEndgameGear,
-    rotation: noRotation,
+    rotation: mutilateVenomRotation,
   },
   {
     id: 'questing',
@@ -53,7 +87,7 @@ export const assassination: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202532310001401-302333010014142-002_t5/1A0BcccDFgEcmcnnnq2C1ccEffhfDmnnnnpqqqqR0n',
     stats,
     gear: levelingGear,
-    rotation: noRotation,
+    rotation: mutilateRotation,
   },
   {
     id: 'dungeons',
@@ -69,6 +103,6 @@ export const assassination: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-302333010014152-002_t5/0CDffgfEjmnnnnq2C1AccDEhFmnnnnpqqqqRq',
     stats,
     gear: levelingGear,
-    rotation: noRotation,
+    rotation: mutilateRotation,
   },
 ];

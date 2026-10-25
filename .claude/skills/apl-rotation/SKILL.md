@@ -17,7 +17,9 @@ and tell the user separately.
 - `scripts/apl/builds.json`: per build variable toggles and main hand type, matching the
   WoWSims preset build (`ui/specs/rogue/dps/presets.ts`). Add a build here if it's missing.
   The sim's Simple rotation sets `Use Backstab` and `Use Expose Armor`; everything else
-  keeps the APL's value.
+  keeps the APL's value. Leveling builds have no preset (`wowsimsPreset: null`): their
+  toggles follow the build's weapon and talents (Subtlety leveling turns on
+  `Use Ambush Opener`), and the rotation is the APL run with the build's full talents.
 - `scripts/apl/spells.json`: every id the APL references. The resolver stops on an id
   that isn't listed; look it up in `sim/rogue/spell_data_auto_gen.go` and
   `sim/core/racials.go` (or wowhead.com/forever/spell=<id>) and add it.
@@ -41,6 +43,13 @@ and tell the user separately.
      of fight finishers. Keep every number the APL uses (thresholds, seconds, energy).
      `sweaty: true` for optional extra effort (Vanish for damage, early finishers).
    - Plain words: "Slice and Dice has 2s or less left", not "SnD Fall Imminent".
+   - Reuse the shared wording in `src/content/builds/shared.ts` (`sliceAndDiceStep`, `tip.*`,
+     `racialTips`) so the same APL row reads the same in every build. Tip order: melee
+     uptime, Premeditation, Adrenaline Rush, Blade Flurry, trinkets, racials, Thistle Tea,
+     pooling, then the sweaty ones (Vanish, early Eviscerate, end of fight).
+   - Builds that resolve to the same rows share one constant (Combat Questing and Dungeons
+     use the Sinister Strike rotation; Assassination Questing and Dungeons use Combat's
+     `mutilateRotation`).
 3. `opener`: walk the priority list from the prepull actions at time 0 (stealthed, 0
    combo points, 100 energy, Slice and Dice down) until the first finisher. Prepull actions
    keep their timing, e.g. "Blade Flurry (-2s)". Don't fix counts that depend on crits or
@@ -50,6 +59,11 @@ and tell the user separately.
    Adrenaline Rush, "Sinister Strike to 5CP", "Cold Blood + Eviscerate". Its first pro tip, on melee uptime,
    and the wording of the sweaty Vanish into Garrote tip (right after the opener, for
    damage and a threat reset) are also hand-edited; keep them.
+   Every other build follows that pattern: one "(-1s)" step with Evasion, Major Frenzy
+   Potion, Trinket and Racial (plus Blade Flurry when known), then the APL's presses to
+   the first Eviscerate. Combat and Assassination skip Stealth and Garrote (Vanish into
+   Garrote is the sweaty tip). Subtlety keeps the APL's stealth opener, since its talents
+   are built on it: "Premeditation (-2s)", "Stealth + ... (-1s)", then Garrote or Ambush.
 4. Check that every APL row the build can fire ended up in `steps`, `tips` or `opener`.
    Name items exactly (the sim's potion, e.g. "Major Frenzy Potion", not "Potion").
    Every spell and item name in the section is linked to Wowhead Forever with its

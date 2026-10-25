@@ -53,8 +53,8 @@ interface HandbookState {
   /* actions */
   /** Switches spec and lands on its matching build (see `buildForSwitch`). */
   setSpec: (id: SpecId) => void;
-  /** Switch to `spec` and make its build `id` active. `stay` skips settling on the section top. */
-  pickBuild: (spec: SpecId, id: string, opts?: { stay?: boolean }) => void;
+  /** Switch to `spec` and make its build `id` active. */
+  pickBuild: (spec: SpecId, id: string) => void;
   setSimSet: (id: SimSetId) => void;
   toggleSort: (key: SortKey) => void;
   setGearSet: (id: GearSetId) => void;
@@ -297,29 +297,6 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
-  /*
-   * Switching spec or build adds and removes content above whatever you're reading, so
-   * the page shifts by a different amount every time. Instead, settle on the top of the
-   * section you were in once the new build has rendered, the same way every time.
-   */
-  const pendingSection = useRef<string | null>(null);
-  const holdSection = () => {
-    const line = sectionOffset() + 1;
-    let current: string | null = null;
-    for (const id of sectionIds) {
-      const el = document.getElementById(id);
-      if (el && el.getBoundingClientRect().top <= line) current = id;
-    }
-    pendingSection.current = current;
-  };
-  useEffect(() => {
-    const id = pendingSection.current;
-    pendingSection.current = null;
-    const el = id && document.getElementById(id);
-    // Only when you're into the section; at its top (or above it) there's nothing to fix.
-    if (el && el.getBoundingClientRect().top < sectionOffset() - 1) scrollToSection(el);
-  }, [spec, build.id]);
-
   /* ----- actions ----- */
   const jump = useCallback(
     (id: string) => {
@@ -397,16 +374,13 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
 
   const setSpec = useCallback(
     (id: SpecId) => {
-      holdSection();
       setSpecState(id);
       setBuilds((b) => ({ ...b, [id]: buildForSwitch(id, build, b[id]).id }));
       track('spec_select', { spec: id });
     },
     [build],
   );
-  const pickBuild = useCallback((id: SpecId, buildId: string, opts?: { stay?: boolean }) => {
-    if (opts?.stay) pendingSection.current = null;
-    else holdSection();
+  const pickBuild = useCallback((id: SpecId, buildId: string) => {
     setSpecState(id);
     setBuilds((b) => ({ ...b, [id]: buildId }));
     track('build_select', { spec: id, build: buildId });

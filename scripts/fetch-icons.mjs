@@ -60,6 +60,15 @@ const pinned = [
   ["Elune's Light", 1259799],
   ['Eureka!', 1259812],
   ['Berserking', 20554],
+  ['Backstab', 11281],
+  ['Mutilate', 1241584],
+  ['Hemorrhage', 16511],
+  ['Ghostly Strike', 14278],
+  ['Ambush', 11269],
+  ['Rupture', 11275],
+  ['Venom', 1310703],
+  ['Premeditation', 14183],
+  ['Preparation', 14185],
 ].map(([name, id]) => ({ name, id, kind: 'spell' }));
 pinned.push({ name: 'Major Frenzy Potion', id: 250943, kind: 'item' });
 // Generated leveling lists (scripts/gear-research) live in JSON.

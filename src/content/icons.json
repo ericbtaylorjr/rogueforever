@@ -399,6 +399,51 @@
     "icon": "racial_troll_berserk",
     "kind": "spell"
   },
+  "Backstab": {
+    "id": 11281,
+    "icon": "ability_backstab",
+    "kind": "spell"
+  },
+  "Mutilate": {
+    "id": 1241584,
+    "icon": "ability_rogue_deadlybrew",
+    "kind": "spell"
+  },
+  "Hemorrhage": {
+    "id": 16511,
+    "icon": "spell_shadow_lifedrain",
+    "kind": "spell"
+  },
+  "Ghostly Strike": {
+    "id": 14278,
+    "icon": "spell_shadow_curse",
+    "kind": "spell"
+  },
+  "Ambush": {
+    "id": 11269,
+    "icon": "ability_rogue_ambush",
+    "kind": "spell"
+  },
+  "Rupture": {
+    "id": 11275,
+    "icon": "ability_rogue_rupture",
+    "kind": "spell"
+  },
+  "Venom": {
+    "id": 1310703,
+    "icon": "inv_sword_31",
+    "kind": "spell"
+  },
+  "Premeditation": {
+    "id": 14183,
+    "icon": "spell_shadow_possession",
+    "kind": "spell"
+  },
+  "Preparation": {
+    "id": 14185,
+    "icon": "spell_shadow_antishadow",
+    "kind": "spell"
+  },
   "Major Frenzy Potion": {
     "id": 250943,
     "icon": "inv_potione_6",

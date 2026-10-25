@@ -138,7 +138,7 @@ export function Talents() {
           <div>
             <h3 className="t-card-sub text-ink">{copy.endgameTitle}</h3>
             <div className="mt-[12px]">
-              <BuildList builds={endgame} label={copy.buildsLabel} stay />
+              <BuildList builds={endgame} label={copy.buildsLabel} />
             </div>
           </div>
         )}
@@ -146,7 +146,7 @@ export function Talents() {
           <div>
             <h3 className="t-card-sub text-ink">{copy.levelingTitle}</h3>
             <div className="mt-[12px]">
-              <BuildList builds={leveling} label={copy.levelingLabel} stay />
+              <BuildList builds={leveling} label={copy.levelingLabel} />
             </div>
           </div>
         )}

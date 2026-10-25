@@ -1,6 +1,6 @@
 import { levelingShared, levelingSlowWeapons } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { byLevel, noEndgameGear, noRotation, points } from './shared';
+import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } from './shared';
 
 /** WoWSims EP against current BiS gear. EP is relative to `relativeTo` (= 1). */
 const stats: StatPriority = {
@@ -24,6 +24,8 @@ const levelingGear = byLevel(levelingShared, levelingSlowWeapons);
 /**
  * The WoWSims Rogue APL as the "Combat SS" preset runs it (Use Backstab off, sword main
  * hand). Regenerate the source rows with `npm run apl -- combat/sinister-strike`.
+ * The opener, the melee uptime tip and the Vanish tip's wording are hand-edited.
+ * Combat Questing and Dungeons resolve to the same rows, so they share it.
  */
 const sinisterStrikeRotation: Rotation = {
   opener: [
@@ -35,38 +37,83 @@ const sinisterStrikeRotation: Rotation = {
     'Cold Blood + Eviscerate',
   ],
   steps: [
-    {
-      press: 'Slice and Dice',
-      note: "Only once it has fallen off, with however many combo points you have. Don't refresh it early.",
-    },
+    sliceAndDiceStep,
     { press: 'Sinister Strike', note: 'Until you have 5 combo points.' },
     { press: 'Cold Blood', note: "If it's off cooldown." },
     { press: 'Eviscerate', note: 'With all 5 combo points.' },
   ],
   tips: [
-    {
-      text: 'Melee uptime is very important. Start attacking the moment the tank engages, and stay in melee range as much as possible.',
-    },
-    { text: 'Adrenaline Rush on cooldown, as long as Slice and Dice is up.' },
-    { text: 'Blade Flurry on cooldown, unless Slice and Dice has 2s or less left.' },
-    { text: 'Trinkets on cooldown. Trolls use Berserking on cooldown too.' },
-    { text: 'Orcs: Blood Fury right after Adrenaline Rush, or on its own when Adrenaline Rush is 1.9 min or more away.' },
-    {
-      text: "Night Elves: Elune's Light, then Adrenaline Rush, holding Adrenaline Rush until both are ready. Use Elune's Light on its own when Adrenaline Rush is 1.9 min or more away, and save Cold Blood until Elune's Light ends.",
-    },
-    {
-      text: "Gnomes: pool to 90 energy, then Eureka! during Adrenaline Rush or whenever Adrenaline Rush is further away than Eureka!'s cooldown. During Eureka!, Thistle Tea at 25 energy or less.",
-    },
-    { text: 'Thistle Tea at 15 energy or less, while you have under 3 combo points.' },
-    {
-      text: 'Pool energy in the last 2s of Slice and Dice. Only Sinister Strike at 0 combo points or 75+ energy, so you can reapply it the moment it falls off.',
-    },
-    {
-      text: 'Consider fitting in a Vanish into Garrote right after the opener. It lets you be aggressive with your damage and resets your threat. Garrote needs you behind the target.',
-      sweaty: true,
-    },
-    { text: 'At 4 combo points with 2 to 6s of Slice and Dice left, Eviscerate early.', sweaty: true },
-    { text: 'In the last 6s of the fight, Eviscerate at 3+ combo points and let Slice and Dice go.', sweaty: true },
+    tip.meleeUptime,
+    tip.adrenalineRush,
+    tip.bladeFlurry,
+    tip.trinkets,
+    ...racialTips({ adrenalineRush: true }),
+    tip.thistleTea,
+    tip.pool('Sinister Strike'),
+    tip.vanishGarrote,
+    tip.earlyEviscerate,
+    tip.fightEnd(),
+  ],
+};
+
+/** "Combat BS" (Use Backstab on, dagger main hand): `npm run apl -- combat/backstab`. */
+const backstabRotation: Rotation = {
+  opener: [
+    'Blade Flurry + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
+    'Backstab',
+    'Slice and Dice',
+    'Adrenaline Rush',
+    'Backstab to 5CP',
+    'Cold Blood + Eviscerate',
+  ],
+  steps: [
+    sliceAndDiceStep,
+    { press: 'Backstab', note: 'Until you have 5 combo points. Stay behind the target.' },
+    { press: 'Cold Blood', note: "If it's off cooldown." },
+    { press: 'Eviscerate', note: 'With all 5 combo points.' },
+  ],
+  tips: [
+    tip.meleeUptime,
+    tip.adrenalineRush,
+    tip.bladeFlurry,
+    tip.trinkets,
+    ...racialTips({ adrenalineRush: true }),
+    tip.thistleTea,
+    tip.pool('Backstab'),
+    tip.vanishGarrote,
+    tip.earlyEviscerate,
+    tip.fightEnd(),
+  ],
+};
+
+/**
+ * "Combat Muti" (daggers in both hands): `npm run apl -- combat/mutilate`. Mutilate adds 2
+ * combo points, so the APL Eviscerates at 4 and Cold Blood only fires at 5.
+ * Assassination Questing and Dungeons resolve to the same rows, so they share it.
+ */
+export const mutilateRotation: Rotation = {
+  opener: [
+    'Blade Flurry + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
+    'Mutilate',
+    'Slice and Dice',
+    'Mutilate to 4CP',
+    'Eviscerate',
+  ],
+  steps: [
+    sliceAndDiceStep,
+    { press: 'Mutilate', note: 'Until you have 4 or more combo points. Needs a dagger in both hands.' },
+    { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
+    { press: 'Eviscerate', note: 'With 4 or 5 combo points.' },
+  ],
+  tips: [
+    tip.meleeUptime,
+    tip.bladeFlurry,
+    tip.trinkets,
+    ...racialTips({ adrenalineRush: false }),
+    tip.thistleTea,
+    tip.pool('Mutilate'),
+    tip.vanishGarrote,
+    tip.fightEnd(),
   ],
 };
 
@@ -85,7 +132,7 @@ export const combat: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-320303202015152-001_t5/0CDEFgjm1ABDFGJmNQpR0nn2c0nnq',
     stats,
     gear: noEndgameGear,
-    rotation: noRotation,
+    rotation: mutilateRotation,
   },
   {
     id: 'sinister-strike',
@@ -117,7 +164,7 @@ export const combat: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101-32030320201515231-002_t5/0CDe2C0eFgjm1ABDFGJmNQpRSt',
     stats,
     gear: noEndgameGear,
-    rotation: noRotation,
+    rotation: backstabRotation,
   },
   {
     id: 'questing',
@@ -134,7 +181,7 @@ export const combat: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v232232310001-32003321201515231_t0/1B0BA1AffEhfGjmnnnnpqqqqRs0F1sst0ddgdEcmc1qnj',
     stats,
     gear: levelingGear,
-    rotation: noRotation,
+    rotation: sinisterStrikeRotation,
   },
   {
     id: 'dungeons',
@@ -150,6 +197,6 @@ export const combat: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310301-32003321101515231_t0/1BAEffhfGjmnnnnpQRsstsn0CFEgDjmjj',
     stats,
     gear: levelingGear,
-    rotation: noRotation,
+    rotation: sinisterStrikeRotation,
   },
 ];

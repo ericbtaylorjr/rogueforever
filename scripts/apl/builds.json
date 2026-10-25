@@ -2,17 +2,100 @@
   "_note": "Per build APL settings, matching the WoWSims preset build. vars override the APL's const value variables (the sim's Simple rotation sets Use Backstab and Use Expose Armor this way). mh is the main hand weapon type.",
   "combat/sinister-strike": {
     "wowsimsPreset": "Combat SS",
-    "vars": { "Use Backstab": false, "Use Expose Armor": false },
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false
+    },
     "mh": "sword"
   },
   "combat/backstab": {
     "wowsimsPreset": "Combat BS",
-    "vars": { "Use Backstab": true, "Use Expose Armor": false },
+    "vars": {
+      "Use Backstab": true,
+      "Use Expose Armor": false
+    },
     "mh": "dagger"
   },
   "combat/mutilate": {
     "wowsimsPreset": "Combat Muti",
-    "vars": { "Use Backstab": false, "Use Expose Armor": false },
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false
+    },
+    "mh": "dagger"
+  },
+  "combat/questing": {
+    "wowsimsPreset": null,
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false
+    },
+    "mh": "sword"
+  },
+  "combat/dungeons": {
+    "wowsimsPreset": null,
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false
+    },
+    "mh": "sword"
+  },
+  "assassination/mutilate-venom": {
+    "wowsimsPreset": "Asn Muti",
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false
+    },
+    "mh": "dagger"
+  },
+  "assassination/questing": {
+    "wowsimsPreset": null,
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false
+    },
+    "mh": "dagger"
+  },
+  "assassination/dungeons": {
+    "wowsimsPreset": null,
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false
+    },
+    "mh": "dagger"
+  },
+  "subtlety/backstab": {
+    "wowsimsPreset": "Subtlety BS",
+    "vars": {
+      "Use Backstab": true,
+      "Use Expose Armor": false
+    },
+    "mh": "dagger"
+  },
+  "subtlety/hemo": {
+    "wowsimsPreset": "Subtlety Hemo",
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false
+    },
+    "mh": "sword"
+  },
+  "subtlety/questing": {
+    "wowsimsPreset": null,
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false,
+      "Use Ambush Opener": true
+    },
+    "mh": "dagger"
+  },
+  "subtlety/dungeons": {
+    "wowsimsPreset": null,
+    "vars": {
+      "Use Backstab": true,
+      "Use Expose Armor": false,
+      "Use Ambush Opener": true
+    },
     "mh": "dagger"
   }
 }
