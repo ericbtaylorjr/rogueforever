@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
 import { specById } from '../../content/content';
 import { stats as copy } from '../../content/copy';
 import { wowsimsLink } from '../../content/links';
 import type { StatWeight } from '../../content/types';
 import { useShownBuild } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
+import { useGrown } from '../../state/useGrown';
 import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Tip } from '../ui/Tip';
@@ -18,13 +18,7 @@ function StatPriorityPanel() {
   const { stats, relativeTo } = build.stats;
   const maxEp = Math.max(...stats.map((st) => st.ep));
   const s = specById[build.spec];
-  const [grown, setGrown] = useState(false);
-
-  useEffect(() => {
-    setGrown(false);
-    const raf = requestAnimationFrame(() => setGrown(true));
-    return () => cancelAnimationFrame(raf);
-  }, [build]);
+  const grown = useGrown(build);
 
   return (
     <div className="panel p-[18px]">

@@ -7,7 +7,7 @@ import { SweatyLegend, Wordmark } from './Wordmark';
 export function Sidebar() {
   return (
     <aside
-      className="fixed left-0 top-0 z-[40] flex h-full w-[262px] flex-col"
+      className="fixed left-0 top-0 z-[40] flex h-full w-[262px] flex-col max-rail:hidden"
       style={{
         background: 'linear-gradient(180deg, var(--rail-a), var(--rail-b))',
         borderRight: '1px solid var(--line)',

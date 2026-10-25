@@ -9,8 +9,6 @@ import { RogueMark } from '../ui/RogueMark';
 
 /** Murloc art is 611×520, 2× its display size. */
 const FIGURE = { width: 282, height: 240 };
-/** Room kept clear on the right so the murloc never sits over text (body starts ~52% in). */
-const FIGURE_GUTTER = 180;
 
 const button =
   'min-h-[40px] flex-1 basis-[140px] rounded-[8px] border px-[14px] py-[9px] text-center text-[13px] font-semibold transition-colors';
@@ -29,7 +27,7 @@ const button =
  */
 export function ConsentBanner() {
   const { choice, reviewing, open } = useConsent();
-  const { isNarrow, isPhone, setPrivacyOpen } = useHandbook();
+  const { setPrivacyOpen } = useHandbook();
   const card = useRef<HTMLElement>(null);
   const returnTo = useRef<HTMLElement | null>(null);
 
@@ -48,8 +46,7 @@ export function ConsentBanner() {
 
   if (!open) return null;
 
-  const railNav = !isNarrow && config.navLayout === 'sidebar';
-  const inset = isPhone ? 12 : isNarrow ? 22 : 30;
+  const railNav = config.navLayout === 'sidebar';
   const choose = (c: ConsentChoice) => () => setConsent(c);
 
   return (
@@ -58,30 +55,29 @@ export function ConsentBanner() {
       tabIndex={-1}
       aria-labelledby="consent-title"
       aria-describedby="consent-body"
-      className="consent-card panel fixed z-[50] outline-none animate-rise"
-      style={{
-        left: railNav ? `calc(var(--rail-w) + ${inset}px)` : inset,
-        right: isNarrow ? inset : undefined,
-        bottom: `calc(${isPhone ? 12 : 24}px + env(safe-area-inset-bottom, 0px))`,
-        width: isNarrow ? undefined : `min(720px, calc(100vw - ${railNav ? 'var(--rail-w) - ' : ''}${inset * 2}px))`,
-        padding: isPhone ? '18px 16px 16px' : `20px ${FIGURE_GUTTER}px 18px 22px`,
-      }}
+      // Inset from the edges by the page gutter (see Shell); from 1100px it's a 720px card
+      // beside the nav. Past phones, 180px on the right stays clear for the murloc.
+      className={`consent-card panel fixed inset-x-[12px] bottom-[calc(12px+env(safe-area-inset-bottom,0px))] z-[50] px-[16px] pt-[18px] pb-[16px] outline-hidden animate-rise sm:inset-x-[22px] sm:bottom-[calc(24px+env(safe-area-inset-bottom,0px))] sm:pt-[20px] sm:pr-[180px] sm:pb-[18px] sm:pl-[22px] rail:right-auto ${
+        railNav
+          ? 'rail:left-[calc(var(--rail-w)+30px)] rail:w-[min(720px,calc(100vw-var(--rail-w)-60px))]'
+          : 'rail:left-[30px] rail:w-[min(720px,calc(100vw-60px))]'
+      }`}
     >
       {/* The section divider's dagger slash, so the card reads as part of the page. */}
       <span aria-hidden="true" className="consent-slash" />
 
-      {!isPhone && (
-        <img
-          src={murloc}
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          decoding="async"
-          width={FIGURE.width}
-          height={FIGURE.height}
-          className="consent-figure pointer-events-none absolute right-[6px] bottom-[8px] select-none"
-        />
-      )}
+      {/* Lazy, so a phone, where it's hidden, never downloads it. */}
+      <img
+        src={murloc}
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        loading="lazy"
+        decoding="async"
+        width={FIGURE.width}
+        height={FIGURE.height}
+        className="consent-figure pointer-events-none absolute right-[6px] bottom-[8px] select-none max-sm:hidden"
+      />
 
       <div className="flex items-start gap-[12px]">
         <RogueMark size={28} />
@@ -135,7 +131,7 @@ export function ConsentBanner() {
       </div>
 
       {/* Stops short of the spear on desktop so it only crosses the end of "Allow", never its label. */}
-      <div className={`mt-[16px] flex flex-wrap gap-[10px] ${isPhone ? '' : 'max-w-[448px]'}`}>
+      <div className="mt-[16px] flex flex-wrap gap-[10px] sm:max-w-[448px]">
         <button
           type="button"
           onClick={choose('denied')}

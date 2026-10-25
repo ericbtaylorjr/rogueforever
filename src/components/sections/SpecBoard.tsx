@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { config } from '../../config';
 import { rankedBuilds, rankedLeveling } from '../../content/builds';
 import { foreverOutlook, levelingIndex, specById, specIndex } from '../../content/content';
@@ -7,6 +7,7 @@ import type { Build, BuildPhase, LevelingSetId, SimSetId, SpecId } from '../../c
 import { track } from '../../lib/analytics';
 import { useHandbook, useShownBuild, type SortKey } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
+import { useGrown } from '../../state/useGrown';
 import { useSpecColor } from '../../state/useSpecColor';
 import { wowsimsLink } from '../../content/links';
 import { BuildList } from '../ui/BuildList';
@@ -52,17 +53,6 @@ function useRows(simSet: SimSetId): Row[] {
         };
       });
   }, [simSet]);
-}
-
-/** Bar fills grow on mount and whenever the data set changes. */
-function useGrown(dep: unknown): boolean {
-  const [grown, setGrown] = useState(false);
-  useEffect(() => {
-    setGrown(false);
-    const raf = requestAnimationFrame(() => setGrown(true));
-    return () => cancelAnimationFrame(raf);
-  }, [dep]);
-  return grown;
 }
 
 function YourSpecBadge() {
@@ -253,7 +243,6 @@ function CardsView({ rows }: { rows: Row[] }) {
 }
 
 function ForeverPending() {
-  const { isNarrow } = useHandbook();
   const { tone } = useTheme();
   return (
     <div
@@ -274,19 +263,13 @@ function ForeverPending() {
             return (
               <div
                 key={o.id}
-                className="grid items-baseline gap-x-[10px] gap-y-[4px] border-t border-line pt-[10px]"
-                style={{
-                  gridTemplateColumns: isNarrow ? '30px minmax(0,1fr)' : '30px minmax(0,190px) minmax(0,1fr)',
-                }}
+                className="grid grid-cols-[30px_minmax(0,1fr)] items-baseline gap-x-[10px] gap-y-[4px] border-t border-line pt-[10px] rail:grid-cols-[30px_minmax(0,190px)_minmax(0,1fr)]"
               >
                 <span aria-hidden="true" className="text-[13px]" style={{ color: tone(o.arrowColor) }}>
                   {o.arrow}
                 </span>
                 <span className="text-[13.5px] font-semibold text-ink">{s.name}</span>
-                <span
-                  className="text-[12.5px] leading-[1.55] text-mute"
-                  style={isNarrow ? { gridColumn: 2 } : undefined}
-                >
+                <span className="text-[12.5px] leading-[1.55] text-mute max-rail:col-start-2">
                   {o.why}
                 </span>
               </div>
@@ -436,7 +419,12 @@ export function SpecBoard() {
   // Opens on the active build's kind (a deep link to a leveling build shows the leveling
   // meta) and follows it when the build changes; the tabs still switch it by hand.
   const [phase, setPhaseState] = useState<BuildPhase>(build.phase);
-  useEffect(() => setPhaseState(build.phase), [build.phase]);
+  // Adjusted while rendering rather than in an effect, so a build change never paints the old tab first.
+  const [followed, setFollowed] = useState(build.phase);
+  if (followed !== build.phase) {
+    setFollowed(build.phase);
+    setPhaseState(build.phase);
+  }
   const setPhase = (id: BuildPhase) => {
     setPhaseState(id);
     track('meta_tab', { tab: id });

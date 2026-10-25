@@ -152,7 +152,7 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <Ctx.Provider value={api}>
+    <Ctx value={api}>
       {children}
       <div
         id={TIP_ID}
@@ -188,7 +188,7 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
           </>
         )}
       </div>
-    </Ctx.Provider>
+    </Ctx>
   );
 }
 

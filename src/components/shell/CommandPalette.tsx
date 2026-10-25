@@ -1,14 +1,18 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { search } from '../../content/copy';
 import { searchEntries } from '../../content/searchIndex';
 import { track } from '../../lib/analytics';
 import { useHandbook } from '../../state/HandbookProvider';
 
+/**
+ * Search, as a native modal <dialog>: showModal() puts it in the top layer, makes the page
+ * behind it inert, closes on Esc and hands focus back to whatever opened it.
+ */
 export function CommandPalette() {
   const { searchOpen, setSearchOpen, query, setQuery, jump } = useHandbook();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const restoreTo = useRef<HTMLElement | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [cursor, setCursor] = useState(0);
 
   const results = useMemo(() => searchEntries(query), [query]);
@@ -44,16 +48,15 @@ export function CommandPalette() {
 
   useEffect(() => setCursor(0), [query]);
 
-  useEffect(() => {
-    if (!searchOpen) return;
-    restoreTo.current = document.activeElement as HTMLElement | null;
-    inputRef.current?.focus();
-    return () => {
-      // Leave focus alone if a jump already moved it into the page.
-      if (!document.activeElement || document.activeElement === document.body) {
-        restoreTo.current?.focus?.();
-      }
-    };
+  // A layout effect, so a jump that closes the palette has it closed before focus moves.
+  useLayoutEffect(() => {
+    const d = dialogRef.current;
+    if (!d) return;
+    if (searchOpen && !d.open) {
+      d.showModal();
+      inputRef.current?.focus();
+    }
+    if (!searchOpen && d.open) d.close();
   }, [searchOpen]);
 
   // Keep the highlighted row in view when arrowing through a long list.
@@ -68,8 +71,6 @@ export function CommandPalette() {
     results.length === 0
       ? search.empty
       : `${results.length} result${results.length === 1 ? '' : 's'}`;
-
-  if (!searchOpen) return null;
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
@@ -88,94 +89,89 @@ export function CommandPalette() {
   };
 
   return (
-    <div
-      className="fixed inset-0 z-[80] flex justify-center px-[14px]"
-      style={{
-        background: 'var(--scrim)',
-        backdropFilter: 'blur(6px)',
-        paddingTop: 'min(9vh, 60px)',
-      }}
-      onClick={() => setSearchOpen(false)}
+    <dialog
+      ref={dialogRef}
+      aria-label={search.placeholder}
+      onClose={() => setSearchOpen(false)}
+      // A click on the dialog element itself (not its content) is a backdrop click.
+      onClick={(e) => e.target === e.currentTarget && setSearchOpen(false)}
+      className="mx-auto mt-[min(9vh,60px)] h-fit w-[calc(100%-28px)] max-w-[620px] animate-rise overflow-hidden rounded-[14px] border border-line p-0 text-ink backdrop:bg-[var(--scrim)] backdrop:backdrop-blur-[6px]"
+      style={{ background: 'var(--surface-pop)', boxShadow: 'var(--palette-shadow)' }}
     >
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={search.placeholder}
-        className="h-fit w-full max-w-[620px] animate-rise overflow-hidden rounded-[14px] border border-line"
-        style={{ background: 'var(--surface-pop)', boxShadow: 'var(--palette-shadow)' }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center gap-[10px] border-b border-line px-[16px] py-[13px] focus-within:shadow-[inset_0_-2px_0_var(--accent)]">
-          <span aria-hidden="true" className="text-[15px] text-faint">⌕</span>
-          <input
-            ref={inputRef}
-            role="combobox"
-            aria-expanded="true"
-            aria-controls="rc-search-list"
-            aria-autocomplete="list"
-            aria-activedescendant={results[cursor] ? optionId(cursor) : undefined}
-            autoComplete="off"
-            spellCheck={false}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={onKeyDown}
-            placeholder={search.placeholder}
+      {searchOpen && (
+        <>
+          <div className="flex items-center gap-[10px] border-b border-line px-[16px] py-[13px] focus-within:shadow-[inset_0_-2px_0_var(--accent)]">
+            <span aria-hidden="true" className="text-[15px] text-faint">⌕</span>
+            <input
+              ref={inputRef}
+              role="combobox"
+              aria-expanded="true"
+              aria-controls="rc-search-list"
+              aria-autocomplete="list"
+              aria-activedescendant={results[cursor] ? optionId(cursor) : undefined}
+              autoComplete="off"
+              spellCheck={false}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={onKeyDown}
+              placeholder={search.placeholder}
+              aria-label={search.placeholder}
+              className="flex-1 bg-transparent text-[14.5px] text-ink outline-hidden placeholder:text-dim"
+            />
+            <button
+              type="button"
+              onClick={() => setSearchOpen(false)}
+              className="key-chip t-num transition-colors hover:text-mute"
+            >
+              ESC
+            </button>
+          </div>
+
+          <div role="status" aria-live="polite" className="sr-only">
+            {status}
+          </div>
+
+          <div
+            ref={listRef}
+            id="rc-search-list"
+            role="listbox"
             aria-label={search.placeholder}
-            className="flex-1 bg-transparent text-[14.5px] text-ink outline-none placeholder:text-dim"
-          />
-          <button
-            type="button"
-            onClick={() => setSearchOpen(false)}
-            className="key-chip t-num transition-colors hover:text-mute"
+            className="overflow-y-auto"
+            style={{ maxHeight: 'min(58vh, 440px)' }}
           >
-            ESC
-          </button>
-        </div>
-
-        <div role="status" aria-live="polite" className="sr-only">
-          {status}
-        </div>
-
-        <div
-          ref={listRef}
-          id="rc-search-list"
-          role="listbox"
-          aria-label={search.placeholder}
-          className="overflow-y-auto"
-          style={{ maxHeight: 'min(58vh, 440px)' }}
-        >
-          {results.length === 0 ? (
-            <p aria-hidden="true" className="px-[16px] py-[22px] text-[13px] text-faint">
-              {search.empty}
-            </p>
-          ) : (
-            results.map((r, i) => (
-              <a
-                key={`${r.kind}-${r.label}-${i}`}
-                id={optionId(i)}
-                role="option"
-                aria-selected={i === cursor}
-                tabIndex={-1}
-                href={`#${r.id}`}
-                data-cursor={i === cursor}
-                onMouseMove={() => setCursor(i)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  pick(i);
-                }}
-                className="flex items-center gap-[12px] px-[16px] py-[9px] transition-colors"
-                style={{ background: i === cursor ? 'var(--panel2)' : 'transparent' }}
-              >
-                <span className="t-eyebrow w-[78px] shrink-0 text-[10.5px] text-faint">
-                  {r.kind}
-                </span>
-                <span className="flex-1 truncate text-[13.5px] text-ink">{r.label}</span>
-                <span className="shrink-0 text-[11px] text-faint">{r.section}</span>
-              </a>
-            ))
-          )}
-        </div>
-      </div>
-    </div>
+            {results.length === 0 ? (
+              <p aria-hidden="true" className="px-[16px] py-[22px] text-[13px] text-faint">
+                {search.empty}
+              </p>
+            ) : (
+              results.map((r, i) => (
+                <a
+                  key={`${r.kind}-${r.label}-${i}`}
+                  id={optionId(i)}
+                  role="option"
+                  aria-selected={i === cursor}
+                  tabIndex={-1}
+                  href={`#${r.id}`}
+                  data-cursor={i === cursor}
+                  onMouseMove={() => setCursor(i)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    pick(i);
+                  }}
+                  className="flex items-center gap-[12px] px-[16px] py-[9px] transition-colors"
+                  style={{ background: i === cursor ? 'var(--panel2)' : 'transparent' }}
+                >
+                  <span className="t-eyebrow w-[78px] shrink-0 text-[10.5px] text-faint">
+                    {r.kind}
+                  </span>
+                  <span className="flex-1 truncate text-[13.5px] text-ink">{r.label}</span>
+                  <span className="shrink-0 text-[11px] text-faint">{r.section}</span>
+                </a>
+              ))
+            )}
+          </div>
+        </>
+      )}
+    </dialog>
   );
 }

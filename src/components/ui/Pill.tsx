@@ -1,8 +1,8 @@
 import { useRef, type KeyboardEvent, type ReactNode } from 'react';
 
 /**
- * Category filter pill with a count. Forever watch uses `tone="sky"` to stay
- * visually distinct from the rest of the page.
+ * Category filter pill with a count. `tone="sky"` is the blue variant for lists that
+ * need to stay visually distinct from the rest of the page.
  */
 export function FilterPill({
   label,

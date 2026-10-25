@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { scope } from '../../content/copy';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useKeepPlace } from '../../lib/keepPlace';
+import { useHandbook, useShownBuild } from '../../state/HandbookProvider';
 import { useSpecColor } from '../../state/useSpecColor';
 import { Divider } from '../ui/Divider';
 import { Tip } from '../ui/Tip';
@@ -13,9 +14,11 @@ import { SpecBar } from './SpecBar';
  * length of the zone.
  */
 export function SpecZone({ children }: { children: ReactNode }) {
-  const { build, isPhone, isNarrow } = useHandbook();
+  const { build } = useHandbook();
   const c = useSpecColor();
-  const gutter = isPhone ? -9 : isNarrow ? -13 : -17;
+  // Runs after the deferred build commits, so the switch has fully rendered.
+  const shown = useShownBuild();
+  useKeepPlace(`${shown.spec}/${shown.id}`);
 
   return (
     <div
@@ -26,9 +29,9 @@ export function SpecZone({ children }: { children: ReactNode }) {
     >
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[40px] top-[4px] w-[2px] rounded-full transition-colors"
+        // In the page's side gutter, which widens at each breakpoint (see Shell).
+        className="pointer-events-none absolute bottom-[40px] top-[4px] -left-[9px] w-[2px] rounded-full transition-colors sm:-left-[13px] rail:-left-[17px]"
         style={{
-          left: gutter,
           background: `linear-gradient(180deg, ${c.mark}, ${c.line} 85%, transparent)`,
         }}
       />

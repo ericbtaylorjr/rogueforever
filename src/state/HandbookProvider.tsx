@@ -8,10 +8,13 @@ import {
   useMemo,
   useRef,
   useState,
+  useSyncExternalStore,
   type ReactNode,
 } from 'react';
-import { bp, config, scrollOffset } from '../config';
+import { flushSync } from 'react-dom';
+import { bp, config } from '../config';
 import { setTrackContext, track } from '../lib/analytics';
+import { holdPlace, sectionOffset } from '../lib/keepPlace';
 import { noteJump, useSectionViews } from '../lib/sectionViews';
 import { buildForSwitch, defaultBuild, findBuild } from '../content/builds';
 import { sectionIds, specs } from '../content/content';
@@ -32,10 +35,9 @@ interface HandbookState {
   sort: Sort;
   gearSet: GearSetId;
   consumeFilter: string;
-  foreverFilter: string;
+  guideFilter: string;
   sweaty: boolean;
   openRaid: number;
-  openFaq: number;
   searchOpen: boolean;
   query: string;
   active: string;
@@ -43,12 +45,12 @@ interface HandbookState {
   drawer: boolean;
   /** Privacy policy window. Also opened by landing on #privacy. */
   privacyOpen: boolean;
-  vw: number;
 
-  /* derived viewport flags */
-  isPhone: boolean;
+  /**
+   * Below the 1100px nav breakpoint. Layout comes from CSS breakpoints, so the page renders
+   * the same before any script runs; this is for behaviour only (the drawer, sticky offsets).
+   */
   isNarrow: boolean;
-  isWide: boolean;
 
   /* actions */
   /** Switches spec and lands on its matching build (see `buildForSwitch`). */
@@ -59,10 +61,9 @@ interface HandbookState {
   toggleSort: (key: SortKey) => void;
   setGearSet: (id: GearSetId) => void;
   setConsumeFilter: (cat: string) => void;
-  setForeverFilter: (cat: string) => void;
+  setGuideFilter: (cat: string) => void;
   toggleSweaty: () => void;
   toggleRaid: (i: number) => void;
-  toggleFaq: (i: number) => void;
   setSearchOpen: (open: boolean) => void;
   setQuery: (q: string) => void;
   setDrawer: (open: boolean) => void;
@@ -121,9 +122,6 @@ function readInitial(): { spec: SpecId; build?: string; sweaty: boolean } {
   };
 }
 
-/** Where a section's top sits once scrolled to: just under the sticky header. */
-const sectionOffset = () => (window.innerWidth < bp.rail ? scrollOffset.narrow : scrollOffset.desktop);
-
 /**
  * The section a shared link points at (`?spec=combat&build=backstab#talents`), read once
  * before anything renders. Left to itself, the browser races React for it: sometimes the
@@ -147,6 +145,23 @@ function focusSection(el: HTMLElement) {
   el.focus({ preventScroll: true });
 }
 
+/**
+ * A media query's match, as React state. It only changes when the viewport crosses the
+ * breakpoint, so resizing doesn't re-render the page on every frame. Without a window
+ * (prerendering), it reads as the desktop layout.
+ */
+function useMedia(query: string): boolean {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia(query);
+      mq.addEventListener('change', onChange);
+      return () => mq.removeEventListener('change', onChange);
+    },
+    () => window.matchMedia(query).matches,
+    () => false,
+  );
+}
+
 function scrollToSection(el: HTMLElement) {
   const top = el.getBoundingClientRect().top + window.scrollY - sectionOffset();
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -166,10 +181,9 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const [sort, setSort] = useState<Sort>({ key: 'idx', dir: 'desc' });
   const [gearSet, setGearSetState] = useState<GearSetId>('prebis');
   const [consumeFilter, setConsumeFilterState] = useState('All');
-  const [foreverFilter, setForeverFilterState] = useState('All');
+  const [guideFilter, setGuideFilterState] = useState('All');
   const [sweaty, setSweaty] = useState(initial.sweaty);
   const [openRaid, setOpenRaid] = useState(0);
-  const [openFaq, setOpenFaq] = useState(-1);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(sectionIds[0]);
@@ -178,29 +192,8 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const [privacyOpen, setPrivacyOpenState] = useState(
     () => typeof window !== 'undefined' && window.location.hash === PRIVACY_HASH,
   );
-  const [vw, setVw] = useState(() => (typeof window === 'undefined' ? 1440 : window.innerWidth));
-
-  const isNarrow = vw < bp.rail;
+  const isNarrow = useMedia(`(width < ${bp.rail}px)`);
   const copyTimer = useRef<number | undefined>(undefined);
-
-  /* ----- viewport ----- */
-  useEffect(() => {
-    let raf = 0;
-    const onResize = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        setVw(window.innerWidth);
-      });
-    };
-    window.addEventListener('resize', onResize);
-    window.addEventListener('orientationchange', onResize);
-    return () => {
-      window.removeEventListener('resize', onResize);
-      window.removeEventListener('orientationchange', onResize);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
 
   /* Drawer belongs to narrow viewports only. */
   useEffect(() => {
@@ -273,20 +266,13 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
         setSearchOpen((o) => !o);
         return;
       }
-      if (e.key === 'Escape' && searchOpen) {
-        setSearchOpen(false);
-        return;
-      }
-      if (e.key === 'Escape' && drawer) {
-        setDrawer(false);
-        return;
-      }
+      // Esc is the drawer's and search's own: they're native dialogs.
       // No bare-key shortcuts (e.g. `/`): WCAG 2.1.4 — they collide with speech input and
       // can't be remapped here. Keep shortcuts behind a modifier.
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [searchOpen, drawer]);
+  }, []);
 
   useEffect(() => () => window.clearTimeout(copyTimer.current), []);
 
@@ -300,8 +286,12 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   /* ----- actions ----- */
   const jump = useCallback(
     (id: string) => {
-      setDrawer(false);
-      setSearchOpen(false);
+      // Close the drawer or search first: while a modal dialog is open the page is inert and
+      // can't take focus, and closing one hands focus back to whatever opened it.
+      flushSync(() => {
+        setDrawer(false);
+        setSearchOpen(false);
+      });
       const el = document.getElementById(id);
       if (!el) return;
       scrollToSection(el);
@@ -372,15 +362,19 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     window.history.replaceState(null, '', url);
   }, []);
 
+  // Both keep the section you're reading where it is on screen (lib/keepPlace).
   const setSpec = useCallback(
     (id: SpecId) => {
+      const next = buildForSwitch(id, build, builds[id]).id;
+      holdPlace(`${id}/${next}`);
       setSpecState(id);
-      setBuilds((b) => ({ ...b, [id]: buildForSwitch(id, build, b[id]).id }));
+      setBuilds((b) => ({ ...b, [id]: next }));
       track('spec_select', { spec: id });
     },
-    [build],
+    [build, builds],
   );
   const pickBuild = useCallback((id: SpecId, buildId: string) => {
+    holdPlace(`${id}/${buildId}`);
     setSpecState(id);
     setBuilds((b) => ({ ...b, [id]: buildId }));
     track('build_select', { spec: id, build: buildId });
@@ -398,9 +392,9 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     setConsumeFilterState(cat);
     track('filter_select', { list: 'consumables', filter: cat });
   }, []);
-  const setForeverFilter = useCallback((cat: string) => {
-    setForeverFilterState(cat);
-    track('filter_select', { list: 'forever', filter: cat });
+  const setGuideFilter = useCallback((cat: string) => {
+    setGuideFilterState(cat);
+    track('filter_select', { list: 'guide', filter: cat });
   }, []);
 
   const toggleSort = useCallback((key: SortKey) => {
@@ -416,33 +410,28 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       sort,
       gearSet,
       consumeFilter,
-      foreverFilter,
+      guideFilter,
       sweaty,
       openRaid,
-      openFaq,
       searchOpen,
       query,
       active,
       copied,
       drawer,
       privacyOpen,
-      vw,
-      isPhone: vw < bp.phone,
       isNarrow,
-      isWide: vw >= bp.wide,
       setSpec,
       pickBuild,
       setSimSet,
       toggleSort,
       setGearSet,
       setConsumeFilter,
-      setForeverFilter,
+      setGuideFilter,
       toggleSweaty: () => {
         setSweaty(!sweaty);
         track('sweaty_toggle', { enabled: !sweaty });
       },
       toggleRaid: (i) => setOpenRaid((o) => (o === i ? -1 : i)),
-      toggleFaq: (i) => setOpenFaq((o) => (o === i ? -1 : i)),
       setSearchOpen,
       setQuery,
       setDrawer,
@@ -457,17 +446,15 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       sort,
       gearSet,
       consumeFilter,
-      foreverFilter,
+      guideFilter,
       sweaty,
       openRaid,
-      openFaq,
       searchOpen,
       query,
       active,
       copied,
       drawer,
       privacyOpen,
-      vw,
       isNarrow,
       setSpec,
       pickBuild,
@@ -475,14 +462,14 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       setGearSet,
       setSimSet,
       setConsumeFilter,
-      setForeverFilter,
+      setGuideFilter,
       toggleSort,
       copy,
       jump,
     ],
   );
 
-  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+  return <Ctx value={value}>{children}</Ctx>;
 }
 
 export function useHandbook(): HandbookState {

@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 import { buildsFor } from '../../content/builds';
 import { points as treePoints } from '../../content/builds/shared';
 import { specById } from '../../content/content';
@@ -7,6 +7,7 @@ import type { Build } from '../../content/types';
 import { decodeTalentLink, decodeTalentOrder } from '../../lib/talentCalc';
 import { useHandbook, useShownBuild } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
+import { useGrown } from '../../state/useGrown';
 import { BUILD_CARD_ID, BuildList } from '../ui/BuildList';
 import { SectionHeading } from '../ui/SectionHeading';
 import { TalentOrder, TalentPreview } from '../ui/TalentTree';
@@ -23,13 +24,7 @@ const BuildCard = memo(function BuildCard({ build }: { build: Build }) {
   const { tone } = useTheme();
   const total = build.phase === 'endgame' ? TOTAL_POINTS : undefined;
   const points = total ?? build.talents.reduce((n, t) => n + t.pts, 0);
-  const [grown, setGrown] = useState(false);
-
-  useEffect(() => {
-    setGrown(false);
-    const raf = requestAnimationFrame(() => setGrown(true));
-    return () => cancelAnimationFrame(raf);
-  }, [build]);
+  const grown = useGrown(build);
 
   const trees = build.talents;
   const pending = !trees.length && !build.talentNote;

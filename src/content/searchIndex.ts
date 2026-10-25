@@ -1,8 +1,7 @@
 import {
   buffGroups,
   consumables,
-  faqs,
-  foreverChanges,
+  guide,
   macros,
   nav,
   poisons,
@@ -23,7 +22,7 @@ export interface SearchEntry {
 
 /**
  * ~140 entries: every nav section, consumable, buff/debuff, profession, poison,
- * raid, Forever change, FAQ, macro and spec. Built once at module load.
+ * raid, guide entry, macro and spec. Built once at module load.
  */
 export const searchIndex: SearchEntry[] = [
   ...nav.flatMap((g) =>
@@ -42,13 +41,12 @@ export const searchIndex: SearchEntry[] = [
   ...races.map((r) => ({ kind: 'Race', label: r.name, id: 'races', section: 'Races' })),
   ...poisons.map((p) => ({ kind: 'Poison', label: p.name, id: 'poisons', section: 'Poisons' })),
   ...raids.map((r) => ({ kind: 'Raid', label: r.name, id: 'raid', section: r.tag })),
-  ...foreverChanges.map((c) => ({
-    kind: 'Forever',
+  ...guide.map((c) => ({
+    kind: 'Guide',
     label: c.title,
-    id: 'forever',
-    section: c.status,
+    id: 'new-to-rogue',
+    section: 'New to Rogue?',
   })),
-  ...faqs.map((f) => ({ kind: 'FAQ', label: f.q, id: 'faq', section: 'FAQ' })),
   ...macros.map((m) => ({ kind: 'Macro', label: m.name, id: 'macros', section: 'Macros' })),
   ...specs.map((s) => ({ kind: 'Spec', label: s.name, id: 'specs', section: 'Meta breakdown' })),
 ];

@@ -63,6 +63,7 @@ let state: ConsentState = {
   choice: typeof window === 'undefined' ? null : readChoice(),
   reviewing: false,
 };
+const serverState: ConsentState = { choice: 'denied', reviewing: false };
 const listeners = new Set<() => void>();
 
 function emit(next: Partial<ConsentState>) {
@@ -77,7 +78,9 @@ const subscribe = (l: () => void) => {
 
 /** The visitor's choice, plus whether the banner should be on screen. */
 export function useConsent(): ConsentState & { open: boolean } {
-  const s = useSyncExternalStore(subscribe, () => state);
+  // Prerendered HTML can't know the visitor's choice, so it leaves the banner out; it
+  // appears once the page runs and reads the real choice.
+  const s = useSyncExternalStore(subscribe, () => state, () => serverState);
   return { ...s, open: analyticsConfigured && (s.choice === null || s.reviewing) };
 }
 

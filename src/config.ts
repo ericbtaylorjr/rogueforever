@@ -33,7 +33,10 @@ export const config: HandbookConfig = {
   cfBeaconToken: '464cb912098a449fb507327176b98dbd',
 };
 
-/** Viewport thresholds. Kept in one place so CSS and JS can't drift apart. */
+/**
+ * Viewport thresholds, for the few places script needs one. They mirror the `--breakpoint-*`
+ * tokens in styles/index.css that the layout uses (`phone` is Tailwind's built-in `sm`).
+ */
 export const bp = {
   phone: 640,
   stack: 900,

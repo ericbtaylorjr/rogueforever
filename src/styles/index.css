@@ -259,7 +259,10 @@
   --font-sans: "Source Sans 3", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  /* Design breakpoints. Named for what they do, not for t-shirt sizes. */
+  /* Design breakpoints. Named for what they do, not for t-shirt sizes. `sm` (phones end) is
+     Tailwind's own, restated in px: breakpoints only sort into the right order when they
+     share a unit, so `rail:` rules can override `sm:` ones. */
+  --breakpoint-sm: 640px;
   --breakpoint-stack: 900px;
   --breakpoint-hero: 980px;
   --breakpoint-rail: 1100px;

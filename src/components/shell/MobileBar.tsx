@@ -9,7 +9,7 @@ export function MobileBar() {
 
   return (
     <header
-      className="fixed left-0 right-0 top-0 z-[45] flex h-[58px] items-center gap-[12px] border-b border-line px-[15px]"
+      className="fixed left-0 right-0 top-0 z-[45] flex h-[58px] items-center gap-[12px] border-b border-line px-[15px] rail:hidden"
       style={{ background: 'var(--bar-bg)', backdropFilter: 'blur(14px)' }}
     >
       <button

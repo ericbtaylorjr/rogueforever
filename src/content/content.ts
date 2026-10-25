@@ -12,8 +12,7 @@ export const {
   specIndex,
   levelingIndex,
   foreverOutlook,
-  foreverDates,
-  foreverChanges,
+  guide,
   races,
   poisons,
   consumables,
@@ -21,7 +20,6 @@ export const {
   professions,
   gearSlots,
   raids,
-  faqs,
   tools,
   macros,
   changelog,
@@ -48,10 +46,10 @@ export const sectionLabels = Object.fromEntries(
 /** Category filters, derived rather than hardcoded so new data shows up. */
 export const consumableCats = ['All', ...new Set(consumables.map((c) => c.k))];
 
-export const foreverCats = ['All', ...new Set(foreverChanges.map((c) => c.cat))];
+export const guideCats = ['All', ...new Set(guide.map((c) => c.cat))];
 
-export const foreverCatCount = (cat: string) =>
-  cat === 'All' ? foreverChanges.length : foreverChanges.filter((c) => c.cat === cat).length;
+export const guideCatCount = (cat: string) =>
+  cat === 'All' ? guide.length : guide.filter((c) => c.cat === cat).length;
 
 export const consumableCatCount = (cat: string, sweaty: boolean) =>
   consumables.filter((c) => (cat === 'All' || c.k === cat) && (sweaty || !c.s)).length;

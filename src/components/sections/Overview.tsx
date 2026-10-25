@@ -129,7 +129,7 @@ export function Overview() {
             </button>
             <button
               type="button"
-              onClick={() => jump('forever')}
+              onClick={() => jump('new-to-rogue')}
               className="rounded-[8px] border border-line px-[16px] py-[11px] text-[13px] font-semibold text-mute transition-colors hover:border-sky hover:text-sky"
             >
               {hero.ctaGhost}

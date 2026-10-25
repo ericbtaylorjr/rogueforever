@@ -52,9 +52,13 @@ and the raid badges. IBM Plex Mono is only for code and key chips; numbers use t
 face with tabular lining figures (`.t-num`). Keep monospace out of labels.
 
 **Breakpoints are named for what they do**: `stack:` (900px), `hero:` (980px),
-`rail:` (1100px), `wide:` (1600px). Layout switches the design drives from JS
-(drawer, scroll offset, Forever outlook rows) read the same numbers from
-`src/config.ts` so CSS and JS can't drift.
+`rail:` (1100px), `wide:` (1600px). Layout comes from these CSS breakpoints only, so the
+page renders the same before any script runs. The few behaviours that need one in JS
+(closing the drawer, scroll offsets) read the same numbers from `src/config.ts`.
+
+**Switching spec or build keeps your place.** The section you're reading stays where it is
+on screen while the content above it changes height (`src/lib/keepPlace.ts`).
+Nothing scrolls into view or animates.
 
 **Tips use `<Tip>`** (`components/ui/Tip.tsx`), never a hand-styled `<Callout>`. The
 colour says who a tip is for: yellow (default) for every Rogue, blue with the droplet
@@ -122,7 +126,7 @@ Target: WCAG 2.2 AA. Last audited 22 October 2026 with axe-core 4.10 (0 violatio
 and 390px, dark and light, on an endgame build, the Combat and Subtlety leveling builds with
 their milestone gear tables, and an open Wowhead tooltip), a 274-stop keyboard walk (every
 stop shows a focus ring) and Lighthouse 12 (Accessibility 100). Earlier audits also covered
-the palette, drawer, profile modal and an open FAQ.
+the palette, drawer, profile modal and an open raid.
 
 Covered: skip link and `<main>` landmark; nav jumps and shared section links
 (`?spec=combat&build=backstab#talents`, scrolled to once the page has loaded) move keyboard
@@ -153,7 +157,7 @@ Known / accepted: the hero's looping poison drips have no pause control beyond
 1.4.13): moving the pointer off the trigger hides them, so the next item in a list shows its
 own tooltip instead of being covered. Their content is display only, and every item and spell
 with a tooltip also links to its Wowhead page. Not done yet:
-arrow-key navigation between FAQ/raid accordion headers (not required by WCAG).
+arrow-key navigation between raid accordion headers (not required by WCAG).
 
 ## Performance
 
@@ -204,11 +208,12 @@ React DOM) has downloaded and rendered. Keep it that way:
   on a leveling build with its three milestone gear tables) are
   expected for a one-page app this size.
 - **Not done, on purpose:** `content-visibility: auto` on later sections saves ~100ms of
-  mobile LCP but makes section positions estimates, which breaks the deep-link and
-  build-switch scrolling. Pre-rendering the HTML at build would paint the hero without
-  waiting for JS, but the first render depends on the theme, viewport width, URL and
-  remembered build, so a snapshot would flash or shift for many visitors unless every one
-  of those moves to CSS or post-hydration state. Swapping React for Preact (`preact/compat`)
+  mobile LCP but makes section positions estimates, which breaks deep-link scrolling and
+  keeping your place on a build switch. Pre-rendering the HTML at build would paint the
+  hero without waiting for JS. Layout and theme no longer depend on script (CSS
+  breakpoints, `theme-init.js`) and the app renders on the server, but the URL's and
+  remembered build would still swap in after load unless the default build is the
+  only one prerendered. Swapping React for Preact (`preact/compat`)
   would cut ~50 KB gzipped from the bundle; it's the cheapest remaining win, but needs a
   full regression pass.
 
@@ -304,8 +309,8 @@ split by spec or build.
 | `sweaty_toggle` | sweaty mode is switched | `enabled` |
 | `gear_tab` | a Gear tab is picked | `tab` |
 | `meta_tab` | Meta breakdown switches between End Game and Leveling | `tab` (`endgame`/`leveling`) |
-| `filter_select` | a Consumables or Forever watch filter is picked | `list`, `filter` |
-| `raid_open` / `faq_open` | a raid or FAQ entry is expanded | `raid` / `question` |
+| `filter_select` | a Consumables or New to Rogue? filter is picked | `list`, `filter` |
+| `raid_open` | a raid entry is expanded | `raid` |
 | `tooltip_view` | a tooltip stays up 0.7s | `name`, `kind` |
 | `search_open` | search opens, by any route | — |
 | `search` | search closes after a term was typed | `search_term`, `results`, `picked`, `position` |
@@ -350,9 +355,7 @@ backfills, so do this before you rely on the data.
 
 ## Editorial rules the code enforces
 
-- Every Forever claim carries a status, and only `Confirmed` reads as fact. The
-  three badge treatments are in `ForeverWatch.tsx` — keep them distinct.
-- Forever Watch entries come only from official Blizzard sources (news.blizzard.com,
-  worldofwarcraft.blizzard.com, blue posts), and every entry links its `sources`.
+- New to Rogue? entries that relay a Blizzard change link their official `sources`
+  (news.blizzard.com, worldofwarcraft.blizzard.com, blue posts). Plain tips leave `sources` empty.
 - The spec board is a 0–100 consensus index, never simulated DPS.
 - The sweaty marker is a CSS teardrop, never an emoji.

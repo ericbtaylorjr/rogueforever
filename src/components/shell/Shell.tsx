@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 import { config } from '../../config';
 import { shell } from '../../content/copy';
 import { themeVars } from '../../lib/theme';
-import { useHandbook } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { CommandPalette } from './CommandPalette';
 import { ConsentBanner } from './ConsentBanner';
@@ -12,44 +11,32 @@ import { PrivacyPolicy } from './PrivacyPolicy';
 import { Sidebar } from './Sidebar';
 import { TopTabs } from './TopTabs';
 
+/**
+ * The page frame. Every viewport gets the same markup and CSS picks the layout (the
+ * `rail:` breakpoint is 1100px), so the page renders correctly before any script runs.
+ * Below 1100px the nav is always the mobile bar and drawer, whatever navLayout says.
+ */
 export function Shell({ children }: { children: ReactNode }) {
-  const { isNarrow, isWide, isPhone } = useHandbook();
   const { theme } = useTheme();
-
-  // Below 1100px the nav is always the drawer, whatever navLayout says.
-  const railNav = !isNarrow && config.navLayout === 'sidebar';
-  const topNav = !isNarrow && config.navLayout === 'topTabs';
+  const railNav = config.navLayout === 'sidebar';
 
   return (
     <div style={themeVars(theme)}>
       <a href="#main" className="skip-link">
         {shell.skipToContent}
       </a>
-      {railNav && <Sidebar />}
-      {topNav && <TopTabs />}
-      {isNarrow && (
-        <>
-          <MobileBar />
-          <Drawer />
-        </>
-      )}
+      {railNav ? <Sidebar /> : <TopTabs />}
+      <MobileBar />
+      <Drawer />
 
       <main
         id="main"
         tabIndex={-1}
-        className="relative z-[1] outline-none"
-        style={{
-          marginLeft: railNav ? 'var(--rail-w)' : undefined,
-          paddingTop: isNarrow ? 'var(--topbar-h)' : topNav ? 62 : undefined,
-        }}
+        className={`relative z-[1] outline-hidden max-rail:pt-[var(--topbar-h)] ${
+          railNav ? 'rail:ml-[var(--rail-w)]' : 'rail:pt-[62px]'
+        }`}
       >
-        <div
-          className="mx-auto"
-          style={{
-            maxWidth: isWide ? 1420 : 1180,
-            padding: `0 ${isPhone ? 15 : isNarrow ? 22 : 30}px ${isPhone ? 80 : 120}px`,
-          }}
-        >
+        <div className="mx-auto max-w-[1180px] px-[15px] pb-[80px] sm:px-[22px] sm:pb-[120px] rail:px-[30px] wide:max-w-[1420px]">
           {children}
         </div>
       </main>

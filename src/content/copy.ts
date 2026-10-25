@@ -31,7 +31,7 @@ export const hero = {
       " and the WoWSims data the community has built, tested and argued over together. If you have questions, comments or feedback about anything here, ping The Comfy Wizard in the Discord. Corrections are always welcome.",
   },
   ctaPrimary: 'Pick your spec',
-  ctaGhost: 'What Forever changes',
+  ctaGhost: 'New to Rogue?',
   note: {
     title: 'A note from Comfy',
     body: [
@@ -64,7 +64,7 @@ export const scope = {
 /** Section headings. Nav labels are shorter — these are the on-page H2s. */
 export const headings: Record<string, string> = {
   specs: 'Meta breakdown',
-  forever: 'Forever watch',
+  'new-to-rogue': 'New to Rogue?',
   talents: 'Talents',
   stats: 'Stats',
   races: 'Races',
@@ -79,7 +79,6 @@ export const headings: Record<string, string> = {
   pvp: 'PvP',
   tools: 'Tools & UI',
   macros: 'Macros',
-  faq: 'FAQ',
   changelog: 'Changelog',
   credits: 'Credits',
 };
@@ -120,12 +119,11 @@ export const buildList = {
   ungraded: 'Not graded',
 } as const;
 
-export const forever = {
+export const newToRogue = {
   intro:
-    "Only what Blizzard has officially said, from news posts, panel recaps, blue posts and developer interviews, each linked to its source. Anything Blizzard hasn't published is marked as such, and community findings stay out until Blizzard confirms them.",
+    'A library of tips and systems explanations for the Rogue in WoW Forever. It is here to help a Beginner or Intermediate Rogue player better understand the class and how to perform well. Where a change comes from Blizzard, the entry links its source.',
   impactPrefix: 'What it means for you:',
   sourcesLabel: 'Sources:',
-  sourceLink: 'Source ↗',
 } as const;
 
 /** Lead-ins for <Tip>. */

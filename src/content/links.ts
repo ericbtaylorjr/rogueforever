@@ -7,6 +7,7 @@
  */
 export const links = {
   wowsims: 'https://www.wowsims.com/forever/rogue/dps/',
+  warcraftlogs: 'https://www.warcraftlogs.com',
   googleAnalyticsData: 'https://policies.google.com/technologies/partner-sites',
   googlePrivacy: 'https://policies.google.com/privacy',
   cloudflarePrivacy: 'https://www.cloudflare.com/privacypolicy/',

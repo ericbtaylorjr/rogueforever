@@ -95,7 +95,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     [theme, toggleTheme],
   );
 
-  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+  return <Ctx value={value}>{children}</Ctx>;
 }
 
 export function useTheme(): ThemeState {

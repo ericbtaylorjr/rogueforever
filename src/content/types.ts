@@ -106,25 +106,15 @@ export interface ForeverSource {
   url: string;
 }
 
-export interface ForeverDate {
-  label: string;
-  val: string;
-  note: string;
-  color: string;
-  source: ForeverSource;
-}
-
-/** Only `Confirmed` may be presented as fact. See README > Editorial rules. */
-export type ForeverStatus = 'Confirmed' | 'Demo footage' | 'Not published' | 'Partial';
-
-export interface ForeverChange {
+/** One "New to Rogue?" entry. Blizzard-sourced entries cite it; plain tips leave `sources` empty. */
+export interface GuideEntry {
   title: string;
   cat: string;
-  status: ForeverStatus;
   hue: string;
   body: string;
-  impact: string;
-  /** Every entry cites at least one official Blizzard source. */
+  impact?: string;
+  /** Link the spells, talents and items named in the text to Wowhead, with tooltips. */
+  wowhead?: boolean;
   sources: ForeverSource[];
 }
 
@@ -168,11 +158,6 @@ export interface Raid {
   summary: string;
   prep: string;
   phases: RaidPhase[];
-}
-
-export interface Faq {
-  q: string;
-  a: string;
 }
 
 export interface Tool {
@@ -280,8 +265,7 @@ export interface Content {
   specIndex: Record<SimSetId, SimSet>;
   levelingIndex: Record<LevelingSetId, SimSet>;
   foreverOutlook: ForeverOutlook[];
-  foreverDates: ForeverDate[];
-  foreverChanges: ForeverChange[];
+  guide: GuideEntry[];
   races: Race[];
   poisons: Poison[];
   consumables: Consumable[];
@@ -289,7 +273,6 @@ export interface Content {
   professions: Profession[];
   gearSlots: string[];
   raids: Raid[];
-  faqs: Faq[];
   tools: Tool[];
   macros: Macro[];
   changelog: ChangelogEntry[];

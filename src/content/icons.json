@@ -444,9 +444,24 @@
     "icon": "spell_shadow_antishadow",
     "kind": "spell"
   },
+  "Hack and Slash": {
+    "id": 13960,
+    "icon": "inv_sword_27",
+    "kind": "spell"
+  },
+  "Hand of Justice": {
+    "id": 15601,
+    "icon": "inv_jewelry_talisman_01",
+    "kind": "spell"
+  },
   "Major Frenzy Potion": {
     "id": 250943,
     "icon": "inv_potione_6",
+    "kind": "item"
+  },
+  "Thrash Blade": {
+    "id": 17705,
+    "icon": "inv_sword_36",
     "kind": "item"
   },
   "item:252428": {

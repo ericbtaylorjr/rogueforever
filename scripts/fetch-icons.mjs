@@ -69,8 +69,12 @@ const pinned = [
   ['Venom', 1310703],
   ['Premeditation', 14183],
   ['Preparation', 14185],
+  ['Hack and Slash', 13960],
+  ['Hand of Justice', 15601],
+  ['Windfury Totem', 8512],
 ].map(([name, id]) => ({ name, id, kind: 'spell' }));
 pinned.push({ name: 'Major Frenzy Potion', id: 250943, kind: 'item' });
+pinned.push({ name: 'Thrash Blade', id: 17705, kind: 'item' });
 // Generated leveling lists (scripts/gear-research) live in JSON.
 const levelingJson = JSON.parse(readFileSync(root('src/content/leveling-gear.json'), 'utf8'));
 const levelingItems = ['shared', 'slow', 'daggers'].flatMap((k) => levelingJson[k] ?? []);

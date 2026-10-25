@@ -121,7 +121,7 @@ const cfBeacon = (): Plugin => ({
 /**
  * Search engine data, built from content.json so it can't drift from the page:
  * - JSON-LD (schema.org) in <head>: the site, the guide (author, published and updated
- *   dates from the changelog) and the FAQ. A data block, not a script, so the CSP allows it.
+ *   dates from the changelog). A data block, not a script, so the CSP allows it.
  * - dist/sitemap.xml with <lastmod> from the newest changelog entry, replacing public/'s copy.
  */
 const SITE = 'https://wowrogue.gg/';
@@ -161,16 +161,6 @@ const seo = (): Plugin => {
         datePublished: dates[0],
         dateModified: dates.at(-1),
         about: { '@type': 'VideoGame', name: 'World of Warcraft' },
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': `${SITE}#faq`,
-        isPartOf: { '@id': `${SITE}#website` },
-        mainEntity: (content.faqs as { q: string; a: string }[]).map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
       },
     ],
   };

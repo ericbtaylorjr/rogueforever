@@ -5,9 +5,8 @@ import { Changelog } from './components/sections/Changelog';
 import { Credits } from './components/sections/Credits';
 import { Consumables } from './components/sections/Consumables';
 import { ExposeArmor } from './components/sections/ExposeArmor';
-import { Faq } from './components/sections/Faq';
 import { Footer } from './components/sections/Footer';
-import { ForeverWatch } from './components/sections/ForeverWatch';
+import { NewToRogue } from './components/sections/NewToRogue';
 import { Gear } from './components/sections/Gear';
 import { Macros } from './components/sections/Macros';
 import { Overview } from './components/sections/Overview';
@@ -71,9 +70,7 @@ export default function App() {
             <Divider />
             <Macros />
             <Divider />
-            <Faq />
-            <Divider />
-            <ForeverWatch />
+            <NewToRogue />
             <Divider />
             <Changelog />
             <Divider />

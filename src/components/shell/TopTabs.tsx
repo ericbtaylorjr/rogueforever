@@ -16,7 +16,7 @@ export function TopTabs() {
 
   return (
     <header
-      className="fixed left-0 right-0 top-0 z-[40] border-b border-line"
+      className="fixed left-0 right-0 top-0 z-[40] border-b border-line max-rail:hidden"
       style={{ background: 'var(--bar-bg)', backdropFilter: 'blur(14px)' }}
     >
       <div className="mx-auto flex max-w-[1420px] items-center gap-[18px] px-[30px] py-[12px]">
