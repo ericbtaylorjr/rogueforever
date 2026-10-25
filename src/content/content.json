@@ -172,14 +172,24 @@
       "note": "Agility and crit. The default battle elixir for a raiding Rogue."
     },
     {
+      "n": "Elixir of the Grizzly",
+      "k": "Elixir",
+      "note": "Strength and +2% crit for 30 minutes. Crafted. The Strength option when you want the crit too."
+    },
+    {
       "n": "Elixir of Greater Strength",
       "k": "Elixir",
-      "note": "Strength. Goes in the guardian slot alongside Mongoose."
+      "note": "Strength for a full hour. Elixir of the Grizzly has the same Strength plus 2% crit, for 30 minutes."
     },
     {
       "n": "Elixir of Fortitude",
       "k": "Elixir",
-      "note": "Health. Cheap insurance against one mistake."
+      "note": "+200 health for 30 minutes. Cheap insurance against one mistake."
+    },
+    {
+      "n": "Elixir of Greater Fortitude",
+      "k": "Elixir",
+      "note": "+400 health for 30 minutes. The level 55 step up from Fortitude."
     },
     {
       "n": "Elixir of Greater Defense",
@@ -191,6 +201,16 @@
       "n": "Potion of Demon Slaying",
       "k": "Potion",
       "note": "Attack power against demons only. Mandatory on demon bosses, dead weight elsewhere."
+    },
+    {
+      "n": "Major Frenzy Potion",
+      "k": "Potion",
+      "note": "+80 attack power for 30 seconds. Crafted and cheap, so use it on cooldown. Greater and Superior Frenzy are the weaker versions."
+    },
+    {
+      "n": "Potion of Beast Slaying",
+      "k": "Potion",
+      "note": "Attack power against beasts only. Same idea as Demon Slaying, for beast bosses."
     },
     {
       "n": "Juju Might",
@@ -218,7 +238,12 @@
     {
       "n": "Winterfall Firewater",
       "k": "Misc",
-      "note": "Attack power. The budget alternative when Juju Might runs dry."
+      "note": "Attack power. A decent alternative when Juju Might runs dry."
+    },
+    {
+      "n": "Distilled Firewater",
+      "k": "Misc",
+      "note": "Same +35 attack power for 20 minutes as Winterfall Firewater, but crafted."
     },
     {
       "n": "Ground Scorpok Assay",
@@ -233,12 +258,23 @@
     {
       "n": "Elemental Sharpening Stone",
       "k": "Stone",
-      "note": "Weapon stone, crit chance. Reapply between pulls, never mid-fight."
+      "note": "Weapon stone, +2% crit. Poisons and stones now stack on the same weapon. Reapply between pulls, never mid-fight."
     },
     {
       "n": "Dense Sharpening Stone",
       "k": "Stone",
-      "note": "Flat weapon damage. The cheap fallback when Elemental is gone."
+      "note": "+8 damage on a sharp weapon (dagger, sword, axe). The cheap fallback when Elemental is gone."
+    },
+    {
+      "n": "Dense Weightstone",
+      "k": "Stone",
+      "note": "+8 damage on a blunt weapon (mace, fist weapon). Forever lets Combat use any weapon type, so this is the mace version of Dense Sharpening Stone."
+    },
+    {
+      "n": "Consecrated Sharpening Stone",
+      "s": true,
+      "k": "Stone",
+      "note": "+100 attack power against undead for 1 hour. Only worth it for undead content."
     },
     {
       "n": "Blessed Sunfruit",
@@ -248,7 +284,7 @@
     {
       "n": "Grilled Squid",
       "k": "Food",
-      "note": "Agility food. Competes with Sunfruit — sim which one your gear wants."
+      "note": "Well Fed: +1% crit. Cheap, and a fine fallback while you level."
     },
     {
       "n": "Smoked Desert Dumplings",
@@ -256,9 +292,24 @@
       "note": "Strength food, quest-limited supply. Hoard them for progression."
     },
     {
+      "n": "Filet o' Flank",
+      "k": "Food",
+      "note": "Well Fed: +25 Agility and +10 Stamina. Crafted, level 55. Sim it against Prowler Steak and Mightfish Steak."
+    },
+    {
+      "n": "Prowler Steak",
+      "k": "Food",
+      "note": "Well Fed: +25 Strength and +10 Stamina. Crafted, level 55."
+    },
+    {
+      "n": "Mightfish Steak",
+      "k": "Food",
+      "note": "Well Fed: +40 attack power. Level 45 food that still holds up at 60."
+    },
+    {
       "n": "Dragonbreath Chili",
       "k": "Food",
-      "note": "Proc damage that scales with spell power — the one place spell power touches a Rogue. A parsing curiosity, not a build."
+      "note": "Proc fire damage on melee hits. Not worth a bag slot unless you are chasing the last fraction of a percent."
     },
     {
       "n": "Rumsey Rum Black Label",
@@ -268,13 +319,37 @@
     {
       "n": "Gordok Green Grog",
       "k": "Food",
-      "note": "Agility and stamina. Cheap Dire Maul staple."
+      "note": "Stamina, 15 minutes. Cheap Dire Maul staple."
     },
     {
       "n": "Flask of the Titans",
       "s": true,
       "k": "Flask",
       "note": "Big health pool, survives death. Expensive — progression nights only."
+    },
+    {
+      "n": "Flask of Natural Aggression",
+      "s": true,
+      "k": "Flask",
+      "note": "+60 Stamina, and +4% crit in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
+    },
+    {
+      "n": "Flask of Natural Swiftness",
+      "s": true,
+      "k": "Flask",
+      "note": "+60 Stamina, and +5% Haste in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
+    },
+    {
+      "n": "Flask of Natural Accuracy",
+      "s": true,
+      "k": "Flask",
+      "note": "+60 Stamina, and +5% Hit in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
+    },
+    {
+      "n": "Flask of Natural Precision",
+      "s": true,
+      "k": "Flask",
+      "note": "+60 Stamina, and 5% fewer parries and dodges in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
     },
     {
       "n": "Thistle Tea",
@@ -305,7 +380,7 @@
       "n": "Restorative Potion",
       "s": true,
       "k": "Potion",
-      "note": "Clears a magic effect off yourself every few seconds. Saves healer globals."
+      "note": "Removes a magic, curse, poison or disease effect from you every 5 seconds for 30 seconds. Saves healer globals."
     },
     {
       "n": "Purification Potion",
@@ -368,7 +443,17 @@
     {
       "n": "Deadly Poison",
       "k": "Poison",
-      "note": "Stacking damage over time. Strong off-hand option, especially for Assassination."
+      "note": "Stacking damage over time. Occult Poison replaces it from level 54, so this is the leveling and fallback option."
+    },
+    {
+      "n": "Occult Poison II",
+      "k": "Poison",
+      "note": "Counts as Deadly Poison and benefits from all its talents. Deals more damage and makes the target take 4% more Arcane, Fire, Frost, Nature and Shadow damage. Level 60; Occult Poison I is level 54."
+    },
+    {
+      "n": "Sebacious Poison",
+      "k": "Poison",
+      "note": "Reduces the target's armor by 1700 and benefits from Improved Expose Armor. A Rogue-only armor debuff."
     },
     {
       "n": "Wound Poison",
@@ -386,15 +471,19 @@
       "note": "Casting slow. Carry a few for caster adds."
     },
     {
+      "n": "Atrophic Poison",
+      "k": "Poison",
+      "note": "Reduces the target's melee attack power by 205. Mostly a tanking tool."
+    },
+    {
+      "n": "Numbing Poison",
+      "k": "Poison",
+      "note": "Slows the target's melee attacks by 20%. Mostly a tanking tool."
+    },
+    {
       "n": "Flash Powder",
       "k": "Misc",
       "note": "Blind reagent. Keep a stack, nothing more."
-    },
-    {
-      "n": "Bogling Root",
-      "s": true,
-      "k": "Misc",
-      "note": "Small attack power buff, stacks with everything, annoying to macro."
     },
     {
       "n": "Whipper Root Tuber",
@@ -402,10 +491,14 @@
       "note": "Health on a separate cooldown from potions. Sneaky good."
     },
     {
-      "n": "Night Dragon’s Breath",
-      "s": true,
+      "n": "Songflower Seed",
       "k": "Misc",
-      "note": "Mana for your healers is not your problem, but the shared cooldown is worth knowing."
+      "note": "Plant it for 5% crit and 15 attributes on your whole party or raid, for 1 hour. Sold by NPCs. Exclusive with similar world effects."
+    },
+    {
+      "n": "Horn of the Dawn",
+      "k": "Misc",
+      "note": "Gives your party or raid 5% melee and ranged crit and 140 attack power for 2 hours. Sold by NPCs. Exclusive with similar world effects."
     }
   ],
   "buffGroups": [
@@ -895,7 +988,7 @@
       "sources": []
     },
     {
-      "title": "Gear lasts longer: horizontal progression",
+      "title": "Gear lasts longer: \"horizontal progression\"",
       "cat": "Systems",
       "hue": "#FFF468",
       "body": "Blizzard calls Forever horizontal, but gear still climbs, just much more slowly. Lead Classic Designer Tim Jones: \"We are going to continue to build content horizontally for players.\" Raid gear still gets stronger tier to tier, but Associate Production Director Clay Stone says the power gap between raid tiers will be \"as compact as possible\" while keeping new raids \"fulfilling and desirable.\"",

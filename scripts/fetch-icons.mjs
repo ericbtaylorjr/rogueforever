@@ -75,6 +75,18 @@ const pinned = [
 ].map(([name, id]) => ({ name, id, kind: 'spell' }));
 pinned.push({ name: 'Major Frenzy Potion', id: 250943, kind: 'item' });
 pinned.push({ name: 'Thrash Blade', id: 17705, kind: 'item' });
+// Poisons, pinned to the top rank (a name search lands on rank I) plus the Forever-only ones.
+for (const [name, id] of [
+  ['Instant Poison', 8928],
+  ['Deadly Poison', 20844],
+  ['Wound Poison', 10922],
+  ['Crippling Poison', 3776],
+  ['Mind-numbing Poison', 9186],
+  ['Occult Poison II', 234444],
+  ['Dense Weightstone', 12643],
+]) {
+  pinned.push({ name, id, kind: 'item' });
+}
 // Generated leveling lists (scripts/gear-research) live in JSON.
 const levelingJson = JSON.parse(readFileSync(root('src/content/leveling-gear.json'), 'utf8'));
 const levelingItems = ['shared', 'slow', 'daggers'].flatMap((k) => levelingJson[k] ?? []);

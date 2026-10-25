@@ -4,6 +4,11 @@
     "icon": "inv_potion_32",
     "kind": "item"
   },
+  "Elixir of the Grizzly": {
+    "id": 250351,
+    "icon": "inv_potion_160",
+    "kind": "item"
+  },
   "Elixir of Greater Strength": {
     "id": 9206,
     "icon": "inv_potion_59",
@@ -14,6 +19,11 @@
     "icon": "inv_potion_44",
     "kind": "item"
   },
+  "Elixir of Greater Fortitude": {
+    "id": 250335,
+    "icon": "inv_potion_45",
+    "kind": "item"
+  },
   "Elixir of Greater Defense": {
     "id": 13445,
     "icon": "inv_potion_66",
@@ -22,6 +32,16 @@
   "Potion of Demon Slaying": {
     "id": 9224,
     "icon": "inv_potion_27",
+    "kind": "item"
+  },
+  "Major Frenzy Potion": {
+    "id": 250943,
+    "icon": "inv_potione_6",
+    "kind": "item"
+  },
+  "Potion of Beast Slaying": {
+    "id": 250955,
+    "icon": "inv_alchemy_80_potion02yellow",
     "kind": "item"
   },
   "Juju Might": {
@@ -49,6 +69,11 @@
     "icon": "inv_potion_92",
     "kind": "item"
   },
+  "Distilled Firewater": {
+    "id": 246948,
+    "icon": "inv_potion_92",
+    "kind": "item"
+  },
   "Ground Scorpok Assay": {
     "id": 8412,
     "icon": "inv_misc_dust_02",
@@ -69,6 +94,16 @@
     "icon": "inv_stone_sharpeningstone_05",
     "kind": "item"
   },
+  "Dense Weightstone": {
+    "id": 12643,
+    "icon": "inv_stone_weightstone_05",
+    "kind": "item"
+  },
+  "Consecrated Sharpening Stone": {
+    "id": 23122,
+    "icon": "inv_stone_sharpeningstone_02",
+    "kind": "item"
+  },
   "Blessed Sunfruit": {
     "id": 13810,
     "icon": "inv_misc_food_41",
@@ -82,6 +117,21 @@
   "Smoked Desert Dumplings": {
     "id": 20452,
     "icon": "inv_misc_food_64",
+    "kind": "item"
+  },
+  "Filet o' Flank": {
+    "id": 238638,
+    "icon": "inv_misc_food_88_ravagernuggets",
+    "kind": "item"
+  },
+  "Prowler Steak": {
+    "id": 238637,
+    "icon": "inv_misc_food_84_roastclefthoof",
+    "kind": "item"
+  },
+  "Mightfish Steak": {
+    "id": 13934,
+    "icon": "inv_misc_food_47",
     "kind": "item"
   },
   "Dragonbreath Chili": {
@@ -102,6 +152,26 @@
   "Flask of the Titans": {
     "id": 13510,
     "icon": "inv_potion_62",
+    "kind": "item"
+  },
+  "Flask of Natural Aggression": {
+    "id": 274274,
+    "icon": "inv_potionc_1",
+    "kind": "item"
+  },
+  "Flask of Natural Swiftness": {
+    "id": 274276,
+    "icon": "inv_potionc_4",
+    "kind": "item"
+  },
+  "Flask of Natural Accuracy": {
+    "id": 274273,
+    "icon": "inv_potionc_5",
+    "kind": "item"
+  },
+  "Flask of Natural Precision": {
+    "id": 274275,
+    "icon": "inv_potionc_3",
     "kind": "item"
   },
   "Thistle Tea": {
@@ -185,28 +255,48 @@
     "kind": "item"
   },
   "Instant Poison": {
-    "id": 6947,
+    "id": 8928,
     "icon": "ability_poisons",
     "kind": "item"
   },
   "Deadly Poison": {
-    "id": 2892,
+    "id": 20844,
     "icon": "ability_rogue_dualweild",
     "kind": "item"
   },
+  "Occult Poison II": {
+    "id": 234444,
+    "icon": "spell_holy_nullifydisease",
+    "kind": "item"
+  },
+  "Sebacious Poison": {
+    "id": 217345,
+    "icon": "ability_creature_poison_06",
+    "kind": "item"
+  },
   "Wound Poison": {
-    "id": 10918,
+    "id": 10922,
     "icon": "inv_misc_herb_16",
     "kind": "item"
   },
   "Crippling Poison": {
-    "id": 3775,
+    "id": 3776,
     "icon": "ability_poisonsting",
     "kind": "item"
   },
   "Mind-numbing Poison": {
-    "id": 5237,
+    "id": 9186,
     "icon": "spell_nature_nullifydisease",
+    "kind": "item"
+  },
+  "Atrophic Poison": {
+    "id": 217347,
+    "icon": "ability_creature_disease_03",
+    "kind": "item"
+  },
+  "Numbing Poison": {
+    "id": 217346,
+    "icon": "ability_creature_disease_01",
     "kind": "item"
   },
   "Flash Powder": {
@@ -214,19 +304,19 @@
     "icon": "inv_misc_powder_purple",
     "kind": "item"
   },
-  "Bogling Root": {
-    "id": 5206,
-    "icon": "inv_misc_herb_07",
-    "kind": "item"
-  },
   "Whipper Root Tuber": {
     "id": 11951,
     "icon": "inv_misc_food_55",
     "kind": "item"
   },
-  "Night Dragon’s Breath": {
-    "id": 11952,
-    "icon": "inv_misc_food_45",
+  "Songflower Seed": {
+    "id": 233200,
+    "icon": "inv_misc_herb_dreamingglory",
+    "kind": "item"
+  },
+  "Horn of the Dawn": {
+    "id": 233198,
+    "icon": "inv_misc_horn_03",
     "kind": "item"
   },
   "Improved Battle Shout": {
@@ -453,11 +543,6 @@
     "id": 15601,
     "icon": "inv_jewelry_talisman_01",
     "kind": "spell"
-  },
-  "Major Frenzy Potion": {
-    "id": 250943,
-    "icon": "inv_potione_6",
-    "kind": "item"
   },
   "Thrash Blade": {
     "id": 17705,

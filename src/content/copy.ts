@@ -280,8 +280,8 @@ export const consumablesCopy = {
     after: ' consumables, which most players can skip, as they may be too expensive or difficult to acquire to justify the effort for.',
   },
   status: {
-    label: 'Placeholder:',
-    text: "This is an early list. Blizzard is reviewing reagents and effects for Forever, so expect additions, removals and rebalances. I'll update it once the final list is known.",
+    label: 'Heads up:',
+    text: "Checked against the Wowhead Forever item database on October 25th. The notes say what each item does, not how it ranks in the sims, so expect changes once launch data comes in.",
   },
 } as const;
 
