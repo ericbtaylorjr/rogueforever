@@ -281,7 +281,7 @@ export const consumablesCopy = {
   },
   status: {
     label: 'Heads up:',
-    text: "Checked against the Wowhead Forever item database on October 25th. The notes say what each item does, not how it ranks in the sims, so expect changes once launch data comes in.",
+    text: "Checked against the Wowhead Forever item database on October 25th. This list is tentative: it may include entries that exist in the Wowhead database but won't actually be available in Forever.",
   },
 } as const;
 

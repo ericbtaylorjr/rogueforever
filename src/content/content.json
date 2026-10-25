@@ -323,31 +323,26 @@
     },
     {
       "n": "Flask of the Titans",
-      "s": true,
       "k": "Flask",
       "note": "Big health pool, survives death. Expensive — progression nights only."
     },
     {
       "n": "Flask of Natural Aggression",
-      "s": true,
       "k": "Flask",
       "note": "+60 Stamina, and +4% crit in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
     },
     {
       "n": "Flask of Natural Swiftness",
-      "s": true,
       "k": "Flask",
       "note": "+60 Stamina, and +5% Haste in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
     },
     {
       "n": "Flask of Natural Accuracy",
-      "s": true,
       "k": "Flask",
       "note": "+60 Stamina, and +5% Hit in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
     },
     {
       "n": "Flask of Natural Precision",
-      "s": true,
       "k": "Flask",
       "note": "+60 Stamina, and 5% fewer parries and dodges in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
     },
