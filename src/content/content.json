@@ -88,6 +88,12 @@
       "note": "Strong choice for short encounters. CC removal & immunity may yield higher uptime in some encounters. Improved Engineering could yield benefit with failure reduction."
     },
     {
+      "name": "Dwarf",
+      "racials": "2% Crit passive. Bleed/Poison/Disease removal & 8s immune CD. 5% damage to Beasts.",
+      "grade": "A",
+      "note": "Crit value may diminish over time. Will be optimal for Beasts. Debuff removal/immune may yield higher uptime in some encounters."
+    },
+    {
       "name": "Human",
       "racials": "2% Crit passive. Stun removal CD.",
       "grade": "A",
@@ -110,15 +116,6 @@
       "racials": "3min 10% Attack Speed CD. 5% damage to Beasts.",
       "grade": "B",
       "note": "Attack Speed CD isn't bad, but outperformed by others. Will still be optimal for Beasts."
-    },
-    {
-      "name": "Dwarf",
-      "racials": "2% Crit passive. Bleed/Poison/Disease removal & 8s immune CD. 5% damage to Beasts.",
-      "grade": null,
-      "note": "Meta unknown due to Crit bug currently. Crit value may diminish over time. Will be optimal for Beasts. Debuff removal/immune may yield higher uptime in some encounters.",
-      "noteLinks": {
-        "Crit bug": "https://github.com/ClassicWoWCommunity/forever-bugs/issues/392"
-      }
     }
   ],
   "poisons": [
