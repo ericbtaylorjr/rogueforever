@@ -119,6 +119,95 @@ const cfBeacon = (): Plugin => ({
 });
 
 /**
+ * Search engine data, built from content.json so it can't drift from the page:
+ * - JSON-LD (schema.org) in <head>: the site, the guide (author, published and updated
+ *   dates from the changelog) and the FAQ. A data block, not a script, so the CSP allows it.
+ * - dist/sitemap.xml with <lastmod> from the newest changelog entry, replacing public/'s copy.
+ */
+const SITE = 'https://wowrogue.gg/';
+
+const seo = (): Plugin => {
+  const content = JSON.parse(readFileSync(new URL('./src/content/content.json', import.meta.url), 'utf8'));
+  const html = readFileSync(new URL('./index.html', import.meta.url), 'utf8');
+  const meta = (attr: string) => html.match(new RegExp(`${attr}"\\s+content="([^"]+)"`))?.[1]?.replace(/&amp;/g, '&');
+  // Changelog dates read "Oct 22nd, 2026"; newest first.
+  const isoDate = (d: string) => new Date(`${d.replace(/(\d+)(st|nd|rd|th)/, '$1')} UTC`).toISOString().slice(0, 10);
+  const dates = (content.changelog as { date: string }[]).map((c) => isoDate(c.date)).sort();
+  const author = { '@type': 'Person', name: 'The Comfy Wizard' };
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE}#website`,
+        url: SITE,
+        name: 'Rogue Handbook',
+        alternateName: 'wowrogue.gg',
+        inLanguage: 'en',
+      },
+      {
+        '@type': 'Article',
+        '@id': `${SITE}#guide`,
+        headline: meta('property="og:title'),
+        description: meta('name="description'),
+        image: `${SITE}og-image.png`,
+        url: SITE,
+        mainEntityOfPage: SITE,
+        isPartOf: { '@id': `${SITE}#website` },
+        inLanguage: 'en',
+        author,
+        publisher: author,
+        datePublished: dates[0],
+        dateModified: dates.at(-1),
+        about: { '@type': 'VideoGame', name: 'World of Warcraft' },
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${SITE}#faq`,
+        isPartOf: { '@id': `${SITE}#website` },
+        mainEntity: (content.faqs as { q: string; a: string }[]).map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+    ],
+  };
+
+  let outDir = '';
+  return {
+    name: 'seo',
+    apply: 'build',
+    configResolved: (c) => {
+      outDir = resolve(c.root, c.build.outDir);
+    },
+    transformIndexHtml: () => [
+      {
+        tag: 'script',
+        attrs: { type: 'application/ld+json' },
+        // `<` escaped so no answer text can close the tag early.
+        children: JSON.stringify(graph).replace(/</g, '\\u003c'),
+        injectTo: 'head',
+      },
+    ],
+    closeBundle: () => {
+      writeFileSync(
+        join(outDir, 'sitemap.xml'),
+        `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${SITE}</loc>
+    <lastmod>${dates.at(-1)}</lastmod>
+  </url>
+</urlset>
+`,
+      );
+    },
+  };
+};
+
+/**
  * Writes dist/sw.js (src/sw.js plus this build's file lists), which src/main.tsx registers.
  * `assets` are the hashed build files, `shell` the ones index.html starts with, `files`
  * everything else the site serves that a page asks for (art, icons, favicons). The lists
@@ -153,5 +242,14 @@ const serviceWorker = (): Plugin => {
 // Served from the wowrogue.gg custom domain root, so base stays '/'.
 export default defineConfig({
   base: '/',
-  plugins: [react(), tailwindcss(), inlineThemeInit(), preloadFonts(), contentSecurityPolicy(), cfBeacon(), serviceWorker()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    inlineThemeInit(),
+    preloadFonts(),
+    contentSecurityPolicy(),
+    cfBeacon(),
+    seo(),
+    serviceWorker(),
+  ],
 });
