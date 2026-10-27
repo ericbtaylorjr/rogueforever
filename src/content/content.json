@@ -70,40 +70,22 @@
   "foreverOutlook": [],
   "races": [
     {
-      "name": "Skyborn",
-      "racials": "3% Haste passive, 5% damage to Elementals. [Horde] 2min movement speed CD.",
-      "grade": "S",
-      "note": "Overall seems best choice. Will be optimal for Elementals. Haste value may diminish over time. Horde movement speed may help improve uptime."
-    },
-    {
-      "name": "Orc",
-      "racials": "1% Crit passive. 3min 10% Attack Power CD. Curse/Bane removal CD. Stun duration reduction passive.",
-      "grade": "S",
-      "note": "Strong choice for short encounters. Crit value may diminish over time. CC reduction/removal may yield ability for higher uptime in some encounters."
-    },
-    {
       "name": "Gnome",
-      "racials": "2min reduced Energy cost CD. Root/Snare removal & 3s immune CD. Reduced Engineering failure.",
+      "racials": "2min reduced Energy cost CD (8s duration). Root/Snare removal & 3s immune CD. Reduced Engineering failure.",
       "grade": "S",
       "note": "Strong choice for short encounters. CC removal & immunity may yield higher uptime in some encounters. Improved Engineering could yield benefit with failure reduction."
     },
     {
-      "name": "Dwarf",
-      "racials": "2% Crit passive. Bleed/Poison/Disease removal & 8s immune CD. 5% damage to Beasts.",
-      "grade": "A",
-      "note": "Crit value may diminish over time. Will be optimal for Beasts. Debuff removal/immune may yield higher uptime in some encounters."
-    },
-    {
-      "name": "Human",
-      "racials": "2% Crit passive. Stun removal CD.",
-      "grade": "A",
-      "note": "Crit value may diminish over time. Stun removal may yield higher uptime in some encounters."
-    },
-    {
       "name": "Undead",
-      "racials": "Life drain damage proc. Charm/Fear/Sleep removal CD.",
+      "racials": "Life drain damage proc (15s ICD). Charm/Fear/Sleep removal CD.",
+      "grade": "S",
+      "note": "Very minor damage proc, but CC removal may yield higher uptime in some encounters."
+    },
+    {
+      "name": "Skyborn",
+      "racials": "2% Haste passive, 5% damage to Elementals. [Horde] 2min 15% movement speed CD (15s, 30% when Charged).",
       "grade": "A",
-      "note": "Very minor damage proc. CC removal may yield higher uptime in some encounters."
+      "note": "Haste value may diminish over time. Will be optimal for Elementals. Horde movement speed may help improve uptime, but Charged is removed upon entering a raid."
     },
     {
       "name": "Night Elf",
@@ -113,9 +95,27 @@
     },
     {
       "name": "Troll",
-      "racials": "3min 10% Attack Speed CD. 5% damage to Beasts.",
+      "racials": "3min 10% Attack Speed CD (15s duration). 5% damage to Beasts.",
+      "grade": "A",
+      "note": "Attack Speed CD is strong. Will also be optimal for Beasts."
+    },
+    {
+      "name": "Dwarf",
+      "racials": "1% Hit passive. Bleed/Poison/Disease removal & 8s immune CD. 5% damage to Beasts.",
       "grade": "B",
-      "note": "Attack Speed CD isn't bad, but outperformed by others. Will still be optimal for Beasts."
+      "note": "Hit value may diminish over time. Will be optimal for Beasts. Debuff removal/immune may yield higher uptime in some encounters."
+    },
+    {
+      "name": "Human",
+      "racials": "1% Crit passive. Stun removal CD.",
+      "grade": "C",
+      "note": "Crit value may diminish over time. Stun removal may yield higher uptime in some encounters."
+    },
+    {
+      "name": "Orc",
+      "racials": "2min 10% Attack Power CD (15s duration). Curse/Bane removal CD. Stun duration reduction passive.",
+      "grade": "C",
+      "note": "CC reduction/removal may yield higher uptime in some encounters, but outperformed by others."
     }
   ],
   "poisons": [
@@ -1102,7 +1102,7 @@
       "title": "Racials and Skyborne",
       "cat": "Class",
       "hue": "#FFF468",
-      "body": "Racials have been reworked from Classic, and the weapon-type racials are gone, so race no longer locks you into a weapon. Rogue-relevant changes: Human Sword Specialization is replaced by Ruthless (2% increased critical strike chance). Orc Axe Specialization is replaced by Savage (1% increased critical strike chance), and Blood Fury's cooldown rises to 3 minutes. Dwarf Mace Specialization is replaced by Earth Fury (2% increased critical damage and healing). Gnome Eureka! becomes an 8 second buff and can't be used in Stealth. Undead Touch of the Dead procs 20% of the time for Rogues with a 25 second internal cooldown. Night Elf Quickness now stacks with other movement speed, and Troll Regeneration rises to 20%. The new Skyborne can also be Rogues, and each faction's version differs slightly. Both share Walk on Air (glide downward for 10 seconds, 90 second cooldown), Wind Blessed (3% passive Haste) and Elemental Insight (5% more damage to Elementals). Windshaper (Horde) adds Skysight (10% run speed), while High Order (Alliance) adds Read Ley Line (100% more Health and Mana regeneration). The race requires the Skyborne Heroic Pack or higher.",
+      "body": "Racials have been reworked from Classic, and the weapon-type racials are gone, so race no longer locks you into a weapon. Rogue-relevant changes: Human Sword Specialization is replaced by Ruthless (1% increased critical strike chance). Orc Axe Specialization is removed with no crit replacement, and Blood Fury's cooldown is 2 minutes. Dwarf Mace Specialization is replaced by Artisan's Precision (1% increased hit chance with spells and attacks). Troll Berserking lasts 15 seconds. Gnome Eureka! becomes an 8 second buff and can't be used in Stealth. Undead Touch of the Grave procs 20% of the time for Rogues with a 15 second internal cooldown. Night Elf Quickness now stacks with other movement speed, and Troll Regeneration rises to 20%. The new Skyborne can also be Rogues, and each faction's version differs slightly. Both share Walk on Air (glide downward for 10 seconds, 90 second cooldown), Wind Blessed (2% passive Haste) and Elemental Insight (5% more damage to Elementals). Windshaper (Horde) adds Skysight (15% run speed for 15 seconds; using it at an elemental convergence grants Charged for 1 hour, raising it to 30%), while High Order (Alliance) adds Read Ley Line (50% more Health and Mana regeneration for 15 seconds; using it at a Ley Line grants Attuned for 1 hour, raising it to 100%). Charged and Attuned persist through death but are removed upon entering a raid. The race requires the Skyborne Heroic Pack or higher.",
       "impact": "Don't assume a Classic racial still works the way you remember. Check the Races section for how each one ranks.",
       "sources": [
         {
