@@ -800,6 +800,10 @@
   ],
   "changelog": [
     {
+      "date": "Oct 27th, 2026",
+      "text": "Updated the Racial meta and the Racials and Skyborne section for the Oct 26 and Oct 27 Blizzard race hotfixes. Human Ruthless is now 1% Crit, Dwarf and Orc lose their Crit passives (Dwarf gains 1% Hit), Orc Blood Fury is 2 minutes, Troll Berserking lasts 15 seconds, Undead Touch of the Grave has a 15 second internal cooldown, and Skyborne Haste is 2% with changes to Skysight. Racial grades were re-ranked."
+    },
+    {
       "date": "Oct 25th, 2026",
       "text": "Replaced Forever watch and FAQ with a new \"New to Rogue?\" section: a library of tips and systems explanations for Beginner and Intermediate Rogues, covering melee uptime, positioning, UI, WoWSims and WarcraftLogs, the new parry/dodge stat, racials and Skyborne, and how each spec changed from Classic. Removed beta-specific information ahead of launch."
     },
