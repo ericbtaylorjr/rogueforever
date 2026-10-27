@@ -79,7 +79,7 @@
       "name": "Undead",
       "racials": "Life drain damage proc (15s ICD). Charm/Fear/Sleep removal CD.",
       "grade": "S",
-      "note": "Very minor damage proc, but CC removal may yield higher uptime in some encounters."
+      "note": "Consistent minor damage proc. CC removal may yield higher uptime in some encounters."
     },
     {
       "name": "Skyborn",
@@ -97,7 +97,7 @@
       "name": "Troll",
       "racials": "3min 10% Attack Speed CD (15s duration). 5% damage to Beasts.",
       "grade": "A",
-      "note": "Attack Speed CD is strong. Will also be optimal for Beasts."
+      "note": "Attack Speed CD is good. Will also be optimal for Beasts."
     },
     {
       "name": "Dwarf",
