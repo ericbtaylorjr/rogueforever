@@ -19,6 +19,40 @@ const stats: StatPriority = {
   ],
 };
 
+/** Subtlety Backstab (dagger main hand) weights from its own WoWSims run. */
+const backstabStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Hit Rating', ep: 2.99 },
+    { stat: 'Expertise Rating', ep: 2.61, op: '>' },
+    { stat: 'Agility', ep: 2.0, op: '>' },
+    { stat: 'Crit Rating', ep: 1.77, op: '>' },
+    { stat: 'Haste Rating', ep: 1.33, op: '>' },
+    { stat: 'Strength', ep: 1.1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.35, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.16, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/** Subtlety Hemo (slow main hand) weights from its own WoWSims run. */
+const hemoStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Hit Rating', ep: 2.59 },
+    { stat: 'Expertise Rating', ep: 2.27, op: '>' },
+    { stat: 'Agility', ep: 1.98, op: '>' },
+    { stat: 'Crit Rating', ep: 1.74, op: '>' },
+    { stat: 'Haste Rating', ep: 1.31, op: '>' },
+    { stat: 'Strength', ep: 1.1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.32, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.2, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
 /** Hemorrhage works with any weapon, and Ambush only needs a dagger in the main hand, so Subtlety gets every weapon list. */
 const levelingGear = byLevel(levelingShared, levelingSlowWeapons, levelingDaggers);
 
@@ -197,7 +231,7 @@ export const subtlety: Build[] = [
       'The traditional Subtlety Backstab build: bleed damage from Garrote and Rupture, plus Backstab builders and Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Ghostly Strike and Hemorrhage as needed, Backstab from behind to 5, then Eviscerate while Rupture is up.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v20053031-3203-1323200310213211501_t5/2CBaEDHjnPMsrQTw0CDFg1ABD',
-    stats,
+    stats: backstabStats,
     gear: noEndgameGear,
     rotation: backstabRotation,
   },
@@ -213,7 +247,7 @@ export const subtlety: Build[] = [
       'A Subtlety Backstab variant using Hemorrhage as the builder, so it works with a slow main hand instead of a dagger. Bleed damage from Garrote and Rupture, with Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Ghostly Strike on cooldown, Hemorrhage to 5, then Eviscerate while Rupture is up.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101005--1323200310213211501_t5/2CBaEDHjnPMsrQTw0CDEFgjN',
-    stats,
+    stats: hemoStats,
     gear: noEndgameGear,
     rotation: hemoRotation,
   },

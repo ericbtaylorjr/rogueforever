@@ -20,6 +20,23 @@ const stats: StatPriority = {
   ],
 };
 
+/** Assassination Mutilate Venom (daggers in both hands) weights from its own WoWSims run. */
+const mutilateVenomStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Hit Rating', ep: 2.9 },
+    { stat: 'Expertise Rating', ep: 2.74, op: '>' },
+    { stat: 'Agility', ep: 2.08, op: '>' },
+    { stat: 'Crit Rating', ep: 2.07, op: '>' },
+    { stat: 'Haste Rating', ep: 1.77, op: '>' },
+    { stat: 'Strength', ep: 1.1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.58, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.39, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
 const levelingGear = byLevel(levelingShared, levelingDaggers);
 
 /**
@@ -68,7 +85,7 @@ export const assassination: Build[] = [
       'Poison-focused dagger damage. Mutilate builds combo points two at a time while Venom stays up for extra poison damage, and Eviscerate finishes. Keep Slice and Dice up, Mutilate to 3 combo points and apply Venom, then Mutilate to 4 and Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310131501051-302303202014_t5/0CDEFgjnnnnq1AccDF0kkkmnSt1GJmnnnn',
-    stats,
+    stats: mutilateVenomStats,
     gear: noEndgameGear,
     rotation: mutilateVenomRotation,
   },

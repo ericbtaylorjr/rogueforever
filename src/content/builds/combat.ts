@@ -19,6 +19,57 @@ const stats: StatPriority = {
   ],
 };
 
+/** Combat Mutilate (daggers in both hands) weights from its own WoWSims run. */
+const mutilateStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Hit Rating', ep: 2.44 },
+    { stat: 'Expertise Rating', ep: 2.35, op: '>' },
+    { stat: 'Agility', ep: 1.97, op: '>' },
+    { stat: 'Crit Rating', ep: 1.73, op: '>' },
+    { stat: 'Haste Rating', ep: 1.63, op: '>' },
+    { stat: 'Strength', ep: 1.1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.41, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.27, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/** Combat Sinister Strike (slow main hand) weights from its own WoWSims run. */
+const sinisterStrikeStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Hit Rating', ep: 2.43 },
+    { stat: 'Expertise Rating', ep: 2.37, op: '>' },
+    { stat: 'Agility', ep: 2.0, op: '>' },
+    { stat: 'Crit Rating', ep: 1.75, op: '>' },
+    { stat: 'Haste Rating', ep: 1.58, op: '>' },
+    { stat: 'Strength', ep: 1.1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.39, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.17, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/** Combat Backstab (dagger main hand) weights from its own WoWSims run. */
+const backstabStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Hit Rating', ep: 2.48 },
+    { stat: 'Expertise Rating', ep: 2.42, op: '>' },
+    { stat: 'Agility', ep: 1.95, op: '>' },
+    { stat: 'Crit Rating', ep: 1.67, op: '>' },
+    { stat: 'Haste Rating', ep: 1.62, op: '>' },
+    { stat: 'Strength', ep: 1.1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.42, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.16, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
 const levelingGear = byLevel(levelingShared, levelingSlowWeapons);
 
 /**
@@ -130,7 +181,7 @@ export const combat: Build[] = [
       'Dagger damage using Combat talents instead of Venom. Mutilate builds combo points two at a time and Eviscerate finishes, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-320303202015152-001_t5/0CDEFgjm1ABDFGJmNQpR0nn2c0nnq',
-    stats,
+    stats: mutilateStats,
     gear: noEndgameGear,
     rotation: mutilateRotation,
   },
@@ -146,7 +197,7 @@ export const combat: Build[] = [
       'The traditional Classic Rogue Combat build: steady melee damage from Sinister Strike builders into Eviscerate, boosted by Adrenaline Rush and Blade Flurry. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101012-32030320201515231_t5/0CDEFgjm1ABDFGJmNQpRSt0nn',
-    stats,
+    stats: sinisterStrikeStats,
     gear: noEndgameGear,
     rotation: sinisterStrikeRotation,
   },
@@ -162,7 +213,7 @@ export const combat: Build[] = [
       'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush and Blade Flurry. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Cold Blood and Eviscerate.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101-32030320201515231-002_t5/0CDe2C0eFgjm1ABDFGJmNQpRSt',
-    stats,
+    stats: backstabStats,
     gear: noEndgameGear,
     rotation: backstabRotation,
   },

@@ -33,7 +33,7 @@ export function Changelog() {
             disabled={page === 0}
             className="rounded-[7px] border border-line px-[12px] py-[6px] text-[12px] font-semibold text-mute transition-colors disabled:opacity-30"
           >
-            Prev
+            &laquo; Newer
           </button>
           <span role="status" className="t-num text-[11.5px] text-faint">
             <span className="sr-only">Page </span>
@@ -45,7 +45,7 @@ export function Changelog() {
             disabled={page === pageCount - 1}
             className="rounded-[7px] border border-line px-[12px] py-[6px] text-[12px] font-semibold text-mute transition-colors disabled:opacity-30"
           >
-            Next
+            Older &raquo;
           </button>
         </nav>
       )}
