@@ -193,7 +193,8 @@ export const subtlety: Build[] = [
     grade: 'B',
     rank: 5,
     talents: points(12, 8, 31),
-    talentNote: 'The traditional Subtlety Backstab build, focused on bleed damage.',
+    talentNote:
+      'The traditional Subtlety Backstab build: bleed damage from Garrote and Rupture, plus Backstab builders and Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Ghostly Strike and Hemorrhage as needed, Backstab from behind to 5, then Eviscerate while Rupture is up.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v20053031-3203-1323200310213211501_t5/2CBaEDHjnPMsrQTw0CDFg1ABD',
     stats,
@@ -209,7 +210,7 @@ export const subtlety: Build[] = [
     rank: 4,
     talents: points(20, 0, 31),
     talentNote:
-      'A variant of the Subtlety Backstab build that uses Hemorrhage as the builder instead. It leans on a slow main hand rather than a dagger.',
+      'A Subtlety Backstab variant using Hemorrhage as the builder, so it works with a slow main hand instead of a dagger. Bleed damage from Garrote and Rupture, with Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Ghostly Strike on cooldown, Hemorrhage to 5, then Eviscerate while Rupture is up.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101005--1323200310213211501_t5/2CBaEDHjnPMsrQTw0CDEFgjN',
     stats,
@@ -226,7 +227,7 @@ export const subtlety: Build[] = [
     rank: 3,
     talents: points(2, 27, 22),
     talentNote:
-      'A Subtlety hybrid built around a devastating opener. Stealth in, open with a big Ambush and finish most mobs before they can fight back, then reset and move on. Quick kills, less downtime, and more picking your battles.',
+      'A Subtlety hybrid built around a big Ambush opener. Stealth in, Ambush, and finish most mobs before they can fight back, then reset and move on. Fights that last follow the Hemorrhage loop: Slice and Dice, Rupture at 3+ combo points, Ghostly Strike, Hemorrhage to 5, then Eviscerate. Vanish into Ambush when you want another opener.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202-321033210014142-4323003010013011_t0/1B0B2BCGddjdaaaPnasr1AFEhGcmnnnnpqqqqR',
     stats,
@@ -242,7 +243,8 @@ export const subtlety: Build[] = [
     grade: 'A',
     rank: 3,
     talents: points(0, 30, 21),
-    talentNote: '',
+    talentNote:
+      'Burst opener into steady Backstab damage. Stealth in, Ambush, then keep Slice and Dice up, Ghostly Strike on cooldown, Backstab from behind to 5 combo points and Eviscerate. Blade Flurry on cooldown, and Vanish into Ambush when you want another opener.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2-3200332110141423-532000321001301_t0/1B2BCGaajaaahPnhr1AEffhfGjmnnnnpqqqqRS',
     stats,

@@ -127,7 +127,7 @@ export const combat: Build[] = [
     rank: 3,
     talents: points(21, 29, 1),
     talentNote:
-      'A variation of the Assassination Mutilate build. It drops Venom in favor of leaning further into Combat talents.',
+      'Dagger damage using Combat talents instead of Venom. Mutilate builds combo points two at a time and Eviscerate finishes, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-320303202015152-001_t5/0CDEFgjm1ABDFGJmNQpR0nn2c0nnq',
     stats,
@@ -143,7 +143,7 @@ export const combat: Build[] = [
     rank: 2,
     talents: points(18, 33, 0),
     talentNote:
-      'The traditional Classic Rogue Combat build: Sinister Strike as your builder and Eviscerate as your spender.',
+      'The traditional Classic Rogue Combat build: steady melee damage from Sinister Strike builders into Eviscerate, boosted by Adrenaline Rush and Blade Flurry. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101012-32030320201515231_t5/0CDEFgjm1ABDFGJmNQpRSt0nn',
     stats,
@@ -159,7 +159,7 @@ export const combat: Build[] = [
     rank: 1,
     talents: points(16, 33, 2),
     talentNote:
-      'A Backstab variant of the Sinister Strike build. It swaps to a dagger in the main hand and uses Backstab as the builder.',
+      'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush and Blade Flurry. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Cold Blood and Eviscerate.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101-32030320201515231-002_t5/0CDe2C0eFgjm1ABDFGJmNQpRSt',
     stats,
@@ -176,7 +176,7 @@ export const combat: Build[] = [
     rank: 1,
     talents: points(17, 34, 0),
     talentNote:
-      'Traditional Combat, centered on cleaving with Blade Flurry. Pull two or three mobs, turn on Blade Flurry and take them down together with the familiar Sinister Strike, Slice and Dice and Eviscerate loop. No positioning to worry about.',
+      'Traditional Combat, centered on cleaving with Blade Flurry. Pull two or three mobs, turn on Blade Flurry and take them down together. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate. No positioning to worry about.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v232232310001-32003321201515231_t0/1B0BA1AffEhfGjmnnnnpqqqqRs0F1sst0ddgdEcmc1qnj',
     stats,
@@ -192,7 +192,8 @@ export const combat: Build[] = [
     grade: 'S',
     rank: 1,
     talents: points(18, 33, 0),
-    talentNote: '',
+    talentNote:
+      'Traditional Combat for groups: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate. No positioning to worry about.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310301-32003321101515231_t0/1BAEffhfGjmnnnnpQRsstsn0CFEgDjmjj',
     stats,
