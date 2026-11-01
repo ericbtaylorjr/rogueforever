@@ -39,6 +39,8 @@ export const hero = {
       "My goal is to take all the data out there and provide it to the Rogue community in a clean, easy to understand format to serve both the diehard and more casual players. See y'all in Azeroth!",
     ],
     sign: 'The Comfy Wizard',
+    youtubeCta: 'Subscribe on YouTube',
+    xCta: 'Follow on X',
   },
 } as const;
 

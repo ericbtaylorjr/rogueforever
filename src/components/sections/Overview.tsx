@@ -4,6 +4,7 @@ import { links, wowsimsLink } from '../../content/links';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { LinkedText } from '../ui/LinkedText';
+import { XIcon, YouTubeIcon } from '../ui/SocialIcons';
 
 /** Accent line that fades out to the right. The hero's poison drips hang from one. */
 function TaperedRule({ className = '' }: { className?: string }) {
@@ -59,6 +60,33 @@ function CuratorNote() {
           <p key={p}>
             <LinkedText text={p} links={{ 'Rank 1': links.rank1Logs }} />
           </p>
+        ))}
+      </div>
+      <div className="mt-[14px] flex flex-wrap gap-[8px]">
+        {[
+          {
+            href: links.youtube,
+            label: hero.note.youtubeCta,
+            Icon: YouTubeIcon,
+            brand: 'bg-[#ff0000] hover:bg-[#cc0000] text-white',
+          },
+          {
+            href: links.x,
+            label: hero.note.xCta,
+            Icon: XIcon,
+            brand: 'bg-ink text-bg hover:opacity-85',
+          },
+        ].map(({ href, label, Icon, brand }) => (
+          <a
+            key={href}
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className={`inline-flex items-center gap-[7px] rounded-[8px] px-[12px] py-[7px] text-[12.5px] font-semibold transition-colors ${brand}`}
+          >
+            <Icon size={15} />
+            {label}
+          </a>
         ))}
       </div>
       <p className="mt-[14px] text-[13px] font-semibold text-mute">&ndash; {hero.note.sign}</p>

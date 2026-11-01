@@ -17,6 +17,7 @@ export const links = {
   discord: 'https://discord.gg/rKF9G7zusj',
   tip: 'https://streamelements.com/thecomfywizard-bba10/tip',
   youtube: 'https://youtube.com/@thecomfywizard',
+  x: 'https://x.com/TheComfyWizard',
   tiktok: 'https://www.tiktok.com/@thecomfywizard',
   twitch: 'https://www.twitch.tv/thecomfywizard',
   mail: 'mailto:TheComfyWizard@gmail.com',
