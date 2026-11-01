@@ -60,9 +60,23 @@ tips. The `update-talents` skill covers the whole talent update (link, order, po
      off cooldown." }`, or "...and you have 5 combo points." when the builder adds 2 combo points
      (Mutilate) or the row requires exactly 5 and the Eviscerate has other conditions (Subtlety).
      Opener: "Cold Blood + Eviscerate".
-   - Builds that resolve to the same rows share one constant (Combat Questing and Dungeons
-     use the Sinister Strike rotation; Assassination Questing and Dungeons use Combat's
-     `mutilateRotation`).
+   - Builds that resolve to the same rows share one constant (Combat Mutilate and the
+     Assassination leveling builds share `mutilateRotation`'s rows, Combat Questing shares the
+     Sinister Strike rows, Combat Dungeons the Backstab rows).
+   - A build with the Riposte talent also gets `withRiposte(rotation, builder)` (see the
+     `update-talents` skill). It's a talent tip, not an APL row, so don't derive it from the APL.
+   - **Leveling builds** (`phase: 'leveling'`) never use the endgame constant as is. Wrap it in
+     `forLeveling(rotation, [cooldown names])` from `shared.ts` (named `leveling<X>Rotation`,
+     e.g. `levelingMutilateRotation` in combat.ts, used by Assassination Questing and Dungeons).
+     It makes the three leveling changes in one place: the opener drops Evasion and Major
+     Frenzy Potion (keeping Blade Flurry, Stealth, trinket and racial), the racial and Thistle Tea
+     tips go, and the trinket and cooldown tips fold into one line, "Pair your trinkets and racial
+     with <cooldowns> on a powerful mob or big pull." The cooldown names are the tips it replaces, in rotation
+     order (Adrenaline Rush and Blade Flurry for Combat, Blade Flurry for Assassination and
+     Subtlety). A leveling-only rotation (Subtlety Questing and Dungeons) wraps its own
+     definition. The offensive Vanish tip (Vanish into Garrote or Ambush) is swapped for "Use Vanish and Evasion
+     as defensive abilities if threat becomes an issue." Premeditation, pooling and the other sweaty
+     tips stay.
 3. `opener`: walk the priority list from the prepull actions at time 0 (stealthed, 0
    combo points, 100 energy, Slice and Dice down) until the first finisher. Prepull actions
    keep their timing, e.g. "Blade Flurry (-2s)". Don't fix counts that depend on crits or

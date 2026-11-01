@@ -68,6 +68,45 @@ export const racialTips = ({ adrenalineRush, coldBlood = true }: { adrenalineRus
       ];
 
 /**
+ * Adds the Riposte tip to a build that takes the Riposte talent (Combat tree, row 3): macro it with
+ * the build's builder so it fires whenever it's available after a parry. It sits before the pooling tip.
+ * The APL doesn't cast Riposte, so this is a talent tip, not a rotation row.
+ */
+export const withRiposte = (rotation: Rotation, builder: string): Rotation => {
+  const riposte: ProTip = { text: `Macro Riposte with ${builder} so it fires whenever it's available after a parry.` };
+  const at = rotation.tips.findIndex((t) => t.text.startsWith('Pool energy'));
+  const index = at < 0 ? rotation.tips.length : at;
+  return { ...rotation, tips: [...rotation.tips.slice(0, index), riposte, ...rotation.tips.slice(index)] };
+};
+
+/**
+ * A leveling build's version of an endgame-style rotation: no Evasion or potion in the opener, no
+ * racial or Thistle Tea tips, the offensive Vanish tip swapped for a defensive one, and the trinket and
+ * cooldown tips folded into one line about pairing them (and your racial) on a powerful mob or big pull.
+ * `cooldowns` names the cooldown tips it replaces, in the order the rotation lists them (e.g. Adrenaline
+ * Rush, Blade Flurry).
+ */
+export const forLeveling = (rotation: Rotation, cooldowns: string[]): Rotation => {
+  const folded = new Set<ProTip>([tip.adrenalineRush, tip.bladeFlurry, tip.trinkets]);
+  const isVanish = (t: ProTip) => /Vanish into (Garrote|Ambush)/.test(t.text);
+  const defensive: ProTip = { text: 'Use Vanish and Evasion as defensive abilities if threat becomes an issue.' };
+  const isRacial = (t: ProTip) => /^(Orcs|Night Elves|Gnomes):/.test(t.text);
+  const firstFolded = rotation.tips.findIndex((t) => folded.has(t));
+  const list = cooldowns.length > 1 ? `${cooldowns.slice(0, -1).join(', ')} and ${cooldowns.at(-1)}` : cooldowns[0];
+  const paired: ProTip = { text: `Pair your trinkets and racial with ${list} on a powerful mob or big pull.` };
+  return {
+    ...rotation,
+    opener: rotation.opener.map((step) => {
+      const [, actions, timing = ''] = step.match(/^(.*?)( \(-\d+s\))?$/) ?? [];
+      return actions.split(' + ').filter((a) => a !== 'Evasion' && a !== 'Major Frenzy Potion').join(' + ') + timing;
+    }),
+    tips: rotation.tips.flatMap((t, i) =>
+      i === firstFolded ? [paired] : isVanish(t) ? [defensive] : folded.has(t) || isRacial(t) || t === tip.thistleTea ? [] : [t],
+    ),
+  };
+};
+
+/**
  * Level 60 gear that hasn't been listed yet. Blizzard has confirmed a full
  * itemization pass for Forever, so Classic Era BiS lists would be wrong at launch.
  */

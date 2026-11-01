@@ -23,11 +23,23 @@ A build's talents are its calculator `link` in `src/content/builds/<spec>.ts`, p
    the build's `rotation`, and fix the opener, steps and tips (Cold Blood, Ghostly Strike,
    Premeditation, Preparation, Blade Flurry, Venom...). Builds that share a rotation constant
    share the result, so check siblings that use the same constant. When the rows don't
-   change, say so.
-4. **Summary.** Refresh `talentNote` (see `apl-rotation` step 5) so it names the same spells
+   change, say so. For a **leveling** build, wrap the rotation in `forLeveling` (`apl-rotation`
+   step 2): no Evasion or Major Frenzy Potion in the opener, no racial or Thistle Tea tips, and one
+   combined "Pair your trinkets and racial with <cooldowns> on a powerful mob or big pull." tip. Never
+   the Vanish into Garrote/Ambush tip: leveling builds say "Use Vanish and Evasion as defensive
+   abilities if threat becomes an issue." instead. If the build now
+   resolves to a different rotation, use that endgame constant's leveling version, or add one.
+4. **Riposte.** If the new link takes Riposte (Combat tree, row 3, rank 1; `v2…-<combat digits>`
+   has a `1` in the 8th place of the Combat digits), wrap the build's rotation in
+   `withRiposte(rotation, '<builder>')` from `shared.ts`: Mutilate, Sinister Strike, Hemorrhage
+   (Subtlety Hemo and Questing) or Backstab. It adds the Pro tip "Macro Riposte with <builder>
+   so it fires whenever it's available after a parry." before the pooling tip. If the new link
+   drops Riposte, remove the wrapper. Check this on every talent update; as of now Assassination
+   Questing and Dungeons, Combat Questing and Subtlety Questing take it.
+5. **Summary.** Refresh `talentNote` (see `apl-rotation` step 5) so it names the same spells
    as the rotation. If the talents changed the build's character (new builder, new bleed),
    rewrite the damage profile too.
-5. `npm run talents -- --check` and `npm run typecheck`. Don't commit unless asked.
+6. `npm run talents -- --check` and `npm run typecheck`. Don't commit unless asked.
 
 ## Report
 

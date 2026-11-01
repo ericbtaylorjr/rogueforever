@@ -504,6 +504,11 @@
     "icon": "spell_shadow_lifedrain",
     "kind": "spell"
   },
+  "Riposte": {
+    "id": 14251,
+    "icon": "ability_warrior_challange",
+    "kind": "spell"
+  },
   "Ghostly Strike": {
     "id": 14278,
     "icon": "spell_shadow_curse",

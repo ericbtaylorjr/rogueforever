@@ -1,6 +1,6 @@
 import { levelingDaggers, levelingShared, levelingSlowWeapons } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } from './shared';
+import { byLevel, forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Combat Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
 const dungeonsStats: StatPriority = {
@@ -191,6 +191,11 @@ export const mutilateRotation: Rotation = {
   ],
 };
 
+/** Leveling versions: Combat Questing and Dungeons, and Assassination Questing and Dungeons (`mutilateRotation`). */
+const levelingSinisterStrikeRotation = forLeveling(sinisterStrikeRotation, ['Adrenaline Rush', 'Blade Flurry']);
+const levelingBackstabRotation = forLeveling(backstabRotation, ['Adrenaline Rush', 'Blade Flurry']);
+export const levelingMutilateRotation = forLeveling(mutilateRotation, ['Blade Flurry']);
+
 export const combat: Build[] = [
   {
     id: 'mutilate',
@@ -255,7 +260,7 @@ export const combat: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v232232310001-32003321201515231_t0/1B0BA1AffEhfGjmnnnnpqqqqRs0F1sst0ddgdEcmc1qnj',
     stats: questingStats,
     gear: levelingGear,
-    rotation: sinisterStrikeRotation,
+    rotation: withRiposte(levelingSinisterStrikeRotation, 'Sinister Strike'),
   },
   {
     id: 'dungeons',
@@ -272,6 +277,6 @@ export const combat: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101-32030320201515231-002_t0/2C1BADFGJmnnnnpqqqqRStnq0CFEgDjm',
     stats: dungeonsStats,
     gear: dungeonsGear,
-    rotation: backstabRotation,
+    rotation: levelingBackstabRotation,
   },
 ];

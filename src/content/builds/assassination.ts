@@ -1,20 +1,20 @@
 import { levelingDaggers, levelingShared } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { mutilateRotation } from './combat';
-import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } from './shared';
+import { levelingMutilateRotation } from './combat';
+import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Assassination Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
 const dungeonsStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Agility', ep: 1.54 },
-    { stat: 'Expertise Rating', ep: 1.41, op: '>' },
-    { stat: 'Crit Rating', ep: 1.23, op: '>' },
+    { stat: 'Agility', ep: 1.53 },
+    { stat: 'Expertise Rating', ep: 1.47, op: '>' },
+    { stat: 'Crit Rating', ep: 1.24, op: '>' },
     { stat: 'Hit Rating', ep: 1.19, op: '>' },
-    { stat: 'Haste Rating', ep: 1.11, op: '>' },
+    { stat: 'Haste Rating', ep: 1.15, op: '>' },
     { stat: 'Strength', ep: 1, op: '>' },
     { stat: 'Attack Power', ep: 1, op: '=' },
-    { stat: 'Spell Piercing', ep: 0.37, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.38, op: '>' },
     { stat: 'Armor Penetration', ep: 0.19, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
@@ -121,7 +121,7 @@ export const assassination: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202532310001401-302333010014142-002_t5/1A0BcccDFgEcmcnnnq2C1ccEffhfDmnnnnpqqqqR0n',
     stats: questingStats,
     gear: levelingGear,
-    rotation: mutilateRotation,
+    rotation: withRiposte(levelingMutilateRotation, 'Mutilate'),
   },
   {
     id: 'dungeons',
@@ -135,9 +135,9 @@ export const assassination: Build[] = [
     talentNote:
       'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-302333010015142-002_t5/0CDffgfEjmnnnnq2C1AccDEhFmnnnnpqqqqRn',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-304303200015142-002_t5/0CDEgFjmnnnnq2C1AccFDGccmnnnnpqqqqRn',
     stats: dungeonsStats,
     gear: levelingGear,
-    rotation: mutilateRotation,
+    rotation: levelingMutilateRotation,
   },
 ];

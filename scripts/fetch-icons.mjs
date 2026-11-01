@@ -63,6 +63,7 @@ const pinned = [
   ['Backstab', 11281],
   ['Mutilate', 1241584],
   ['Hemorrhage', 16511],
+  ['Riposte', 14251],
   ['Ghostly Strike', 14278],
   ['Ambush', 11269],
   ['Rupture', 11275],

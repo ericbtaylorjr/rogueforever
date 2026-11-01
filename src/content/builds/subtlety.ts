@@ -1,6 +1,6 @@
 import { levelingDaggers, levelingShared, levelingSlowWeapons } from '../gear';
 import type { Build, ProTip, Rotation, StatPriority } from '../types';
-import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } from './shared';
+import { byLevel, forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Subtlety Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
 const dungeonsStats: StatPriority = {
@@ -167,72 +167,78 @@ const hemoRotation: Rotation = {
  * No WoWSims preset: the APL with Use Ambush Opener on, a dagger main hand and Hemorrhage
  * as the builder (Use Backstab off), `npm run apl -- subtlety/questing`.
  */
-const questingRotation: Rotation = {
-  opener: [
-    'Blade Flurry + Premeditation (-2s)',
-    'Stealth + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
-    'Ambush',
-    'Slice and Dice',
-    'Ghostly Strike',
-    'Hemorrhage to 3CP',
-    'Rupture',
-    'Hemorrhage to 5CP',
-    'Eviscerate',
-  ],
-  steps: [
-    sliceAndDiceStep,
-    ruptureStep,
-    ghostlyStrikeStep,
-    { press: 'Hemorrhage', note: 'Until you have 5 combo points.' },
-    { press: 'Eviscerate', note: 'With all 5 combo points.' },
-  ],
-  tips: [
-    tip.meleeUptime,
-    tip.premeditation,
-    tip.bladeFlurry,
-    tip.trinkets,
-    ...racialTips({ adrenalineRush: false, coldBlood: false }),
-    tip.thistleTea,
-    tip.pool('Hemorrhage'),
-    vanishAmbush,
-    tip.earlyEviscerate,
-    tip.fightEnd('Slice and Dice and Rupture'),
-  ],
-};
+const questingRotation: Rotation = forLeveling(
+  {
+    opener: [
+      'Blade Flurry + Premeditation (-2s)',
+      'Stealth + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
+      'Ambush',
+      'Slice and Dice',
+      'Ghostly Strike',
+      'Hemorrhage to 3CP',
+      'Rupture',
+      'Hemorrhage to 5CP',
+      'Eviscerate',
+    ],
+    steps: [
+      sliceAndDiceStep,
+      ruptureStep,
+      ghostlyStrikeStep,
+      { press: 'Hemorrhage', note: 'Until you have 5 combo points.' },
+      { press: 'Eviscerate', note: 'With all 5 combo points.' },
+    ],
+    tips: [
+      tip.meleeUptime,
+      tip.premeditation,
+      tip.bladeFlurry,
+      tip.trinkets,
+      ...racialTips({ adrenalineRush: false, coldBlood: false }),
+      tip.thistleTea,
+      tip.pool('Hemorrhage'),
+      vanishAmbush,
+      tip.earlyEviscerate,
+      tip.fightEnd('Slice and Dice and Rupture'),
+    ],
+  },
+  ['Blade Flurry'],
+);
 
 /**
  * No WoWSims preset: the APL with Use Ambush Opener on and Backstab as the builder
  * (Use Backstab on, dagger main hand), `npm run apl -- subtlety/dungeons`.
  */
-const dungeonsRotation: Rotation = {
-  opener: [
-    'Blade Flurry + Premeditation (-2s)',
-    'Stealth + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
-    'Ambush',
-    'Slice and Dice',
-    'Ghostly Strike',
-    'Backstab to 5CP',
-    'Eviscerate',
-  ],
-  steps: [
-    sliceAndDiceStep,
-    ghostlyStrikeStep,
-    { press: 'Backstab', note: 'Until you have 5 combo points. Stay behind the target.' },
-    { press: 'Eviscerate', note: 'With all 5 combo points.' },
-  ],
-  tips: [
-    tip.meleeUptime,
-    tip.premeditation,
-    tip.bladeFlurry,
-    tip.trinkets,
-    ...racialTips({ adrenalineRush: false, coldBlood: false }),
-    tip.thistleTea,
-    tip.pool('Backstab'),
-    vanishAmbush,
-    tip.earlyEviscerate,
-    tip.fightEnd(),
-  ],
-};
+const dungeonsRotation: Rotation = forLeveling(
+  {
+    opener: [
+      'Blade Flurry + Premeditation (-2s)',
+      'Stealth + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
+      'Ambush',
+      'Slice and Dice',
+      'Ghostly Strike',
+      'Backstab to 5CP',
+      'Eviscerate',
+    ],
+    steps: [
+      sliceAndDiceStep,
+      ghostlyStrikeStep,
+      { press: 'Backstab', note: 'Until you have 5 combo points. Stay behind the target.' },
+      { press: 'Eviscerate', note: 'With all 5 combo points.' },
+    ],
+    tips: [
+      tip.meleeUptime,
+      tip.premeditation,
+      tip.bladeFlurry,
+      tip.trinkets,
+      ...racialTips({ adrenalineRush: false, coldBlood: false }),
+      tip.thistleTea,
+      tip.pool('Backstab'),
+      vanishAmbush,
+      tip.earlyEviscerate,
+      tip.fightEnd(),
+    ],
+  },
+  ['Blade Flurry'],
+);
 
 export const subtlety: Build[] = [
   {
@@ -282,7 +288,7 @@ export const subtlety: Build[] = [
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202-321033210014142-4323003010013011_t0/1B0B2BCGddjdaaaPnasr1AFEhGcmnnnnpqqqqR',
     stats: questingStats,
     gear: levelingGear,
-    rotation: questingRotation,
+    rotation: withRiposte(questingRotation, 'Hemorrhage'),
   },
   {
     id: 'dungeons',
@@ -294,7 +300,7 @@ export const subtlety: Build[] = [
     rank: 3,
     talents: points(0, 30, 21),
     talentNote:
-      'Burst opener into steady Backstab damage. Stealth in, Ambush, then keep Slice and Dice up, Ghostly Strike on cooldown, Backstab from behind to 5 combo points and Eviscerate. Blade Flurry on cooldown, and Vanish into Ambush when you want another opener. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can\'t attack from behind.',
+      "Burst opener into steady Backstab damage. Stealth in, Ambush, then keep Slice and Dice up, Ghostly Strike on cooldown, Backstab from behind to 5 combo points and Eviscerate. Blade Flurry on cooldown, and Vanish into Ambush when you want another opener. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can't attack from behind.",
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2-3223032000141423-532000321001301_t0/1B2CaaaGaajhhbbnPbr1AFDGccmnnnnpqqqqRS',
     stats: dungeonsStats,
