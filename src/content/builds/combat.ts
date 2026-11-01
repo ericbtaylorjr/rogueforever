@@ -1,4 +1,4 @@
-import { levelingShared, levelingSlowWeapons } from '../gear';
+import { levelingDaggers, levelingShared, levelingSlowWeapons } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
 import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } from './shared';
 
@@ -6,15 +6,15 @@ import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } fro
 const dungeonsStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Agility', ep: 1.54 },
-    { stat: 'Expertise Rating', ep: 1.45, op: '>' },
-    { stat: 'Crit Rating', ep: 1.22, op: '>' },
-    { stat: 'Hit Rating', ep: 1.2, op: '>' },
-    { stat: 'Haste Rating', ep: 1.09, op: '>' },
+    { stat: 'Agility', ep: 1.52 },
+    { stat: 'Expertise Rating', ep: 1.42, op: '>' },
+    { stat: 'Hit Rating', ep: 1.19, op: '>' },
+    { stat: 'Crit Rating', ep: 1.18, op: '>' },
+    { stat: 'Haste Rating', ep: 1.12, op: '>' },
     { stat: 'Strength', ep: 1, op: '>' },
     { stat: 'Attack Power', ep: 1, op: '=' },
-    { stat: 'Spell Piercing', ep: 0.24, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.18, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.22, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.2, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
@@ -89,11 +89,14 @@ const backstabStats: StatPriority = {
 
 const levelingGear = byLevel(levelingShared, levelingSlowWeapons);
 
+/** Combat Dungeons uses Backstab, so it needs a dagger in the main hand. */
+const dungeonsGear = byLevel(levelingShared, levelingDaggers);
+
 /**
  * The WoWSims Rogue APL as the "Combat SS" preset runs it (Use Backstab off, sword main
  * hand). Regenerate the source rows with `npm run apl -- combat/sinister-strike`.
  * The opener, the melee uptime tip and the Vanish tip's wording are hand-edited.
- * Combat Questing and Dungeons resolve to the same rows, so they share it.
+ * Combat Questing resolves to the same rows, so it shares it.
  */
 const sinisterStrikeRotation: Rotation = {
   opener: [
@@ -124,7 +127,10 @@ const sinisterStrikeRotation: Rotation = {
   ],
 };
 
-/** "Combat BS" (Use Backstab on, dagger main hand): `npm run apl -- combat/backstab`. */
+/**
+ * "Combat BS" (Use Backstab on, dagger main hand): `npm run apl -- combat/backstab`.
+ * Combat Dungeons resolves to the same rows, so it shares it.
+ */
 const backstabRotation: Rotation = {
   opener: [
     'Blade Flurry + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
@@ -259,13 +265,13 @@ export const combat: Build[] = [
     name: 'Dungeons',
     grade: 'S',
     rank: 1,
-    talents: points(18, 33, 0),
+    talents: points(16, 33, 2),
     talentNote:
-      'Traditional Combat for groups: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate. No positioning to worry about.',
+      'Combat for groups with a Backstab twist: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Cold Blood and Eviscerate. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can\'t attack from behind.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310301-32003321101515231_t0/1BAEffhfGjmnnnnpQRsstsn0CFEgDjmjj',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101-32030320201515231-002_t0/2C1BADFGJmnnnnpqqqqRStnq0CFEgDjm',
     stats: dungeonsStats,
-    gear: levelingGear,
-    rotation: sinisterStrikeRotation,
+    gear: dungeonsGear,
+    rotation: backstabRotation,
   },
 ];

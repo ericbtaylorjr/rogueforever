@@ -294,9 +294,9 @@ export const subtlety: Build[] = [
     rank: 3,
     talents: points(0, 30, 21),
     talentNote:
-      'Burst opener into steady Backstab damage. Stealth in, Ambush, then keep Slice and Dice up, Ghostly Strike on cooldown, Backstab from behind to 5 combo points and Eviscerate. Blade Flurry on cooldown, and Vanish into Ambush when you want another opener.',
+      'Burst opener into steady Backstab damage. Stealth in, Ambush, then keep Slice and Dice up, Ghostly Strike on cooldown, Backstab from behind to 5 combo points and Eviscerate. Blade Flurry on cooldown, and Vanish into Ambush when you want another opener. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can\'t attack from behind.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2-3200332110141423-532000321001301_t0/1B2BCGaajaaahPnhr1AEffhfGjmnnnnpqqqqRS',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2-3223032000141423-532000321001301_t0/1B2CaaaGaajhhbbnPbr1AFDGccmnnnnpqqqqRS',
     stats: dungeonsStats,
     gear: levelingGear,
     rotation: dungeonsRotation,

@@ -101,7 +101,7 @@ export const assassination: Build[] = [
     talentNote:
       'Poison-focused dagger damage. Mutilate builds combo points two at a time while Venom stays up for extra poison damage, and Eviscerate finishes. Keep Slice and Dice up, Mutilate to 3 combo points and apply Venom, then Mutilate to 4 and Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310131501051-302303202014_t5/0CDEFgjnnnnq1AccDF0kkkmnSt1GJmnnnn',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310131501051-302303202014_t5/1AccDFGJmnnnn0CEDFgjNmqkkkSt',
     stats: mutilateVenomStats,
     gear: noEndgameGear,
     rotation: mutilateVenomRotation,
@@ -116,7 +116,7 @@ export const assassination: Build[] = [
     rank: 2,
     talents: points(22, 27, 2),
     talentNote:
-      'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
+      'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202532310001401-302333010014142-002_t5/1A0BcccDFgEcmcnnnq2C1ccEffhfDmnnnnpqqqqR0n',
     stats: questingStats,
@@ -133,9 +133,9 @@ export const assassination: Build[] = [
     rank: 2,
     talents: points(21, 28, 2),
     talentNote:
-      'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
+      'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-302333010014152-002_t5/0CDffgfEjmnnnnq2C1AccDEhFmnnnnpqqqqRq',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-302333010015142-002_t5/0CDffgfEjmnnnnq2C1AccDEhFmnnnnpqqqqRn',
     stats: dungeonsStats,
     gear: levelingGear,
     rotation: mutilateRotation,

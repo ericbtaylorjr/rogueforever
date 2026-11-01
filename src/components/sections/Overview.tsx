@@ -4,6 +4,7 @@ import { links, wowsimsLink } from '../../content/links';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { LinkedText } from '../ui/LinkedText';
+import { StarIcon } from '../ui/StarIcon';
 import { XIcon, YouTubeIcon } from '../ui/SocialIcons';
 
 /** Accent line that fades out to the right. The hero's poison drips hang from one. */
@@ -158,8 +159,9 @@ export function Overview() {
             <button
               type="button"
               onClick={() => jump('new-to-rogue')}
-              className="rounded-[8px] border border-line px-[16px] py-[11px] text-[13px] font-semibold text-mute transition-colors hover:border-sky hover:text-sky"
+              className="inline-flex items-center gap-[7px] rounded-[8px] border border-line px-[16px] py-[11px] text-[13px] font-semibold text-mute transition-colors hover:border-sky hover:text-sky"
             >
+              <StarIcon />
               {hero.ctaGhost}
             </button>
           </div>

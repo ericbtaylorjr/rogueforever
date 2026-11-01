@@ -14,7 +14,7 @@ and tell the user separately.
 Also run it, for the affected build only, whenever a build's **talent link** changes, even if the APL
 didn't. Talents decide which rows the build can fire (Cold Blood, Ghostly Strike, Premeditation,
 Preparation...), so a new talent adds a step and a dropped one removes it from the opener, steps and
-tips. Pasting an APL identical to `scripts/apl/rogue.apl.json` changes nothing: look at the build's talents.
+tips. The `update-talents` skill covers the whole talent update (link, order, points); this one covers its rotation step. Pasting an APL identical to `scripts/apl/rogue.apl.json` changes nothing: look at the build's talents.
 
 ## Inputs
 
