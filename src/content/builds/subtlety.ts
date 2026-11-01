@@ -2,20 +2,37 @@ import { levelingDaggers, levelingShared, levelingSlowWeapons } from '../gear';
 import type { Build, ProTip, Rotation, StatPriority } from '../types';
 import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } from './shared';
 
-/** WoWSims EP against current BiS gear. EP is relative to `relativeTo` (= 1). */
-const stats: StatPriority = {
+/** Subtlety Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
+const dungeonsStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Hit Rating', ep: 2.24 },
-    { stat: 'Expertise Rating', ep: 2.24, op: '=' },
-    { stat: 'Agility', ep: 1.96, op: '>' },
-    { stat: 'Crit Rating', ep: 1.71, op: '>' },
-    { stat: 'Haste Rating', ep: 1.48, op: '>' },
-    { stat: 'Strength', ep: 1.1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.36, op: '>' },
-    { stat: 'Spell Piercing', ep: 0.21, op: '>' },
-    { stat: 'Stamina', ep: 0, op: '>' },
+    { stat: 'Agility', ep: 1.52 },
+    { stat: 'Expertise Rating', ep: 1.48, op: '>' },
+    { stat: 'Hit Rating', ep: 1.34, op: '>' },
+    { stat: 'Haste Rating', ep: 1.25, op: '>' },
+    { stat: 'Crit Rating', ep: 1.18, op: '>' },
+    { stat: 'Strength', ep: 1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '=' },
+    { stat: 'Spell Piercing', ep: 0.23, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.17, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/** Subtlety Questing (leveling) weights from its own WoWSims run. */
+const questingStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Expertise Rating', ep: 3.04 },
+    { stat: 'Agility', ep: 1.5, op: '>' },
+    { stat: 'Hit Rating', ep: 1.34, op: '>' },
+    { stat: 'Haste Rating', ep: 1.2, op: '>' },
+    { stat: 'Crit Rating', ep: 1.14, op: '>' },
+    { stat: 'Strength', ep: 1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '=' },
+    { stat: 'Spell Piercing', ep: 0.2, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.15, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
 
@@ -114,31 +131,30 @@ const backstabRotation: Rotation = {
   ],
 };
 
-/** "Subtlety Hemo" (Use Backstab off, slow main hand): `npm run apl -- subtlety/hemo`. */
+/** "Subtlety Hemo" (Use Backstab off, slow main hand, Cold Blood talented, no Ghostly Strike): `npm run apl -- subtlety/hemo`. */
 const hemoRotation: Rotation = {
   opener: [
     'Premeditation (-2s)',
     'Stealth + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
     'Garrote',
     'Slice and Dice',
-    'Ghostly Strike',
     'Hemorrhage to 3CP',
     'Rupture',
     'Hemorrhage to 5CP',
-    'Eviscerate',
+    'Cold Blood + Eviscerate',
   ],
   steps: [
     sliceAndDiceStep,
     ruptureStep,
-    ghostlyStrikeStep,
     { press: 'Hemorrhage', note: 'Until you have 5 combo points.' },
+    { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
     eviscerateWithRupture,
   ],
   tips: [
     tip.meleeUptime,
     tip.premeditation,
     tip.trinkets,
-    ...racialTips({ adrenalineRush: false, coldBlood: false }),
+    ...racialTips({ adrenalineRush: false }),
     tip.thistleTea,
     tip.pool('Hemorrhage'),
     vanishGarrote,
@@ -244,9 +260,9 @@ export const subtlety: Build[] = [
     rank: 4,
     talents: points(20, 0, 31),
     talentNote:
-      'A Subtlety Backstab variant using Hemorrhage as the builder, so it works with a slow main hand instead of a dagger. Bleed damage from Garrote and Rupture, with Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Ghostly Strike on cooldown, Hemorrhage to 5, then Eviscerate while Rupture is up.',
+      'A Subtlety Backstab variant using Hemorrhage as the builder, so it works with a slow main hand instead of a dagger. Bleed damage from Garrote and Rupture, with Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Hemorrhage to 5, then Cold Blood and Eviscerate while Rupture is up.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101005--1323200310213211501_t5/2CBaEDHjnPMsrQTw0CDEFgjN',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101014--4323200300013211501_t5',
     stats: hemoStats,
     gear: noEndgameGear,
     rotation: hemoRotation,
@@ -264,7 +280,7 @@ export const subtlety: Build[] = [
       'A Subtlety hybrid built around a big Ambush opener. Stealth in, Ambush, and finish most mobs before they can fight back, then reset and move on. Fights that last follow the Hemorrhage loop: Slice and Dice, Rupture at 3+ combo points, Ghostly Strike, Hemorrhage to 5, then Eviscerate. Vanish into Ambush when you want another opener.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202-321033210014142-4323003010013011_t0/1B0B2BCGddjdaaaPnasr1AFEhGcmnnnnpqqqqR',
-    stats,
+    stats: questingStats,
     gear: levelingGear,
     rotation: questingRotation,
   },
@@ -281,7 +297,7 @@ export const subtlety: Build[] = [
       'Burst opener into steady Backstab damage. Stealth in, Ambush, then keep Slice and Dice up, Ghostly Strike on cooldown, Backstab from behind to 5 combo points and Eviscerate. Blade Flurry on cooldown, and Vanish into Ambush when you want another opener.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2-3200332110141423-532000321001301_t0/1B2BCGaajaaahPnhr1AEffhfGjmnnnnpqqqqRS',
-    stats,
+    stats: dungeonsStats,
     gear: levelingGear,
     rotation: dungeonsRotation,
   },

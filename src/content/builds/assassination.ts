@@ -3,20 +3,20 @@ import type { Build, Rotation, StatPriority } from '../types';
 import { mutilateRotation } from './combat';
 import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } from './shared';
 
-/** WoWSims EP against current BiS gear. EP is relative to `relativeTo` (= 1). */
-const stats: StatPriority = {
+/** Assassination Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
+const dungeonsStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Expertise Rating', ep: 2.78 },
-    { stat: 'Hit Rating', ep: 2.73, op: '>' },
-    { stat: 'Agility', ep: 2.08, op: '>' },
-    { stat: 'Crit Rating', ep: 2.03, op: '>' },
-    { stat: 'Haste Rating', ep: 1.95, op: '>' },
-    { stat: 'Strength', ep: 1.1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '>' },
-    { stat: 'Spell Piercing', ep: 0.65, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.4, op: '>' },
-    { stat: 'Stamina', ep: 0, op: '>' },
+    { stat: 'Agility', ep: 1.54 },
+    { stat: 'Expertise Rating', ep: 1.41, op: '>' },
+    { stat: 'Crit Rating', ep: 1.23, op: '>' },
+    { stat: 'Hit Rating', ep: 1.19, op: '>' },
+    { stat: 'Haste Rating', ep: 1.11, op: '>' },
+    { stat: 'Strength', ep: 1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '=' },
+    { stat: 'Spell Piercing', ep: 0.37, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.19, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
 
@@ -33,6 +33,23 @@ const mutilateVenomStats: StatPriority = {
     { stat: 'Attack Power', ep: 1, op: '>' },
     { stat: 'Spell Piercing', ep: 0.58, op: '>' },
     { stat: 'Armor Penetration', ep: 0.39, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/** Assassination Questing (leveling) weights from its own WoWSims run. */
+const questingStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Expertise Rating', ep: 3.03 },
+    { stat: 'Agility', ep: 1.52, op: '>' },
+    { stat: 'Crit Rating', ep: 1.22, op: '>' },
+    { stat: 'Hit Rating', ep: 1.21, op: '>' },
+    { stat: 'Haste Rating', ep: 1.15, op: '>' },
+    { stat: 'Strength', ep: 1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '=' },
+    { stat: 'Spell Piercing', ep: 0.39, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.2, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
@@ -102,7 +119,7 @@ export const assassination: Build[] = [
       'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202532310001401-302333010014142-002_t5/1A0BcccDFgEcmcnnnq2C1ccEffhfDmnnnnpqqqqR0n',
-    stats,
+    stats: questingStats,
     gear: levelingGear,
     rotation: mutilateRotation,
   },
@@ -119,7 +136,7 @@ export const assassination: Build[] = [
       'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-302333010014152-002_t5/0CDffgfEjmnnnnq2C1AccDEhFmnnnnpqqqqRq',
-    stats,
+    stats: dungeonsStats,
     gear: levelingGear,
     rotation: mutilateRotation,
   },

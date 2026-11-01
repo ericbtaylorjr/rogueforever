@@ -2,20 +2,37 @@ import { levelingShared, levelingSlowWeapons } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
 import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip } from './shared';
 
-/** WoWSims EP against current BiS gear. EP is relative to `relativeTo` (= 1). */
-const stats: StatPriority = {
+/** Combat Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
+const dungeonsStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Hit Rating', ep: 2.43 },
-    { stat: 'Expertise Rating', ep: 2.28, op: '>' },
-    { stat: 'Agility', ep: 1.95, op: '>' },
-    { stat: 'Haste Rating', ep: 1.73, op: '>' },
-    { stat: 'Crit Rating', ep: 1.68, op: '>' },
-    { stat: 'Strength', ep: 1.1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.43, op: '>' },
+    { stat: 'Agility', ep: 1.54 },
+    { stat: 'Expertise Rating', ep: 1.45, op: '>' },
+    { stat: 'Crit Rating', ep: 1.22, op: '>' },
+    { stat: 'Hit Rating', ep: 1.2, op: '>' },
+    { stat: 'Haste Rating', ep: 1.09, op: '>' },
+    { stat: 'Strength', ep: 1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '=' },
+    { stat: 'Spell Piercing', ep: 0.24, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.18, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/** Combat Questing (leveling) weights from its own WoWSims run. */
+const questingStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Expertise Rating', ep: 3.22 },
+    { stat: 'Agility', ep: 1.54, op: '>' },
+    { stat: 'Hit Rating', ep: 1.33, op: '>' },
+    { stat: 'Crit Rating', ep: 1.23, op: '>' },
+    { stat: 'Haste Rating', ep: 1.22, op: '>' },
+    { stat: 'Strength', ep: 1, op: '>' },
+    { stat: 'Attack Power', ep: 1, op: '=' },
     { stat: 'Spell Piercing', ep: 0.21, op: '>' },
-    { stat: 'Stamina', ep: 0, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.19, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
 
@@ -230,7 +247,7 @@ export const combat: Build[] = [
       'Traditional Combat, centered on cleaving with Blade Flurry. Pull two or three mobs, turn on Blade Flurry and take them down together. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate. No positioning to worry about.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v232232310001-32003321201515231_t0/1B0BA1AffEhfGjmnnnnpqqqqRs0F1sst0ddgdEcmc1qnj',
-    stats,
+    stats: questingStats,
     gear: levelingGear,
     rotation: sinisterStrikeRotation,
   },
@@ -247,7 +264,7 @@ export const combat: Build[] = [
       'Traditional Combat for groups: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate. No positioning to worry about.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310301-32003321101515231_t0/1BAEffhfGjmnnnnpQRsstsn0CFEgDjmjj',
-    stats,
+    stats: dungeonsStats,
     gear: levelingGear,
     rotation: sinisterStrikeRotation,
   },

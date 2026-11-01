@@ -9,6 +9,13 @@ The Rotation section must say what the WoWSims APL does for that build, nothing 
 No outside advice or opinions. When the APL looks wrong, still describe what the sim does
 and tell the user separately.
 
+## When to run it
+
+Also run it, for the affected build only, whenever a build's **talent link** changes, even if the APL
+didn't. Talents decide which rows the build can fire (Cold Blood, Ghostly Strike, Premeditation,
+Preparation...), so a new talent adds a step and a dropped one removes it from the opener, steps and
+tips. Pasting an APL identical to `scripts/apl/rogue.apl.json` changes nothing: look at the build's talents.
+
 ## Inputs
 
 - `scripts/apl/rogue.apl.json`: the shared Rogue APL (the WoWSims export, as pasted).
@@ -47,6 +54,12 @@ and tell the user separately.
      `racialTips`) so the same APL row reads the same in every build. Tip order: melee
      uptime, Premeditation, Adrenaline Rush, Blade Flurry, trinkets, racials, Thistle Tea,
      pooling, then the sweaty ones (Vanish, early Eviscerate, end of fight).
+   - `racialTips({ adrenalineRush, coldBlood })`: pass `coldBlood: false` only when the resolver lists
+     Cold Blood as not known (the Night Elf tip then drops its "save Cold Blood" clause). If Cold Blood is
+     in the build's rows, leave the default. A Cold Blood step reads `{ press: 'Cold Blood', note: "If it's
+     off cooldown." }`, or "...and you have 5 combo points." when the builder adds 2 combo points
+     (Mutilate) or the row requires exactly 5 and the Eviscerate has other conditions (Subtlety).
+     Opener: "Cold Blood + Eviscerate".
    - Builds that resolve to the same rows share one constant (Combat Questing and Dungeons
      use the Sinister Strike rotation; Assassination Questing and Dungeons use Combat's
      `mutilateRotation`).
@@ -69,8 +82,14 @@ and tell the user separately.
    Every spell and item name in the section is linked to Wowhead Forever with its
    tooltip (`WowheadText`). A new name needs an entry in `pinned` in
    `scripts/fetch-icons.mjs` with the id the sim casts, then `npm run icons`.
-5. `npm run typecheck`.
-6. Report APL quirks: rows that can never fire, checks on spells the sim doesn't
+5. Refresh the build's summary, `talentNote` in the same build file (shown under the build name in
+   the Talents card). Two or three short sentences: the damage profile (builder, finisher, bleeds
+   and poisons, cleave, what boosts it), then the loop in the order of `steps`, naming the same
+   spells. Rewrite it when the rotation changes so it never names a spell the rotation dropped
+   (e.g. Ghostly Strike). Builds that share a rotation constant get the same loop in their summary.
+   Also check the sibling builds' summaries when a shared constant changes.
+6. `npm run typecheck`.
+7. Report APL quirks: rows that can never fire, checks on spells the sim doesn't
    register (they are dropped, not false), toggles that break the build (e.g.
    `Use Backstab=true` on a sword build never casts a builder).
 
