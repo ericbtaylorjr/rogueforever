@@ -229,8 +229,14 @@ export const rotation = {
 export const stats = {
   intro:
     'These weights are relative to current BiS gear, so expect them to shift slightly as your gear changes. For more accurate values, run the EP calculator in WoWSims with your current gear setup.',
-  /** Follows the "Tip:" label. Shown for every build until real weights are in. */
-  placeholderTip: 'These stats are placeholders and will be updated prior to launch.',
+  /** Follows the "Tip:" label, with the active spec and build's name between `before` and `after`. */
+  tip: {
+    before: 'These stat weights are relative to ',
+    after: ' and are just a general guide. Weapon damage is MUCH more important than stats.',
+  },
+  /** Questing builds only, after the general tip. */
+  questingTip:
+    'Since while questing you are attacking from the front, Expertise gains double the value since you benefit from both the Parry and Dodge reduction.',
   statsTitle: 'Stat priority',
   statsMeta: 'Weights relative to',
   epLabel: 'EP',

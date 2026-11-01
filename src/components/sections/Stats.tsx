@@ -73,6 +73,21 @@ function StatPriorityPanel() {
   );
 }
 
+function StatTips() {
+  const build = useShownBuild();
+  const specName = specById[build.spec].name;
+  return (
+    <div className="mt-[14px] flex flex-col gap-[10px]">
+      <Tip spec>
+        {copy.tip.before}
+        {specName} {build.name}
+        {copy.tip.after}
+      </Tip>
+      {build.phase === 'leveling' && build.activity === 'questing' && <Tip spec>{copy.questingTip}</Tip>}
+    </div>
+  );
+}
+
 export function Stats() {
   return (
     <section id="stats" aria-label="Stats">
@@ -86,9 +101,7 @@ export function Stats() {
         <StatPriorityPanel />
       </div>
 
-      <div className="mt-[14px]">
-        <Tip>{copy.placeholderTip}</Tip>
-      </div>
+      <StatTips />
     </section>
   );
 }
