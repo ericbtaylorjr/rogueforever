@@ -190,6 +190,7 @@ export const racesCopy = {
     durationLabel: (m: number) => `${m} min`,
     best: 'BEST',
     legend: { best: 'Best, or within 0.5%', close: '0.5–2% behind', far: 'More than 2% behind' },
+    lastUpdated: 'Last updated',
     loading: 'Loading race simulations…',
     failed: "The race simulations couldn't load. Try reloading the page.",
     newTab: '(opens WoWSims in a new tab)',

@@ -5,7 +5,7 @@
  *
  * Keeps only what the chart draws: per spec and duration, each race's % behind the best race
  * and the sim's relative link (the page prefixes https://www.wowsims.com). The best race has
- * pct 0. Races and builds are listed alphabetically, and the two Skyborne races (High Order and Windshaper)
+ * pct 0. `updated` is when this script ran (shown as the chart's "Last updated"). Races and builds are listed alphabetically, and the two Skyborne races (High Order and Windshaper)
  * are one "Skyborne" row: they sim identically, so the first one's numbers and link are kept
  * (the script warns if they ever differ, and keeps the better one).
  */
@@ -23,6 +23,7 @@ const raceNames = [...new Set(data.races.map(nameOf))].sort((a, b) => a.localeCo
 
 const out = {
   generated: data.meta.generated,
+  updated: new Date().toISOString(),
   durations: data.durations,
   races: raceNames,
   specs: [...data.specs]

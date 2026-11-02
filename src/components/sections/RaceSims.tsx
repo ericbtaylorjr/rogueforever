@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { racesCopy } from '../../content/copy';
+import { easternDate } from '../../lib/time';
 import type { SpecId } from '../../content/types';
 import { useSpecColor } from '../../state/useSpecColor';
 import { FilterPill } from '../ui/Pill';
@@ -129,7 +130,7 @@ export function RaceSims() {
               </table>
             </div>
 
-            <ul className="flex flex-wrap gap-x-[18px] gap-y-[6px] px-[18px] pt-[8px] pb-[16px] text-[12px] text-faint">
+            <ul className="flex flex-wrap gap-x-[18px] gap-y-[6px] px-[18px] pt-[8px] pb-[10px] text-[12px] text-faint">
               {(['best', 'close', 'far'] as const).map((k) => (
                 <li key={k} className="flex items-center gap-[7px]">
                   <span
@@ -141,6 +142,12 @@ export function RaceSims() {
                 </li>
               ))}
             </ul>
+            <p className="px-[18px] pb-[16px] text-[12px] text-faint">
+              {copy.lastUpdated}:{' '}
+              <time dateTime={data.updated} className="t-num text-mute">
+                {easternDate(new Date(data.updated))}
+              </time>
+            </p>
           </>
         )
       )}

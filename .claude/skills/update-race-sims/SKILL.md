@@ -19,7 +19,9 @@ A JSON export with `meta`, `durations` (seconds), `races`, and `specs`. Each spe
 ## Steps
 
 1. `npm run race-sims -- <path-to-json>`. It rewrites `src/content/raceSims.json` and prints
-   `specs × durations × races`. Always expect **8 races** (see rules). Read any `!` warning.
+   `specs × durations × races`. It also stamps `updated` (the run time), which the chart shows
+   at the bottom as "Last updated: Nov 2, 2026" (the date, US Eastern). **Any time the data is adjusted, re-run the
+   script (never edit `raceSims.json` by hand) so the stamp moves with it.** Always expect **8 races** (see rules). Read any `!` warning.
 2. `npm run typecheck`, then `npm run build` (the data is a lazy chunk, about 135 KB, 6 KB gzipped).
 3. Check it renders: `npx vite preview --port 4173 --strictPort &`, open `/#races`, scroll the
    chart into view (it loads when it nears the viewport) and look at dark and light themes and a
@@ -40,7 +42,7 @@ A JSON export with `meta`, `durations` (seconds), `races`, and `specs`. Each spe
 
 ## Report
 
-Tell the user: the export's `generated` date, spec/duration/race counts, and anything that moved
+Tell the user: the export's `generated` date and the new "Last updated" stamp, spec/duration/race counts, and anything that moved
 notably (a different best race for a build, or the spread across races growing or shrinking). The
 Races intro tip claims races are "within about 1%": if the data now shows a wider spread, flag
 that the tip is out of date rather than editing it silently.

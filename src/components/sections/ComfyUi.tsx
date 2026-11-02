@@ -4,6 +4,7 @@ import thumb from '../../assets/comfy-ui-thumb.webp';
 import { addons, comfyUi as copy, type ComfyProfileId } from '../../content/copy';
 import updated from '../../content/imports/updated.json';
 import { track } from '../../lib/analytics';
+import { easternLabel } from '../../lib/time';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Modal } from '../ui/Modal';
 
@@ -12,22 +13,6 @@ const loadString: Record<ComfyProfileId, () => Promise<{ default: string }>> = {
   ellesmere: () => import('../../content/imports/ellesmere.txt?raw'),
   editmode: () => import('../../content/imports/editmode.txt?raw'),
 };
-
-/** e.g. "Oct 13, 2026, 11:13 AM EDT", always in US Eastern time. */
-const formatUpdated = new Intl.DateTimeFormat('en-US', {
-  timeZone: 'America/New_York',
-  dateStyle: 'medium',
-  timeStyle: 'short',
-}).format;
-
-function easternLabel(iso: string) {
-  const date = new Date(iso);
-  // timeStyle can't be combined with timeZoneName, so take the EDT/EST label separately.
-  const zone = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', timeZoneName: 'short' })
-    .formatToParts(date)
-    .find((p) => p.type === 'timeZoneName')?.value;
-  return `${formatUpdated(date)} ${zone ?? 'ET'}`;
-}
 
 type CopyState = 'idle' | 'copied' | 'failed';
 
