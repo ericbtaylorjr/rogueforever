@@ -69,7 +69,7 @@ function CuratorNote() {
             href: links.youtube,
             label: hero.note.youtubeCta,
             Icon: YouTubeIcon,
-            brand: 'bg-[#ff0000] hover:bg-[#cc0000] text-white',
+            brand: 'bg-[#cc0000] hover:bg-[#a30000] text-white',
           },
           {
             href: links.x,
@@ -108,7 +108,7 @@ export function Overview() {
       <p className="relative text-[13.5px] text-faint">{hero.eyebrow}</p>
 
       <h1 className="relative mt-[18px]">
-        <span className="t-h1 block text-ink">{hero.titleTop}</span>
+        <span className="t-h1 block text-ink">{hero.titleTop}</span>{' '}
         <span className="t-h1 block text-accent">
           {hero.titleBottom}
         </span>

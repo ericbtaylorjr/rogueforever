@@ -13,7 +13,11 @@
     "comfy-image": "node scripts/update-comfy-image.mjs",
     "icons": "node scripts/fetch-icons.mjs",
     "talents": "node scripts/fetch-talents.mjs",
-    "apl": "node scripts/apl/resolve.mjs"
+    "apl": "node scripts/apl/resolve.mjs",
+    "audit:a11y": "node scripts/audit/a11y.mjs",
+    "audit:perf": "node scripts/audit/perf.mjs",
+    "audit:security": "node scripts/audit/security.mjs",
+    "audit:seo": "node scripts/audit/seo.mjs"
   },
   "dependencies": {
     "react": "^19.3.1",

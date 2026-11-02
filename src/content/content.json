@@ -502,37 +502,45 @@
       "note": "Nag your raid leader until these are assigned.",
       "items": [
         {
-          "n": "Improved Battle Shout"
+          "n": "Blessing of Kings"
         },
         {
           "n": "Blessing of Might"
         },
         {
-          "n": "Blessing of Kings"
+          "n": "Grace of Air Totem"
+        },
+        {
+          "n": "Improved Battle Shout"
         },
         {
           "n": "Improved Mark of the Wild"
         },
         {
+          "n": "Leader of the Pack"
+        },
+        {
+          "n": "Moonkin Aura",
+          "s": true
+        },
+        {
+          "n": "Power Infusion",
+          "s": true
+        },
+        {
           "n": "Power Word: Fortitude"
         },
         {
-          "n": "Grace of Air Totem"
+          "n": "Salvation"
         },
         {
           "n": "Strength of Earth Totem"
         },
         {
-          "n": "Windfury Totem"
-        },
-        {
           "n": "Trueshot Aura"
         },
         {
-          "n": "Leader of the Pack"
-        },
-        {
-          "n": "Salvation"
+          "n": "Windfury Totem"
         }
       ]
     },
@@ -541,30 +549,25 @@
       "note": "On the boss, or your damage is fiction.",
       "items": [
         {
-          "n": "Faerie Fire"
+          "n": "Curse of Recklessness"
         },
         {
-          "n": "Curse of Recklessness"
+          "n": "Curse of the Elements"
         },
         {
           "n": "Expose Armor"
         },
         {
-          "n": "Sunder Armor"
+          "n": "Faerie Fire"
         },
         {
           "n": "Gift of Arthas"
         },
         {
-          "n": "Improved Scorch",
-          "s": true
-        },
-        {
           "n": "Hunter’s Mark"
         },
         {
-          "n": "Shadow Weaving",
-          "s": true
+          "n": "Sunder Armor"
         }
       ]
     }

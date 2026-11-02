@@ -64,7 +64,7 @@ export function BuildList({
                   <span className="block truncate text-[13.5px] font-semibold text-ink">{b.name}</span>
                 )}
                 {showSpec && !bySpec && (
-                  <span className="flex items-center gap-[6px] text-[11px] text-faint">
+                  <span className={`flex items-center gap-[6px] text-[11px] ${on ? 'text-mute' : 'text-faint'}`}>
                     <span
                       aria-hidden="true"
                       className="size-[6px] shrink-0 rounded-full"
@@ -74,7 +74,7 @@ export function BuildList({
                   </span>
                 )}
               </span>
-              <span className="t-num text-[12px] text-faint">
+              <span className={`t-num text-[12px] ${on ? 'text-mute' : 'text-faint'}`}>
                 {b.talents.map((t) => t.pts).join(' / ')}
               </span>
             </button>

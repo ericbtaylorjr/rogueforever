@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useDeferredValue, useMemo, useState } from 'react';
 import { config } from '../../config';
 import { rankedBuilds, rankedLeveling } from '../../content/builds';
 import { foreverOutlook, levelingIndex, specById, specIndex } from '../../content/content';
@@ -430,6 +430,10 @@ export function SpecBoard() {
     track('meta_tab', { tab: id });
   };
 
+  // The tab answers the click at once; the lists under it follow in a render React can interrupt
+  // (Cloudflare INP: switching to Leveling took ~230ms to paint on slow phones).
+  const shownPhase = useDeferredValue(phase);
+
   // Until any view has real data, the sim views stay hidden: no tabs, no empty states.
   // Filling in specIndex/levelingIndex brings them back.
   const sims = [...Object.values(specIndex), ...Object.values(levelingIndex)].some((v) => !v.pending);
@@ -455,7 +459,7 @@ export function SpecBoard() {
       </div>
 
       <div id={`panel-${phase}`} role="tabpanel" aria-labelledby={`tab-${phase}`} className="mt-[16px]">
-        {phase === 'endgame' ? <EndgameMeta sims={sims} /> : <LevelingMeta sims={sims} />}
+        {shownPhase === 'endgame' ? <EndgameMeta sims={sims} /> : <LevelingMeta sims={sims} />}
       </div>
     </section>
   );

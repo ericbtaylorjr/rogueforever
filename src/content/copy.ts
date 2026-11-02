@@ -169,8 +169,9 @@ export const talents = {
     fallback: 'Legacy perk: start gaining talent points at level 5 instead of 10.',
   },
   orderLabel: 'Talent order by level. Arrow keys move between talents.',
+  /** Starts with the row's visible text ("14–16 Lightning Reflexes 3/5"), so voice control and WCAG 2.5.3 match it. */
   stepLabel: (from: number, to: number, name: string, rank: number, max: number, tree: string) =>
-    `${from === to ? `Level ${from}` : `Levels ${from} to ${to}`}: ${name}, ${rank} of ${max}, ${tree}`,
+    `${from === to ? from : `${from}–${to}`} ${name} ${rank}/${max}, ${tree}`,
 } as const;
 
 export const racesCopy = {
@@ -287,15 +288,15 @@ export const consumablesCopy = {
     strong: 'sweaty',
     after: ' consumables, which most players can skip, as they may be too expensive or difficult to acquire to justify the effort for.',
   },
+  /** Rendered with <Tip>, which adds the "Tip:" label. */
   status: {
-    label: 'Heads up:',
     text: "Checked against the Wowhead Forever item database on October 25th. This list is tentative: it may include entries that exist in the Wowhead database but won't actually be available in Forever.",
   },
 } as const;
 
 export const buffsCopy = {
+  /** Rendered with <Tip>, which adds the "Tip:" label. */
   status: {
-    label: 'Placeholder:',
     text: "These are early baselines. Forever's balancing and stacking rules aren't settled, so I'll update this once they are and the sims have run.",
   },
 } as const;

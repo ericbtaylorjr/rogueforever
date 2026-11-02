@@ -238,7 +238,7 @@ export function TalentOrder({ steps, colors }: { steps: TalentStep[]; colors: Tr
               >
                 <span className="t-num w-[38px] shrink-0 text-faint" aria-hidden="true">
                   {s.from === s.to ? s.from : `${s.from}–${s.to}`}
-                </span>
+                </span>{' '}
                 {/* Ringed in its tree's colour. */}
                 <img
                   src={ICON(t.icon)}
@@ -251,7 +251,8 @@ export function TalentOrder({ steps, colors }: { steps: TalentStep[]; colors: Tr
                 />
                 <span className="min-w-0 flex-1 truncate text-prose" aria-hidden="true">
                   {t.name}
-                </span>
+                </span>{' '}
+                {/* The spaces between these spans give axe's visible text the same word breaks as the label. */}
                 <span className="t-num shrink-0 text-mute" aria-hidden="true">
                   {rank}/{t.max}
                 </span>

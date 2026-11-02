@@ -1,11 +1,11 @@
 import { consumableCatCount, consumableCats, consumables } from '../../content/content';
 import { consumablesCopy as copy } from '../../content/copy';
 import { useHandbook } from '../../state/HandbookProvider';
-import { Callout } from '../ui/Callout';
 import { Droplet } from '../ui/Droplet';
 import { FilterPill } from '../ui/Pill';
 import { GameIcon, WowheadLink, wowheadRefFor } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
+import { Tip } from '../ui/Tip';
 import { useTooltip } from '../ui/Tooltip';
 
 export function Consumables() {
@@ -30,9 +30,7 @@ export function Consumables() {
       </p>
 
       <div className="mt-[16px]">
-        <Callout tone="accent" quiet label={copy.status.label}>
-          {copy.status.text}
-        </Callout>
+        <Tip>{copy.status.text}</Tip>
       </div>
 
       <div

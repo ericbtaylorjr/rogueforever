@@ -122,11 +122,15 @@ authored them in markup.
 
 ## Accessibility
 
-Target: WCAG 2.2 AA. Last audited 22 October 2026 with axe-core 4.10 (0 violations at 1440px
-and 390px, dark and light, on an endgame build, the Combat and Subtlety leveling builds with
-their milestone gear tables, and an open Wowhead tooltip), a 274-stop keyboard walk (every
-stop shows a focus ring) and Lighthouse 12 (Accessibility 100). Earlier audits also covered
-the palette, drawer, profile modal and an open raid.
+Target: WCAG 2.2 AA. Last audited 1 November 2026 with axe-core 4.14 (0 violations at 1440px
+and 390px, dark and light, on three level 60 builds and three leveling builds) and a 78-stop
+keyboard walk (every stop shows a focus ring), both from `npm run audit:a11y` (see Auditing).
+The 4.14 run found three things the 4.10 audit of 22 October didn't, all fixed: the
+YouTube button's white-on-`#ff0000` text (4.0:1, now `#cc0000`), faint text on a spec-tinted
+active build row (now `text-mute`), and talent order links whose `aria-label` didn't contain
+their visible text (WCAG 2.5.3; the label now starts with it, "14–16 Lightning Reflexes 3/5").
+The 22 October audit also ran Lighthouse 12 (Accessibility 100) and covered the palette, drawer,
+profile modal and an open raid.
 
 Covered: skip link and `<main>` landmark; nav jumps and shared section links
 (`?spec=combat&build=backstab#talents`, scrolled to once the page has loaded) move keyboard
@@ -161,11 +165,21 @@ arrow-key navigation between raid accordion headers (not required by WCAG).
 
 ## Performance
 
-Last measured 22 October 2026 with Lighthouse 12 against the production build: desktop
-Performance 100 (LCP 0.7s, CLS 0), throttled mobile 97 (LCP 2.4s, TBT ≤60ms), about
-355 KiB transferred. Under the same throttling in Chrome itself (4× CPU, 1.6 Mbps), mobile
-LCP is ~1.8s: the intro paragraph, painted once the JS bundle (135 KB gzipped, most of it
-React DOM) has downloaded and rendered. Keep it that way:
+Last measured 1 November 2026 with Lighthouse 13 against the production build
+(`npm run audit:perf`): desktop Performance 100 (FCP 0.2s, LCP 0.8s, CLS 0), throttled mobile
+95 (FCP 0.8s, LCP 2.9s, TBT 50ms, CLS 0), about 400 KiB transferred on mobile. The lab loads
+are fast; the field data is where the work is. Cloudflare Web Analytics (1 November):
+FCP 97% good, INP 98% good / 2% needs improvement, CLS 99% good / 1% needs improvement.
+Their Debug View named two slow interactions (232ms and 272ms, mostly presentation delay):
+the Meta breakdown's **Leveling** tab (`#tab-leveling`) and a **build row** in the ranking
+list. The tab now answers the click first and renders the lists after it
+(`useDeferredValue` in `SpecBoard`: 48ms → 24ms at 4× CPU slowdown). A build pick measures
+90–110ms at 4× in the lab, so the 272ms is a slow-phone tail; the remaining lever is
+splitting the one `useHandbook()` context so a pick doesn't re-render every section. The one
+CLS sample (0.131, a 15px sideways shift of the hero) did not reproduce at nine widths, with
+real scrollbars or on a throttled network; check it again in Cloudflare after the next deploy.
+Under the same throttling in Chrome itself the first paint is the intro paragraph, painted once
+the JS bundle (144 KB gzipped, most of it React DOM) has downloaded and rendered. Keep it that way:
 
 - **Size images for their display size.** Images are WebP at about 3× their CSS size
   (crisp on high-density phones). Don't ship source art; `sharp` is a dev dependency
@@ -217,6 +231,35 @@ React DOM) has downloaded and rendered. Keep it that way:
   would cut ~50 KB gzipped from the bundle; it's the cheapest remaining win, but needs a
   full regression pass.
 
+## SEO
+
+One canonical URL (`https://wowrogue.gg/`); spec and build are query parameters on the same page.
+Last audited 1 November 2026 with `npm run audit:seo`: Lighthouse SEO 100, Best Practices 96
+(the only note is Cloudflare's beacon being refused a CORS preflight on `localhost`, which can't
+happen on the real domain). Title 58 characters, description 158, canonical, robots, Open Graph
+and Twitter cards, a JSON-LD `WebSite` + `Article` graph, `robots.txt` and `sitemap.xml` all
+check out; the rendered page has one `h1` ("Rogue Handbook", with a space between its two lines
+for crawlers that read text content), no skipped heading levels, alt text on every image, and a
+name on every link. The page is client-rendered with a `<noscript>` summary; prerendering was
+left out on purpose (see Performance).
+
+## Auditing
+
+Four scripts and four Claude Code skills keep the audits repeatable: `audit-accessibility`,
+`audit-performance`, `audit-security` and `audit-seo` (in `.claude/skills/`) say what to run, what
+to check by hand and what to record here. The scripts are in `scripts/audit/`:
+
+```
+npm run build && npx vite preview --port 4173 --strictPort &
+AUDIT_TOOLS=/tmp/audit-tools npm run audit:a11y       # axe-core + keyboard walk
+AUDIT_TOOLS=/tmp/audit-tools npm run audit:perf       # Lighthouse, layout shift, interaction timing
+AUDIT_TOOLS=/tmp/audit-tools npm run audit:seo        # meta, JSON-LD, headings, Lighthouse SEO
+npm run audit:security                                # CSP, dependencies, patterns, CI, secrets
+```
+
+`AUDIT_TOOLS` is a scratch folder with `playwright-core`, `axe-core` and `lighthouse` installed
+(`scripts/audit/lib.mjs` explains); they are deliberately not project dependencies.
+
 ## Theming
 
 Dark is the default; light is a papyrus "bounty letter". Which one you get: a choice made
@@ -241,7 +284,10 @@ first paint (no flash) and `src/state/ThemeProvider.tsx` owns it afterwards; bot
 ## Security
 
 Static site, no backend, no user input beyond a search box, no third-party scripts beyond
-analytics (below). `npm audit` is clean.
+analytics (below). Last audited 1 November 2026 with `npm run audit:security`: `npm audit` is
+clean (runtime and dev), the CSP has no `unsafe-inline`/`unsafe-eval` in `script-src`, the
+inline script is pinned by hash, every CSP host is a documented one, actions are pinned to SHAs,
+and no secrets or source maps ship.
 
 - **Wowhead tooltips:** item and spell tooltips fetch JSON from `nether.wowhead.com`
   (Forever data only) the first time each one opens, so the CSP

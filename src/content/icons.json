@@ -374,6 +374,16 @@
     "icon": "spell_holy_sealofsalvation",
     "kind": "spell"
   },
+  "Power Infusion": {
+    "id": 10060,
+    "icon": "spell_holy_powerinfusion",
+    "kind": "spell"
+  },
+  "Moonkin Aura": {
+    "id": 24907,
+    "icon": "spell_nature_moonglow",
+    "kind": "spell"
+  },
   "Faerie Fire": {
     "id": 9907,
     "icon": "spell_nature_faeriefire",
@@ -382,6 +392,11 @@
   "Curse of Recklessness": {
     "id": 11717,
     "icon": "spell_shadow_unholystrength",
+    "kind": "spell"
+  },
+  "Curse of the Elements": {
+    "id": 1311680,
+    "icon": "warlock_curse_shadow",
     "kind": "spell"
   },
   "Expose Armor": {
@@ -399,19 +414,9 @@
     "icon": "spell_nature_nullifydisease",
     "kind": "spell"
   },
-  "Improved Scorch": {
-    "id": 11095,
-    "icon": "spell_fire_soulburn",
-    "kind": "spell"
-  },
   "Hunter’s Mark": {
     "id": 14324,
     "icon": "ability_hunter_snipershot",
-    "kind": "spell"
-  },
-  "Shadow Weaving": {
-    "id": 15257,
-    "icon": "spell_shadow_blackplague",
     "kind": "spell"
   },
   "Sprint": {
