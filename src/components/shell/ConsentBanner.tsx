@@ -10,6 +10,39 @@ import { RogueMark } from '../ui/RogueMark';
 /** Murloc art is 611×520, 2× its display size. */
 const FIGURE = { width: 282, height: 240 };
 
+/**
+ * Drawn into a canvas instead of an <img>: an image is an LCP candidate, and at 282×240 this
+ * decorative one was the largest paint on desktop (about a second after the page text, and
+ * the whole of the 47s outlier in Cloudflare's field data). A canvas isn't a candidate, so
+ * the real content stays the LCP. The image only loads where it's shown, so phones skip it.
+ */
+function Murloc() {
+  const canvas = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const el = canvas.current;
+    if (!el || !window.matchMedia('(min-width: 640px)').matches) return;
+    const img = new Image();
+    img.decoding = 'async';
+    img.onload = () => el.getContext('2d')?.drawImage(img, 0, 0);
+    img.src = murloc;
+    return () => {
+      img.onload = null;
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvas}
+      aria-hidden="true"
+      width={611}
+      height={520}
+      style={{ width: FIGURE.width, height: FIGURE.height }}
+      className="consent-figure pointer-events-none absolute right-[6px] bottom-[8px] select-none max-sm:hidden"
+    />
+  );
+}
+
 const button =
   'min-h-[40px] flex-1 basis-[140px] rounded-[8px] border px-[14px] py-[9px] text-center text-[13px] font-semibold transition-colors';
 
@@ -66,18 +99,7 @@ export function ConsentBanner() {
       {/* The section divider's dagger slash, so the card reads as part of the page. */}
       <span aria-hidden="true" className="consent-slash" />
 
-      {/* Lazy, so a phone, where it's hidden, never downloads it. */}
-      <img
-        src={murloc}
-        alt=""
-        aria-hidden="true"
-        draggable={false}
-        loading="lazy"
-        decoding="async"
-        width={FIGURE.width}
-        height={FIGURE.height}
-        className="consent-figure pointer-events-none absolute right-[6px] bottom-[8px] select-none max-sm:hidden"
-      />
+      <Murloc />
 
       <div className="flex items-start gap-[12px]">
         <RogueMark size={28} />
