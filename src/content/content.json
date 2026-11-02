@@ -800,6 +800,10 @@
   ],
   "changelog": [
     {
+      "date": "Nov 1st, 2026",
+      "text": "Updated the talents for the builds with optimizations, refreshed the stat weights, and cleaned up the rotations and Pro Tips, with leveling builds now getting simpler guidance. Made slight adjustments to the Meta Breakdown projections, which should still be taken with a grain of salt."
+    },
+    {
       "date": "Oct 27th, 2026",
       "text": "Updated the Racial meta and the Racials and Skyborne section for the Oct 26 and Oct 27 Blizzard race hotfixes. Human Ruthless is now 1% Crit, Dwarf and Orc lose their Crit passives (Dwarf gains 1% Hit), Orc Blood Fury is 2 minutes, Troll Berserking lasts 15 seconds, Undead Touch of the Grave has a 15 second internal cooldown, and Skyborne Haste is 2% with changes to Skysight. Racial grades were re-ranked."
     },

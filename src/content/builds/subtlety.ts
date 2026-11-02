@@ -262,7 +262,7 @@ export const subtlety: Build[] = [
     spec: 'subtlety',
     phase: 'endgame',
     name: 'Hemo',
-    grade: 'A',
+    grade: 'B',
     rank: 4,
     talents: points(20, 0, 31),
     talentNote:
@@ -279,7 +279,7 @@ export const subtlety: Build[] = [
     phase: 'leveling',
     activity: 'questing',
     name: 'Questing',
-    grade: 'A',
+    grade: 'B',
     rank: 3,
     talents: points(2, 27, 22),
     talentNote:
@@ -296,7 +296,7 @@ export const subtlety: Build[] = [
     phase: 'leveling',
     activity: 'dungeons',
     name: 'Dungeons',
-    grade: 'A',
+    grade: 'B',
     rank: 3,
     talents: points(0, 30, 21),
     talentNote:
