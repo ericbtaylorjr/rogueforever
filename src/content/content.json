@@ -804,7 +804,7 @@
   "changelog": [
     {
       "date": "Nov 1st, 2026",
-      "text": "Updated the talents for the builds with optimizations, refreshed the stat weights, and cleaned up the rotations and Pro Tips, with leveling builds now getting simpler guidance. Made slight adjustments to the Meta Breakdown projections, which should still be taken with a grain of salt."
+      "text": "Updated the talents for the builds with optimizations, refreshed the stat weights, and cleaned up the rotations and Pro Tips, with leveling builds now getting simpler guidance. Made slight adjustments to the Meta Breakdown projections, which should still be taken with a grain of salt. Added a race performance chart to the Races section, showing how each race compares for every build at 1, 2, 3 and 5 minute encounters, with links to the WoWSims runs behind it."
     },
     {
       "date": "Oct 27th, 2026",
