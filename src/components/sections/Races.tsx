@@ -4,6 +4,7 @@ import { links, wowsimsLink } from '../../content/links';
 import { Tip } from '../ui/Tip';
 import { GradeBadge } from '../ui/GradeBadge';
 import { LinkedText } from '../ui/LinkedText';
+import { RaceSims } from './RaceSims';
 import { SectionHeading } from '../ui/SectionHeading';
 
 /** Race meta for every Rogue: a graded list, framed by how far the sims generalise. */
@@ -59,9 +60,7 @@ export function Races() {
         </ol>
       </div>
 
-      <p className="mt-[16px] max-w-[70ch] text-[13px] leading-[1.6] text-mute">
-        <LinkedText text={copy.sheet.text} links={{ [copy.sheet.link]: links.anhakRacials }} />
-      </p>
+      <RaceSims />
     </section>
   );
 }

@@ -181,9 +181,18 @@ export const racesCopy = {
   tip: "Every race is within about 1% of the others, and some will be better in certain raids. Don't stress about choosing wrong. If you enjoy the vibes of one, play it.",
   listTitle: 'Racial meta',
   listLabel: 'Races ranked by meta grade',
-  sheet: {
-    text: "To review each race's performance at varying encounter durations and per spec, please review Anhak's Racial Spreadsheet.",
-    link: "Anhak's Racial Spreadsheet",
+  sims: {
+    title: 'Race performance by build',
+    intro:
+      "How far each race falls behind the best one, per build and encounter length. These are early WoWSims results from the data available today and will change over time. They exclude mob-type bonuses (Beasts, Elementals), which the racial meta above covers. Click any cell to open its simulation in a new tab.",
+    buildLabel: 'Build',
+    raceHeader: 'Race',
+    durationLabel: (m: number) => `${m} min`,
+    best: 'BEST',
+    legend: { best: 'Best, or within 0.5%', close: '0.5–2% behind', far: 'More than 2% behind' },
+    loading: 'Loading race simulations…',
+    failed: "The race simulations couldn't load. Try reloading the page.",
+    newTab: '(opens WoWSims in a new tab)',
   },
 } as const;
 

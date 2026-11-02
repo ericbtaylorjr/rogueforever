@@ -9,12 +9,15 @@ export function FilterPill({
   count,
   selected,
   tone = 'accent',
+  color,
   onSelect,
 }: {
   label: string;
   count?: number;
   selected: boolean;
   tone?: 'accent' | 'sky';
+  /** Overrides the selected colours, e.g. a spec's (see useSpecColor). */
+  color?: { text: string; soft: string; line: string };
   onSelect: () => void;
 }) {
   const rgb = tone === 'sky' ? 'var(--sky-rgb)' : 'var(--accent-rgb)';
@@ -27,7 +30,9 @@ export function FilterPill({
       className="pill px-[12px] py-[6px] text-[12px] transition-colors"
       style={
         selected
-          ? { borderColor: cssVar, background: `rgba(${rgb}, .13)`, color: cssVar, fontWeight: 600 }
+          ? color
+            ? { borderColor: color.line, background: color.soft, color: color.text, fontWeight: 600 }
+            : { borderColor: cssVar, background: `rgba(${rgb}, .13)`, color: cssVar, fontWeight: 600 }
           : { color: 'var(--faint)' }
       }
     >

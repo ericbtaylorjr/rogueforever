@@ -98,6 +98,10 @@
   --sky-rgb: 127, 196, 232;
   --warn-rgb: 255, 138, 91;
   --amber: #ffb347;
+  --caution: #ffe14d; /* race chart: within 1% of the best */
+  --caution-rgb: 255, 225, 77;
+  --bad: #ff7070; /* race chart: more than 1% behind */
+  --bad-rgb: 255, 112, 112;
   --amber-rgb: 255, 179, 71;
   /* "Foreground" channel for hairlines, tracks and glints drawn over a surface. */
   --fg-rgb: 255, 255, 255;
@@ -162,6 +166,10 @@
   --sky: #18496d;
   --sky-rgb: 24, 73, 109;
   --amber: #663e00;
+  --caution: #5e4700;
+  --caution-rgb: 94, 71, 0;
+  --bad: #8f1b12;
+  --bad-rgb: 143, 27, 18;
   --amber-rgb: 102, 62, 0;
 
   --glow: 0 1px 0 rgba(255, 246, 220, 0.75);
@@ -251,6 +259,8 @@
   --color-warn: var(--warn);
   --color-sky: var(--sky);
   --color-amber: var(--amber);
+  --color-caution: var(--caution);
+  --color-bad: var(--bad);
 
   /* Archivo is the brand only (hero title, wordmark, raid badges). Headings are the Literata
      book serif; body is Source Sans 3, built for reading on screens. */
@@ -889,4 +899,19 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Race chart: banded rows and a row highlight, so a race name on the left lines up with its cells. */
+.race-row:nth-child(odd) {
+  background: rgba(var(--fg-rgb), 0.045);
+}
+.race-row:hover,
+.race-row:focus-within {
+  background: rgba(var(--fg-rgb), 0.1);
+}
+.race-row > :first-child {
+  border-radius: 6px 0 0 6px;
+}
+.race-row > :last-child {
+  border-radius: 0 6px 6px 0;
 }

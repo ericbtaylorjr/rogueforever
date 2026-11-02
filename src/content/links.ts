@@ -24,8 +24,6 @@ export const links = {
   site: 'https://thecomfywizard.com',
   ellesmereui: 'https://www.curseforge.com/wow/addons/ellesmereui',
   wowheadRacials: 'https://www.wowhead.com/forever/guide/new-race-class-combinations',
-  anhakRacials:
-    'https://docs.google.com/spreadsheets/d/1UkeR_x3OsEWXG90JhOm59Lb3MpRPYfQVfd2x4Ok9NOY/edit?gid=1328799785#gid=1328799785',
   rank1Logs: 'https://sod.warcraftlogs.com/character/us/crusader-strike/comfyrogue',
 } as const;
 
