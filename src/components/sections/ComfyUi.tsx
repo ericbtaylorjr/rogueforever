@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import preview from '../../assets/comfy-ui-preview.webp';
 import thumb from '../../assets/comfy-ui-thumb.webp';
-import { comfyUi as copy, type ComfyProfileId } from '../../content/copy';
+import { addons, comfyUi as copy, type ComfyProfileId } from '../../content/copy';
 import updated from '../../content/imports/updated.json';
 import { track } from '../../lib/analytics';
 import { useHandbook } from '../../state/HandbookProvider';
@@ -133,6 +133,7 @@ function ProfileModal({ id, onClose }: { id: ComfyProfileId | null; onClose: () 
 export function ComfyUiActions() {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [profile, setProfile] = useState<ComfyProfileId | null>(null);
+  const [addonsOpen, setAddonsOpen] = useState(false);
 
   return (
     <>
@@ -177,7 +178,43 @@ export function ComfyUiActions() {
             {p.label}
           </button>
         ))}
+        <button
+          type="button"
+          onClick={() => {
+            setAddonsOpen(true);
+            track('comfy_addons_open');
+          }}
+          className="rounded-[8px] border border-line px-[13px] py-[9px] text-center text-[12.5px] font-semibold text-mute transition-colors hover:border-accent hover:bg-accent-dim hover:text-accent"
+        >
+          {addons.label}
+        </button>
       </div>
+
+      <Modal
+        open={addonsOpen}
+        onClose={() => setAddonsOpen(false)}
+        title={addons.title}
+        closeLabel={copy.close}
+        size="lg"
+      >
+        <p className="px-[18px] pt-[14px] text-[13.5px] leading-[1.55] text-mute">{addons.intro}</p>
+        <ul className="m-0 list-none p-[18px] pt-[10px]">
+          {addons.list.map((a) => (
+            <li key={a.name} className="border-b border-line py-[10px] last:border-b-0">
+              <a
+                href={a.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[14px] font-semibold text-accent underline-offset-2 hover:underline"
+              >
+                {a.name}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              <p className="m-0 mt-[2px] text-[13px] leading-[1.5] text-mute">{a.summary}</p>
+            </li>
+          ))}
+        </ul>
+      </Modal>
 
       <Modal
         open={previewOpen}

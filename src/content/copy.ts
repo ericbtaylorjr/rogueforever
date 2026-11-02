@@ -347,6 +347,38 @@ export const macrosCopy = {
   copied: 'Copied',
 } as const;
 
+export const addons = {
+  label: 'Recommended Addons',
+  title: 'Recommended Addons',
+  intro: 'The addons Comfy runs. Each links to its CurseForge page.',
+  open: 'CurseForge',
+  list: [
+    { name: "Account Wide Interface Settings", url: "https://www.curseforge.com/wow/addons/account-wide-interface-settings", summary: "Shares your interface and layout options across every character on the account." },
+    { name: "Auctionator", url: "https://www.curseforge.com/wow/addons/auctionator", summary: "A faster, friendlier auction house with shopping lists, price history and one-click posting." },
+    { name: "BugGrabber", url: "https://www.curseforge.com/wow/addons/bug-grabber", summary: "Library that catches Lua errors quietly so BugSack can show them, instead of popping up error windows." },
+    { name: "BugSack", url: "https://www.curseforge.com/wow/addons/bugsack", summary: "Lists the Lua errors BugGrabber caught, so you can read or report them when something breaks." },
+    { name: "Deadly Boss Mods (DBM-Core)", url: "https://www.curseforge.com/wow/addons/deadly-boss-mods", summary: "Boss timers, warnings and alerts for raids and dungeons. The base addon the other DBM modules need." },
+    { name: "DBM - Dungeons, Delves, Challenges & Events", url: "https://www.curseforge.com/wow/search?search=DBM%20Dungeons", summary: "Adds DBM boss timers and warnings for dungeons. Requires DBM-Core." },
+    { name: "DBM - PvP Mods", url: "https://www.curseforge.com/wow/search?search=DBM%20PvP", summary: "Adds DBM timers and alerts for battlegrounds. Requires DBM-Core." },
+    { name: "DungeonJournal", url: "https://www.curseforge.com/wow/search?search=Forever%20DungeonJournal", summary: "An in-game dungeon journal listing bosses, abilities, loot and quests for Forever's dungeons and raids." },
+    { name: "EllesmereUI", url: "https://www.curseforge.com/wow/addons/ellesmereui", summary: "The UI suite behind Comfy's setup: unit frames, action bars, nameplates and more. Import the profile above to match it." },
+    { name: "Enhance QoL", url: "https://www.curseforge.com/wow/addons/eqol", summary: "A grab bag of small quality-of-life tweaks for the UI, bags, minimap, castbars and more." },
+    { name: "ForeverAuras", url: "https://www.curseforge.com/wow/search?search=ForeverAuras", summary: "A WeakAuras fork for Forever. Tracks buffs, debuffs and cooldowns with custom on-screen displays." },
+    { name: "GatherLite", url: "https://www.curseforge.com/wow/addons/gatherlite", summary: "Shows herbs, ore and other gathering nodes you've found on the map and minimap." },
+    { name: "HandyNotes", url: "https://www.curseforge.com/wow/addons/handynotes", summary: "Adds custom notes and pins to your world map. The base addon the HandyNotes plugins need." },
+    { name: "HandyNotes: Class Trainers", url: "https://www.curseforge.com/wow/search?search=HandyNotes%20ClassTrainers", summary: "Marks class trainer locations on the map. Requires HandyNotes." },
+    { name: "HandyNotes: Dungeon & Raid Locations (Forever)", url: "https://www.curseforge.com/wow/search?search=HandyNotes%20Dungeon%20Raid%20Locations%20Forever", summary: "Pins dungeon and raid entrances on the map. Requires HandyNotes." },
+    { name: "Leatrix Plus", url: "https://www.curseforge.com/wow/addons/leatrix-plus", summary: "Many small convenience options: auto-sell junk, faster looting, interface tweaks and more." },
+    { name: "LibSharedMedia-3.0", url: "https://www.curseforge.com/wow/addons/libsharedmedia-3-0", summary: "Library that lets addons share fonts, sounds and textures. Other addons need it." },
+    { name: "Method Raid Tools", url: "https://www.curseforge.com/wow/addons/method-raid-tools", summary: "Raid planning and note-sharing tools such as assignments and cooldown planning." },
+    { name: "RareScanner", url: "https://www.curseforge.com/wow/addons/rarescanner", summary: "Alerts you to rare mobs and treasures nearby and marks them on the map." },
+    { name: "Spoken", url: "https://www.curseforge.com/wow/addons/spoken", summary: "Reads quest text, gossip and books aloud with voice acting." },
+    { name: "TomTom", url: "https://www.curseforge.com/wow/addons/tomtom", summary: "Waypoint arrow and map pins that point you to coordinates and quest objectives." },
+    { name: "What's Training?", url: "https://www.curseforge.com/wow/addons/whats-training", summary: "Shows which spells your class trainer can teach you and what they cost, right in the spellbook." },
+    { name: "Wowhead Quick Link", url: "https://www.curseforge.com/wow/search?search=Wowhead%20Quick%20Link", summary: "Gives you a quick link to the Wowhead page for quests, items and more, so you can look them up fast." },
+  ],
+} as const;
+
 export const comfyUi = {
   preview: {
     open: "View Comfy's UI screenshot",
