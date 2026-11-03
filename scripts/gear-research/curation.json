@@ -1,11 +1,33 @@
 {
-  "_readme": "Hand corrections rank.mjs applies on every run. exclude: [{id, why}] drops an item. level: {id: n} overrides the level shown. source: {id: text} overrides the Source column. include: [{list: shared|slow|daggers, item: LevelingItem}] adds an item the data can't find (e.g. just decrypted). allow: [id] lets a vendor or rare-spawn drop count as chaseable. faction: {id: Alliance|Horde} fixes quest rewards whose quest is faction-only but the item isn't marked.",
-  "exclude": [],
+  "_readme": "Hand corrections rank.mjs applies on every run. exclude: [{id, why}] drops an item. level: {id: n} overrides the level shown. source: {id: text} overrides the Source column. include: [{list: shared|slow|daggers, item: LevelingItem}] adds an item the data can't find (e.g. just decrypted). allow: [id] lets a vendor or rare-spawn drop count as chaseable. faction: {id: Alliance|Horde} fixes quest rewards whose quest is faction-only but the item isn't marked. dpsEp: {\"<spec>/<build>\": {main, off}} overrides the EP per weapon DPS point for one build. pins: [{id, why, roles?, builds?, force?}] are items you know matter but the model can't see: the report says where each landed for every build that could use it. Pins are forced into the list for the builds and slots they fit (roles/builds narrow that); set force: false to only report where one landed. ppm: {\"<itemId>\": n} sets a known procs-per-minute for an on-hit effect whose rate the game data doesn't give (otherwise rank.mjs assumes 1). A pin takes roles: [\"Main hand\"] and builds: [\"combat/questing\"] to limit where force applies. notAtLaunch: {zones: [zone ids]} keeps drops from those zones out, and crafted items whose recipe drops there (Dire Maul is 2557). allowEpic: [ids] lets an epic below level 60 in: epics are blocked by default because most are raid-era or post-launch rewards.",
+  "exclude": [
+    {
+      "id": 250616,
+      "why": "Bold Dirk: its recipe is sold by Pexmit in zone 616 (Mount Hyjal), which isn't open at launch. Remove if that turns out wrong."
+    }
+  ],
   "level": {},
   "source": {},
   "include": [],
   "allow": [],
   "faction": {
     "19120": "Horde"
-  }
+  },
+  "pins": [
+    {
+      "id": 17705,
+      "roles": [
+        "Main hand"
+      ],
+      "why": "Thrash Blade: 'Chance on hit: grants an extra attack'. A slow-weapon main hand for Sinister Strike."
+    }
+  ],
+  "ppm": {},
+  "notAtLaunch": {
+    "zones": [
+      2557
+    ],
+    "why": "Dire Maul isn't in the game at launch."
+  },
+  "allowEpic": []
 }

@@ -1,5 +1,5 @@
 import levelingGear from './leveling-gear.json';
-import type { ItemQuality, LevelingItem } from './types';
+import type { ItemQuality, LevelingItem, SpecId } from './types';
 
 /** Wowhead-style quality colours. */
 export const qualityColor: Record<ItemQuality, string> = {
@@ -21,17 +21,19 @@ export const levelingBrackets = [
 ] as const;
 
 /*
- * Leveling milestone building blocks, generated from Wowhead's Forever database by
- * scripts/gear-research (see its README). Don't edit leveling-gear.json by hand: fix
- * picks in scripts/gear-research/curation.json and rerun `rank.mjs --emit`.
- * Each leveling build in `builds/` combines the lists it can use.
+ * Leveling milestone gear, generated per build from Wowhead's Forever database with each
+ * build's own stat weights (scripts/gear-research, see its README and the
+ * leveling-milestone-gear skill). Don't edit leveling-gear.json by hand: fix picks in
+ * scripts/gear-research/curation.json and rerun `rank.mjs --emit`.
  */
-/** Armour, jewelry, trinkets and ranged: the same for every leveling build. */
-export const levelingShared = levelingGear.shared as LevelingItem[];
-/** Swords, axes, maces and fist weapons in the main hand, any one-hander in the off hand (Sinister Strike, Hemorrhage). */
-export const levelingSlowWeapons = levelingGear.slow as LevelingItem[];
-/** Daggers in both hands (Mutilate, Backstab, Ambush). */
-export const levelingDaggers = levelingGear.daggers as LevelingItem[];
+const levelingBuilds = levelingGear.builds as Record<string, LevelingItem[]>;
+
+/** The milestone list for one leveling build, in the order you reach each item. */
+export const levelingGearFor = (spec: SpecId, build: string): LevelingItem[] => {
+  const list = levelingBuilds[`${spec}/${build}`];
+  if (!list) throw new Error(`No leveling gear generated for ${spec}/${build}`);
+  return list;
+};
 
 /** Faction badge colours, run through `tone()` for light mode. */
 export const factionColor: Record<'Alliance' | 'Horde', string> = {

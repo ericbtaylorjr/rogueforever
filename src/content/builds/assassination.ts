@@ -1,7 +1,7 @@
-import { levelingDaggers, levelingShared } from '../gear';
+import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
 import { levelingMutilateRotation } from './combat';
-import { byLevel, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
+import { noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Assassination Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
 const dungeonsStats: StatPriority = {
@@ -53,8 +53,6 @@ const questingStats: StatPriority = {
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
-
-const levelingGear = byLevel(levelingShared, levelingDaggers);
 
 /**
  * The WoWSims Rogue APL as the "Asn Muti" preset runs it (daggers in both hands):
@@ -120,7 +118,7 @@ export const assassination: Build[] = [
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202532310001401-302333010014142-002_t5/1A0BcccDFgEcmcnnnq2C1ccEffhfDmnnnnpqqqqR0n',
     stats: questingStats,
-    gear: levelingGear,
+    gear: levelingGearFor('assassination', 'questing'),
     rotation: withRiposte(levelingMutilateRotation, 'Mutilate'),
   },
   {
@@ -137,7 +135,7 @@ export const assassination: Build[] = [
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101401-304303200015142-002_t5/0CDEgFjmnnnnq2C1AccFDGccmnnnnpqqqqRn',
     stats: dungeonsStats,
-    gear: levelingGear,
+    gear: levelingGearFor('assassination', 'dungeons'),
     rotation: levelingMutilateRotation,
   },
 ];

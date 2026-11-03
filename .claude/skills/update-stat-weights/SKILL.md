@@ -34,5 +34,5 @@ what the user has set. Read every row, including ones you'll drop.
 
 ## Finish
 
-Run `npm run typecheck`, then tell the user which build changed and note any value that moved
+Run `npm run typecheck`. If the build is a leveling build (Questing or Dungeons), its Leveling milestone gear is scored with these weights, so say the `leveling-milestone-gear` skill should be rerun. Then tell the user which build changed and note any value that moved
 a lot or reordered the priority. Don't commit unless asked.

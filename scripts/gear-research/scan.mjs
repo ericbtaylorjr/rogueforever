@@ -6,6 +6,7 @@
  *   node scripts/gear-research/scan.mjs                 # ids 1–25000 (the original game)
  *   node scripts/gear-research/scan.mjs 200000 300000   # any other range
  *   node scripts/gear-research/scan.mjs --missing       # re-check only ids that were "not found" last time
+ *   node scripts/gear-research/scan.mjs --revalidate    # re-read every cached item: drops ones Wowhead no longer has, refreshes the rest
  *   node scripts/gear-research/scan.mjs --recheck "armor type"   # re-check ids skipped for a reason (after a parse.mjs fix)
  *
  * Reads Wowhead's tooltip API (nether.wowhead.com, the same JSON the site's tooltips
@@ -30,9 +31,12 @@ const args = process.argv.slice(2);
 const cache = existsSync(CACHE) ? JSON.parse(readFileSync(CACHE, 'utf8')) : { items: {}, skipped: {}, missing: [] };
 
 const onlyMissing = args.includes('--missing');
+const revalidate = args.includes('--revalidate');
 const recheck = args.includes('--recheck') ? args[args.indexOf('--recheck') + 1] : undefined;
 let ids;
-if (onlyMissing) {
+if (revalidate) {
+  ids = Object.keys(cache.items).map(Number);
+} else if (onlyMissing) {
   ids = cache.missing;
 } else if (recheck) {
   ids = Object.entries(cache.skipped).filter(([, why]) => why === recheck).map(([id]) => Number(id));
@@ -62,6 +66,7 @@ let done = 0;
 let found = 0;
 let added = 0;
 let failed = 0;
+const gone = [];
 
 async function scanOne(id) {
   const tip = await fetchTip(id);
@@ -72,6 +77,8 @@ async function scanOne(id) {
   }
   if (tip === null) {
     missing.add(id);
+    // Wowhead had it when it was scanned and doesn't now (re-itemized or removed): stop recommending it.
+    if (cache.items[id]) (gone.push(`${id} ${cache.items[id].name}`), delete cache.items[id]);
     return;
   }
   missing.delete(id);
@@ -100,6 +107,7 @@ cache.missing = [...missing].sort((a, b) => a - b);
 cache.scannedAt = new Date().toISOString();
 mkdirSync(here('./cache'), { recursive: true });
 writeFileSync(CACHE, JSON.stringify(cache));
+if (gone.length) console.log(`No longer in Wowhead's Forever data (${gone.length}):\n  ${gone.join('\n  ')}`);
 console.log(
   `Found ${found} items, ${added} newly Rogue-usable${failed ? `, ${failed} failed (rerun to retry)` : ''}. ` +
     `Cache: ${Object.keys(cache.items).length} usable, ${cache.missing.length} not found.`,

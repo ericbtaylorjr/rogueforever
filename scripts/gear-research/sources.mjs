@@ -20,6 +20,7 @@ const CACHE = here('./cache/items.json');
 /** Kept apart from items.json so a scan running at the same time can't overwrite it. */
 const SOURCES = here('./cache/sources.json');
 const SHORTLIST = here('./cache/shortlist.json');
+const RECIPES = here('./cache/recipes.json');
 const PAUSE_MS = 1500;
 /** After a block: wait this long and try again, this many times, before giving up. */
 const BLOCK_WAIT_MS = 120_000;
@@ -32,12 +33,16 @@ const args = process.argv.slice(2);
 const refresh = args.includes('--refresh');
 const named = args.filter((a) => /^\d+$/.test(a)).map(Number);
 const ids = named.length ? named : existsSync(SHORTLIST) ? JSON.parse(readFileSync(SHORTLIST, 'utf8')) : [];
-const todo = ids.filter((id) => cache.items[id] && (refresh || !sources[id]?.codes));
+// A crafted item is only as available as its recipe, so look up where each shortlisted one's
+// recipe comes from too (recipes.mjs finds them). Recipes aren't in the item cache, which skips them.
+const recipes = existsSync(RECIPES) ? JSON.parse(readFileSync(RECIPES, 'utf8')) : {};
+const recipeIds = new Set(ids.flatMap((id) => recipes[id]?.recipes ?? []));
+const todo = [...new Set([...ids, ...recipeIds])].filter((id) => (cache.items[id] || recipeIds.has(id)) && (refresh || !sources[id]?.codes));
 
 const block = (xml, tag) => xml.match(new RegExp(`<${tag}><!\\[CDATA\\[([\\s\\S]*?)\\]\\]></${tag}>`))?.[1];
 const save = () => writeFileSync(SOURCES, JSON.stringify(sources));
 
-console.log(`Looking up sources for ${todo.length} items (${ids.length - todo.length} already known)…`);
+console.log(`Looking up sources for ${todo.length} items, ${recipeIds.size} of them recipes (${ids.length + recipeIds.size - todo.length} already known)…`);
 let n = 0;
 let blocks = 0;
 for (const id of todo) {
@@ -65,6 +70,9 @@ for (const id of todo) {
       more: json.sourcemore ?? [],
       checked: new Date().toISOString().slice(0, 10),
     };
+  } else {
+    // Wowhead has no entry for it (not obtainable yet): remember that, so it isn't asked for every run.
+    sources[id] = { codes: [], more: [], checked: new Date().toISOString().slice(0, 10) };
   }
   if (++n % 25 === 0) {
     save();

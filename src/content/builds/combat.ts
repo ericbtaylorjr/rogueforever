@@ -1,6 +1,6 @@
-import { levelingDaggers, levelingShared, levelingSlowWeapons } from '../gear';
+import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { byLevel, forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
+import { forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Combat Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
 const dungeonsStats: StatPriority = {
@@ -86,11 +86,6 @@ const backstabStats: StatPriority = {
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
-
-const levelingGear = byLevel(levelingShared, levelingSlowWeapons);
-
-/** Combat Dungeons uses Backstab, so it needs a dagger in the main hand. */
-const dungeonsGear = byLevel(levelingShared, levelingDaggers);
 
 /**
  * The WoWSims Rogue APL as the "Combat SS" preset runs it (Use Backstab off, sword main
@@ -259,7 +254,7 @@ export const combat: Build[] = [
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v232232310001-32003321201515231_t0/1B0BA1AffEhfGjmnnnnpqqqqRs0F1sst0ddgdEcmc1qnj',
     stats: questingStats,
-    gear: levelingGear,
+    gear: levelingGearFor('combat', 'questing'),
     rotation: withRiposte(levelingSinisterStrikeRotation, 'Sinister Strike'),
   },
   {
@@ -276,7 +271,7 @@ export const combat: Build[] = [
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200532310101-32030320201515231-002_t0/2C1BADFGJmnnnnpqqqqRStnq0CFEgDjm',
     stats: dungeonsStats,
-    gear: dungeonsGear,
+    gear: levelingGearFor('combat', 'dungeons'),
     rotation: levelingBackstabRotation,
   },
 ];

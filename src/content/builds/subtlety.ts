@@ -1,6 +1,6 @@
-import { levelingDaggers, levelingShared, levelingSlowWeapons } from '../gear';
+import { levelingGearFor } from '../gear';
 import type { Build, ProTip, Rotation, StatPriority } from '../types';
-import { byLevel, forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
+import { forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Subtlety Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
 const dungeonsStats: StatPriority = {
@@ -69,9 +69,6 @@ const hemoStats: StatPriority = {
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
-
-/** Hemorrhage works with any weapon, and Ambush only needs a dagger in the main hand, so Subtlety gets every weapon list. */
-const levelingGear = byLevel(levelingShared, levelingSlowWeapons, levelingDaggers);
 
 /**
  * Subtlety opens from Stealth, as the APL does: Premeditation before the pull, then Garrote
@@ -287,7 +284,7 @@ export const subtlety: Build[] = [
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202-321033210014142-4323003010013011_t0/1B0B2BCGddjdaaaPnasr1AFEhGcmnnnnpqqqqR',
     stats: questingStats,
-    gear: levelingGear,
+    gear: levelingGearFor('subtlety', 'questing'),
     rotation: withRiposte(questingRotation, 'Hemorrhage'),
   },
   {
@@ -304,7 +301,7 @@ export const subtlety: Build[] = [
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2-3223032000141423-532000321001301_t0/1B2CaaaGaajhhbbnPbr1AFDGccmnnnnpqqqqRS',
     stats: dungeonsStats,
-    gear: levelingGear,
+    gear: levelingGearFor('subtlety', 'dungeons'),
     rotation: dungeonsRotation,
   },
 ];
