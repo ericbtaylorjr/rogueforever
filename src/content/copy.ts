@@ -409,7 +409,7 @@ export const gathering = {
   intro:
     'Pick up to two gathering professions and a zone. You get the skill you need to gather there and how high the zone can take each one, so you reach the next zone ready for it.',
   professionsLabel: 'Your gathering professions',
-  professionsHint: 'Choose up to two. Picking a third replaces the first.',
+  professionsHint: 'Choose up to two.',
   professions: { herbalism: 'Herbalism', mining: 'Mining', skinning: 'Skinning' },
   zoneLabel: 'Zone',
   zoneHint: 'Sorted by the highest skill the zone asks for.',
@@ -419,8 +419,11 @@ export const gathering = {
   empty: 'Choose a profession and a zone to see what you need.',
   minimum: 'Minimum skill',
   maximum: 'Maximum skill',
-  minimumHint: 'To gather anything here',
+  minimumHint: 'For the lowest node here',
   maximumHint: 'For the best node here',
+  /** Skinning follows creatures, not nodes. */
+  minimumHintSkinning: 'For the lowest mob here',
+  maximumHintSkinning: 'For the highest mob here',
   commonHint: (common: number) => `Most nodes need up to ${common}`,
   levelsTo: (profession: string, skill: number, cap: number) =>
     skill >= cap

@@ -71,13 +71,16 @@ function ProfessionCard({ profession, summary }: { profession: GatherProfession;
             <div>
               <dt className="text-[11.5px] font-semibold text-mute">{copy.minimum}</dt>
               <dd className="t-num mt-[2px] text-[26px] leading-none font-semibold text-ink">{summary.min}</dd>
-              <dd className="mt-[4px] text-[11.5px] text-mute">{copy.minimumHint}</dd>
+              <dd className="mt-[4px] text-[11.5px] text-mute">{profession === 'skinning' ? copy.minimumHintSkinning : copy.minimumHint}</dd>
             </div>
             <div>
               <dt className="text-[11.5px] font-semibold text-mute">{copy.maximum}</dt>
               <dd className="t-num mt-[2px] text-[26px] leading-none font-semibold text-ink">{summary.max}</dd>
               <dd className="mt-[4px] text-[11.5px] text-mute">
-                {summary.common < summary.max ? copy.commonHint(summary.common) : copy.maximumHint}
+                {summary.common < summary.max ? copy.commonHint(summary.common)
+                  : profession === 'skinning'
+                    ? copy.maximumHintSkinning
+                    : copy.maximumHint}
               </dd>
             </div>
           </dl>
