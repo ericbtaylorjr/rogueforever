@@ -40,6 +40,7 @@ interface TooltipApi {
     onPointerLeave: () => void;
     onFocus: (e: React.FocusEvent) => void;
     onBlur: () => void;
+    onPointerDown: (e: React.PointerEvent) => void;
     onClick: (e: React.MouseEvent) => void;
     tabIndex: number;
   };
@@ -116,9 +117,24 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') hide();
     };
+    // Touch has no hover to leave, and iOS doesn't blur on tap-away: a tap elsewhere dismisses.
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType === 'touch' && !(e.target instanceof Node && anchor.current?.contains(e.target))) hide();
+    };
     document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onDown);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onDown);
+    };
   }, [tip, hide]);
+
+  /**
+   * A touch tap on an element, and whether its tooltip was already up when the finger landed.
+   * Android focuses a tapped link before `click`, which shows the tooltip, so "is it showing
+   * now?" can't tell a first tap from a second; this can.
+   */
+  const touch = useRef<{ el: Element; wasShowing: boolean } | null>(null);
 
   /* Count a tooltip as read once it has stayed up a moment; a pointer sweeping across icons isn't.
      Keyed on the name, so re-positioning the same tooltip isn't a new read. */
@@ -140,10 +156,28 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
         onPointerLeave: hide,
         onFocus: (e) => show(e.currentTarget, t),
         onBlur: hide,
+        onPointerDown: (e) => {
+          touch.current =
+            e.pointerType === 'touch' ? { el: e.currentTarget, wasShowing: anchor.current === e.currentTarget } : null;
+        },
         onClick: (e) => {
-          // Touch + keyboard path: toggle rather than hover.
-          if (anchor.current === e.currentTarget) hide();
-          else show(e.currentTarget, t);
+          const el = e.currentTarget;
+          const tap = touch.current?.el === el ? touch.current : null;
+          touch.current = null;
+          const isLink = el instanceof HTMLAnchorElement && !!el.href;
+          if (tap) {
+            // Touch: first tap shows the tooltip, a link waits for the second tap to open.
+            if (!tap.wasShowing) {
+              if (isLink) e.preventDefault();
+              show(el, t);
+            } else if (!isLink) hide();
+            return;
+          }
+          // Mouse and keyboard already saw the tooltip on hover/focus, so a link just opens.
+          // Assistive tech that activates with a plain click gets the same: one activation.
+          if (isLink) return;
+          if (anchor.current === el) hide();
+          else show(el, t);
         },
         tabIndex: 0,
       }),
