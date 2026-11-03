@@ -15,7 +15,6 @@ export const {
   guide,
   races,
   poisons,
-  consumables,
   buffGroups,
   professions,
   gearSlots,
@@ -26,6 +25,10 @@ export const {
   nav,
   themes,
 } = content;
+
+/** Alphabetical, so a new entry can go anywhere in content.json. Category pills keep the order they first appear in the file. */
+const consumablesByCategory = raw.consumables as unknown as Content['consumables'];
+export const consumables = [...consumablesByCategory].sort((a, b) => a.n.localeCompare(b.n, 'en', { sensitivity: 'base' }));
 
 export const specById = Object.fromEntries(specs.map((s) => [s.id, s])) as Record<
   SpecId,
@@ -44,7 +47,7 @@ export const sectionLabels = Object.fromEntries(
 ) as Record<string, string>;
 
 /** Category filters, derived rather than hardcoded so new data shows up. */
-export const consumableCats = ['All', ...new Set(consumables.map((c) => c.k))];
+export const consumableCats = ['All', ...new Set(consumablesByCategory.map((c) => c.k))];
 
 export const guideCats = ['All', ...new Set(guide.map((c) => c.cat))];
 
