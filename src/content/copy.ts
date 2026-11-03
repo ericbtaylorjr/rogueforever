@@ -389,6 +389,40 @@ export const addons = {
   ],
 } as const;
 
+export const gathering = {
+  title: "Comfy's Gathering Reference Tool",
+  intro:
+    'Pick up to two gathering professions and a zone. You get the skill you need to gather there and how high the zone can take each one, so you reach the next zone ready for it.',
+  professionsLabel: 'Your gathering professions',
+  professionsHint: 'Choose up to two. Picking a third replaces the first.',
+  professions: { herbalism: 'Herbalism', mining: 'Mining', skinning: 'Skinning' },
+  zoneLabel: 'Zone',
+  zoneHint: 'Sorted by the highest skill the zone asks for.',
+  zonePlaceholder: 'Choose a zone',
+  zoneLocked: 'Choose a profession first',
+  none: (profession: string) => `no ${profession}`,
+  empty: 'Choose a profession and a zone to see what you need.',
+  minimum: 'Minimum skill',
+  maximum: 'Maximum skill',
+  minimumHint: 'To gather anything here',
+  maximumHint: 'For the best node here',
+  commonHint: (common: number) => `Most nodes need up to ${common}`,
+  levelsTo: (profession: string, skill: number, cap: number) =>
+    skill >= cap
+      ? `Gathering here reliably takes your ${profession} all the way to the cap (${cap}).`
+      : `Gathering here reliably takes your ${profession} up to ${skill}. After that, move on to a higher zone.`,
+  lastSkillUp: (skill: number, cap: number) =>
+    skill >= cap ? `Skill-ups stay possible all the way to ${cap}.` : `Skill-ups stay possible, but rarer, up to ${skill}.`,
+  noNodes: (profession: string) => `This zone has no ${profession} to gather.`,
+  skinningNote: "Skinning follows the creatures' levels: it uses the skinnable creatures in the zone's level range.",
+  estimateNote: "Wowhead lists what each node needs, not its skill-up limits. Those are estimates: reliable until your skill is 50 above the node's requirement, and a last chance at 100 above.",
+  barLabel: (profession: string, from: number, reliable: number, last: number) =>
+    `${profession} skill-ups here run from ${from}: reliably to ${reliable}, and still possible to ${last}`,
+  loading: 'Loading the gathering data…',
+  failed: "The gathering data couldn't load. Try reloading the page.",
+  close: 'Close',
+} as const;
+
 export const comfyUi = {
   preview: {
     open: "View Comfy's UI screenshot",

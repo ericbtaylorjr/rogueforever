@@ -14,6 +14,7 @@
     "icons": "node scripts/fetch-icons.mjs",
     "talents": "node scripts/fetch-talents.mjs",
     "race-sims": "node scripts/update-race-sims.mjs",
+    "gathering": "node scripts/gathering/build.mjs",
     "apl": "node scripts/apl/resolve.mjs",
     "audit:a11y": "node scripts/audit/a11y.mjs",
     "audit:perf": "node scripts/audit/perf.mjs",

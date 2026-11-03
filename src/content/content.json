@@ -777,6 +777,13 @@
       "color": "#7BE06B",
       "body": "Where the sims get argued about before they end up on this page, and where the first real Forever data will show up. Ask questions there.",
       "cta": "Join the Discord"
+    },
+    {
+      "kicker": "Reference",
+      "name": "Comfy's Gathering Reference Tool",
+      "color": "#FFF468",
+      "body": "Pick two gathering professions and a zone to see the minimum and maximum skill you need to gather there, and how high the zone can take each skill. So you stop reaching the next zone with a skill that's too low to use it.",
+      "cta": "View Gathering Reference Tool"
     }
   ],
   "macros": [

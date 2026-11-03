@@ -1,0 +1,981 @@
+{
+ "generated": "2026-11-02",
+ "zones": [
+  {
+   "id": 36,
+   "name": "Alterac Mountains",
+   "mining": {
+    "min": 65,
+    "max": 230,
+    "common": 230,
+    "levelsTo": 280,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 195,
+    "common": 195,
+    "levelsTo": 245,
+    "lastSkillUp": 295
+   },
+   "skinning": {
+    "min": 125,
+    "max": 185,
+    "common": 185,
+    "levelsTo": 235,
+    "lastSkillUp": 285
+   }
+  },
+  {
+   "id": 45,
+   "name": "Arathi Highlands",
+   "mining": {
+    "min": 65,
+    "max": 230,
+    "common": 230,
+    "levelsTo": 280,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 100,
+    "max": 185,
+    "common": 185,
+    "levelsTo": 235,
+    "lastSkillUp": 285
+   },
+   "skinning": {
+    "min": 150,
+    "max": 185,
+    "common": 185,
+    "levelsTo": 235,
+    "lastSkillUp": 285
+   }
+  },
+  {
+   "id": 331,
+   "name": "Ashenvale",
+   "mining": {
+    "min": 1,
+    "max": 175,
+    "common": 125,
+    "levelsTo": 175,
+    "lastSkillUp": 225
+   },
+   "herbalism": {
+    "min": 50,
+    "max": 250,
+    "common": 205,
+    "levelsTo": 255,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 80,
+    "max": 155,
+    "common": 155,
+    "levelsTo": 205,
+    "lastSkillUp": 255
+   }
+  },
+  {
+   "id": 16,
+   "name": "Azshara",
+   "mining": {
+    "min": 155,
+    "max": 275,
+    "common": 275,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 280,
+    "common": 280,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 225,
+    "max": 270,
+    "common": 270,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 3,
+   "name": "Badlands",
+   "mining": {
+    "min": 75,
+    "max": 230,
+    "common": 230,
+    "levelsTo": 280,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 115,
+    "max": 210,
+    "common": 205,
+    "levelsTo": 255,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 175,
+    "max": 215,
+    "common": 215,
+    "levelsTo": 265,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 4,
+   "name": "Blasted Lands",
+   "mining": {
+    "min": 155,
+    "max": 245,
+    "common": 245,
+    "levelsTo": 295,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 205,
+    "max": 250,
+    "common": 250,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 225,
+    "max": 275,
+    "common": 275,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 46,
+   "name": "Burning Steppes",
+   "mining": {
+    "min": 155,
+    "max": 275,
+    "common": 275,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 230,
+    "max": 300,
+    "common": 280,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 255,
+    "max": 285,
+    "common": 285,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 148,
+   "name": "Darkshore",
+   "mining": {
+    "min": 1,
+    "max": 75,
+    "common": 75,
+    "levelsTo": 125,
+    "lastSkillUp": 175
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 100,
+    "common": 100,
+    "levelsTo": 150,
+    "lastSkillUp": 200
+   },
+   "skinning": {
+    "min": 1,
+    "max": 100,
+    "common": 100,
+    "levelsTo": 150,
+    "lastSkillUp": 200
+   }
+  },
+  {
+   "id": 405,
+   "name": "Desolace",
+   "mining": {
+    "min": 1,
+    "max": 230,
+    "common": 230,
+    "levelsTo": 280,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 250,
+    "common": 250,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 150,
+    "max": 200,
+    "common": 200,
+    "levelsTo": 250,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 1,
+   "name": "Dun Morogh",
+   "mining": {
+    "min": 1,
+    "max": 1,
+    "common": 1,
+    "levelsTo": 51,
+    "lastSkillUp": 101
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 15,
+    "common": 15,
+    "levelsTo": 65,
+    "lastSkillUp": 115
+   },
+   "skinning": {
+    "min": 1,
+    "max": 10,
+    "common": 10,
+    "levelsTo": 60,
+    "lastSkillUp": 110
+   }
+  },
+  {
+   "id": 14,
+   "name": "Durotar",
+   "mining": {
+    "min": 1,
+    "max": 1,
+    "common": 1,
+    "levelsTo": 51,
+    "lastSkillUp": 101
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 50,
+    "common": 50,
+    "levelsTo": 100,
+    "lastSkillUp": 150
+   },
+   "skinning": {
+    "min": 1,
+    "max": 20,
+    "common": 20,
+    "levelsTo": 70,
+    "lastSkillUp": 120
+   }
+  },
+  {
+   "id": 10,
+   "name": "Duskwood",
+   "mining": {
+    "min": 1,
+    "max": 155,
+    "common": 155,
+    "levelsTo": 205,
+    "lastSkillUp": 255
+   },
+   "herbalism": {
+    "min": 50,
+    "max": 125,
+    "common": 125,
+    "levelsTo": 175,
+    "lastSkillUp": 225
+   },
+   "skinning": {
+    "min": 90,
+    "max": 160,
+    "common": 160,
+    "levelsTo": 210,
+    "lastSkillUp": 260
+   }
+  },
+  {
+   "id": 15,
+   "name": "Dustwallow Marsh",
+   "mining": {
+    "min": 65,
+    "max": 230,
+    "common": 230,
+    "levelsTo": 280,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 185,
+    "common": 185,
+    "levelsTo": 235,
+    "lastSkillUp": 285
+   },
+   "skinning": {
+    "min": 175,
+    "max": 225,
+    "common": 225,
+    "levelsTo": 275,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 139,
+   "name": "Eastern Plaguelands",
+   "mining": {
+    "min": 155,
+    "max": 275,
+    "common": 275,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 220,
+    "max": 300,
+    "common": 285,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 265,
+    "max": 300,
+    "common": 300,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 12,
+   "name": "Elwynn Forest",
+   "mining": {
+    "min": 1,
+    "max": 1,
+    "common": 1,
+    "levelsTo": 51,
+    "lastSkillUp": 101
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 15,
+    "common": 15,
+    "levelsTo": 65,
+    "lastSkillUp": 115
+   },
+   "skinning": {
+    "min": 1,
+    "max": 10,
+    "common": 10,
+    "levelsTo": 60,
+    "lastSkillUp": 110
+   }
+  },
+  {
+   "id": 361,
+   "name": "Felwood",
+   "mining": null,
+   "herbalism": null,
+   "skinning": {
+    "min": 235,
+    "max": 260,
+    "common": 260,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 357,
+   "name": "Feralas",
+   "mining": {
+    "min": 75,
+    "max": 245,
+    "common": 230,
+    "levelsTo": 280,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 260,
+    "common": 230,
+    "levelsTo": 280,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 200,
+    "max": 270,
+    "common": 270,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 267,
+   "name": "Hillsbrad Foothills",
+   "mining": {
+    "min": 1,
+    "max": 230,
+    "common": 155,
+    "levelsTo": 205,
+    "lastSkillUp": 255
+   },
+   "herbalism": {
+    "min": 50,
+    "max": 150,
+    "common": 125,
+    "levelsTo": 175,
+    "lastSkillUp": 225
+   },
+   "skinning": {
+    "min": 105,
+    "max": 170,
+    "common": 170,
+    "levelsTo": 220,
+    "lastSkillUp": 270
+   }
+  },
+  {
+   "id": 38,
+   "name": "Loch Modan",
+   "mining": {
+    "min": 1,
+    "max": 75,
+    "common": 75,
+    "levelsTo": 125,
+    "lastSkillUp": 175
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 100,
+    "common": 100,
+    "levelsTo": 150,
+    "lastSkillUp": 200
+   },
+   "skinning": {
+    "min": 1,
+    "max": 100,
+    "common": 100,
+    "levelsTo": 150,
+    "lastSkillUp": 200
+   }
+  },
+  {
+   "id": 215,
+   "name": "Mulgore",
+   "mining": {
+    "min": 1,
+    "max": 1,
+    "common": 1,
+    "levelsTo": 51,
+    "lastSkillUp": 101
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 15,
+    "common": 15,
+    "levelsTo": 65,
+    "lastSkillUp": 115
+   },
+   "skinning": {
+    "min": 1,
+    "max": 20,
+    "common": 20,
+    "levelsTo": 70,
+    "lastSkillUp": 120
+   }
+  },
+  {
+   "id": 44,
+   "name": "Redridge Mountains",
+   "mining": {
+    "min": 1,
+    "max": 75,
+    "common": 75,
+    "levelsTo": 125,
+    "lastSkillUp": 175
+   },
+   "herbalism": {
+    "min": 15,
+    "max": 100,
+    "common": 100,
+    "levelsTo": 150,
+    "lastSkillUp": 200
+   },
+   "skinning": {
+    "min": 60,
+    "max": 125,
+    "common": 125,
+    "levelsTo": 175,
+    "lastSkillUp": 225
+   }
+  },
+  {
+   "id": 16591,
+   "name": "Riverglades",
+   "mining": {
+    "min": 75,
+    "max": 155,
+    "common": 155,
+    "levelsTo": 205,
+    "lastSkillUp": 255
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 185,
+    "common": 170,
+    "levelsTo": 220,
+    "lastSkillUp": 270
+   },
+   "skinning": null
+  },
+  {
+   "id": 51,
+   "name": "Searing Gorge",
+   "mining": {
+    "min": 125,
+    "max": 245,
+    "common": 245,
+    "levelsTo": 295,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 205,
+    "max": 205,
+    "common": 205,
+    "levelsTo": 255,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 235,
+    "max": 245,
+    "common": 245,
+    "levelsTo": 295,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 1377,
+   "name": "Silithus",
+   "mining": {
+    "min": 155,
+    "max": 245,
+    "common": 245,
+    "levelsTo": 295,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 230,
+    "max": 300,
+    "common": 280,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 270,
+    "max": 295,
+    "common": 295,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 130,
+   "name": "Silverpine Forest",
+   "mining": {
+    "min": 1,
+    "max": 75,
+    "common": 75,
+    "levelsTo": 125,
+    "lastSkillUp": 175
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 100,
+    "common": 100,
+    "levelsTo": 150,
+    "lastSkillUp": 200
+   },
+   "skinning": {
+    "min": 1,
+    "max": 70,
+    "common": 70,
+    "levelsTo": 120,
+    "lastSkillUp": 170
+   }
+  },
+  {
+   "id": 406,
+   "name": "Stonetalon Mountains",
+   "mining": {
+    "min": 1,
+    "max": 230,
+    "common": 155,
+    "levelsTo": 205,
+    "lastSkillUp": 255
+   },
+   "herbalism": {
+    "min": 50,
+    "max": 125,
+    "common": 125,
+    "levelsTo": 175,
+    "lastSkillUp": 225
+   },
+   "skinning": {
+    "min": 50,
+    "max": 140,
+    "common": 140,
+    "levelsTo": 190,
+    "lastSkillUp": 240
+   }
+  },
+  {
+   "id": 33,
+   "name": "Stranglethorn Vale",
+   "mining": {
+    "min": 65,
+    "max": 230,
+    "common": 230,
+    "levelsTo": 280,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 210,
+    "common": 210,
+    "levelsTo": 260,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 150,
+    "max": 250,
+    "common": 250,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 8,
+   "name": "Swamp of Sorrows",
+   "mining": {
+    "min": 75,
+    "max": 230,
+    "common": 175,
+    "levelsTo": 225,
+    "lastSkillUp": 275
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 235,
+    "common": 235,
+    "levelsTo": 285,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 170,
+    "max": 225,
+    "common": 225,
+    "levelsTo": 275,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 440,
+   "name": "Tanaris",
+   "mining": {
+    "min": 75,
+    "max": 245,
+    "common": 230,
+    "levelsTo": 280,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 210,
+    "common": 210,
+    "levelsTo": 260,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 200,
+    "max": 250,
+    "common": 250,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 141,
+   "name": "Teldrassil",
+   "mining": null,
+   "herbalism": {
+    "min": 1,
+    "max": 50,
+    "common": 50,
+    "levelsTo": 100,
+    "lastSkillUp": 150
+   },
+   "skinning": {
+    "min": 1,
+    "max": 10,
+    "common": 10,
+    "levelsTo": 60,
+    "lastSkillUp": 110
+   }
+  },
+  {
+   "id": 17,
+   "name": "The Barrens",
+   "mining": {
+    "min": 1,
+    "max": 75,
+    "common": 75,
+    "levelsTo": 125,
+    "lastSkillUp": 175
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 125,
+    "common": 125,
+    "levelsTo": 175,
+    "lastSkillUp": 225
+   },
+   "skinning": {
+    "min": 1,
+    "max": 135,
+    "common": 135,
+    "levelsTo": 185,
+    "lastSkillUp": 235
+   }
+  },
+  {
+   "id": 47,
+   "name": "The Hinterlands",
+   "mining": {
+    "min": 75,
+    "max": 245,
+    "common": 245,
+    "levelsTo": 295,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 85,
+    "max": 260,
+    "common": 260,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 200,
+    "max": 250,
+    "common": 250,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 400,
+   "name": "Thousand Needles",
+   "mining": {
+    "min": 1,
+    "max": 230,
+    "common": 155,
+    "levelsTo": 205,
+    "lastSkillUp": 255
+   },
+   "herbalism": {
+    "min": 100,
+    "max": 125,
+    "common": 125,
+    "levelsTo": 175,
+    "lastSkillUp": 225
+   },
+   "skinning": {
+    "min": 120,
+    "max": 175,
+    "common": 175,
+    "levelsTo": 225,
+    "lastSkillUp": 275
+   }
+  },
+  {
+   "id": 85,
+   "name": "Tirisfal Glades",
+   "mining": {
+    "min": 1,
+    "max": 1,
+    "common": 1,
+    "levelsTo": 51,
+    "lastSkillUp": 101
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 15,
+    "common": 15,
+    "levelsTo": 65,
+    "lastSkillUp": 115
+   },
+   "skinning": {
+    "min": 1,
+    "max": 10,
+    "common": 10,
+    "levelsTo": 60,
+    "lastSkillUp": 110
+   }
+  },
+  {
+   "id": 490,
+   "name": "Un'Goro Crater",
+   "mining": {
+    "min": 155,
+    "max": 275,
+    "common": 275,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 230,
+    "max": 280,
+    "common": 280,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 240,
+    "max": 280,
+    "common": 280,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 28,
+   "name": "Western Plaguelands",
+   "mining": {
+    "min": 155,
+    "max": 275,
+    "common": 245,
+    "levelsTo": 295,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 220,
+    "max": 285,
+    "common": 285,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 255,
+    "max": 280,
+    "common": 280,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 40,
+   "name": "Westfall",
+   "mining": {
+    "min": 1,
+    "max": 75,
+    "common": 75,
+    "levelsTo": 125,
+    "lastSkillUp": 175
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 100,
+    "common": 100,
+    "levelsTo": 150,
+    "lastSkillUp": 200
+   },
+   "skinning": {
+    "min": 1,
+    "max": 70,
+    "common": 70,
+    "levelsTo": 120,
+    "lastSkillUp": 170
+   }
+  },
+  {
+   "id": 11,
+   "name": "Wetlands",
+   "mining": {
+    "min": 1,
+    "max": 155,
+    "common": 125,
+    "levelsTo": 175,
+    "lastSkillUp": 225
+   },
+   "herbalism": {
+    "min": 50,
+    "max": 150,
+    "common": 150,
+    "levelsTo": 200,
+    "lastSkillUp": 250
+   },
+   "skinning": {
+    "min": 105,
+    "max": 145,
+    "common": 145,
+    "levelsTo": 195,
+    "lastSkillUp": 245
+   }
+  },
+  {
+   "id": 618,
+   "name": "Winterspring",
+   "mining": {
+    "min": 155,
+    "max": 275,
+    "common": 275,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "herbalism": {
+    "min": 280,
+    "max": 300,
+    "common": 290,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   },
+   "skinning": {
+    "min": 265,
+    "max": 300,
+    "common": 300,
+    "levelsTo": 300,
+    "lastSkillUp": 300
+   }
+  },
+  {
+   "id": 16593,
+   "name": "Zephras Isle",
+   "mining": {
+    "min": 1,
+    "max": 1,
+    "common": 1,
+    "levelsTo": 51,
+    "lastSkillUp": 101
+   },
+   "herbalism": {
+    "min": 1,
+    "max": 50,
+    "common": 50,
+    "levelsTo": 100,
+    "lastSkillUp": 150
+   },
+   "skinning": {
+    "min": 1,
+    "max": 10,
+    "common": 10,
+    "levelsTo": 60,
+    "lastSkillUp": 110
+   }
+  }
+ ]
+}

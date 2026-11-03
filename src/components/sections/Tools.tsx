@@ -3,16 +3,18 @@ import { toolBodyLinks, toolHref } from '../../content/links';
 import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
 import { ComfyUiActions } from './ComfyUi';
+import { GatheringActions } from './Gathering';
 
 /**
  * Two-column layout once the section is wide enough: Comfy's UI (the tall card)
- * sits on the right spanning both rows, the other two stack on the left.
+ * sits on the right spanning all rows, the others stack on the left.
  * Narrow containers fall back to one column in content order.
  */
 const placement: Record<string, string> = {
   'Learn WoWSims': '@xl:col-start-1 @xl:row-start-1',
   'Rogue Classic Discord': '@xl:col-start-1 @xl:row-start-2',
-  "Comfy's UI": '@xl:col-start-2 @xl:row-start-1 @xl:row-span-2',
+  "Comfy's Gathering Reference Tool": '@xl:col-start-1 @xl:row-start-3',
+  "Comfy's UI": '@xl:col-start-2 @xl:row-start-1 @xl:row-span-3',
 };
 
 export function Tools() {
@@ -31,6 +33,8 @@ export function Tools() {
               </p>
               {t.name === "Comfy's UI" ? (
                 <ComfyUiActions />
+              ) : t.name === "Comfy's Gathering Reference Tool" ? (
+                <GatheringActions cta={t.cta ?? ''} />
               ) : t.disabled ? (
                 <p className="mt-[14px] text-[12.5px] italic text-dim">{t.cta}</p>
               ) : (
