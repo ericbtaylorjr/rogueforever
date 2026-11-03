@@ -42,9 +42,10 @@ export const talentTrees = data.trees as TalentTreeData[];
  * `null` when the link isn't a Rogue calculator link or no longer fits the trees.
  */
 export function decodeTalentLink(link: string | undefined): number[][] | null {
-  const m = link?.match(/\/talent-calc\/rogue\/v2([0-9-]*)(?:[_/]|$)/);
+  // A bare `/talent-calc/rogue` link is the empty calculator.
+  const m = link?.match(/\/talent-calc\/rogue(?:\/v2([0-9-]*)(?:[_/]|$)|\/?$)/);
   if (!m) return null;
-  const parts = m[1].split('-');
+  const parts = (m[1] ?? '').split('-');
   if (parts.length > talentTrees.length) return null;
   const ranks = talentTrees.map((t) => t.talents.map(() => 0));
   for (const [i, digits] of parts.entries()) {

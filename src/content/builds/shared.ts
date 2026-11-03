@@ -7,6 +7,13 @@ export const points = (assassination: number, combat: number, subtlety: number):
   { name: 'Subtlety', pts: subtlety, color: '#B98BFF' },
 ];
 
+/**
+ * The calculator with nothing spent: every build starts here until its talents are worked out
+ * (after the Nov 2 rework). Paste the build's own link over it; `npm run talents -- --fix` then
+ * fills `points(a, c, s)`.
+ */
+export const BLANK_TALENTS = 'https://www.wowhead.com/forever/talent-calc/rogue';
+
 /** A rotation that hasn't been written yet. */
 export const noRotation: Rotation = { opener: [], steps: [], tips: [] };
 
@@ -46,10 +53,18 @@ export const tip = {
  * One tip per race with a DPS racial. The APL times them around Adrenaline Rush, so builds
  * without it just use them on cooldown. Night Elves hold Cold Blood while Elune's Light is up.
  */
-export const racialTips = ({ adrenalineRush, coldBlood = true }: { adrenalineRush: boolean; coldBlood?: boolean }): ProTip[] =>
+export const racialTips = ({
+  adrenalineRush,
+  coldBlood = true,
+}: {
+  adrenalineRush: boolean;
+  coldBlood?: boolean;
+}): ProTip[] =>
   adrenalineRush
     ? [
-        { text: 'Orcs: Blood Fury right after Adrenaline Rush, or on its own when Adrenaline Rush is 1.9 min or more away.' },
+        {
+          text: 'Orcs: Blood Fury right after Adrenaline Rush, or on its own when Adrenaline Rush is 1.9 min or more away.',
+        },
         {
           text: "Night Elves: Elune's Light, then Adrenaline Rush, holding Adrenaline Rush until both are ready. Use Elune's Light on its own when Adrenaline Rush is 1.9 min or more away, and save Cold Blood until Elune's Light ends.",
         },
@@ -64,7 +79,9 @@ export const racialTips = ({ adrenalineRush, coldBlood = true }: { adrenalineRus
             ? "Night Elves: Elune's Light on cooldown, and save Cold Blood until Elune's Light ends."
             : "Night Elves: Elune's Light on cooldown.",
         },
-        { text: 'Gnomes: pool to 90 energy, then Eureka! on cooldown. During Eureka!, Thistle Tea at 25 energy or less.' },
+        {
+          text: 'Gnomes: pool to 90 energy, then Eureka! on cooldown. During Eureka!, Thistle Tea at 25 energy or less.',
+        },
       ];
 
 /**
@@ -98,10 +115,21 @@ export const forLeveling = (rotation: Rotation, cooldowns: string[]): Rotation =
     ...rotation,
     opener: rotation.opener.map((step) => {
       const [, actions, timing = ''] = step.match(/^(.*?)( \(-\d+s\))?$/) ?? [];
-      return actions.split(' + ').filter((a) => a !== 'Evasion' && a !== 'Major Frenzy Potion').join(' + ') + timing;
+      return (
+        actions
+          .split(' + ')
+          .filter((a) => a !== 'Evasion' && a !== 'Major Frenzy Potion')
+          .join(' + ') + timing
+      );
     }),
     tips: rotation.tips.flatMap((t, i) =>
-      i === firstFolded ? [paired] : isVanish(t) ? [defensive] : folded.has(t) || isRacial(t) || t === tip.thistleTea ? [] : [t],
+      i === firstFolded
+        ? [paired]
+        : isVanish(t)
+          ? [defensive]
+          : folded.has(t) || isRacial(t) || t === tip.thistleTea
+            ? []
+            : [t],
     ),
   };
 };

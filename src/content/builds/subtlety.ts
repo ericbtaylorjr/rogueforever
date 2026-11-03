@@ -1,6 +1,6 @@
 import { levelingGearFor } from '../gear';
 import type { Build, ProTip, Rotation, StatPriority } from '../types';
-import { forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
+import { forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte, BLANK_TALENTS } from './shared';
 
 /** Subtlety Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
 const dungeonsStats: StatPriority = {
@@ -246,11 +246,11 @@ export const subtlety: Build[] = [
     grade: 'B',
     rank: 5,
     stale: true,
-    talents: points(12, 8, 31),
+    talents: points(0, 0, 0),
     talentNote:
       'The traditional Subtlety Backstab build: bleed damage from Garrote and Rupture, plus Backstab builders and Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Ghostly Strike and Hemorrhage as needed, Backstab from behind to 5, then Eviscerate while Rupture is up.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v20053031-3203-1323200310213211501_t5/2CBaEDHjnPMsrQTw0CDFg1ABD',
+    link: BLANK_TALENTS,
     stats: backstabStats,
     gear: noEndgameGear,
     rotation: backstabRotation,
@@ -263,11 +263,11 @@ export const subtlety: Build[] = [
     grade: 'B',
     rank: 4,
     stale: true,
-    talents: points(20, 0, 31),
+    talents: points(0, 0, 0),
     talentNote:
       'A Subtlety Backstab variant using Hemorrhage as the builder, so it works with a slow main hand instead of a dagger. Bleed damage from Garrote and Rupture, with Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Hemorrhage to 5, then Cold Blood and Eviscerate while Rupture is up.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005323101014--4323200300013211501_t5',
+    link: BLANK_TALENTS,
     stats: hemoStats,
     gear: noEndgameGear,
     rotation: hemoRotation,
@@ -281,11 +281,11 @@ export const subtlety: Build[] = [
     grade: 'B',
     rank: 3,
     stale: true,
-    talents: points(2, 27, 22),
+    talents: points(0, 0, 0),
     talentNote:
       'A Subtlety hybrid built around a big Ambush opener. Stealth in, Ambush, and finish most mobs before they can fight back, then reset and move on. Fights that last follow the Hemorrhage loop: Slice and Dice, Rupture at 3+ combo points, Ghostly Strike, Hemorrhage to 5, then Eviscerate. Vanish into Ambush when you want another opener.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202-321033210014142-4323003010013011_t0/1B0B2BCGddjdaaaPnasr1AFEhGcmnnnnpqqqqR',
+    link: BLANK_TALENTS,
     stats: questingStats,
     gear: levelingGearFor('subtlety', 'questing'),
     rotation: withRiposte(questingRotation, 'Hemorrhage'),
@@ -299,11 +299,11 @@ export const subtlety: Build[] = [
     grade: 'B',
     rank: 3,
     stale: true,
-    talents: points(0, 30, 21),
+    talents: points(0, 0, 0),
     talentNote:
       "Burst opener into steady Backstab damage. Stealth in, Ambush, then keep Slice and Dice up, Ghostly Strike on cooldown, Backstab from behind to 5 combo points and Eviscerate. Blade Flurry on cooldown, and Vanish into Ambush when you want another opener. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can't attack from behind.",
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2-3223032000141423-532000321001301_t0/1B2CaaaGaajhhbbnPbr1AFDGccmnnnnpqqqqRS',
+    link: BLANK_TALENTS,
     stats: dungeonsStats,
     gear: levelingGearFor('subtlety', 'dungeons'),
     rotation: dungeonsRotation,
