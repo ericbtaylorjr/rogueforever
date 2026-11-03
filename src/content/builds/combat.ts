@@ -199,6 +199,7 @@ export const combat: Build[] = [
     name: 'Mutilate',
     grade: 'A',
     rank: 3,
+    stale: true,
     talents: points(21, 29, 1),
     talentNote:
       'Dagger damage using Combat talents instead of Venom. Mutilate builds combo points two at a time and Eviscerate finishes, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
@@ -215,6 +216,7 @@ export const combat: Build[] = [
     name: 'Sinister Strike',
     grade: 'S',
     rank: 2,
+    stale: true,
     talents: points(18, 33, 0),
     talentNote:
       'The traditional Classic Rogue Combat build: steady melee damage from Sinister Strike builders into Eviscerate, boosted by Adrenaline Rush and Blade Flurry. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
@@ -231,6 +233,7 @@ export const combat: Build[] = [
     name: 'Backstab',
     grade: 'S',
     rank: 1,
+    stale: true,
     talents: points(16, 33, 2),
     talentNote:
       'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush and Blade Flurry. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Cold Blood and Eviscerate.',
@@ -248,6 +251,7 @@ export const combat: Build[] = [
     name: 'Questing',
     grade: 'S',
     rank: 1,
+    stale: true,
     talents: points(17, 34, 0),
     talentNote:
       'Traditional Combat, centered on cleaving with Blade Flurry. Pull two or three mobs, turn on Blade Flurry and take them down together. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate. No positioning to worry about.',
@@ -265,6 +269,7 @@ export const combat: Build[] = [
     name: 'Dungeons',
     grade: 'S',
     rank: 1,
+    stale: true,
     talents: points(16, 33, 2),
     talentNote:
       'Combat for groups with a Backstab twist: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Cold Blood and Eviscerate. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can\'t attack from behind.',

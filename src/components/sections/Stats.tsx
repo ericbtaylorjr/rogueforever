@@ -7,6 +7,7 @@ import { useTheme } from '../../state/ThemeProvider';
 import { useGrown } from '../../state/useGrown';
 import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
+import { StaleNote } from '../ui/StaleNote';
 import { Tip } from '../ui/Tip';
 
 /** Stamina sims to 0 EP, which reads as worthless; show it as a token 0.01 instead. */
@@ -26,6 +27,8 @@ function StatPriorityPanel() {
         <span className="t-panel-label text-ink">{copy.statsTitle}</span>
         <span className="text-[12px] text-faint">{copy.statsMeta} {relativeTo}</span>
       </div>
+
+      <StaleNote build={build} />
 
       <p className="mt-[14px] flex flex-wrap items-baseline gap-x-[10px] gap-y-[4px] text-[19px] font-bold leading-tight">
         {/* Screen readers get the priority as words; the symbols below are visual only. */}

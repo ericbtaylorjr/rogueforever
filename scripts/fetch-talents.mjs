@@ -6,6 +6,7 @@
  *
  *   npm run talents            # refresh the trees, then check every build's calculator link
  *   npm run talents -- --check # just check the links against the current trees
+ *   npm run talents -- --fix   # also rewrite each build's points(a, c, s) from its link
  *
  * Builds point at a calculator link (`link` in src/content/builds/*.ts); the preview
  * decodes it with src/lib/talentCalc.ts. Re-run after Wowhead updates Forever's talents
@@ -163,7 +164,9 @@ function check(trees) {
       if (off) problems.push("talent order doesn't add up to the link's ranks");
     }
     if (problems.length) bad++;
-    console.log(`${problems.length ? '✗' : '✓'} ${totals.join('/').padEnd(9)} ${link.split('/talent-calc/')[1]}${problems.length ? `\n    ${problems.join('; ')}` : ''}`);
+    console.log(
+      `${problems.length ? '✗' : '✓'} ${totals.join('/').padEnd(9)} ${link.split('/talent-calc/')[1]}${problems.length ? `\n    ${problems.join('; ')}` : ''}`,
+    );
   }
   if (bad) {
     console.log(`\n${bad} link(s) don't fit the current trees.`);
@@ -171,5 +174,41 @@ function check(trees) {
   }
 }
 
-const trees = process.argv.includes('--check') ? JSON.parse(readFileSync(outPath, 'utf8')).trees : await refresh();
+/**
+ * Each build's `talents: points(a, c, s)` is just its link's point split, so it's derived
+ * rather than typed: a mismatch fails the check, and `--fix` rewrites it from the link.
+ */
+function checkPoints({ fix }) {
+  let bad = 0;
+  for (const f of readdirSync(root('src/content/builds')).filter((n) =>
+    /^(assassination|combat|subtlety)\.ts$/.test(n),
+  )) {
+    const path = root(`src/content/builds/${f}`);
+    const src = readFileSync(path, 'utf8');
+    const out = src.replace(
+      /talents: points\(([\d, ]+)\)((?:(?!talents: points\()[\s\S])*?)link: '([^']*)'/g,
+      (whole, typed, mid, link) => {
+        const digits = link.match(/\/talent-calc\/rogue\/v2([0-9-]*)/)?.[1];
+        if (digits === undefined) return whole;
+        const parts = digits.split('-');
+        const want = [0, 1, 2].map((i) => [...(parts[i] ?? '')].reduce((n, d) => n + +d, 0)).join(', ');
+        if (want === typed.replace(/\s+/g, ' ').trim()) return whole;
+        console.log(`${fix ? '→' : '✗'} ${f}: points(${typed.trim()}) but its link spends ${want}`);
+        bad++;
+        return fix ? whole.replace(`points(${typed})`, `points(${want})`) : whole;
+      },
+    );
+    if (fix && out !== src) writeFileSync(path, out);
+  }
+  if (bad && !fix) {
+    console.log(`${bad} point split(s) don't match their link: run \`npm run talents -- --fix\`.`);
+    process.exitCode = 1;
+  } else if (bad) console.log(`Fixed ${bad} point split(s).`);
+}
+
+const trees =
+  process.argv.includes('--check') || process.argv.includes('--fix')
+    ? JSON.parse(readFileSync(outPath, 'utf8')).trees
+    : await refresh();
 check(trees);
+checkPoints({ fix: process.argv.includes('--fix') });

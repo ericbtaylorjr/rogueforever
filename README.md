@@ -110,7 +110,10 @@ authored them in markup.
   split by `-`) against `src/content/talent-trees.json`, which `npm run talents`
   (`scripts/fetch-talents.mjs`) builds from Wowhead's calculator data, along with the
   talent icons and tree art in `public/talents/`. That command also checks every build's
-  link against the trees; `npm run talents -- --check` does only the check. Re-run it
+  link against the trees and each `points(a, c, s)` against its link; `npm run talents -- --check` does only
+  the check and `--fix` rewrites the point splits. `npm run talent-audit` then diffs the trees against git HEAD
+  and finds prose that still names a removed or changed talent. A build flagged `stale: true` shows a
+  "pre-rework" note (Talents, Stats, Rotation) until it is redone; the `rogue-rework` skill is the runbook. Re-run it
   when Forever's talents change. A link that doesn't fit the trees falls back to the
   point split bars. Leveling builds also list the link's **talent order** (the part after
   the trees' `/`, Wowhead's "Talent Order"): a digit picks the tree, each letter is one

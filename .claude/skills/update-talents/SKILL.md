@@ -15,9 +15,10 @@ A build's talents are its calculator `link` in `src/content/builds/<spec>.ts`, p
    leveling builds. Only drop the order when the user's link has none (for example, a link
    rebuilt from a screenshot): then end the link at `_t5`/`_t0` and say so. Never copy the
    order from the old link.
-2. **Points.** Set `talents: points(a, c, s)` to the link's split (`npm run talents -- --check`
-   prints it as `a/c/s` next to the link; it drops a zero tree, so `21/28/2` is three trees).
-   It must match, and the check also fails when the order doesn't end on the link's ranks.
+2. **Points.** `talents: points(a, c, s)` is the link's split, derived, not typed: run
+   `npm run talents -- --fix` and it rewrites the numbers from the link (plain `--check` fails
+   on a mismatch; it prints the split as `a/c/s` next to each link, dropping a zero tree).
+   The check also fails when the order doesn't end on the link's ranks.
 3. **Rotation.** Talents decide which APL rows the build can fire. Follow the `apl-rotation`
    skill for this build: `npm run apl -- <spec>/<build-id>` (and `--race` runs), compare with
    the build's `rotation`, and fix the opener, steps and tips (Cold Blood, Ghostly Strike,

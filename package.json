@@ -13,6 +13,7 @@
     "comfy-image": "node scripts/update-comfy-image.mjs",
     "icons": "node scripts/fetch-icons.mjs",
     "talents": "node scripts/fetch-talents.mjs",
+    "talent-audit": "node scripts/audit-talents.mjs",
     "race-sims": "node scripts/update-race-sims.mjs",
     "gathering": "node scripts/gathering/build.mjs",
     "apl": "node scripts/apl/resolve.mjs",

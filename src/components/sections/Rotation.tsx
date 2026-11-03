@@ -7,6 +7,7 @@ import { Droplet } from '../ui/Droplet';
 import { GameIcon } from '../ui/GameIcon';
 import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
+import { StaleNote } from '../ui/StaleNote';
 import { WowheadText, firstWowheadName } from '../ui/WowheadText';
 
 /** The icon of the spell or item an opener step presses, if it names one. */
@@ -119,6 +120,7 @@ export function Rotation() {
   return (
     <section id="rotation" aria-label="Rotation">
       <SectionHeading id="rotation" scope="spec" />
+      {hasData && <StaleNote build={build} />}
 
       {!hasData ? (
         <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute" aria-live="polite">

@@ -10,6 +10,7 @@ import { useTheme } from '../../state/ThemeProvider';
 import { useGrown } from '../../state/useGrown';
 import { BUILD_CARD_ID, BuildList } from '../ui/BuildList';
 import { SectionHeading } from '../ui/SectionHeading';
+import { StaleNote } from '../ui/StaleNote';
 import { TalentOrder, TalentPreview } from '../ui/TalentTree';
 import { Tip } from '../ui/Tip';
 
@@ -40,6 +41,8 @@ const BuildCard = memo(function BuildCard({ build }: { build: Build }) {
           {specById[build.spec].name} {build.name}
         </h3>
       </div>
+
+      <StaleNote build={build} />
 
       {build.talentNote && (
         <p className="mt-[10px] max-w-[70ch] text-[12.5px] leading-[1.6] text-mute">{build.talentNote}</p>

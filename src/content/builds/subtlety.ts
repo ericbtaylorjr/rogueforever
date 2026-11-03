@@ -245,6 +245,7 @@ export const subtlety: Build[] = [
     name: 'Backstab',
     grade: 'B',
     rank: 5,
+    stale: true,
     talents: points(12, 8, 31),
     talentNote:
       'The traditional Subtlety Backstab build: bleed damage from Garrote and Rupture, plus Backstab builders and Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Ghostly Strike and Hemorrhage as needed, Backstab from behind to 5, then Eviscerate while Rupture is up.',
@@ -261,6 +262,7 @@ export const subtlety: Build[] = [
     name: 'Hemo',
     grade: 'B',
     rank: 4,
+    stale: true,
     talents: points(20, 0, 31),
     talentNote:
       'A Subtlety Backstab variant using Hemorrhage as the builder, so it works with a slow main hand instead of a dagger. Bleed damage from Garrote and Rupture, with Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Hemorrhage to 5, then Cold Blood and Eviscerate while Rupture is up.',
@@ -278,6 +280,7 @@ export const subtlety: Build[] = [
     name: 'Questing',
     grade: 'B',
     rank: 3,
+    stale: true,
     talents: points(2, 27, 22),
     talentNote:
       'A Subtlety hybrid built around a big Ambush opener. Stealth in, Ambush, and finish most mobs before they can fight back, then reset and move on. Fights that last follow the Hemorrhage loop: Slice and Dice, Rupture at 3+ combo points, Ghostly Strike, Hemorrhage to 5, then Eviscerate. Vanish into Ambush when you want another opener.',
@@ -295,6 +298,7 @@ export const subtlety: Build[] = [
     name: 'Dungeons',
     grade: 'B',
     rank: 3,
+    stale: true,
     talents: points(0, 30, 21),
     talentNote:
       "Burst opener into steady Backstab damage. Stealth in, Ambush, then keep Slice and Dice up, Ghostly Strike on cooldown, Backstab from behind to 5 combo points and Eviscerate. Blade Flurry on cooldown, and Vanish into Ambush when you want another opener. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can't attack from behind.",

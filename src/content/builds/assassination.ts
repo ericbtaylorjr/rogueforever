@@ -95,6 +95,7 @@ export const assassination: Build[] = [
     name: 'Mutilate Venom',
     grade: 'C',
     rank: 6,
+    stale: true,
     talents: points(31, 20, 0),
     talentNote:
       'Poison-focused dagger damage. Mutilate builds combo points two at a time while Venom stays up for extra poison damage, and Eviscerate finishes. Keep Slice and Dice up, Mutilate to 3 combo points and apply Venom, then Mutilate to 4 and Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
@@ -112,6 +113,7 @@ export const assassination: Build[] = [
     name: 'Questing',
     grade: 'A',
     rank: 2,
+    stale: true,
     talents: points(22, 27, 2),
     talentNote:
       'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
@@ -129,6 +131,7 @@ export const assassination: Build[] = [
     name: 'Dungeons',
     grade: 'A',
     rank: 2,
+    stale: true,
     talents: points(21, 28, 2),
     talentNote:
       'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',

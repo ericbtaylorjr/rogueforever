@@ -52,6 +52,12 @@ interface BuildBase {
   grade: MetaGrade;
   /** Position in its Meta breakdown ranking across every spec, 1 = best. */
   rank: number;
+  /**
+   * Still on pre-rework (Nov 2) data. Shows a "pre-rework" note on Talents, Stats and Rotation.
+   * Delete the field once the build's talents, weights and rotation have been redone;
+   * `npm run talent-audit` lists the builds still flagged.
+   */
+  stale?: boolean;
   /** Empty until the build is worked out; the Talents card then shows only its note. */
   talents: TalentTree[];
   talentNote: string;

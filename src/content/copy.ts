@@ -143,6 +143,12 @@ export const tips = {
   sweatyLabel: 'Sweaty tip:',
 } as const;
 
+/** Shown on a build flagged `stale` until its data is redone for the Nov 2 Rogue rework. */
+export const staleBuild = {
+  label: 'Pre-rework data.',
+  text: "This build hasn't been redone for the Rogue rework yet, so its talents, weights and rotation may be out of date.",
+};
+
 export const talents = {
   intro: 'Level 60 and leveling builds for your active spec. Pick one here or from the Build menu above. Meta breakdown has how every level 60 build ranks across all three specs.',
   endgameTitle: 'Level 60 builds',
