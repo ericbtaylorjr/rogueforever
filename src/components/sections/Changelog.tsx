@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { changelog } from '../../content/content';
+import { LinkedText } from '../ui/LinkedText';
 import { SectionHeading } from '../ui/SectionHeading';
 
 const PAGE_SIZE = 5;
@@ -20,7 +21,9 @@ export function Changelog() {
             className="grid gap-x-[16px] gap-y-[4px] border-t border-line py-[14px] sm:grid-cols-[120px_minmax(0,1fr)]"
           >
             <span className="t-num text-[12px] text-accent">{c.date}</span>
-            <p className="text-[13.5px] leading-[1.6] text-prose">{c.text}</p>
+            <p className="text-[13.5px] leading-[1.6] text-prose">
+              <LinkedText text={c.text} links={c.links} />
+            </p>
           </div>
         ))}
       </div>

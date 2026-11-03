@@ -178,6 +178,8 @@ export interface Macro {
 export interface ChangelogEntry {
   date: string;
   text: string;
+  /** Phrases in `text` to link, opening in a new tab. */
+  links?: Record<string, string>;
 }
 
 export interface NavGroup {

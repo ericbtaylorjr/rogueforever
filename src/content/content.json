@@ -810,6 +810,13 @@
   ],
   "changelog": [
     {
+      "date": "Nov 2nd, 2026",
+      "text": "Rebuilt the Leveling Milestone Gear lists from the ground up. Each leveling build now has its own list, scored with that build's own stat weights, with weapon procs and use effects valued instead of ignored, and with items that are gone from the game data or won't be available at launch removed. Added the Gathering Reference Tool to Tools & UI: pick up to two gathering professions and a zone to see the skill you need to gather there and how high the zone can take you. I'm also preparing my body and soul for the massive Rogue changes just announced. Will be spending next couple days repopulating everything... send help.",
+      "links": {
+        "Rogue changes": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-november-2/2360696/9"
+      }
+    },
+    {
       "date": "Nov 1st, 2026",
       "text": "Updated the talents for the builds with optimizations, refreshed the stat weights, and cleaned up the rotations and Pro Tips, with leveling builds now getting simpler guidance. Made slight adjustments to the Meta Breakdown projections, which should still be taken with a grain of salt. Added a race performance chart to the Races section, showing how each race compares for every build at 1, 2, 3 and 5 minute encounters, with links to the WoWSims runs behind it."
     },
