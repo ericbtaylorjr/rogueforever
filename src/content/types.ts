@@ -219,6 +219,8 @@ export interface GearItem {
   name: string;
   quality: ItemQuality;
   source: string;
+  /** Bind on equip, so it can be bought or traded. Unset for everything else. */
+  boe?: boolean;
   enchant?: string;
 }
 

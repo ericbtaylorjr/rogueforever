@@ -27,6 +27,7 @@ function ItemLink({ item }: { item: Omit<GearItem, 'enchant'> }) {
     >
       <GameIcon name={`item:${item.itemId}`} size={24} />
       <span className="truncate">{item.name}</span>
+      {item.boe && <Tag>BoE</Tag>}
     </a>
   );
 }

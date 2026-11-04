@@ -436,6 +436,8 @@ if (emit) {
     process.exit(1);
   }
   const out = here('../../src/content/leveling-gear.json');
+  // Tag bind-on-equip items so the Handbook can mark them; everything else stays untagged.
+  for (const k of Object.keys(emitted)) for (const e of emitted[k]) if (cache.items[e.itemId]?.bind === 'BoE') e.boe = true;
   for (const k of Object.keys(emitted)) emitted[k].sort((a, b) => a.level - b.level || a.slot.localeCompare(b.slot));
   // Builds without stat weights yet keep the list they have.
   const previous = existsSync(out) ? JSON.parse(readFileSync(out, 'utf8')).builds : {};
