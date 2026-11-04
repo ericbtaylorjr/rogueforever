@@ -70,16 +70,22 @@
   "foreverOutlook": [],
   "races": [
     {
+      "name": "Undead",
+      "racials": "Life drain damage proc (15s ICD). Charm/Fear/Sleep removal CD.",
+      "grade": "S",
+      "note": "Consistent minor damage proc. CC removal may yield higher uptime in some encounters."
+    },
+    {
       "name": "Gnome",
       "racials": "2min reduced Energy cost CD (8s duration). Root/Snare removal & 3s immune CD. Reduced Engineering failure.",
       "grade": "S",
       "note": "Strong choice for short encounters. CC removal & immunity may yield higher uptime in some encounters. Improved Engineering could yield benefit with failure reduction."
     },
     {
-      "name": "Undead",
-      "racials": "Life drain damage proc (15s ICD). Charm/Fear/Sleep removal CD.",
+      "name": "Night Elf",
+      "racials": "3min 10% Crit CD. 2% Movement speed passive. Free oGCD Feint CD.",
       "grade": "S",
-      "note": "Consistent minor damage proc. CC removal may yield higher uptime in some encounters."
+      "note": "Crit value may diminish over time. Movement speed may help improve uptime. Free oGCD threat reduction may support more aggressive openers."
     },
     {
       "name": "Skyborn",
@@ -88,10 +94,10 @@
       "note": "Haste value may diminish over time. Will be optimal for Elementals. Horde movement speed may help improve uptime, but Charged is removed upon entering a raid."
     },
     {
-      "name": "Night Elf",
-      "racials": "3min 10% Crit CD. 2% Movement speed passive. Free oGCD Feint CD.",
+      "name": "Human",
+      "racials": "1% Crit passive. Stun removal CD.",
       "grade": "A",
-      "note": "Crit value may diminish over time. Movement speed may help improve uptime. Free oGCD threat reduction may support more aggressive openers."
+      "note": "Crit value may diminish over time. Stun removal may yield higher uptime in some encounters."
     },
     {
       "name": "Troll",
@@ -100,22 +106,16 @@
       "note": "Attack Speed CD is good. Will also be optimal for Beasts."
     },
     {
+      "name": "Orc",
+      "racials": "2min 10% Attack Power CD (15s duration). Curse/Bane removal CD. Stun duration reduction passive.",
+      "grade": "B",
+      "note": "CC reduction/removal may yield higher uptime in some encounters, but outperformed by others."
+    },
+    {
       "name": "Dwarf",
       "racials": "1% Hit passive. Bleed/Poison/Disease removal & 8s immune CD. 5% damage to Beasts.",
       "grade": "B",
       "note": "Hit value may diminish over time. Will be optimal for Beasts. Debuff removal/immune may yield higher uptime in some encounters."
-    },
-    {
-      "name": "Human",
-      "racials": "1% Crit passive. Stun removal CD.",
-      "grade": "C",
-      "note": "Crit value may diminish over time. Stun removal may yield higher uptime in some encounters."
-    },
-    {
-      "name": "Orc",
-      "racials": "2min 10% Attack Power CD (15s duration). Curse/Bane removal CD. Stun duration reduction passive.",
-      "grade": "C",
-      "note": "CC reduction/removal may yield higher uptime in some encounters, but outperformed by others."
     }
   ],
   "poisons": [
