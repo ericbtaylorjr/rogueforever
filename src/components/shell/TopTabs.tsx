@@ -1,5 +1,5 @@
 import { nav, specSectionIds } from '../../content/content';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useHandbook, useUi } from '../../state/HandbookProvider';
 import { useSpecColor } from '../../state/useSpecColor';
 import { SearchTrigger } from './SearchTrigger';
 import { ThemeToggle } from './ThemeToggle';
@@ -10,7 +10,8 @@ import { Wordmark } from './Wordmark';
  * falls back to the drawer. Not the recommended ship configuration.
  */
 export function TopTabs() {
-  const { active, jump } = useHandbook();
+  const { jump } = useHandbook();
+  const { active } = useUi();
   const items = nav.flatMap((g) => g.items);
   const c = useSpecColor();
 

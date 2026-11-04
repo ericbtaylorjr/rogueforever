@@ -47,9 +47,10 @@ Reproduce a field number with `audit:perf` before changing code, and show before
 
 Images WebP at ~3× display size; icons lazy; new below-the-fold lists that follow the build
 use `useShownBuild()`; don't add a render-blocking request; keep `preload-fonts` in
-`vite.config.ts` in sync with the hero's fonts. Remaining big lever: `useHandbook()` is one
-context, so every pick re-renders every section; splitting it (spec/build vs UI state) would
-cut build-pick cost.
+`vite.config.ts` in sync with the hero's fonts. The volatile UI state (drawer, search, scroll spy, copy
+confirmation) already has its own context, `useUi()`; put any new state that changes while scrolling or
+typing there. Remaining lever: `useHandbook()` is still one context for the build and filters, so every
+pick re-renders every section; splitting it further would cut build-pick cost.
 
 ## Record
 

@@ -38,11 +38,6 @@ interface HandbookState {
   guideFilter: string;
   sweaty: boolean;
   openRaid: number;
-  searchOpen: boolean;
-  query: string;
-  active: string;
-  copied: string;
-  drawer: boolean;
   /** Privacy policy window. Also opened by landing on #privacy. */
   privacyOpen: boolean;
 
@@ -75,12 +70,29 @@ interface HandbookState {
 
 const Ctx = createContext<HandbookState | null>(null);
 
+/**
+ * State that changes while you scroll, type or open a panel. It has its own context so it doesn't
+ * re-render every section the way `HandbookState` does: opening the mobile drawer or moving the
+ * scroll spy touches only the components that read these (Cloudflare INP: the menu and search
+ * buttons were the slowest taps).
+ */
+interface UiState {
+  searchOpen: boolean;
+  query: string;
+  drawer: boolean;
+  /** The section the scroll spy says you're reading. */
+  active: string;
+  /** Key of the copy button that just copied, for a moment. */
+  copied: string;
+}
+
+const UiCtx = createContext<UiState | null>(null);
+
 const COPY_RESET_MS = 1600;
 const STORE_KEY = 'rc:prefs';
 const PRIVACY_HASH = '#privacy';
 
-const isSpecId = (v: string | null): v is SpecId =>
-  !!v && specs.some((s) => s.id === (v as SpecId));
+const isSpecId = (v: string | null): v is SpecId => !!v && specs.some((s) => s.id === (v as SpecId));
 
 /** Spec ids before the rename to tree names. Old shared links and saved prefs still resolve. */
 const LEGACY_SPEC: Record<string, SpecId> = {
@@ -238,9 +250,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
 
   /* ----- scroll spy ----- */
   useEffect(() => {
-    const nodes = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((n): n is HTMLElement => !!n);
+    const nodes = sectionIds.map((id) => document.getElementById(id)).filter((n): n is HTMLElement => !!n);
     if (!nodes.length) return;
 
     const io = new IntersectionObserver(
@@ -284,25 +294,22 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /* ----- actions ----- */
-  const jump = useCallback(
-    (id: string) => {
-      // Close the drawer or search first: while a modal dialog is open the page is inert and
-      // can't take focus, and closing one hands focus back to whatever opened it.
-      flushSync(() => {
-        setDrawer(false);
-        setSearchOpen(false);
-      });
-      const el = document.getElementById(id);
-      if (!el) return;
-      scrollToSection(el);
-      setActive(id);
-      track('section_jump', { section: id });
-      noteJump(id);
-      window.history.replaceState(null, '', `#${id}`);
-      focusSection(el);
-    },
-    [],
-  );
+  const jump = useCallback((id: string) => {
+    // Close the drawer or search first: while a modal dialog is open the page is inert and
+    // can't take focus, and closing one hands focus back to whatever opened it.
+    flushSync(() => {
+      setDrawer(false);
+      setSearchOpen(false);
+    });
+    const el = document.getElementById(id);
+    if (!el) return;
+    scrollToSection(el);
+    setActive(id);
+    track('section_jump', { section: id });
+    noteJump(id);
+    window.history.replaceState(null, '', `#${id}`);
+    focusSection(el);
+  }, []);
 
   /*
    * A shared link to a section scrolls there once the page has loaded and its fonts have
@@ -413,11 +420,6 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       guideFilter,
       sweaty,
       openRaid,
-      searchOpen,
-      query,
-      active,
-      copied,
-      drawer,
       privacyOpen,
       isNarrow,
       setSpec,
@@ -449,11 +451,6 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       guideFilter,
       sweaty,
       openRaid,
-      searchOpen,
-      query,
-      active,
-      copied,
-      drawer,
       privacyOpen,
       isNarrow,
       setSpec,
@@ -469,7 +466,22 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     ],
   );
 
-  return <Ctx value={value}>{children}</Ctx>;
+  const ui = useMemo<UiState>(
+    () => ({ searchOpen, query, drawer, active, copied }),
+    [searchOpen, query, drawer, active, copied],
+  );
+
+  return (
+    <Ctx value={value}>
+      <UiCtx value={ui}>{children}</UiCtx>
+    </Ctx>
+  );
+}
+
+export function useUi(): UiState {
+  const ctx = useContext(UiCtx);
+  if (!ctx) throw new Error('useUi must be used inside <HandbookProvider>');
+  return ctx;
 }
 
 export function useHandbook(): HandbookState {

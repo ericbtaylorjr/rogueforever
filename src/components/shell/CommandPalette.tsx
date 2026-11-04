@@ -2,14 +2,15 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { search } from '../../content/copy';
 import { searchEntries } from '../../content/searchIndex';
 import { track } from '../../lib/analytics';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useHandbook, useUi } from '../../state/HandbookProvider';
 
 /**
  * Search, as a native modal <dialog>: showModal() puts it in the top layer, makes the page
  * behind it inert, closes on Esc and hands focus back to whatever opened it.
  */
 export function CommandPalette() {
-  const { searchOpen, setSearchOpen, query, setQuery, jump } = useHandbook();
+  const { setSearchOpen, setQuery, jump } = useHandbook();
+  const { searchOpen, query } = useUi();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);

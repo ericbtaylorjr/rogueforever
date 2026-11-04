@@ -1,4 +1,4 @@
-import { useHandbook } from '../../state/HandbookProvider';
+import { useHandbook, useUi } from '../../state/HandbookProvider';
 
 /**
  * Copy-to-clipboard with a 1600ms confirmation. Only one confirmation shows at
@@ -20,7 +20,8 @@ export function CopyButton({
   name?: string;
   variant?: 'block' | 'small';
 }) {
-  const { copied, copy } = useHandbook();
+  const { copy } = useHandbook();
+  const { copied } = useUi();
   const done = copied === copyKey;
 
   const base =

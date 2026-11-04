@@ -1,11 +1,12 @@
 import { shell } from '../../content/copy';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useHandbook, useUi } from '../../state/HandbookProvider';
 import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 
 /** Fixed 58px top bar, <1100px. */
 export function MobileBar() {
-  const { setDrawer, setSearchOpen, setQuery, drawer } = useHandbook();
+  const { setDrawer, setSearchOpen, setQuery } = useHandbook();
+  const { drawer } = useUi();
 
   return (
     <header

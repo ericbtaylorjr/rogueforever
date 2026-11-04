@@ -129,14 +129,16 @@ authored them in markup.
 
 ## Accessibility
 
-Target: WCAG 2.2 AA. Last audited 1 November 2026 with axe-core 4.14 (0 violations at 1440px
-and 390px, dark and light, on three level 60 builds and three leveling builds) and a 78-stop
-keyboard walk (every stop shows a focus ring), both from `npm run audit:a11y` (see Auditing).
-The 4.14 run found three things the 4.10 audit of 22 October didn't, all fixed: the
-YouTube button's white-on-`#ff0000` text (4.0:1, now `#cc0000`), faint text on a spec-tinted
+Target: WCAG 2.2 AA. Last audited 4 November 2026 with axe-core 4.14 (0 violations at 1440px
+and 390px, dark and light, on three level 60 builds and three leveling builds, plus a recheck of
+Combat and Subtlety Questing after the leveling rebuild) and a 76-stop keyboard walk (every stop
+shows a focus ring), both from `npm run audit:a11y` (see Auditing). Nothing new turned up since
+the 1 November run, whose 4.14 findings were three things the 4.10 audit of 22 October didn't,
+all fixed: the YouTube button's white-on-`#ff0000` text (4.0:1, now `#cc0000`), faint text on a spec-tinted
 active build row (now `text-mute`), and talent order links whose `aria-label` didn't contain
 their visible text (WCAG 2.5.3; the label now starts with it, "14–16 Lightning Reflexes 3/5").
-The 22 October audit also ran Lighthouse 12 (Accessibility 100) and covered the palette, drawer,
+The leveling rotations (no Opener panel, fixed intro) and the Rotation-above-Stats order add no new
+controls. The 22 October audit also ran Lighthouse 12 (Accessibility 100) and covered the palette, drawer,
 profile modal and an open raid.
 
 Covered: skip link and `<main>` landmark; nav jumps and shared section links
@@ -172,17 +174,33 @@ arrow-key navigation between raid accordion headers (not required by WCAG).
 
 ## Performance
 
-Last measured 1 November 2026 with Lighthouse 13 against the production build
-(`npm run audit:perf`): desktop Performance 100 (FCP 0.2s, LCP 0.8s, CLS 0), throttled mobile
-95 (FCP 0.8s, LCP 2.9s, TBT 50ms, CLS 0), about 400 KiB transferred on mobile. The lab loads
-are fast; the field data is where the work is. Cloudflare Web Analytics (1 November):
-FCP 97% good, INP 98% good / 2% needs improvement, CLS 99% good / 1% needs improvement.
-Their Debug View named two slow interactions (232ms and 272ms, mostly presentation delay):
+Last measured 4 November 2026 with Lighthouse 13 against the production build
+(`npm run audit:perf`): desktop Performance 100 (FCP 0.2s, LCP 0.7s, CLS 0), throttled mobile
+95–97 (FCP 0.8s, LCP 2.6–2.9s, TBT 50–110ms, CLS 0; it varies by run), about 410 KiB transferred
+on mobile. The lab loads are fast; the field data is where the work is. Cloudflare Web Analytics
+(3–4 November): LCP 98% good (P75 881ms; the one 31s sample was a talent tree background image on
+a bad connection), INP 97% good / 2% needs improvement / 1% poor, CLS 99% good. Its Debug View
+named the slowest taps: the mobile bar's menu and search buttons (536–544ms), a build row name
+(272ms), a hover-styled button (496ms) and an accent link (328ms), each 2–3 samples. Opening the
+drawer or search used to re-render every section, because the scroll spy, search text, drawer and
+copy confirmation lived in the same context as the build. They now have their own (`useUi()` in
+`HandbookProvider`: `searchOpen`, `query`, `drawer`, `active`, `copied`), so those changes
+re-render only the nav, palette, drawer and copy buttons. In the lab at 4× CPU that moved the menu
+tap from 104–168ms to 96–152ms, so the field's 536ms is mostly a slow phone's paint and layout
+(the page lock and the blurred backdrop): removing the drawer's backdrop blur changed nothing in
+the lab, so it was left as it is. The 1 November numbers below are kept for the history.
+The CLS debug rows (`#raid` 0.367, `#specs` 0.105, `#overview` rule 0.198, a `div.flex-1`
+0.346, one to two samples each) did not reproduce on a phone or desktop viewport, cold or warm, with
+throttled network and CPU, on `/`, `#raid`, `#specs`, `#talents`, `#rotation` and `#poisons` links;
+check them again in Cloudflare after the next deploy.
+
+Earlier, 1 November 2026: Lighthouse mobile 95 (LCP 2.9s, TBT 50ms); Cloudflare FCP 97% good,
+INP 98% good, CLS 99% good. Their Debug View named two slow interactions (232ms and 272ms, mostly presentation delay):
 the Meta breakdown's **Leveling** tab (`#tab-leveling`) and a **build row** in the ranking
 list. The tab now answers the click first and renders the lists after it
 (`useDeferredValue` in `SpecBoard`: 48ms → 24ms at 4× CPU slowdown). A build pick measures
 90–110ms at 4× in the lab, so the 272ms is a slow-phone tail; the remaining lever is
-splitting the one `useHandbook()` context so a pick doesn't re-render every section. The one
+splitting the rest of the `useHandbook()` context so a pick doesn't re-render every section (the volatile UI state is already split off, above). The one
 CLS sample (0.131, a 15px sideways shift of the hero) did not reproduce at nine widths, with
 real scrollbars or on a throttled network; check it again in Cloudflare after the next deploy.
 Under the same throttling in Chrome itself the first paint is the intro paragraph, painted once
@@ -241,7 +259,7 @@ the JS bundle (144 KB gzipped, most of it React DOM) has downloaded and rendered
 ## SEO
 
 One canonical URL (`https://wowrogue.gg/`); spec and build are query parameters on the same page.
-Last audited 1 November 2026 with `npm run audit:seo`: Lighthouse SEO 100, Best Practices 96
+Last audited 4 November 2026 with `npm run audit:seo`: Lighthouse SEO 100, Best Practices 96
 (the only note is Cloudflare's beacon being refused a CORS preflight on `localhost`, which can't
 happen on the real domain). Title 58 characters, description 158, canonical, robots, Open Graph
 and Twitter cards, a JSON-LD `WebSite` + `Article` graph, `robots.txt` and `sitemap.xml` all
@@ -291,7 +309,7 @@ first paint (no flash) and `src/state/ThemeProvider.tsx` owns it afterwards; bot
 ## Security
 
 Static site, no backend, no user input beyond a search box, no third-party scripts beyond
-analytics (below). Last audited 1 November 2026 with `npm run audit:security`: `npm audit` is
+analytics (below). Last audited 4 November 2026 with `npm run audit:security`: `npm audit` is
 clean (runtime and dev), the CSP has no `unsafe-inline`/`unsafe-eval` in `script-src`, the
 inline script is pinned by hash, every CSP host is a documented one, actions are pinned to SHAs,
 and no secrets or source maps ship.

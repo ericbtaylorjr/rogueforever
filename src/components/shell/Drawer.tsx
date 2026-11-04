@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import { shell } from '../../content/copy';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useHandbook, useUi } from '../../state/HandbookProvider';
 import { NavList } from './NavList';
 import { SweatyLegend, Wordmark } from './Wordmark';
 
@@ -10,7 +10,8 @@ import { SweatyLegend, Wordmark } from './Wordmark';
  * contents only render while it's open, so the nav isn't in the page twice.
  */
 export function Drawer() {
-  const { drawer, setDrawer } = useHandbook();
+  const { setDrawer } = useHandbook();
+  const { drawer } = useUi();
   const ref = useRef<HTMLDialogElement>(null);
 
   // A layout effect, so a nav jump that closes the drawer has it closed before focus moves.

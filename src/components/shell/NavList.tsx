@@ -1,6 +1,6 @@
 import { nav } from '../../content/content';
 import type { NavGroup } from '../../content/types';
-import { useHandbook } from '../../state/HandbookProvider';
+import { useHandbook, useUi } from '../../state/HandbookProvider';
 import { useSpecColor } from '../../state/useSpecColor';
 import { BuildSelect, SpecSelect } from '../ui/SpecSelect';
 import { StarIcon } from '../ui/StarIcon';
@@ -11,7 +11,8 @@ import { StarIcon } from '../ui/StarIcon';
  * Note: item counts were removed in a later design revision. Don't add them back.
  */
 export function NavList({ size = 'rail' }: { size?: 'rail' | 'touch' }) {
-  const { active, jump } = useHandbook();
+  const { jump } = useHandbook();
+  const { active } = useUi();
   const c = useSpecColor();
   const touch = size === 'touch';
 
