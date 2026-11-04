@@ -13,15 +13,6 @@ import { links } from './links';
  */
 
 export const hero = {
-  /** Pulsing notice above the eyebrow. Take it out (or edit it) when the Handbook is caught up. */
-  banner: {
-    label: 'Rogue rebalance notice',
-    before: 'There was a ',
-    link: 'large Rogue rebalance',
-    after:
-      ' announced on 11/3. We are actively working to get WoWSims updated, which will then allow me to update the Handbook. I appreciate the patience as we scramble to get things implemented before launch.',
-    sign: '~ Comfy',
-  },
   eyebrow: 'A Rogue guide for World of Warcraft: Forever',
   titleTop: 'Rogue',
   titleBottom: 'Handbook',

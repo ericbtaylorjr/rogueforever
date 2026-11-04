@@ -5,7 +5,6 @@ import { useHandbook } from '../../state/HandbookProvider';
 import { Callout } from '../ui/Callout';
 import { LinkedText } from '../ui/LinkedText';
 import { StarIcon } from '../ui/StarIcon';
-import { WarningIcon } from '../ui/WarningIcon';
 import { XIcon, YouTubeIcon } from '../ui/SocialIcons';
 
 /** Accent line that fades out to the right. The hero's poison drips hang from one. */
@@ -39,36 +38,6 @@ function PoisonDrip() {
           }}
         />
       ))}
-    </div>
-  );
-}
-
-/** The pulsing notice at the very top of the page: what's changed and why the Handbook is waiting. */
-function Notice() {
-  const { banner } = hero;
-  return (
-    <div
-      role="note"
-      aria-label={banner.label}
-      className="animate-notice flex max-w-[88ch] items-start gap-[14px] rounded-[10px] border px-[16px] py-[14px]"
-      style={{ borderColor: 'var(--accent)', background: 'var(--accent-dim)' }}
-    >
-      <WarningIcon className="mt-[2px] text-accent" />
-      <div className="text-[14px] leading-[1.6] text-ink">
-        <p>
-          {banner.before}
-          <a
-            href={links.rogueRebalance}
-            target="_blank"
-            rel="noreferrer"
-            className="font-semibold text-accent underline underline-offset-2"
-          >
-            {banner.link}
-          </a>
-          {banner.after}
-        </p>
-        <p className="mt-[8px] font-semibold text-mute">{banner.sign}</p>
-      </div>
     </div>
   );
 }
@@ -136,9 +105,7 @@ export function Overview() {
       className="relative"
       style={{ padding: 'clamp(24px, 5.5vw, 58px) 0 10px' }}
     >
-      <Notice />
-
-      <p className="relative mt-[22px] text-[13.5px] text-faint">{hero.eyebrow}</p>
+      <p className="relative text-[13.5px] text-faint">{hero.eyebrow}</p>
 
       <h1 className="relative mt-[18px]">
         <span className="t-h1 block text-ink">{hero.titleTop}</span>{' '}

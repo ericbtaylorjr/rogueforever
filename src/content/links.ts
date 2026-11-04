@@ -23,8 +23,6 @@ export const links = {
   mail: 'mailto:TheComfyWizard@gmail.com',
   site: 'https://thecomfywizard.com',
   ellesmereui: 'https://www.curseforge.com/wow/addons/ellesmereui',
-  rogueRebalance:
-    'https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-november-2/2360696/9',
   wowheadRacials: 'https://www.wowhead.com/forever/guide/new-race-class-combinations',
   rank1Logs: 'https://sod.warcraftlogs.com/character/us/crusader-strike/comfyrogue',
 } as const;
