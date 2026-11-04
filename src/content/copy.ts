@@ -258,11 +258,13 @@ export const stats = {
   /** Follows the "Tip:" label, with the active spec and build's name between `before` and `after`. */
   tip: {
     before: 'These stat weights are relative to ',
-    after: ' and are just a general guide. Weapon damage is MUCH more important than stats.',
+    after: ' and are just a general guide. Weapon damage is MUCH more important than stats. Undead will get some benefit from Stamina.',
   },
   /** Questing builds only, after the general tip. */
   questingTip:
     'Since while questing you are attacking from the front, Expertise gains double the value since you benefit from both the Parry and Dodge reduction.',
+  /** A build whose weights haven't been worked out yet. */
+  pending: "This build's stat weights haven't been worked out yet. They go up once it's been tested.",
   statsTitle: 'Stat priority',
   statsMeta: 'Weights relative to',
   epLabel: 'EP',

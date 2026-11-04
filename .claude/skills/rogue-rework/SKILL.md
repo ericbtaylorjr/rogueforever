@@ -22,6 +22,10 @@ still flagged, so it is the progress tracker.
   (Assassination Mutilate, Combat Sinister Strike, Combat Backstab, Combat Venom, Subtlety Hemo) have their links
   (built from screenshots, so no learning order), point splits and rotations. Combat Mutilate and Subtlety Backstab were
   removed. Their stat weights were added after, and `stale` was deleted from all five.
+- Leveling builds were emptied on purpose (`noStats`, `noRotation`, blank calculator link; the old rows and weights are gone,
+  `git log` has them). Refill each with `update-talents`, `update-stat-weights` and `apl-rotation` (which can use `forLeveling`
+  and `withRiposte` in shared.ts), then delete its `stale: true`. `leveling-milestone-gear` reads their weights, so it needs
+  them back first (it would score every item 0 now).
 - Pending: every leveling build (links, weights, rotations; their rotation constants are
   `preRework*` in combat.ts and the quest/dungeon rotations in subtlety.ts until redone); the New to Rogue guide
   entries that still describe Murder and the Venom finisher (content.json); gear-research follow-ups below.

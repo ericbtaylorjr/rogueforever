@@ -1,4 +1,4 @@
-import type { GearItem, GearSetId, ProTip, Rotation, RotationStep, TalentTree } from '../types';
+import type { GearItem, GearSetId, ProTip, Rotation, RotationStep, StatPriority, TalentTree } from '../types';
 
 /** Talent point split, Assassination / Combat / Subtlety, in each tree's colour. */
 export const points = (assassination: number, combat: number, subtlety: number): TalentTree[] => [
@@ -13,6 +13,9 @@ export const points = (assassination: number, combat: number, subtlety: number):
  * fills `points(a, c, s)`.
  */
 export const BLANK_TALENTS = 'https://www.wowhead.com/forever/talent-calc/rogue';
+
+/** Stat weights that haven't been worked out yet: the Stats card says so. */
+export const noStats: StatPriority = { relativeTo: 'Attack Power', stats: [] };
 
 /** A rotation that hasn't been written yet. */
 export const noRotation: Rotation = { opener: [], steps: [], tips: [] };

@@ -11,6 +11,9 @@ major upgrades per slot, about one every 5–10 levels, for both factions. `scri
 builds it (its README has the file-by-file detail); this skill is the run order and the judgment
 calls. Never edit the JSON by hand: fix `curation.json` and re-emit.
 
+> **Needs weights first.** The leveling builds' stat weights were emptied for the Nov 2 rework (`noStats`). Run this only
+> after each leveling build has its weights again (`update-stat-weights`), or every item scores 0.
+
 ## How items are scored
 
 - **Stats** use the build's own weights, read from `src/content/builds/*.ts` by `weights.mjs`.

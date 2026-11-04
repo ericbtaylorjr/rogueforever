@@ -1,33 +1,16 @@
 import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { levelingMutilateRotation } from './combat';
 import {
   BLANK_TALENTS,
   noEndgameGear,
+  noRotation,
+  noStats,
   points,
   racialTips,
   shankStep,
   sliceAndDiceStep,
   tip,
-  withRiposte,
 } from './shared';
-
-/** Assassination Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
-const dungeonsStats: StatPriority = {
-  relativeTo: 'Attack Power',
-  stats: [
-    { stat: 'Agility', ep: 1.53 },
-    { stat: 'Expertise Rating', ep: 1.47, op: '>' },
-    { stat: 'Crit Rating', ep: 1.24, op: '>' },
-    { stat: 'Hit Rating', ep: 1.19, op: '>' },
-    { stat: 'Haste Rating', ep: 1.15, op: '>' },
-    { stat: 'Strength', ep: 1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '=' },
-    { stat: 'Spell Piercing', ep: 0.38, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.19, op: '>' },
-    { stat: 'Stamina', ep: 0.01, op: '>' },
-  ],
-};
 
 /** Assassination Mutilate (daggers in both hands) weights from its own WoWSims run. */
 const mutilateStats: StatPriority = {
@@ -42,23 +25,6 @@ const mutilateStats: StatPriority = {
     { stat: 'Attack Power', ep: 1.0, op: '>' },
     { stat: 'Spell Piercing', ep: 0.5, op: '>' },
     { stat: 'Armor Penetration', ep: 0.46, op: '>' },
-    { stat: 'Stamina', ep: 0.01, op: '>' },
-  ],
-};
-
-/** Assassination Questing (leveling) weights from its own WoWSims run. */
-const questingStats: StatPriority = {
-  relativeTo: 'Attack Power',
-  stats: [
-    { stat: 'Expertise Rating', ep: 3.03 },
-    { stat: 'Agility', ep: 1.52, op: '>' },
-    { stat: 'Crit Rating', ep: 1.22, op: '>' },
-    { stat: 'Hit Rating', ep: 1.21, op: '>' },
-    { stat: 'Haste Rating', ep: 1.15, op: '>' },
-    { stat: 'Strength', ep: 1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '=' },
-    { stat: 'Spell Piercing', ep: 0.39, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.2, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
@@ -101,8 +67,8 @@ export const assassination: Build[] = [
     spec: 'assassination',
     phase: 'endgame',
     name: 'Mutilate',
-    grade: 'C',
-    rank: 5,
+    grade: 'S',
+    rank: 1,
     talents: points(31, 19, 1),
     talentNote:
       'Poison-focused dagger damage. Mutilate builds combo points two at a time and Shank, your off-hand strike, goes on cooldown below 80 energy with Venom boosting your poisons for 6 seconds. Keep Slice and Dice up, Mutilate to 4 combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
@@ -118,17 +84,17 @@ export const assassination: Build[] = [
     phase: 'leveling',
     activity: 'questing',
     name: 'Questing',
-    grade: 'A',
-    rank: 2,
+    grade: 'X',
+    rank: 1,
     stale: true,
     talents: points(0, 0, 0),
     talentNote:
       'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: BLANK_TALENTS,
-    stats: questingStats,
+    stats: noStats,
     gear: levelingGearFor('assassination', 'questing'),
-    rotation: withRiposte(levelingMutilateRotation, 'Mutilate'),
+    rotation: noRotation,
   },
   {
     id: 'dungeons',
@@ -136,16 +102,16 @@ export const assassination: Build[] = [
     phase: 'leveling',
     activity: 'dungeons',
     name: 'Dungeons',
-    grade: 'A',
-    rank: 2,
+    grade: 'X',
+    rank: 1,
     stale: true,
     talents: points(0, 0, 0),
     talentNote:
       'Mutilate and poisons do the work: fast combo points from Mutilate while your poisons tick on everything you hit, finished with Eviscerate, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: BLANK_TALENTS,
-    stats: dungeonsStats,
+    stats: noStats,
     gear: levelingGearFor('assassination', 'dungeons'),
-    rotation: levelingMutilateRotation,
+    rotation: noRotation,
   },
 ];
