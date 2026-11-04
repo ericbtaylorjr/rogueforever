@@ -8,7 +8,7 @@
  *
  * Lists talents that were added, removed, renamed, moved (row/column), re-ranked or
  * re-worded (matched by talent id), then greps the prose for every name that changed so
- * stale text ("2/2 Murder", "Thousand Cuts") is found by the script, not by reading.
+ * stale text (a removed talent's name) is found by the script, not by reading.
  * Finishes with the builds still flagged `stale: true`.
  */
 import { execFileSync } from 'node:child_process';

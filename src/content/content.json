@@ -1062,20 +1062,16 @@
       "title": "Racials and Skyborne",
       "cat": "Class",
       "hue": "#FFF468",
-      "body": "Racials have been reworked from Classic, and the weapon-type racials are gone, so race no longer locks you into a weapon. Rogue-relevant changes: Human Sword Specialization is replaced by Ruthless (1% increased critical strike chance). Orc Axe Specialization is removed with no crit replacement, and Blood Fury's cooldown is 2 minutes. Dwarf Mace Specialization is replaced by Artisan's Precision (1% increased hit chance with spells and attacks). Troll Berserking lasts 15 seconds. Gnome Eureka! becomes an 8 second buff and can't be used in Stealth. Undead Touch of the Grave procs 20% of the time for Rogues with a 15 second internal cooldown. Night Elf Quickness now stacks with other movement speed, and Troll Regeneration rises to 20%. The new Skyborne can also be Rogues, and each faction's version differs slightly. Both share Walk on Air (glide downward for 10 seconds, 90 second cooldown), Wind Blessed (2% passive Haste) and Elemental Insight (5% more damage to Elementals). Windshaper (Horde) adds Skysight (15% run speed for 15 seconds; using it at an elemental convergence grants Charged for 1 hour, raising it to 30%), while High Order (Alliance) adds Read Ley Line (50% more Health and Mana regeneration for 15 seconds; using it at a Ley Line grants Attuned for 1 hour, raising it to 100%). Charged and Attuned persist through death but are removed upon entering a raid. The race requires the Skyborne Heroic Pack or higher.",
+      "body": "A new race, the Skyborne, has been added and can be a Rogue, in a Horde (Windshaper) and an Alliance (High Order) version. Every race offers its own strengths, and some are stronger against certain types of enemies: Skyborne deal extra damage to Elementals, while Trolls and Dwarves deal extra damage to Beasts. For a detailed look at what each race offers, see Wowhead's new race and class combinations guide.",
       "impact": "Don't assume a Classic racial still works the way you remember. Check the Races section for how each one ranks.",
       "sources": [
         {
+          "label": "Wowhead: New race and class combinations",
+          "url": "https://www.wowhead.com/forever/guide/new-race-class-combinations"
+        },
+        {
           "label": "Meet the New Skyborne",
           "url": "https://news.blizzard.com/en-us/article/24302071/wow-forever-meet-the-new-skyborne"
-        },
-        {
-          "label": "Pre-purchase upgrades",
-          "url": "https://worldofwarcraft.blizzard.com/en-gb/news/24301508"
-        },
-        {
-          "label": "Development notes",
-          "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-october-15/2360696"
         }
       ]
     },
@@ -1096,8 +1092,8 @@
       "title": "Assassination: Mutilate and Venom",
       "cat": "Class",
       "hue": "#FFF468",
-      "body": "Mutilate is the new 21-point talent: a 60 Energy ability that strikes with both weapons, which must both be daggers. It deals more damage to Poisoned targets and awards 2 Combo Points. Venom is the new 31-point finisher: 25 Energy for 30% more Poison damage and a 10% higher chance to apply Poisons, lasting longer with more Combo Points. Cold Blood moves to the 16-point slot, Seal Fate no longer requires Cold Blood, Malice now covers Poisons, and Murder \"now also applies to Giants but no longer applies to Beasts and Dragonkin.\"",
-      "impact": "Assassination is a dual-dagger Poison spec built around keeping Venom up. Murder only pays off against Humanoids and Giants.",
+      "body": "Mutilate is the new 21-point talent: a 60 Energy ability that strikes with both weapons, which must both be daggers. It deals more damage to Poisoned targets and awards 2 Combo Points. Venom is now a buff your Shank applies: for 6 seconds you deal 30% more Poison damage and have a 10% higher chance to apply Poisons. Cold Blood moves to the 16-point slot, Seal Fate no longer requires Cold Blood, and Malice now covers Poisons.",
+      "impact": "Assassination is a dual-dagger Poison spec built around keeping Venom up with Shank.",
       "sources": [
         {
           "label": "Class Deep Dives: Rogue and Warlock (Oct 7)",
@@ -1123,10 +1119,10 @@
       ]
     },
     {
-      "title": "Subtlety: Thousand Cuts and Premeditation",
+      "title": "Subtlety: Premeditation and Hemorrhage",
       "cat": "Class",
       "hue": "#FFF468",
-      "body": "Thousand Cuts is the new 31-point talent: each Rupture tick makes your next Hemorrhage or Backstab cheaper, stacking up to 5 times. Premeditation moves to the 16-point slot with a 20 second duration, Hemorrhage now also increases Rupture damage on the target, and Ghostly Strike and Hemorrhage favour a Dagger. New row 6 talents: Quietus (more Sinister Strike, Ghostly Strike and Hemorrhage damage below 35% health) and Cutthroat (Backstab can let your next Ambush skip Stealth). Dirty Tricks replaces Improved Sap and cuts the Energy cost of Sap and Blind.",
+      "body": "Premeditation adds 2 Combo Points to your target, and you must add to or use them within 20 seconds. Hemorrhage now also makes the target take 15% more Rupture and Garrote damage for 15 seconds, and Ghostly Strike and Hemorrhage hit harder with a Dagger in your main hand. Dirty Tricks replaces Improved Sap and cuts the Energy cost of Sap and Blind by 25%.",
       "impact": "Subtlety has a real damage loop built on Rupture, not just an opener spec.",
       "sources": [
         {

@@ -26,14 +26,14 @@ still flagged, so it is the progress tracker.
   `git log` has them). Refill each with `update-talents`, `update-stat-weights` and `apl-rotation` (which can use `forLeveling`
   and `withRiposte` in shared.ts), then delete its `stale: true`. `leveling-milestone-gear` reads their weights, so it needs
   them back first (it would score every item 0 now).
-- Pending: every leveling build (links, weights, rotations; their rotation constants are
-  `preRework*` in combat.ts and the quest/dungeon rotations in subtlety.ts until redone); the New to Rogue guide
-  entries that still describe Murder and the Venom finisher (content.json); gear-research follow-ups below.
+- Done 2026-11-04: all six leveling builds repopulated (links, weights, simplified rotations with no opener) and their milestone
+  gear regenerated; the New to Rogue Murder/Venom entry was fixed. Subtlety leveling weapon-swaps, so its gear scores daggers and
+  slow weapons. Pending: gear-research follow-ups below and the user-owned content items in memory (`rogue-rework-pending`).
 
 ## 0. Preconditions
 
 - Wowhead Forever's calculator data has the new tree (`npm run talents` shows Shank-era
-  talents such as Boot Knife, Blood Splatter, Death Mark; no Murder, Thousand Cuts).
+  talents such as Boot Knife, Blood Splatter, Death Mark; removed talents are gone).
 - The user has WoWSims builds ready: talent links, stat weights, an APL export, race sims.
   Never guess a link or weights.
 

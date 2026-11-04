@@ -85,7 +85,7 @@
   "subtlety/dungeons": {
     "wowsimsPreset": null,
     "vars": {
-      "Use Backstab": true,
+      "Use Backstab": false,
       "Use Expose Armor": false,
       "Use Ambush Opener": true
     },
