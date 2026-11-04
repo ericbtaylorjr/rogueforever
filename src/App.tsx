@@ -41,11 +41,11 @@ export default function App() {
             <SpecZone>
               <Talents />
               <Divider />
+              <Rotation />
+              <Divider />
               <Stats />
               <Divider />
               <Gear />
-              <Divider />
-              <Rotation />
             </SpecZone>
             <Divider />
             <AllRoguesBanner />

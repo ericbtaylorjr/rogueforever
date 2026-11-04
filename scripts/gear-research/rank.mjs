@@ -212,7 +212,7 @@ function scoreFor(i, role, build) {
 
 const ARMOR_SLOTS = ['Head', 'Neck', 'Shoulders', 'Back', 'Chest', 'Wrists', 'Hands', 'Waist', 'Legs', 'Feet', 'Ring', 'Trinket'];
 const MELEE = ['Sword', 'Axe', 'Mace', 'Fist Weapon', 'Dagger'];
-/** Which weapons each build's rotation needs: Mutilate wants a dagger in each hand; Backstab and Ambush a dagger in the main hand; Sinister Strike a slow main hand. */
+/** Which weapons each build's rotation needs: Mutilate wants a dagger in each hand; Backstab and Ambush a dagger in the main hand; Sinister Strike (Combat Questing and Dungeons) a slow main hand. Subtlety Questing and Dungeons swap weapons, so they get both a dagger list and a slow list. */
 const MAIN = {
   dagger: { key: 'Main hand', hand: 'main', slot: 'Main hand', family: 'dagger', types: ['Dagger'], skill: 'Daggers', group: 'weapon' },
   slow: { key: 'Main hand', hand: 'main', slot: 'Main hand', family: 'slow', types: ['Sword', 'Axe', 'Mace', 'Fist Weapon'], group: 'weapon' },
@@ -225,9 +225,10 @@ const WEAPONS = {
   'assassination/questing': [MAIN.dagger, OFF.dagger],
   'assassination/dungeons': [MAIN.dagger, OFF.dagger],
   'combat/questing': [MAIN.slow, OFF.any],
-  'combat/dungeons': [MAIN.dagger, OFF.any],
-  'subtlety/questing': [MAIN.dagger, OFF.any],
-  'subtlety/dungeons': [MAIN.dagger, OFF.any],
+  'combat/dungeons': [MAIN.slow, OFF.any],
+  // Subtlety weapon-swaps: a dagger for Ambush/Backstab and a slow weapon, each with its own main-hand picks.
+  'subtlety/questing': [MAIN.dagger, MAIN.slow, OFF.any],
+  'subtlety/dungeons': [MAIN.dagger, MAIN.slow, OFF.any],
 };
 const rolesFor = (build) => [
   ...ARMOR_SLOTS.map((slot) => ({ key: slot, hand: 'armor', slot, group: SLOT_GROUP[slot] })),
@@ -366,7 +367,7 @@ for (const build of builds) {
     for (const s of scored) if (forced.has(s.item.id) && !chosen.has(s.item.id)) chosen.set(s.item.id, { s, factions: new Set(['Alliance', 'Horde']) });
 
     const rows = [...chosen.values()].sort((a, b) => a.s.item.level - b.s.item.level);
-    report.push(`\n## ${build.key} · ${role.key}\n`);
+    report.push(`\n## ${build.key} · ${role.key}${role.hand === 'main' ? ` (${role.family})` : ''}\n`);
     report.push('| Lvl | Item | EP | of which proc | vs green | Source | Faction | Runners-up (±3 lvls) |');
     report.push('|---|---|---|---|---|---|---|---|');
     const flag = (s) => (s.proc.unmodeled ? ' ⚠' : s.proc.assumed ? ' ~' : '');
@@ -436,6 +437,9 @@ if (emit) {
   }
   const out = here('../../src/content/leveling-gear.json');
   for (const k of Object.keys(emitted)) emitted[k].sort((a, b) => a.level - b.level || a.slot.localeCompare(b.slot));
-  writeFileSync(out, `${JSON.stringify({ generated: new Date().toISOString().slice(0, 10), builds: emitted }, null, 2)}\n`);
+  // Builds without stat weights yet keep the list they have.
+  const previous = existsSync(out) ? JSON.parse(readFileSync(out, 'utf8')).builds : {};
+  const all = { ...previous, ...emitted };
+  writeFileSync(out, `${JSON.stringify({ generated: new Date().toISOString().slice(0, 10), builds: all }, null, 2)}\n`);
   console.log(`Wrote src/content/leveling-gear.json: ${Object.entries(emitted).map(([k, v]) => `${k} ${v.length}`).join(', ')}.`);
 }

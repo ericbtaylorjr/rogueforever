@@ -401,7 +401,7 @@ backfills, so do this before you rely on the data.
   only shows event names, not their parameters, so it's better for the order of actions,
   e.g. `spec_select` → `build_select` → `copy`.)
 - **How far people get:** Funnel exploration, open funnel, steps `section_view` where
-  `section` = `overview` → `talents` → `stats` → `gear` → `rotation`.
+  `section` = `overview` → `talents` → `rotation` → `stats` → `gear`.
 - **What people click:** Free form, rows *Event name*, then drill into `filter`, `raid`,
   `question` or `name` (tooltips).
 - **What people look for:** Reports → Engagement → Events → `search`, or a free form on

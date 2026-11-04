@@ -40,10 +40,24 @@ tips. The `update-talents` skill covers the whole talent update (link, order, po
 2. Split the kept rows into a `<build>Rotation: Rotation` constant in
    `src/content/builds/<spec>.ts`, passed as the build's `rotation`. Readers want buttons
    to press, not APL conditions:
-   - `steps`: the core loop of builders and finishers, in the order you press them
-     (e.g. Slice and Dice only once it falls off, Sinister Strike until 5 combo points,
-     Cold Blood if ready, Eviscerate). A short `note` says when or how long. The page
-     adds "Then back to step 1."
+   - `steps`: the core loop, listed as the **buttons a player presses, not the APL's priority order**
+     (the APL checks its highest-priority row first, but readers think "what do I hit"). Order:
+     1. the combo point builder first (Mutilate, Sinister Strike, Backstab, Hemorrhage), noted as your
+        combo point builder;
+     2. cooldown-gated abilities that fire whenever available (Shank, Ghostly Strike, Death Mark...);
+     3. upkeep of debuffs and buffs: bleeds (Garrote, Rupture) then Slice and Dice, each noting when it
+        is reapplied ("only once it has fallen off");
+     4. cooldown-and-finisher pairs last (Cold Blood, then Eviscerate).
+     Write combo point thresholds as "4+ combo points", never "4 or 5" or "4 or more" (Eviscerate's note
+     is "With 4+ combo points.").
+     The APL's real priority still decides *which conditions* go in each note; only the list order
+     changes. Keep every number the APL uses. A short `note` says when or how long. The page adds
+     "Then back to step 1." for level 60 builds only; leveling builds show neither that line nor an
+     Opener, and their intro under the heading is fixed copy (`rotation.levelingIntro`, "This is the
+     general rotation and priority to follow when leveling as {Spec Build}..."), so write nothing about
+     either in a leveling build's rotation Example (Assassination Questing): Mutilate, Shank (on cooldown, under 80
+     energy), Rupture (3+ combo points, if the mob lives 12s), Slice and Dice (only once fallen off),
+     Cold Blood (off cooldown, only at 5 combo points), Eviscerate (with 4+ combo points).
    - `tips` (Pro tips): everything else, phrased as what to do, never "don't". Cooldowns,
      racials (one tip per race), trinkets ("Autocast other cooldowns", which includes Troll
      Berserking), items (Thistle Tea, potion), pooling, and edge cases like early or end
@@ -68,8 +82,8 @@ tips. The `update-talents` skill covers the whole talent update (link, order, po
    - **Leveling builds** (`phase: 'leveling'`) never use the endgame constant as is. Wrap it in
      `forLeveling(rotation, [cooldown names])` from `shared.ts` (named `leveling<X>Rotation`,
      e.g. `levelingMutilateRotation` in combat.ts, used by Assassination Questing and Dungeons).
-     It makes the three leveling changes in one place: the opener drops Evasion and Major
-     Frenzy Potion (keeping Blade Flurry, Stealth, trinket and racial), the racial and Thistle Tea
+     It makes the leveling changes in one place: **leveling builds have no opener** (`opener: []`; the
+     Rotation card hides the Opener panel, so skip step 3 for them), the racial and Thistle Tea
      tips go, and the trinket and cooldown tips fold into one line, "Pair your trinkets and racial
      with <cooldowns> on a powerful mob or big pull." The cooldown names are the tips it replaces, in rotation
      order (Adrenaline Rush and Blade Flurry for Combat, Blade Flurry for Assassination and
@@ -77,7 +91,7 @@ tips. The `update-talents` skill covers the whole talent update (link, order, po
      definition. The offensive Vanish tip (Vanish into Garrote or Ambush) is swapped for "Use Vanish and Evasion
      as defensive abilities if threat becomes an issue." Premeditation, pooling and the other sweaty
      tips stay.
-3. `opener`: walk the priority list from the prepull actions at time 0 (stealthed, 0
+3. `opener` (level 60 builds only; leveling builds leave it `[]`): walk the priority list from the prepull actions at time 0 (stealthed, 0
    combo points, 100 energy, Slice and Dice down) until the first finisher. Prepull actions
    keep their timing, e.g. "Blade Flurry (-2s)". Don't fix counts that depend on crits or
    procs ("Sinister Strike to 5"). Keep manual edits the user made that differ from the

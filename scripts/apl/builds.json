@@ -35,10 +35,10 @@
   "combat/dungeons": {
     "wowsimsPreset": null,
     "vars": {
-      "Use Backstab": true,
+      "Use Backstab": false,
       "Use Expose Armor": false
     },
-    "mh": "dagger"
+    "mh": "sword"
   },
   "assassination/mutilate": {
     "wowsimsPreset": "Asn Muti",

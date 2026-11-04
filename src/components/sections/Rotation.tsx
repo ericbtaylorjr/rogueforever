@@ -17,19 +17,32 @@ function OpenerIcon({ text }: { text: string }) {
 }
 
 /** Opener, the repeating rotation and pro tips, once a build has any of them. */
-function RotationDetail({ d, sweaty }: { d: RotationData; sweaty: boolean }) {
+function RotationDetail({
+  d,
+  sweaty,
+  leveling,
+  buildName,
+}: {
+  d: RotationData;
+  sweaty: boolean;
+  leveling: boolean;
+  buildName: string;
+}) {
   const tips = d.tips.filter((t) => sweaty || !t.sweaty);
   return (
     <>
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
-        <LinkedText text={copy.intro} links={wowsimsLink} />
+        <LinkedText
+          text={leveling ? copy.levelingIntro.replace('{build}', buildName) : copy.intro}
+          links={wowsimsLink}
+        />
       </p>
 
       <div className="mt-[18px] grid gap-[14px] stack:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
         <div className="flex flex-col gap-[14px]">
-          <div className="panel p-[18px]">
-            <span className="t-panel-label text-ink">{copy.openerTitle}</span>
-            {d.opener.length > 0 && (
+          {d.opener.length > 0 && (
+            <div className="panel p-[18px]">
+              <span className="t-panel-label text-ink">{copy.openerTitle}</span>
               <ol className="mt-[14px] flex flex-wrap gap-[8px]">
                 {d.opener.map((o, i) => (
                   <li
@@ -44,8 +57,8 @@ function RotationDetail({ d, sweaty }: { d: RotationData; sweaty: boolean }) {
                   </li>
                 ))}
               </ol>
-            )}
-          </div>
+            </div>
+          )}
 
           {d.steps.length > 0 && (
             <div className="panel px-[18px] pt-[18px] pb-[14px]">
@@ -57,9 +70,7 @@ function RotationDetail({ d, sweaty }: { d: RotationData; sweaty: boolean }) {
                     className="flex items-center gap-[12px] py-[11px]"
                     style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(var(--fg-rgb),.05)' }}
                   >
-                    <span className="t-num shrink-0 text-[12px] text-accent">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
+                    <span className="t-num shrink-0 text-[12px] text-accent">{String(i + 1).padStart(2, '0')}</span>
                     <GameIcon name={s.press} size={22} />
                     <span className="min-w-0">
                       <span className="text-[14.5px] font-semibold text-ink">
@@ -74,7 +85,7 @@ function RotationDetail({ d, sweaty }: { d: RotationData; sweaty: boolean }) {
                   </li>
                 ))}
               </ol>
-              <p className="mt-[4px] text-[12.5px] italic text-faint">{copy.repeat}</p>
+              {!leveling && <p className="mt-[4px] text-[12.5px] italic text-faint">{copy.repeat}</p>}
             </div>
           )}
         </div>
@@ -124,10 +135,18 @@ export function Rotation() {
 
       {!hasData ? (
         <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute" aria-live="polite">
-          <LinkedText text={copy.pending.replace('{spec}', `${specById[spec].name} ${build.name}`)} links={wowsimsLink} />
+          <LinkedText
+            text={copy.pending.replace('{spec}', `${specById[spec].name} ${build.name}`)}
+            links={wowsimsLink}
+          />
         </p>
       ) : (
-        <RotationDetail d={d} sweaty={sweaty} />
+        <RotationDetail
+          d={d}
+          sweaty={sweaty}
+          leveling={build.phase === 'leveling'}
+          buildName={`${specById[spec].name} ${build.name}`}
+        />
       )}
     </section>
   );

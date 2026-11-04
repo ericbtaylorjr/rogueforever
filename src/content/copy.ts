@@ -57,7 +57,7 @@ export const scope = {
   specChipPrefix: 'Spec',
   zone: {
     label: 'Your spec guide',
-    before: 'Talents, stats, gear and rotation below are for ',
+    before: 'Talents, rotation, stats and gear below are for ',
     after: '. If you change the Active Spec or Build, then all the contextual information will change as well.',
   },
   allZone: 'Everything from here down is the same for all Rogue specs and no longer relative to your Active Spec.',
@@ -105,7 +105,7 @@ export const specBoard = {
     questing: { title: 'Questing', label: 'Leveling builds for questing, ranked' },
     dungeons: { title: 'Dungeons', label: 'Leveling builds for dungeons, ranked' },
     /** Shown as a tip without the "Tip:" label. */
-    tip: "This meta projection is extremely early. We need more launch data to really understand which builds pull ahead and which fall behind, so expect it to be updated throughout the launch period.",
+    tip: "This projection is very early and should be viewed as such. We'll adjust and improve throughout launch as more tuning and information becomes available.",
   },
 } as const;
 
@@ -240,6 +240,9 @@ export const rotation = {
   stepsTitle: 'Rotation',
   /** Closes the rotation list. */
   repeat: 'Then back to step 1.',
+  /** Leveling builds: no opener and no "back to step 1". {build} is the spec and build name. */
+  levelingIntro:
+    'This is the general rotation and priority to follow when leveling as {build}. They have been loosely modeled in WoWSims, but still somewhat too varied to be objective. You can adjust to your liking.',
   tipsTitle: 'Pro tips',
 } as const;
 

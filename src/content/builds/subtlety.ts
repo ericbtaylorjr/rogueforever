@@ -1,6 +1,6 @@
 import { levelingGearFor } from '../gear';
-import type { Build, ProTip, Rotation, StatPriority } from '../types';
-import { BLANK_TALENTS, noEndgameGear, noRotation, noStats, points, racialTips, sliceAndDiceStep, tip } from './shared';
+import type { Build, ProTip, Rotation, RotationStep, StatPriority } from '../types';
+import { noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Subtlety Hemo (slow main hand) weights from its own WoWSims run. */
 const hemoStats: StatPriority = {
@@ -15,6 +15,40 @@ const hemoStats: StatPriority = {
     { stat: 'Attack Power', ep: 1.0, op: '>' },
     { stat: 'Armor Penetration', ep: 0.26, op: '>' },
     { stat: 'Spell Piercing', ep: 0.13, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/** Subtlety Questing weights from its own WoWSims run (hit, crit, haste and expertise converted from per 1% at 10, 14, 10 and 10 rating). */
+const questingStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Expertise Rating', ep: 2.32 },
+    { stat: 'Agility', ep: 1.7, op: '>' },
+    { stat: 'Crit Rating', ep: 1.26, op: '>' },
+    { stat: 'Strength', ep: 1.0, op: '>' },
+    { stat: 'Attack Power', ep: 1.0, op: '=' },
+    { stat: 'Hit Rating', ep: 0.82, op: '>' },
+    { stat: 'Haste Rating', ep: 0.78, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.19, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.13, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/** Subtlety Dungeons weights from its own WoWSims run (hit, crit, haste and expertise converted from per 1% at 10, 14, 10 and 10 rating). */
+const dungeonsStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Agility', ep: 1.59 },
+    { stat: 'Expertise Rating', ep: 1.43, op: '>' },
+    { stat: 'Crit Rating', ep: 1.27, op: '>' },
+    { stat: 'Strength', ep: 1.0, op: '>' },
+    { stat: 'Attack Power', ep: 1.0, op: '=' },
+    { stat: 'Hit Rating', ep: 0.86, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.17, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.12, op: '>' },
+    { stat: 'Haste Rating', ep: 0.06, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
@@ -64,6 +98,70 @@ const hemoRotation: Rotation = {
   ],
 };
 
+const noSwapTip: ProTip = {
+  text: "If you don't want to weapon swap, use a slow main hand and skip the Stealth and Ambush.",
+};
+const preparationTip: ProTip = { text: 'Preparation whenever Vanish is on cooldown.' };
+const subtletyShank = {
+  press: 'Shank',
+  note: 'On cooldown, at 3 combo points or fewer and 80 energy or less. Boot Knife adds 2 combo points.',
+};
+const deathMarkStep = { press: 'Death Mark', note: 'With 4+ combo points.' };
+
+/** Subtlety leveling steps, the same for Questing and Dungeons. */
+const levelingSteps: RotationStep[] = [
+  { press: 'Ambush', note: 'Use weapon swap macro to equip Dagger with Stealth.' },
+  {
+    press: 'Ghostly Strike',
+    note: 'On cooldown, whenever you have under 5 combo points. Macro in your slow main hand if weapon swapping.',
+  },
+  {
+    press: 'Garrote',
+    note: "Whenever it isn't on the target. Ghostly Strike beforehand means it needs no Stealth.",
+  },
+  subtletyShank,
+  { press: 'Hemorrhage', note: 'Your combo point builder when you cannot Ambush, until you have 5 combo points.' },
+  deathMarkStep,
+  ruptureStep,
+];
+
+/**
+ * Subtlety Questing, simplified from the APL run with these talents (`npm run apl -- subtlety/questing`): no opener,
+ * and no Thistle Tea or potion. Ambush needs a dagger in the main hand, so this build swaps weapons.
+ */
+const levelingQuestingRotation: Rotation = withRiposte(
+  {
+    opener: [],
+    steps: levelingSteps,
+    tips: [
+      tip.meleeUptime,
+      tip.premeditation,
+      preparationTip,
+      noSwapTip,
+      { text: 'Pair your trinkets and racial with Death Mark on a powerful mob or big pull.' },
+      { text: 'Use Vanish and Evasion as defensive abilities if threat becomes an issue.' },
+    ],
+  },
+  'Hemorrhage',
+);
+
+/**
+ * Subtlety Dungeons (`npm run apl -- subtlety/dungeons`): no opener, no Thistle Tea or potion.
+ * Ambush needs a dagger in the main hand, so this build swaps weapons.
+ */
+const levelingDungeonsRotation: Rotation = {
+  opener: [],
+  steps: levelingSteps,
+  tips: [
+    tip.meleeUptime,
+    tip.premeditation,
+    preparationTip,
+    noSwapTip,
+    { text: 'Pair your trinkets and racial with Death Mark on a powerful mob or big pull.' },
+    { text: 'Use Vanish and Evasion as defensive abilities if threat becomes an issue.' },
+  ],
+};
+
 export const subtlety: Build[] = [
   {
     id: 'hemo',
@@ -87,17 +185,16 @@ export const subtlety: Build[] = [
     phase: 'leveling',
     activity: 'questing',
     name: 'Questing',
-    grade: 'X',
+    grade: 'S',
     rank: 1,
-    stale: true,
-    talents: points(0, 0, 0),
+    talents: points(3, 17, 31),
     talentNote:
-      'A Subtlety hybrid built around a big Ambush opener. Stealth in, Ambush, and finish most mobs before they can fight back, then reset and move on. Fights that last follow the Hemorrhage loop: Slice and Dice, Rupture at 3+ combo points, Ghostly Strike, Hemorrhage to 5, then Eviscerate. Vanish into Ambush when you want another opener.',
+      'A Subtlety build around Ambush from Stealth, then Ghostly Strike, Garrote and Hemorrhage for combo points, with Shank adding more through Boot Knife. Use Death Mark at 4+ combo points and keep Rupture up. Swap to a dagger for Ambush.',
     keyTalents: [],
-    link: BLANK_TALENTS,
-    stats: noStats,
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2021-3200330112002-305223031301001151_t0/0B1B2CFDjKhnhheesrATv1AEffjKfhP0c',
+    stats: questingStats,
     gear: levelingGearFor('subtlety', 'questing'),
-    rotation: noRotation,
+    rotation: levelingQuestingRotation,
   },
   {
     id: 'dungeons',
@@ -105,16 +202,15 @@ export const subtlety: Build[] = [
     phase: 'leveling',
     activity: 'dungeons',
     name: 'Dungeons',
-    grade: 'X',
+    grade: 'A',
     rank: 1,
-    stale: true,
-    talents: points(0, 0, 0),
+    talents: points(14, 6, 31),
     talentNote:
-      "Burst opener into steady Backstab damage. Stealth in, Ambush, then keep Slice and Dice up, Ghostly Strike on cooldown, Backstab from behind to 5 combo points and Eviscerate. Blade Flurry on cooldown, and Vanish into Ambush when you want another opener. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can't attack from behind.",
+      'A Subtlety build around Ambush from Stealth, then Ghostly Strike, Garrote and Hemorrhage for combo points, with Shank adding more through Boot Knife. Use Death Mark at 4+ combo points and keep Rupture up. Swap to a dagger for Ambush.',
     keyTalents: [],
-    link: BLANK_TALENTS,
-    stats: noStats,
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005302211-320001-025233031301001151_t0/1B2CFDjKhnhheesrebbTv0CDffhGj1Af',
+    stats: dungeonsStats,
     gear: levelingGearFor('subtlety', 'dungeons'),
-    rotation: noRotation,
+    rotation: levelingDungeonsRotation,
   },
 ];

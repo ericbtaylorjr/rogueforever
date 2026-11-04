@@ -32,11 +32,12 @@ export function loadBuildWeights() {
     const builds = [...src.matchAll(/\n    id: '([\w-]+)',\n    spec: '(\w+)',\n    phase: '(\w+)'[\s\S]*?\n    stats: (\w+),/g)];
     for (const [, id, , phase, statsConst] of builds) {
       if (phase !== 'leveling') continue;
+      if (statsConst === 'noStats') continue; // weights not worked out yet: its gear list is left as it is
       if (!consts[statsConst]) throw new Error(`${spec}/${id}: stats const ${statsConst} not found in ${spec}.ts`);
       out.push({ key: `${spec}/${id}`, spec, id, weights: consts[statsConst] });
     }
   }
-  if (out.length !== 6) throw new Error(`Expected 6 leveling builds, found ${out.length}: ${out.map((b) => b.key).join(', ')}`);
+  if (!out.length) throw new Error('No leveling build has stat weights yet.');
   return out;
 }
 

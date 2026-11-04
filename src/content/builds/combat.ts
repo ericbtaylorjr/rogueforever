@@ -1,16 +1,85 @@
 import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import {
-  BLANK_TALENTS,
-  noEndgameGear,
-  noRotation,
-  noStats,
-  points,
-  racialTips,
-  shankStep,
-  sliceAndDiceStep,
-  tip,
-} from './shared';
+import { noEndgameGear, points, racialTips, shankStep, sliceAndDiceStep, tip, withRiposte } from './shared';
+
+/**
+ * Combat Dungeons, simplified from the APL run with these talents (`npm run apl -- combat/dungeons`, with Sinister Strike as the builder): no opener,
+ * and no Thistle Tea or pooling. Blade Flurry is only cast before the pull in the APL.
+ */
+const levelingDungeonsRotation: Rotation = {
+  opener: [],
+  steps: [
+    { press: 'Blade Flurry', note: 'Whenever a mob will live more than 15s or with a double pull.' },
+    { press: 'Sinister Strike', note: 'This is your combo point builder.' },
+    shankStep,
+    { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points.' },
+    { press: 'Cold Blood', note: 'Whenever it is off cooldown, but only at 5 combo points.' },
+    { press: 'Eviscerate', note: 'With 5 combo points.' },
+    { press: 'Adrenaline Rush', note: 'Align with large pulls or a boss.' },
+  ],
+  tips: [
+    tip.meleeUptime,
+    { text: 'Pair your trinkets and racial with Blade Flurry and Adrenaline Rush on a powerful mob or big pull.' },
+    { text: 'Use Vanish and Evasion as defensive abilities if threat becomes an issue.' },
+  ],
+};
+
+/** Combat Questing weights from its own WoWSims run (hit, crit, haste and expertise converted from per 1% at 10, 14, 10 and 10 rating). */
+const questingStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Expertise Rating', ep: 2.83 },
+    { stat: 'Agility', ep: 1.76, op: '>' },
+    { stat: 'Crit Rating', ep: 1.22, op: '>' },
+    { stat: 'Strength', ep: 1.0, op: '>' },
+    { stat: 'Attack Power', ep: 1.0, op: '=' },
+    { stat: 'Hit Rating', ep: 0.99, op: '>' },
+    { stat: 'Haste Rating', ep: 0.92, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.2, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.19, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/**
+ * Combat Questing, simplified from the APL run with these talents (`npm run apl -- combat/questing`): no opener,
+ * and no Rupture, Cold Blood, Adrenaline Rush or pooling. Blade Flurry is only cast before the pull in the APL.
+ */
+const levelingSinisterStrikeRotation: Rotation = withRiposte(
+  {
+    opener: [],
+    steps: [
+      { press: 'Blade Flurry', note: 'Whenever a mob will live more than 15s or with a double pull.' },
+      { press: 'Sinister Strike', note: 'This is your combo point builder.' },
+      shankStep,
+      { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points.' },
+      { press: 'Eviscerate', note: 'With 5 combo points.' },
+    ],
+    tips: [
+      tip.meleeUptime,
+      { text: 'Pair your trinkets and racial with Blade Flurry on a powerful mob or big pull.' },
+      { text: 'Use Vanish and Evasion as defensive abilities if threat becomes an issue.' },
+    ],
+  },
+  'Sinister Strike',
+);
+
+/** Combat Dungeons weights from its own WoWSims run (hit, crit, haste and expertise converted from per 1% at 10, 14, 10 and 10 rating). */
+const dungeonsStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Agility', ep: 1.57 },
+    { stat: 'Expertise Rating', ep: 1.35, op: '>' },
+    { stat: 'Crit Rating', ep: 1.24, op: '>' },
+    { stat: 'Strength', ep: 1.0, op: '>' },
+    { stat: 'Attack Power', ep: 1.0, op: '=' },
+    { stat: 'Hit Rating', ep: 0.91, op: '>' },
+    { stat: 'Haste Rating', ep: 0.7, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.2, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.19, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
 
 /** Combat Venom weights from its own WoWSims run. */
 const venomStats: StatPriority = {
@@ -211,17 +280,16 @@ export const combat: Build[] = [
     phase: 'leveling',
     activity: 'questing',
     name: 'Questing',
-    grade: 'X',
-    rank: 1,
-    stale: true,
-    talents: points(0, 0, 0),
+    grade: 'A',
+    rank: 2,
+    talents: points(14, 34, 3),
     talentNote:
-      'Traditional Combat, centered on cleaving with Blade Flurry. Pull two or three mobs, turn on Blade Flurry and take them down together. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate. No positioning to worry about.',
+      'Traditional Combat, centered on cleaving with Blade Flurry, which you use whenever a mob will live more than 15s or on a double pull. Sinister Strike builds combo points and Shank goes on cooldown below 80 energy. Keep Slice and Dice up, then Eviscerate at 5 combo points. No positioning to worry about.',
     keyTalents: [],
-    link: BLANK_TALENTS,
-    stats: noStats,
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v20253022-320033011201232155-3_t5/0B1BAEffjKfhnPqqsqRtV2A1tttt0CDGff',
+    stats: questingStats,
     gear: levelingGearFor('combat', 'questing'),
-    rotation: noRotation,
+    rotation: levelingSinisterStrikeRotation,
   },
   {
     id: 'dungeons',
@@ -229,16 +297,15 @@ export const combat: Build[] = [
     phase: 'leveling',
     activity: 'dungeons',
     name: 'Dungeons',
-    grade: 'X',
-    rank: 1,
-    stale: true,
-    talents: points(0, 0, 0),
+    grade: 'A',
+    rank: 2,
+    talents: points(16, 35, 0),
     talentNote:
-      "Combat for groups with a Backstab twist: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Cold Blood and Eviscerate. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can't attack from behind.",
+      'Combat for groups: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Sinister Strike builds combo points and Shank goes on cooldown below 80 energy. Keep Slice and Dice up, then Cold Blood and Eviscerate at 5 combo points.',
     keyTalents: [],
-    link: BLANK_TALENTS,
-    stats: noStats,
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530221201-3210032202012321551_t5/1BAFGKHcnPqqsqRtVwtttt0CDffGJhm',
+    stats: dungeonsStats,
     gear: levelingGearFor('combat', 'dungeons'),
-    rotation: noRotation,
+    rotation: levelingDungeonsRotation,
   },
 ];

@@ -123,7 +123,7 @@ export const withRiposte = (rotation: Rotation, builder: string): Rotation => {
 };
 
 /**
- * A leveling build's version of an endgame-style rotation: no Evasion or potion in the opener, no
+ * A leveling build's version of an endgame-style rotation: no opener at all, no
  * racial or Thistle Tea tips, the offensive Vanish tip swapped for a defensive one, and the trinket and
  * cooldown tips folded into one line about pairing them (and your racial) on a powerful mob or big pull.
  * `cooldowns` names the cooldown tips it replaces, in the order the rotation lists them (e.g. Adrenaline
@@ -139,15 +139,7 @@ export const forLeveling = (rotation: Rotation, cooldowns: string[]): Rotation =
   const paired: ProTip = { text: `Pair your trinkets and racial with ${list} on a powerful mob or big pull.` };
   return {
     ...rotation,
-    opener: rotation.opener.map((step) => {
-      const [, actions, timing = ''] = step.match(/^(.*?)( \(-\d+s\))?$/) ?? [];
-      return (
-        actions
-          .split(' + ')
-          .filter((a) => a !== 'Evasion' && a !== 'Major Frenzy Potion')
-          .join(' + ') + timing
-      );
-    }),
+    opener: [],
     tips: rotation.tips.flatMap((t, i) =>
       i === firstFolded
         ? [paired]

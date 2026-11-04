@@ -61,7 +61,8 @@ and Dungeons), so a build's list reflects its own stat weights.
    hits for weapon damage), off hand 9 EP per DPS. `curation.json` `dpsEp` can override this per
    build, e.g. with the sim's Main Hand DPS EP. Which weapons a build may use is `WEAPONS` in
    `rank.mjs`: Mutilate daggers in both hands; Backstab/Ambush builds a dagger main hand;
-   Sinister Strike a slow main hand; off hand any weapon unless the build is Assassination.
+   Sinister Strike a slow main hand; Subtlety Questing and Dungeons weapon-swap, so they get both a
+   dagger list and a slow list (each scored for its own family); off hand any weapon unless the build is Assassination.
 3. **Procs and use effects** are valued from the game's own data (`procs.mjs`), not the tooltip.
    Each effect becomes damage per second (or an average stat), then EP:
    - extra attack: procs/sec × the weapon's average hit × 1.3 (Attack Power on the swing)

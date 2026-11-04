@@ -11,8 +11,8 @@ major upgrades per slot, about one every 5–10 levels, for both factions. `scri
 builds it (its README has the file-by-file detail); this skill is the run order and the judgment
 calls. Never edit the JSON by hand: fix `curation.json` and re-emit.
 
-> **Needs weights first.** The leveling builds' stat weights were emptied for the Nov 2 rework (`noStats`). Run this only
-> after each leveling build has its weights again (`update-stat-weights`), or every item scores 0.
+> **Needs weights first.** A leveling build whose stats are still `noStats` is skipped (its existing list is kept when
+> emitting). Give it weights with `update-stat-weights` and rerun.
 
 ## How items are scored
 
@@ -21,7 +21,9 @@ calls. Never edit the JSON by hand: fix `curation.json` and re-emit.
 - **Weapon damage**: DPS counts per hand (main 20 EP per DPS, off 9; slow weapons get a speed
   bonus for Sinister Strike, daggers for Backstab/Mutilate). Which weapons each build can use is
   `WEAPONS` in `rank.mjs` (Mutilate: daggers both hands; Backstab/Ambush builds: dagger main
-  hand; Sinister Strike: slow main hand; off hand any weapon except Assassination).
+  hand; Sinister Strike, Combat Questing and Dungeons: slow main hand; **Subtlety Questing and
+  Dungeons weapon-swap, so they get both a dagger main-hand list and a slow main-hand list**, each
+  picked and scored on its own; off hand any weapon except Assassination).
 - **Procs and use effects** are valued from the game's tables (`procs.mjs`, via wago.tools),
   not the tooltip: each effect becomes damage per second or an average stat, then EP. Extra
   attacks, flat and over-time damage, AP/Agility/Strength/crit/hit buffs and haste are modeled.
@@ -68,7 +70,7 @@ Only items players can actually get at launch belong in the list. `rank.mjs` enf
    - Faction: Wowhead only flags faction on the item itself, so a quest reward from a faction-only
      quest can read "Both". Check quest picks (`Quest:` sources) and fix with `curation.json` `faction`.
    - Each build's tables: sanity-check the picks against the weapon types and the Handbook
-     builds (dagger builds shouldn't get slow weapons in the main hand).
+     builds (dagger builds shouldn't get slow weapons in the main hand; Subtlety leveling builds should have both).
 5. `node scripts/gear-research/rank.mjs --emit`, then `npm run icons` (icons and rarity for new items).
 6. `npm run typecheck`, then check the Gear section on a leveling build (all three brackets,
    both factions, spot-check a few Wowhead links). Don't commit unless asked.

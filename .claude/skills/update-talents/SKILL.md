@@ -25,7 +25,7 @@ A build's talents are its calculator `link` in `src/content/builds/<spec>.ts`, p
    Premeditation, Preparation, Blade Flurry, Venom...). Builds that share a rotation constant
    share the result, so check siblings that use the same constant. When the rows don't
    change, say so. For a **leveling** build, wrap the rotation in `forLeveling` (`apl-rotation`
-   step 2): no Evasion or Major Frenzy Potion in the opener, no racial or Thistle Tea tips, and one
+   step 2): no opener (leveling builds never have one), no racial or Thistle Tea tips, and one
    combined "Pair your trinkets and racial with <cooldowns> on a powerful mob or big pull." tip. Never
    the Vanish into Garrote/Ambush tip: leveling builds say "Use Vanish and Evasion as defensive
    abilities if threat becomes an issue." instead. If the build now

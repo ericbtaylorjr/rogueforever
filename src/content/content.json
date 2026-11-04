@@ -741,6 +741,10 @@
   ],
   "changelog": [
     {
+      "date": "Nov 4th, 2026",
+      "text": "Added the Leveling builds for the Rogue rework. Questing and Dungeons builds are now populated for Assassination, Combat and Subtlety, each with its own talents, stat weights and a simplified rotation with Pro Tips. Leveling rotations are a general guide to the order of buttons to press and skip the opener. They are loosely modeled in WoWSims, so adjust them to your liking. Assassination is only useful at level 40+. Subtlety weapon swaps between a dagger for Ambush and a slow weapon, and the Pro Tips cover how to skip it. The Leveling Milestone Gear lists were rebuilt from each build's new stat weights, with both daggers and slow weapons covered for Subtlety. The Rotation section now sits above Stats."
+    },
+    {
       "date": "Nov 2nd, 2026",
       "text": "Rebuilt the Leveling Milestone Gear lists from the ground up. Each leveling build now has its own list, scored with that build's own stat weights, with weapon procs and use effects valued instead of ignored, and with items that are gone from the game data or won't be available at launch removed. Added the Gathering Reference Tool to Tools & UI: pick up to two gathering professions and a zone to see the skill you need to gather there and how high the zone can take you. I'm also preparing my body and soul for the massive Rogue changes just announced. Will be spending next couple days repopulating everything... send help.",
       "links": {
@@ -803,16 +807,16 @@
           "label": "Talents"
         },
         {
+          "id": "rotation",
+          "label": "Rotation"
+        },
+        {
           "id": "stats",
           "label": "Stats"
         },
         {
           "id": "gear",
           "label": "Gear"
-        },
-        {
-          "id": "rotation",
-          "label": "Rotation"
         }
       ]
     },
