@@ -32,7 +32,10 @@ function useSims() {
     const el = ref.current;
     if (!el || data) return;
     const load = () =>
-      import('../../content/raceSims.json').then((m) => setData(m.default), () => setFailed(true));
+      import('../../content/raceSims.json').then(
+        (m) => setData(m.default),
+        () => setFailed(true),
+      );
     if (!('IntersectionObserver' in window)) {
       void load();
       return;
@@ -54,7 +57,17 @@ function useSims() {
 }
 
 /** A build pill, in its spec's colour when selected (assassination_mutilate → Assassination). */
-function BuildPill({ id, name, selected, onSelect }: { id: string; name: string; selected: boolean; onSelect: () => void }) {
+function BuildPill({
+  id,
+  name,
+  selected,
+  onSelect,
+}: {
+  id: string;
+  name: string;
+  selected: boolean;
+  onSelect: () => void;
+}) {
   const c = useSpecColor(id.split('_')[0] as SpecId);
   return <FilterPill label={name} selected={selected} color={c} onSelect={onSelect} />;
 }
@@ -63,6 +76,10 @@ function BuildPill({ id, name, selected, onSelect }: { id: string; name: string;
 export function RaceSims() {
   const { ref, data, failed } = useSims();
   const [specId, setSpecId] = useState<string>('');
+  /** Whether this export came with simulation links (the CSV doesn't). */
+  const linked = !!data?.specs.some((sp) =>
+    Object.values(sp.sims).some((cells) => (cells as { link?: string }[]).some((c) => c.link)),
+  );
   const spec = data && (data.specs.find((s) => s.id === specId) ?? data.specs[0]);
 
   return (
@@ -81,7 +98,13 @@ export function RaceSims() {
           <>
             <div role="group" aria-label={copy.buildLabel} className="flex flex-wrap gap-[8px] px-[18px] pt-[14px]">
               {data.specs.map((s) => (
-                <BuildPill key={s.id} id={s.id} name={s.name} selected={s.id === spec.id} onSelect={() => setSpecId(s.id)} />
+                <BuildPill
+                  key={s.id}
+                  id={s.id}
+                  name={s.name}
+                  selected={s.id === spec.id}
+                  onSelect={() => setSpecId(s.id)}
+                />
               ))}
             </div>
 
@@ -90,11 +113,18 @@ export function RaceSims() {
                 <caption className="sr-only">{`${spec.name}: ${copy.title}`}</caption>
                 <thead>
                   <tr>
-                    <th scope="col" className="t-eyebrow px-[6px] pb-[4px] text-left text-[10.5px] font-semibold text-faint">
+                    <th
+                      scope="col"
+                      className="t-eyebrow px-[6px] pb-[4px] text-left text-[10.5px] font-semibold text-faint"
+                    >
                       {copy.raceHeader}
                     </th>
                     {data.durations.map((d) => (
-                      <th key={d} scope="col" className="t-eyebrow px-[6px] pb-[4px] text-center text-[10.5px] font-semibold text-faint">
+                      <th
+                        key={d}
+                        scope="col"
+                        className="t-eyebrow px-[6px] pb-[4px] text-center text-[10.5px] font-semibold text-faint"
+                      >
                         {copy.durationLabel(d / 60)}
                       </th>
                     ))}
@@ -103,24 +133,54 @@ export function RaceSims() {
                 <tbody>
                   {data.races.map((race, i) => (
                     <tr key={race} className="race-row">
-                      <th scope="row" className="w-[34%] px-[8px] py-[3px] text-left sm:w-[28%] text-[12.5px] leading-[1.25] sm:text-[13px] font-semibold text-ink">
+                      <th
+                        scope="row"
+                        className="w-[34%] px-[8px] py-[3px] text-left sm:w-[28%] text-[12.5px] leading-[1.25] sm:text-[13px] font-semibold text-ink"
+                      >
                         {race}
                       </th>
                       {data.durations.map((d) => {
-                        const sim = spec.sims[String(d) as keyof typeof spec.sims][i];
+                        const sim: { pct: number | null; link?: string } =
+                          spec.sims[String(d) as keyof typeof spec.sims][i];
+                        const cell =
+                          'flex min-h-[36px] items-center justify-center rounded-[6px] border px-[2px] text-[12px] font-semibold sm:px-[6px] sm:text-[12.5px]';
+                        if (sim.pct === null) {
+                          // No sim for this race and build: say so rather than leave a hole.
+                          return (
+                            <td key={d} className="p-[3px]">
+                              <div className={`t-num ${cell} border-line text-faint`}>
+                                {'\u2014'}
+                                <span className="sr-only">{` ${race}, ${d / 60} minute simulation: ${copy.noSim}`}</span>
+                              </div>
+                            </td>
+                          );
+                        }
                         const t = tone[tierOf(sim.pct)];
+                        const style = {
+                          color: t.color,
+                          background: solid(t.color, 16),
+                          borderColor: solid(t.color, 45),
+                        };
+                        const label = sim.pct === 0 ? copy.best : `${sim.pct.toFixed(2)}%`;
                         return (
                           <td key={d} className="p-[3px]">
-                            <a
-                              href={`${WOWSIMS}${sim.link}`}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="t-num flex min-h-[36px] items-center justify-center rounded-[6px] border px-[2px] text-[12px] font-semibold transition-[filter] sm:px-[6px] sm:text-[12.5px] hover:brightness-125 focus-visible:brightness-125"
-                              style={{ color: t.color, background: solid(t.color, 16), borderColor: solid(t.color, 45) }}
-                            >
-                              {sim.pct === 0 ? copy.best : `${sim.pct.toFixed(2)}%`}
-                              <span className="sr-only">{` ${race}, ${d / 60} minute simulation ${copy.newTab}`}</span>
-                            </a>
+                            {sim.link ? (
+                              <a
+                                href={`${WOWSIMS}${sim.link}`}
+                                target="_blank"
+                                rel="noreferrer"
+                                className={`t-num ${cell} transition-[filter] hover:brightness-125 focus-visible:brightness-125`}
+                                style={style}
+                              >
+                                {label}
+                                <span className="sr-only">{` ${race}, ${d / 60} minute simulation ${copy.newTab}`}</span>
+                              </a>
+                            ) : (
+                              <div className={`t-num ${cell}`} style={style}>
+                                {label}
+                                <span className="sr-only">{` ${race}, ${d / 60} minute simulation`}</span>
+                              </div>
+                            )}
                           </td>
                         );
                       })}
@@ -142,6 +202,7 @@ export function RaceSims() {
                 </li>
               ))}
             </ul>
+            {linked && <p className="px-[18px] pb-[6px] text-[12px] text-faint">{copy.openHint}</p>}
             <p className="px-[18px] pb-[16px] text-[12px] text-faint">
               {copy.lastUpdated}:{' '}
               <time dateTime={data.updated} className="t-num text-mute">

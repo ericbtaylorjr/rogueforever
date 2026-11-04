@@ -157,9 +157,6 @@ export const talents = {
   levelingLabel: 'Leveling builds for this spec',
   /** A build with no talents or note yet. */
   buildPending: "This build hasn't been written up yet. It goes up once it's been tested.",
-  /** A sweaty tip: shown only with sweaty tips on. */
-  murderTip:
-    "Most of these builds take 2/2 Murder. For encounters without Humanoids or Giants it does nothing, so swap those points into a couple of other offensive talents. Most players can set and forget, but if you're squeezing out every bit of damage, it's worth the respec.",
   /** Tree names are confirmed to carry over; the split is what is pending. */
   trees: ['Assassination', 'Combat', 'Subtlety'],
   calculator: 'Open in talent calculator ↗',
@@ -199,7 +196,10 @@ export const racesCopy = {
   sims: {
     title: 'Race performance by build',
     intro:
-      "How far each race falls behind the best one, per build and encounter length. These are early WoWSims results from the data available today and will change over time. They exclude mob-type bonuses (Beasts, Elementals), which the racial meta above covers. Click any cell to open its simulation in a new tab.",
+      "How far each race falls behind the best one, per build and encounter length. These are early WoWSims results from the data available today and will change over time. They exclude mob-type bonuses (Beasts, Elementals), which the racial meta above covers.",
+    /** Shown under the chart only when the data has simulation links. */
+    openHint: 'Click any cell to open its simulation in a new tab.',
+    noSim: 'no simulation',
     buildLabel: 'Build',
     raceHeader: 'Race',
     durationLabel: (m: number) => `${m} min`,

@@ -16,13 +16,13 @@
     },
     "mh": "dagger"
   },
-  "combat/mutilate": {
-    "wowsimsPreset": "Combat Muti",
+  "combat/venom": {
+    "wowsimsPreset": "Combat Venom",
     "vars": {
       "Use Backstab": false,
       "Use Expose Armor": false
     },
-    "mh": "dagger"
+    "mh": "sword"
   },
   "combat/questing": {
     "wowsimsPreset": null,
@@ -40,7 +40,7 @@
     },
     "mh": "dagger"
   },
-  "assassination/mutilate-venom": {
+  "assassination/mutilate": {
     "wowsimsPreset": "Asn Muti",
     "vars": {
       "Use Backstab": false,
@@ -64,19 +64,12 @@
     },
     "mh": "dagger"
   },
-  "subtlety/backstab": {
-    "wowsimsPreset": "Subtlety BS",
-    "vars": {
-      "Use Backstab": true,
-      "Use Expose Armor": false
-    },
-    "mh": "dagger"
-  },
   "subtlety/hemo": {
     "wowsimsPreset": "Subtlety Hemo",
     "vars": {
       "Use Backstab": false,
-      "Use Expose Armor": false
+      "Use Expose Armor": false,
+      "Start In Stealth": true
     },
     "mh": "sword"
   },

@@ -1,6 +1,16 @@
 import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte, BLANK_TALENTS } from './shared';
+import {
+  BLANK_TALENTS,
+  forLeveling,
+  noEndgameGear,
+  points,
+  racialTips,
+  shankStep,
+  sliceAndDiceStep,
+  tip,
+  withRiposte,
+} from './shared';
 
 /** Combat Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
 const dungeonsStats: StatPriority = {
@@ -36,19 +46,19 @@ const questingStats: StatPriority = {
   ],
 };
 
-/** Combat Mutilate (daggers in both hands) weights from its own WoWSims run. */
-const mutilateStats: StatPriority = {
+/** Combat Venom weights from its own WoWSims run. */
+const venomStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Hit Rating', ep: 2.44 },
-    { stat: 'Expertise Rating', ep: 2.35, op: '>' },
-    { stat: 'Agility', ep: 1.97, op: '>' },
-    { stat: 'Crit Rating', ep: 1.73, op: '>' },
-    { stat: 'Haste Rating', ep: 1.63, op: '>' },
+    { stat: 'Hit Rating', ep: 2.18 },
+    { stat: 'Expertise Rating', ep: 2.07, op: '>' },
+    { stat: 'Agility', ep: 2.01, op: '>' },
+    { stat: 'Crit Rating', ep: 1.85, op: '>' },
+    { stat: 'Haste Rating', ep: 1.42, op: '>' },
     { stat: 'Strength', ep: 1.1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.41, op: '>' },
-    { stat: 'Spell Piercing', ep: 0.27, op: '>' },
+    { stat: 'Attack Power', ep: 1.0, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.4, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.34, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
@@ -57,15 +67,15 @@ const mutilateStats: StatPriority = {
 const sinisterStrikeStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Hit Rating', ep: 2.43 },
-    { stat: 'Expertise Rating', ep: 2.37, op: '>' },
-    { stat: 'Agility', ep: 2.0, op: '>' },
-    { stat: 'Crit Rating', ep: 1.75, op: '>' },
-    { stat: 'Haste Rating', ep: 1.58, op: '>' },
+    { stat: 'Hit Rating', ep: 2.31 },
+    { stat: 'Expertise Rating', ep: 2.24, op: '>' },
+    { stat: 'Agility', ep: 2.02, op: '>' },
+    { stat: 'Crit Rating', ep: 1.78, op: '>' },
+    { stat: 'Haste Rating', ep: 1.28, op: '>' },
     { stat: 'Strength', ep: 1.1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.39, op: '>' },
-    { stat: 'Spell Piercing', ep: 0.17, op: '>' },
+    { stat: 'Attack Power', ep: 1.0, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.41, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.14, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
@@ -74,26 +84,24 @@ const sinisterStrikeStats: StatPriority = {
 const backstabStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Hit Rating', ep: 2.48 },
-    { stat: 'Expertise Rating', ep: 2.42, op: '>' },
-    { stat: 'Agility', ep: 1.95, op: '>' },
-    { stat: 'Crit Rating', ep: 1.67, op: '>' },
-    { stat: 'Haste Rating', ep: 1.62, op: '>' },
+    { stat: 'Hit Rating', ep: 2.19 },
+    { stat: 'Expertise Rating', ep: 2.15, op: '>' },
+    { stat: 'Agility', ep: 1.99, op: '>' },
+    { stat: 'Crit Rating', ep: 1.75, op: '>' },
+    { stat: 'Haste Rating', ep: 1.38, op: '>' },
     { stat: 'Strength', ep: 1.1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.42, op: '>' },
-    { stat: 'Spell Piercing', ep: 0.16, op: '>' },
+    { stat: 'Attack Power', ep: 1.0, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.43, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.15, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
 
 /**
- * The WoWSims Rogue APL as the "Combat SS" preset runs it (Use Backstab off, sword main
- * hand). Regenerate the source rows with `npm run apl -- combat/sinister-strike`.
- * The opener, the melee uptime tip and the Vanish tip's wording are hand-edited.
- * Combat Questing resolves to the same rows, so it shares it.
+ * PRE-REWORK rows (the old APL), kept only as the base of the leveling builds' rotations until
+ * they are redone with their new talents. The level 60 builds have their own rows below.
  */
-const sinisterStrikeRotation: Rotation = {
+const preReworkSinisterStrike: Rotation = {
   opener: [
     'Blade Flurry + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
     'Sinister Strike',
@@ -122,11 +130,8 @@ const sinisterStrikeRotation: Rotation = {
   ],
 };
 
-/**
- * "Combat BS" (Use Backstab on, dagger main hand): `npm run apl -- combat/backstab`.
- * Combat Dungeons resolves to the same rows, so it shares it.
- */
-const backstabRotation: Rotation = {
+/** PRE-REWORK rows, as above: the base of Combat Dungeons. */
+const preReworkBackstab: Rotation = {
   opener: [
     'Blade Flurry + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
     'Backstab',
@@ -155,12 +160,8 @@ const backstabRotation: Rotation = {
   ],
 };
 
-/**
- * "Combat Muti" (daggers in both hands): `npm run apl -- combat/mutilate`. Mutilate adds 2
- * combo points, so the APL Eviscerates at 4 and Cold Blood only fires at 5.
- * Assassination Questing and Dungeons resolve to the same rows, so they share it.
- */
-export const mutilateRotation: Rotation = {
+/** PRE-REWORK rows, as above: the base of Assassination Questing and Dungeons. */
+const preReworkMutilate: Rotation = {
   opener: [
     'Blade Flurry + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
     'Mutilate',
@@ -186,28 +187,121 @@ export const mutilateRotation: Rotation = {
   ],
 };
 
-/** Leveling versions: Combat Questing and Dungeons, and Assassination Questing and Dungeons (`mutilateRotation`). */
-const levelingSinisterStrikeRotation = forLeveling(sinisterStrikeRotation, ['Adrenaline Rush', 'Blade Flurry']);
-const levelingBackstabRotation = forLeveling(backstabRotation, ['Adrenaline Rush', 'Blade Flurry']);
-export const levelingMutilateRotation = forLeveling(mutilateRotation, ['Blade Flurry']);
+/**
+ * Combat SS (Use Backstab off, sword main hand), from the Nov 2 rework APL:
+ * `npm run apl -- combat/sinister-strike`, with the race runs. The APL casts Blade Flurry once,
+ * three seconds before the pull (and for Orcs, paired with Blood Fury).
+ */
+const sinisterStrikeRotation: Rotation = {
+  opener: [
+    'Blade Flurry (-1s)',
+    'Evasion + Major Frenzy Potion + Trinket + Racial + Sinister Strike',
+    'Slice and Dice',
+    'Vanish + Garrote',
+    'Shank',
+    'Adrenaline Rush',
+    'Sinister Strike to 5CP',
+    'Cold Blood + Eviscerate',
+  ],
+  steps: [
+    shankStep,
+    sliceAndDiceStep,
+    { press: 'Sinister Strike', note: 'Until you have 5 combo points.' },
+    { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
+    { press: 'Eviscerate', note: 'With all 5 combo points.' },
+  ],
+  tips: [
+    tip.meleeUptime,
+    tip.adrenalineRush,
+    tip.trinkets,
+    ...racialTips({ adrenalineRush: true }),
+    tip.thistleTea,
+    tip.vanishGarroteWhenReady,
+    tip.earlyEviscerate,
+    tip.fightEnd(),
+  ],
+};
+
+/** Combat BS (Use Backstab on, dagger main hand): `npm run apl -- combat/backstab`. No Cold Blood in these talents. */
+const backstabRotation: Rotation = {
+  opener: [
+    'Blade Flurry (-1s)',
+    'Evasion + Major Frenzy Potion + Trinket + Racial + Backstab',
+    'Shank',
+    'Vanish + Garrote',
+    'Slice and Dice',
+    'Adrenaline Rush',
+    'Backstab to 5CP',
+    'Eviscerate',
+  ],
+  steps: [
+    shankStep,
+    sliceAndDiceStep,
+    { press: 'Backstab', note: 'Until you have 5 combo points. Stay behind the target.' },
+    { press: 'Eviscerate', note: 'With all 5 combo points.' },
+  ],
+  tips: [
+    tip.meleeUptime,
+    tip.adrenalineRush,
+    tip.trinkets,
+    ...racialTips({ adrenalineRush: true, coldBlood: false }),
+    tip.thistleTea,
+    tip.vanishGarroteWhenReady,
+    tip.earlyEviscerate,
+    tip.fightEnd(),
+  ],
+};
+
+/** Combat Venom (Sinister Strike builder, no Adrenaline Rush): `npm run apl -- combat/venom`. */
+const venomRotation: Rotation = {
+  opener: [
+    'Blade Flurry (-1s)',
+    'Evasion + Major Frenzy Potion + Trinket + Racial + Sinister Strike',
+    'Slice and Dice',
+    'Vanish + Garrote',
+    'Shank',
+    'Sinister Strike until 5CP',
+    'Cold Blood + Eviscerate',
+  ],
+  steps: [
+    shankStep,
+    sliceAndDiceStep,
+    { press: 'Sinister Strike', note: 'Until you have 5 combo points.' },
+    { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
+    { press: 'Eviscerate', note: 'With all 5 combo points.' },
+  ],
+  tips: [
+    tip.meleeUptime,
+    tip.trinkets,
+    ...racialTips({ adrenalineRush: false }),
+    tip.thistleTea,
+    tip.vanishGarroteWhenReady,
+    tip.earlyEviscerate,
+    tip.fightEnd(),
+  ],
+};
+
+/** Leveling versions: Combat Questing and Dungeons, and Assassination Questing and Dungeons (`preReworkMutilate`). */
+const levelingSinisterStrikeRotation = forLeveling(preReworkSinisterStrike, ['Adrenaline Rush', 'Blade Flurry']);
+const levelingBackstabRotation = forLeveling(preReworkBackstab, ['Adrenaline Rush', 'Blade Flurry']);
+export const levelingMutilateRotation = forLeveling(preReworkMutilate, ['Blade Flurry']);
 
 export const combat: Build[] = [
   {
-    id: 'mutilate',
+    id: 'venom',
     spec: 'combat',
     phase: 'endgame',
-    name: 'Mutilate',
+    name: 'Venom',
     grade: 'A',
     rank: 3,
-    stale: true,
-    talents: points(0, 0, 0),
+    talents: points(21, 30, 0),
     talentNote:
-      'Dagger damage using Combat talents instead of Venom. Mutilate builds combo points two at a time and Eviscerate finishes, with Blade Flurry on cooldown. Keep Slice and Dice up, Mutilate to 4 or more combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
+      'Combat with Venom: Shank, your off-hand strike, applies Venom (more poison damage and a better poison chance for 6 seconds), so it goes on cooldown below 80 energy while poisons do extra work. Blade Flurry opens the fight. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
     keyTalents: [],
-    link: BLANK_TALENTS,
-    stats: mutilateStats,
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530320241001-320013220201232115_t5',
+    stats: venomStats,
     gear: noEndgameGear,
-    rotation: mutilateRotation,
+    rotation: venomRotation,
   },
   {
     id: 'sinister-strike',
@@ -216,12 +310,11 @@ export const combat: Build[] = [
     name: 'Sinister Strike',
     grade: 'S',
     rank: 2,
-    stale: true,
-    talents: points(0, 0, 0),
+    talents: points(16, 35, 0),
     talentNote:
-      'The traditional Classic Rogue Combat build: steady melee damage from Sinister Strike builders into Eviscerate, boosted by Adrenaline Rush and Blade Flurry. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
+      'The traditional Classic Rogue Combat build: steady melee damage from Sinister Strike builders into Eviscerate, with Blade Flurry before the pull and Adrenaline Rush once Slice and Dice is up. Shank, your new off-hand strike, goes on cooldown below 80 energy. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
     keyTalents: [],
-    link: BLANK_TALENTS,
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530320201-3200132202012321551_t5',
     stats: sinisterStrikeStats,
     gear: noEndgameGear,
     rotation: sinisterStrikeRotation,
@@ -233,12 +326,11 @@ export const combat: Build[] = [
     name: 'Backstab',
     grade: 'S',
     rank: 1,
-    stale: true,
-    talents: points(0, 0, 0),
+    talents: points(12, 34, 5),
     talentNote:
-      'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush and Blade Flurry. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Cold Blood and Eviscerate.',
+      'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush, with Blade Flurry before the pull. Shank goes on cooldown below 80 energy. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Eviscerate.',
     keyTalents: [],
-    link: BLANK_TALENTS,
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2005203002-3203130202012321351-005_t5',
     stats: backstabStats,
     gear: noEndgameGear,
     rotation: backstabRotation,
@@ -272,7 +364,7 @@ export const combat: Build[] = [
     stale: true,
     talents: points(0, 0, 0),
     talentNote:
-      'Combat for groups with a Backstab twist: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Cold Blood and Eviscerate. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can\'t attack from behind.',
+      "Combat for groups with a Backstab twist: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Cold Blood and Eviscerate. Needs a dagger in the main hand. Keep Sinister Strike on your bar for when you can't attack from behind.",
     keyTalents: [],
     link: BLANK_TALENTS,
     stats: dungeonsStats,

@@ -12,7 +12,6 @@ import { BUILD_CARD_ID, BuildList } from '../ui/BuildList';
 import { SectionHeading } from '../ui/SectionHeading';
 import { StaleNote } from '../ui/StaleNote';
 import { TalentOrder, TalentPreview } from '../ui/TalentTree';
-import { Tip } from '../ui/Tip';
 
 const TOTAL_POINTS = 51;
 
@@ -152,14 +151,6 @@ export function Talents() {
       <div className="mt-[16px]" id={BUILD_CARD_ID}>
         <BuildCard build={build} />
       </div>
-      {/* Below the card, so switching to a leveling build (no tip) doesn't move the card. */}
-      {build.phase === 'endgame' && (
-        <div className="mt-[16px] empty:hidden">
-          <Tip sweaty>
-            {copy.murderTip}
-          </Tip>
-        </div>
-      )}
     </section>
   );
 }

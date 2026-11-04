@@ -45,7 +45,7 @@ export async function launch() {
 /** One page per build family: an endgame build, and one leveling build per spec. */
 export const PAGES = [
   { name: 'combat/backstab (level 60)', query: '?spec=combat&build=backstab' },
-  { name: 'assassination/mutilate-venom (level 60)', query: '?spec=assassination&build=mutilate-venom' },
+  { name: 'assassination/mutilate (level 60)', query: '?spec=assassination&build=mutilate' },
   { name: 'subtlety/hemo (level 60)', query: '?spec=subtlety&build=hemo' },
   { name: 'combat/questing (leveling)', query: '?spec=combat&build=questing' },
   { name: 'assassination/dungeons (leveling)', query: '?spec=assassination&build=dungeons' },

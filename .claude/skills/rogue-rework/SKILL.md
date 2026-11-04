@@ -16,6 +16,16 @@ Every build carries `stale: true` (types.ts) until it is redone; that shows a
 "pre-rework" note on Talents, Stats and Rotation. `npm run talent-audit` lists what is
 still flagged, so it is the progress tracker.
 
+## Status (update as you go)
+
+- Done 2026-11-04: talent trees refreshed; new APL in `scripts/apl/rogue.apl.json`; the five level 60 builds
+  (Assassination Mutilate, Combat Sinister Strike, Combat Backstab, Combat Venom, Subtlety Hemo) have their links
+  (built from screenshots, so no learning order), point splits and rotations. Combat Mutilate and Subtlety Backstab were
+  removed. Their stat weights were added after, and `stale` was deleted from all five.
+- Pending: every leveling build (links, weights, rotations; their rotation constants are
+  `preRework*` in combat.ts and the quest/dungeon rotations in subtlety.ts until redone); the New to Rogue guide
+  entries that still describe Murder and the Venom finisher (content.json); gear-research follow-ups below.
+
 ## 0. Preconditions
 
 - Wowhead Forever's calculator data has the new tree (`npm run talents` shows Shank-era

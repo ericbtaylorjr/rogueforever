@@ -29,11 +29,6 @@
     "icon": "inv_potion_66",
     "kind": "item"
   },
-  "Potion of Demon Slaying": {
-    "id": 9224,
-    "icon": "inv_potion_27",
-    "kind": "item"
-  },
   "Major Frenzy Potion": {
     "id": 250943,
     "icon": "inv_potione_6",
@@ -84,11 +79,6 @@
     "icon": "inv_stone_15",
     "kind": "item"
   },
-  "Elemental Sharpening Stone": {
-    "id": 18262,
-    "icon": "inv_stone_02",
-    "kind": "item"
-  },
   "Dense Sharpening Stone": {
     "id": 12404,
     "icon": "inv_stone_sharpeningstone_05",
@@ -97,16 +87,6 @@
   "Dense Weightstone": {
     "id": 12643,
     "icon": "inv_stone_weightstone_05",
-    "kind": "item"
-  },
-  "Consecrated Sharpening Stone": {
-    "id": 23122,
-    "icon": "inv_stone_sharpeningstone_02",
-    "kind": "item"
-  },
-  "Blessed Sunfruit": {
-    "id": 13810,
-    "icon": "inv_misc_food_41",
     "kind": "item"
   },
   "Grilled Squid": {
@@ -142,11 +122,6 @@
   "Rumsey Rum Black Label": {
     "id": 21151,
     "icon": "inv_drink_04",
-    "kind": "item"
-  },
-  "Gordok Green Grog": {
-    "id": 18269,
-    "icon": "inv_drink_03",
     "kind": "item"
   },
   "Flask of the Titans": {
@@ -264,16 +239,6 @@
     "icon": "ability_rogue_dualweild",
     "kind": "item"
   },
-  "Occult Poison II": {
-    "id": 234444,
-    "icon": "spell_holy_nullifydisease",
-    "kind": "item"
-  },
-  "Sebacious Poison": {
-    "id": 217345,
-    "icon": "ability_creature_poison_06",
-    "kind": "item"
-  },
   "Wound Poison": {
     "id": 10922,
     "icon": "inv_misc_herb_16",
@@ -289,16 +254,6 @@
     "icon": "spell_nature_nullifydisease",
     "kind": "item"
   },
-  "Atrophic Poison": {
-    "id": 217347,
-    "icon": "ability_creature_disease_03",
-    "kind": "item"
-  },
-  "Numbing Poison": {
-    "id": 217346,
-    "icon": "ability_creature_disease_01",
-    "kind": "item"
-  },
   "Flash Powder": {
     "id": 5140,
     "icon": "inv_misc_powder_purple",
@@ -307,16 +262,6 @@
   "Whipper Root Tuber": {
     "id": 11951,
     "icon": "inv_misc_food_55",
-    "kind": "item"
-  },
-  "Songflower Seed": {
-    "id": 233200,
-    "icon": "inv_misc_herb_dreamingglory",
-    "kind": "item"
-  },
-  "Horn of the Dawn": {
-    "id": 233198,
-    "icon": "inv_misc_horn_03",
     "kind": "item"
   },
   "Blessing of Kings": {
@@ -354,29 +299,14 @@
     "icon": "spell_nature_moonglow",
     "kind": "spell"
   },
-  "Power Infusion": {
-    "id": 10060,
-    "icon": "spell_holy_powerinfusion",
-    "kind": "spell"
-  },
   "Power Word: Fortitude": {
     "id": 10938,
     "icon": "spell_holy_wordfortitude",
     "kind": "spell"
   },
-  "Salvation": {
-    "id": 1038,
-    "icon": "spell_holy_sealofsalvation",
-    "kind": "spell"
-  },
   "Strength of Earth Totem": {
     "id": 25361,
     "icon": "spell_nature_earthbindtotem",
-    "kind": "spell"
-  },
-  "Trueshot Aura": {
-    "id": 1299348,
-    "icon": "ability_trueshot",
     "kind": "spell"
   },
   "Windfury Totem": {
@@ -407,11 +337,6 @@
   "Gift of Arthas": {
     "id": 11374,
     "icon": "spell_nature_nullifydisease",
-    "kind": "spell"
-  },
-  "Hunter’s Mark": {
-    "id": 14324,
-    "icon": "ability_hunter_snipershot",
     "kind": "spell"
   },
   "Sunder Armor": {
@@ -530,8 +455,23 @@
     "kind": "spell"
   },
   "Venom": {
-    "id": 1310703,
+    "id": 1329328,
     "icon": "inv_sword_31",
+    "kind": "spell"
+  },
+  "Shank": {
+    "id": 1329549,
+    "icon": "ability_theblackarrow",
+    "kind": "spell"
+  },
+  "Death Mark": {
+    "id": 1325758,
+    "icon": "ability_creature_cursed_02",
+    "kind": "spell"
+  },
+  "Boot Knife": {
+    "id": 1329286,
+    "icon": "inv_sword_32",
     "kind": "spell"
   },
   "Premeditation": {
@@ -557,6 +497,11 @@
   "Thrash Blade": {
     "id": 17705,
     "icon": "inv_sword_36",
+    "kind": "item"
+  },
+  "Occult Poison II": {
+    "id": 234444,
+    "icon": "spell_holy_nullifydisease",
     "kind": "item"
   }
 }

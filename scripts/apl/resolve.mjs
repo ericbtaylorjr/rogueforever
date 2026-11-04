@@ -128,8 +128,16 @@ function val(v) {
     case 'remainingTime':
       return { e: 'fight remaining' };
     case 'spellIsKnown':
-    case 'talentIsKnown':
-      return { c: known(body.spellId ?? body.talentId) };
+      return { c: known(body.spellId) };
+    case 'talentIsKnown': {
+      // `rank` asks for at least that many points (Dirty Deeds 2/2); the id is the talent's first rank's spell.
+      const id = body.talentId;
+      return { c: known(id) && (talents.get(id.spellId)?.rank ?? 0) >= (id.rank ?? 1) };
+    }
+    case 'currentTime':
+      return { e: 'time in fight' };
+    case 'frontOfTarget':
+      return { e: 'in front of target' };
     case 'auraIsKnown':
       return { c: known(body.auraId) };
     default: {
@@ -211,7 +219,8 @@ out.push(`Variables set: ${Object.entries(overrides).map(([k, v]) => `${k}=${v}`
 out.push('', '## Prepull');
 for (const p of apl.prepullActions) {
   const act = action(p.action, []);
-  if (act) out.push(`- ${p.doAtValue.const.val}: ${act}`);
+  const cond = p.action.condition ? val(p.action.condition) : T;
+  if (act && cond?.c !== false) out.push(`- ${p.doAtValue.const.val}: ${act}${cond && cond.c === undefined ? ` (if ${txt(cond)})` : ''}`);
 }
 out.push('', '## Priority list (rows this build can fire)');
 const skipped = [];

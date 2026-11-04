@@ -1,6 +1,15 @@
 import { levelingGearFor } from '../gear';
 import type { Build, ProTip, Rotation, StatPriority } from '../types';
-import { forLeveling, noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte, BLANK_TALENTS } from './shared';
+import {
+  BLANK_TALENTS,
+  forLeveling,
+  noEndgameGear,
+  points,
+  racialTips,
+  sliceAndDiceStep,
+  tip,
+  withRiposte,
+} from './shared';
 
 /** Subtlety Dungeons (leveling) weights from its own WoWSims run. EP is relative to `relativeTo` (= 1). */
 const dungeonsStats: StatPriority = {
@@ -36,49 +45,24 @@ const questingStats: StatPriority = {
   ],
 };
 
-/** Subtlety Backstab (dagger main hand) weights from its own WoWSims run. */
-const backstabStats: StatPriority = {
-  relativeTo: 'Attack Power',
-  stats: [
-    { stat: 'Hit Rating', ep: 2.99 },
-    { stat: 'Expertise Rating', ep: 2.61, op: '>' },
-    { stat: 'Agility', ep: 2.0, op: '>' },
-    { stat: 'Crit Rating', ep: 1.77, op: '>' },
-    { stat: 'Haste Rating', ep: 1.33, op: '>' },
-    { stat: 'Strength', ep: 1.1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.35, op: '>' },
-    { stat: 'Spell Piercing', ep: 0.16, op: '>' },
-    { stat: 'Stamina', ep: 0.01, op: '>' },
-  ],
-};
-
 /** Subtlety Hemo (slow main hand) weights from its own WoWSims run. */
 const hemoStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Hit Rating', ep: 2.59 },
-    { stat: 'Expertise Rating', ep: 2.27, op: '>' },
-    { stat: 'Agility', ep: 1.98, op: '>' },
-    { stat: 'Crit Rating', ep: 1.74, op: '>' },
-    { stat: 'Haste Rating', ep: 1.31, op: '>' },
+    { stat: 'Hit Rating', ep: 2.47 },
+    { stat: 'Expertise Rating', ep: 2.18, op: '>' },
+    { stat: 'Agility', ep: 2.07, op: '>' },
+    { stat: 'Crit Rating', ep: 1.89, op: '>' },
+    { stat: 'Haste Rating', ep: 1.27, op: '>' },
     { stat: 'Strength', ep: 1.1, op: '>' },
-    { stat: 'Attack Power', ep: 1, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.32, op: '>' },
-    { stat: 'Spell Piercing', ep: 0.2, op: '>' },
+    { stat: 'Attack Power', ep: 1.0, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.26, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.13, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
 
-/**
- * Subtlety opens from Stealth, as the APL does: Premeditation before the pull, then Garrote
- * (or Ambush, for the leveling builds). With Preparation, the APL Vanishes again for another.
- */
-const vanishGarrote: ProTip = {
-  text: 'Vanish into Garrote whenever Garrote has fallen off, then Preparation to reset Vanish and do it again. It lets you be aggressive with your damage and resets your threat.',
-  sweaty: true,
-};
-
+/** The leveling builds open from Stealth with Ambush, and with Preparation the APL Vanishes again for another. */
 const vanishAmbush: ProTip = {
   text: 'Vanish into Ambush whenever Vanish is ready, then Preparation to reset Vanish and do it again. It lets you be aggressive with your damage and resets your threat. Ambush needs a dagger in your main hand and you behind the target.',
   sweaty: true,
@@ -87,76 +71,47 @@ const vanishAmbush: ProTip = {
 const ruptureStep = { press: 'Rupture', note: "With 3 or more combo points, whenever it isn't on the target." };
 const ghostlyStrikeStep = { press: 'Ghostly Strike', note: "If it's off cooldown." };
 
-/** Thousand Cuts: the APL only Eviscerates while Rupture has 4s or more left, unless energy is about to cap. */
-const eviscerateWithRupture = {
-  press: 'Eviscerate',
-  note: 'With all 5 combo points, as long as Rupture has 4s or more left or you have 75+ energy.',
+/** Death Mark replaces Eviscerate in Hemo's talents, and the APL stops refreshing bleeds and Slice and Dice at the end. */
+const hemoFightEnd: ProTip = {
+  text: 'In the last 6s of the fight, stop refreshing Slice and Dice and Rupture.',
+  sweaty: true,
 };
 
-/** The WoWSims Rogue APL as the "Subtlety BS" preset runs it (Use Backstab on, dagger main hand): `npm run apl -- subtlety/backstab`. */
-const backstabRotation: Rotation = {
-  opener: [
-    'Premeditation (-2s)',
-    'Stealth + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
-    'Garrote',
-    'Slice and Dice',
-    'Ghostly Strike',
-    'Hemorrhage',
-    'Backstab to 3CP',
-    'Rupture',
-    'Backstab to 5CP',
-    'Eviscerate',
-  ],
-  steps: [
-    sliceAndDiceStep,
-    ruptureStep,
-    ghostlyStrikeStep,
-    { press: 'Hemorrhage', note: "Whenever its debuff isn't on the target." },
-    { press: 'Backstab', note: 'Until you have 5 combo points. Stay behind the target.' },
-    eviscerateWithRupture,
-  ],
-  tips: [
-    tip.meleeUptime,
-    tip.premeditation,
-    tip.trinkets,
-    ...racialTips({ adrenalineRush: false, coldBlood: false }),
-    tip.thistleTea,
-    tip.pool('Backstab'),
-    vanishGarrote,
-    tip.earlyEviscerate,
-    tip.fightEnd('Slice and Dice and Rupture'),
-  ],
-};
-
-/** "Subtlety Hemo" (Use Backstab off, slow main hand, Cold Blood talented, no Ghostly Strike): `npm run apl -- subtlety/hemo`. */
+/**
+ * "Subtlety Hemo" (slow main hand, Start In Stealth on, Death Mark and Boot Knife talented, Ghostly Strike
+ * for Garrote): `npm run apl -- subtlety/hemo`. No Eviscerate or Cold Blood in these talents.
+ */
 const hemoRotation: Rotation = {
   opener: [
-    'Premeditation (-2s)',
-    'Stealth + Evasion + Major Frenzy Potion + Trinket + Racial (-1s)',
-    'Garrote',
+    'Premeditation (-1s)',
     'Slice and Dice',
-    'Hemorrhage to 3CP',
+    'Evasion + Major Frenzy Potion + Trinket + Racial + Vanish + Garrote',
+    'Preparation',
+    'Premeditation + Death Mark',
+    'Shank',
     'Rupture',
     'Hemorrhage to 5CP',
-    'Cold Blood + Eviscerate',
+    'Death Mark',
   ],
   steps: [
-    sliceAndDiceStep,
+    { press: 'Garrote', note: "Whenever it isn't on the target. Ghostly Strike beforehand means it needs no Stealth." },
+    {
+      press: 'Shank',
+      note: 'On cooldown, at 3 combo points or fewer and 80 energy or less. Boot Knife adds 2 combo points.',
+    },
+    { press: 'Death Mark', note: 'With 4 or more combo points.' },
     ruptureStep,
-    { press: 'Hemorrhage', note: 'Until you have 5 combo points.' },
-    { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
-    eviscerateWithRupture,
+    sliceAndDiceStep,
+    { press: 'Ghostly Strike', note: 'When Garrote has 4s or less left, so the next Garrote needs no Stealth.' },
+    { press: 'Hemorrhage', note: 'Until you have 5 combo points, while Garrote has 8s or more left.' },
   ],
   tips: [
     tip.meleeUptime,
     tip.premeditation,
     tip.trinkets,
-    ...racialTips({ adrenalineRush: false }),
-    tip.thistleTea,
-    tip.pool('Hemorrhage'),
-    vanishGarrote,
-    tip.earlyEviscerate,
-    tip.fightEnd('Slice and Dice and Rupture'),
+    ...racialTips({ adrenalineRush: false, coldBlood: false, bladeFlurry: false }),
+    { text: 'Thistle Tea at 25 energy or less, while Death Mark is up and you have under 3 combo points.' },
+    hemoFightEnd,
   ],
 };
 
@@ -239,35 +194,17 @@ const dungeonsRotation: Rotation = forLeveling(
 
 export const subtlety: Build[] = [
   {
-    id: 'backstab',
-    spec: 'subtlety',
-    phase: 'endgame',
-    name: 'Backstab',
-    grade: 'B',
-    rank: 5,
-    stale: true,
-    talents: points(0, 0, 0),
-    talentNote:
-      'The traditional Subtlety Backstab build: bleed damage from Garrote and Rupture, plus Backstab builders and Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Ghostly Strike and Hemorrhage as needed, Backstab from behind to 5, then Eviscerate while Rupture is up.',
-    keyTalents: [],
-    link: BLANK_TALENTS,
-    stats: backstabStats,
-    gear: noEndgameGear,
-    rotation: backstabRotation,
-  },
-  {
     id: 'hemo',
     spec: 'subtlety',
     phase: 'endgame',
     name: 'Hemo',
     grade: 'B',
     rank: 4,
-    stale: true,
-    talents: points(0, 0, 0),
+    talents: points(12, 8, 31),
     talentNote:
-      'A Subtlety Backstab variant using Hemorrhage as the builder, so it works with a slow main hand instead of a dagger. Bleed damage from Garrote and Rupture, with Eviscerate finishers. Keep Slice and Dice up, Rupture at 3+ combo points, Hemorrhage to 5, then Cold Blood and Eviscerate while Rupture is up.',
+      'A Subtlety bleed build: Garrote is kept up (Ghostly Strike makes the next one free of Stealth), Hemorrhage builds combo points, and Shank adds 2 more through Boot Knife. Rupture and Death Mark finish, with Slice and Dice up. Open from Stealth with Premeditation, Garrote, Shank and Death Mark.',
     keyTalents: [],
-    link: BLANK_TALENTS,
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530301-320003-305230031321001151_t5',
     stats: hemoStats,
     gear: noEndgameGear,
     rotation: hemoRotation,
