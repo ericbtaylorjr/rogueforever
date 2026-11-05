@@ -191,7 +191,7 @@ export const subtlety: Build[] = [
     talentNote:
       'A Subtlety build around Ambush from Stealth, then Ghostly Strike, Garrote and Hemorrhage for combo points, with Shank adding more through Boot Knife. Use Death Mark at 4+ combo points and keep Rupture up. Swap to a dagger for Ambush.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v2021-3200330112002-305223031301001151_t0/0B1B2CFDjKhnhheesrATv1AEffjKfhP0c',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh021-3200330112002-305223031301001151_t0/0B1B2CFeejKhnDhhsrATv1AEffjKfhP0c',
     stats: questingStats,
     gear: levelingGearFor('subtlety', 'questing'),
     rotation: levelingQuestingRotation,

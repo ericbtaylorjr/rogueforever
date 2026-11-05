@@ -47,7 +47,7 @@ const [spec, id] = buildKey.split('/');
 const buildSrc = readFileSync(root(`src/content/builds/${spec}.ts`), 'utf8');
 const block = buildSrc.split(/\n\s*\{\n/).find((b) => b.includes(`id: '${id}'`));
 // BLANK_TALENTS (the empty calculator) means no talents yet.
-const link = block?.match(/talent-calc\/rogue\/v2([0-9-]*)/)?.[1] ?? (block?.includes('link: BLANK_TALENTS') ? '' : undefined);
+const link = block?.match(/talent-calc\/rogue\/v(?:2|[a-z]+)([0-9-]*)/)?.[1] ?? (block?.includes('link: BLANK_TALENTS') ? '' : undefined);
 if (link === undefined) throw new Error(`No talent link for ${buildKey}`);
 const trees = readJson(root('src/content/talent-trees.json')).trees;
 const talents = new Map();

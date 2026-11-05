@@ -3,7 +3,7 @@
  * preview. A build only stores its calculator link; the trees themselves come from
  * src/content/talent-trees.json (`npm run talents`).
  *
- * Link format, `…/talent-calc/rogue/v2<trees>_…`: `v2` is the format version, then one
+ * Link format, `…/talent-calc/rogue/v<version><trees>_…`: the version is `2` or a run of letters (`vkndmh021-…`), then one
  * digit per talent (its rank) in row-then-column order, the trees in calculator order
  * (Assassination, Combat, Subtlety) separated by `-`, trailing zeros left off. What
  * follows (`_t0_r95`, the learning order) doesn't change the finished tree.
@@ -43,7 +43,7 @@ export const talentTrees = data.trees as TalentTreeData[];
  */
 export function decodeTalentLink(link: string | undefined): number[][] | null {
   // A bare `/talent-calc/rogue` link is the empty calculator.
-  const m = link?.match(/\/talent-calc\/rogue(?:\/v2([0-9-]*)(?:[_/]|$)|\/?$)/);
+  const m = link?.match(/\/talent-calc\/rogue(?:\/v(?:2|[a-z]+)([0-9-]*)(?:[_/]|$)|\/?$)/);
   if (!m) return null;
   const parts = (m[1] ?? '').split('-');
   if (parts.length > talentTrees.length) return null;
@@ -84,7 +84,7 @@ const FIRST_POINT_LEVEL = 10;
  * the link has no order, or it doesn't fit the trees.
  */
 export function decodeTalentOrder(link: string | undefined): TalentStep[] | null {
-  const code = link?.match(/\/talent-calc\/rogue\/v2[0-9-]*[^/]*\/([0-9a-zA-Z]+)/)?.[1];
+  const code = link?.match(/\/talent-calc\/rogue\/v(?:2|[a-z]+)[0-9-]*[^/]*\/([0-9a-zA-Z]+)/)?.[1];
   if (!code) return null;
   const ranks = talentTrees.map((t) => t.talents.map(() => 0));
   const steps: TalentStep[] = [];

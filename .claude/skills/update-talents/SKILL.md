@@ -30,7 +30,7 @@ A build's talents are its calculator `link` in `src/content/builds/<spec>.ts`, p
    the Vanish into Garrote/Ambush tip: leveling builds say "Use Vanish and Evasion as defensive
    abilities if threat becomes an issue." instead. If the build now
    resolves to a different rotation, use that endgame constant's leveling version, or add one.
-4. **Riposte.** If the new link takes Riposte (Combat tree, row 3, rank 1; `v2…-<combat digits>`
+4. **Riposte.** If the new link takes Riposte (Combat tree, row 3, rank 1; `v<version>…-<combat digits>`
    has a `1` in the 8th place of the Combat digits), wrap the build's rotation in
    `withRiposte(rotation, '<builder>')` from `shared.ts`: Mutilate, Sinister Strike, Hemorrhage
    (Subtlety Hemo and Questing) or Backstab. It adds the Pro tip "Macro Riposte with <builder>
@@ -46,5 +46,5 @@ A build's talents are its calculator `link` in `src/content/builds/<spec>.ts`, p
 
 Tell the user: points split, which talents moved if it's easy to tell, and what changed in
 the rotation and summary (or that they didn't). If a screenshot is the source instead of a
-link, build the link as `v2<digits>` (see `src/lib/talentCalc.ts`), mention that no order
+link, build the link as `v2<digits>` (the calculator also issues `vkndmh<digits>` links; both are valid, keep whichever the user gives) (see `src/lib/talentCalc.ts`), mention that no order
 was included, and flag any spell the rotation uses that the new talents drop.

@@ -123,10 +123,10 @@ function check(trees) {
     .join('\n');
   let bad = 0;
   for (const [, link] of src.matchAll(/link: '([^']*talent-calc[^']*)'/g)) {
-    const m = link.match(/\/talent-calc\/rogue\/v2([0-9-]*)(?:[_/]|$)/);
+    const m = link.match(/\/talent-calc\/rogue\/v(?:2|[a-z]+)([0-9-]*)(?:[_/]|$)/);
     const problems = [];
     const totals = [];
-    if (!m) problems.push('not a v2 Rogue calculator link');
+    if (!m) problems.push('not a Rogue calculator link');
     else {
       const parts = m[1].split('-');
       if (parts.length > trees.length) problems.push('more trees than the Rogue has');
@@ -141,7 +141,7 @@ function check(trees) {
         totals.push(sum);
       });
     }
-    const order = link.match(/\/talent-calc\/rogue\/v2[0-9-]*[^/]*\/([0-9a-zA-Z]+)/)?.[1];
+    const order = link.match(/\/talent-calc\/rogue\/v(?:2|[a-z]+)[0-9-]*[^/]*\/([0-9a-zA-Z]+)/)?.[1];
     if (m && order) {
       // Same rules as decodeTalentOrder: the learning order has to finish on the link's ranks.
       const got = trees.map((t) => t.talents.map(() => 0));
@@ -188,7 +188,7 @@ function checkPoints({ fix }) {
     const out = src.replace(
       /talents: points\(([\d, ]+)\)((?:(?!talents: points\()[\s\S])*?)link: '([^']*)'/g,
       (whole, typed, mid, link) => {
-        const digits = link.match(/\/talent-calc\/rogue\/v2([0-9-]*)/)?.[1];
+        const digits = link.match(/\/talent-calc\/rogue\/v(?:2|[a-z]+)([0-9-]*)/)?.[1];
         if (digits === undefined) return whole;
         const parts = digits.split('-');
         const want = [0, 1, 2].map((i) => [...(parts[i] ?? '')].reduce((n, d) => n + +d, 0)).join(', ');

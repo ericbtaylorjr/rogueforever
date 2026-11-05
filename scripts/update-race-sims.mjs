@@ -75,7 +75,7 @@ function buildLinks() {
     const file = readFileSync(new URL(`../src/content/builds/${spec}.ts`, import.meta.url), 'utf8');
     for (const block of file.split(/\n {2}\{\n/).slice(1)) {
       const id = block.match(/\bid: '([^']+)'/)?.[1];
-      const digits = block.match(/talent-calc\/rogue\/v2([0-9-]*)/)?.[1];
+      const digits = block.match(/talent-calc\/rogue\/v(?:2|[a-z]+)([0-9-]*)/)?.[1];
       if (id && digits !== undefined) out[`${spec}/${id}`] = digits;
     }
   }
