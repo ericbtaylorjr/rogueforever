@@ -96,7 +96,7 @@ const levelingMutilateRotation: Rotation = {
     { press: 'Mutilate', note: 'This is your combo point builder. Needs a dagger in both hands.' },
     { press: 'Shank', note: 'Whenever it is on cooldown and you are under 80 energy.' },
     { press: 'Rupture', note: 'At 3 or more combo points, if the mob will live for 12 seconds.' },
-    { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points.' },
+    { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points. It is generally not worth casting until around the mid level 40s.' },
     { press: 'Cold Blood', note: 'Whenever it is off cooldown, but only at 5 combo points.' },
     { press: 'Eviscerate', note: 'With 4+ combo points.' },
   ],

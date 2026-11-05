@@ -12,7 +12,7 @@ const levelingDungeonsRotation: Rotation = {
     { press: 'Blade Flurry', note: 'Whenever a mob will live more than 15s or with a double pull.' },
     { press: 'Sinister Strike', note: 'This is your combo point builder.' },
     shankStep,
-    { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points.' },
+    { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points. It is generally not worth casting until around the mid level 40s.' },
     { press: 'Cold Blood', note: 'Whenever it is off cooldown, but only at 5 combo points.' },
     { press: 'Eviscerate', note: 'With 5 combo points.' },
     { press: 'Adrenaline Rush', note: 'Align with large pulls or a boss.' },
@@ -52,7 +52,7 @@ const levelingSinisterStrikeRotation: Rotation = withRiposte(
       { press: 'Blade Flurry', note: 'Whenever a mob will live more than 15s or with a double pull.' },
       { press: 'Sinister Strike', note: 'This is your combo point builder.' },
       shankStep,
-      { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points.' },
+      { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points. It is generally not worth casting until around the mid level 40s.' },
       { press: 'Eviscerate', note: 'With 5 combo points.' },
     ],
     tips: [
