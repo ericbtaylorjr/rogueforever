@@ -104,8 +104,7 @@ export const specBoard = {
     meta: 'Leveling',
     questing: { title: 'Questing', label: 'Leveling builds for questing, ranked' },
     dungeons: { title: 'Dungeons', label: 'Leveling builds for dungeons, ranked' },
-    /** Shown as a tip without the "Tip:" label. */
-    tip: "This projection is very early and should be viewed as such. We'll adjust and improve throughout launch as more tuning and information becomes available.",
+    tip: "Both Subtlety and Combat are viable options for leveling. Subtlety is a little stronger earlier on, while Combat provides cleave a bit later. Assassination is great for leveling, but only comes online after level 40, so it sits a bit below the other two.",
   },
 } as const;
 

@@ -130,7 +130,7 @@ export const assassination: Build[] = [
     phase: 'leveling',
     activity: 'questing',
     name: 'Questing',
-    grade: 'A',
+    grade: 'B',
     rank: 3,
     talents: points(38, 8, 5),
     talentNote:
@@ -147,7 +147,7 @@ export const assassination: Build[] = [
     phase: 'leveling',
     activity: 'dungeons',
     name: 'Dungeons',
-    grade: 'A',
+    grade: 'B',
     rank: 3,
     talents: points(37, 9, 5),
     talentNote:

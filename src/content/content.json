@@ -751,6 +751,10 @@
   ],
   "changelog": [
     {
+      "date": "Nov 6th, 2026",
+      "text": "Adjusted the Leveling Meta Breakdown. Subtlety Questing moves to A, and Assassination Questing and Dungeons move to B. Subtlety and Combat are both viable for leveling, with Subtlety a little stronger earlier on and Combat providing cleave a bit later. Assassination is great for leveling, but only comes online after level 40, so it sits a bit below the other two. Combat Leveling builds now have a Pro Tip to use a non-dagger main hand."
+    },
+    {
       "date": "Nov 4th, 2026",
       "text": "Added the Leveling builds for the Rogue rework. Questing and Dungeons builds are now populated for Assassination, Combat and Subtlety, each with its own talents, stat weights and a simplified rotation with Pro Tips. Leveling rotations are a general guide to the order of buttons to press and skip the opener. They are loosely modeled in WoWSims, so adjust them to your liking. Assassination is only useful at level 40+. Subtlety weapon swaps between a dagger for Ambush and a slow weapon, and the Pro Tips cover how to skip it. The Leveling Milestone Gear lists were rebuilt from each build's new stat weights, with both daggers and slow weapons covered for Subtlety. The Rotation section now sits above Stats."
     },

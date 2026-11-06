@@ -185,7 +185,7 @@ export const subtlety: Build[] = [
     phase: 'leveling',
     activity: 'questing',
     name: 'Questing',
-    grade: 'S',
+    grade: 'A',
     rank: 1,
     talents: points(3, 17, 31),
     talentNote:

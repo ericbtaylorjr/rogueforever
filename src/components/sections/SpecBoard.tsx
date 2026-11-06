@@ -389,7 +389,7 @@ function LevelingMeta({ sims }: { sims: boolean }) {
       </div>
 
       <div className="mt-[14px]">
-        <Tip label={false}>{specBoard.leveling.tip}</Tip>
+        <Tip>{specBoard.leveling.tip}</Tip>
       </div>
 
       {sims && (

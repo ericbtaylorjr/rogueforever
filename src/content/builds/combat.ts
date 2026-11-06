@@ -2,6 +2,10 @@ import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
 import { noEndgameGear, points, racialTips, shankStep, sliceAndDiceStep, tip, withRiposte } from './shared';
 
+const nonDaggerTip = {
+  text: 'Use a non-dagger main hand. Daggers do not work well with Sinister Strike.',
+};
+
 /**
  * Combat Dungeons, simplified from the APL run with these talents (`npm run apl -- combat/dungeons`, with Sinister Strike as the builder): no opener,
  * and no Thistle Tea or pooling. Blade Flurry is only cast before the pull in the APL.
@@ -18,6 +22,7 @@ const levelingDungeonsRotation: Rotation = {
     { press: 'Adrenaline Rush', note: 'Align with large pulls or a boss.' },
   ],
   tips: [
+    nonDaggerTip,
     tip.meleeUptime,
     { text: 'Pair your trinkets and racial with Blade Flurry and Adrenaline Rush on a powerful mob or big pull.' },
     { text: 'Use Vanish and Evasion as defensive abilities if threat becomes an issue.' },
@@ -56,6 +61,7 @@ const levelingSinisterStrikeRotation: Rotation = withRiposte(
       { press: 'Eviscerate', note: 'With 5 combo points.' },
     ],
     tips: [
+      nonDaggerTip,
       tip.meleeUptime,
       { text: 'Pair your trinkets and racial with Blade Flurry on a powerful mob or big pull.' },
       { text: 'Use Vanish and Evasion as defensive abilities if threat becomes an issue.' },
