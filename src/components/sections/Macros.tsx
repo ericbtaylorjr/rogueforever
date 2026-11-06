@@ -24,6 +24,7 @@ export function Macros() {
                 name={m.name}
               />
             </div>
+            <p className="mt-[8px] text-[13px] leading-[1.5] text-mute">{m.description}</p>
             <pre
               className="t-code mt-[10px] rounded-[8px] p-[11px] text-mute"
               style={{ background: 'var(--surface-deep)' }}

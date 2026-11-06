@@ -719,23 +719,33 @@
   ],
   "macros": [
     {
-      "name": "Weapon set swap",
-      "code": "#showtooltip\n/equipslot 16 Backup Main Hand\n/equipslot 17 Backup Off Hand"
+      "name": "Subtlety MH dagger swap",
+      "description": "Changes your main hand, so you can Ambush. Replace \"Dagger Name\" with your highest DPS dagger.",
+      "code": "#showtooltip\n/cast Stealth\n/equipslot 16 Dagger Name"
     },
     {
-      "name": "Pickpocket (any skill from stealth)",
+      "name": "Subtlety MH slow swap",
+      "description": "Changes your main hand to a slow weapon, for higher rotation damage. Replace \"Slow MH Name\" with your primary slow main hand. Replace Hemorrhage with your builder if different spec.",
+      "code": "#showtooltip Hemorrhage\n/equipslot 16 Slow MH Name\n/cast Riposte\n/cast Hemorrhage\n/startattack"
+    },
+    {
+      "name": "Pick Pocket",
+      "description": "Include Pick Pocket into any Stealth ability. Be sure you are within range.",
       "code": "#showtooltip\n/cast Pick Pocket\n/cast Sinister Strike"
     },
     {
-      "name": "Ranged attack (any type)",
+      "name": "Universal ranged attack",
+      "description": "All in one ranged attack macro for any ranged weapon type.",
       "code": "#showtooltip\n/cast [equipped:Guns] Shoot Gun; [equipped:Bows] Shoot Bow; [equipped:Crossbows] Shoot Crossbow; [equipped:Thrown] Throw"
     },
     {
-      "name": "MH/OH Weapon Imbue Apply",
+      "name": "MH/OH weapon imbue apply",
+      "description": "Left click to apply to MH, right click for OH. Update Poison or Stone name to match the imbue item name.",
       "code": "#showtooltip\n/use Instant Poison VI;\n/use [button:1] 16; [button:2] 17;\n/click StaticPopup1Button1"
     },
     {
       "name": "Opener w/ all CDs",
+      "description": "Simple macro to blow all your cooldowns for alignment. Not always optimal, adjust to your rotation.",
       "code": "#showtooltip Blade Flurry\n/use Major Frenzy Potion\n/use 13\n/use 14\n/cast {racial}\n/cast Blade Flurry\n/cast Evasion"
     }
   ],

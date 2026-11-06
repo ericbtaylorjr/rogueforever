@@ -98,8 +98,8 @@ const hemoRotation: Rotation = {
   ],
 };
 
-const noSwapTip: ProTip = {
-  text: "If you don't want to weapon swap, use a slow main hand and skip the Stealth and Ambush.",
+const swapMacroTip: ProTip = {
+  text: 'This rotation uses weapon swap macros, which can be found in the Macros section. If you prefer not to swap, always use Slow MH, ignore Stealth and start with Ghostly Strike instead.',
 };
 const preparationTip: ProTip = { text: 'Preparation whenever Vanish is on cooldown.' };
 const subtletyShank = {
@@ -134,10 +134,10 @@ const levelingQuestingRotation: Rotation = withRiposte(
     opener: [],
     steps: levelingSteps,
     tips: [
+      swapMacroTip,
       tip.meleeUptime,
       tip.premeditation,
       preparationTip,
-      noSwapTip,
       { text: 'Pair your trinkets and racial with Death Mark on a powerful mob or big pull.' },
       { text: 'Use Vanish and Evasion as defensive abilities if threat becomes an issue.' },
     ],
@@ -153,10 +153,10 @@ const levelingDungeonsRotation: Rotation = {
   opener: [],
   steps: levelingSteps,
   tips: [
+    swapMacroTip,
     tip.meleeUptime,
     tip.premeditation,
     preparationTip,
-    noSwapTip,
     { text: 'Pair your trinkets and racial with Death Mark on a powerful mob or big pull.' },
     { text: 'Use Vanish and Evasion as defensive abilities if threat becomes an issue.' },
   ],
