@@ -266,7 +266,7 @@ export const stats = {
 export const gear = {
   /** Rendered with <Tip>, which adds the "Tip:" label. */
   status: {
-    text: "This is an early list. It leaves out some items we know exist but are still encrypted. Those will be added during launch, and this list will be updated as they appear.",
+    text: "This list is scanned and assessed from gear taken directly from the game client as it's discovered, then analyzed against the stat weights and EP values for each spec build. Items still encrypted in the client aren't included yet. As more items are discovered, this list will shift to recommend the best of what's confirmed as available.",
   },
   cols: { slot: 'SLOT', item: 'ITEM', source: 'SOURCE', enchant: 'ENCHANT' },
   tableLabel: 'Gear by slot',
@@ -283,6 +283,29 @@ export const gear = {
     /** Precedes a bracket's level range, as in "Levels 21–40". */
     bracket: 'Levels',
     bracketEmpty: 'Nothing worth chasing in this range yet',
+    /** A bracket with nothing left once a slot filter is on. */
+    bracketEmptyFiltered: 'No items for this slot in this range',
+    /** Filter controls above the list. `slots` are the slot names in leveling-gear.json each pill covers. */
+    filter: {
+      label: 'Filter leveling gear by slot',
+      all: 'All',
+      groups: [
+        { id: 'weapons', label: 'Weapons', slots: ['Main hand', 'Off hand', 'One-hand'] },
+        { id: 'ranged', label: 'Ranged', slots: ['Ranged'] },
+        { id: 'head', label: 'Head', slots: ['Head'] },
+        { id: 'neck', label: 'Neck', slots: ['Neck'] },
+        { id: 'shoulders', label: 'Shoulders', slots: ['Shoulders'] },
+        { id: 'back', label: 'Back', slots: ['Back'] },
+        { id: 'chest', label: 'Chest', slots: ['Chest'] },
+        { id: 'wrists', label: 'Wrists', slots: ['Wrists'] },
+        { id: 'hands', label: 'Hands', slots: ['Hands'] },
+        { id: 'waist', label: 'Waist', slots: ['Waist'] },
+        { id: 'legs', label: 'Legs', slots: ['Legs'] },
+        { id: 'feet', label: 'Feet', slots: ['Feet'] },
+        { id: 'rings', label: 'Rings', slots: ['Ring'] },
+        { id: 'trinkets', label: 'Trinkets', slots: ['Trinket'] },
+      ],
+    },
     empty: 'No leveling items listed for this build yet',
   },
   /** Level 60 builds only; leveling builds show their milestone list instead. */

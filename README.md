@@ -90,7 +90,7 @@ authored them in markup.
   Wowhead quality colouring, tooltips and icons included. A list with no items shows a
   "Coming soon" note (`gear.comingSoon` in `copy.ts`) instead of an empty table.
 - **Leveling milestones** come from `src/content/leveling-gear.json`: one list per leveling
-  build, generated from Wowhead's Forever database by `scripts/gear-research` using each
+  build, generated from the WoWSims Forever database by `scripts/gear-research` using each
   build's own stat weights and the game's proc data (see its README, and the
   `leveling-milestone-gear` skill, for how to rerun it as items are decrypted or weights
   change). Hand fixes and pinned items go in `scripts/gear-research/curation.json`.

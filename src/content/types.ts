@@ -223,6 +223,15 @@ export interface GearItem {
   /** Bind on equip, so it can be bought or traded. Unset for everything else. */
   boe?: boolean;
   enchant?: string;
+  /**
+   * The item is in the Forever database but Wowhead doesn't list it yet: it shows its tooltip
+   * (`tooltip`, Wowhead's markup, built by scripts/gear-research) but doesn't link out.
+   * `icon` is the icon file name, since Wowhead can't tell us. The research drops all three
+   * the next time it finds the item on Wowhead.
+   */
+  noWowhead?: boolean;
+  tooltip?: string;
+  icon?: string;
 }
 
 export type GearSetId = 'prebis' | 'bis';

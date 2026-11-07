@@ -12,7 +12,7 @@ import {
 import { tooltipFallback } from '../../content/copy';
 import { qualityColor } from '../../content/gear';
 import { track } from '../../lib/analytics';
-import { loadWowheadTip, wowheadKey, type WowheadRef, type WowheadTip } from '../../lib/wowhead';
+import { loadWowheadTip, sanitizeTipHtml, wowheadKey, type WowheadRef, type WowheadTip } from '../../lib/wowhead';
 import { useTheme } from '../../state/ThemeProvider';
 
 export interface TipContent {
@@ -21,6 +21,11 @@ export interface TipContent {
   note?: string;
   /** Show Wowhead's live tooltip for this item or spell, with `kind` and `note` beneath it. */
   wowhead?: WowheadRef;
+  /**
+   * Tooltip markup in Wowhead's format for an item Wowhead doesn't list yet: shown the same way
+   * as a live one, with no request. Ignored when `wowhead` is set and its tooltip arrives.
+   */
+  html?: string;
   /**
    * Shown until Wowhead's tooltip arrives (or if it never does) in place of `note`.
    * Screen readers read the tooltip on focus, before the live one loads, so this is
@@ -63,6 +68,8 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
   const [wh, setWh] = useState<{ key: string; tip: WowheadTip } | null>(null);
   const whKey = tip?.wowhead ? wowheadKey(tip.wowhead) : null;
   const whTip = wh && wh.key === whKey ? wh.tip : null;
+  const ownHtml = useMemo(() => (tip?.html ? sanitizeTipHtml(tip.html) : null), [tip?.html]);
+  const richHtml = whTip?.html ?? ownHtml;
 
   useEffect(() => {
     if (!tip?.wowhead || !whKey) return;
@@ -90,7 +97,7 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
     if (y + height > window.innerHeight - 12) y = Math.max(12, r.top - height - GAP);
 
     setPos({ x, y });
-  }, [tip, whTip]);
+  }, [tip, richHtml]);
 
   /**
    * The element whose tooltip is showing. It gets `aria-describedby` set directly, only
@@ -201,10 +208,10 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
           boxShadow: 'var(--tip-shadow)',
         }}
       >
-        {whTip ? (
+        {richHtml ? (
           <>
             {/* Sanitized in lib/wowhead before it gets here. */}
-            <div className="wh-tip" style={wowheadColors(tone)} dangerouslySetInnerHTML={{ __html: whTip.html }} />
+            <div className="wh-tip" style={wowheadColors(tone)} dangerouslySetInnerHTML={{ __html: richHtml }} />
             {(tip?.kind || tip?.note) && (
               <div className="mt-[9px] border-t border-line pt-[8px]">
                 {tip.kind && <div className="t-eyebrow text-[10.5px] text-accent">{tip.kind}</div>}

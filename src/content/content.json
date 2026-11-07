@@ -751,6 +751,10 @@
   ],
   "changelog": [
     {
+      "date": "Nov 7th, 2026",
+      "text": "Completely reworked how the Leveling Milestone Gear lists are updated and populated. They are now built from actual game client data as WoWSims decrypts it, scored against each build's own stat weights and EP values, instead of being pieced together from item pages. Every slot aims for a recommendation every 5-6 levels for both factions, where the game data allows it, and builds that use both daggers and slow weapons get a list for each. Items that are random-suffix drops are valued by the suffixes that help your build, and items the game data has that Wowhead doesn't list yet still show their tooltip, just without a link. You can also now filter the list by slot, such as Weapons, Hands or Rings."
+    },
+    {
       "date": "Nov 6th, 2026",
       "text": "Adjusted the Leveling Meta Breakdown. Subtlety Questing moves to A, and Assassination Questing and Dungeons move to B. Subtlety and Combat are both viable for leveling, with Subtlety a little stronger earlier on and Combat providing cleave a bit later. Assassination is great for leveling, but only comes online after level 40, so it sits a bit below the other two. Combat Leveling builds now have a Pro Tip to use a non-dagger main hand."
     },

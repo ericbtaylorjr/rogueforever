@@ -58,6 +58,14 @@ async function fetchTip({ kind, id, talent }: WowheadRef): Promise<WowheadTip | 
   }
 }
 
+/**
+ * Tooltip markup in Wowhead's format that we build ourselves, for items the database has but
+ * Wowhead doesn't list yet (scripts/gear-research/tooltip.mjs). Same allowlist as the live ones.
+ */
+export function sanitizeTipHtml(html: string): string {
+  return sanitize(html).innerHTML;
+}
+
 /** Tags Wowhead's tooltips use for layout and text. Anything else is unwrapped to its children. */
 const ALLOWED_TAGS = new Set(['TABLE', 'TBODY', 'TR', 'TD', 'TH', 'B', 'I', 'SPAN', 'BR', 'DIV', 'SMALL', 'UL', 'LI']);
 /** The tooltip is display only, so Wowhead's links become plain text that keeps its colour class. */

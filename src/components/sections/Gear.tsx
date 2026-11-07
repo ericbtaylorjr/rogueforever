@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { gearSlots } from '../../content/content';
 import { gear as copy } from '../../content/copy';
 import { factionColor, levelingBrackets, qualityColor, wowheadUrl } from '../../content/gear';
@@ -5,7 +6,7 @@ import type { Faction, GearItem, GearSetId, LevelingItem } from '../../content/t
 import { useHandbook, useShownBuild } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { GameIcon } from '../ui/GameIcon';
-import { SegmentedTabs, Tag } from '../ui/Pill';
+import { FilterPill, SegmentedTabs, Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Tip } from '../ui/Tip';
 import { useTooltip } from '../ui/Tooltip';
@@ -16,18 +17,37 @@ const LEVELING_GRID = '62px 92px minmax(0,1.5fr) minmax(0,1fr) 88px';
 function ItemLink({ item }: { item: Omit<GearItem, 'enchant'> }) {
   const { bind } = useTooltip();
   const { tone } = useTheme();
+  const inner = (
+    <>
+      <GameIcon name={`item:${item.itemId}`} size={24} />
+      <span className="truncate">{item.name}</span>
+      {item.boe && <Tag>BoE</Tag>}
+    </>
+  );
+  const className = 'flex min-w-0 items-center gap-[10px] text-[13px] font-semibold';
+  const style = { color: tone(qualityColor[item.quality]) };
+  // Not on Wowhead yet: the same tooltip, built from the game database, but nothing to link to.
+  if (item.noWowhead) {
+    return (
+      <span
+        className={`cursor-help ${className}`}
+        style={style}
+        {...bind({ name: item.name, kind: item.slot, note: item.source, html: item.tooltip })}
+      >
+        {inner}
+      </span>
+    );
+  }
   return (
     <a
       href={wowheadUrl(item.itemId)}
       target="_blank"
       rel="noreferrer"
-      className="flex min-w-0 items-center gap-[10px] text-[13px] font-semibold"
-      style={{ color: tone(qualityColor[item.quality]) }}
+      className={className}
+      style={style}
       {...bind({ name: item.name, kind: item.slot, note: item.source, wowhead: { kind: 'item', id: item.itemId } })}
     >
-      <GameIcon name={`item:${item.itemId}`} size={24} />
-      <span className="truncate">{item.name}</span>
-      {item.boe && <Tag>BoE</Tag>}
+      {inner}
     </a>
   );
 }
@@ -110,7 +130,7 @@ function LevelingHeader() {
 }
 
 /** One level range of milestones, e.g. 21–40. Items are already sorted by level. */
-function LevelingBracket({ from, to, items }: { from: number; to: number; items: LevelingItem[] }) {
+function LevelingBracket({ from, to, items, filtered }: { from: number; to: number; items: LevelingItem[]; filtered: boolean }) {
   const range = `${from}–${to}`;
 
   return (
@@ -128,7 +148,7 @@ function LevelingBracket({ from, to, items }: { from: number; to: number; items:
           ) : (
             <div role="row" className="border-t border-line px-[14px] py-[14px]">
               <span role="cell" className="text-[12.5px] italic text-dim">
-                {copy.leveling.bracketEmpty}
+                {filtered ? copy.leveling.bracketEmptyFiltered : copy.leveling.bracketEmpty}
               </span>
             </div>
           )}
@@ -139,17 +159,41 @@ function LevelingBracket({ from, to, items }: { from: number; to: number; items:
 }
 
 function LevelingPanel({ items }: { items: LevelingItem[] }) {
+  const { filter } = copy.leveling;
+  const [slotFilter, setSlotFilter] = useState<string>('all');
+  // Only offer slots this build has items for, each with its count.
+  const groups = filter.groups
+    .map((g) => ({ ...g, count: items.filter((i) => (g.slots as readonly string[]).includes(i.slot)).length }))
+    .filter((g) => g.count > 0);
+  // A build without the chosen slot falls back to everything rather than an empty list.
+  const active = groups.find((g) => g.id === slotFilter);
+  const shown = active ? items.filter((i) => (active.slots as readonly string[]).includes(i.slot)) : items;
+
   return (
     <div className="mt-[16px] flex flex-col gap-[16px]">
       {/* Headings, so screen reader users can jump between brackets. */}
       <h3 className="t-panel-label text-ink">{copy.leveling.itemsTitle}</h3>
+      {items.length > 0 && (
+        <>
+          <div role="group" aria-label={filter.label} className="flex flex-wrap gap-[8px]">
+            <FilterPill label={filter.all} count={items.length} selected={!active} onSelect={() => setSlotFilter('all')} />
+            {groups.map((g) => (
+              <FilterPill key={g.id} label={g.label} count={g.count} selected={active?.id === g.id} onSelect={() => setSlotFilter(g.id)} />
+            ))}
+          </div>
+          <p role="status" className="sr-only">
+            {`Showing ${shown.length} item${shown.length === 1 ? '' : 's'}${active ? `, ${active.label.toLowerCase()} only` : ''}`}
+          </p>
+        </>
+      )}
       {items.length ? (
         levelingBrackets.map(({ from, to }) => (
           <LevelingBracket
             key={from}
             from={from}
             to={to}
-            items={items.filter((i) => i.level >= from && i.level <= to)}
+            items={shown.filter((i) => i.level >= from && i.level <= to)}
+            filtered={!!active}
           />
         ))
       ) : (

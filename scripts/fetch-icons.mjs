@@ -93,7 +93,9 @@ for (const [name, id] of [
 }
 // Generated leveling lists (scripts/gear-research) live in JSON.
 const levelingJson = JSON.parse(readFileSync(root('src/content/leveling-gear.json'), 'utf8'));
-const levelingItems = ['shared', 'slow', 'daggers'].flatMap((k) => levelingJson[k] ?? []);
+const levelingItems = Object.values(levelingJson.builds ?? {}).flat();
+/** Items the game database has but Wowhead doesn't list yet: the research gives their icon name, since Wowhead can't. */
+const unlistedIcons = new Map(levelingItems.filter((i) => i.noWowhead && i.icon).map((i) => [i.itemId, i.icon]));
 const gearIds = [
   ...new Set([...[...gearSrc.matchAll(/itemId: (\d+)/g)].map((m) => Number(m[1])), ...levelingItems.map((i) => i.itemId)]),
 ];
@@ -139,11 +141,23 @@ for (const p of pinned) {
 }
 for (const id of gearIds) {
   const key = `item:${id}`;
+  if (unlistedIcons.has(id)) {
+    manifest[key] = { id, icon: unlistedIcons.get(id), kind: 'item' };
+    continue;
+  }
   const hit = prev[key] ?? (await tooltip(id));
   if (hit) manifest[key] = hit;
   else missed.push(key);
 }
-for (const icon of new Set(Object.values(manifest).map((m) => m.icon))) await download(icon);
+for (const icon of new Set(Object.values(manifest).map((m) => m.icon))) {
+  try {
+    await download(icon);
+  } catch (e) {
+    // An icon the CDN doesn't have yet (an unlisted item's): render without one rather than a broken image.
+    for (const [k, m] of Object.entries(manifest)) if (m.icon === icon) (delete manifest[k], missed.push(k));
+    console.log(String(e.message));
+  }
+}
 
 // Item links are coloured from the `quality` written in gear.ts; Wowhead's tooltip colours the
 // name from its own data. Check they agree so a link never shows one colour and its tooltip another.

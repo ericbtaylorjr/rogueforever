@@ -2,55 +2,53 @@
 /**
  * Proc and use-effect data for the leveling gear research (see README.md here).
  *
- * Wowhead's tooltip says "Chance on hit: grants an extra attack" but not how often. The
- * game's own tables (via wago.tools) have it, so this reads them for the current Forever
- * build and writes cache/procs.json: per item, each on-hit / use effect with its proc rate
- * and what it does, in plain numbers rank.mjs can value.
+ * The Forever database says *that* an item has a proc or use effect and gives its rate
+ * (PPM or chance), internal cooldown, duration and, for stat buffs, the stats it grants.
+ * What it doesn't carry is what a damage or extra-attack effect does, so those come from
+ * the game's own tables (via wago.tools) for the newest Forever build. Writes
+ * cache/procs.json: per item, each effect with its rate and what it does, in plain numbers
+ * rank.mjs can value.
  *
- *   node scripts/gear-research/procs.mjs                # newest Forever build
+ *   node scripts/gear-research/procs.mjs                 # newest Forever build (cached per build)
+ *   node scripts/gear-research/procs.mjs --offline       # newest build already in cache/db2
  *   node scripts/gear-research/procs.mjs --build 1.60.1.70753
  *
  * Tables (CSV, one request each, cached per build in cache/db2/): ItemXItemEffect,
  * ItemEffect, SpellEffect, SpellAuraOptions, SpellProcsPerMinute, SpellMisc, SpellDuration.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { loadDb } from './forever.mjs';
+import { parseCsv } from './wago.mjs';
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url));
 const UA = { 'User-Agent': 'Mozilla/5.0 (RogueHandbook gear research)' };
+const offline = process.argv.includes('--offline');
 const buildArg = process.argv.includes('--build') ? process.argv[process.argv.indexOf('--build') + 1] : undefined;
 
-async function forever() {
-  const r = await fetch('https://wago.tools/api/builds', { headers: UA });
-  const j = await r.json();
-  const v = j.wowf?.[0]?.version; // wago's product code for WoW: Forever
-  if (!v) throw new Error('No Forever build found at wago.tools/api/builds (product "wowf")');
-  return v;
+async function newestBuild() {
+  const cached = existsSync(here('./cache/db2/')) ? readdirSync(here('./cache/db2/')).sort().at(-1) : undefined;
+  if (offline) {
+    if (!cached) throw new Error('--offline needs a build already in cache/db2; run once online first.');
+    return cached;
+  }
+  try {
+    const j = await (await fetch('https://wago.tools/api/builds', { headers: UA })).json();
+    const v = j.wowf?.[0]?.version; // wago's product code for WoW: Forever
+    if (v) return v;
+  } catch {
+    /* fall through to the cache */
+  }
+  if (cached) {
+    console.log(`wago.tools unreachable; using the cached game tables for ${cached}.`);
+    return cached;
+  }
+  throw new Error('No Forever build found at wago.tools/api/builds (product "wowf") and nothing cached.');
 }
 
-const build = buildArg ?? (await forever());
+const build = buildArg ?? (await newestBuild());
 const dir = here(`./cache/db2/${build}/`);
 mkdirSync(dir, { recursive: true });
-
-/** Minimal CSV reader: quoted fields, doubled quotes, newlines inside quotes. */
-function parseCsv(text) {
-  const rows = [];
-  let row = [], field = '', q = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (q) {
-      if (c === '"' && text[i + 1] === '"') (field += '"', i++);
-      else if (c === '"') q = false;
-      else field += c;
-    } else if (c === '"') q = true;
-    else if (c === ',') (row.push(field), (field = ''));
-    else if (c === '\n') (row.push(field), rows.push(row), (row = []), (field = ''));
-    else if (c !== '\r') field += c;
-  }
-  if (field || row.length) (row.push(field), rows.push(row));
-  const [head, ...body] = rows;
-  return body.map((r) => Object.fromEntries(head.map((h, i) => [h, r[i]])));
-}
 
 async function table(name) {
   const file = `${dir}${name}.csv`;
@@ -63,8 +61,8 @@ async function table(name) {
   return parseCsv(readFileSync(file, 'utf8'));
 }
 
-const items = JSON.parse(readFileSync(here('./cache/items.json'), 'utf8')).items;
-const wanted = new Set(Object.keys(items).filter((id) => items[id].procs?.length));
+const { db } = loadDb();
+const withEffects = db.items.filter((i) => i.itemEffects?.length);
 
 const [ixe, ie, se, sao, ppmT, misc, dur] = await Promise.all(
   ['ItemXItemEffect', 'ItemEffect', 'SpellEffect', 'SpellAuraOptions', 'SpellProcsPerMinute', 'SpellMisc', 'SpellDuration'].map(table),
@@ -74,11 +72,9 @@ const by = (rows, key) => {
   for (const r of rows) (m.get(r[key]) ?? m.set(r[key], []).get(r[key])).push(r);
   return m;
 };
-const itemEffects = new Map(ie.map((r) => [r.ID, r]));
+const itemEffectRows = new Map(ie.map((r) => [r.ID, r]));
 const effectsOfItem = by(ixe, 'ItemID');
 const effectsOfSpell = by(se, 'SpellID');
-const auraOf = new Map(sao.map((r) => [r.SpellID, r]));
-const ppm = new Map(ppmT.map((r) => [r.ID, Number(r.BaseProcRate)]));
 const miscOf = new Map(misc.map((r) => [r.SpellID, r]));
 const durMs = new Map(dur.map((r) => [r.ID, Number(r.Duration)]));
 
@@ -87,11 +83,11 @@ const EFFECT = { SCHOOL_DAMAGE: 2, APPLY_AURA: 6, TRIGGER_SPELL: 64, EXTRA_ATTAC
 const AURA = { PERIODIC_DAMAGE: 3, MOD_STAT: 29, MOD_ATTACK_POWER: 99, MOD_MELEE_HASTE: 138, MOD_CRIT: 52, MOD_HIT: 54 };
 const STAT_BY_MISC = { 0: 'str', 1: 'agi', 2: 'sta' };
 
-/** What one effect of a spell does, in numbers. `unmodeled` carries the raw effect/aura ids so the report can show it. */
+/** What one spell does, in numbers. `unmodeled` carries the raw effect/aura ids so the report can show it. */
 function describe(spellId, depth = 0) {
   const out = [];
-  const duration = (durMs.get(miscOf.get(spellId)?.DurationIndex) ?? 0) / 1000;
-  for (const e of effectsOfSpell.get(spellId) ?? []) {
+  const duration = (durMs.get(miscOf.get(String(spellId))?.DurationIndex) ?? 0) / 1000;
+  for (const e of effectsOfSpell.get(String(spellId)) ?? []) {
     const effect = Number(e.Effect), aura = Number(e.EffectAura), pts = Number(e.EffectBasePointsF) || 0;
     if (effect === EFFECT.EXTRA_ATTACKS) out.push({ kind: 'extraAttack', count: pts || 1 });
     else if (effect === EFFECT.SCHOOL_DAMAGE) out.push({ kind: 'damage', amount: Math.abs(pts) });
@@ -110,29 +106,42 @@ function describe(spellId, depth = 0) {
   return out;
 }
 
-const TRIGGER = { 0: 'use', 1: 'equip', 2: 'onHit' };
+/** The game's own spell for an item's effect, for when the database's buff id (an aura) has no effects of its own. */
+const spellsOfItem = (itemId) => (effectsOfItem.get(String(itemId)) ?? []).map((x) => itemEffectRows.get(x.ItemEffectID)?.SpellID).filter(Boolean);
+
 const result = {};
 let found = 0;
-for (const id of wanted) {
+for (const item of withEffects) {
   const list = [];
-  for (const x of effectsOfItem.get(id) ?? []) {
-    const e = itemEffects.get(x.ItemEffectID);
-    if (!e || !(e.TriggerType in TRIGGER)) continue;
-    const trig = TRIGGER[e.TriggerType];
-    if (trig === 'equip') continue; // permanent auras are in the tooltip stats
-    const a = auraOf.get(e.SpellID);
-    const rate = a && Number(a.SpellProcsPerMinuteID) ? { ppm: ppm.get(a.SpellProcsPerMinuteID) } : a && Number(a.ProcChance) && Number(a.ProcChance) < 100 ? { chance: Number(a.ProcChance) / 100 } : { assumed: true };
+  const gameSpells = spellsOfItem(item.id);
+  for (const e of item.itemEffects) {
+    const trigger = e.proc ? 'onHit' : e.onUse ? 'use' : 'equip';
+    const duration = (e.effectDurationMs ?? 0) / 1000;
+    const granted = e.scalingOptions?.['0']?.stats ?? (e.stackingAura?.scalingOptions?.['0']?.stats && Object.fromEntries(Object.entries(e.stackingAura.scalingOptions['0'].stats).map(([k, v]) => [k, v * ((e.maxCumulativeStacks ?? 1) / 2)])));
+    let effects;
+    if (granted && Object.keys(granted).length) effects = [{ kind: 'stats', stats: granted, duration }];
+    else {
+      effects = describe(e.buffId);
+      if (!effects.length || effects.every((f) => f.kind === 'unmodeled')) for (const s of gameSpells) if (String(s) !== String(e.buffId)) effects = [...effects.filter((f) => f.kind !== 'unmodeled'), ...describe(s)];
+    }
+    // Permanent (equip) auras are mostly set bonuses and enchant-like text: only keep ones the model can value.
+    if (trigger === 'equip') effects = effects.filter((f) => f.kind !== 'unmodeled' && !(f.kind === 'damage'));
+    if (!effects.length && trigger === 'equip') continue;
+    const rate = trigger !== 'onHit' ? undefined : e.proc.ppm !== undefined ? { ppm: e.proc.ppm } : e.proc.procChance !== undefined ? { chance: e.proc.procChance } : { assumed: true };
     list.push({
-      trigger: trig,
-      spell: Number(e.SpellID),
-      cooldown: Math.max(Number(e.CoolDownMSec), Number(e.CategoryCoolDownMSec), 0) / 1000,
-      ...(trig === 'onHit' ? { rate } : {}),
-      effects: describe(e.SpellID),
+      trigger,
+      spell: e.buffId,
+      name: e.buffName,
+      cooldown: trigger === 'use' ? (e.onUse.cooldownMs ?? 0) / 1000 : 0,
+      icd: e.proc?.icdMs ? e.proc.icdMs / 1000 : 0,
+      duration,
+      ...(rate ? { rate } : {}),
+      effects,
     });
   }
-  if (list.length) (result[id] = list, found++);
+  if (list.length) (result[item.id] = list, found++);
 }
 writeFileSync(here('./cache/procs.json'), JSON.stringify({ build, generated: new Date().toISOString(), items: result }));
-console.log(`Build ${build}: ${found} of ${wanted.size} items with procs or use effects have data → cache/procs.json`);
+console.log(`Game tables ${build}: ${found} of ${withEffects.length} items with effects have data → cache/procs.json`);
 const assumed = Object.values(result).flat().filter((e) => e.trigger === 'onHit' && e.rate.assumed).length;
-console.log(`${assumed} on-hit effects have no proc data (rank.mjs assumes the default rate).`);
+console.log(`${assumed} on-hit effects have no rate in the database (rank.mjs assumes the default).`);

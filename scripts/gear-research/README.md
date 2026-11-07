@@ -1,130 +1,174 @@
 # Leveling gear research
 
 Builds the **Leveling milestone gear** lists (`src/content/leveling-gear.json`, one per leveling
-build) from Wowhead's Forever database. The `leveling-milestone-gear` skill is the run order. Built to be rerun as Wowhead decrypts more Forever items
-(expect a couple of times a week around launch).
+build) from the WoWSims **Forever item database** and each build's own stat weights. The
+`leveling-milestone-gear` skill is the run order. Built to be rerun often: WoWSims regenerates
+the database from the decrypted game files several times a day.
 
 ## Rerun (the usual case)
 
 ```sh
-node scripts/gear-research/scan.mjs --revalidate   # ~2 min: drop items Wowhead no longer has
-node scripts/gear-research/scan.mjs --missing      # ~15 min: re-check ids Wowhead didn't have last time
-node scripts/gear-research/procs.mjs               # proc and use-effect data from the game tables (fast)
-node scripts/gear-research/recipes.mjs             # which recipe item teaches each crafted item (fast)
-node scripts/gear-research/rank.mjs                # writes cache/report.md + cache/shortlist.json
-node scripts/gear-research/sources.mjs             # sources for anything new on the shortlist (slow, polite)
-node scripts/gear-research/rank.mjs --emit         # writes src/content/leveling-gear.json
-npm run icons                                      # icons + rarity check for any new items
+node scripts/gear-research/run.mjs      # everything below, skipping what nothing changed
+npm run icons                           # icons + rarity check for any new items
+npm run typecheck
 ```
 
-Then review `git diff src/content/leveling-gear.json` and skim `cache/report.md` (each
-pick with its EP, how much it beats a green, its source and runners-up). If something's
-wrong, fix it in `curation.json` (below) and run `rank.mjs --emit` again; don't hand-edit
-the JSON, or the next run overwrites it.
+`run.mjs` takes seconds when nothing relevant changed (it says so and stops) and under a minute
+otherwise, apart from the first run's Wowhead lookups (about 5–10 minutes, then cached for good).
+Flags: `--force` (rebuild anyway), `--offline` (don't fetch Forever or the game tables),
+`--no-emit` (do everything but write the JSON).
 
-`rank.mjs --emit` refuses to write while any pick lacks a source, so the loop is just
-"rank → sources → rank" until it says `0 without sources`.
+Then review `git diff src/content/leveling-gear.json` and skim `cache/report.md`. If something is
+wrong, fix it in `curation.json` (below) and rerun; don't hand-edit the JSON, or the next run
+overwrites it.
 
-Stats can change on existing items too (Forever re-itemizes). Every few weeks, or after
-a big patch, do a **full rescan** instead of `--missing`:
+The steps, if you want them one at a time:
 
 ```sh
-node scripts/gear-research/scan.mjs                # ids 1–25000, ~10 min
-node scripts/gear-research/scan.mjs 200000 300000  # newer ids (Season of Discovery era and later), ~40 min
-node scripts/gear-research/sources.mjs --refresh   # re-read sources for the shortlist
+node scripts/gear-research/forever.mjs        # fetch wowsims/forever origin/master, say which commit is read
+node scripts/gear-research/procs.mjs          # proc/use-effect numbers from the game tables (wago.tools, cached per build)
+node scripts/gear-research/recipes.mjs        # which recipe item teaches each crafted item
+node scripts/gear-research/rank.mjs           # score, pick, write cache/report.md; exit 3 = lookups.mjs has work
+node scripts/gear-research/lookups.mjs        # Wowhead: levels the database lacks, recipe sources (cached)
+node scripts/gear-research/links.mjs          # which picks Wowhead lists (rechecks every unlinked one)
+node scripts/gear-research/rank.mjs --emit    # writes src/content/leveling-gear.json
 ```
+
+## The database
+
+`~/dev/forever/assets/database/db.json` (override with `FOREVER_REPO`) from `wowsims/forever`. The
+research always reads it from **`origin/master`** with `git show` after a `git fetch`, so it is
+the latest master whatever state the checkout is in. The checkout itself is fast-forwarded only
+when it is clean and on `master`; otherwise it is left alone and the run says so. A failed fetch
+stops the run (rerun with `--offline` to use the last fetched master). The report and
+`leveling-gear.json` record the Forever commit and the date the database last changed.
+
+It carries, per item: slot, armor/weapon type, hand, required level, quality, stats (in rating
+points, the unit the weights use), weapon damage and speed, random-suffix options, class
+restrictions, faction restriction, proc/use effects (rate, cooldown, duration, granted stats) and
+sources (quest with its faction, dungeon drop, crafted, vendor, reputation, PvP). Not in it:
+quest levels, the level a quest is accepted at, and what damage/extra-attack effects do. Items
+Forever hasn't decrypted yet are missing, and many have no source recorded yet; the report's
+"kept out" and coverage sections show what that costs.
 
 ## Files
 
 | File | What it does |
 |---|---|
-| `scan.mjs` | Reads every item id from Wowhead's tooltip API (`nether.wowhead.com`, tolerates bulk reads), keeps the ones a Rogue can equip. `--missing` re-checks not-found ids; `--recheck "<reason>"` re-checks ids skipped for a reason after a `parse.mjs` fix. |
-| `parse.mjs` | Tooltip HTML → slot, type, level, stats, weapon damage. Also the "usable by a Rogue" filter (leather/cloth/jewelry, one-handers incl. axes, bows/guns/crossbows/thrown, no other-class items, no recipes or test items). |
-| `sources.mjs` | Source + faction for shortlisted items from the www XML feed, stored raw. CloudFront blocks bursts there, so it goes one request per 1.5 s and waits out blocks by itself (a first run of ~650 items takes ~20 min; reruns only fetch new ones). Then reads each reward quest's level from the tooltip API. Writes `cache/sources.json`. |
-| `zones.mjs` | Wowhead source codes and zone ids → Source text. Add zone ids here when the report shows `Zone 1234`; new Forever dungeons go in `DUNGEONS` so their drops count as chaseable. No refetch needed, sources are stored raw. |
-| `weights.mjs` | Reads each leveling build's stat weights from `src/content/builds/*.ts`. |
-| `procs.mjs` | Proc rates and effects for items with on-hit or use text, from wago.tools' DB2 tables for the newest Forever build (`wowf`). Writes `cache/procs.json` (and caches the tables in `cache/db2/`). |
-| `recipes.mjs` | Recipe item for each crafted item (the Pattern/Plans/Formula whose use effect is the crafting spell), from the same game tables. `sources.mjs` then looks up where each recipe comes from. Writes `cache/recipes.json`. |
-| `rank.mjs` | Scores, baselines, picks, report, and `--emit`. All tuning knobs are at the top. |
+| `run.mjs` | Orchestrates everything, skipping when the Rogue-relevant database slice, weights, `curation.json` and scripts are unchanged. |
+| `forever.mjs` | Fetches the Forever repo's master, reads `db.json` from `origin/master`. |
+| `items.mjs` | Database → candidates: what a Rogue can wear, stats, random-suffix options, where each faction can get it (offers), the level to show. Availability rules live here. |
+| `weights.mjs` | Reads each leveling build's stat weights from `src/content/builds/*.ts`. Stops if any leveling build still has no weights. |
+| `procs.mjs` | Proc and use effects: rates and granted stats from the database, damage and extra attacks from the game tables (wago.tools DB2, cached per Forever build in `cache/db2/`). Writes `cache/procs.json`. |
+| `recipes.mjs` | Recipe item for each crafted item's spell, from the same tables. Writes `cache/recipes.json`. |
+| `lookups.mjs` | The Wowhead lookups the database can't replace (see Levels). Writes `cache/lookups.json`; cached for good. |
+| `links.mjs` | Which picks Wowhead lists, from the tooltip API. Writes `cache/wowhead.json`. |
+| `tooltip.mjs` | Tooltip markup, in Wowhead's format, for picks Wowhead doesn't list yet. |
+| `rank.mjs` | Scoring, baselines, picks, gap-filling, checks, report and `--emit`. All tuning knobs are at the top. `--debug "<build>\|<slot>"` prints every scored candidate for one slot. |
 | `curation.json` | Hand corrections kept across runs (see below). Committed. |
-| `cache/` | Gitignored: `items.json` (scan), `sources.json`, `shortlist.json`, `report.md`. |
+| `cache/` | Gitignored: `report.md`, `picks.json`, `lookups*.json`, `wowhead.json`, `procs.json`, `recipes.json`, `forever.json`, `last-run.json`, `db2/`. |
 
 ## Method
 
 Everything below runs once per leveling build (Assassination, Combat and Subtlety, each Questing
 and Dungeons), so a build's list reflects its own stat weights.
 
-1. **EP** per item from that build's weights (Attack Power = 1; `weights.mjs` reads them from
-   the builds), plus a little Stamina (0.3) for leveling survival. Tooltips show hit/crit as %,
-   converted at 10 hit / 14 crit rating per 1% (what Wowhead's XML reports for the same items).
+1. **EP** per item from that build's weights (Attack Power = 1): Strength, Agility, Stamina, Attack
+   Power, Hit, Crit, Haste, Expertise, Armor Penetration and Spell Piercing, each as the build's
+   Handbook table weights it. Stamina is floored at **0.1** so it still breaks ties. The database
+   gives ratings, the weights are per rating point, so nothing is converted.
 2. **Weapons** add DPS: main hand 20 EP per DPS (scaled up for slower weapons where the rotation
    hits for weapon damage), off hand 9 EP per DPS. `curation.json` `dpsEp` can override this per
-   build, e.g. with the sim's Main Hand DPS EP. Which weapons a build may use is `WEAPONS` in
-   `rank.mjs`: Mutilate daggers in both hands; Backstab/Ambush builds a dagger main hand;
-   Sinister Strike a slow main hand; Subtlety Questing and Dungeons weapon-swap, so they get both a
-   dagger list and a slow list (each scored for its own family); off hand any weapon unless the build is Assassination.
-3. **Procs and use effects** are valued from the game's own data (`procs.mjs`), not the tooltip.
-   Each effect becomes damage per second (or an average stat), then EP:
+   build. Which weapons a build may use is `WEAPONS` in `rank.mjs`: Mutilate daggers in both
+   hands; Backstab/Ambush builds a dagger main hand; Sinister Strike a slow main hand; **Subtlety
+   Questing and Dungeons weapon-swap, so each gets both a dagger list and a slow list, each picked,
+   spaced and gap-filled on its own**, even at the same level. Off hand: any melee weapon unless the
+   build is Assassination (daggers).
+3. **Random-suffix items** ("of the Tiger"): each suffix option adds stats scaled by the item's
+   rand-prop points. The item scores its base stats plus the **average over the suffixes that
+   help the build** (anything with a weighted stat besides Stamina), and only counts if at least a
+   third of its suffixes help. You can't choose the suffix, so they are tagged "· random suffix" in
+   the Source column and listed in the report.
+4. **Procs and use effects** are valued from the database and game tables, not the tooltip. Each
+   effect becomes damage per second (or an average stat), then EP:
    - extra attack: procs/sec × the weapon's average hit × 1.3 (Attack Power on the swing)
    - flat or over-time damage: procs/sec × damage × 0.9 (resists) × 0.85 (it doesn't scale like
      weapon DPS) of a main-hand DPS point
-   - AP / Agility / Strength / crit / hit buffs and haste: amount × uptime × the build's weight
+   - granted stats (database), AP / Agility / Strength / crit / hit buffs and haste: amount ×
+     uptime × the build's weight
    - use effects count once per cooldown
    - anything else (utility, absorbs, target debuffs) scores 0 and is flagged ⚠ in the report
 
-   Rates come from the game's proc data. When it has none (all weapon procs so far), 1 PPM is
-   assumed (flagged `~`); `curation.json` `ppm` sets a known rate for one item. All the proc
-   knobs are at the top of `rank.mjs`. There's no sim: it only runs at level 60.
-4. **Baseline**: per slot and level, the median EP of fixed-stat greens with Rogue stats
-   (random-suffix greens have no fixed stats; caster greens would drag it down).
-5. **Level** shown: the required level, or for a quest reward the quest's level when
-   that's higher (Wingblade requires 10 but its quest is 22). When Wowhead has no quest
-   level, item level − 2.
-6. **Picks** per slot: the set of upgrades that adds the most "better than green" over
-   levels 10–60, where each pick has a cost and picks sit a minimum number of levels
-   apart (weapons 5, big armor 8, small armor/jewelry 10). Picks come first from items
-   both factions can get; each faction then adds its own faction-only items where they
-   beat those, which gives the other side's answer at about the same level.
-7. **Pins** (`curation.json`): items you know matter that the model can't see or undervalues
-   (Thrash Blade). They're forced in for the builds and slots they fit; the report's "Pinned
-   items" table shows what each scored and whether it would have been picked on its own.
-8. **Chaseable sources only**: quests, dungeon drops (anything Wowhead marks with a
-   dungeon difficulty, `dd`, so new Forever dungeons count even before they're named in
-   `zones.mjs`), crafted. World drops, open-world rare spawns, vendors (battleground and
-   reputation quartermasters), battleground quests, raids and PvP are out unless
-   `curation.json` allows them. Items Wowhead has no source for are out too. The Stockade
-   and Ragefire Chasm count as Alliance and Horde respectively.
-9. **Available at launch**: a pick must be obtainable when the game launches, not just exist in the data.
-   - `curation.json` `notAtLaunch.zones` keeps out drops from those zones (Dire Maul), and crafted
-     items whose *recipe* drops there. A crafted item is only as available as its recipe: Shifting
-     Cloak is Leatherworking, but the pattern is a Dire Maul drop. A recipe with no source listed
-     isn't blocked (new Forever recipes often have none), but the report lists those picks to check.
-   - **Epics below level 60 are blocked by default** (most are Naxxramas-era or post-launch
-     rewards: Darkmantle, Persuader, Shifting Cloak…). `allowEpic: [ids]` lets one in. The report's
-     "kept out" section lists every strong item blocked this way, so nothing disappears silently.
-   - `exclude` is the hard blacklist for anything else (with a `why`).
-10. **Range**: required level 10–58. Below 10 greens barely have stats; 59–60 items belong
-   to pre-raid BiS.
+   Rates come from the database (PPM or chance). When it has none, 1 PPM is assumed (flagged `~`);
+   `curation.json` `ppm` sets a known rate for one item. Knobs are at the top of `rank.mjs`. There's
+   no sim: it only runs at level 60.
+5. **Baseline**: per slot and level, the median EP of fixed-stat greens with Rogue stats.
+6. **Picks** per slot, **per faction**: the chain of upgrades that adds the most "better than
+   green" over levels 10–58, where each pick has a small cost and picks sit a minimum number of
+   levels apart (weapons 4, others 5). Items only one faction can get count at 92%, so the neutral
+   item wins unless the exclusive one is clearly better; otherwise each faction gets its own best
+   answer at about the same level. An item both factions can get is listed once as "Both"; one
+   they reach by different quests or vendors is listed once per faction.
+7. **Gap-fill**: no slot goes more than **6 levels** (level 10 → first pick, between picks, last
+   pick → 58) without a recommendation, for each faction and each weapon family. A filler is the
+   strongest available item that is still an upgrade over the pick before it (and weaker than the
+   one after) and at least matches a typical green. Rings and trinkets, which have two slots, only
+   need to match the green. Gaps nothing can fill are **reported, not padded**: the report's Coverage
+   table lists them per build, slot and faction, and the same gap on both sides means the database
+   has nothing (usually: not decrypted yet, or no source recorded).
+8. **Pins** (`curation.json`): items you know matter that the model can't see or undervalues
+   (Thrash Blade). They're forced in for the builds and slots they fit when the database has them;
+   the report's "Pinned items" table shows what each scored, and a warning says if the database
+   doesn't have the item.
+9. **Chaseable sources only**:
+   - quests (with the faction that can take them), dungeon drops, crafted (with a recipe players can
+     get), vendors, and reputation rewards up to `maxRepLevel` (Honored) from reputations not in
+     `notAtLaunch.reps`;
+   - out: raids, anything PvP-flagged, world drops and rare spawns (unless `allow`), items with no
+     source recorded. An item sold by a reputation vendor counts only through its reputation.
+   - The Stockade and Ragefire Chasm are one faction's dungeons (`cityDungeons`).
+10. **Available at launch**: `notAtLaunch.zones` keeps out drops and vendors in those zones (Dire
+    Maul), and crafted items whose *recipe* drops or is sold there. A crafted item is only as available
+    as its recipe; a recipe with no source listed isn't blocked (new Forever recipes often have none),
+    but the report lists those picks to check. **Epics below level 60 are blocked by default**
+    (`allowEpic: [ids]` lets one in); the report's "kept out" section lists every strong item this
+    blocked.
+11. **Range**: required level 10–58. Below 10 greens barely have stats; 59–60 items belong to
+    pre-raid BiS.
 
-Each build's list holds armor, jewelry, trinkets and ranged plus its own main hand and off hand picks; `src/content/gear.ts` `levelingGearFor(spec, build)` hands it to the build.
+### Levels
+
+The level shown is the highest of: the item's required level (database), the required level
+Wowhead lists for it when the database has none (`lookups.mjs`, www XML feed), and for a quest
+reward the quest's level (Wowhead's quest tooltip, which shows it for some quests). With none of
+those, item level − 4. `curation.json` `level` overrides. The report header counts where each
+level came from. Wowhead's quest pages don't expose a quest's level or "requires level to accept"
+to scripts, so the minimum accept level can't be read directly; the quest level is the closest
+signal available.
+
+### Wowhead links
+
+An item can be in the database before Wowhead lists it. Such a pick is still emitted, flagged
+`noWowhead` with its `icon` and a `tooltip` built from the database (`tooltip.mjs`); the Handbook
+shows the same tooltip without a link. `links.mjs` runs **every** time: it rechecks every item
+without a link (and links older than a week), so the flags drop off by themselves once Wowhead
+adds the item. `run.mjs` also rebuilds when a listed item's link status changed. `npm run icons`
+uses the database's icon name for unlisted items.
 
 ## curation.json
 
 - `exclude: [{ "id": 1234, "why": "…" }]` drops an item.
-- `allow: [1234]` lets a vendor or rare-spawn item count as chaseable.
-- `level: { "1234": 30 }` overrides the level shown (e.g. a quest reward with no level requirement).
-- `faction: { "1234": "Horde" }` for quest rewards whose quest is faction-only but the item isn't marked.
+- `allow: [1234]` lets a world drop, rare spawn or PvP-flagged item count as chaseable.
+- `level: { "1234": 30 }` overrides the level shown.
 - `source: { "1234": "Quest: …" }` overrides the Source text.
-- `include: [{ "builds": ["combat/questing"], "item": { …LevelingItem } }]` adds an item the data can't see yet (omit `builds` for all six).
-- `pins`, `ppm` and `dpsEp`: see Method 2, 3 and 7.
+- `include: [{ "builds": ["combat/questing"], "item": { …LevelingItem } }]` adds an item the database can't see yet (omit `builds` for all six).
+- `pins`, `ppm`, `dpsEp`, `notAtLaunch`, `allowEpic`, `maxRepLevel`, `cityDungeons`, `dungeonInZone`: see the `_readme` in the file.
 
 ## Known limits
 
-- Items can disappear: Forever re-itemizes, so `--revalidate` (every run) drops cached items Wowhead no longer has.
-- Faction comes only from Wowhead's flag on the item itself; faction-only quest rewards often aren't flagged and read "Both". Fix with `curation.json` `faction`.
-- Encrypted items are invisible until Wowhead decrypts them; `scan.mjs --missing` picks them up.
-- Procs are modeled, not simulated: rates the game data lacks are assumed at 1 PPM, and effects outside the model score 0 (⚠). Judge those by hand and pin or `ppm` them.
-- Quest faction is only known when the item itself is marked Alliance/Horde; fix others with `curation.json` `faction`.
-- Some Forever dungeons sit under an outdoor zone id on Wowhead (City of Dalaran's bosses are in Alterac Mountains, 36); `DUNGEON_IN_ZONE` in `zones.mjs` names them.
-- Late daggers are thin until more Forever dungeon loot is decrypted (the level 44–58 dungeon daggers aren't in Wowhead's data yet).
-- Wowhead's `www` pages (list views) block scripts outright, which is why this goes item by item.
+- The database only has what WoWSims has decrypted, and many items have no source yet; thin slots show as gaps in the Coverage table.
+- Stat ratings are scored at face value; if the game scales rating-to-percent by level (the sim only has level 60 constants), low-level hit/crit/expertise are undervalued.
+- Procs are modeled, not simulated: rates the database lacks are assumed at 1 PPM, and effects outside the model score 0 (⚠). Judge those by hand and pin or `ppm` them.
+- Quest levels are partial (see Levels).
+- Bind-on-equip comes from the Wowhead tooltip, so an unlisted item isn't tagged BoE.
+- Some Forever dungeons sit under an outdoor zone id in the database (City of Dalaran under Alterac Mountains); `dungeonInZone` names them.
