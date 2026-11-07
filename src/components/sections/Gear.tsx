@@ -129,6 +129,9 @@ function LevelingHeader() {
   );
 }
 
+/** Unique per row: an item both factions reach by different quests appears twice at the same level and slot. */
+const levelingKey = (i: LevelingItem) => [i.level, i.slot, i.itemId, i.faction, i.source].join('|');
+
 /** One level range of milestones, e.g. 21–40. Items are already sorted by level. */
 function LevelingBracket({ from, to, items, filtered }: { from: number; to: number; items: LevelingItem[]; filtered: boolean }) {
   const range = `${from}–${to}`;
@@ -144,7 +147,7 @@ function LevelingBracket({ from, to, items, filtered }: { from: number; to: numb
         <div role="table" aria-label={`${copy.leveling.tableLabel}, ${copy.leveling.bracket.toLowerCase()} ${range}`} style={{ minWidth: 640 }}>
           <LevelingHeader />
           {items.length ? (
-            items.map((item) => <LevelingRow key={`${item.level}-${item.itemId}-${item.slot}`} item={item} />)
+            items.map((item) => <LevelingRow key={levelingKey(item)} item={item} />)
           ) : (
             <div role="row" className="border-t border-line px-[14px] py-[14px]">
               <span role="cell" className="text-[12.5px] italic text-dim">
