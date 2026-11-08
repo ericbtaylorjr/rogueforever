@@ -101,6 +101,9 @@ const hemoRotation: Rotation = {
 const swapMacroTip: ProTip = {
   text: 'This rotation uses weapon swap macros, which can be found in the Macros section. If you prefer not to swap, always use Slow MH, ignore Stealth and start with Ghostly Strike instead.',
 };
+const sinisterForHemoTip: ProTip = {
+  text: 'Use Sinister Strike in place of Hemorrhage as your combo point builder until you have unlocked the Hemorrhage talent.',
+};
 const preparationTip: ProTip = { text: 'Preparation whenever Vanish is on cooldown.' };
 const subtletyShank = {
   press: 'Shank',
@@ -135,6 +138,7 @@ const levelingQuestingRotation: Rotation = withRiposte(
     steps: levelingSteps,
     tips: [
       swapMacroTip,
+      sinisterForHemoTip,
       tip.meleeUptime,
       tip.premeditation,
       preparationTip,
@@ -154,6 +158,7 @@ const levelingDungeonsRotation: Rotation = {
   steps: levelingSteps,
   tips: [
     swapMacroTip,
+    sinisterForHemoTip,
     tip.meleeUptime,
     tip.premeditation,
     preparationTip,
