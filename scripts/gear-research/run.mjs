@@ -53,6 +53,9 @@ const code = sha(readdirSync(here('.')).filter((f) => f.endsWith('.mjs')).sort()
 const fingerprint = sha(JSON.stringify({ slice, code, weights: loadBuildWeights(), curation: readFileSync(here('./curation.json'), 'utf8') }));
 const lastFile = here('./cache/last-run.json');
 const last = readJson(lastFile, {});
+// The database drops items as well as adding them (client clean-ups); say so when it shrinks a lot.
+const itemCount = db.items.length;
+if (last.itemCount && itemCount < last.itemCount * 0.9) console.warn(`\n!! The database has ${itemCount} items, down from ${last.itemCount} at the last run. Expect smaller lists; the report names the previously listed items that vanished.`);
 
 console.log('\n— Wowhead links');
 const outFile = here('../../src/content/leveling-gear.json');
@@ -103,5 +106,5 @@ if (flag('--no-emit')) {
 console.log('\n— Emit');
 const emitStatus = run('rank.mjs', ['--emit']);
 if (emitStatus !== 0) process.exit(emitStatus);
-writeFileSync(lastFile, JSON.stringify({ fingerprint, at: new Date().toISOString() }));
+writeFileSync(lastFile, JSON.stringify({ fingerprint, itemCount, at: new Date().toISOString() }));
 console.log('\nDone. Next: npm run icons, npm run typecheck, then review `git diff src/content/leveling-gear.json` and scripts/gear-research/cache/report.md.');

@@ -78,7 +78,7 @@ function offersOf(item, ctx) {
   else
     for (const s of sources) {
       if (s.quest) {
-        offers.push({ kind: 'quest', text: `Quest: ${s.quest.name}`, factions: sideOf(s.quest.faction), questId: s.quest.id });
+        offers.push({ kind: 'quest', text: `Quest: ${s.quest.name}`, factions: curation.questSide?.[s.quest.id] ? [curation.questSide[s.quest.id]] : sideOf(s.quest.faction), questId: s.quest.id, sideKnown: s.quest.faction != null || curation.questSide?.[s.quest.id] != null });
       } else if (s.drop) {
         const d = s.drop;
         const zone = zoneName(d.zoneId);

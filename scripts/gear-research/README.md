@@ -77,7 +77,7 @@ and Dungeons), so a build's list reflects its own stat weights.
    Power, Hit, Crit, Haste, Expertise, Armor Penetration and Spell Piercing, each as the build's
    Handbook table weights it. Stamina is floored at **0.1** so it still breaks ties. The database
    gives ratings, the weights are per rating point, so nothing is converted.
-2. **Weapons** add DPS: main hand 20 EP per DPS (scaled up for slower weapons where the rotation
+2. **Weapons** follow `WEAPON_PREFS` in `rank.mjs` (Combat: top-end damage > DPS > speed on a non-dagger main hand, DPS > speed off hand; Assassination: daggers, DPS > slow; Subtlety: daggers plus a non-dagger swap list, DPS first, slight slow preference), on top of DPS: main hand 20 EP per DPS (scaled up for slower weapons where the rotation
    hits for weapon damage), off hand 9 EP per DPS. `curation.json` `dpsEp` can override this per
    build. Which weapons a build may use is `WEAPONS` in `rank.mjs`: Mutilate daggers in both
    hands; Backstab/Ambush builds a dagger main hand; Sinister Strike a slow main hand; **Subtlety
@@ -116,6 +116,11 @@ and Dungeons), so a build's list reflects its own stat weights.
    need to match the green. Gaps nothing can fill are **reported, not padded**: the report's Coverage
    table lists them per build, slot and faction, and the same gap on both sides means the database
    has nothing (usually: not decrypted yet, or no source recorded).
+   **Options and alternatives**, per faction after gap-fill: a Bind on Pickup craft (`lookups.json` `binds`,
+   from Wowhead's tooltip) gets a non-crafted alternative within 6 levels below / 3 above, and every slot is
+   topped up to `MIN_OPTIONS` (3) per bracket (1–20, 21–40, 41–58) from the best unused available items at
+   0.9× a typical green or better, then to `MIN_OPTIONS_FLOOR` (2) at 0.5× or better. Shortfalls are in
+   the report's "Brackets with fewer than 3 options".
 8. **Pins** (`curation.json`): items you know matter that the model can't see or undervalues
    (Thrash Blade). They're forced in for the builds and slots they fit when the database has them;
    the report's "Pinned items" table shows what each scored, and a warning says if the database
@@ -162,6 +167,7 @@ uses the database's icon name for unlisted items.
 - `level: { "1234": 30 }` overrides the level shown.
 - `source: { "1234": "Quest: …" }` overrides the Source text.
 - `include: [{ "builds": ["combat/questing"], "item": { …LevelingItem } }]` adds an item the database can't see yet (omit `builds` for all six).
+- `questSide: { "93128": "Horde" }` sets which side can take a quest when the database records none (it then assumes both sides; the report lists picked quests like that under "side the database doesn't record", to check on Wowhead).
 - `pins`, `ppm`, `dpsEp`, `notAtLaunch`, `allowEpic`, `maxRepLevel`, `cityDungeons`, `dungeonInZone`: see the `_readme` in the file.
 
 ## Known limits

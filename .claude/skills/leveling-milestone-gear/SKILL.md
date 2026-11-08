@@ -32,9 +32,15 @@ quest levels, so a few items need small Wowhead lookups (cached): `lookups.mjs`.
 - **Stats** use the build's own weights, read from `src/content/builds/*.ts` by `weights.mjs`: Agility,
   Strength, Attack Power, Hit, Crit, Haste, Expertise, Armor Penetration, Spell Piercing, plus Stamina
   floored at 0.1. After `update-stat-weights` changes a leveling build, rerun this.
-- **Weapon damage**: DPS counts per hand (main 20 EP per DPS, off 9; slow weapons get a speed bonus for
-  Sinister Strike, daggers for Backstab/Mutilate). Which weapons each build uses is `WEAPONS` in
-  `rank.mjs`.
+- **Weapons** follow each spec's stated preference (`WEAPON_PREFS` and `WEAPONS` in `rank.mjs`), always
+  after the item's stats:
+  - **Combat** main hand: any weapon except a dagger; highest top-end (maximum) damage first, then DPS,
+    then speed (slower is better). Off hand: any weapon type, DPS first, then speed.
+  - **Assassination** (Mutilate): daggers in both hands; main hand DPS first, then a slower dagger.
+  - **Subtlety**: a dagger list and a non-dagger main-hand list (the weapon swap after the Ambush opener,
+    any weapon type), DPS first, with a slight preference for a slow non-dagger; any weapon off hand.
+  - The off-hand speed preference is assumed to run the same way as the main hand's (slower); confirm
+    with the user if it matters. Weapon DPS counts 20 EP per point in the main hand, 9 in the off hand.
 - **Dagger and non-dagger**: a build that uses both gets a separate main-hand list for each, picked
   and gap-filled on its own, so both appear even at the same level. That is Subtlety Questing and
   Dungeons (weapon-swap). Dagger-only builds (Assassination main and off hand, Backstab/Ambush main
@@ -62,6 +68,17 @@ No sims: the sim only runs at level 60, so it can't rank level 20 gear.
   The report's **Coverage** table lists, per build and slot, the picks each faction sees and its
   remaining gaps. Read it every run. Most gaps are the database's, not the model's (items not
   decrypted yet, or no source recorded): say so, don't hide them.
+
+- **Options per bracket**: every slot should have **at least 3 options (never fewer than 2 if anything
+  qualifies) in each level bracket the Handbook shows (1–20, 21–40, 41–58), for each faction.** After the
+  upgrade chain and gap-fill, the best remaining available items near a typical green are added (marked `+`
+  in the report); a second pass accepts items down to half of a typical green only to reach 2. The report's
+  "Brackets with fewer than 3 options" lists what still falls short, almost always because the database
+  has no usable source there: say so, don't pad further.
+- **Bind on Pickup crafts**: a crafted pick that binds when picked up (read from Wowhead's tooltip, cached
+  in `lookups.json` `binds`) is tagged "· binds on pickup" and always gets a **non-crafted alternative**
+  within 6 levels below / 3 above (marked `⇄`), so players without the profession have an option. Those
+  extras are in addition to the normal picks. If nothing non-crafted qualifies the report warns.
 
 ## Availability
 
@@ -103,6 +120,11 @@ Wowhead adds the item. List the currently unlinked picks in your summary (the re
      `curation.json` (never in the JSON) and rerun.
    - **Kept out** and **recipe source Wowhead doesn't list**: confirm with the user which are really in the
      game at launch; `exclude` the ones that aren't, `allowEpic` the ones that are.
+   - **Quest picks whose side the database doesn't record**: it assumes both factions; check "Side" on each
+     quest's Wowhead page (ask the user if you can't read it; don't guess) and set `questSide` in `curation.json`.
+   - **Brackets with fewer than 3 options** and the Warnings about Bind on Pickup crafts with no alternative.
+   - **Warnings** also name listed items that vanished from the database (it drops items as well as adding
+     them); `run.mjs` warns when the item count falls over 10%. Report the drop; don't pad the lists.
    - **Random-suffix picks** and **picks Wowhead doesn't list**.
    - Each build's tables: sanity-check the picks against the weapon types and the Handbook builds.
    - To see why a slot has a gap: `node scripts/gear-research/rank.mjs --debug "combat/questing|Head"`.

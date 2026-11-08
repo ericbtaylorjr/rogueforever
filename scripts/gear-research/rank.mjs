@@ -95,6 +95,20 @@ const MIN_STEP = 2;
 const FACTION_ONLY_DISCOUNT = 0.92;
 /** A gap filler only has to match a typical green at its level (it still has to be an upgrade over the pick before it). */
 const FILL_RATIO = 1.0;
+/** When no gap filler matches a typical green, one this close (and still an upgrade over the pick before it) is used rather than leave a long gap. */
+const GAP_FALLBACK_RATIO = 0.9;
+/** Every slot gets this many options in each level bracket (1-20, 21-40, 41-58) for each faction, and never fewer than the floor if anything at all qualifies. */
+const MIN_OPTIONS = 3;
+const MIN_OPTIONS_FLOOR = 2;
+/** Extra options only have to come close to a typical green (the floor accepts a bit less when nothing better exists). */
+const OPTION_RATIO = 0.9;
+const OPTION_RATIO_FLOOR = 0.5;
+/** A Bind on Pickup craft needs a non-crafted alternative this far below / above it, at least this close to a typical green. */
+const ALT_BEFORE = 6;
+const ALT_AFTER = 3;
+const ALT_RATIO = 0.8;
+const BRACKETS = [[MIN_LEVEL, 20], [21, 40], [41, MAX_LEVEL]];
+
 /** An item must beat the green baseline at its level by this much to be considered. Weapons differ less (mostly DPS). */
 const MIN_RATIO = { weapon: 1.05, major: 1.1, minor: 1.1, trinket: 1.1 };
 
@@ -172,6 +186,32 @@ function procEP(item, build, w) {
   return out;
 }
 
+/**
+ * What each spec wants from a weapon, as weights that rank the three things in order of
+ * importance: top-end damage (the weapon's maximum hit, per reference swing), DPS, and speed
+ * (slower is better). The weapon's EP is dpsEp × (top × top-end DPS + dps × DPS), scaled by
+ * 1 + speed × (its speed ÷ the reference speed − 1). Combat: highest top-end damage, then DPS,
+ * then speed, any non-dagger main hand; off hand DPS then speed, any weapon type. Assassination
+ * (Mutilate): daggers, main hand DPS then slow. Subtlety: daggers, plus any weapon type for the
+ * weapon swap after the Ambush opener, DPS first with a slight preference for a slow non-dagger.
+ * The speed on an off hand is the same direction as the main hand's (an assumption: confirm).
+ */
+const WEAPON_PREFS = {
+  combat: { main: { top: 0.55, dps: 0.45, speed: 0.15 }, off: { top: 0, dps: 1, speed: 0.1 } },
+  assassination: { main: { top: 0, dps: 1, speed: 0.2 }, off: { top: 0, dps: 1, speed: 0 } },
+  subtlety: { main: { top: 0, dps: 1, speed: 0.15 }, off: { top: 0, dps: 1, speed: 0.1 } },
+};
+/** A typical weapon's maximum hit is about this multiple of its average hit. */
+const TOP_END_SHAPE = 1.3;
+const weaponValue = (item, build, hand, family) => {
+  const p = WEAPON_PREFS[build.key.split('/')[0]][hand === 'off' ? 'off' : 'main'];
+  const ref = REFERENCE_SPEED[family === 'dagger' ? 'dagger' : 'slow'];
+  const w = item.weapon;
+  const topDps = w.max / TOP_END_SHAPE / ref;
+  const mix = p.top * topDps + p.dps * w.dps;
+  return mix * (1 + p.speed * (w.speed / ref - 1));
+};
+
 /** Score for one role and build, `{ ep, proc, suffix }`; `null` when the item can't fill it. */
 function scoreFor(item, role, build, w) {
   const dps = dpsEp(build);
@@ -188,12 +228,11 @@ function scoreFor(item, role, build, w) {
       return item.cls === 'ranged' ? base((item.weapon?.dps ?? 0) * dps.ranged) : null;
     case 'main': {
       if (item.cls !== 'weapon' || !['Main hand', 'One-hand'].includes(item.slot) || !role.types.includes(item.wtype)) return null;
-      const speedBonus = role.family === 'slow' ? 0.7 + 0.3 * (item.weapon.speed / REFERENCE_SPEED.slow) : role.family === 'dagger' ? 0.7 + 0.3 * (item.weapon.speed / REFERENCE_SPEED.dagger) : 1;
-      return base(item.weapon.dps * dps.main * speedBonus);
+      return base(weaponValue(item, build, 'main', role.family) * dps.main);
     }
     case 'off': {
       if (item.cls !== 'weapon' || !['Off hand', 'One-hand'].includes(item.slot) || !role.types.includes(item.wtype)) return null;
-      return base(item.weapon.dps * dps.off);
+      return base(weaponValue(item, build, 'off', role.family) * dps.off);
     }
   }
 }
@@ -235,15 +274,20 @@ function baselineCurve(scored, weapons) {
   const greens = scored.filter((s) => s.item.quality === 2 && !s.item.suffixOptions && (weapons || ROGUE_STATS.some((k) => s.item.stats[k])));
   const curve = [];
   for (let l = 1; l <= 60; l++) {
-    const near = greens.filter((s) => Math.abs(s.item.level - l) <= 3).map((s) => s.ep).sort((a, b) => a - b);
-    curve[l] = near.length >= 3 ? near[Math.floor(near.length / 2)] : undefined;
+    // Thin levels (the database has few greens there) look a little further out before giving up.
+    for (const reach of [3, 6]) {
+      const near = greens.filter((s) => Math.abs(s.item.level - l) <= reach).map((s) => s.ep).sort((a, b) => a - b);
+      if (near.length >= 3) { curve[l] = near[Math.floor(near.length / 2)]; break; }
+    }
   }
   // Fill gaps by interpolation, then make it monotonic so a dip never makes an item look better.
   for (let l = 1; l <= 60; l++) {
     if (curve[l] !== undefined) continue;
     const prev = [...Array(l).keys()].reverse().find((k) => curve[k] !== undefined);
     const next = curve.findIndex((v, k) => k > l && v !== undefined);
-    curve[l] = prev !== undefined && next > 0 ? curve[prev] + ((curve[next] - curve[prev]) * (l - prev)) / (next - prev) : curve[prev ?? next] ?? 1;
+    // Below the first level with greens, scale down with level (a flat extension would hold level 10 gear to a level 30 bar).
+    const first = curve.findIndex((v) => v !== undefined);
+    curve[l] = prev !== undefined && next > 0 ? curve[prev] + ((curve[next] - curve[prev]) * (l - prev)) / (next - prev) : prev === undefined && first > 0 ? Math.max(1, (curve[first] * l) / first) : curve[prev ?? next] ?? 1;
   }
   for (let l = 2; l <= 60; l++) curve[l] = Math.max(curve[l], curve[l - 1], 1);
   return curve;
@@ -308,10 +352,16 @@ function fillGaps(picks, pool, base, paired) {
     const [a, b] = gap;
     const lo = a.start ? MIN_LEVEL : a.item.level + MIN_STEP;
     const hi = b.end ? MAX_LEVEL : b.item.level - MIN_STEP;
-    const fits = (s, to) => !used.has(s.item.id) && s.item.level >= lo && s.item.level <= to && s.ep >= need * base[clampLevel(s.item.level)] && (paired || (s.ep > a.ep && s.ep < b.ep));
+    const fitsAt = (ratio) => (s, to) => !used.has(s.item.id) && s.item.level >= lo && s.item.level <= to && s.ep >= ratio * base[clampLevel(s.item.level)] && (paired || (s.ep > a.ep && s.ep < b.ep));
+    const fits = fitsAt(need);
     const top = (list) => list.sort((x, y) => y.ep - x.ep || y.item.level - x.item.level)[0];
     // Prefer one that closes the gap in a single step, otherwise anything that splits it.
-    const pick = top(pool.filter((s) => fits(s, Math.min(a.item.level + MAX_GAP, hi)))) ?? top(pool.filter((s) => fits(s, hi)));
+    let pick = top(pool.filter((s) => fits(s, Math.min(a.item.level + MAX_GAP, hi)))) ?? top(pool.filter((s) => fits(s, hi)));
+    // Nothing matches a typical green: a slightly weaker upgrade still beats a long gap.
+    if (!pick) {
+      const loose = fitsAt(GAP_FALLBACK_RATIO);
+      pick = top(pool.filter((s) => loose(s, Math.min(a.item.level + MAX_GAP, hi)))) ?? top(pool.filter((s) => loose(s, hi)));
+    }
     if (!pick) {
       stuck.add(`${a.item.level}-${b.item.level}`);
       unfilled.push({ from: a.item.level, to: b.item.level });
@@ -330,9 +380,10 @@ function fillGaps(picks, pool, base, paired) {
 const report = [];
 const emitted = {};
 const chosenAll = []; // every pick, for links.mjs
-const needed = { items: new Set(), quests: new Set(), recipes: new Set(), vendors: new Set() };
+const needed = { items: new Set(), quests: new Set(), recipes: new Set(), vendors: new Set(), binds: new Set() };
 const flagged = new Map(); // id → name, for effects the model can't value
 const unverified = new Map(); // crafted picks whose recipe source Wowhead doesn't list
+const sideUnverified = new Map(); // quest picks whose side the database doesn't record (assumed both)
 const keptOut = new Map(); // id → why: strong items that aren't available
 const coverage = []; // table rows
 const problems = [];
@@ -361,6 +412,7 @@ for (const build of builds) {
       .filter(Boolean);
     const base = baselineCurve(scored, role.group === 'weapon');
     if (debugArg === `${build.key}|${role.key}`) {
+      console.log(`baseline (typical green EP) by level: ${[10, 15, 20, 25, 30, 40, 50, 58].map((l) => `L${l} ${base[l]?.toFixed(0)}`).join(', ')}`);
       for (const s of [...scored].sort((a, b) => a.item.level - b.item.level)) {
         if (s.item.level < MIN_LEVEL || s.item.level > MAX_LEVEL) continue;
         console.log(`L${s.item.level} ${(s.ep / base[clampLevel(s.item.level)]).toFixed(2)}× ep ${s.ep.toFixed(0)} ${s.item.name} (${s.item.id}) q${s.item.quality} ${s.item.faction ?? 'unavailable: ' + (s.item.dropped[0] ?? (s.item.hasSource ? 'source not chaseable' : 'no source'))}${s.item.suffixOptions ? ' [suffix ' + s.suffix.useful + '/' + s.suffix.total + ']' : ''} ${JSON.stringify(s.item.stats)}`);
@@ -386,6 +438,7 @@ for (const build of builds) {
         const o = i.avail[f];
         if (o?.kind === 'quest' && lookups.quests?.[o.questId] === undefined) needed.quests.add(o.questId);
       }
+      if (FACTIONS.some((f) => i.avail[f]?.kind === 'crafted') && lookups.binds?.[i.id] === undefined) needed.binds.add(i.id);
       for (const rid of i.pendingRecipes) needed.recipes.add(rid);
       if (i.needsVendorLookup) needed.vendors.add(i.id);
     }
@@ -411,14 +464,47 @@ for (const build of builds) {
       const everything = scored
         .filter((s) => s.item.avail[faction] && !taken(s) && s.item.level >= MIN_LEVEL && s.item.level <= MAX_LEVEL)
         .map((s) => ({ ...s, real: s.ep, ep: s.ep * (s.item.faction === 'Both' ? 1 : FACTION_ONLY_DISCOUNT) }));
-      return fillGaps(picks, everything, base, paired);
+      const { picks: filled, unfilled } = fillGaps(picks, everything, base, paired);
+      const out = filled;
+      const have = new Set(out.map((s) => s.item.id));
+      const crafted = (s) => s.item.avail[faction]?.kind === 'crafted';
+      const unused = (s) => !have.has(s.item.id);
+      const add = (s, tag) => { s[tag] = true; out.push(s); have.add(s.item.id); };
+      const better = (list) => list.sort((x, y) => y.ep - x.ep || y.item.level - x.item.level)[0];
+      // A craft that binds when picked up is no use to someone without the profession: offer a non-crafted alternative nearby.
+      for (const p of [...out]) {
+        if (!crafted(p)) continue;
+        if (lookups.binds?.[p.item.id] === undefined) needed.binds.add(p.item.id);
+        if (lookups.binds?.[p.item.id] !== 'pickup') continue;
+        const near = (s) => s.item.level >= p.item.level - ALT_BEFORE && s.item.level <= p.item.level + ALT_AFTER;
+        if (out.some((q) => q !== p && !crafted(q) && near(q))) continue;
+        const alt = better(everything.filter((s) => unused(s) && !crafted(s) && near(s) && s.ep >= ALT_RATIO * base[clampLevel(s.item.level)]));
+        if (alt) add(alt, 'alt');
+        else warnings.push(`${build.key} · ${role.key} (${faction}): ${p.item.name} binds on pickup (${p.item.avail[faction].text}) and nothing that isn't crafted qualifies within ${ALT_BEFORE} levels below / ${ALT_AFTER} above.`);
+      }
+      // Options: at least MIN_OPTIONS per level bracket, taking the best of what's left that is close to a typical green.
+      const optionGaps = [];
+      for (const [lo, hi] of BRACKETS) {
+        const count = () => out.filter((s) => s.item.level >= lo && s.item.level <= hi).length;
+        for (const [need, ratio] of [[MIN_OPTIONS, OPTION_RATIO], [MIN_OPTIONS_FLOOR, OPTION_RATIO_FLOOR]]) {
+          while (count() < need) {
+            const c = better(everything.filter((s) => unused(s) && s.item.level >= lo && s.item.level <= hi && s.ep >= ratio * base[clampLevel(s.item.level)]));
+            if (!c) break;
+            add(c, 'extra');
+          }
+        }
+        if (count() < MIN_OPTIONS) optionGaps.push({ lo, hi, n: count() });
+      }
+      return { picks: out.sort((x, y) => x.item.level - y.item.level), unfilled, optionGaps };
     };
 
     const chosen = new Map(); // id → { s, pickedBy: Set }
     const unfilled = {};
+    const optionGaps = {};
     for (const faction of FACTIONS) {
-      const { picks, unfilled: gaps } = picksFor(faction);
+      const { picks, unfilled: gaps, optionGaps: og } = picksFor(faction);
       unfilled[faction] = gaps;
+      optionGaps[faction] = og;
       for (const s of picks) {
         const entry = chosen.get(s.item.id) ?? { s, pickedBy: new Set() };
         entry.pickedBy.add(faction);
@@ -438,7 +524,7 @@ for (const build of builds) {
       return out;
     };
     const seenA = sees('Alliance'), seenH = sees('Horde');
-    coverage.push({ build: build.key, label, a: seenA.length, h: seenH.length, gapsA: gapsOf(seenA), gapsH: gapsOf(seenH), candidates: strong.length });
+    coverage.push({ build: build.key, label, optsA: optionGaps.Alliance, optsH: optionGaps.Horde, a: seenA.length, h: seenH.length, gapsA: gapsOf(seenA), gapsH: gapsOf(seenH), candidates: strong.length });
     if (!rows.length && strong.length) problems.push(`${build.key} · ${label}: ${strong.length} candidates but no picks`);
     if (role.hand === 'main') familyPicks[role.family] = rows.length;
 
@@ -458,13 +544,17 @@ for (const build of builds) {
       const srcA = i.avail.Alliance?.text, srcH = i.avail.Horde?.text;
       const src = srcA && srcH && srcA !== srcH ? `${srcA} / ${srcH}` : srcA ?? srcH;
       const wt = i.wtype && i.cls !== 'armor' ? ` ${i.wtype} ${i.weapon?.speed ?? ''}` : '';
-      const tags = `${flag(s)}${i.suffixOptions ? ' 🎲' : ''}${s.filler ? ' ↔' : ''}`;
+      const tags = `${flag(s)}${i.suffixOptions ? ' 🎲' : ''}${s.filler ? ' ↔' : ''}${s.alt ? ' ⇄' : ''}${s.extra ? ' +' : ''}`;
       report.push(
         `| ${i.level} | [${i.name}](https://www.wowhead.com/forever/item=${i.id}) (${i.id})${wt}${tags} | ${real.toFixed(0)} | ${s.proc.ep ? s.proc.ep.toFixed(0) : ''} | ${(real / base[clampLevel(i.level)]).toFixed(2)}× | ${src} | ${i.faction} | ${near.map((o) => `${o.item.name} (${o.item.id}, ${o.item.level}, ${(o.ep / base[clampLevel(o.item.level)]).toFixed(2)}×${flag(o)})`).join('; ')} |`,
       );
+      for (const f of ['Alliance', 'Horde']) {
+        const o = i.avail[f];
+        if (o?.kind === 'quest' && !o.sideKnown && i.avail.Alliance?.questId === i.avail.Horde?.questId) sideUnverified.set(o.questId, `${o.text.replace(/^Quest: /, '')} (quest ${o.questId}) → ${i.name} (${i.id})`);
+      }
       chosenAll.push({ itemId: i.id, build: build.key, slot: role.slot });
       // One entry per item; where the two factions reach it from different places it is two entries, one each.
-      const suffixTag = i.suffixOptions ? ' · random suffix' : '';
+      const suffixTag = `${i.suffixOptions ? ' · random suffix' : ''}${FACTIONS.some((f) => i.avail[f]?.kind === 'crafted') && lookups.binds?.[i.id] === 'pickup' ? ' · binds on pickup' : ''}`;
       const mk = (faction, text) => {
         const e = { level: i.level, slot: role.slot, itemId: i.id, name: i.name, quality: QUALITY[i.quality], source: `${curation.source?.[i.id] ?? text}${suffixTag}`, faction };
         const wh = wowhead[i.id];
@@ -490,42 +580,65 @@ for (const build of builds) {
   if (WEAPONS[build.key].filter((r) => r.hand === 'main').length > 1) for (const [fam, n] of Object.entries(familyPicks)) if (!n) problems.push(`${build.key}: no ${fam} main-hand picks, but the build uses both weapon families`);
 }
 
+// Rows must be unique (the Handbook keys its rows on these fields).
+for (const [k, rows] of Object.entries(emitted)) {
+  const seen = new Set();
+  for (const e of rows) {
+    const key = [e.level, e.slot, e.itemId, e.faction, e.source].join('|');
+    if (seen.has(key)) problems.push(`${k}: duplicate row ${e.name} (${e.itemId}) at level ${e.level}, ${e.slot}, ${e.faction}`);
+    seen.add(key);
+  }
+}
+// Items the last published lists had that the database no longer has (it drops and adds items as the client is cleaned up).
+{
+  const ids = new Set(db.items.map((i) => i.id));
+  const prev = existsSync(here('../../src/content/leveling-gear.json')) ? JSON.parse(readFileSync(here('../../src/content/leveling-gear.json'), 'utf8')).builds : {};
+  const gone = new Map();
+  for (const rows of Object.values(prev)) for (const e of rows) if (e.itemId && !ids.has(e.itemId) && !(curation.include ?? []).some((x) => x.item.itemId === e.itemId)) gone.set(e.itemId, `${e.name} (${e.itemId}, ${e.slot} L${e.level})`);
+  if (gone.size) warnings.push(`${gone.size} items in the last published lists are no longer in the database, so they drop out: ${[...gone.values()].join('; ')}`);
+}
+
 // Manual includes go in as written, for the builds that can use them.
 for (const inc of curation.include ?? []) for (const key of inc.builds ?? Object.keys(emitted)) emitted[key].push(inc.item);
 
 // ---------------------------------------------------------------- checks and output
 
 const pendingTotal = needed.items.size + needed.quests.size + needed.recipes.size;
-const neededOut = { items: [...needed.items].filter((id) => !lookups.items[id]), quests: [...needed.quests], recipes: [...needed.recipes].filter((id) => !lookups.recipes[id]), vendors: [...needed.vendors] };
+const neededOut = { items: [...needed.items].filter((id) => !lookups.items[id]), quests: [...needed.quests], recipes: [...needed.recipes].filter((id) => !lookups.recipes[id]), vendors: [...needed.vendors], binds: [...needed.binds].filter((id) => lookups.binds?.[id] === undefined) };
 writeFileSync(here('./cache/lookups-needed.json'), JSON.stringify(neededOut));
-const pending = neededOut.items.length + neededOut.quests.length + neededOut.recipes.length + neededOut.vendors.length;
+const pending = neededOut.items.length + neededOut.quests.length + neededOut.recipes.length + neededOut.vendors.length + neededOut.binds.length;
 const unchecked = [...new Set(chosenAll.map((c) => c.itemId))].filter((id) => !wowhead[id]);
 writeFileSync(here('./cache/picks.json'), JSON.stringify(chosenAll));
 if (emit && unchecked.length) problems.push(`${unchecked.length} picks have no Wowhead link check yet (run links.mjs): ${unchecked.slice(0, 12).join(', ')}${unchecked.length > 12 ? '…' : ''}`);
 
 const unlinked = [...new Set(chosenAll.map((c) => c.itemId))].filter((id) => wowhead[id] && !wowhead[id].found);
 const gapRows = coverage.filter((c) => c.gapsA.length || c.gapsH.length);
+const optionRows = coverage.flatMap((c) => ['Alliance', 'Horde'].flatMap((f) => (f === 'Alliance' ? c.optsA : c.optsH).map((g) => ({ ...g, build: c.build, label: c.label, f }))));
+const optionLines = optionRows.map((g) => `- ${g.build} · ${g.label} · ${g.f}: levels ${g.lo}–${g.hi} has ${g.n}`);
+const underFloor = optionRows.filter((g) => g.n < MIN_OPTIONS_FLOOR).length;
 const levelFrom = {};
 for (const id of new Set(chosenAll.map((c) => c.itemId))) levelFrom[byId.get(id).levelFrom] = (levelFrom[byId.get(id).levelFrom] ?? 0) + 1;
 const header = [
   `# Leveling gear research report`,
   ``,
   `Generated ${new Date().toISOString().slice(0, 16)}Z from the Forever database: master ${forever.head?.slice(0, 10) ?? '?'} (${forever.headDate?.slice(0, 10) ?? '?'}), database last changed ${forever.dbDate?.slice(0, 10) ?? '?'}; ${db.items.length} items, ${items.length} Rogue-usable candidates, ${Object.keys(procData).length} with proc or use data.`,
-  `EP uses each build's own weights from the Handbook (Stamina floored at ${STAMINA_EP}). "vs green" is EP over the typical fixed-stat green at that level. In the tables: ~ = on-hit rate assumed (${DEFAULT_PPM} PPM), ⚠ = has an effect the model can't value (scored 0), 🎲 = random-suffix item (average of the suffixes that help), ↔ = gap filler.`,
+  `EP uses each build's own weights from the Handbook (Stamina floored at ${STAMINA_EP}). "vs green" is EP over the typical fixed-stat green at that level. In the tables: ~ = on-hit rate assumed (${DEFAULT_PPM} PPM), ⚠ = has an effect the model can't value (scored 0), 🎲 = random-suffix item (average of the suffixes that help), ↔ = gap filler, ⇄ = non-crafted alternative to a Bind on Pickup craft, + = extra option to reach the per-bracket minimum.`,
   `Levels come from: ${Object.entries(levelFrom).map(([k, v]) => `${k} ${v}`).join(', ')}.`,
   pending ? `\n**Lookups pending (${neededOut.items.length} item levels, ${neededOut.quests.length} quests, ${neededOut.recipes.length} recipes, ${neededOut.vendors.length} vendor items):** run \`node scripts/gear-research/lookups.mjs\`, then rerun this. The picks below are provisional.` : '',
   problems.length ? `\n### Problems (these stop --emit)\n\n${problems.map((t) => `- ${t}`).join('\n')}` : '',
   warnings.length ? `\n### Warnings\n\n${warnings.map((t) => `- ${t}`).join('\n')}` : '',
+  optionLines.length ? `\n### Brackets with fewer than ${MIN_OPTIONS} options (${underFloor} with fewer than ${MIN_OPTIONS_FLOOR})\n\nNothing else available qualifies (close to a typical green) in these stretches, usually because the database has no source for the items there.\n\n${optionLines.join('\n')}` : '',
   `\n### Coverage\n\nA recommendation at least every ${MAX_GAP} levels from ${MIN_LEVEL} to ${MAX_LEVEL}. Picks each faction sees per slot; gaps are stretches no qualifying upgrade could fill.\n\n| Build | Slot | Alliance | Horde | Gaps (Alliance) | Gaps (Horde) |\n|---|---|---|---|---|---|\n${coverage.map((c) => `| ${c.build} | ${c.label} | ${c.a} | ${c.h} | ${c.gapsA.join(', ') || '·'} | ${c.gapsH.join(', ') || '·'} |`).join('\n')}`,
   pinReport.length ? `\n### Pinned items\n\n| Build | Slot | Item | Lvl | EP | vs green | Result | Why pinned |\n|---|---|---|---|---|---|---|---|\n${pinReport.join('\n')}` : '',
   unlinked.length ? `\n### Picks Wowhead doesn't list yet (shown with a tooltip, no link)\n\n${unlinked.map((id) => `- ${byId.get(id).name} (${id})`).join('\n')}` : '',
   suffixPicks.size ? `\n### Random-suffix picks\n\nScored as the average of the suffixes that help the build; you can't choose the suffix.\n\n${[...suffixPicks.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
+  sideUnverified.size ? `\n### Quest picks whose side the database doesn't record (shown as both factions)\n\nCheck "Side" on each quest's Wowhead page; set \`questSide\` in curation.json for any that is one faction's.\n\n${[...sideUnverified.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   keptOut.size ? `\n### Strong items kept out: not available (or an unconfirmed epic)\n\nAllow an epic with \`allowEpic\` in curation.json; remove a zone from \`notAtLaunch\` when it opens.\n\n${[...keptOut.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   unverified.size ? `\n### Crafted picks whose recipe source Wowhead doesn't list\n\nUsually new Forever recipes. Check each in game or on Wowhead; \`exclude\` any that aren't obtainable.\n\n${[...unverified.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   flagged.size ? `\n### Picks and runners-up with effects the model can't value\n\n${[...flagged].map(([id, n]) => `- [${n}](https://www.wowhead.com/forever/item=${id})`).join('\n')}` : '',
 ];
 writeFileSync(here('./cache/report.md'), [...header, ...report].join('\n') + '\n');
-console.log(`Report: scripts/gear-research/cache/report.md (${new Set(chosenAll.map((c) => c.itemId)).size} distinct picks, ${gapRows.length} slots with a gap, ${pending} lookups pending).`);
+console.log(`Report: scripts/gear-research/cache/report.md (${new Set(chosenAll.map((c) => c.itemId)).size} distinct picks, ${gapRows.length} slots with a gap, ${optionRows.length} slot brackets under ${MIN_OPTIONS} options, ${pending} lookups pending).`);
 for (const p of problems) console.log(`  problem: ${p}`);
 
 if (pending) {

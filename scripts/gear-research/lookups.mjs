@@ -12,6 +12,8 @@
  *  - vendors: the reputation a vendor-sold item requires ("Requires Silverwing Sentinels - Honored"
  *    in its Wowhead tooltip), which the database doesn't record for vendor items. Battleground
  *    reputations are PvP gear (curation.json excludeReps); the rest are limited by maxRepLevel.
+ *  - binds: whether a crafted item binds when picked up (its Wowhead tooltip), so a Bind on Pickup
+ *    craft also gets an alternative for players without the profession.
  *  - recipes: where a crafted pick's recipe item comes from, from the XML feed, so a recipe
  *    that only drops in content that isn't open yet can be ruled out.
  *
@@ -33,16 +35,18 @@ const BLOCK_RETRIES = 10;
 const refresh = process.argv.includes('--refresh');
 
 export const LOOKUPS = here('./cache/lookups.json');
-export const readLookups = () => (existsSync(LOOKUPS) ? JSON.parse(readFileSync(LOOKUPS, 'utf8')) : { items: {}, quests: {}, recipes: {}, vendors: {} });
+export const readLookups = () => (existsSync(LOOKUPS) ? JSON.parse(readFileSync(LOOKUPS, 'utf8')) : { items: {}, quests: {}, recipes: {}, vendors: {}, binds: {} });
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const needed = existsSync(here('./cache/lookups-needed.json')) ? JSON.parse(readFileSync(here('./cache/lookups-needed.json'), 'utf8')) : { items: [], quests: [], recipes: [], vendors: [] };
+  const needed = existsSync(here('./cache/lookups-needed.json')) ? JSON.parse(readFileSync(here('./cache/lookups-needed.json'), 'utf8')) : { items: [], quests: [], recipes: [], vendors: [], binds: [] };
   needed.vendors ??= [];
+  needed.binds ??= [];
   const lk = readLookups();
   lk.items ??= {};
   lk.quests ??= {};
   lk.recipes ??= {};
   lk.vendors ??= {};
+  lk.binds ??= {};
   const save = () => writeFileSync(LOOKUPS, JSON.stringify(lk));
   const today = () => new Date().toISOString().slice(0, 10);
   const block = (xml, tag) => xml.match(new RegExp(`<${tag}><!\\[CDATA\\[([\\s\\S]*?)\\]\\]></${tag}>`))?.[1];
@@ -76,6 +80,23 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
         const text = (d.tooltip ?? '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
         const m = text.match(/Requires ((?:(?!Requires)[A-Za-z' ])+?) - (Neutral|Friendly|Honored|Revered|Exalted)/);
         lk.vendors[id] = m ? { faction: m[1].trim(), level: REP.indexOf(m[2]) + 4, standing: m[2] } : null;
+      }
+    }),
+  );
+  save();
+
+  // How a crafted item binds: 'pickup', 'equip' or 'none'. An item Wowhead doesn't list yet is retried next run.
+  const binds = needed.binds.filter((id) => refresh || lk.binds[id] === undefined);
+  console.log(`Crafted item bind types to read: ${binds.length}`);
+  await Promise.all(
+    Array.from({ length: 6 }, async () => {
+      while (binds.length) {
+        const id = binds.shift();
+        const res = await fetch(`https://nether.wowhead.com/forever/tooltip/item/${id}`, { headers: UA }).catch(() => null);
+        if (!res) continue;
+        const d = res.ok ? await res.json().catch(() => null) : null;
+        if (!d?.tooltip) { lk.binds[id] = 'unlisted'; continue; }
+        lk.binds[id] = /Binds when picked up/.test(d.tooltip) ? 'pickup' : /Binds when equipped/.test(d.tooltip) ? 'equip' : 'none';
       }
     }),
   );
