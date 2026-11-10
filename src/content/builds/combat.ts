@@ -275,7 +275,7 @@ export const combat: Build[] = [
     talentNote:
       'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush, with Blade Flurry before the pull. Shank goes on cooldown below 80 energy. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Eviscerate.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh005203002-3203130202012121551-005_t5',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh005203002-3203030202012221551-005_t5',
     stats: backstabStats,
     gear: noEndgameGear,
     rotation: backstabRotation,
