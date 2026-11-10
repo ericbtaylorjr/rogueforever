@@ -80,6 +80,12 @@ No sims: the sim only runs at level 60, so it can't rank level 20 gear.
   within 6 levels below / 3 above (marked `⇄`), so players without the profession have an option. Those
   extras are in addition to the normal picks. If nothing non-crafted qualifies the report warns.
 
+- **Source mix**: every slot should offer, in each 10-level window (1–20, 21–30, 31–40, 41–50, 51–58; crafts per Handbook bracket), a mix of **Bind on Equip** items (drops and crafts
+  anyone can buy), **Bind on Pickup quest/dungeon/vendor/reputation rewards**, and a **craft**, whenever one exists,
+  even when it is statistically weaker than what's already there (down to 75% of a typical green, 50% if nothing better
+  exists). Added items are marked `✚` in the report. Bind type comes from Wowhead's tooltip (`lookups.json` `binds`,
+  cached; the first run after a change does a few hundred polite lookups). Tune `MIX_RATIO*` in `rank.mjs`.
+
 ## Availability
 
 Quests (with the faction that can take them), dungeon drops, crafted items (with a recipe players can get),
@@ -125,6 +131,10 @@ Wowhead adds the item. List the currently unlinked picks in your summary (the re
    - **Brackets with fewer than 3 options** and the Warnings about Bind on Pickup crafts with no alternative.
    - **Warnings** also name listed items that vanished from the database (it drops items as well as adding
      them); `run.mjs` warns when the item count falls over 10%. Report the drop; don't pad the lists.
+   - **Picks whose level is an estimate**: levels come from the item's own required level (never the quest's level, which
+     runs a few above the level a quest can be accepted at). Items with none fall back to the quest level or item level − 4 and
+     are listed; read "Requires level" on Wowhead for each (the scripts can't: Wowhead blocks scripted page fetches, so never
+     spoof headers to get around it) and set `curation.json` `level`.
    - **Random-suffix picks** and **picks Wowhead doesn't list**.
    - Each build's tables: sanity-check the picks against the weapon types and the Handbook builds.
    - To see why a slot has a gap: `node scripts/gear-research/rank.mjs --debug "combat/questing|Head"`.

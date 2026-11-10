@@ -192,8 +192,9 @@ export function buildCandidates({ db, curation, recipes, lookups }) {
         .map((s) => ({ name: s.name, stats: Object.fromEntries(Object.entries(shortStats(Object.fromEntries(s.stats.map((v, i) => [i, v]).filter(([, v]) => v)))).map(([k, v]) => [k, Math.round((v * so.randPropPoints) / 10000)])) }));
     }
 
-    // Level: the item's own requirement (or, where the database has none, what Wowhead lists for it),
-    // raised to the quest's level for a quest reward. Last resort: item level − 4.
+    // Level: the item's own requirement (the database, or what Wowhead lists for it). A quest's level is its
+    // difficulty, usually a few above the level it can be accepted at, so it is only a fallback for an item
+    // with no requirement. Last resort: item level − 4.
     const lk = lookups.items?.[it.id];
     const quest = [o.avail.Alliance, o.avail.Horde].find((x) => x?.kind === 'quest');
     const questLevel = quest ? lookups.quests?.[quest.questId]?.level : undefined;
@@ -203,11 +204,10 @@ export function buildCandidates({ db, curation, recipes, lookups }) {
       const parts = [
         [it.reqLvl, 'database'],
         [lk?.reqlevel, 'Wowhead item'],
-        [questLevel, 'Wowhead quest'],
       ].filter(([v]) => v);
-      if (parts.length) {
-        [level, levelFrom] = parts.reduce((a, b) => (b[0] > a[0] ? b : a));
-      } else (level = Math.max(1, (so.ilvl ?? 5) - 4)), (levelFrom = 'item level');
+      if (parts.length) [level, levelFrom] = parts[0];
+      else if (questLevel) (level = questLevel), (levelFrom = 'Wowhead quest');
+      else (level = Math.max(1, (so.ilvl ?? 5) - 4)), (levelFrom = 'item level');
     }
     const needsLevelLookup = !it.reqLvl && !!quest && !lk && !curation.level?.[it.id];
 

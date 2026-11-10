@@ -108,6 +108,15 @@ const ALT_BEFORE = 6;
 const ALT_AFTER = 3;
 const ALT_RATIO = 0.8;
 const BRACKETS = [[MIN_LEVEL, 20], [21, 40], [41, MAX_LEVEL]];
+/**
+ * Source mix: in each bracket a slot should offer a Bind on Equip item (a drop or a craft the player can also buy), a Bind on Pickup
+ * quest/dungeon/vendor/reputation reward, and a craft, whenever one exists. The missing kind is added even when it is statistically
+ * weaker, down to MIX_RATIO of a typical green (MIX_RATIO_FLOOR when nothing better exists).
+ */
+const MIX_RATIO = 0.75;
+const MIX_RATIO_FLOOR = 0.5;
+/** Candidates this close to a typical green get their bind type looked up so the mix pass can classify them. */
+const MIX_LOOKUP_RATIO = 0.6;
 
 /** An item must beat the green baseline at its level by this much to be considered. Weapons differ less (mostly DPS). */
 const MIN_RATIO = { weapon: 1.05, major: 1.1, minor: 1.1, trinket: 1.1 };
@@ -382,6 +391,7 @@ const emitted = {};
 const chosenAll = []; // every pick, for links.mjs
 const needed = { items: new Set(), quests: new Set(), recipes: new Set(), vendors: new Set(), binds: new Set() };
 const flagged = new Map(); // id → name, for effects the model can't value
+const estimatedLevel = new Map(); // picks whose level is an estimate, not a requirement
 const unverified = new Map(); // crafted picks whose recipe source Wowhead doesn't list
 const sideUnverified = new Map(); // quest picks whose side the database doesn't record (assumed both)
 const keptOut = new Map(); // id → why: strong items that aren't available
@@ -482,6 +492,26 @@ for (const build of builds) {
         if (alt) add(alt, 'alt');
         else warnings.push(`${build.key} · ${role.key} (${faction}): ${p.item.name} binds on pickup (${p.item.avail[faction].text}) and nothing that isn't crafted qualifies within ${ALT_BEFORE} levels below / ${ALT_AFTER} above.`);
       }
+      // Source mix: don't leave a bracket with only Bind on Equip items, or only quest/dungeon rewards, or no craft at all.
+      const bindOf = (s) => lookups.binds?.[s.item.id];
+      const kindsOf = (s) => {
+        const c = crafted(s);
+        const boe = bindOf(s) === 'equip';
+        return { boe, craft: c, reward: !c && !boe };
+      };
+      for (const s of everything) if (!crafted(s) && s.ep >= MIX_LOOKUP_RATIO * base[clampLevel(s.item.level)] && bindOf(s) === undefined) needed.binds.add(s.item.id);
+      // Rewards and BoE items are balanced in 10-level windows (a bracket can hide a stretch that is all BoE); crafts per bracket.
+      const MIX_WINDOWS = [[MIN_LEVEL, 20, 'reward', 'boe'], [21, 30, 'reward', 'boe'], [31, 40, 'reward', 'boe'], [41, 50, 'reward', 'boe'], [51, MAX_LEVEL, 'reward', 'boe'], ...BRACKETS.map(([a, b]) => [a, b, 'craft'])];
+      for (const [lo, hi, ...kinds] of MIX_WINDOWS) {
+        for (const kind of kinds) {
+          const inBracket = () => out.filter((s) => s.item.level >= lo && s.item.level <= hi);
+          if (!inBracket().length || inBracket().some((s) => kindsOf(s)[kind])) continue;
+          for (const r of [MIX_RATIO, MIX_RATIO_FLOOR]) {
+            const c = better(everything.filter((s) => unused(s) && s.item.level >= lo && s.item.level <= hi && s.ep >= r * base[clampLevel(s.item.level)] && (crafted(s) || bindOf(s) !== undefined) && kindsOf(s)[kind]));
+            if (c) { add(c, 'mix'); break; }
+          }
+        }
+      }
       // Options: at least MIN_OPTIONS per level bracket, taking the best of what's left that is close to a typical green.
       const optionGaps = [];
       for (const [lo, hi] of BRACKETS) {
@@ -537,6 +567,7 @@ for (const build of builds) {
       const real = s.real ?? s.ep;
       if (role.hand === 'main') mainHandPicks.add(i.id);
       if (s.proc.unmodeled) flagged.set(i.id, i.name);
+      if (i.levelFrom === 'Wowhead quest' || i.levelFrom === 'item level') estimatedLevel.set(i.id, `${i.name} (${i.id}) shown at L${i.level} from the ${i.levelFrom === 'item level' ? 'item level − 4' : "quest's level (usually a few above the level it can be accepted at)"}; check "Requires level" on Wowhead and set curation.json \`level\``);
       if (i.recipeUnknown) unverified.set(i.id, `${i.name} (${i.id}, L${i.level}, ${(i.avail.Alliance ?? i.avail.Horde).text})`);
       if (i.suffixOptions) suffixPicks.set(i.id, `${i.name} (${i.id}, ${s.suffix.useful}/${s.suffix.total} suffixes help)`);
       const near = strong.filter((o) => o.item.id !== i.id && Math.abs(o.item.level - i.level) <= 3).sort((a, b) => b.ep - a.ep).slice(0, 3);
@@ -544,7 +575,7 @@ for (const build of builds) {
       const srcA = i.avail.Alliance?.text, srcH = i.avail.Horde?.text;
       const src = srcA && srcH && srcA !== srcH ? `${srcA} / ${srcH}` : srcA ?? srcH;
       const wt = i.wtype && i.cls !== 'armor' ? ` ${i.wtype} ${i.weapon?.speed ?? ''}` : '';
-      const tags = `${flag(s)}${i.suffixOptions ? ' 🎲' : ''}${s.filler ? ' ↔' : ''}${s.alt ? ' ⇄' : ''}${s.extra ? ' +' : ''}`;
+      const tags = `${flag(s)}${i.suffixOptions ? ' 🎲' : ''}${s.filler ? ' ↔' : ''}${s.alt ? ' ⇄' : ''}${s.extra ? ' +' : ''}${s.mix ? ' ✚' : ''}`;
       report.push(
         `| ${i.level} | [${i.name}](https://www.wowhead.com/forever/item=${i.id}) (${i.id})${wt}${tags} | ${real.toFixed(0)} | ${s.proc.ep ? s.proc.ep.toFixed(0) : ''} | ${(real / base[clampLevel(i.level)]).toFixed(2)}× | ${src} | ${i.faction} | ${near.map((o) => `${o.item.name} (${o.item.id}, ${o.item.level}, ${(o.ep / base[clampLevel(o.item.level)]).toFixed(2)}×${flag(o)})`).join('; ')} |`,
       );
@@ -622,7 +653,7 @@ const header = [
   `# Leveling gear research report`,
   ``,
   `Generated ${new Date().toISOString().slice(0, 16)}Z from the Forever database: master ${forever.head?.slice(0, 10) ?? '?'} (${forever.headDate?.slice(0, 10) ?? '?'}), database last changed ${forever.dbDate?.slice(0, 10) ?? '?'}; ${db.items.length} items, ${items.length} Rogue-usable candidates, ${Object.keys(procData).length} with proc or use data.`,
-  `EP uses each build's own weights from the Handbook (Stamina floored at ${STAMINA_EP}). "vs green" is EP over the typical fixed-stat green at that level. In the tables: ~ = on-hit rate assumed (${DEFAULT_PPM} PPM), ⚠ = has an effect the model can't value (scored 0), 🎲 = random-suffix item (average of the suffixes that help), ↔ = gap filler, ⇄ = non-crafted alternative to a Bind on Pickup craft, + = extra option to reach the per-bracket minimum.`,
+  `EP uses each build's own weights from the Handbook (Stamina floored at ${STAMINA_EP}). "vs green" is EP over the typical fixed-stat green at that level. In the tables: ~ = on-hit rate assumed (${DEFAULT_PPM} PPM), ⚠ = has an effect the model can't value (scored 0), 🎲 = random-suffix item (average of the suffixes that help), ↔ = gap filler, ⇄ = non-crafted alternative to a Bind on Pickup craft, + = extra option to reach the per-bracket minimum, ✚ = added so the bracket mixes Bind on Equip items, quest/dungeon rewards and crafts.`,
   `Levels come from: ${Object.entries(levelFrom).map(([k, v]) => `${k} ${v}`).join(', ')}.`,
   pending ? `\n**Lookups pending (${neededOut.items.length} item levels, ${neededOut.quests.length} quests, ${neededOut.recipes.length} recipes, ${neededOut.vendors.length} vendor items):** run \`node scripts/gear-research/lookups.mjs\`, then rerun this. The picks below are provisional.` : '',
   problems.length ? `\n### Problems (these stop --emit)\n\n${problems.map((t) => `- ${t}`).join('\n')}` : '',
@@ -634,6 +665,7 @@ const header = [
   suffixPicks.size ? `\n### Random-suffix picks\n\nScored as the average of the suffixes that help the build; you can't choose the suffix.\n\n${[...suffixPicks.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   sideUnverified.size ? `\n### Quest picks whose side the database doesn't record (shown as both factions)\n\nCheck "Side" on each quest's Wowhead page; set \`questSide\` in curation.json for any that is one faction's.\n\n${[...sideUnverified.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   keptOut.size ? `\n### Strong items kept out: not available (or an unconfirmed epic)\n\nAllow an epic with \`allowEpic\` in curation.json; remove a zone from \`notAtLaunch\` when it opens.\n\n${[...keptOut.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
+  estimatedLevel.size ? `\n### Picks whose level is an estimate\n\nNo required level in the database or on Wowhead's item page.\n\n${[...estimatedLevel.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   unverified.size ? `\n### Crafted picks whose recipe source Wowhead doesn't list\n\nUsually new Forever recipes. Check each in game or on Wowhead; \`exclude\` any that aren't obtainable.\n\n${[...unverified.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   flagged.size ? `\n### Picks and runners-up with effects the model can't value\n\n${[...flagged].map(([id, n]) => `- [${n}](https://www.wowhead.com/forever/item=${id})`).join('\n')}` : '',
 ];
