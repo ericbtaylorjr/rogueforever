@@ -7,6 +7,7 @@
     }
   ],
   "level": {},
+  "questMinLevel": { "78699": 30, "3636": 39 },
   "questSide": { "93128": "Horde" },
   "source": {},
   "include": [],

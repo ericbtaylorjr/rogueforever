@@ -131,6 +131,11 @@ Wowhead adds the item. List the currently unlinked picks in your summary (the re
    - **Brackets with fewer than 3 options** and the Warnings about Bind on Pickup crafts with no alternative.
    - **Warnings** also name listed items that vanished from the database (it drops items as well as adding
      them); `run.mjs` warns when the item count falls over 10%. Report the drop; don't pad the lists.
+   - **Quest rewards whose accept level isn't verified**: the database has no quest accept level, the quest tooltip only
+     gives the quest's level, and the item's own requirement can be lower than the quest's (Ruby-Adorned Blade needs 25
+     but its quest needs 30). Each quest is listed with its Wowhead link; read "Requires level" on the page and put it in
+     `curation.json` `questMinLevel` ({questId: level}). The shown level is then the higher of that and the item's
+     requirement. Ask the user to confirm any you can't read; verified quests drop off the list.
    - **Picks whose level is an estimate**: levels come from the item's own required level (never the quest's level, which
      runs a few above the level a quest can be accepted at). Items with none fall back to the quest level or item level − 4 and
      are listed; read "Requires level" on Wowhead for each (the scripts can't: Wowhead blocks scripted page fetches, so never

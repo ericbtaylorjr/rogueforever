@@ -391,6 +391,7 @@ const emitted = {};
 const chosenAll = []; // every pick, for links.mjs
 const needed = { items: new Set(), quests: new Set(), recipes: new Set(), vendors: new Set(), binds: new Set() };
 const flagged = new Map(); // id → name, for effects the model can't value
+const questUnverified = new Map(); // quest-reward picks whose accept level hasn't been confirmed by hand
 const estimatedLevel = new Map(); // picks whose level is an estimate, not a requirement
 const unverified = new Map(); // crafted picks whose recipe source Wowhead doesn't list
 const sideUnverified = new Map(); // quest picks whose side the database doesn't record (assumed both)
@@ -568,6 +569,10 @@ for (const build of builds) {
       if (role.hand === 'main') mainHandPicks.add(i.id);
       if (s.proc.unmodeled) flagged.set(i.id, i.name);
       if (i.levelFrom === 'Wowhead quest' || i.levelFrom === 'item level') estimatedLevel.set(i.id, `${i.name} (${i.id}) shown at L${i.level} from the ${i.levelFrom === 'item level' ? 'item level − 4' : "quest's level (usually a few above the level it can be accepted at)"}; check "Requires level" on Wowhead and set curation.json \`level\``);
+      for (const f of ['Alliance', 'Horde']) {
+        const o = i.avail[f];
+        if (o?.kind === 'quest' && !curation.questMinLevel?.[o.questId]) questUnverified.set(o.questId, `${o.text.replace(/^Quest: /, '')} (https://www.wowhead.com/classic/quest=${o.questId}) → ${i.name} (${i.id}): shown at L${i.level} from ${i.levelFrom}; item requires ${i.reqLvl ?? lookups.items?.[i.id]?.reqlevel ?? '?'}, quest level ${lookups.quests?.[o.questId]?.level ?? '?'}`);
+      }
       if (i.recipeUnknown) unverified.set(i.id, `${i.name} (${i.id}, L${i.level}, ${(i.avail.Alliance ?? i.avail.Horde).text})`);
       if (i.suffixOptions) suffixPicks.set(i.id, `${i.name} (${i.id}, ${s.suffix.useful}/${s.suffix.total} suffixes help)`);
       const near = strong.filter((o) => o.item.id !== i.id && Math.abs(o.item.level - i.level) <= 3).sort((a, b) => b.ep - a.ep).slice(0, 3);
@@ -667,6 +672,7 @@ const header = [
   suffixPicks.size ? `\n### Random-suffix picks\n\nScored as the average of the suffixes that help the build; you can't choose the suffix.\n\n${[...suffixPicks.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   sideUnverified.size ? `\n### Quest picks whose side the database doesn't record (shown as both factions)\n\nCheck "Side" on each quest's Wowhead page; set \`questSide\` in curation.json for any that is one faction's.\n\n${[...sideUnverified.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   keptOut.size ? `\n### Strong items kept out: not available (or an unconfirmed epic)\n\nAllow an epic with \`allowEpic\` in curation.json; remove a zone from \`notAtLaunch\` when it opens.\n\n${[...keptOut.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
+  questUnverified.size ? `\n### Quest rewards whose accept level isn't verified\n\nThe database has no quest accept level and Wowhead blocks scripts, so read "Requires level" on each quest page (the item's own requirement can be lower) and add it to curation.json \`questMinLevel\` {questId: level}. Verified quests drop off this list.\n\n${[...questUnverified.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   estimatedLevel.size ? `\n### Picks whose level is an estimate\n\nNo required level in the database or on Wowhead's item page.\n\n${[...estimatedLevel.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   unverified.size ? `\n### Crafted picks whose recipe source Wowhead doesn't list\n\nUsually new Forever recipes. Check each in game or on Wowhead; \`exclude\` any that aren't obtainable.\n\n${[...unverified.values()].sort().map((t) => `- ${t}`).join('\n')}` : '',
   flagged.size ? `\n### Picks and runners-up with effects the model can't value\n\n${[...flagged].map(([id, n]) => `- [${n}](https://www.wowhead.com/forever/item=${id})`).join('\n')}` : '',

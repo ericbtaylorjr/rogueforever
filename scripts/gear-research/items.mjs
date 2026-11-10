@@ -209,6 +209,9 @@ export function buildCandidates({ db, curation, recipes, lookups }) {
       else if (questLevel) (level = questLevel), (levelFrom = 'Wowhead quest');
       else (level = Math.max(1, (so.ilvl ?? 5) - 4)), (levelFrom = 'item level');
     }
+    // A quest's "Requires level" (verified by hand on Wowhead, curation.json questMinLevel) can be higher than the item's own requirement.
+    const questMin = quest ? curation.questMinLevel?.[quest.questId] : undefined;
+    if (questMin && questMin > level && !curation.level?.[it.id]) (level = questMin), (levelFrom = 'quest requirement');
     const needsLevelLookup = !it.reqLvl && !!quest && !lk && !curation.level?.[it.id];
 
     out.push({

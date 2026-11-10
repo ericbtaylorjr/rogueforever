@@ -989,11 +989,6 @@
     "icon": "inv_sword_31",
     "kind": "item"
   },
-  "item:250611": {
-    "id": 250611,
-    "icon": "inv_weapon_shortblade_05",
-    "kind": "item"
-  },
   "item:10624": {
     "id": 10624,
     "icon": "inv_weapon_bow_08",
@@ -1034,9 +1029,19 @@
     "icon": "inv_chest_leather_08",
     "kind": "item"
   },
+  "item:12531": {
+    "id": 12531,
+    "icon": "inv_weapon_shortblade_03",
+    "kind": "item"
+  },
   "item:19159": {
     "id": 19159,
     "icon": "inv_misc_herb_15",
+    "kind": "item"
+  },
+  "item:7947": {
+    "id": 7947,
+    "icon": "inv_weapon_shortblade_14",
     "kind": "item"
   },
   "item:10800": {
@@ -1164,14 +1169,14 @@
     "icon": "inv_belt_09",
     "kind": "item"
   },
+  "item:12653": {
+    "id": 12653,
+    "icon": "inv_weapon_bow_08",
+    "kind": "item"
+  },
   "item:13210": {
     "id": 13210,
     "icon": "inv_boots_wolf",
-    "kind": "item"
-  },
-  "item:13395": {
-    "id": 13395,
-    "icon": "inv_gauntlets_27",
     "kind": "item"
   },
   "item:15062": {
@@ -1204,9 +1209,19 @@
     "icon": "inv_bracer_10",
     "kind": "item"
   },
-  "item:16709": {
-    "id": 16709,
-    "icon": "inv_pants_02",
+  "item:14637": {
+    "id": 14637,
+    "icon": "inv_chest_leather_03",
+    "kind": "item"
+  },
+  "item:14640": {
+    "id": 14640,
+    "icon": "inv_gauntlets_15",
+    "kind": "item"
+  },
+  "item:14638": {
+    "id": 14638,
+    "icon": "inv_pants_07",
     "kind": "item"
   },
   "item:14024": {
@@ -1229,19 +1244,14 @@
     "icon": "inv_misc_gem_bloodstone_01",
     "kind": "item"
   },
-  "item:13956": {
-    "id": 13956,
-    "icon": "inv_belt_12",
+  "item:14636": {
+    "id": 14636,
+    "icon": "inv_belt_16",
     "kind": "item"
   },
   "item:13340": {
     "id": 13340,
     "icon": "inv_misc_cape_20",
-    "kind": "item"
-  },
-  "item:16721": {
-    "id": 16721,
-    "icon": "inv_chest_leather_07",
     "kind": "item"
   },
   "item:12783": {
@@ -1294,14 +1304,9 @@
     "icon": "inv_wand_10",
     "kind": "item"
   },
-  "item:1727": {
-    "id": 1727,
-    "icon": "inv_sword_26",
-    "kind": "item"
-  },
-  "item:277246": {
-    "id": 277246,
-    "icon": "inv_sword_07",
+  "item:1454": {
+    "id": 1454,
+    "icon": "inv_axe_21",
     "kind": "item"
   },
   "item:16886": {
@@ -1309,9 +1314,19 @@
     "icon": "inv_sword_33",
     "kind": "item"
   },
+  "item:8226": {
+    "id": 8226,
+    "icon": "inv_sword_18",
+    "kind": "item"
+  },
   "item:7683": {
     "id": 7683,
     "icon": "inv_gauntlets_11",
+    "kind": "item"
+  },
+  "item:277246": {
+    "id": 277246,
+    "icon": "inv_sword_07",
     "kind": "item"
   },
   "item:9386": {
@@ -1369,6 +1384,11 @@
     "icon": "inv_sword_36",
     "kind": "item"
   },
+  "item:12535": {
+    "id": 12535,
+    "icon": "inv_sword_41",
+    "kind": "item"
+  },
   "item:12774": {
     "id": 12774,
     "icon": "inv_axe_05",
@@ -1389,14 +1409,9 @@
     "icon": "inv_pick_05",
     "kind": "item"
   },
-  "item:16711": {
-    "id": 16711,
-    "icon": "inv_boots_08",
-    "kind": "item"
-  },
-  "item:15806": {
-    "id": 15806,
-    "icon": "inv_sword_34",
+  "item:12553": {
+    "id": 12553,
+    "icon": "inv_boots_02",
     "kind": "item"
   },
   "item:15085": {
@@ -1414,29 +1429,19 @@
     "icon": "inv_jewelry_necklace_23",
     "kind": "item"
   },
+  "item:14487": {
+    "id": 14487,
+    "icon": "inv_hammer_13",
+    "kind": "item"
+  },
   "item:12797": {
     "id": 12797,
     "icon": "inv_sword_11",
     "kind": "item"
   },
-  "item:250618": {
-    "id": 250618,
-    "icon": "inv_misc_monsterclaw_03",
-    "kind": "item"
-  },
-  "item:1454": {
-    "id": 1454,
-    "icon": "inv_axe_21",
-    "kind": "item"
-  },
   "item:7687": {
     "id": 7687,
     "icon": "inv_hammer_19",
-    "kind": "item"
-  },
-  "item:9424": {
-    "id": 9424,
-    "icon": "inv_sword_42",
     "kind": "item"
   },
   "item:1951": {
@@ -1459,9 +1464,9 @@
     "icon": "inv_axe_13",
     "kind": "item"
   },
-  "item:7786": {
-    "id": 7786,
-    "icon": "inv_axe_14",
+  "item:1727": {
+    "id": 1727,
+    "icon": "inv_sword_26",
     "kind": "item"
   },
   "item:7752": {
@@ -1479,49 +1484,9 @@
     "icon": "inv_mace_11",
     "kind": "item"
   },
-  "item:9511": {
-    "id": 9511,
-    "icon": "inv_sword_40",
-    "kind": "item"
-  },
-  "item:7954": {
-    "id": 7954,
-    "icon": "inv_hammer_18",
-    "kind": "item"
-  },
-  "item:250614": {
-    "id": 250614,
-    "icon": "inv_gauntlets_11",
-    "kind": "item"
-  },
-  "item:11866": {
-    "id": 11866,
-    "icon": "inv_belt_11",
-    "kind": "item"
-  },
-  "item:12792": {
-    "id": 12792,
-    "icon": "inv_hammer_06",
-    "kind": "item"
-  },
-  "item:13183": {
-    "id": 13183,
-    "icon": "inv_wand_10",
-    "kind": "item"
-  },
-  "item:13358": {
-    "id": 13358,
-    "icon": "inv_shoulder_24",
-    "kind": "item"
-  },
-  "item:9392": {
-    "id": 9392,
-    "icon": "inv_sword_26",
-    "kind": "item"
-  },
-  "item:10772": {
-    "id": 10772,
-    "icon": "inv_axe_23",
+  "item:10623": {
+    "id": 10623,
+    "icon": "inv_axe_07",
     "kind": "item"
   },
   "item:9467": {
@@ -1532,6 +1497,31 @@
   "item:10797": {
     "id": 10797,
     "icon": "inv_sword_09",
+    "kind": "item"
+  },
+  "item:12792": {
+    "id": 12792,
+    "icon": "inv_hammer_06",
+    "kind": "item"
+  },
+  "item:18683": {
+    "id": 18683,
+    "icon": "inv_hammer_13",
+    "kind": "item"
+  },
+  "item:250618": {
+    "id": 250618,
+    "icon": "inv_misc_monsterclaw_03",
+    "kind": "item"
+  },
+  "item:13358": {
+    "id": 13358,
+    "icon": "inv_shoulder_24",
+    "kind": "item"
+  },
+  "item:9465": {
+    "id": 9465,
+    "icon": "inv_pick_01",
     "kind": "item"
   }
 }
