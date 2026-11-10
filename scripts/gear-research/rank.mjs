@@ -585,11 +585,13 @@ for (const build of builds) {
       }
       chosenAll.push({ itemId: i.id, build: build.key, slot: role.slot });
       // One entry per item; where the two factions reach it from different places it is two entries, one each.
-      const suffixTag = `${i.suffixOptions ? ' · random suffix' : ''}${FACTIONS.some((f) => i.avail[f]?.kind === 'crafted') && lookups.binds?.[i.id] === 'pickup' ? ' · binds on pickup' : ''}`;
+      const suffixTag = `${i.suffixOptions ? ' · random suffix' : ''}`;
+      const craftedBop = FACTIONS.some((f) => i.avail[f]?.kind === 'crafted') && lookups.binds?.[i.id] === 'pickup';
       const mk = (faction, text) => {
         const e = { level: i.level, slot: role.slot, itemId: i.id, name: i.name, quality: QUALITY[i.quality], source: `${curation.source?.[i.id] ?? text}${suffixTag}`, faction };
         const wh = wowhead[i.id];
         if (wh?.boe) e.boe = true;
+        if (craftedBop) e.bop = true;
         if (wh && !wh.found) Object.assign(e, { noWowhead: true, icon: i.icon, tooltip: buildTooltip(i) });
         return e;
       };

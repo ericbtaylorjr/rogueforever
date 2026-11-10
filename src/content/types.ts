@@ -222,6 +222,8 @@ export interface GearItem {
   source: string;
   /** Bind on equip, so it can be bought or traded. Unset for everything else. */
   boe?: boolean;
+  /** A crafted item that binds when picked up, so only the crafter can use it. Unset for everything else. */
+  bop?: boolean;
   enchant?: string;
   /**
    * The item is in the Forever database but Wowhead doesn't list it yet: it shows its tooltip

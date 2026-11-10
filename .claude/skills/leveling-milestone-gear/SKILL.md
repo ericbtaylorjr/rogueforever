@@ -76,7 +76,7 @@ No sims: the sim only runs at level 60, so it can't rank level 20 gear.
   "Brackets with fewer than 3 options" lists what still falls short, almost always because the database
   has no usable source there: say so, don't pad further.
 - **Bind on Pickup crafts**: a crafted pick that binds when picked up (read from Wowhead's tooltip, cached
-  in `lookups.json` `binds`) is tagged "· binds on pickup" and always gets a **non-crafted alternative**
+  in `lookups.json` `binds`) is tagged **BoP** (like BoE, a tag beside the name, not text in the source) and always gets a **non-crafted alternative**
   within 6 levels below / 3 above (marked `⇄`), so players without the profession have an option. Those
   extras are in addition to the normal picks. If nothing non-crafted qualifies the report warns.
 
