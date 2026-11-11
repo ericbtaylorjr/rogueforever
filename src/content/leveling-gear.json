@@ -1,8 +1,8 @@
 {
   "generated": "2026-11-11",
   "forever": {
-    "commit": "ff9babba5238325eff8bb74a742a2ca626804e60",
-    "databaseChanged": "2026-11-10T23:23:47Z"
+    "commit": "6a767454b4ee88cfc6411d4b5eddd6382846da56",
+    "databaseChanged": "2026-11-11T14:33:40Z"
   },
   "builds": {
     "assassination/questing": [
@@ -1231,15 +1231,6 @@
       },
       {
         "level": 52,
-        "slot": "Head",
-        "itemId": 11735,
-        "name": "Ragefury Eyepatch",
-        "quality": "rare",
-        "source": "Blackrock Depths (Guzzler)",
-        "faction": "Both"
-      },
-      {
-        "level": 52,
         "slot": "Legs",
         "itemId": 15065,
         "name": "Warbear Woolies",
@@ -1363,15 +1354,6 @@
       },
       {
         "level": 55,
-        "slot": "Shoulders",
-        "itemId": 16708,
-        "name": "Shadowcraft Spaulders",
-        "quality": "rare",
-        "source": "Stratholme (Cannon Master Willey)",
-        "faction": "Both"
-      },
-      {
-        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -1399,20 +1381,11 @@
       },
       {
         "level": 56,
-        "slot": "Legs",
-        "itemId": 14638,
-        "name": "Cadaverous Leggings",
+        "slot": "Neck",
+        "itemId": 12929,
+        "name": "Emberfury Talisman",
         "quality": "rare",
-        "source": "Scholomance (Instructor Malicia)",
-        "faction": "Both"
-      },
-      {
-        "level": 56,
-        "slot": "Off hand",
-        "itemId": 14024,
-        "name": "Frightalon",
-        "quality": "rare",
-        "source": "Scholomance (Kirtonos the Herald)",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
         "faction": "Both"
       },
       {
@@ -1437,6 +1410,15 @@
       },
       {
         "level": 56,
+        "slot": "Shoulders",
+        "itemId": 12927,
+        "name": "Truestrike Shoulders",
+        "quality": "rare",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
         "slot": "Trinket",
         "itemId": 22321,
         "name": "Heart of Wyrmthalak",
@@ -1454,12 +1436,39 @@
         "faction": "Both"
       },
       {
+        "level": 57,
+        "slot": "Off hand",
+        "itemId": 13368,
+        "name": "Bonescraper",
+        "quality": "rare",
+        "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
+      },
+      {
         "level": 58,
         "slot": "Back",
         "itemId": 13340,
         "name": "Cape of the Black Baron",
         "quality": "rare",
         "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Head",
+        "itemId": 12587,
+        "name": "Eye of Rend",
+        "quality": "rare",
+        "source": "Blackrock Spire (Warchief Rend Blackhand)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Legs",
+        "itemId": 12963,
+        "name": "Blademaster Leggings",
+        "quality": "rare",
+        "source": "Blackrock Spire (The Beast)",
         "faction": "Both"
       },
       {
@@ -1474,11 +1483,11 @@
       },
       {
         "level": 58,
-        "slot": "Neck",
-        "itemId": 12103,
-        "name": "Star of Mystaria",
+        "slot": "Ring",
+        "itemId": 13098,
+        "name": "Painweaver Band",
         "quality": "rare",
-        "source": "Stratholme (Balnazzar)",
+        "source": "Blackrock Spire (General Drakkisath)",
         "faction": "Both"
       }
     ],
@@ -2699,15 +2708,6 @@
       },
       {
         "level": 52,
-        "slot": "Head",
-        "itemId": 11735,
-        "name": "Ragefury Eyepatch",
-        "quality": "rare",
-        "source": "Blackrock Depths (Guzzler)",
-        "faction": "Both"
-      },
-      {
-        "level": 52,
         "slot": "Ring",
         "itemId": 22255,
         "name": "Magma Forged Band",
@@ -2821,15 +2821,6 @@
       },
       {
         "level": 55,
-        "slot": "Shoulders",
-        "itemId": 16708,
-        "name": "Shadowcraft Spaulders",
-        "quality": "rare",
-        "source": "Stratholme (Cannon Master Willey)",
-        "faction": "Both"
-      },
-      {
-        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -2857,20 +2848,11 @@
       },
       {
         "level": 56,
-        "slot": "Legs",
-        "itemId": 14638,
-        "name": "Cadaverous Leggings",
+        "slot": "Neck",
+        "itemId": 12929,
+        "name": "Emberfury Talisman",
         "quality": "rare",
-        "source": "Scholomance (Instructor Malicia)",
-        "faction": "Both"
-      },
-      {
-        "level": 56,
-        "slot": "Off hand",
-        "itemId": 14024,
-        "name": "Frightalon",
-        "quality": "rare",
-        "source": "Scholomance (Kirtonos the Herald)",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
         "faction": "Both"
       },
       {
@@ -2895,6 +2877,15 @@
       },
       {
         "level": 56,
+        "slot": "Shoulders",
+        "itemId": 12927,
+        "name": "Truestrike Shoulders",
+        "quality": "rare",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
         "slot": "Trinket",
         "itemId": 22321,
         "name": "Heart of Wyrmthalak",
@@ -2912,12 +2903,39 @@
         "faction": "Both"
       },
       {
+        "level": 57,
+        "slot": "Off hand",
+        "itemId": 13368,
+        "name": "Bonescraper",
+        "quality": "rare",
+        "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
+      },
+      {
         "level": 58,
         "slot": "Back",
         "itemId": 13340,
         "name": "Cape of the Black Baron",
         "quality": "rare",
         "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Head",
+        "itemId": 12587,
+        "name": "Eye of Rend",
+        "quality": "rare",
+        "source": "Blackrock Spire (Warchief Rend Blackhand)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Legs",
+        "itemId": 12963,
+        "name": "Blademaster Leggings",
+        "quality": "rare",
+        "source": "Blackrock Spire (The Beast)",
         "faction": "Both"
       },
       {
@@ -2932,11 +2950,11 @@
       },
       {
         "level": 58,
-        "slot": "Neck",
-        "itemId": 12103,
-        "name": "Star of Mystaria",
+        "slot": "Ring",
+        "itemId": 13098,
+        "name": "Painweaver Band",
         "quality": "rare",
-        "source": "Stratholme (Balnazzar)",
+        "source": "Blackrock Spire (General Drakkisath)",
         "faction": "Both"
       }
     ],
@@ -4064,22 +4082,22 @@
       },
       {
         "level": 48,
+        "slot": "Main hand",
+        "itemId": 12527,
+        "name": "Ribsplitter",
+        "quality": "rare",
+        "source": "Blackrock Depths (Trash) · random suffix",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 48,
         "slot": "Ranged",
         "itemId": 11629,
         "name": "Houndmaster's Rifle",
         "quality": "rare",
         "source": "Blackrock Depths (Houndmaster Grebmar)",
         "faction": "Both"
-      },
-      {
-        "level": 49,
-        "slot": "Off hand",
-        "itemId": 12535,
-        "name": "Doomforged Straightedge",
-        "quality": "rare",
-        "source": "Blackrock Depths (Trash)",
-        "faction": "Both",
-        "boe": true
       },
       {
         "level": 49,
@@ -4140,7 +4158,7 @@
       },
       {
         "level": 50,
-        "slot": "Main hand",
+        "slot": "Off hand",
         "itemId": 12774,
         "name": "Dawn's Edge",
         "quality": "rare",
@@ -4310,15 +4328,6 @@
       },
       {
         "level": 55,
-        "slot": "Neck",
-        "itemId": 13177,
-        "name": "Talisman of Evasion",
-        "quality": "rare",
-        "source": "Blackrock Spire (War Master Voone)",
-        "faction": "Both"
-      },
-      {
-        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -4329,10 +4338,10 @@
       {
         "level": 56,
         "slot": "Chest",
-        "itemId": 14637,
-        "name": "Cadaverous Armor",
+        "itemId": 12603,
+        "name": "Nightbrace Tunic",
         "quality": "rare",
-        "source": "Scholomance (Instructor Malicia)",
+        "source": "Blackrock Spire (Solakar Flamewreath)",
         "faction": "Both"
       },
       {
@@ -4356,21 +4365,20 @@
       },
       {
         "level": 56,
-        "slot": "Head",
-        "itemId": 252482,
-        "name": "Blue Suede Hat",
-        "quality": "uncommon",
-        "source": "Leatherworking (280)",
-        "faction": "Both",
-        "boe": true
-      },
-      {
-        "level": 56,
         "slot": "Legs",
         "itemId": 14638,
         "name": "Cadaverous Leggings",
         "quality": "rare",
         "source": "Scholomance (Instructor Malicia)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
+        "slot": "Neck",
+        "itemId": 12929,
+        "name": "Emberfury Talisman",
+        "quality": "rare",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
         "faction": "Both"
       },
       {
@@ -4412,21 +4420,30 @@
         "faction": "Both"
       },
       {
-        "level": 57,
-        "slot": "Off hand",
-        "itemId": 14487,
-        "name": "Bonechill Hammer",
-        "quality": "rare",
-        "source": "Scholomance (Ras Frostwhisper)",
-        "faction": "Both"
-      },
-      {
         "level": 58,
         "slot": "Back",
         "itemId": 13340,
         "name": "Cape of the Black Baron",
         "quality": "rare",
         "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Head",
+        "itemId": 12587,
+        "name": "Eye of Rend",
+        "quality": "rare",
+        "source": "Blackrock Spire (Warchief Rend Blackhand)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Main hand",
+        "itemId": 12940,
+        "name": "Dal'Rend's Sacred Charge",
+        "quality": "rare",
+        "source": "Blackrock Spire (Warchief Rend Blackhand)",
         "faction": "Both"
       },
       {
@@ -4438,6 +4455,15 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 58,
+        "slot": "Off hand",
+        "itemId": 13361,
+        "name": "Skullforge Reaver",
+        "quality": "rare",
+        "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
       }
     ],
     "combat/dungeons": [
@@ -5599,22 +5625,22 @@
       },
       {
         "level": 48,
+        "slot": "Main hand",
+        "itemId": 12527,
+        "name": "Ribsplitter",
+        "quality": "rare",
+        "source": "Blackrock Depths (Trash) · random suffix",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 48,
         "slot": "Ranged",
         "itemId": 11629,
         "name": "Houndmaster's Rifle",
         "quality": "rare",
         "source": "Blackrock Depths (Houndmaster Grebmar)",
         "faction": "Both"
-      },
-      {
-        "level": 49,
-        "slot": "Off hand",
-        "itemId": 12535,
-        "name": "Doomforged Straightedge",
-        "quality": "rare",
-        "source": "Blackrock Depths (Trash)",
-        "faction": "Both",
-        "boe": true
       },
       {
         "level": 49,
@@ -5685,7 +5711,7 @@
       },
       {
         "level": 50,
-        "slot": "Main hand",
+        "slot": "Off hand",
         "itemId": 12774,
         "name": "Dawn's Edge",
         "quality": "rare",
@@ -5846,15 +5872,6 @@
       },
       {
         "level": 55,
-        "slot": "Shoulders",
-        "itemId": 16708,
-        "name": "Shadowcraft Spaulders",
-        "quality": "rare",
-        "source": "Stratholme (Cannon Master Willey)",
-        "faction": "Both"
-      },
-      {
-        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -5892,21 +5909,20 @@
       },
       {
         "level": 56,
-        "slot": "Head",
-        "itemId": 252482,
-        "name": "Blue Suede Hat",
-        "quality": "uncommon",
-        "source": "Leatherworking (280)",
-        "faction": "Both",
-        "boe": true
-      },
-      {
-        "level": 56,
         "slot": "Legs",
         "itemId": 14638,
         "name": "Cadaverous Leggings",
         "quality": "rare",
         "source": "Scholomance (Instructor Malicia)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
+        "slot": "Neck",
+        "itemId": 12929,
+        "name": "Emberfury Talisman",
+        "quality": "rare",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
         "faction": "Both"
       },
       {
@@ -5931,6 +5947,15 @@
       },
       {
         "level": 56,
+        "slot": "Shoulders",
+        "itemId": 12927,
+        "name": "Truestrike Shoulders",
+        "quality": "rare",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
         "slot": "Trinket",
         "itemId": 22321,
         "name": "Heart of Wyrmthalak",
@@ -5948,21 +5973,30 @@
         "faction": "Both"
       },
       {
-        "level": 57,
-        "slot": "Off hand",
-        "itemId": 14487,
-        "name": "Bonechill Hammer",
-        "quality": "rare",
-        "source": "Scholomance (Ras Frostwhisper)",
-        "faction": "Both"
-      },
-      {
         "level": 58,
         "slot": "Back",
         "itemId": 13340,
         "name": "Cape of the Black Baron",
         "quality": "rare",
         "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Head",
+        "itemId": 12587,
+        "name": "Eye of Rend",
+        "quality": "rare",
+        "source": "Blackrock Spire (Warchief Rend Blackhand)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Main hand",
+        "itemId": 12940,
+        "name": "Dal'Rend's Sacred Charge",
+        "quality": "rare",
+        "source": "Blackrock Spire (Warchief Rend Blackhand)",
         "faction": "Both"
       },
       {
@@ -5974,6 +6008,15 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 58,
+        "slot": "Off hand",
+        "itemId": 13361,
+        "name": "Skullforge Reaver",
+        "quality": "rare",
+        "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
       }
     ],
     "subtlety/questing": [
@@ -7480,15 +7523,6 @@
       },
       {
         "level": 55,
-        "slot": "Neck",
-        "itemId": 13177,
-        "name": "Talisman of Evasion",
-        "quality": "rare",
-        "source": "Blackrock Spire (War Master Voone)",
-        "faction": "Both"
-      },
-      {
-        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -7499,10 +7533,10 @@
       {
         "level": 56,
         "slot": "Chest",
-        "itemId": 14637,
-        "name": "Cadaverous Armor",
+        "itemId": 12603,
+        "name": "Nightbrace Tunic",
         "quality": "rare",
-        "source": "Scholomance (Instructor Malicia)",
+        "source": "Blackrock Spire (Solakar Flamewreath)",
         "faction": "Both"
       },
       {
@@ -7526,21 +7560,29 @@
       },
       {
         "level": 56,
-        "slot": "Head",
-        "itemId": 252482,
-        "name": "Blue Suede Hat",
-        "quality": "uncommon",
-        "source": "Leatherworking (280)",
-        "faction": "Both",
-        "boe": true
-      },
-      {
-        "level": 56,
         "slot": "Legs",
         "itemId": 14638,
         "name": "Cadaverous Leggings",
         "quality": "rare",
         "source": "Scholomance (Instructor Malicia)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
+        "slot": "Main hand",
+        "itemId": 22404,
+        "name": "Willey's Back Scratcher",
+        "quality": "rare",
+        "source": "Stratholme (Cannon Master Willey)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
+        "slot": "Neck",
+        "itemId": 12929,
+        "name": "Emberfury Talisman",
+        "quality": "rare",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
         "faction": "Both"
       },
       {
@@ -7583,20 +7625,11 @@
       },
       {
         "level": 57,
-        "slot": "Main hand",
+        "slot": "Off hand",
         "itemId": 14487,
         "name": "Bonechill Hammer",
         "quality": "rare",
         "source": "Scholomance (Ras Frostwhisper)",
-        "faction": "Both"
-      },
-      {
-        "level": 57,
-        "slot": "Off hand",
-        "itemId": 18737,
-        "name": "Bone Slicing Hatchet",
-        "quality": "rare",
-        "source": "Stratholme (Maleki the Pallid)",
         "faction": "Both"
       },
       {
@@ -7610,6 +7643,15 @@
       },
       {
         "level": 58,
+        "slot": "Head",
+        "itemId": 12587,
+        "name": "Eye of Rend",
+        "quality": "rare",
+        "source": "Blackrock Spire (Warchief Rend Blackhand)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
         "slot": "Main hand",
         "itemId": 12783,
         "name": "Heartseeker",
@@ -7617,6 +7659,15 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 58,
+        "slot": "Main hand",
+        "itemId": 13361,
+        "name": "Skullforge Reaver",
+        "quality": "rare",
+        "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
       },
       {
         "level": 58,
@@ -9159,24 +9210,6 @@
       },
       {
         "level": 55,
-        "slot": "Neck",
-        "itemId": 13177,
-        "name": "Talisman of Evasion",
-        "quality": "rare",
-        "source": "Blackrock Spire (War Master Voone)",
-        "faction": "Both"
-      },
-      {
-        "level": 55,
-        "slot": "Shoulders",
-        "itemId": 16708,
-        "name": "Shadowcraft Spaulders",
-        "quality": "rare",
-        "source": "Stratholme (Cannon Master Willey)",
-        "faction": "Both"
-      },
-      {
-        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -9214,21 +9247,29 @@
       },
       {
         "level": 56,
-        "slot": "Head",
-        "itemId": 252482,
-        "name": "Blue Suede Hat",
-        "quality": "uncommon",
-        "source": "Leatherworking (280)",
-        "faction": "Both",
-        "boe": true
-      },
-      {
-        "level": 56,
         "slot": "Legs",
         "itemId": 14638,
         "name": "Cadaverous Leggings",
         "quality": "rare",
         "source": "Scholomance (Instructor Malicia)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
+        "slot": "Main hand",
+        "itemId": 22404,
+        "name": "Willey's Back Scratcher",
+        "quality": "rare",
+        "source": "Stratholme (Cannon Master Willey)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
+        "slot": "Neck",
+        "itemId": 12929,
+        "name": "Emberfury Talisman",
+        "quality": "rare",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
         "faction": "Both"
       },
       {
@@ -9253,6 +9294,15 @@
       },
       {
         "level": 56,
+        "slot": "Shoulders",
+        "itemId": 12927,
+        "name": "Truestrike Shoulders",
+        "quality": "rare",
+        "source": "Blackrock Spire (Pyroguard Emberseer)",
+        "faction": "Both"
+      },
+      {
+        "level": 56,
         "slot": "Trinket",
         "itemId": 22321,
         "name": "Heart of Wyrmthalak",
@@ -9271,20 +9321,11 @@
       },
       {
         "level": 57,
-        "slot": "Main hand",
+        "slot": "Off hand",
         "itemId": 14487,
         "name": "Bonechill Hammer",
         "quality": "rare",
         "source": "Scholomance (Ras Frostwhisper)",
-        "faction": "Both"
-      },
-      {
-        "level": 57,
-        "slot": "Off hand",
-        "itemId": 18737,
-        "name": "Bone Slicing Hatchet",
-        "quality": "rare",
-        "source": "Stratholme (Maleki the Pallid)",
         "faction": "Both"
       },
       {
@@ -9298,6 +9339,15 @@
       },
       {
         "level": 58,
+        "slot": "Head",
+        "itemId": 12587,
+        "name": "Eye of Rend",
+        "quality": "rare",
+        "source": "Blackrock Spire (Warchief Rend Blackhand)",
+        "faction": "Both"
+      },
+      {
+        "level": 58,
         "slot": "Main hand",
         "itemId": 12783,
         "name": "Heartseeker",
@@ -9305,6 +9355,15 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 58,
+        "slot": "Main hand",
+        "itemId": 13361,
+        "name": "Skullforge Reaver",
+        "quality": "rare",
+        "source": "Stratholme (Baron Rivendare)",
+        "faction": "Both"
       }
     ]
   }
