@@ -573,7 +573,7 @@ for (const build of builds) {
         const o = i.avail[f];
         if (o?.kind === 'quest' && !curation.questMinLevel?.[o.questId]) questUnverified.set(o.questId, `${o.text.replace(/^Quest: /, '')} (https://www.wowhead.com/classic/quest=${o.questId}) → ${i.name} (${i.id}): shown at L${i.level} from ${i.levelFrom}; item requires ${i.reqLvl ?? lookups.items?.[i.id]?.reqlevel ?? '?'}, quest level ${lookups.quests?.[o.questId]?.level ?? '?'}`);
       }
-      if (i.recipeUnknown) unverified.set(i.id, `${i.name} (${i.id}, L${i.level}, ${(i.avail.Alliance ?? i.avail.Horde).text})`);
+      if (i.recipeUnknown && !curation.recipeVerified?.includes(i.id)) unverified.set(i.id, `${i.name} (${i.id}, L${i.level}, ${(i.avail.Alliance ?? i.avail.Horde).text})`);
       if (i.suffixOptions) suffixPicks.set(i.id, `${i.name} (${i.id}, ${s.suffix.useful}/${s.suffix.total} suffixes help)`);
       const near = strong.filter((o) => o.item.id !== i.id && Math.abs(o.item.level - i.level) <= 3).sort((a, b) => b.ep - a.ep).slice(0, 3);
       for (const o of near) if (o.proc.unmodeled) flagged.set(o.item.id, o.item.name);

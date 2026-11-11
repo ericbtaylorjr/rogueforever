@@ -78,7 +78,7 @@ function offersOf(item, ctx) {
   else
     for (const s of sources) {
       if (s.quest) {
-        offers.push({ kind: 'quest', text: `Quest: ${s.quest.name}`, factions: curation.questSide?.[s.quest.id] ? [curation.questSide[s.quest.id]] : sideOf(s.quest.faction), questId: s.quest.id, sideKnown: s.quest.faction != null || curation.questSide?.[s.quest.id] != null });
+        offers.push({ kind: 'quest', text: `Quest: ${s.quest.name}`, factions: curation.questSide?.[s.quest.id] && curation.questSide[s.quest.id] !== 'Both' ? [curation.questSide[s.quest.id]] : sideOf(s.quest.faction), questId: s.quest.id, sideKnown: s.quest.faction != null || curation.questSide?.[s.quest.id] != null });
       } else if (s.drop) {
         const d = s.drop;
         const zone = zoneName(d.zoneId);
@@ -211,7 +211,7 @@ export function buildCandidates({ db, curation, recipes, lookups }) {
     }
     // A quest's "Requires level" (verified by hand on Wowhead, curation.json questMinLevel) can be higher than the item's own requirement.
     const questMin = quest ? curation.questMinLevel?.[quest.questId] : undefined;
-    if (questMin && questMin > level && !curation.level?.[it.id]) (level = questMin), (levelFrom = 'quest requirement');
+    if (questMin && !curation.level?.[it.id] && (questMin > level || levelFrom === 'Wowhead quest' || levelFrom === 'item level')) (level = questMin), (levelFrom = 'quest requirement');
     const needsLevelLookup = !it.reqLvl && !!quest && !lk && !curation.level?.[it.id];
 
     out.push({

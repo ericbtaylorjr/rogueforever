@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-10",
+  "generated": "2026-11-11",
   "forever": {
-    "commit": "3d67a0a1a069f41a2257e94637ddc7b455988917",
-    "databaseChanged": "2026-11-10T09:53:50Z"
+    "commit": "ff9babba5238325eff8bb74a742a2ca626804e60",
+    "databaseChanged": "2026-11-10T23:23:47Z"
   },
   "builds": {
     "assassination/questing": [
@@ -305,6 +305,15 @@
         "quality": "rare",
         "source": "The Stockade (Targorr the Dread)",
         "faction": "Alliance"
+      },
+      {
+        "level": 21,
+        "slot": "Chest",
+        "itemId": 270043,
+        "name": "Dreamer's Chestguard",
+        "quality": "rare",
+        "source": "Quest: Baron Aquanis",
+        "faction": "Horde"
       },
       {
         "level": 21,
@@ -718,6 +727,15 @@
       },
       {
         "level": 37,
+        "slot": "Back",
+        "itemId": 4114,
+        "name": "Darktide Cape",
+        "quality": "uncommon",
+        "source": "Quest: Keep An Eye Out",
+        "faction": "Both"
+      },
+      {
+        "level": 37,
         "slot": "Feet",
         "itemId": 9398,
         "name": "Worn Running Boots",
@@ -742,15 +760,6 @@
         "name": "Branded Leather Bracers",
         "quality": "rare",
         "source": "Scarlet Monastery (High Inquisitor Fairbanks)",
-        "faction": "Both"
-      },
-      {
-        "level": 38,
-        "slot": "Back",
-        "itemId": 4114,
-        "name": "Darktide Cape",
-        "quality": "uncommon",
-        "source": "Quest: Keep An Eye Out",
         "faction": "Both"
       },
       {
@@ -817,6 +826,15 @@
         "source": "Engineering",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 39,
+        "slot": "Trinket",
+        "itemId": 17774,
+        "name": "Mark of the Chosen",
+        "quality": "uncommon",
+        "source": "Quest: The Pariah's Instructions",
+        "faction": "Both"
       },
       {
         "level": 40,
@@ -894,10 +912,20 @@
       {
         "level": 41,
         "slot": "Back",
+        "itemId": 9512,
+        "name": "Blackmetal Cape",
+        "quality": "rare",
+        "source": "Zul'Farrak (Trash)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 41,
+        "slot": "Back",
         "itemId": 8195,
         "name": "Nightscape Cloak",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (205)",
         "faction": "Both",
         "boe": true
       },
@@ -1044,6 +1072,15 @@
         "boe": true
       },
       {
+        "level": 46,
+        "slot": "Trinket",
+        "itemId": 19120,
+        "name": "Rune of the Guard Captain",
+        "quality": "uncommon",
+        "source": "Quest: Job Opening: Guard Captain of Revantusk Village",
+        "faction": "Horde"
+      },
+      {
         "level": 47,
         "slot": "Wrists",
         "itemId": 10800,
@@ -1071,15 +1108,6 @@
         "faction": "Both"
       },
       {
-        "level": 48,
-        "slot": "Trinket",
-        "itemId": 17774,
-        "name": "Mark of the Chosen",
-        "quality": "uncommon",
-        "source": "Quest: The Pariah's Instructions",
-        "faction": "Both"
-      },
-      {
         "level": 49,
         "slot": "Off hand",
         "itemId": 11635,
@@ -1100,6 +1128,15 @@
       {
         "level": 50,
         "slot": "Chest",
+        "itemId": 22274,
+        "name": "Grizzled Pelt",
+        "quality": "rare",
+        "source": "Quest: A Better Ingredient",
+        "faction": "Both"
+      },
+      {
+        "level": 50,
+        "slot": "Chest",
         "itemId": 15064,
         "name": "Warbear Harness",
         "quality": "rare",
@@ -1113,7 +1150,7 @@
         "itemId": 252548,
         "name": "Skulker's Leather Gauntlets",
         "quality": "rare",
-        "source": "Leatherworking",
+        "source": "Leatherworking (250)",
         "faction": "Both",
         "bop": true
       },
@@ -1180,15 +1217,6 @@
         "name": "Girdle of Beastial Fury",
         "quality": "rare",
         "source": "Blackrock Depths (Eviscerator)",
-        "faction": "Both"
-      },
-      {
-        "level": 52,
-        "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
         "faction": "Both"
       },
       {
@@ -1447,10 +1475,10 @@
       {
         "level": 58,
         "slot": "Neck",
-        "itemId": 19615,
-        "name": "Zandalarian Shadow Talisman",
+        "itemId": 12103,
+        "name": "Star of Mystaria",
         "quality": "rare",
-        "source": "Quest: Zandalarian Shadow Talisman",
+        "source": "Stratholme (Balnazzar)",
         "faction": "Both"
       }
     ],
@@ -1757,6 +1785,15 @@
       },
       {
         "level": 21,
+        "slot": "Chest",
+        "itemId": 270043,
+        "name": "Dreamer's Chestguard",
+        "quality": "rare",
+        "source": "Quest: Baron Aquanis",
+        "faction": "Horde"
+      },
+      {
+        "level": 21,
         "slot": "Shoulders",
         "itemId": 273804,
         "name": "Executioner Mantle",
@@ -2167,6 +2204,15 @@
       },
       {
         "level": 37,
+        "slot": "Back",
+        "itemId": 4114,
+        "name": "Darktide Cape",
+        "quality": "uncommon",
+        "source": "Quest: Keep An Eye Out",
+        "faction": "Both"
+      },
+      {
+        "level": 37,
         "slot": "Feet",
         "itemId": 9398,
         "name": "Worn Running Boots",
@@ -2191,15 +2237,6 @@
         "name": "Branded Leather Bracers",
         "quality": "rare",
         "source": "Scarlet Monastery (High Inquisitor Fairbanks)",
-        "faction": "Both"
-      },
-      {
-        "level": 38,
-        "slot": "Back",
-        "itemId": 4114,
-        "name": "Darktide Cape",
-        "quality": "uncommon",
-        "source": "Quest: Keep An Eye Out",
         "faction": "Both"
       },
       {
@@ -2257,6 +2294,15 @@
         "source": "Engineering",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 39,
+        "slot": "Trinket",
+        "itemId": 17774,
+        "name": "Mark of the Chosen",
+        "quality": "uncommon",
+        "source": "Quest: The Pariah's Instructions",
+        "faction": "Both"
       },
       {
         "level": 40,
@@ -2334,10 +2380,20 @@
       {
         "level": 41,
         "slot": "Back",
+        "itemId": 9512,
+        "name": "Blackmetal Cape",
+        "quality": "rare",
+        "source": "Zul'Farrak (Trash)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 41,
+        "slot": "Back",
         "itemId": 8195,
         "name": "Nightscape Cloak",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (205)",
         "faction": "Both",
         "boe": true
       },
@@ -2484,6 +2540,15 @@
         "boe": true
       },
       {
+        "level": 46,
+        "slot": "Trinket",
+        "itemId": 19120,
+        "name": "Rune of the Guard Captain",
+        "quality": "uncommon",
+        "source": "Quest: Job Opening: Guard Captain of Revantusk Village",
+        "faction": "Horde"
+      },
+      {
         "level": 47,
         "slot": "Wrists",
         "itemId": 10800,
@@ -2511,15 +2576,6 @@
         "faction": "Both"
       },
       {
-        "level": 48,
-        "slot": "Trinket",
-        "itemId": 17774,
-        "name": "Mark of the Chosen",
-        "quality": "uncommon",
-        "source": "Quest: The Pariah's Instructions",
-        "faction": "Both"
-      },
-      {
         "level": 49,
         "slot": "Off hand",
         "itemId": 11635,
@@ -2540,6 +2596,15 @@
       {
         "level": 50,
         "slot": "Chest",
+        "itemId": 22274,
+        "name": "Grizzled Pelt",
+        "quality": "rare",
+        "source": "Quest: A Better Ingredient",
+        "faction": "Both"
+      },
+      {
+        "level": 50,
+        "slot": "Chest",
         "itemId": 15064,
         "name": "Warbear Harness",
         "quality": "rare",
@@ -2553,7 +2618,7 @@
         "itemId": 252548,
         "name": "Skulker's Leather Gauntlets",
         "quality": "rare",
-        "source": "Leatherworking",
+        "source": "Leatherworking (250)",
         "faction": "Both",
         "bop": true
       },
@@ -2620,15 +2685,6 @@
         "name": "Girdle of Beastial Fury",
         "quality": "rare",
         "source": "Blackrock Depths (Eviscerator)",
-        "faction": "Both"
-      },
-      {
-        "level": 52,
-        "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
         "faction": "Both"
       },
       {
@@ -2877,10 +2933,10 @@
       {
         "level": 58,
         "slot": "Neck",
-        "itemId": 19615,
-        "name": "Zandalarian Shadow Talisman",
+        "itemId": 12103,
+        "name": "Star of Mystaria",
         "quality": "rare",
-        "source": "Quest: Zandalarian Shadow Talisman",
+        "source": "Stratholme (Balnazzar)",
         "faction": "Both"
       }
     ],
@@ -3211,6 +3267,15 @@
         "quality": "rare",
         "source": "The Stockade (Targorr the Dread)",
         "faction": "Alliance"
+      },
+      {
+        "level": 21,
+        "slot": "Chest",
+        "itemId": 270043,
+        "name": "Dreamer's Chestguard",
+        "quality": "rare",
+        "source": "Quest: Baron Aquanis",
+        "faction": "Horde"
       },
       {
         "level": 21,
@@ -3634,6 +3699,15 @@
       },
       {
         "level": 37,
+        "slot": "Back",
+        "itemId": 4114,
+        "name": "Darktide Cape",
+        "quality": "uncommon",
+        "source": "Quest: Keep An Eye Out",
+        "faction": "Both"
+      },
+      {
+        "level": 37,
         "slot": "Feet",
         "itemId": 9398,
         "name": "Worn Running Boots",
@@ -3668,15 +3742,6 @@
         "name": "Branded Leather Bracers",
         "quality": "rare",
         "source": "Scarlet Monastery (High Inquisitor Fairbanks)",
-        "faction": "Both"
-      },
-      {
-        "level": 38,
-        "slot": "Back",
-        "itemId": 4114,
-        "name": "Darktide Cape",
-        "quality": "uncommon",
-        "source": "Quest: Keep An Eye Out",
         "faction": "Both"
       },
       {
@@ -3734,6 +3799,15 @@
         "source": "Engineering",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 39,
+        "slot": "Trinket",
+        "itemId": 17774,
+        "name": "Mark of the Chosen",
+        "quality": "uncommon",
+        "source": "Quest: The Pariah's Instructions",
+        "faction": "Both"
       },
       {
         "level": 40,
@@ -3831,10 +3905,20 @@
       {
         "level": 41,
         "slot": "Back",
+        "itemId": 9512,
+        "name": "Blackmetal Cape",
+        "quality": "rare",
+        "source": "Zul'Farrak (Trash)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 41,
+        "slot": "Back",
         "itemId": 8195,
         "name": "Nightscape Cloak",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (205)",
         "faction": "Both",
         "boe": true
       },
@@ -3952,6 +4036,15 @@
         "faction": "Horde"
       },
       {
+        "level": 46,
+        "slot": "Trinket",
+        "itemId": 19120,
+        "name": "Rune of the Guard Captain",
+        "quality": "uncommon",
+        "source": "Quest: Job Opening: Guard Captain of Revantusk Village",
+        "faction": "Horde"
+      },
+      {
         "level": 47,
         "slot": "Wrists",
         "itemId": 10800,
@@ -3979,15 +4072,6 @@
         "faction": "Both"
       },
       {
-        "level": 48,
-        "slot": "Trinket",
-        "itemId": 17774,
-        "name": "Mark of the Chosen",
-        "quality": "uncommon",
-        "source": "Quest: The Pariah's Instructions",
-        "faction": "Both"
-      },
-      {
         "level": 49,
         "slot": "Off hand",
         "itemId": 12535,
@@ -4009,6 +4093,15 @@
       {
         "level": 50,
         "slot": "Chest",
+        "itemId": 22274,
+        "name": "Grizzled Pelt",
+        "quality": "rare",
+        "source": "Quest: A Better Ingredient",
+        "faction": "Both"
+      },
+      {
+        "level": 50,
+        "slot": "Chest",
         "itemId": 15064,
         "name": "Warbear Harness",
         "quality": "rare",
@@ -4022,7 +4115,7 @@
         "itemId": 252548,
         "name": "Skulker's Leather Gauntlets",
         "quality": "rare",
-        "source": "Leatherworking",
+        "source": "Leatherworking (250)",
         "faction": "Both",
         "bop": true
       },
@@ -4091,15 +4184,6 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 52,
-        "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
-        "faction": "Both"
       },
       {
         "level": 52,
@@ -4217,6 +4301,24 @@
       },
       {
         "level": 55,
+        "slot": "Neck",
+        "itemId": 13212,
+        "name": "Halycon's Spiked Collar",
+        "quality": "rare",
+        "source": "Blackrock Spire (Halycon)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
+        "slot": "Neck",
+        "itemId": 13177,
+        "name": "Talisman of Evasion",
+        "quality": "rare",
+        "source": "Blackrock Spire (War Master Voone)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -4258,7 +4360,7 @@
         "itemId": 252482,
         "name": "Blue Suede Hat",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (280)",
         "faction": "Both",
         "boe": true
       },
@@ -4269,15 +4371,6 @@
         "name": "Cadaverous Leggings",
         "quality": "rare",
         "source": "Scholomance (Instructor Malicia)",
-        "faction": "Both"
-      },
-      {
-        "level": 56,
-        "slot": "Neck",
-        "itemId": 19614,
-        "name": "Zandalarian Shadow Talisman",
-        "quality": "uncommon",
-        "source": "Quest: Zandalarian Shadow Talisman",
         "faction": "Both"
       },
       {
@@ -4345,15 +4438,6 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 58,
-        "slot": "Neck",
-        "itemId": 19615,
-        "name": "Zandalarian Shadow Talisman",
-        "quality": "rare",
-        "source": "Quest: Zandalarian Shadow Talisman",
-        "faction": "Both"
       }
     ],
     "combat/dungeons": [
@@ -4683,6 +4767,15 @@
         "quality": "rare",
         "source": "The Stockade (Targorr the Dread)",
         "faction": "Alliance"
+      },
+      {
+        "level": 21,
+        "slot": "Chest",
+        "itemId": 270043,
+        "name": "Dreamer's Chestguard",
+        "quality": "rare",
+        "source": "Quest: Baron Aquanis",
+        "faction": "Horde"
       },
       {
         "level": 21,
@@ -5124,6 +5217,15 @@
       },
       {
         "level": 37,
+        "slot": "Back",
+        "itemId": 4114,
+        "name": "Darktide Cape",
+        "quality": "uncommon",
+        "source": "Quest: Keep An Eye Out",
+        "faction": "Both"
+      },
+      {
+        "level": 37,
         "slot": "Feet",
         "itemId": 9398,
         "name": "Worn Running Boots",
@@ -5158,15 +5260,6 @@
         "name": "Branded Leather Bracers",
         "quality": "rare",
         "source": "Scarlet Monastery (High Inquisitor Fairbanks)",
-        "faction": "Both"
-      },
-      {
-        "level": 38,
-        "slot": "Back",
-        "itemId": 4114,
-        "name": "Darktide Cape",
-        "quality": "uncommon",
-        "source": "Quest: Keep An Eye Out",
         "faction": "Both"
       },
       {
@@ -5242,6 +5335,15 @@
         "source": "Engineering",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 39,
+        "slot": "Trinket",
+        "itemId": 17774,
+        "name": "Mark of the Chosen",
+        "quality": "uncommon",
+        "source": "Quest: The Pariah's Instructions",
+        "faction": "Both"
       },
       {
         "level": 40,
@@ -5339,10 +5441,20 @@
       {
         "level": 41,
         "slot": "Back",
+        "itemId": 9512,
+        "name": "Blackmetal Cape",
+        "quality": "rare",
+        "source": "Zul'Farrak (Trash)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 41,
+        "slot": "Back",
         "itemId": 8195,
         "name": "Nightscape Cloak",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (205)",
         "faction": "Both",
         "boe": true
       },
@@ -5459,6 +5571,15 @@
         "faction": "Horde"
       },
       {
+        "level": 46,
+        "slot": "Trinket",
+        "itemId": 19120,
+        "name": "Rune of the Guard Captain",
+        "quality": "uncommon",
+        "source": "Quest: Job Opening: Guard Captain of Revantusk Village",
+        "faction": "Horde"
+      },
+      {
         "level": 47,
         "slot": "Wrists",
         "itemId": 10800,
@@ -5486,15 +5607,6 @@
         "faction": "Both"
       },
       {
-        "level": 48,
-        "slot": "Trinket",
-        "itemId": 17774,
-        "name": "Mark of the Chosen",
-        "quality": "uncommon",
-        "source": "Quest: The Pariah's Instructions",
-        "faction": "Both"
-      },
-      {
         "level": 49,
         "slot": "Off hand",
         "itemId": 12535,
@@ -5516,6 +5628,15 @@
       {
         "level": 50,
         "slot": "Chest",
+        "itemId": 22274,
+        "name": "Grizzled Pelt",
+        "quality": "rare",
+        "source": "Quest: A Better Ingredient",
+        "faction": "Both"
+      },
+      {
+        "level": 50,
+        "slot": "Chest",
         "itemId": 15064,
         "name": "Warbear Harness",
         "quality": "rare",
@@ -5529,7 +5650,7 @@
         "itemId": 252548,
         "name": "Skulker's Leather Gauntlets",
         "quality": "rare",
-        "source": "Leatherworking",
+        "source": "Leatherworking (250)",
         "faction": "Both",
         "bop": true
       },
@@ -5775,7 +5896,7 @@
         "itemId": 252482,
         "name": "Blue Suede Hat",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (280)",
         "faction": "Both",
         "boe": true
       },
@@ -5853,15 +5974,6 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 58,
-        "slot": "Neck",
-        "itemId": 19615,
-        "name": "Zandalarian Shadow Talisman",
-        "quality": "rare",
-        "source": "Quest: Zandalarian Shadow Talisman",
-        "faction": "Both"
       }
     ],
     "subtlety/questing": [
@@ -6220,6 +6332,15 @@
         "quality": "rare",
         "source": "The Stockade (Targorr the Dread)",
         "faction": "Alliance"
+      },
+      {
+        "level": 21,
+        "slot": "Chest",
+        "itemId": 270043,
+        "name": "Dreamer's Chestguard",
+        "quality": "rare",
+        "source": "Quest: Baron Aquanis",
+        "faction": "Horde"
       },
       {
         "level": 21,
@@ -6701,6 +6822,15 @@
       },
       {
         "level": 37,
+        "slot": "Back",
+        "itemId": 4114,
+        "name": "Darktide Cape",
+        "quality": "uncommon",
+        "source": "Quest: Keep An Eye Out",
+        "faction": "Both"
+      },
+      {
+        "level": 37,
         "slot": "Feet",
         "itemId": 9398,
         "name": "Worn Running Boots",
@@ -6735,15 +6865,6 @@
         "name": "Branded Leather Bracers",
         "quality": "rare",
         "source": "Scarlet Monastery (High Inquisitor Fairbanks)",
-        "faction": "Both"
-      },
-      {
-        "level": 38,
-        "slot": "Back",
-        "itemId": 4114,
-        "name": "Darktide Cape",
-        "quality": "uncommon",
-        "source": "Quest: Keep An Eye Out",
         "faction": "Both"
       },
       {
@@ -6801,6 +6922,15 @@
         "source": "Engineering",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 39,
+        "slot": "Trinket",
+        "itemId": 17774,
+        "name": "Mark of the Chosen",
+        "quality": "uncommon",
+        "source": "Quest: The Pariah's Instructions",
+        "faction": "Both"
       },
       {
         "level": 40,
@@ -6898,10 +7028,20 @@
       {
         "level": 41,
         "slot": "Back",
+        "itemId": 9512,
+        "name": "Blackmetal Cape",
+        "quality": "rare",
+        "source": "Zul'Farrak (Trash)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 41,
+        "slot": "Back",
         "itemId": 8195,
         "name": "Nightscape Cloak",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (205)",
         "faction": "Both",
         "boe": true
       },
@@ -7047,6 +7187,15 @@
         "faction": "Horde"
       },
       {
+        "level": 46,
+        "slot": "Trinket",
+        "itemId": 19120,
+        "name": "Rune of the Guard Captain",
+        "quality": "uncommon",
+        "source": "Quest: Job Opening: Guard Captain of Revantusk Village",
+        "faction": "Horde"
+      },
+      {
         "level": 47,
         "slot": "Wrists",
         "itemId": 10800,
@@ -7083,21 +7232,21 @@
         "faction": "Both"
       },
       {
-        "level": 48,
-        "slot": "Trinket",
-        "itemId": 17774,
-        "name": "Mark of the Chosen",
-        "quality": "uncommon",
-        "source": "Quest: The Pariah's Instructions",
-        "faction": "Both"
-      },
-      {
         "level": 49,
         "slot": "Ring",
         "itemId": 17713,
         "name": "Blackstone Ring",
         "quality": "rare",
         "source": "Maraudon (Princess Theradras)",
+        "faction": "Both"
+      },
+      {
+        "level": 50,
+        "slot": "Chest",
+        "itemId": 22274,
+        "name": "Grizzled Pelt",
+        "quality": "rare",
+        "source": "Quest: A Better Ingredient",
         "faction": "Both"
       },
       {
@@ -7116,7 +7265,7 @@
         "itemId": 252548,
         "name": "Skulker's Leather Gauntlets",
         "quality": "rare",
-        "source": "Leatherworking",
+        "source": "Leatherworking (250)",
         "faction": "Both",
         "bop": true
       },
@@ -7195,15 +7344,6 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 52,
-        "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
-        "faction": "Both"
       },
       {
         "level": 52,
@@ -7331,6 +7471,24 @@
       },
       {
         "level": 55,
+        "slot": "Neck",
+        "itemId": 13212,
+        "name": "Halycon's Spiked Collar",
+        "quality": "rare",
+        "source": "Blackrock Spire (Halycon)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
+        "slot": "Neck",
+        "itemId": 13177,
+        "name": "Talisman of Evasion",
+        "quality": "rare",
+        "source": "Blackrock Spire (War Master Voone)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -7372,7 +7530,7 @@
         "itemId": 252482,
         "name": "Blue Suede Hat",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (280)",
         "faction": "Both",
         "boe": true
       },
@@ -7383,24 +7541,6 @@
         "name": "Cadaverous Leggings",
         "quality": "rare",
         "source": "Scholomance (Instructor Malicia)",
-        "faction": "Both"
-      },
-      {
-        "level": 56,
-        "slot": "Main hand",
-        "itemId": 18683,
-        "name": "Hammer of the Vesper",
-        "quality": "rare",
-        "source": "Scholomance (Instructor Malicia)",
-        "faction": "Both"
-      },
-      {
-        "level": 56,
-        "slot": "Neck",
-        "itemId": 19614,
-        "name": "Zandalarian Shadow Talisman",
-        "quality": "uncommon",
-        "source": "Quest: Zandalarian Shadow Talisman",
         "faction": "Both"
       },
       {
@@ -7443,11 +7583,20 @@
       },
       {
         "level": 57,
-        "slot": "Off hand",
+        "slot": "Main hand",
         "itemId": 14487,
         "name": "Bonechill Hammer",
         "quality": "rare",
         "source": "Scholomance (Ras Frostwhisper)",
+        "faction": "Both"
+      },
+      {
+        "level": 57,
+        "slot": "Off hand",
+        "itemId": 18737,
+        "name": "Bone Slicing Hatchet",
+        "quality": "rare",
+        "source": "Stratholme (Maleki the Pallid)",
         "faction": "Both"
       },
       {
@@ -7468,25 +7617,6 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 58,
-        "slot": "Main hand",
-        "itemId": 250618,
-        "name": "Bagh Nakh",
-        "quality": "rare",
-        "source": "Blacksmithing",
-        "faction": "Both",
-        "boe": true
-      },
-      {
-        "level": 58,
-        "slot": "Neck",
-        "itemId": 19615,
-        "name": "Zandalarian Shadow Talisman",
-        "quality": "rare",
-        "source": "Quest: Zandalarian Shadow Talisman",
-        "faction": "Both"
       },
       {
         "level": 58,
@@ -7854,6 +7984,15 @@
         "quality": "rare",
         "source": "The Stockade (Targorr the Dread)",
         "faction": "Alliance"
+      },
+      {
+        "level": 21,
+        "slot": "Chest",
+        "itemId": 270043,
+        "name": "Dreamer's Chestguard",
+        "quality": "rare",
+        "source": "Quest: Baron Aquanis",
+        "faction": "Horde"
       },
       {
         "level": 21,
@@ -8334,6 +8473,15 @@
       },
       {
         "level": 37,
+        "slot": "Back",
+        "itemId": 4114,
+        "name": "Darktide Cape",
+        "quality": "uncommon",
+        "source": "Quest: Keep An Eye Out",
+        "faction": "Both"
+      },
+      {
+        "level": 37,
         "slot": "Feet",
         "itemId": 9398,
         "name": "Worn Running Boots",
@@ -8368,15 +8516,6 @@
         "name": "Branded Leather Bracers",
         "quality": "rare",
         "source": "Scarlet Monastery (High Inquisitor Fairbanks)",
-        "faction": "Both"
-      },
-      {
-        "level": 38,
-        "slot": "Back",
-        "itemId": 4114,
-        "name": "Darktide Cape",
-        "quality": "uncommon",
-        "source": "Quest: Keep An Eye Out",
         "faction": "Both"
       },
       {
@@ -8452,6 +8591,15 @@
         "source": "Engineering",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 39,
+        "slot": "Trinket",
+        "itemId": 17774,
+        "name": "Mark of the Chosen",
+        "quality": "uncommon",
+        "source": "Quest: The Pariah's Instructions",
+        "faction": "Both"
       },
       {
         "level": 40,
@@ -8559,10 +8707,20 @@
       {
         "level": 41,
         "slot": "Back",
+        "itemId": 9512,
+        "name": "Blackmetal Cape",
+        "quality": "rare",
+        "source": "Zul'Farrak (Trash)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 41,
+        "slot": "Back",
         "itemId": 8195,
         "name": "Nightscape Cloak",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (205)",
         "faction": "Both",
         "boe": true
       },
@@ -8708,6 +8866,15 @@
         "faction": "Horde"
       },
       {
+        "level": 46,
+        "slot": "Trinket",
+        "itemId": 19120,
+        "name": "Rune of the Guard Captain",
+        "quality": "uncommon",
+        "source": "Quest: Job Opening: Guard Captain of Revantusk Village",
+        "faction": "Horde"
+      },
+      {
         "level": 47,
         "slot": "Wrists",
         "itemId": 10800,
@@ -8744,21 +8911,21 @@
         "faction": "Both"
       },
       {
-        "level": 48,
-        "slot": "Trinket",
-        "itemId": 17774,
-        "name": "Mark of the Chosen",
-        "quality": "uncommon",
-        "source": "Quest: The Pariah's Instructions",
-        "faction": "Both"
-      },
-      {
         "level": 49,
         "slot": "Ring",
         "itemId": 17713,
         "name": "Blackstone Ring",
         "quality": "rare",
         "source": "Maraudon (Princess Theradras)",
+        "faction": "Both"
+      },
+      {
+        "level": 50,
+        "slot": "Chest",
+        "itemId": 22274,
+        "name": "Grizzled Pelt",
+        "quality": "rare",
+        "source": "Quest: A Better Ingredient",
         "faction": "Both"
       },
       {
@@ -8777,7 +8944,7 @@
         "itemId": 252548,
         "name": "Skulker's Leather Gauntlets",
         "quality": "rare",
-        "source": "Leatherworking",
+        "source": "Leatherworking (250)",
         "faction": "Both",
         "bop": true
       },
@@ -8856,15 +9023,6 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 52,
-        "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
-        "faction": "Both"
       },
       {
         "level": 52,
@@ -9001,6 +9159,15 @@
       },
       {
         "level": 55,
+        "slot": "Neck",
+        "itemId": 13177,
+        "name": "Talisman of Evasion",
+        "quality": "rare",
+        "source": "Blackrock Spire (War Master Voone)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
         "slot": "Shoulders",
         "itemId": 16708,
         "name": "Shadowcraft Spaulders",
@@ -9051,7 +9218,7 @@
         "itemId": 252482,
         "name": "Blue Suede Hat",
         "quality": "uncommon",
-        "source": "Leatherworking",
+        "source": "Leatherworking (280)",
         "faction": "Both",
         "boe": true
       },
@@ -9060,15 +9227,6 @@
         "slot": "Legs",
         "itemId": 14638,
         "name": "Cadaverous Leggings",
-        "quality": "rare",
-        "source": "Scholomance (Instructor Malicia)",
-        "faction": "Both"
-      },
-      {
-        "level": 56,
-        "slot": "Main hand",
-        "itemId": 18683,
-        "name": "Hammer of the Vesper",
         "quality": "rare",
         "source": "Scholomance (Instructor Malicia)",
         "faction": "Both"
@@ -9113,11 +9271,20 @@
       },
       {
         "level": 57,
-        "slot": "Off hand",
+        "slot": "Main hand",
         "itemId": 14487,
         "name": "Bonechill Hammer",
         "quality": "rare",
         "source": "Scholomance (Ras Frostwhisper)",
+        "faction": "Both"
+      },
+      {
+        "level": 57,
+        "slot": "Off hand",
+        "itemId": 18737,
+        "name": "Bone Slicing Hatchet",
+        "quality": "rare",
+        "source": "Stratholme (Maleki the Pallid)",
         "faction": "Both"
       },
       {
@@ -9138,25 +9305,6 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 58,
-        "slot": "Main hand",
-        "itemId": 250618,
-        "name": "Bagh Nakh",
-        "quality": "rare",
-        "source": "Blacksmithing",
-        "faction": "Both",
-        "boe": true
-      },
-      {
-        "level": 58,
-        "slot": "Neck",
-        "itemId": 19615,
-        "name": "Zandalarian Shadow Talisman",
-        "quality": "rare",
-        "source": "Quest: Zandalarian Shadow Talisman",
-        "faction": "Both"
       }
     ]
   }

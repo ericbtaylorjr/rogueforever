@@ -1,15 +1,105 @@
 {
-  "_readme": "Hand corrections every run applies (see README.md here). exclude: [{id, why}] drops an item. level: {id: n} overrides the level shown. source: {id: text} overrides the Source column. include: [{builds?, item: LevelingItem}] adds an item the database can't see yet (omit builds for all six). allow: [id] lets a world drop or rare spawn count as chaseable (or a PvP-flagged item). dpsEp: {\"<spec>/<build>\": {main, off, ranged}} overrides the EP per weapon DPS point for one build. pins: [{id, why, roles?, builds?, force?}] are items you know matter but the model can't see: the report says where each landed; they are forced into the list for the builds and slots they fit (roles/builds narrow that), or set force: false to only report. ppm: {\"<itemId>\": n} sets a known procs-per-minute for an on-hit effect whose rate the database doesn't give (otherwise 1 is assumed). notAtLaunch: {zones: [zone ids], reps: [reputation faction ids]} keeps drops, vendors and reputation rewards from those out, and crafted items whose recipe drops or is sold there (Dire Maul is 2557). allowEpic: [ids] lets an epic below level 60 in: epics are blocked by default because most are raid-era or post-launch rewards. maxRepLevel: the highest reputation standing a player is assumed to reach while leveling (6 = Honored; RepLevel in the Forever proto). cityDungeons: {zoneId: 'Alliance'|'Horde'} dungeons inside a capital, practical for that side only. dungeonInZone: {zoneId: name} dungeons the database files under an outdoor zone. questSide: {questId: 'Alliance'|'Horde'} sets which side can take a quest when the database records none (it treats those as both sides); verify on Wowhead. excludeReps: [names] reputations earned through battlegrounds (PvP): their vendor and reputation gear is out, matched by name against the database's reputation list and the tooltip's \"Requires <faction> - <standing>\" line.",
+  "_readme": "Hand corrections every run applies (see README.md here). exclude: [{id, why}] drops an item. level: {id: n} overrides the level shown. source: {id: text} overrides the Source column. include: [{builds?, item: LevelingItem}] adds an item the database can't see yet (omit builds for all six). allow: [id] lets a world drop or rare spawn count as chaseable (or a PvP-flagged item). dpsEp: {\"<spec>/<build>\": {main, off, ranged}} overrides the EP per weapon DPS point for one build. pins: [{id, why, roles?, builds?, force?}] are items you know matter but the model can't see: the report says where each landed; they are forced into the list for the builds and slots they fit (roles/builds narrow that), or set force: false to only report. ppm: {\"<itemId>\": n} sets a known procs-per-minute for an on-hit effect whose rate the database doesn't give (otherwise 1 is assumed). notAtLaunch: {zones: [zone ids], reps: [reputation faction ids]} keeps drops, vendors and reputation rewards from those out, and crafted items whose recipe drops or is sold there (Dire Maul is 2557). allowEpic: [ids] lets an epic below level 60 in: epics are blocked by default because most are raid-era or post-launch rewards. maxRepLevel: the highest reputation standing a player is assumed to reach while leveling (6 = Honored; RepLevel in the Forever proto). cityDungeons: {zoneId: 'Alliance'|'Horde'} dungeons inside a capital, practical for that side only. dungeonInZone: {zoneId: name} dungeons the database files under an outdoor zone. questSide: {questId: 'Alliance'|'Horde'} sets which side can take a quest when the database records none (it treats those as both sides); verify on Wowhead. 'Both' records that both sides were checked.recipeVerified: [ids] crafts whose recipe source was confirmed by hand when Wowhead doesn't list one (they drop off the report's check list). questMinLevel: {questId: n} the quest's verified \"Requires level\" on Wowhead, applied when higher than the item's own requirement. excludeReps: [names] reputations earned through battlegrounds (PvP): their vendor and reputation gear is out, matched by name against the database's reputation list and the tooltip's \"Requires <faction> - <standing>\" line.",
   "exclude": [
     {
       "id": 250616,
       "why": "Bold Dirk: its recipe is sold by Pexmit in zone 616 (Mount Hyjal), which isn't open at launch. Remove if that turns out wrong."
+    },
+    {
+      "id": 19614,
+      "why": "Zandalarian Shadow Talisman: Zul'Gurub item, not available in current content."
+    },
+    {
+      "id": 19615,
+      "why": "Zandalarian Shadow Talisman: Zul'Gurub item, not available in current content."
+    },
+    {
+      "id": 250618,
+      "why": "Bagh Nakh: the recipe needs Revered with Timbermaw Hold; leveling assumes Honored at most."
     }
   ],
   "level": {},
-  "questMinLevel": { "78699": 30, "3636": 39 },
-  "questSide": { "93128": "Horde" },
-  "source": {},
+  "questMinLevel": {
+    "166": 14,
+    "628": 31,
+    "717": 40,
+    "793": 40,
+    "914": 10,
+    "1014": 18,
+    "1048": 33,
+    "1053": 34,
+    "1173": 38,
+    "1200": 18,
+    "2768": 40,
+    "2841": 25,
+    "2929": 25,
+    "2994": 40,
+    "3341": 37,
+    "3528": 40,
+    "3625": 45,
+    "3636": 39,
+    "4201": 50,
+    "4363": 50,
+    "6031": 50,
+    "6561": 18,
+    "6922": 21,
+    "7064": 45,
+    "7065": 45,
+    "7067": 39,
+    "7068": 39,
+    "7070": 39,
+    "7861": 46,
+    "8236": 50,
+    "8464": 45,
+    "9053": 50,
+    "78699": 30,
+    "79536": 20,
+    "576": 37,
+    "7862": 46
+  },
+  "questSide": {
+    "93128": "Horde",
+    "914": "Horde",
+    "166": "Alliance",
+    "1014": "Horde",
+    "6922": "Horde",
+    "1048": "Horde",
+    "1053": "Alliance",
+    "1173": "Horde",
+    "3341": "Horde",
+    "3636": "Alliance",
+    "2994": "Alliance",
+    "7861": "Horde",
+    "4363": "Alliance",
+    "1200": "Both",
+    "6561": "Both",
+    "79536": "Both",
+    "2841": "Both",
+    "2929": "Both",
+    "628": "Both",
+    "7068": "Both",
+    "7070": "Both",
+    "793": "Both",
+    "717": "Both",
+    "2768": "Both",
+    "3528": "Both",
+    "7064": "Both",
+    "7065": "Both",
+    "3625": "Both",
+    "8464": "Both",
+    "7067": "Both",
+    "6031": "Both",
+    "8236": "Both",
+    "9053": "Both",
+    "576": "Both",
+    "78699": "Both",
+    "7862": "Horde"
+  },
+  "source": {
+    "252482": "Leatherworking (280)",
+    "8195": "Leatherworking (205)",
+    "252548": "Leatherworking (250)"
+  },
   "include": [],
   "allow": [],
   "pins": [
@@ -47,5 +137,10 @@
     "The League of Arathor",
     "League of Arathor",
     "Defilers"
+  ],
+  "recipeVerified": [
+    252482,
+    8195,
+    252548
   ]
 }
