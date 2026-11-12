@@ -1184,6 +1184,11 @@
     "icon": "inv_weapon_bow_08",
     "kind": "item"
   },
+  "item:18701": {
+    "id": 18701,
+    "icon": "inv_jewelry_ring_24",
+    "kind": "item"
+  },
   "item:13210": {
     "id": 13210,
     "icon": "inv_boots_wolf",
@@ -1369,9 +1374,9 @@
     "icon": "inv_misc_bone_01",
     "kind": "item"
   },
-  "item:9401": {
-    "id": 9401,
-    "icon": "inv_sword_24",
+  "item:10772": {
+    "id": 10772,
+    "icon": "inv_axe_23",
     "kind": "item"
   },
   "item:10823": {

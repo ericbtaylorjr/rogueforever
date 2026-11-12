@@ -86,7 +86,7 @@ function offersOf(item, ctx) {
         if (d.difficulty === 2) dropped.push(`Raid: ${zone}`);
         else if (curation.notAtLaunch?.zones?.includes(d.zoneId)) dropped.push(`Not at launch: ${zone}`);
         else if (d.difficulty === 1) {
-          const only = curation.cityDungeons?.[d.zoneId];
+          const only = curation.npcSide?.[d.npcId] ?? curation.cityDungeons?.[d.zoneId];
           offers.push({ kind: 'dungeon', text: who ? `${zone} (${who})` : zone, factions: only ? [only] : FACTIONS });
         } else offers.push({ kind: 'world', text: `${who ?? 'World drop'}, ${zone}`, factions: FACTIONS });
       } else if (s.crafted) {

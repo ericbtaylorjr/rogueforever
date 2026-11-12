@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-11",
+  "generated": "2026-11-12",
   "forever": {
-    "commit": "6a767454b4ee88cfc6411d4b5eddd6382846da56",
-    "databaseChanged": "2026-11-11T14:33:40Z"
+    "commit": "444044178860b4ccd46a47f0f850403919ee993c",
+    "databaseChanged": "2026-11-12T11:09:31Z"
   },
   "builds": {
     "assassination/questing": [
@@ -1305,6 +1305,16 @@
         "quality": "rare",
         "source": "Blackrock Spire (Shadow Hunter Vosh'gajin)",
         "faction": "Both"
+      },
+      {
+        "level": 54,
+        "slot": "Ring",
+        "itemId": 18701,
+        "name": "Innervating Band",
+        "quality": "rare",
+        "source": "Scholomance (Trash)",
+        "faction": "Both",
+        "boe": true
       },
       {
         "level": 55,
@@ -2774,6 +2784,16 @@
         "faction": "Both"
       },
       {
+        "level": 54,
+        "slot": "Ring",
+        "itemId": 18701,
+        "name": "Innervating Band",
+        "quality": "rare",
+        "source": "Scholomance (Trash)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
         "level": 55,
         "slot": "Feet",
         "itemId": 13210,
@@ -3745,6 +3765,15 @@
       },
       {
         "level": 37,
+        "slot": "Off hand",
+        "itemId": 10772,
+        "name": "Glutton's Cleaver",
+        "quality": "rare",
+        "source": "Razorfen Downs (Glutton)",
+        "faction": "Both"
+      },
+      {
+        "level": 37,
         "slot": "Shoulders",
         "itemId": 8192,
         "name": "Nightscape Shoulders",
@@ -3771,15 +3800,6 @@
         "source": "Tailoring",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 38,
-        "slot": "Off hand",
-        "itemId": 9401,
-        "name": "Nordic Longshank",
-        "quality": "rare",
-        "source": "Uldaman (Baelog)",
-        "faction": "Both"
       },
       {
         "level": 39,
@@ -4297,6 +4317,16 @@
         "quality": "rare",
         "source": "Blackrock Spire (Shadow Hunter Vosh'gajin)",
         "faction": "Both"
+      },
+      {
+        "level": 54,
+        "slot": "Ring",
+        "itemId": 18701,
+        "name": "Innervating Band",
+        "quality": "rare",
+        "source": "Scholomance (Trash)",
+        "faction": "Both",
+        "boe": true
       },
       {
         "level": 55,
@@ -5271,6 +5301,15 @@
       },
       {
         "level": 37,
+        "slot": "Off hand",
+        "itemId": 10772,
+        "name": "Glutton's Cleaver",
+        "quality": "rare",
+        "source": "Razorfen Downs (Glutton)",
+        "faction": "Both"
+      },
+      {
+        "level": 37,
         "slot": "Shoulders",
         "itemId": 8192,
         "name": "Nightscape Shoulders",
@@ -5297,15 +5336,6 @@
         "source": "Tailoring",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 38,
-        "slot": "Off hand",
-        "itemId": 9401,
-        "name": "Nordic Longshank",
-        "quality": "rare",
-        "source": "Uldaman (Baelog)",
-        "faction": "Both"
       },
       {
         "level": 38,
@@ -5832,6 +5862,16 @@
         "quality": "rare",
         "source": "Blackrock Spire (Shadow Hunter Vosh'gajin)",
         "faction": "Both"
+      },
+      {
+        "level": 54,
+        "slot": "Ring",
+        "itemId": 18701,
+        "name": "Innervating Band",
+        "quality": "rare",
+        "source": "Scholomance (Trash)",
+        "faction": "Both",
+        "boe": true
       },
       {
         "level": 55,
@@ -7483,6 +7523,16 @@
         "quality": "rare",
         "source": "Blackrock Spire (Shadow Hunter Vosh'gajin)",
         "faction": "Both"
+      },
+      {
+        "level": 54,
+        "slot": "Ring",
+        "itemId": 18701,
+        "name": "Innervating Band",
+        "quality": "rare",
+        "source": "Scholomance (Trash)",
+        "faction": "Both",
+        "boe": true
       },
       {
         "level": 55,
@@ -9161,6 +9211,16 @@
         "quality": "rare",
         "source": "Blackrock Spire (Shadow Hunter Vosh'gajin)",
         "faction": "Both"
+      },
+      {
+        "level": 54,
+        "slot": "Ring",
+        "itemId": 18701,
+        "name": "Innervating Band",
+        "quality": "rare",
+        "source": "Scholomance (Trash)",
+        "faction": "Both",
+        "boe": true
       },
       {
         "level": 55,
