@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-12",
+  "generated": "2026-11-13",
   "forever": {
-    "commit": "444044178860b4ccd46a47f0f850403919ee993c",
-    "databaseChanged": "2026-11-12T11:09:31Z"
+    "commit": "8c7b5a5f5ae85b6222c16d1780c342992cd74f71",
+    "databaseChanged": "2026-11-13T16:26:14Z"
   },
   "builds": {
     "assassination/questing": [
@@ -4358,6 +4358,15 @@
       },
       {
         "level": 55,
+        "slot": "Off hand",
+        "itemId": 13183,
+        "name": "Venomspitter",
+        "quality": "rare",
+        "source": "Blackrock Spire (Mother Smolderweb)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -5912,6 +5921,15 @@
       },
       {
         "level": 55,
+        "slot": "Off hand",
+        "itemId": 13183,
+        "name": "Venomspitter",
+        "quality": "rare",
+        "source": "Blackrock Spire (Mother Smolderweb)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
         "slot": "Wrists",
         "itemId": 22204,
         "name": "Wristguards of Renown",
@@ -7186,15 +7204,6 @@
         "boe": true
       },
       {
-        "level": 43,
-        "slot": "Off hand",
-        "itemId": 9467,
-        "name": "Gahz'rilla Fang",
-        "quality": "rare",
-        "source": "Zul'Farrak (Gahz'rilla)",
-        "faction": "Both"
-      },
-      {
         "level": 45,
         "slot": "Hands",
         "itemId": 21319,
@@ -7229,6 +7238,15 @@
         "name": "Thrash Blade",
         "quality": "rare",
         "source": "Quest: Corruption of Earth and Seed",
+        "faction": "Both"
+      },
+      {
+        "level": 45,
+        "slot": "Off hand",
+        "itemId": 17752,
+        "name": "Satyr's Lash",
+        "quality": "rare",
+        "source": "Maraudon (Lord Vyletongue)",
         "faction": "Both"
       },
       {
@@ -7294,15 +7312,6 @@
         "name": "Blackveil Cape",
         "quality": "rare",
         "source": "Blackrock Depths (High Interrogator Gerstahn )",
-        "faction": "Both"
-      },
-      {
-        "level": 48,
-        "slot": "Off hand",
-        "itemId": 10797,
-        "name": "Firebreather",
-        "quality": "rare",
-        "source": "The Temple of Atal'Hakkar (Dreamscythe)",
         "faction": "Both"
       },
       {
@@ -7429,6 +7438,15 @@
         "boe": true
       },
       {
+        "level": 51,
+        "slot": "Off hand",
+        "itemId": 11744,
+        "name": "Bloodfist",
+        "quality": "rare",
+        "source": "Blackrock Depths (Phalanx)",
+        "faction": "Both"
+      },
+      {
         "level": 52,
         "slot": "Legs",
         "itemId": 15065,
@@ -7483,16 +7501,6 @@
         "name": "Devilsaur Gauntlets",
         "quality": "rare",
         "source": "Leatherworking",
-        "faction": "Both",
-        "boe": true
-      },
-      {
-        "level": 53,
-        "slot": "Off hand",
-        "itemId": 12792,
-        "name": "Volcanic Hammer",
-        "quality": "uncommon",
-        "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
       },
@@ -7569,6 +7577,15 @@
         "name": "Halycon's Spiked Collar",
         "quality": "rare",
         "source": "Blackrock Spire (Halycon)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
+        "slot": "Off hand",
+        "itemId": 13183,
+        "name": "Venomspitter",
+        "quality": "rare",
+        "source": "Blackrock Spire (Mother Smolderweb)",
         "faction": "Both"
       },
       {
@@ -7674,15 +7691,6 @@
         "faction": "Both"
       },
       {
-        "level": 57,
-        "slot": "Off hand",
-        "itemId": 14487,
-        "name": "Bonechill Hammer",
-        "quality": "rare",
-        "source": "Scholomance (Ras Frostwhisper)",
-        "faction": "Both"
-      },
-      {
         "level": 58,
         "slot": "Back",
         "itemId": 13340,
@@ -7718,6 +7726,16 @@
         "quality": "rare",
         "source": "Stratholme (Baron Rivendare)",
         "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Off hand",
+        "itemId": 12798,
+        "name": "Annihilator",
+        "quality": "rare",
+        "source": "Blacksmithing",
+        "faction": "Both",
+        "boe": true
       },
       {
         "level": 58,
@@ -8883,15 +8901,6 @@
         "boe": true
       },
       {
-        "level": 43,
-        "slot": "Off hand",
-        "itemId": 9467,
-        "name": "Gahz'rilla Fang",
-        "quality": "rare",
-        "source": "Zul'Farrak (Gahz'rilla)",
-        "faction": "Both"
-      },
-      {
         "level": 45,
         "slot": "Hands",
         "itemId": 21319,
@@ -8926,6 +8935,15 @@
         "name": "Thrash Blade",
         "quality": "rare",
         "source": "Quest: Corruption of Earth and Seed",
+        "faction": "Both"
+      },
+      {
+        "level": 45,
+        "slot": "Off hand",
+        "itemId": 17752,
+        "name": "Satyr's Lash",
+        "quality": "rare",
+        "source": "Maraudon (Lord Vyletongue)",
         "faction": "Both"
       },
       {
@@ -8991,15 +9009,6 @@
         "name": "Blackveil Cape",
         "quality": "rare",
         "source": "Blackrock Depths (High Interrogator Gerstahn )",
-        "faction": "Both"
-      },
-      {
-        "level": 48,
-        "slot": "Off hand",
-        "itemId": 10797,
-        "name": "Firebreather",
-        "quality": "rare",
-        "source": "The Temple of Atal'Hakkar (Dreamscythe)",
         "faction": "Both"
       },
       {
@@ -9126,6 +9135,15 @@
         "boe": true
       },
       {
+        "level": 51,
+        "slot": "Off hand",
+        "itemId": 11744,
+        "name": "Bloodfist",
+        "quality": "rare",
+        "source": "Blackrock Depths (Phalanx)",
+        "faction": "Both"
+      },
+      {
         "level": 52,
         "slot": "Legs",
         "itemId": 15065,
@@ -9180,16 +9198,6 @@
         "name": "Devilsaur Gauntlets",
         "quality": "rare",
         "source": "Leatherworking",
-        "faction": "Both",
-        "boe": true
-      },
-      {
-        "level": 53,
-        "slot": "Off hand",
-        "itemId": 12792,
-        "name": "Volcanic Hammer",
-        "quality": "uncommon",
-        "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
       },
@@ -9266,6 +9274,15 @@
         "name": "Halycon's Spiked Collar",
         "quality": "rare",
         "source": "Blackrock Spire (Halycon)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
+        "slot": "Off hand",
+        "itemId": 13183,
+        "name": "Venomspitter",
+        "quality": "rare",
+        "source": "Blackrock Spire (Mother Smolderweb)",
         "faction": "Both"
       },
       {
@@ -9380,15 +9397,6 @@
         "faction": "Both"
       },
       {
-        "level": 57,
-        "slot": "Off hand",
-        "itemId": 14487,
-        "name": "Bonechill Hammer",
-        "quality": "rare",
-        "source": "Scholomance (Ras Frostwhisper)",
-        "faction": "Both"
-      },
-      {
         "level": 58,
         "slot": "Back",
         "itemId": 13340,
@@ -9424,6 +9432,16 @@
         "quality": "rare",
         "source": "Stratholme (Baron Rivendare)",
         "faction": "Both"
+      },
+      {
+        "level": 58,
+        "slot": "Off hand",
+        "itemId": 12798,
+        "name": "Annihilator",
+        "quality": "rare",
+        "source": "Blacksmithing",
+        "faction": "Both",
+        "boe": true
       }
     ]
   }

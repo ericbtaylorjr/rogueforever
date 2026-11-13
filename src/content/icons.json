@@ -1439,6 +1439,11 @@
     "icon": "inv_boots_02",
     "kind": "item"
   },
+  "item:13183": {
+    "id": 13183,
+    "icon": "inv_wand_10",
+    "kind": "item"
+  },
   "item:12603": {
     "id": 12603,
     "icon": "inv_chest_plate06",
@@ -1519,19 +1524,9 @@
     "icon": "inv_axe_07",
     "kind": "item"
   },
-  "item:9467": {
-    "id": 9467,
-    "icon": "inv_misc_monsterfang_01",
-    "kind": "item"
-  },
-  "item:10797": {
-    "id": 10797,
-    "icon": "inv_sword_09",
-    "kind": "item"
-  },
-  "item:12792": {
-    "id": 12792,
-    "icon": "inv_hammer_06",
+  "item:11744": {
+    "id": 11744,
+    "icon": "inv_gauntlets_11",
     "kind": "item"
   },
   "item:22404": {
@@ -1539,9 +1534,9 @@
     "icon": "inv_weapon_shortblade_16",
     "kind": "item"
   },
-  "item:14487": {
-    "id": 14487,
-    "icon": "inv_hammer_13",
+  "item:12798": {
+    "id": 12798,
+    "icon": "inv_axe_12",
     "kind": "item"
   },
   "item:13358": {
