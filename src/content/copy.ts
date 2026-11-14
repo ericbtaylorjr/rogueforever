@@ -243,6 +243,16 @@ export const rotation = {
   levelingIntro:
     'This is the general rotation and priority to follow when leveling as {build}. They have been loosely modeled in WoWSims, but still somewhat too varied to be objective. You can adjust to your liking.',
   tipsTitle: 'Pro tips',
+  /** Leveling builds: the Poisons card above the pro tips. */
+  levelingPoisonsTitle: 'Poisons',
+  mainHandLabel: 'Main hand',
+  offHandLabel: 'Off hand',
+  /** Which poison goes on each weapon, by spec, for leveling builds. */
+  levelingPoisons: {
+    assassination: { mainHand: 'Instant Poison', offHand: 'Deadly Poison' },
+    combat: { mainHand: 'Instant Poison', offHand: 'Instant Poison' },
+    subtlety: { mainHand: 'Instant Poison', offHand: 'Instant Poison' },
+  },
 } as const;
 
 export const stats = {

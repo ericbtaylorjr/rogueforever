@@ -22,11 +22,13 @@ function RotationDetail({
   sweaty,
   leveling,
   buildName,
+  poisons,
 }: {
   d: RotationData;
   sweaty: boolean;
   leveling: boolean;
   buildName: string;
+  poisons?: { mainHand: string; offHand: string };
 }) {
   const tips = d.tips.filter((t) => sweaty || !t.sweaty);
   return (
@@ -90,8 +92,32 @@ function RotationDetail({
           )}
         </div>
 
+        <div className="flex flex-col gap-[14px] self-start">
+          {leveling && poisons && (
+            <div className="panel p-[18px]">
+              <span className="t-panel-label text-ink">{copy.levelingPoisonsTitle}</span>
+              <ul className="mt-[12px] flex flex-col gap-[10px]">
+                {(
+                  [
+                    [copy.mainHandLabel, poisons.mainHand],
+                    [copy.offHandLabel, poisons.offHand],
+                  ] as const
+                ).map(([hand, name]) => (
+                  <li key={hand} className="flex items-center gap-[10px] text-[13px] text-prose">
+                    <GameIcon name={name} size={22} />
+                    <span className="min-w-0">
+                      <span className="font-semibold text-ink">
+                        <WowheadText text={name} />
+                      </span>
+                      <span className="ml-[8px] text-[12px] text-mute">{hand}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         <div
-          className="sheet self-start rounded-[14px] p-[18px]"
+          className="sheet rounded-[14px] p-[18px]"
           style={{ border: '1px solid rgba(var(--accent-rgb),.22)', background: 'var(--panel)' }}
         >
           <span className="t-panel-label text-accent">{copy.tipsTitle}</span>
@@ -115,6 +141,7 @@ function RotationDetail({
               ))}
             </ul>
           )}
+        </div>
         </div>
       </div>
     </>
@@ -146,6 +173,7 @@ export function Rotation() {
           sweaty={sweaty}
           leveling={build.phase === 'leveling'}
           buildName={`${specById[spec].name} ${build.name}`}
+          poisons={copy.levelingPoisons[spec]}
         />
       )}
     </section>
