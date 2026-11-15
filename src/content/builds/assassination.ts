@@ -95,7 +95,6 @@ const levelingMutilateRotation: Rotation = {
   steps: [
     { press: 'Mutilate', note: 'This is your combo point builder. Needs a dagger in both hands.' },
     { press: 'Shank', note: 'Whenever it is on cooldown and you are under 80 energy.' },
-    { press: 'Rupture', note: 'At 3 or more combo points, if the mob will live for 12 seconds.' },
     { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points. It is generally not worth casting until around the mid level 40s.' },
     { press: 'Cold Blood', note: 'Whenever it is off cooldown, but only at 5 combo points.' },
     { press: 'Eviscerate', note: 'With 4+ combo points.' },
@@ -134,7 +133,7 @@ export const assassination: Build[] = [
     rank: 3,
     talents: points(38, 8, 5),
     talentNote:
-      'Only useful at level 40 and up, once Mutilate is talented. Poison-focused dagger damage: Mutilate builds your combo points while Shank and Rupture add damage. Keep Slice and Dice up, then Eviscerate at 4+ combo points (Cold Blood first at 5). Needs a dagger in both hands.',
+      'Only useful at level 40 and up, once Mutilate is talented. Poison-focused dagger damage: Mutilate builds your combo points while Shank yields Energy gain. Keep Slice and Dice up, then Eviscerate at 4+ combo points (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202530321241551031-3023-005_t0_r95/0BcccDffGccjmjnnnqppppSpnt2C1AccD0nhkkkkf',
     stats: questingStats,
@@ -151,7 +150,7 @@ export const assassination: Build[] = [
     rank: 3,
     talents: points(37, 9, 5),
     talentNote:
-      'Only useful at level 40 and up, once Mutilate is talented. Poison-focused dagger damage: Mutilate builds your combo points while Shank and Rupture add damage. Keep Slice and Dice up, then Eviscerate at 4+ combo points (Cold Blood first at 5). Needs a dagger in both hands.',
+      'Only useful at level 40 and up, once Mutilate is talented. Poison-focused dagger damage: Mutilate builds your combo points while Shank yields Energy gain. Keep Slice and Dice up, then Eviscerate at 4+ combo points (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530321251551031-302301-005_t0_r95/0CDffGJfmnnnnqppppSpnt2C1AccD0hK1f',
     stats: dungeonsStats,
