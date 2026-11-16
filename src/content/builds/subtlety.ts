@@ -1,6 +1,6 @@
 import { levelingGearFor } from '../gear';
 import type { Build, ProTip, Rotation, RotationStep, StatPriority } from '../types';
-import { points, preRaidGear, trinkets, weapons, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
+import { backstabMainHandAlternatives, points, preRaidGear, trinkets, weapons, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Subtlety Hemo (slow main hand) weights from its own WoWSims run. */
 const hemoStats: StatPriority = {
@@ -185,6 +185,7 @@ export const subtlety: Build[] = [
       trinket: trinkets.handOfJustice,
       legs: 'agility',
       mainHand: [weapons.felstriker, 'crusader'],
+      mainHandAlternatives: backstabMainHandAlternatives,
       offHand: [weapons.distractingDagger, 'agility'],
     }),
     rotation: hemoRotation,

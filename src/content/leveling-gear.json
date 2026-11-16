@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-13",
+  "generated": "2026-11-16",
   "forever": {
-    "commit": "8c7b5a5f5ae85b6222c16d1780c342992cd74f71",
-    "databaseChanged": "2026-11-13T16:26:14Z"
+    "commit": "6f5ff14ac428647a280c2d1c9d97c5f995713453",
+    "databaseChanged": "2026-11-16T15:03:45+01:00"
   },
   "builds": {
     "assassination/questing": [
@@ -15,6 +15,15 @@
         "source": "Leatherworking",
         "faction": "Both",
         "bop": true
+      },
+      {
+        "level": 13,
+        "slot": "Back",
+        "itemId": 271097,
+        "name": "Spiritwraith Drape",
+        "quality": "rare",
+        "source": "The Hall of Thanes (Faldrim Anvilmar)",
+        "faction": "Both"
       },
       {
         "level": 13,
@@ -122,6 +131,15 @@
         "faction": "Both"
       },
       {
+        "level": 15,
+        "slot": "Wrists",
+        "itemId": 271202,
+        "name": "Witherbite Bracers",
+        "quality": "rare",
+        "source": "Ruins of Lordaeron (Witherfang)",
+        "faction": "Both"
+      },
+      {
         "level": 16,
         "slot": "Main hand",
         "itemId": 6448,
@@ -142,10 +160,10 @@
       {
         "level": 17,
         "slot": "Chest",
-        "itemId": 10399,
-        "name": "Blackened Defias Armor",
+        "itemId": 271212,
+        "name": "Bloodied Chestwraps",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Ruins of Lordaeron (Viktor the Vile)",
         "faction": "Both"
       },
       {
@@ -308,15 +326,6 @@
       },
       {
         "level": 21,
-        "slot": "Chest",
-        "itemId": 270043,
-        "name": "Dreamer's Chestguard",
-        "quality": "rare",
-        "source": "Quest: Baron Aquanis",
-        "faction": "Horde"
-      },
-      {
-        "level": 21,
         "slot": "Shoulders",
         "itemId": 273804,
         "name": "Executioner Mantle",
@@ -451,6 +460,15 @@
       },
       {
         "level": 26,
+        "slot": "Chest",
+        "itemId": 273026,
+        "name": "Garb of Florid Feathers",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Shadetooth)",
+        "faction": "Both"
+      },
+      {
+        "level": 26,
         "slot": "Main hand",
         "itemId": 776,
         "name": "Vendetta",
@@ -479,20 +497,21 @@
       },
       {
         "level": 27,
-        "slot": "Off hand",
-        "itemId": 6681,
-        "name": "Thornspike",
-        "quality": "rare",
-        "source": "Razorfen Kraul (Aggem Thorncurse)",
-        "faction": "Both"
-      },
-      {
-        "level": 27,
         "slot": "Wrists",
         "itemId": 18948,
         "name": "Barbaric Bracers",
         "quality": "rare",
         "source": "Leatherworking",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 28,
+        "slot": "Ranged",
+        "itemId": 287068,
+        "name": "Excavated Dagger",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Thicket Lurker)",
         "faction": "Both",
         "boe": true
       },
@@ -503,6 +522,15 @@
         "name": "Thermaplugg Medal of Honor",
         "quality": "rare",
         "source": "Gnomeregan (Crowd Pummeler 9-60)",
+        "faction": "Both"
+      },
+      {
+        "level": 29,
+        "slot": "Off hand",
+        "itemId": 7682,
+        "name": "Torturing Poker",
+        "quality": "rare",
+        "source": "Scarlet Monastery (Interrogator Vishas)",
         "faction": "Both"
       },
       {
@@ -1128,15 +1156,6 @@
       {
         "level": 50,
         "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
-        "faction": "Both"
-      },
-      {
-        "level": 50,
-        "slot": "Chest",
         "itemId": 15064,
         "name": "Warbear Harness",
         "quality": "rare",
@@ -1514,6 +1533,15 @@
       },
       {
         "level": 13,
+        "slot": "Back",
+        "itemId": 271097,
+        "name": "Spiritwraith Drape",
+        "quality": "rare",
+        "source": "The Hall of Thanes (Faldrim Anvilmar)",
+        "faction": "Both"
+      },
+      {
+        "level": 13,
         "slot": "Main hand",
         "itemId": 1936,
         "name": "Goblin Screwdriver",
@@ -1618,6 +1646,15 @@
         "faction": "Both"
       },
       {
+        "level": 15,
+        "slot": "Wrists",
+        "itemId": 271202,
+        "name": "Witherbite Bracers",
+        "quality": "rare",
+        "source": "Ruins of Lordaeron (Witherfang)",
+        "faction": "Both"
+      },
+      {
         "level": 16,
         "slot": "Main hand",
         "itemId": 6448,
@@ -1638,10 +1675,10 @@
       {
         "level": 17,
         "slot": "Chest",
-        "itemId": 10399,
-        "name": "Blackened Defias Armor",
+        "itemId": 271212,
+        "name": "Bloodied Chestwraps",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Ruins of Lordaeron (Viktor the Vile)",
         "faction": "Both"
       },
       {
@@ -1804,15 +1841,6 @@
       },
       {
         "level": 21,
-        "slot": "Chest",
-        "itemId": 270043,
-        "name": "Dreamer's Chestguard",
-        "quality": "rare",
-        "source": "Quest: Baron Aquanis",
-        "faction": "Horde"
-      },
-      {
-        "level": 21,
         "slot": "Shoulders",
         "itemId": 273804,
         "name": "Executioner Mantle",
@@ -1947,6 +1975,15 @@
       },
       {
         "level": 26,
+        "slot": "Chest",
+        "itemId": 273026,
+        "name": "Garb of Florid Feathers",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Shadetooth)",
+        "faction": "Both"
+      },
+      {
+        "level": 26,
         "slot": "Main hand",
         "itemId": 776,
         "name": "Vendetta",
@@ -1975,20 +2012,21 @@
       },
       {
         "level": 27,
-        "slot": "Off hand",
-        "itemId": 6681,
-        "name": "Thornspike",
-        "quality": "rare",
-        "source": "Razorfen Kraul (Aggem Thorncurse)",
-        "faction": "Both"
-      },
-      {
-        "level": 27,
         "slot": "Wrists",
         "itemId": 18948,
         "name": "Barbaric Bracers",
         "quality": "rare",
         "source": "Leatherworking",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 28,
+        "slot": "Ranged",
+        "itemId": 287068,
+        "name": "Excavated Dagger",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Thicket Lurker)",
         "faction": "Both",
         "boe": true
       },
@@ -1999,6 +2037,15 @@
         "name": "Thermaplugg Medal of Honor",
         "quality": "rare",
         "source": "Gnomeregan (Crowd Pummeler 9-60)",
+        "faction": "Both"
+      },
+      {
+        "level": 29,
+        "slot": "Off hand",
+        "itemId": 7682,
+        "name": "Torturing Poker",
+        "quality": "rare",
+        "source": "Scarlet Monastery (Interrogator Vishas)",
         "faction": "Both"
       },
       {
@@ -2615,15 +2662,6 @@
       {
         "level": 50,
         "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
-        "faction": "Both"
-      },
-      {
-        "level": 50,
-        "slot": "Chest",
         "itemId": 15064,
         "name": "Warbear Harness",
         "quality": "rare",
@@ -3000,6 +3038,15 @@
       },
       {
         "level": 13,
+        "slot": "Back",
+        "itemId": 271097,
+        "name": "Spiritwraith Drape",
+        "quality": "rare",
+        "source": "The Hall of Thanes (Faldrim Anvilmar)",
+        "faction": "Both"
+      },
+      {
+        "level": 13,
         "slot": "Main hand",
         "itemId": 270256,
         "name": "Durgen's Crescent Axe",
@@ -3095,6 +3142,15 @@
         "boe": true
       },
       {
+        "level": 15,
+        "slot": "Wrists",
+        "itemId": 271202,
+        "name": "Witherbite Bracers",
+        "quality": "rare",
+        "source": "Ruins of Lordaeron (Witherfang)",
+        "faction": "Both"
+      },
+      {
         "level": 16,
         "slot": "Main hand",
         "itemId": 5197,
@@ -3115,10 +3171,10 @@
       {
         "level": 17,
         "slot": "Chest",
-        "itemId": 10399,
-        "name": "Blackened Defias Armor",
+        "itemId": 271212,
+        "name": "Bloodied Chestwraps",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Ruins of Lordaeron (Viktor the Vile)",
         "faction": "Both"
       },
       {
@@ -3244,19 +3300,19 @@
       {
         "level": 19,
         "slot": "Off hand",
-        "itemId": 5191,
-        "name": "Cruel Barb",
+        "itemId": 6472,
+        "name": "Stinging Viper",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Wailing Caverns (Lord Pythas)",
         "faction": "Both"
       },
       {
         "level": 19,
         "slot": "Off hand",
-        "itemId": 6472,
-        "name": "Stinging Viper",
+        "itemId": 5191,
+        "name": "Cruel Barb",
         "quality": "rare",
-        "source": "Wailing Caverns (Lord Pythas)",
+        "source": "The Deadmines (Edwin VanCleef)",
         "faction": "Both"
       },
       {
@@ -3305,15 +3361,6 @@
         "quality": "rare",
         "source": "The Stockade (Targorr the Dread)",
         "faction": "Alliance"
-      },
-      {
-        "level": 21,
-        "slot": "Chest",
-        "itemId": 270043,
-        "name": "Dreamer's Chestguard",
-        "quality": "rare",
-        "source": "Quest: Baron Aquanis",
-        "faction": "Horde"
       },
       {
         "level": 21,
@@ -3451,6 +3498,15 @@
       },
       {
         "level": 26,
+        "slot": "Chest",
+        "itemId": 273026,
+        "name": "Garb of Florid Feathers",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Shadetooth)",
+        "faction": "Both"
+      },
+      {
+        "level": 26,
         "slot": "Main hand",
         "itemId": 8226,
         "name": "The Butcher",
@@ -3480,6 +3536,15 @@
       },
       {
         "level": 27,
+        "slot": "Off hand",
+        "itemId": 9453,
+        "name": "Toxic Revenger",
+        "quality": "rare",
+        "source": "Gnomeregan (Viscous Fallout)",
+        "faction": "Both"
+      },
+      {
+        "level": 27,
         "slot": "Wrists",
         "itemId": 18948,
         "name": "Barbaric Bracers",
@@ -3489,13 +3554,14 @@
         "boe": true
       },
       {
-        "level": 29,
-        "slot": "Off hand",
-        "itemId": 7683,
-        "name": "Bloody Brass Knuckles",
+        "level": 28,
+        "slot": "Ranged",
+        "itemId": 287068,
+        "name": "Excavated Dagger",
         "quality": "rare",
-        "source": "Scarlet Monastery (Interrogator Vishas)",
-        "faction": "Both"
+        "source": "Excavation Site: Wetlands (Thicket Lurker)",
+        "faction": "Both",
+        "boe": true
       },
       {
         "level": 29,
@@ -4131,15 +4197,6 @@
       {
         "level": 50,
         "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
-        "faction": "Both"
-      },
-      {
-        "level": 50,
-        "slot": "Chest",
         "itemId": 15064,
         "name": "Warbear Harness",
         "quality": "rare",
@@ -4359,10 +4416,10 @@
       {
         "level": 55,
         "slot": "Off hand",
-        "itemId": 13183,
-        "name": "Venomspitter",
+        "itemId": 276419,
+        "name": "Lightcrest Hammer",
         "quality": "rare",
-        "source": "Blackrock Spire (Mother Smolderweb)",
+        "source": "Stratholme (Crimson Hammersmith)",
         "faction": "Both"
       },
       {
@@ -4479,10 +4536,10 @@
       {
         "level": 58,
         "slot": "Main hand",
-        "itemId": 12940,
-        "name": "Dal'Rend's Sacred Charge",
+        "itemId": 13361,
+        "name": "Skullforge Reaver",
         "quality": "rare",
-        "source": "Blackrock Spire (Warchief Rend Blackhand)",
+        "source": "Stratholme (Baron Rivendare)",
         "faction": "Both"
       },
       {
@@ -4494,15 +4551,6 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 58,
-        "slot": "Off hand",
-        "itemId": 13361,
-        "name": "Skullforge Reaver",
-        "quality": "rare",
-        "source": "Stratholme (Baron Rivendare)",
-        "faction": "Both"
       }
     ],
     "combat/dungeons": [
@@ -4524,6 +4572,15 @@
         "source": "Leatherworking",
         "faction": "Both",
         "bop": true
+      },
+      {
+        "level": 13,
+        "slot": "Back",
+        "itemId": 271097,
+        "name": "Spiritwraith Drape",
+        "quality": "rare",
+        "source": "The Hall of Thanes (Faldrim Anvilmar)",
+        "faction": "Both"
       },
       {
         "level": 13,
@@ -4622,6 +4679,15 @@
         "boe": true
       },
       {
+        "level": 15,
+        "slot": "Wrists",
+        "itemId": 271202,
+        "name": "Witherbite Bracers",
+        "quality": "rare",
+        "source": "Ruins of Lordaeron (Witherfang)",
+        "faction": "Both"
+      },
+      {
         "level": 16,
         "slot": "Main hand",
         "itemId": 5197,
@@ -4642,10 +4708,10 @@
       {
         "level": 17,
         "slot": "Chest",
-        "itemId": 10399,
-        "name": "Blackened Defias Armor",
+        "itemId": 271212,
+        "name": "Bloodied Chestwraps",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Ruins of Lordaeron (Viktor the Vile)",
         "faction": "Both"
       },
       {
@@ -4771,19 +4837,19 @@
       {
         "level": 19,
         "slot": "Off hand",
-        "itemId": 5191,
-        "name": "Cruel Barb",
+        "itemId": 6472,
+        "name": "Stinging Viper",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Wailing Caverns (Lord Pythas)",
         "faction": "Both"
       },
       {
         "level": 19,
         "slot": "Off hand",
-        "itemId": 6472,
-        "name": "Stinging Viper",
+        "itemId": 5191,
+        "name": "Cruel Barb",
         "quality": "rare",
-        "source": "Wailing Caverns (Lord Pythas)",
+        "source": "The Deadmines (Edwin VanCleef)",
         "faction": "Both"
       },
       {
@@ -4832,15 +4898,6 @@
         "quality": "rare",
         "source": "The Stockade (Targorr the Dread)",
         "faction": "Alliance"
-      },
-      {
-        "level": 21,
-        "slot": "Chest",
-        "itemId": 270043,
-        "name": "Dreamer's Chestguard",
-        "quality": "rare",
-        "source": "Quest: Baron Aquanis",
-        "faction": "Horde"
       },
       {
         "level": 21,
@@ -4978,6 +5035,15 @@
       },
       {
         "level": 26,
+        "slot": "Chest",
+        "itemId": 273026,
+        "name": "Garb of Florid Feathers",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Shadetooth)",
+        "faction": "Both"
+      },
+      {
+        "level": 26,
         "slot": "Main hand",
         "itemId": 8226,
         "name": "The Butcher",
@@ -5025,6 +5091,16 @@
         "boe": true
       },
       {
+        "level": 28,
+        "slot": "Ranged",
+        "itemId": 287068,
+        "name": "Excavated Dagger",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Thicket Lurker)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
         "level": 29,
         "slot": "Neck",
         "itemId": 274068,
@@ -5067,15 +5143,6 @@
         "name": "Ghostshard Talisman",
         "quality": "rare",
         "source": "Scarlet Monastery (Azshir the Sleepless)",
-        "faction": "Both"
-      },
-      {
-        "level": 30,
-        "slot": "Off hand",
-        "itemId": 7687,
-        "name": "Ironspine's Fist",
-        "quality": "rare",
-        "source": "Scarlet Monastery (Ironspine)",
         "faction": "Both"
       },
       {
@@ -5693,15 +5760,6 @@
       {
         "level": 50,
         "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
-        "faction": "Both"
-      },
-      {
-        "level": 50,
-        "slot": "Chest",
         "itemId": 15064,
         "name": "Warbear Harness",
         "quality": "rare",
@@ -5922,10 +5980,10 @@
       {
         "level": 55,
         "slot": "Off hand",
-        "itemId": 13183,
-        "name": "Venomspitter",
+        "itemId": 276419,
+        "name": "Lightcrest Hammer",
         "quality": "rare",
-        "source": "Blackrock Spire (Mother Smolderweb)",
+        "source": "Stratholme (Crimson Hammersmith)",
         "faction": "Both"
       },
       {
@@ -6051,10 +6109,10 @@
       {
         "level": 58,
         "slot": "Main hand",
-        "itemId": 12940,
-        "name": "Dal'Rend's Sacred Charge",
+        "itemId": 13361,
+        "name": "Skullforge Reaver",
         "quality": "rare",
-        "source": "Blackrock Spire (Warchief Rend Blackhand)",
+        "source": "Stratholme (Baron Rivendare)",
         "faction": "Both"
       },
       {
@@ -6066,15 +6124,6 @@
         "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
-      },
-      {
-        "level": 58,
-        "slot": "Off hand",
-        "itemId": 13361,
-        "name": "Skullforge Reaver",
-        "quality": "rare",
-        "source": "Stratholme (Baron Rivendare)",
-        "faction": "Both"
       }
     ],
     "subtlety/questing": [
@@ -6096,6 +6145,15 @@
         "source": "Leatherworking",
         "faction": "Both",
         "bop": true
+      },
+      {
+        "level": 13,
+        "slot": "Back",
+        "itemId": 271097,
+        "name": "Spiritwraith Drape",
+        "quality": "rare",
+        "source": "The Hall of Thanes (Faldrim Anvilmar)",
+        "faction": "Both"
       },
       {
         "level": 13,
@@ -6204,6 +6262,15 @@
         "boe": true
       },
       {
+        "level": 15,
+        "slot": "Wrists",
+        "itemId": 271202,
+        "name": "Witherbite Bracers",
+        "quality": "rare",
+        "source": "Ruins of Lordaeron (Witherfang)",
+        "faction": "Both"
+      },
+      {
         "level": 16,
         "slot": "Main hand",
         "itemId": 6448,
@@ -6224,10 +6291,10 @@
       {
         "level": 17,
         "slot": "Chest",
-        "itemId": 10399,
-        "name": "Blackened Defias Armor",
+        "itemId": 271212,
+        "name": "Bloodied Chestwraps",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Ruins of Lordaeron (Viktor the Vile)",
         "faction": "Both"
       },
       {
@@ -6363,19 +6430,19 @@
       {
         "level": 19,
         "slot": "Main hand",
-        "itemId": 5191,
-        "name": "Cruel Barb",
+        "itemId": 6472,
+        "name": "Stinging Viper",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Wailing Caverns (Lord Pythas)",
         "faction": "Both"
       },
       {
         "level": 19,
         "slot": "Off hand",
-        "itemId": 6472,
-        "name": "Stinging Viper",
+        "itemId": 5191,
+        "name": "Cruel Barb",
         "quality": "rare",
-        "source": "Wailing Caverns (Lord Pythas)",
+        "source": "The Deadmines (Edwin VanCleef)",
         "faction": "Both"
       },
       {
@@ -6436,15 +6503,6 @@
       },
       {
         "level": 21,
-        "slot": "Chest",
-        "itemId": 270043,
-        "name": "Dreamer's Chestguard",
-        "quality": "rare",
-        "source": "Quest: Baron Aquanis",
-        "faction": "Horde"
-      },
-      {
-        "level": 21,
         "slot": "Shoulders",
         "itemId": 273804,
         "name": "Executioner Mantle",
@@ -6483,16 +6541,6 @@
       },
       {
         "level": 22,
-        "slot": "Off hand",
-        "itemId": 1481,
-        "name": "Grimclaw",
-        "quality": "rare",
-        "source": "Blackfathom Deeps (Trash)",
-        "faction": "Both",
-        "boe": true
-      },
-      {
-        "level": 22,
         "slot": "Ring",
         "itemId": 1491,
         "name": "Ring of Precision",
@@ -6519,6 +6567,15 @@
         "source": "Razorfen Kraul (Trash)",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 23,
+        "slot": "Off hand",
+        "itemId": 6904,
+        "name": "Bite of Serra'kis",
+        "quality": "rare",
+        "source": "Blackfathom Deeps (Old Serra'kis)",
+        "faction": "Both"
       },
       {
         "level": 25,
@@ -6579,6 +6636,16 @@
       },
       {
         "level": 25,
+        "slot": "Off hand",
+        "itemId": 7786,
+        "name": "Headsplitter",
+        "quality": "rare",
+        "source": "Scarlet Monastery (Trash)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 25,
         "slot": "Shoulders",
         "itemId": 2264,
         "name": "Mantle of Thieves",
@@ -6586,6 +6653,15 @@
         "source": "Razorfen Kraul (Trash)",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 26,
+        "slot": "Chest",
+        "itemId": 273026,
+        "name": "Garb of Florid Feathers",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Shadetooth)",
+        "faction": "Both"
       },
       {
         "level": 26,
@@ -6627,15 +6703,6 @@
       },
       {
         "level": 27,
-        "slot": "Off hand",
-        "itemId": 6681,
-        "name": "Thornspike",
-        "quality": "rare",
-        "source": "Razorfen Kraul (Aggem Thorncurse)",
-        "faction": "Both"
-      },
-      {
-        "level": 27,
         "slot": "Wrists",
         "itemId": 18948,
         "name": "Barbaric Bracers",
@@ -6653,6 +6720,25 @@
         "source": "Scarlet Monastery (Trash)",
         "faction": "Both",
         "boe": true
+      },
+      {
+        "level": 28,
+        "slot": "Ranged",
+        "itemId": 287068,
+        "name": "Excavated Dagger",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Thicket Lurker)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 29,
+        "slot": "Off hand",
+        "itemId": 7683,
+        "name": "Bloody Brass Knuckles",
+        "quality": "rare",
+        "source": "Scarlet Monastery (Interrogator Vishas)",
+        "faction": "Both"
       },
       {
         "level": 29,
@@ -7204,6 +7290,15 @@
         "boe": true
       },
       {
+        "level": 43,
+        "slot": "Off hand",
+        "itemId": 9467,
+        "name": "Gahz'rilla Fang",
+        "quality": "rare",
+        "source": "Zul'Farrak (Gahz'rilla)",
+        "faction": "Both"
+      },
+      {
         "level": 45,
         "slot": "Hands",
         "itemId": 21319,
@@ -7238,15 +7333,6 @@
         "name": "Thrash Blade",
         "quality": "rare",
         "source": "Quest: Corruption of Earth and Seed",
-        "faction": "Both"
-      },
-      {
-        "level": 45,
-        "slot": "Off hand",
-        "itemId": 17752,
-        "name": "Satyr's Lash",
-        "quality": "rare",
-        "source": "Maraudon (Lord Vyletongue)",
         "faction": "Both"
       },
       {
@@ -7316,6 +7402,15 @@
       },
       {
         "level": 48,
+        "slot": "Off hand",
+        "itemId": 10797,
+        "name": "Firebreather",
+        "quality": "rare",
+        "source": "The Temple of Atal'Hakkar (Dreamscythe)",
+        "faction": "Both"
+      },
+      {
+        "level": 48,
         "slot": "Ranged",
         "itemId": 11629,
         "name": "Houndmaster's Rifle",
@@ -7330,15 +7425,6 @@
         "name": "Blackstone Ring",
         "quality": "rare",
         "source": "Maraudon (Princess Theradras)",
-        "faction": "Both"
-      },
-      {
-        "level": 50,
-        "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
         "faction": "Both"
       },
       {
@@ -7438,15 +7524,6 @@
         "boe": true
       },
       {
-        "level": 51,
-        "slot": "Off hand",
-        "itemId": 11744,
-        "name": "Bloodfist",
-        "quality": "rare",
-        "source": "Blackrock Depths (Phalanx)",
-        "faction": "Both"
-      },
-      {
         "level": 52,
         "slot": "Legs",
         "itemId": 15065,
@@ -7501,6 +7578,16 @@
         "name": "Devilsaur Gauntlets",
         "quality": "rare",
         "source": "Leatherworking",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 53,
+        "slot": "Off hand",
+        "itemId": 12792,
+        "name": "Volcanic Hammer",
+        "quality": "uncommon",
+        "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
       },
@@ -7563,6 +7650,15 @@
       },
       {
         "level": 55,
+        "slot": "Main hand",
+        "itemId": 276419,
+        "name": "Lightcrest Hammer",
+        "quality": "rare",
+        "source": "Stratholme (Crimson Hammersmith)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
         "slot": "Neck",
         "itemId": 11933,
         "name": "Imperial Jewel",
@@ -7577,15 +7673,6 @@
         "name": "Halycon's Spiked Collar",
         "quality": "rare",
         "source": "Blackrock Spire (Halycon)",
-        "faction": "Both"
-      },
-      {
-        "level": 55,
-        "slot": "Off hand",
-        "itemId": 13183,
-        "name": "Venomspitter",
-        "quality": "rare",
-        "source": "Blackrock Spire (Mother Smolderweb)",
         "faction": "Both"
       },
       {
@@ -7632,15 +7719,6 @@
         "name": "Cadaverous Leggings",
         "quality": "rare",
         "source": "Scholomance (Instructor Malicia)",
-        "faction": "Both"
-      },
-      {
-        "level": 56,
-        "slot": "Main hand",
-        "itemId": 22404,
-        "name": "Willey's Back Scratcher",
-        "quality": "rare",
-        "source": "Stratholme (Cannon Master Willey)",
         "faction": "Both"
       },
       {
@@ -7720,22 +7798,12 @@
       },
       {
         "level": 58,
-        "slot": "Main hand",
+        "slot": "Off hand",
         "itemId": 13361,
         "name": "Skullforge Reaver",
         "quality": "rare",
         "source": "Stratholme (Baron Rivendare)",
         "faction": "Both"
-      },
-      {
-        "level": 58,
-        "slot": "Off hand",
-        "itemId": 12798,
-        "name": "Annihilator",
-        "quality": "rare",
-        "source": "Blacksmithing",
-        "faction": "Both",
-        "boe": true
       },
       {
         "level": 58,
@@ -7766,6 +7834,15 @@
         "source": "Leatherworking",
         "faction": "Both",
         "bop": true
+      },
+      {
+        "level": 13,
+        "slot": "Back",
+        "itemId": 271097,
+        "name": "Spiritwraith Drape",
+        "quality": "rare",
+        "source": "The Hall of Thanes (Faldrim Anvilmar)",
+        "faction": "Both"
       },
       {
         "level": 13,
@@ -7874,6 +7951,15 @@
         "boe": true
       },
       {
+        "level": 15,
+        "slot": "Wrists",
+        "itemId": 271202,
+        "name": "Witherbite Bracers",
+        "quality": "rare",
+        "source": "Ruins of Lordaeron (Witherfang)",
+        "faction": "Both"
+      },
+      {
         "level": 16,
         "slot": "Main hand",
         "itemId": 6448,
@@ -7894,10 +7980,10 @@
       {
         "level": 17,
         "slot": "Chest",
-        "itemId": 10399,
-        "name": "Blackened Defias Armor",
+        "itemId": 271212,
+        "name": "Bloodied Chestwraps",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Ruins of Lordaeron (Viktor the Vile)",
         "faction": "Both"
       },
       {
@@ -8033,19 +8119,19 @@
       {
         "level": 19,
         "slot": "Main hand",
-        "itemId": 5191,
-        "name": "Cruel Barb",
+        "itemId": 6472,
+        "name": "Stinging Viper",
         "quality": "rare",
-        "source": "The Deadmines (Edwin VanCleef)",
+        "source": "Wailing Caverns (Lord Pythas)",
         "faction": "Both"
       },
       {
         "level": 19,
         "slot": "Off hand",
-        "itemId": 6472,
-        "name": "Stinging Viper",
+        "itemId": 5191,
+        "name": "Cruel Barb",
         "quality": "rare",
-        "source": "Wailing Caverns (Lord Pythas)",
+        "source": "The Deadmines (Edwin VanCleef)",
         "faction": "Both"
       },
       {
@@ -8103,15 +8189,6 @@
         "quality": "rare",
         "source": "The Stockade (Targorr the Dread)",
         "faction": "Alliance"
-      },
-      {
-        "level": 21,
-        "slot": "Chest",
-        "itemId": 270043,
-        "name": "Dreamer's Chestguard",
-        "quality": "rare",
-        "source": "Quest: Baron Aquanis",
-        "faction": "Horde"
       },
       {
         "level": 21,
@@ -8259,6 +8336,15 @@
       },
       {
         "level": 26,
+        "slot": "Chest",
+        "itemId": 273026,
+        "name": "Garb of Florid Feathers",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Shadetooth)",
+        "faction": "Both"
+      },
+      {
+        "level": 26,
         "slot": "Main hand",
         "itemId": 776,
         "name": "Vendetta",
@@ -8312,6 +8398,16 @@
         "name": "Dreamslayer",
         "quality": "rare",
         "source": "Scarlet Monastery (Trash)",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 28,
+        "slot": "Ranged",
+        "itemId": 287068,
+        "name": "Excavated Dagger",
+        "quality": "rare",
+        "source": "Excavation Site: Wetlands (Thicket Lurker)",
         "faction": "Both",
         "boe": true
       },
@@ -8901,6 +8997,15 @@
         "boe": true
       },
       {
+        "level": 43,
+        "slot": "Off hand",
+        "itemId": 9467,
+        "name": "Gahz'rilla Fang",
+        "quality": "rare",
+        "source": "Zul'Farrak (Gahz'rilla)",
+        "faction": "Both"
+      },
+      {
         "level": 45,
         "slot": "Hands",
         "itemId": 21319,
@@ -8935,15 +9040,6 @@
         "name": "Thrash Blade",
         "quality": "rare",
         "source": "Quest: Corruption of Earth and Seed",
-        "faction": "Both"
-      },
-      {
-        "level": 45,
-        "slot": "Off hand",
-        "itemId": 17752,
-        "name": "Satyr's Lash",
-        "quality": "rare",
-        "source": "Maraudon (Lord Vyletongue)",
         "faction": "Both"
       },
       {
@@ -9013,6 +9109,15 @@
       },
       {
         "level": 48,
+        "slot": "Off hand",
+        "itemId": 10797,
+        "name": "Firebreather",
+        "quality": "rare",
+        "source": "The Temple of Atal'Hakkar (Dreamscythe)",
+        "faction": "Both"
+      },
+      {
+        "level": 48,
         "slot": "Ranged",
         "itemId": 11629,
         "name": "Houndmaster's Rifle",
@@ -9027,15 +9132,6 @@
         "name": "Blackstone Ring",
         "quality": "rare",
         "source": "Maraudon (Princess Theradras)",
-        "faction": "Both"
-      },
-      {
-        "level": 50,
-        "slot": "Chest",
-        "itemId": 22274,
-        "name": "Grizzled Pelt",
-        "quality": "rare",
-        "source": "Quest: A Better Ingredient",
         "faction": "Both"
       },
       {
@@ -9135,15 +9231,6 @@
         "boe": true
       },
       {
-        "level": 51,
-        "slot": "Off hand",
-        "itemId": 11744,
-        "name": "Bloodfist",
-        "quality": "rare",
-        "source": "Blackrock Depths (Phalanx)",
-        "faction": "Both"
-      },
-      {
         "level": 52,
         "slot": "Legs",
         "itemId": 15065,
@@ -9198,6 +9285,16 @@
         "name": "Devilsaur Gauntlets",
         "quality": "rare",
         "source": "Leatherworking",
+        "faction": "Both",
+        "boe": true
+      },
+      {
+        "level": 53,
+        "slot": "Off hand",
+        "itemId": 12792,
+        "name": "Volcanic Hammer",
+        "quality": "uncommon",
+        "source": "Blacksmithing",
         "faction": "Both",
         "boe": true
       },
@@ -9260,6 +9357,15 @@
       },
       {
         "level": 55,
+        "slot": "Main hand",
+        "itemId": 276419,
+        "name": "Lightcrest Hammer",
+        "quality": "rare",
+        "source": "Stratholme (Crimson Hammersmith)",
+        "faction": "Both"
+      },
+      {
+        "level": 55,
         "slot": "Neck",
         "itemId": 11933,
         "name": "Imperial Jewel",
@@ -9274,15 +9380,6 @@
         "name": "Halycon's Spiked Collar",
         "quality": "rare",
         "source": "Blackrock Spire (Halycon)",
-        "faction": "Both"
-      },
-      {
-        "level": 55,
-        "slot": "Off hand",
-        "itemId": 13183,
-        "name": "Venomspitter",
-        "quality": "rare",
-        "source": "Blackrock Spire (Mother Smolderweb)",
         "faction": "Both"
       },
       {
@@ -9329,15 +9426,6 @@
         "name": "Cadaverous Leggings",
         "quality": "rare",
         "source": "Scholomance (Instructor Malicia)",
-        "faction": "Both"
-      },
-      {
-        "level": 56,
-        "slot": "Main hand",
-        "itemId": 22404,
-        "name": "Willey's Back Scratcher",
-        "quality": "rare",
-        "source": "Stratholme (Cannon Master Willey)",
         "faction": "Both"
       },
       {
@@ -9426,22 +9514,12 @@
       },
       {
         "level": 58,
-        "slot": "Main hand",
+        "slot": "Off hand",
         "itemId": 13361,
         "name": "Skullforge Reaver",
         "quality": "rare",
         "source": "Stratholme (Baron Rivendare)",
         "faction": "Both"
-      },
-      {
-        "level": 58,
-        "slot": "Off hand",
-        "itemId": 12798,
-        "name": "Annihilator",
-        "quality": "rare",
-        "source": "Blacksmithing",
-        "faction": "Both",
-        "boe": true
       }
     ]
   }

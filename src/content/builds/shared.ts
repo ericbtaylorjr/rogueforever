@@ -326,6 +326,16 @@ export const combatMainHandAlternatives: GearAlternative[] = [
   { itemId: 11684, name: 'Ironfoe', quality: 'epic', source: 'Emperor Dagran Thaurissan (Blackrock Depths)' },
 ];
 
+const heartseeker: GearAlternative = { itemId: 12783, name: 'Heartseeker', quality: 'rare', source: 'Blacksmithing' };
+
+/** Main hand dagger alternatives: Assassination Mutilate has these; Backstab and Hemo add Heartseeker. */
+export const daggerMainHandAlternatives: GearAlternative[] = [
+  { itemId: 14555, name: "Alcor's Sunrazor", quality: 'epic', source: 'BoE Drop' },
+  { itemId: 12709, name: "Pip's Skinner", quality: 'rare', source: 'The Beast (Blackrock Spire)' },
+  { itemId: 13368, name: 'Bonescraper', quality: 'rare', source: 'Baron Rivendare (Stratholme)' },
+];
+export const backstabMainHandAlternatives: GearAlternative[] = [...daggerMainHandAlternatives, heartseeker];
+
 /** A main hand or off hand with its enchant: Crusader or the +15 Agility weapon enchant. */
 const weaponWith = (slot: 'Main hand' | 'Off hand', item: Piece, enchant: 'crusader' | 'agility'): GearItem => ({
   slot,

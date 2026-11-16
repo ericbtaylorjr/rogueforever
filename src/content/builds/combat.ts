@@ -1,6 +1,6 @@
 import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { combatMainHandAlternatives, points, preRaidGear, trinkets, weapons, racialTips, shankStep, sliceAndDiceStep, tip, withRiposte } from './shared';
+import { backstabMainHandAlternatives, combatMainHandAlternatives, points, preRaidGear, trinkets, weapons, racialTips, shankStep, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 const nonDaggerTip = {
   text: 'Use a non-dagger main hand. Daggers do not work well with Sinister Strike.',
@@ -293,6 +293,7 @@ export const combat: Build[] = [
       trinket: trinkets.blackhandsBreadth,
       legs: 'agility',
       mainHand: [weapons.felstriker, 'crusader'],
+      mainHandAlternatives: backstabMainHandAlternatives,
       offHand: [weapons.distractingDagger, 'agility'],
     }),
     rotation: backstabRotation,

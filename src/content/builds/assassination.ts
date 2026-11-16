@@ -1,6 +1,6 @@
 import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { points, preRaidGear, trinkets, weapons, racialTips, shankStep, sliceAndDiceStep, tip } from './shared';
+import { daggerMainHandAlternatives, points, preRaidGear, trinkets, weapons, racialTips, shankStep, sliceAndDiceStep, tip } from './shared';
 
 /** Assassination Mutilate (daggers in both hands) weights from its own WoWSims run. */
 const mutilateStats: StatPriority = {
@@ -124,6 +124,7 @@ export const assassination: Build[] = [
       trinket: trinkets.handOfJustice,
       legs: 'agility',
       mainHand: [weapons.felstriker, 'crusader'],
+      mainHandAlternatives: daggerMainHandAlternatives,
       offHand: [weapons.distractingDagger, 'crusader'],
     }),
     rotation: mutilateRotation,

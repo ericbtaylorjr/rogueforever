@@ -99,7 +99,9 @@ function SourceText({ item }: { item: GearItem }) {
   );
 }
 
-function AlternativeRow({ slot, alt }: { slot: string; alt: GearAlternative }) {
+/** An alternative takes the enchant of the item it stands in for, unless it names its own. */
+function AlternativeRow({ slot, alt: own, parent }: { slot: string; alt: GearAlternative; parent: GearItem }) {
+  const alt = { ...own, enchant: own.enchant ?? parent.enchant, enchantSpellId: own.enchant ? own.enchantSpellId : (own.enchantSpellId ?? parent.enchantSpellId) };
   return (
     <div
       role="row"
@@ -179,7 +181,7 @@ function GearRow({ slot, items }: { slot: string; items: GearItem[] }) {
       {open && (
         <div id={panelId} role="rowgroup">
           {alts.map((alt) => (
-            <AlternativeRow key={alt.itemId} slot={slot} alt={alt} />
+            <AlternativeRow key={alt.itemId} slot={slot} alt={alt} parent={item!} />
           ))}
         </div>
       )}
