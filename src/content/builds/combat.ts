@@ -285,11 +285,11 @@ export const combat: Build[] = [
     name: 'Backstab',
     grade: 'A',
     rank: 4,
-    talents: points(12, 34, 5),
+    talents: points(13, 33, 5),
     talentNote:
       'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush, with Blade Flurry before the pull. Shank goes on cooldown below 80 energy. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Eviscerate.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh005203002-3203030202012221551-005_t5',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh005303002-3203030202012321351-005_t5',
     stats: backstabStats,
     gear: preRaidGear({
       trinket: trinkets.blackhandsBreadth,
