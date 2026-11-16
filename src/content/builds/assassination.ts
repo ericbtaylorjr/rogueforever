@@ -6,15 +6,15 @@ import { daggerMainHandAlternatives, points, preRaidGear, trinkets, weapons, rac
 const mutilateStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Hit Rating', ep: 2.42 },
-    { stat: 'Expertise Rating', ep: 2.3, op: '>' },
-    { stat: 'Crit Rating', ep: 2.24, op: '>' },
-    { stat: 'Agility', ep: 2.21, op: '>' },
-    { stat: 'Haste Rating', ep: 1.22, op: '>' },
+    { stat: 'Expertise Rating', ep: 2.92 },
+    { stat: 'Hit Rating', ep: 2.02, op: '>' },
+    { stat: 'Agility', ep: 2.01, op: '>' },
+    { stat: 'Crit Rating', ep: 1.89, op: '>' },
+    { stat: 'Haste Rating', ep: 1.6, op: '>' },
     { stat: 'Strength', ep: 1.1, op: '>' },
     { stat: 'Attack Power', ep: 1.0, op: '>' },
-    { stat: 'Spell Piercing', ep: 0.5, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.46, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.87, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.45, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };

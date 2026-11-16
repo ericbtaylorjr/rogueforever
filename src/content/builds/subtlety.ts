@@ -6,15 +6,15 @@ import { backstabMainHandAlternatives, points, preRaidGear, trinkets, weapons, r
 const hemoStats: StatPriority = {
   relativeTo: 'Attack Power',
   stats: [
-    { stat: 'Hit Rating', ep: 2.47 },
-    { stat: 'Expertise Rating', ep: 2.18, op: '>' },
-    { stat: 'Agility', ep: 2.07, op: '>' },
-    { stat: 'Crit Rating', ep: 1.89, op: '>' },
-    { stat: 'Haste Rating', ep: 1.27, op: '>' },
+    { stat: 'Expertise Rating', ep: 2.29 },
+    { stat: 'Agility', ep: 1.88, op: '>' },
+    { stat: 'Hit Rating', ep: 1.82, op: '>' },
+    { stat: 'Haste Rating', ep: 1.6, op: '>' },
+    { stat: 'Crit Rating', ep: 1.57, op: '>' },
     { stat: 'Strength', ep: 1.1, op: '>' },
     { stat: 'Attack Power', ep: 1.0, op: '>' },
-    { stat: 'Armor Penetration', ep: 0.26, op: '>' },
-    { stat: 'Spell Piercing', ep: 0.13, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.44, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.25, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };

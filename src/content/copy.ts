@@ -269,7 +269,10 @@ export const rotation = {
 
 export const stats = {
   intro:
-    'These weights are relative to current BiS gear, so expect them to shift slightly as your gear changes. For more accurate values, run the EP calculator in WoWSims with your current gear setup.',
+    'These weights are relative to current BiS gear, so expect them to shift slightly as your gear changes. Weights also shift because of the dynamic interaction with caps like hit and expertise, so always sim your current gear if you want the most accurate stat weights. For more accurate values, run the EP calculator in WoWSims with your current gear setup.',
+  /** The intro for leveling builds: their own first sentence, then the same EP calculator advice. */
+  levelingIntro:
+    'These weights are relative to the currently selected leveling build, so expect them to shift slightly as your gear changes. Weights also shift because of the dynamic interaction with caps like hit and expertise, so always sim your current gear if you want the most accurate stat weights. For more accurate values, run the EP calculator in WoWSims with your current gear setup.',
   /** Follows the "Tip:" label, with the active spec and build's name between `before` and `after`. */
   tip: {
     before: 'These stat weights are relative to ',

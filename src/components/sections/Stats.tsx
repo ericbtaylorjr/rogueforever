@@ -102,12 +102,13 @@ function StatTips() {
 }
 
 export function Stats() {
+  const build = useShownBuild();
   return (
     <section id="stats" aria-label="Stats">
       <SectionHeading id="stats" scope="spec" />
 
       <p className="max-w-[70ch] text-[14px] leading-[1.6] text-mute">
-        <LinkedText text={copy.intro} links={wowsimsLink} />
+        <LinkedText text={build.phase === 'leveling' ? copy.levelingIntro : copy.intro} links={wowsimsLink} />
       </p>
 
       <div className="mt-[16px]">
