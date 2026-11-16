@@ -173,17 +173,125 @@ const satyrsBow: GearAlternative = {
   source: 'Zevrim Thornhoof (Dire Maul)',
 };
 
+const quest = (text: string, id: number, slug: string) => ({ text, href: `https://www.wowhead.com/forever/quest=${id}/${slug}` });
+const undermineReals = {
+  text: 'Tarnished Undermine Reals',
+  href: 'https://www.wowhead.com/forever/currency=3469/tarnished-undermine-real',
+  wowhead: { kind: 'currency', id: 3469 },
+} as const;
+const DM_TRIBUTE = 'Dire Maul North Tribute Chest';
+
+/** Easier or cheaper options listed under the shared slots (collapsed). Dire Maul isn't in at launch yet. */
+const beadsOfOgreMight: GearAlternative = {
+  itemId: 22150,
+  name: 'Beads of Ogre Might',
+  quality: 'rare',
+  source: 'Quest: Falrin\'s Vendetta',
+  sourceLinks: [quest("Falrin's Vendetta", 8949, 'falrins-vendetta')],
+};
+const capeOfTheBlackBaron: GearAlternative = {
+  itemId: 13340,
+  name: 'Cape of the Black Baron',
+  quality: 'rare',
+  source: 'Baron Rivendare (Stratholme)',
+};
+const devilsaurGauntlets: GearAlternative = { itemId: 15063, name: 'Devilsaur Gauntlets', quality: 'rare', source: 'Leatherworking' };
+const devilsaurLeggings: GearAlternative = { itemId: 15062, name: 'Devilsaur Leggings', quality: 'rare', source: 'Leatherworking' };
+const theramorePauldrons: GearAlternative = {
+  itemId: 271955,
+  name: 'Theramore Pauldrons',
+  quality: 'epic',
+  source: 'Darkspear Islands exalted reputation',
+  faction: 'Alliance',
+};
+const darkspearPauldrons: GearAlternative = {
+  itemId: 272105,
+  name: 'Darkspear Pauldrons',
+  quality: 'epic',
+  source: 'Darkspear Islands exalted reputation',
+  faction: 'Horde',
+};
+const shadowcraftCap: GearAlternative = { itemId: 16707, name: 'Shadowcraft Cap', quality: 'rare', source: 'Darkmaster Gandling (Scholomance)' };
+const shadowcraftTunic: GearAlternative = { itemId: 16721, name: 'Shadowcraft Tunic', quality: 'rare', source: 'General Drakkisath (Blackrock Spire)' };
+const shadowcraftBracers: GearAlternative = {
+  itemId: 16710,
+  name: 'Shadowcraft Bracers',
+  quality: 'rare',
+  source: 'Instructor Malicia (Scholomance), Scholomance and Stratholme trash',
+};
+const shadowcraftBoots: GearAlternative = { itemId: 16711, name: 'Shadowcraft Boots', quality: 'rare', source: 'Rattlegore (Scholomance)' };
+/** Every Darkmantle piece shares one source: the set's Wowhead page. */
+const darkmantleSource = {
+  source: 'Tier 0.5 upgrade',
+  sourceLinks: [{ text: 'Tier 0.5 upgrade', href: 'https://www.wowhead.com/forever/item-set=512/darkmantle-armor#comments' }],
+} satisfies Pick<GearAlternative, 'source' | 'sourceLinks'>;
+
+const mightOfTheTimbermaw: GearAlternative = { itemId: 19044, name: 'Might of the Timbermaw', quality: 'rare', source: 'BoE Drop' };
+const defilersLeatherGirdle: GearAlternative = {
+  itemId: 20190,
+  name: "Defiler's Leather Girdle",
+  quality: 'rare',
+  source: 'Arathi Basin honored reputation',
+  faction: 'Horde',
+};
+const highlandersLeatherGirdle: GearAlternative = {
+  itemId: 20045,
+  name: "Highlander's Leather Girdle",
+  quality: 'rare',
+  source: 'Arathi Basin honored reputation',
+  faction: 'Alliance',
+};
+const darkmantleBelt: GearAlternative = { itemId: 22002, name: 'Darkmantle Belt', quality: 'rare', ...darkmantleSource };
+const blackstoneRing: GearAlternative = { itemId: 17713, name: 'Blackstone Ring', quality: 'rare', source: 'Princess Theradras (Maraudon)' };
+const tarnishedElvenRing: GearAlternative = { itemId: 18500, name: 'Tarnished Elven Ring', quality: 'rare', source: DM_TRIBUTE };
+
+/** The Trinket 2 alternative every end game build lists: no Blackhand's Breadth or Hand of Justice to chase. */
+const highborneResearchTablet: GearAlternative = {
+  itemId: 260205,
+  name: 'Highborne Research Tablet',
+  quality: 'uncommon',
+  source: 'Quest: Your Final Reward',
+  sourceLinks: [{ text: 'Your Final Reward', href: 'https://www.wowhead.com/forever/quest=89053/your-final-reward' }],
+  faction: 'Alliance',
+  note: 'Equivalent, or even slightly better.',
+};
+
+/** Trinket 2 alternatives. A build's own Trinket 2 is left out of its list, so nothing shows twice. */
+const trinketAlternatives: GearAlternative[] = [
+  highborneResearchTablet,
+  { itemId: 11815, name: 'Hand of Justice', quality: 'rare', source: 'Emperor Dagran Thaurissan (Blackrock Depths)' },
+  { itemId: 272437, name: 'Adaptive Combat Assistant', quality: 'rare', source: undermineReals.text, sourceLinks: [undermineReals] },
+  { itemId: 18537, name: 'Counterattack Lodestone', quality: 'rare', source: DM_TRIBUTE },
+  { itemId: 280065, name: 'Behemoth Bones', quality: 'rare', source: '—' },
+  {
+    itemId: 270275,
+    name: 'Cleansed Vilebranch Medallion',
+    quality: 'uncommon',
+    source: 'Quest: Saving Sharpbeak',
+    sourceLinks: [quest('Saving Sharpbeak', 2994, 'saving-sharpbeak')],
+    faction: 'Alliance',
+  },
+  {
+    itemId: 19120,
+    name: 'Rune of the Guard Captain',
+    quality: 'uncommon',
+    source: 'Quest: Job Opening: Guard Captain of Revantusk Village',
+    sourceLinks: [quest('Job Opening: Guard Captain of Revantusk Village', 7862, 'job-opening-guard-captain-of-revantusk-village')],
+    faction: 'Horde',
+  },
+];
+
 const preRaidShared: Record<string, GearItem> = {
-  head: { slot: 'Head', itemId: 226829, name: 'Darkmantle Cap', quality: 'epic', source: 'Vendor (Ironforge / Orgrimmar)', enchant: '+8 Agility', enchantSpellId: 15401 },
-  neck: { slot: 'Neck', itemId: 15411, name: 'Mark of Fordring', quality: 'rare', source: 'Quest: In Dreams', sourceLinks: [{ text: 'In Dreams', href: 'https://www.wowhead.com/forever/quest=5944' }], enchant: '+5 Agility', enchantSpellId: 13365 },
-  shoulders: { slot: 'Shoulders', itemId: 15058, name: 'Stormshroud Shoulders', quality: 'rare', source: 'Elemental Leatherworking (BoE)' },
-  back: { slot: 'Back', itemId: 272414, name: "Howler's Furs", quality: 'rare', source: 'Tarnished Undermine Reals', sourceLinks: [{ text: 'Tarnished Undermine Reals', href: 'https://www.wowhead.com/forever/currency=3469/tarnished-undermine-real', wowhead: { kind: 'currency', id: 3469 } }], enchant: '+5 Agility', enchantSpellId: 1219587 },
-  chest: { slot: 'Chest', itemId: 226825, name: 'Darkmantle Tunic', quality: 'epic', source: 'Vendor (Ironforge / Orgrimmar)', enchant: 'Greater Stats', enchantSpellId: 19988 },
-  wrists: { slot: 'Wrists', itemId: 226830, name: 'Darkmantle Bracers', quality: 'rare', source: 'Vendor (Ironforge / Orgrimmar)', enchant: '+9 Agility', enchantSpellId: 1248599 },
-  hands: { slot: 'Hands', itemId: 21278, name: 'Stormshroud Gloves', quality: 'rare', source: 'Elemental Leatherworking (BoE)', enchant: '+10 Agility', enchantSpellId: 20012 },
-  waist: { slot: 'Waist', itemId: 272395, name: "Assassin's Waistguard", quality: 'epic', source: 'Tarnished Undermine Reals', sourceLinks: [{ text: 'Tarnished Undermine Reals', href: 'https://www.wowhead.com/forever/currency=3469/tarnished-undermine-real', wowhead: { kind: 'currency', id: 3469 } }] },
-  feet: { slot: 'Feet', itemId: 226831, name: 'Darkmantle Footpads', quality: 'epic', source: 'Vendor (Ironforge / Orgrimmar)', enchant: 'Minor Speed', enchantSpellId: 13889 },
-  ring1: { slot: 'Ring 1', itemId: 19325, name: "Don Julio's Band", quality: 'epic', source: 'Alterac Valley exalted reputation' },
+  head: { slot: 'Head', itemId: 226829, name: 'Darkmantle Cap', quality: 'epic', ...darkmantleSource, enchant: '+8 Agility', enchantSpellId: 15401, alternatives: [shadowcraftCap] },
+  neck: { slot: 'Neck', itemId: 15411, name: 'Mark of Fordring', quality: 'rare', source: 'Quest: In Dreams', sourceLinks: [{ text: 'In Dreams', href: 'https://www.wowhead.com/forever/quest=5944' }], alternatives: [beadsOfOgreMight], enchant: '+5 Agility', enchantSpellId: 13365 },
+  shoulders: { slot: 'Shoulders', itemId: 15058, name: 'Stormshroud Shoulders', quality: 'rare', source: 'Elemental Leatherworking (BoE)', alternatives: [theramorePauldrons, darkspearPauldrons] },
+  back: { slot: 'Back', itemId: 272414, name: "Howler's Furs", quality: 'rare', source: 'Tarnished Undermine Reals', sourceLinks: [{ text: 'Tarnished Undermine Reals', href: 'https://www.wowhead.com/forever/currency=3469/tarnished-undermine-real', wowhead: { kind: 'currency', id: 3469 } }], enchant: '+5 Agility', enchantSpellId: 1219587, alternatives: [capeOfTheBlackBaron] },
+  chest: { slot: 'Chest', itemId: 226825, name: 'Darkmantle Tunic', quality: 'epic', ...darkmantleSource, enchant: 'Greater Stats', enchantSpellId: 19988, alternatives: [shadowcraftTunic] },
+  wrists: { slot: 'Wrists', itemId: 226830, name: 'Darkmantle Bracers', quality: 'rare', ...darkmantleSource, enchant: '+9 Agility', enchantSpellId: 1248599, alternatives: [shadowcraftBracers] },
+  hands: { slot: 'Hands', itemId: 21278, name: 'Stormshroud Gloves', quality: 'rare', source: 'Elemental Leatherworking (BoE)', enchant: '+10 Agility', enchantSpellId: 20012, alternatives: [devilsaurGauntlets] },
+  waist: { slot: 'Waist', itemId: 272395, name: "Assassin's Waistguard", quality: 'epic', source: 'Tarnished Undermine Reals', sourceLinks: [{ text: 'Tarnished Undermine Reals', href: 'https://www.wowhead.com/forever/currency=3469/tarnished-undermine-real', wowhead: { kind: 'currency', id: 3469 } }], alternatives: [mightOfTheTimbermaw, defilersLeatherGirdle, highlandersLeatherGirdle, darkmantleBelt] },
+  feet: { slot: 'Feet', itemId: 226831, name: 'Darkmantle Footpads', quality: 'epic', ...darkmantleSource, enchant: 'Minor Speed', enchantSpellId: 13889, alternatives: [shadowcraftBoots] },
+  ring1: { slot: 'Ring 1', itemId: 19325, name: "Don Julio's Band", quality: 'epic', source: 'Alterac Valley exalted reputation', alternatives: [blackstoneRing, tarnishedElvenRing] },
   ring2: { slot: 'Ring 2', itemId: 272408, name: "Cutthroat's Signet", quality: 'rare', source: 'Tarnished Undermine Reals', sourceLinks: [{ text: 'Tarnished Undermine Reals', href: 'https://www.wowhead.com/forever/currency=3469/tarnished-undermine-real', wowhead: { kind: 'currency', id: 3469 } }] },
   ranged: { slot: 'Ranged', itemId: 2100, name: 'Precisely Calibrated Boomstick', quality: 'epic', source: 'BoE Drop', alternatives: [satyrsBow] },
 };
@@ -202,17 +310,6 @@ export const trinkets = {
   blackhandsBreadth: { itemId: 13965, name: "Blackhand's Breadth", quality: 'rare', source: "Quest: General Drakkisath's Demise / For The Horde!", sourceLinks: [{ text: "General Drakkisath's Demise", href: 'https://www.wowhead.com/forever/quest=5102' }, { text: 'For The Horde!', href: 'https://www.wowhead.com/forever/quest=4974' }] },
 } as const satisfies Record<string, Piece>;
 
-/** The Trinket 2 alternative every end game build lists: no Blackhand's Breadth or Hand of Justice to chase. */
-const highborneResearchTablet: GearAlternative = {
-  itemId: 260205,
-  name: 'Highborne Research Tablet',
-  quality: 'uncommon',
-  source: 'Quest: Your Final Reward',
-  sourceLinks: [{ text: 'Your Final Reward', href: 'https://www.wowhead.com/forever/quest=89053/your-final-reward' }],
-  faction: 'Alliance',
-  note: 'Equivalent, or even slightly better.',
-};
-
 const crusader = { enchant: 'Crusader', enchantSpellId: 20007 };
 const agilityWeapon = { enchant: '+15 Agility', enchantSpellId: 23794 };
 
@@ -222,6 +319,12 @@ export const weapons = {
   teebus: { itemId: 1728, name: "Teebu's Blazing Longsword", quality: 'epic', source: 'BoE Drop' },
   flurryAxe: { itemId: 871, name: 'Flurry Axe', quality: 'epic', source: 'BoE Drop' },
 } as const satisfies Record<string, Piece>;
+
+/** Main hand alternatives for the Combat Sinister Strike and Venom builds. Sword of Zeal has no source in the database; it's a BoE drop. */
+export const combatMainHandAlternatives: GearAlternative[] = [
+  { itemId: 6622, name: 'Sword of Zeal', quality: 'rare', source: 'BoE Drop' },
+  { itemId: 11684, name: 'Ironfoe', quality: 'epic', source: 'Emperor Dagran Thaurissan (Blackrock Depths)' },
+];
 
 /** A main hand or off hand with its enchant: Crusader or the +15 Agility weapon enchant. */
 const weaponWith = (slot: 'Main hand' | 'Off hand', item: Piece, enchant: 'crusader' | 'agility'): GearItem => ({
@@ -236,6 +339,8 @@ interface PreRaid {
   legs: keyof typeof legEnchant;
   mainHand: [Piece, 'crusader' | 'agility'];
   offHand: [Piece, 'crusader' | 'agility'];
+  /** Main hand alternatives for this build, collapsed under its main hand. */
+  mainHandAlternatives?: GearAlternative[];
 }
 
 /** Pre-raid BiS for one build (Best in Slot isn't listed yet). */
@@ -244,12 +349,19 @@ export const preRaidGear = (b: PreRaid): Record<GearSetId, GearItem[]> => {
   return {
     prebis: [
       p.head, p.neck, p.shoulders, p.back, p.chest, p.wrists, p.hands, p.waist,
-      { slot: 'Legs', ...stormshroudPants, ...legEnchant[b.legs] },
+      { slot: 'Legs', ...stormshroudPants, ...legEnchant[b.legs], alternatives: [devilsaurLeggings] },
       p.feet, p.ring1, p.ring2,
       { slot: 'Trinket 1', ...trinkets.heartOfWyrmthalak },
-      { slot: 'Trinket 2', ...b.trinket, alternatives: [highborneResearchTablet] },
-      weaponWith('Main hand', ...b.mainHand),
-      weaponWith('Off hand', ...b.offHand),
+      { slot: 'Trinket 2', ...b.trinket, alternatives: trinketAlternatives.filter((a) => a.itemId !== b.trinket.itemId) },
+      {
+        ...weaponWith('Main hand', ...b.mainHand),
+        ...(b.mainHandAlternatives && { alternatives: b.mainHandAlternatives }),
+      },
+      {
+        ...weaponWith('Off hand', ...b.offHand),
+        // Distracting Dagger is the off hand alternative wherever it isn't already the pick.
+        ...(b.offHand[0].itemId !== weapons.distractingDagger.itemId && { alternatives: [weapons.distractingDagger] }),
+      },
       p.ranged,
     ],
     bis: [],

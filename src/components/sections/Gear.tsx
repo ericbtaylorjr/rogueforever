@@ -117,7 +117,7 @@ function AlternativeRow({ slot, alt }: { slot: string; alt: GearAlternative }) {
         </div>
         {alt.note && <p className="mt-[3px] pl-[34px] text-[12px] leading-[1.4] text-mute">{alt.note}</p>}
       </div>
-      <span role="cell" className="truncate text-[12px] text-faint">
+      <span role="cell" className="truncate pr-[12px] text-[12px] text-faint">
         <SourceText item={{ ...alt, slot }} />
       </span>
       <span role="cell" className="truncate text-[12px] text-faint">
@@ -169,7 +169,7 @@ function GearRow({ slot, items }: { slot: string; items: GearItem[] }) {
           </span>
         )}
 
-        <span role="cell" className="truncate text-[12px] text-faint">
+        <span role="cell" className="truncate pr-[12px] text-[12px] text-faint">
           {item ? <SourceText item={item} /> : '—'}
         </span>
         <span role="cell" className="truncate text-[12px] text-faint">
