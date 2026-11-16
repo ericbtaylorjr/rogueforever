@@ -8,7 +8,7 @@
  * allowlist (`sanitize`) before it reaches the page.
  */
 
-export type WowheadKind = 'item' | 'spell';
+export type WowheadKind = 'item' | 'spell' | 'currency';
 
 export interface WowheadRef {
   kind: WowheadKind;

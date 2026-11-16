@@ -220,11 +220,20 @@ export interface GearItem {
   name: string;
   quality: ItemQuality;
   source: string;
+  /**
+   * Parts of `source` that link to Wowhead Forever (a quest, a currency): each `text` is found in
+   * `source` and becomes a link to `href`, with a live tooltip when `wowhead` is set.
+   */
+  sourceLinks?: { text: string; href: string; wowhead?: { kind: 'item' | 'spell' | 'currency'; id: number } }[];
   /** Bind on equip, so it can be bought or traded. Unset for everything else. */
   boe?: boolean;
   /** A crafted item that binds when picked up, so only the crafter can use it. Unset for everything else. */
   bop?: boolean;
   enchant?: string;
+  /** Easier or cheaper options to chase instead of this item; they show under its row, collapsed. */
+  alternatives?: GearAlternative[];
+  /** The enchant's spell id on Wowhead Forever; makes `enchant` a link with a tooltip. */
+  enchantSpellId?: number;
   /**
    * The item is in the Forever database but Wowhead doesn't list it yet: it shows its tooltip
    * (`tooltip`, Wowhead's markup, built by scripts/gear-research) but doesn't link out.
@@ -234,6 +243,14 @@ export interface GearItem {
   noWowhead?: boolean;
   tooltip?: string;
   icon?: string;
+}
+
+/** An alternative to a gear list's item: same fields, plus who can use it and how it compares. */
+export interface GearAlternative extends Omit<GearItem, 'slot' | 'alternatives'> {
+  /** Only this faction can get it. Unset means both. */
+  faction?: 'Alliance' | 'Horde';
+  /** How it compares with the item it stands in for ("Equivalent, or slightly better."). */
+  note?: string;
 }
 
 export type GearSetId = 'prebis' | 'bis';

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { gearSlots } from '../../content/content';
 import { gear as copy } from '../../content/copy';
 import { factionColor, levelingBrackets, qualityColor, wowheadUrl } from '../../content/gear';
-import type { Faction, GearItem, GearSetId, LevelingItem } from '../../content/types';
+import type { Faction, GearAlternative, GearItem, GearSetId, LevelingItem } from '../../content/types';
 import { useHandbook, useShownBuild } from '../../state/HandbookProvider';
 import { useTheme } from '../../state/ThemeProvider';
 import { GameIcon } from '../ui/GameIcon';
@@ -11,7 +11,7 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { Tip } from '../ui/Tip';
 import { useTooltip } from '../ui/Tooltip';
 
-const GRID = '104px minmax(0,1.5fr) minmax(0,1fr) 84px';
+const GRID = '104px minmax(0,1.5fr) minmax(0,1fr) 110px';
 const LEVELING_GRID = '62px 92px minmax(0,1.5fr) minmax(0,1fr) 88px';
 
 function ItemLink({ item }: { item: Omit<GearItem, 'enchant'> }) {
@@ -53,36 +53,137 @@ function ItemLink({ item }: { item: Omit<GearItem, 'enchant'> }) {
   );
 }
 
-function GearRow({ slot, items }: { slot: string; items: GearItem[] }) {
-  const item = items.find((i) => i.slot === slot);
+function EnchantLink({ item }: { item: GearItem }) {
+  const { bind } = useTooltip();
+  if (!item.enchant) return <>—</>;
+  if (!item.enchantSpellId) return <>{item.enchant}</>;
+  return (
+    <a
+      href={`https://www.wowhead.com/forever/spell=${item.enchantSpellId}`}
+      target="_blank"
+      rel="noreferrer"
+      className="underline decoration-line underline-offset-[3px] transition-colors hover:text-accent focus-visible:text-accent"
+      {...bind({ name: item.enchant, kind: 'Enchant', wowhead: { kind: 'spell', id: item.enchantSpellId } })}
+    >
+      {item.enchant}
+    </a>
+  );
+}
 
+/** A source as text, with any quest or currency named in `sourceLinks` turned into its Wowhead link. */
+function SourceText({ item }: { item: GearItem }) {
+  const { bind } = useTooltip();
+  const links = item.sourceLinks ?? [];
+  if (!links.length) return <>{item.source}</>;
+  const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const parts = item.source.split(new RegExp(`(${links.map((l) => escape(l.text)).join('|')})`));
+  return (
+    <>
+      {parts.map((part, i) => {
+        const link = links.find((l) => l.text === part);
+        if (!link) return part;
+        return (
+          <a
+            key={i}
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-line underline-offset-[3px] transition-colors hover:text-accent focus-visible:text-accent"
+            {...(link.wowhead ? bind({ name: part, wowhead: link.wowhead }) : {})}
+          >
+            {part}
+          </a>
+        );
+      })}
+    </>
+  );
+}
+
+function AlternativeRow({ slot, alt }: { slot: string; alt: GearAlternative }) {
   return (
     <div
       role="row"
-      className="grid items-center border-t border-line px-[14px] py-[11px]"
-      style={{ gridTemplateColumns: GRID }}
+      className="grid items-start border-t border-line/50 px-[14px] py-[9px]"
+      style={{ gridTemplateColumns: GRID, background: 'rgba(var(--fg-rgb),.03)' }}
     >
-      <span role="rowheader" className="text-[12.5px] text-faint">
-        {slot}
+      <span role="rowheader" className="pl-[10px] text-[12px] text-faint">
+        <span className="sm:hidden">{copy.alternatives.labelShort}</span>
+        <span className="max-sm:hidden">{copy.alternatives.label}</span>
       </span>
-
-      {item ? (
-        <div role="cell" className="min-w-0">
-          <ItemLink item={item} />
+      <div role="cell" className="min-w-0 pr-[12px]">
+        <div className="flex min-w-0 flex-wrap items-center gap-x-[8px] gap-y-[4px]">
+          <ItemLink item={{ ...alt, slot }} />
+          {alt.faction && <FactionTag faction={alt.faction} />}
         </div>
-      ) : (
-        <span role="cell" className="flex min-w-0 items-center gap-[10px]">
-          <span className="truncate text-[12.5px] italic text-dim">{copy.empty}</span>
-        </span>
-      )}
-
+        {alt.note && <p className="mt-[3px] pl-[34px] text-[12px] leading-[1.4] text-mute">{alt.note}</p>}
+      </div>
       <span role="cell" className="truncate text-[12px] text-faint">
-        {item?.source ?? '—'}
+        <SourceText item={{ ...alt, slot }} />
       </span>
       <span role="cell" className="truncate text-[12px] text-faint">
-        {item?.enchant ?? '—'}
+        {alt.enchant ? <EnchantLink item={{ ...alt, slot }} /> : '—'}
       </span>
     </div>
+  );
+}
+
+function GearRow({ slot, items }: { slot: string; items: GearItem[] }) {
+  const item = items.find((i) => i.slot === slot);
+  const alts = item?.alternatives ?? [];
+  const [open, setOpen] = useState(false);
+  const panelId = `alts-${slot.replace(/\s+/g, '-').toLowerCase()}`;
+
+  return (
+    <>
+      <div
+        role="row"
+        className="grid items-center border-t border-line px-[14px] py-[11px]"
+        style={{ gridTemplateColumns: GRID }}
+      >
+        <span role="rowheader" className="text-[12.5px] text-faint">
+          {slot}
+        </span>
+
+        {item ? (
+          <div role="cell" className="flex min-w-0 items-center gap-[10px] pr-[12px]">
+            <div className="min-w-0">
+              <ItemLink item={item} />
+            </div>
+            {alts.length > 0 && (
+              <button
+                type="button"
+                aria-expanded={open}
+                aria-controls={panelId}
+                onClick={() => setOpen((o) => !o)}
+                className="t-eyebrow flex shrink-0 items-center gap-[5px] rounded-[4px] border border-line px-[6px] py-[2px] text-[10.5px] text-faint transition-colors hover:text-accent focus-visible:text-accent"
+              >
+                <span className="sm:hidden">{copy.alternatives.chipShort(alts.length)}</span>
+                <span className="max-sm:hidden">{copy.alternatives.chip(alts.length)}</span>
+                <span aria-hidden="true">{open ? '▴' : '▾'}</span>
+              </button>
+            )}
+          </div>
+        ) : (
+          <span role="cell" className="flex min-w-0 items-center gap-[10px]">
+            <span className="truncate text-[12.5px] italic text-dim">{copy.empty}</span>
+          </span>
+        )}
+
+        <span role="cell" className="truncate text-[12px] text-faint">
+          {item ? <SourceText item={item} /> : '—'}
+        </span>
+        <span role="cell" className="truncate text-[12px] text-faint">
+          {item ? <EnchantLink item={item} /> : '—'}
+        </span>
+      </div>
+      {open && (
+        <div id={panelId} role="rowgroup">
+          {alts.map((alt) => (
+            <AlternativeRow key={alt.itemId} slot={slot} alt={alt} />
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 

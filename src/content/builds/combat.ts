@@ -1,6 +1,6 @@
 import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { noEndgameGear, points, racialTips, shankStep, sliceAndDiceStep, tip, withRiposte } from './shared';
+import { points, preRaidGear, trinkets, weapons, racialTips, shankStep, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 const nonDaggerTip = {
   text: 'Use a non-dagger main hand. Daggers do not work well with Sinister Strike.',
@@ -238,14 +238,19 @@ export const combat: Build[] = [
     phase: 'endgame',
     name: 'Venom',
     grade: 'A',
-    rank: 5,
+    rank: 3,
     talents: points(21, 30, 0),
     talentNote:
       'Combat with Venom: Shank, your off-hand strike, applies Venom (more poison damage and a better poison chance for 6 seconds), so it goes on cooldown below 80 energy while poisons do extra work. Blade Flurry opens the fight. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530320241001-320013220201232115_t5',
     stats: venomStats,
-    gear: noEndgameGear,
+    gear: preRaidGear({
+      trinket: trinkets.handOfJustice,
+      legs: 'agility',
+      mainHand: [weapons.teebus, 'crusader'],
+      offHand: [weapons.flurryAxe, 'agility'],
+    }),
     rotation: venomRotation,
   },
   {
@@ -261,7 +266,12 @@ export const combat: Build[] = [
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530320201-3200132202012321551_t5',
     stats: sinisterStrikeStats,
-    gear: noEndgameGear,
+    gear: preRaidGear({
+      trinket: trinkets.handOfJustice,
+      legs: 'agility',
+      mainHand: [weapons.teebus, 'crusader'],
+      offHand: [weapons.flurryAxe, 'agility'],
+    }),
     rotation: sinisterStrikeRotation,
   },
   {
@@ -270,14 +280,19 @@ export const combat: Build[] = [
     phase: 'endgame',
     name: 'Backstab',
     grade: 'A',
-    rank: 3,
+    rank: 4,
     talents: points(12, 34, 5),
     talentNote:
       'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush, with Blade Flurry before the pull. Shank goes on cooldown below 80 energy. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Eviscerate.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh005203002-3203030202012221551-005_t5',
     stats: backstabStats,
-    gear: noEndgameGear,
+    gear: preRaidGear({
+      trinket: trinkets.blackhandsBreadth,
+      legs: 'agility',
+      mainHand: [weapons.felstriker, 'crusader'],
+      offHand: [weapons.distractingDagger, 'agility'],
+    }),
     rotation: backstabRotation,
   },
   {

@@ -11,6 +11,7 @@ import { useGrown } from '../../state/useGrown';
 import { useSpecColor } from '../../state/useSpecColor';
 import { wowsimsLink } from '../../content/links';
 import { BuildList } from '../ui/BuildList';
+import { GearSims } from './GearSims';
 import { LinkedText } from '../ui/LinkedText';
 import { SegmentedTabs, Tag } from '../ui/Pill';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -328,6 +329,8 @@ function EndgameMeta({ sims }: { sims: boolean }) {
         label={specBoard.rankingLabel}
         builds={rankedBuilds}
       />
+
+      <GearSims />
 
       {sims && (
         <>

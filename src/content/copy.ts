@@ -202,6 +202,18 @@ export const racesCopy = {
   },
 } as const;
 
+/** Meta breakdown > End Game: each build's Pre-raid BiS sim results (src/content/gearSims.json). */
+export const gearSimsCopy = {
+  title: 'Pre-raid BiS performance',
+  intro:
+    "How far each build falls behind the best one in its Pre-raid BiS gear, per encounter length. These are early WoWSims results simulated as Undead, with no mob type or zone type set, and will change over time. This comparison only reflects single target damage, so it doesn't reflect the benefit of cleave via Blade Flurry or multi-dotting.",
+  buildHeader: 'Build',
+  durationLabel: (m: number) => `${m} min`,
+  best: 'BEST',
+  legend: { best: 'Best, or within 0.5%', close: '0.5–3% behind', far: 'More than 3% behind' },
+  lastUpdated: 'Last updated',
+} as const;
+
 export const poisonsCopy = {
   intro:
     "Poisons go on each weapon and wear off in charges. Buy the reagents in bulk so you aren't running to a vendor halfway through a dungeon.",
@@ -280,6 +292,14 @@ export const gear = {
   },
   cols: { slot: 'SLOT', item: 'ITEM', source: 'SOURCE', enchant: 'ENCHANT' },
   tableLabel: 'Gear by slot',
+  alternatives: {
+    /** Chip on a row: "1 alternative", "2 alternatives". */
+    chip: (n: number) => (n === 1 ? '1 alternative' : `${n} alternatives`),
+    /** The same on small screens, where the columns are tight. */
+    chipShort: (n: number) => (n === 1 ? '1 alt' : `${n} alts`),
+    label: 'Alternative',
+    labelShort: 'Alt',
+  },
   empty: 'No item set yet',
   /** Shown on a list tab until it has items. */
   comingSoon: {

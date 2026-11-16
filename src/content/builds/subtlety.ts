@@ -1,6 +1,6 @@
 import { levelingGearFor } from '../gear';
 import type { Build, ProTip, Rotation, RotationStep, StatPriority } from '../types';
-import { noEndgameGear, points, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
+import { points, preRaidGear, trinkets, weapons, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Subtlety Hemo (slow main hand) weights from its own WoWSims run. */
 const hemoStats: StatPriority = {
@@ -173,15 +173,20 @@ export const subtlety: Build[] = [
     spec: 'subtlety',
     phase: 'endgame',
     name: 'Hemo',
-    grade: 'A',
-    rank: 4,
+    grade: 'B',
+    rank: 5,
     talents: points(12, 8, 31),
     talentNote:
       'A Subtlety bleed build: Garrote is kept up (Ghostly Strike makes the next one free of Stealth), Hemorrhage builds combo points, and Shank adds 2 more through Boot Knife. Rupture and Death Mark finish, with Slice and Dice up. Open from Stealth with Premeditation, Garrote, Shank and Death Mark.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530301-320003-305230031321001151_t5',
     stats: hemoStats,
-    gear: noEndgameGear,
+    gear: preRaidGear({
+      trinket: trinkets.handOfJustice,
+      legs: 'agility',
+      mainHand: [weapons.felstriker, 'crusader'],
+      offHand: [weapons.distractingDagger, 'agility'],
+    }),
     rotation: hemoRotation,
   },
   {

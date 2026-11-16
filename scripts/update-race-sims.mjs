@@ -31,7 +31,8 @@ if (!src) {
 const PRESETS = {
   'Asn Muti': { id: 'assassination_mutilate', name: 'Assassination Mutilate', build: 'assassination/mutilate' },
   'Combat SS': { id: 'combat_sinister_strike', name: 'Combat Sinister Strike', build: 'combat/sinister-strike' },
-  'Combat BS': { id: 'combat_backstab', name: 'Combat Backstab', build: 'combat/backstab' },
+  // `also`: talents the sims used that differ trivially from the build's link (the owner accepted them, Nov 16 2026).
+  'Combat BS': { id: 'combat_backstab', name: 'Combat Backstab', build: 'combat/backstab', also: ['005203002-3203130202012321351-005'] },
   'Combat Venom': { id: 'combat_venom', name: 'Combat Venom', build: 'combat/venom' },
   'Subtlety Hemo': { id: 'subtlety_hemo', name: 'Subtlety Hemo', build: 'subtlety/hemo' },
 };
@@ -108,7 +109,7 @@ function fromCsv(path) {
   for (const r of rows) {
     const p = PRESETS[r.talents];
     const want = links[p.build];
-    if (want !== undefined && r.talents_string !== want) {
+    if (want !== undefined && r.talents_string !== want && !p.also?.includes(r.talents_string)) {
       warn(`${r.talents} ${r.settings} ${r.duration}s: talents ${r.talents_string} don't match ${p.build}'s link (${want}); skipped`);
       continue;
     }

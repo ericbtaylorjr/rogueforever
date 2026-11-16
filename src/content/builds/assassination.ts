@@ -1,6 +1,6 @@
 import { levelingGearFor } from '../gear';
 import type { Build, Rotation, StatPriority } from '../types';
-import { noEndgameGear, points, racialTips, shankStep, sliceAndDiceStep, tip } from './shared';
+import { points, preRaidGear, trinkets, weapons, racialTips, shankStep, sliceAndDiceStep, tip } from './shared';
 
 /** Assassination Mutilate (daggers in both hands) weights from its own WoWSims run. */
 const mutilateStats: StatPriority = {
@@ -120,7 +120,12 @@ export const assassination: Build[] = [
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530311231251031-32030302020103-001_t5',
     stats: mutilateStats,
-    gear: noEndgameGear,
+    gear: preRaidGear({
+      trinket: trinkets.handOfJustice,
+      legs: 'agility',
+      mainHand: [weapons.felstriker, 'crusader'],
+      offHand: [weapons.distractingDagger, 'crusader'],
+    }),
     rotation: mutilateRotation,
   },
   {

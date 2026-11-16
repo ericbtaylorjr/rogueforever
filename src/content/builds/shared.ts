@@ -1,4 +1,4 @@
-import type { GearItem, GearSetId, ProTip, Rotation, RotationStep, StatPriority, TalentTree } from '../types';
+import type { GearAlternative, GearItem, GearSetId, ProTip, Rotation, RotationStep, StatPriority, TalentTree } from '../types';
 
 /** Talent point split, Assassination / Combat / Subtlety, in each tree's colour. */
 export const points = (assassination: number, combat: number, subtlety: number): TalentTree[] => [
@@ -157,3 +157,101 @@ export const forLeveling = (rotation: Rotation, cooldowns: string[]): Rotation =
  * itemization pass for Forever, so Classic Era BiS lists would be wrong at launch.
  */
 export const noEndgameGear: Record<GearSetId, GearItem[]> = { prebis: [], bis: [] };
+
+type Piece = Omit<GearItem, 'slot'>;
+
+/**
+ * Pre-raid BiS: the slots every end game build shares, plus what differs per build (trinkets, leg
+ * enchant, weapons). One WoWSims gear export per build; see the update-endgame-gear skill.
+ * Precisely Calibrated Boomstick, Teebu's Blazing Longsword and Flurry Axe have no source in the Forever database; they're BoE drops.
+ */
+/** Ranged alternative for every build. Zevrim Thornhoof is in Dire Maul, which isn't in at launch yet. */
+const satyrsBow: GearAlternative = {
+  itemId: 18323,
+  name: "Satyr's Bow",
+  quality: 'rare',
+  source: 'Zevrim Thornhoof (Dire Maul)',
+};
+
+const preRaidShared: Record<string, GearItem> = {
+  head: { slot: 'Head', itemId: 226829, name: 'Darkmantle Cap', quality: 'epic', source: 'Vendor (Ironforge / Orgrimmar)', enchant: '+8 Agility', enchantSpellId: 15401 },
+  neck: { slot: 'Neck', itemId: 15411, name: 'Mark of Fordring', quality: 'rare', source: 'Quest: In Dreams', sourceLinks: [{ text: 'In Dreams', href: 'https://www.wowhead.com/forever/quest=5944' }], enchant: '+5 Agility', enchantSpellId: 13365 },
+  shoulders: { slot: 'Shoulders', itemId: 15058, name: 'Stormshroud Shoulders', quality: 'rare', source: 'Elemental Leatherworking (BoE)' },
+  back: { slot: 'Back', itemId: 272414, name: "Howler's Furs", quality: 'rare', source: 'Tarnished Undermine Reals', sourceLinks: [{ text: 'Tarnished Undermine Reals', href: 'https://www.wowhead.com/forever/currency=3469/tarnished-undermine-real', wowhead: { kind: 'currency', id: 3469 } }], enchant: '+5 Agility', enchantSpellId: 1219587 },
+  chest: { slot: 'Chest', itemId: 226825, name: 'Darkmantle Tunic', quality: 'epic', source: 'Vendor (Ironforge / Orgrimmar)', enchant: 'Greater Stats', enchantSpellId: 19988 },
+  wrists: { slot: 'Wrists', itemId: 226830, name: 'Darkmantle Bracers', quality: 'rare', source: 'Vendor (Ironforge / Orgrimmar)', enchant: '+9 Agility', enchantSpellId: 1248599 },
+  hands: { slot: 'Hands', itemId: 21278, name: 'Stormshroud Gloves', quality: 'rare', source: 'Elemental Leatherworking (BoE)', enchant: '+10 Agility', enchantSpellId: 20012 },
+  waist: { slot: 'Waist', itemId: 272395, name: "Assassin's Waistguard", quality: 'epic', source: 'Tarnished Undermine Reals', sourceLinks: [{ text: 'Tarnished Undermine Reals', href: 'https://www.wowhead.com/forever/currency=3469/tarnished-undermine-real', wowhead: { kind: 'currency', id: 3469 } }] },
+  feet: { slot: 'Feet', itemId: 226831, name: 'Darkmantle Footpads', quality: 'epic', source: 'Vendor (Ironforge / Orgrimmar)', enchant: 'Minor Speed', enchantSpellId: 13889 },
+  ring1: { slot: 'Ring 1', itemId: 19325, name: "Don Julio's Band", quality: 'epic', source: 'Alterac Valley exalted reputation' },
+  ring2: { slot: 'Ring 2', itemId: 272408, name: "Cutthroat's Signet", quality: 'rare', source: 'Tarnished Undermine Reals', sourceLinks: [{ text: 'Tarnished Undermine Reals', href: 'https://www.wowhead.com/forever/currency=3469/tarnished-undermine-real', wowhead: { kind: 'currency', id: 3469 } }] },
+  ranged: { slot: 'Ranged', itemId: 2100, name: 'Precisely Calibrated Boomstick', quality: 'epic', source: 'BoE Drop', alternatives: [satyrsBow] },
+};
+
+const stormshroudPants: Piece = { itemId: 15057, name: 'Stormshroud Pants', quality: 'rare', source: 'Elemental Leatherworking (BoE)' };
+/** The leg enchants the builds use (none is also an option). */
+const legEnchant = {
+  none: {},
+  agility: { enchant: '+8 Agility', enchantSpellId: 15401 },
+  rapidity: { enchant: 'Rapidity', enchantSpellId: 22841 },
+} as const;
+
+export const trinkets = {
+  handOfJustice: { itemId: 11815, name: 'Hand of Justice', quality: 'rare', source: 'Emperor Dagran Thaurissan (Blackrock Depths)' },
+  heartOfWyrmthalak: { itemId: 22321, name: 'Heart of Wyrmthalak', quality: 'rare', source: 'Overlord Wyrmthalak (Blackrock Spire)' },
+  blackhandsBreadth: { itemId: 13965, name: "Blackhand's Breadth", quality: 'rare', source: "Quest: General Drakkisath's Demise / For The Horde!", sourceLinks: [{ text: "General Drakkisath's Demise", href: 'https://www.wowhead.com/forever/quest=5102' }, { text: 'For The Horde!', href: 'https://www.wowhead.com/forever/quest=4974' }] },
+} as const satisfies Record<string, Piece>;
+
+/** The Trinket 2 alternative every end game build lists: no Blackhand's Breadth or Hand of Justice to chase. */
+const highborneResearchTablet: GearAlternative = {
+  itemId: 260205,
+  name: 'Highborne Research Tablet',
+  quality: 'uncommon',
+  source: 'Quest: Your Final Reward',
+  sourceLinks: [{ text: 'Your Final Reward', href: 'https://www.wowhead.com/forever/quest=89053/your-final-reward' }],
+  faction: 'Alliance',
+  note: 'Equivalent, or even slightly better.',
+};
+
+const crusader = { enchant: 'Crusader', enchantSpellId: 20007 };
+const agilityWeapon = { enchant: '+15 Agility', enchantSpellId: 23794 };
+
+export const weapons = {
+  felstriker: { itemId: 12590, name: 'Felstriker', quality: 'epic', source: 'Warchief Rend Blackhand (Blackrock Spire)' },
+  distractingDagger: { itemId: 18392, name: 'Distracting Dagger', quality: 'rare', source: 'Prince Tortheldrin (Dire Maul)' },
+  teebus: { itemId: 1728, name: "Teebu's Blazing Longsword", quality: 'epic', source: 'BoE Drop' },
+  flurryAxe: { itemId: 871, name: 'Flurry Axe', quality: 'epic', source: 'BoE Drop' },
+} as const satisfies Record<string, Piece>;
+
+/** A main hand or off hand with its enchant: Crusader or the +15 Agility weapon enchant. */
+const weaponWith = (slot: 'Main hand' | 'Off hand', item: Piece, enchant: 'crusader' | 'agility'): GearItem => ({
+  slot,
+  ...item,
+  ...(enchant === 'crusader' ? crusader : agilityWeapon),
+});
+
+interface PreRaid {
+  /** Trinket 2. Trinket 1 is always Heart of Wyrmthalak. */
+  trinket: Piece;
+  legs: keyof typeof legEnchant;
+  mainHand: [Piece, 'crusader' | 'agility'];
+  offHand: [Piece, 'crusader' | 'agility'];
+}
+
+/** Pre-raid BiS for one build (Best in Slot isn't listed yet). */
+export const preRaidGear = (b: PreRaid): Record<GearSetId, GearItem[]> => {
+  const p = preRaidShared;
+  return {
+    prebis: [
+      p.head, p.neck, p.shoulders, p.back, p.chest, p.wrists, p.hands, p.waist,
+      { slot: 'Legs', ...stormshroudPants, ...legEnchant[b.legs] },
+      p.feet, p.ring1, p.ring2,
+      { slot: 'Trinket 1', ...trinkets.heartOfWyrmthalak },
+      { slot: 'Trinket 2', ...b.trinket, alternatives: [highborneResearchTablet] },
+      weaponWith('Main hand', ...b.mainHand),
+      weaponWith('Off hand', ...b.offHand),
+      p.ranged,
+    ],
+    bis: [],
+  };
+};

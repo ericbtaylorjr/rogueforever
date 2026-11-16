@@ -22,7 +22,7 @@ Downloads folder is `/mnt/c/Users/<name>/Downloads/` (find it with `ls -d /mnt/c
   clickable (the "Click any cell" hint hides itself). % behind is computed per build and duration from `dps`
   against that build's best race. `generated` is the file's modified date.
   - Preset names map to Handbook builds in `PRESETS` at the top of `scripts/update-race-sims.mjs` (add a line for a new
-    build). The script also checks each row's `talents_string` against that build's calculator link in
+    build; a preset's optional `also` lists extra `talents_string`s the user accepted as equivalent, e.g. Combat BS's Nov 16 sims). The script also checks each row's `talents_string` against that build's calculator link in
     `src/content/builds/*.ts` and skips a row that doesn't match.
   - A row simmed with another build's gear set (the odd one out for its preset) is skipped with a warning and that
     cell shows an em dash ("no simulation"). The Nov 3 file had one: Combat Backstab's Dwarf row was labelled Combat SS
