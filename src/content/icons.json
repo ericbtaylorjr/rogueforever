@@ -729,6 +729,16 @@
     "icon": "spell_frost_frostbrand",
     "kind": "item"
   },
+  "item:12940": {
+    "id": 12940,
+    "icon": "inv_sword_43",
+    "kind": "item"
+  },
+  "item:12939": {
+    "id": 12939,
+    "icon": "inv_sword_40",
+    "kind": "item"
+  },
   "item:12783": {
     "id": 12783,
     "icon": "inv_sword_17",

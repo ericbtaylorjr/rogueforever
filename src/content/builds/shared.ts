@@ -324,6 +324,12 @@ export const weapons = {
 export const combatMainHandAlternatives: GearAlternative[] = [
   { itemId: 6622, name: 'Sword of Zeal', quality: 'rare', source: 'BoE Drop' },
   { itemId: 11684, name: 'Ironfoe', quality: 'epic', source: 'Emperor Dagran Thaurissan (Blackrock Depths)' },
+  { itemId: 12940, name: "Dal'Rend's Sacred Charge", quality: 'rare', source: 'Warchief Rend Blackhand (Blackrock Spire)' },
+];
+
+/** Off hand alternatives for the Combat Sinister Strike and Venom builds, ahead of Distracting Dagger. */
+export const combatOffHandAlternatives: GearAlternative[] = [
+  { itemId: 12939, name: "Dal'Rend's Tribal Guardian", quality: 'rare', source: 'Warchief Rend Blackhand (Blackrock Spire)' },
 ];
 
 const heartseeker: GearAlternative = { itemId: 12783, name: 'Heartseeker', quality: 'rare', source: 'Blacksmithing' };
@@ -351,6 +357,8 @@ interface PreRaid {
   offHand: [Piece, 'crusader' | 'agility'];
   /** Main hand alternatives for this build, collapsed under its main hand. */
   mainHandAlternatives?: GearAlternative[];
+  /** Off hand alternatives for this build, listed before Distracting Dagger. */
+  offHandAlternatives?: GearAlternative[];
 }
 
 /** Pre-raid BiS for one build (Best in Slot isn't listed yet). */
@@ -370,7 +378,7 @@ export const preRaidGear = (b: PreRaid): Record<GearSetId, GearItem[]> => {
       {
         ...weaponWith('Off hand', ...b.offHand),
         // Distracting Dagger is the off hand alternative wherever it isn't already the pick.
-        ...(b.offHand[0].itemId !== weapons.distractingDagger.itemId && { alternatives: [weapons.distractingDagger] }),
+        ...(b.offHand[0].itemId !== weapons.distractingDagger.itemId && { alternatives: [...(b.offHandAlternatives ?? []), weapons.distractingDagger] }),
       },
       p.ranged,
     ],
