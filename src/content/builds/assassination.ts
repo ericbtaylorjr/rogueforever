@@ -118,7 +118,7 @@ export const assassination: Build[] = [
     talentNote:
       'Poison-focused dagger damage. Mutilate builds combo points two at a time and Shank, your off-hand strike, goes on cooldown below 80 energy with Venom boosting your poisons for 6 seconds. Keep Slice and Dice up, Mutilate to 4 combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
     keyTalents: [],
-    link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530311231251031-32030302020103-001_t5',
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh00530311231251031-30230302020103-001_t5',
     stats: mutilateStats,
     gear: preRaidGear({
       trinket: trinkets.handOfJustice,
