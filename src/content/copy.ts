@@ -447,7 +447,6 @@ export const addons = {
     { name: "HandyNotes: Class Trainers", url: "https://www.curseforge.com/wow/search?search=HandyNotes%20ClassTrainers", summary: "Marks class trainer locations on the map. Requires HandyNotes." },
     { name: "HandyNotes: Dungeon & Raid Locations (Forever)", url: "https://www.curseforge.com/wow/search?search=HandyNotes%20Dungeon%20Raid%20Locations%20Forever", summary: "Pins dungeon and raid entrances on the map. Requires HandyNotes." },
     { name: "HandyNotes: MapNotes Forever", url: "https://www.curseforge.com/wow/search?search=HandyNotes%20MapNotes%20Forever", summary: "A HandyNotes plugin that adds map notes for Forever." },
-    { name: "Layer-Swap", url: "https://www.curseforge.com/wow/addons/layer", summary: "Helps you see and switch between server layers." },
     { name: "Leatrix Plus", url: "https://www.curseforge.com/wow/addons/leatrix-plus", summary: "Many small convenience options: auto-sell junk, faster looting, interface tweaks and more." },
     { name: "LFG Forever", url: "https://www.curseforge.com/wow/addons/lfg-forever", summary: "A group finder for Forever that helps you list and find dungeon and other groups." },
     { name: "LibSharedMedia-3.0", url: "https://www.curseforge.com/wow/addons/libsharedmedia-3-0", summary: "Library that lets addons share fonts, sounds and textures. Other addons need it." },
