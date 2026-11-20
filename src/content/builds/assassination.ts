@@ -56,7 +56,7 @@ const dungeonsStats: StatPriority = {
 /**
  * The WoWSims Rogue APL as the "Asn Muti" preset runs it (daggers in both hands):
  * `npm run apl -- assassination/mutilate`. Mutilate adds 2 combo points, so the APL
- * Eviscerates at 4 and Cold Blood only fires at 5. Venom is a Shank effect now, not a finisher.
+ * Eviscerates at 3 and Cold Blood fires at 4+. Venom is a Shank effect now, not a finisher.
  * These talents take Flawless Execution, which the APL treats as "no Rupture".
  */
 const mutilateRotation: Rotation = {
@@ -69,11 +69,11 @@ const mutilateRotation: Rotation = {
     'Cold Blood + Eviscerate',
   ],
   steps: [
-    shankStep,
+    { ...shankStep, note: "On cooldown, whenever you won't cap energy." },
     sliceAndDiceStep,
-    { press: 'Mutilate', note: 'Until you have 4 or more combo points. Needs a dagger in both hands.' },
-    { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
-    { press: 'Eviscerate', note: 'With 4+ combo points.' },
+    { press: 'Mutilate', note: 'Until you have 3 or more combo points. Needs a dagger in both hands.' },
+    { press: 'Cold Blood', note: "If it's off cooldown and you have 4+ combo points." },
+    { press: 'Eviscerate', note: 'With 3+ combo points.' },
   ],
   tips: [
     tip.meleeUptime,
