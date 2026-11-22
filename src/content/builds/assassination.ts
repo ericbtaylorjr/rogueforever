@@ -112,7 +112,7 @@ export const assassination: Build[] = [
     spec: 'assassination',
     phase: 'endgame',
     name: 'Mutilate',
-    grade: 'S',
+    grade: 'A',
     rank: 1,
     talents: points(31, 19, 1),
     talentNote:

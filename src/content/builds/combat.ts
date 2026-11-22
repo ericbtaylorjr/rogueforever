@@ -238,7 +238,7 @@ export const combat: Build[] = [
     phase: 'endgame',
     name: 'Venom',
     grade: 'A',
-    rank: 3,
+    rank: 4,
     talents: points(21, 30, 0),
     talentNote:
       'Combat with Venom: Shank, your off-hand strike, applies Venom (more poison damage and a better poison chance for 6 seconds), so it goes on cooldown below 80 energy while poisons do extra work. Blade Flurry opens the fight. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
@@ -262,7 +262,7 @@ export const combat: Build[] = [
     phase: 'endgame',
     name: 'Sinister Strike',
     grade: 'A',
-    rank: 2,
+    rank: 3,
     talents: points(16, 35, 0),
     talentNote:
       'The traditional Classic Rogue Combat build: steady melee damage from Sinister Strike builders into Eviscerate, with Blade Flurry before the pull and Adrenaline Rush once Slice and Dice is up. Shank, your new off-hand strike, goes on cooldown below 80 energy. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
@@ -285,8 +285,8 @@ export const combat: Build[] = [
     spec: 'combat',
     phase: 'endgame',
     name: 'Backstab',
-    grade: 'A',
-    rank: 4,
+    grade: 'B',
+    rank: 5,
     talents: points(13, 33, 5),
     talentNote:
       'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush, with Blade Flurry before the pull. Shank goes on cooldown below 80 energy. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Eviscerate.',

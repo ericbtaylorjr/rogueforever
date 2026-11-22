@@ -751,6 +751,10 @@
   ],
   "changelog": [
     {
+      "date": "Nov 22nd, 2026",
+      "text": "Adjusted the Pre-raid BiS gear lists and the Meta Breakdown for the Stormshroud nerf and the changes to how Mutilate works, which reduce Assassination's performance. Combat Sinister Strike, Venom and Backstab and Subtlety Hemo now use Darkmantle Spaulders, Dawn Armor, Devilsaur Gauntlets and Devilsaur Leggings in place of the Stormshroud pieces, with Stormshroud listed as an alternative. Their weapons are now enchanted with Crusader, Combat Backstab uses Hand of Justice, and every build now uses the Precisely Calibrated Boomstick for ranged, with Satyr's Bow as an alternative. Assassination Mutilate keeps its Stormshroud set. Updated the Assassination Mutilate rotation to match the new Mutilate: it builds to 3 or more combo points, Eviscerate is used at 3+ and Cold Blood at 4+, and Shank is used on cooldown whenever you won't cap energy. Dire Maul is in at launch, so its items are now included."
+    },
+    {
       "date": "Nov 16th, 2026",
       "text": "Added Pre-raid BiS gear lists for every end game build: Assassination Mutilate, Combat Sinister Strike, Venom and Backstab, and Subtlety Hemo. Each slot lists its enchant, linked to Wowhead with a tooltip, and the source of the item, with the quest, currency or armor set linked where it applies. Slots with easier or cheaper options now have an Alternatives button that expands to show them, with faction restrictions noted. The Meta Breakdown now has a Pre-raid BiS performance table for End Game, simulated as Undead at 1, 2, 3 and 5 minute encounters, showing how far each build trails the best one. These results reflect single target damage only. The projected end game meta was revised from those results: Assassination Mutilate stays on top at S, followed by Combat Sinister Strike, Venom and Backstab at A, and Subtlety Hemo moves to B. The Race performance by build chart was also updated to reflect the Pre-raid BiS simulation data."
     },

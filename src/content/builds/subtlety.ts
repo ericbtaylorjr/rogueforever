@@ -173,8 +173,8 @@ export const subtlety: Build[] = [
     spec: 'subtlety',
     phase: 'endgame',
     name: 'Hemo',
-    grade: 'B',
-    rank: 5,
+    grade: 'A',
+    rank: 2,
     talents: points(12, 8, 31),
     talentNote:
       'A Subtlety bleed build: Garrote is kept up (Ghostly Strike makes the next one free of Stealth), Hemorrhage builds combo points, and Shank adds 2 more through Boot Knife. Rupture and Death Mark finish, with Slice and Dice up. Open from Stealth with Premeditation, Garrote, Shank and Death Mark.',
