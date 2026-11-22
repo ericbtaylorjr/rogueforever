@@ -16,7 +16,7 @@ import { loadDb } from '../gear-research/forever.mjs';
 // WoWSims equipment order -> the Handbook's slot names (content.json gearSlots).
 const SLOTS = ['Head', 'Neck', 'Shoulders', 'Back', 'Chest', 'Wrists', 'Hands', 'Waist', 'Legs', 'Feet', 'Ring 1', 'Ring 2', 'Trinket 1', 'Trinket 2', 'Main hand', 'Off hand', 'Ranged'];
 const QUALITY = { 0: 'poor', 1: 'common', 2: 'uncommon', 3: 'rare', 4: 'epic', 5: 'legendary' };
-const NOT_AT_LAUNCH_ZONES = new Set([2557]); // Dire Maul; keep in step with curation.json notAtLaunch.zones
+const NOT_AT_LAUNCH_ZONES = new Set([]); // none now (Dire Maul is in at launch); keep in step with curation.json notAtLaunch.zones
 
 const raw = process.argv[2] === '-' || !process.argv[2] ? readFileSync(0, 'utf8') : readFileSync(process.argv[2], 'utf8');
 const items = JSON.parse(raw.replace(/^\s*<pasted[^>]*>|<\/pasted[^>]*>\s*$/g, '')).player.equipment.items;

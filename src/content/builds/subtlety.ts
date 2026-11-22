@@ -184,9 +184,10 @@ export const subtlety: Build[] = [
     gear: preRaidGear({
       trinket: trinkets.handOfJustice,
       legs: 'agility',
+      devilsaur: true,
       mainHand: [weapons.felstriker, 'crusader'],
       mainHandAlternatives: backstabMainHandAlternatives,
-      offHand: [weapons.distractingDagger, 'agility'],
+      offHand: [weapons.distractingDagger, 'crusader'],
     }),
     rotation: hemoRotation,
   },

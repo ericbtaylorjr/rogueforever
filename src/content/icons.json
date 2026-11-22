@@ -689,6 +689,16 @@
     "icon": "inv_pants_09",
     "kind": "item"
   },
+  "item:226826": {
+    "id": 226826,
+    "icon": "inv_shoulder_07",
+    "kind": "item"
+  },
+  "item:252483": {
+    "id": 252483,
+    "icon": "inv_chest_leather_08",
+    "kind": "item"
+  },
   "item:22321": {
     "id": 22321,
     "icon": "inv_misc_gem_bloodstone_01",

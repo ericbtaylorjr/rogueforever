@@ -165,7 +165,7 @@ type Piece = Omit<GearItem, 'slot'>;
  * enchant, weapons). One WoWSims gear export per build; see the update-endgame-gear skill.
  * Precisely Calibrated Boomstick, Teebu's Blazing Longsword and Flurry Axe have no source in the Forever database; they're BoE drops.
  */
-/** Ranged alternative for every build. Zevrim Thornhoof is in Dire Maul, which isn't in at launch yet. */
+/** Ranged alternative for every build. Zevrim Thornhoof is in Dire Maul. */
 const satyrsBow: GearAlternative = {
   itemId: 18323,
   name: "Satyr's Bow",
@@ -181,7 +181,7 @@ const undermineReals = {
 } as const;
 const DM_TRIBUTE = 'Dire Maul North Tribute Chest';
 
-/** Easier or cheaper options listed under the shared slots (collapsed). Dire Maul isn't in at launch yet. */
+/** Easier or cheaper options listed under the shared slots (collapsed). */
 const beadsOfOgreMight: GearAlternative = {
   itemId: 22150,
   name: 'Beads of Ogre Might',
@@ -296,6 +296,18 @@ const preRaidShared: Record<string, GearItem> = {
   ranged: { slot: 'Ranged', itemId: 2100, name: 'Precisely Calibrated Boomstick', quality: 'epic', source: 'BoE Drop', alternatives: [satyrsBow] },
 };
 
+const stormshroudShoulders: GearAlternative = { itemId: 15058, name: 'Stormshroud Shoulders', quality: 'rare', source: 'Elemental Leatherworking (BoE)' };
+const stormshroudGloves: GearAlternative = { itemId: 21278, name: 'Stormshroud Gloves', quality: 'rare', source: 'Elemental Leatherworking (BoE)' };
+const stormshroudPantsAlt: GearAlternative = { itemId: 15057, name: 'Stormshroud Pants', quality: 'rare', source: 'Elemental Leatherworking (BoE)' };
+
+/** The slots the Devilsaur builds (Combat, Subtlety) swap out of the Stormshroud set, with Dawn Armor. */
+const devilsaurSlots = {
+  shoulders: { slot: 'Shoulders', itemId: 226826, name: 'Darkmantle Spaulders', quality: 'rare', ...darkmantleSource, alternatives: [stormshroudShoulders, theramorePauldrons, darkspearPauldrons] },
+  chest: { slot: 'Chest', itemId: 252483, name: 'Dawn Armor', quality: 'epic', bop: true, source: 'Leatherworking', enchant: 'Greater Stats', enchantSpellId: 19988, alternatives: [{ itemId: 226825, name: 'Darkmantle Tunic', quality: 'epic', ...darkmantleSource }, shadowcraftTunic] },
+  hands: { slot: 'Hands', itemId: 15063, name: 'Devilsaur Gauntlets', quality: 'rare', source: 'Leatherworking', enchant: '+10 Agility', enchantSpellId: 20012, alternatives: [stormshroudGloves] },
+  legs: { slot: 'Legs', itemId: 15062, name: 'Devilsaur Leggings', quality: 'rare', source: 'Leatherworking', enchant: '+8 Agility', enchantSpellId: 15401, alternatives: [stormshroudPantsAlt] },
+} as const satisfies Record<string, GearItem>;
+
 const stormshroudPants: Piece = { itemId: 15057, name: 'Stormshroud Pants', quality: 'rare', source: 'Elemental Leatherworking (BoE)' };
 /** The leg enchants the builds use (none is also an option). */
 const legEnchant = {
@@ -353,6 +365,8 @@ interface PreRaid {
   /** Trinket 2. Trinket 1 is always Heart of Wyrmthalak. */
   trinket: Piece;
   legs: keyof typeof legEnchant;
+  /** Devilsaur set: Darkmantle Spaulders, Dawn Armor, Devilsaur Gauntlets and Leggings (legs is ignored). */
+  devilsaur?: boolean;
   mainHand: [Piece, 'crusader' | 'agility'];
   offHand: [Piece, 'crusader' | 'agility'];
   /** Main hand alternatives for this build, collapsed under its main hand. */
@@ -364,10 +378,11 @@ interface PreRaid {
 /** Pre-raid BiS for one build (Best in Slot isn't listed yet). */
 export const preRaidGear = (b: PreRaid): Record<GearSetId, GearItem[]> => {
   const p = preRaidShared;
+  const d = b.devilsaur ? devilsaurSlots : undefined;
   return {
     prebis: [
-      p.head, p.neck, p.shoulders, p.back, p.chest, p.wrists, p.hands, p.waist,
-      { slot: 'Legs', ...stormshroudPants, ...legEnchant[b.legs], alternatives: [devilsaurLeggings] },
+      p.head, p.neck, d ? d.shoulders : p.shoulders, p.back, d ? d.chest : p.chest, p.wrists, d ? d.hands : p.hands, p.waist,
+      d ? d.legs : { slot: 'Legs', ...stormshroudPants, ...legEnchant[b.legs], alternatives: [devilsaurLeggings] },
       p.feet, p.ring1, p.ring2,
       { slot: 'Trinket 1', ...trinkets.heartOfWyrmthalak },
       { slot: 'Trinket 2', ...b.trinket, alternatives: trinketAlternatives.filter((a) => a.itemId !== b.trinket.itemId) },

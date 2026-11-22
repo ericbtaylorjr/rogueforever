@@ -117,11 +117,9 @@
   ],
   "ppm": {},
   "notAtLaunch": {
-    "zones": [
-      2557
-    ],
+    "zones": [],
     "reps": [],
-    "why": "Dire Maul isn't in the game at launch."
+    "why": "Dire Maul is in the game at launch, so nothing is kept out for now."
   },
   "allowEpic": [],
   "maxRepLevel": 6,

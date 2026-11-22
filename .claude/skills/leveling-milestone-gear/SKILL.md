@@ -91,7 +91,7 @@ No sims: the sim only runs at level 60, so it can't rank level 20 gear.
 Quests (with the faction that can take them), dungeon drops, crafted items (with a recipe players can get),
 vendors, and reputation rewards up to Honored are chaseable. Raids, PvP-flagged items, world drops and rare
 spawns, and items with no recorded source are out unless `curation.json` `allow` lets one in.
-- **Not at launch**: `curation.json` `notAtLaunch.zones` (Dire Maul now) and `notAtLaunch.reps` keep out
+- **Not at launch**: `curation.json` `notAtLaunch.zones` (none now; Dire Maul is in at launch) and `notAtLaunch.reps` keep out
   content that isn't in yet, and crafted items whose recipe is sold or dropped there. Add an id when the
   user names content that isn't in yet; remove it when it opens. Reputation standing assumed reachable is
   `maxRepLevel` (6, Honored).
