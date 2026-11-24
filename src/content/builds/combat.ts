@@ -146,18 +146,18 @@ const backstabStats: StatPriority = {
 const sinisterStrikeRotation: Rotation = {
   opener: [
     'Blade Flurry (-1s)',
-    'Evasion + Major Frenzy Potion + Trinket + Racial + Sinister Strike',
-    'Slice and Dice',
+    { text: 'Evasion + Major Frenzy Potion + Trinket + Racial + Sinister Strike', icon: 'Sinister Strike' },
     'Vanish + Garrote',
     'Shank',
+    'Slice and Dice',
     'Adrenaline Rush',
     'Sinister Strike to 5CP',
     'Cold Blood + Eviscerate',
   ],
   steps: [
+    { press: 'Sinister Strike', note: 'Until you have 5 combo points.' },
     shankStep,
     sliceAndDiceStep,
-    { press: 'Sinister Strike', note: 'Until you have 5 combo points.' },
     { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
     { press: 'Eviscerate', note: 'With all 5 combo points.' },
   ],
@@ -168,7 +168,6 @@ const sinisterStrikeRotation: Rotation = {
     ...racialTips({ adrenalineRush: true }),
     tip.thistleTea,
     tip.vanishGarroteWhenReady,
-    tip.earlyEviscerate,
     tip.fightEnd(),
   ],
 };
@@ -177,19 +176,19 @@ const sinisterStrikeRotation: Rotation = {
 const backstabRotation: Rotation = {
   opener: [
     'Blade Flurry (-1s)',
-    'Evasion + Major Frenzy Potion + Trinket + Racial + Backstab',
-    'Shank',
+    { text: 'Evasion + Major Frenzy Potion + Trinket + Racial + Backstab', icon: 'Backstab' },
     'Vanish + Garrote',
+    'Shank',
     'Slice and Dice',
     'Adrenaline Rush',
-    'Backstab to 5CP',
+    'Backstab to 4CP',
     'Eviscerate',
   ],
   steps: [
+    { press: 'Backstab', note: 'Until you have 4+ combo points. Stay behind the target.' },
     shankStep,
     sliceAndDiceStep,
-    { press: 'Backstab', note: 'Until you have 5 combo points. Stay behind the target.' },
-    { press: 'Eviscerate', note: 'With all 5 combo points.' },
+    { press: 'Eviscerate', note: 'With 4+ combo points.' },
   ],
   tips: [
     tip.meleeUptime,
@@ -198,7 +197,6 @@ const backstabRotation: Rotation = {
     ...racialTips({ adrenalineRush: true, coldBlood: false }),
     tip.thistleTea,
     tip.vanishGarroteWhenReady,
-    tip.earlyEviscerate,
     tip.fightEnd(),
   ],
 };
@@ -207,17 +205,17 @@ const backstabRotation: Rotation = {
 const venomRotation: Rotation = {
   opener: [
     'Blade Flurry (-1s)',
-    'Evasion + Major Frenzy Potion + Trinket + Racial + Sinister Strike',
-    'Slice and Dice',
+    { text: 'Evasion + Major Frenzy Potion + Trinket + Racial + Sinister Strike', icon: 'Sinister Strike' },
     'Vanish + Garrote',
     'Shank',
+    'Slice and Dice',
     'Sinister Strike until 5CP',
     'Cold Blood + Eviscerate',
   ],
   steps: [
+    { press: 'Sinister Strike', note: 'Until you have 5 combo points.' },
     shankStep,
     sliceAndDiceStep,
-    { press: 'Sinister Strike', note: 'Until you have 5 combo points.' },
     { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
     { press: 'Eviscerate', note: 'With all 5 combo points.' },
   ],
@@ -227,7 +225,6 @@ const venomRotation: Rotation = {
     ...racialTips({ adrenalineRush: false }),
     tip.thistleTea,
     tip.vanishGarroteWhenReady,
-    tip.earlyEviscerate,
     tip.fightEnd(),
   ],
 };
@@ -238,10 +235,10 @@ export const combat: Build[] = [
     phase: 'endgame',
     name: 'Venom',
     grade: 'A',
-    rank: 4,
+    rank: 5,
     talents: points(21, 30, 0),
     talentNote:
-      'Combat with Venom: Shank, your off-hand strike, applies Venom (more poison damage and a better poison chance for 6 seconds), so it goes on cooldown below 80 energy while poisons do extra work. Blade Flurry opens the fight. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
+      'Combat with Venom: Shank, your off-hand strike, applies Venom (more poison damage and a better poison chance for 6 seconds), so it is used on cooldown whenever you won\'t cap energy while poisons do extra work. Blade Flurry opens the fight. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530320241001-320013220201232115_t5',
     stats: venomStats,
@@ -262,10 +259,10 @@ export const combat: Build[] = [
     phase: 'endgame',
     name: 'Sinister Strike',
     grade: 'A',
-    rank: 3,
+    rank: 4,
     talents: points(16, 35, 0),
     talentNote:
-      'The traditional Classic Rogue Combat build: steady melee damage from Sinister Strike builders into Eviscerate, with Blade Flurry before the pull and Adrenaline Rush once Slice and Dice is up. Shank, your new off-hand strike, goes on cooldown below 80 energy. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
+      'The traditional Classic Rogue Combat build: steady melee damage from Sinister Strike builders into Eviscerate, with Blade Flurry before the pull and Adrenaline Rush once Slice and Dice is up. Shank, your new off-hand strike, is used on cooldown whenever you won\'t cap energy. Keep Slice and Dice up, Sinister Strike to 5 combo points, then Cold Blood and Eviscerate.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530320201-3200132202012321551_t5',
     stats: sinisterStrikeStats,
@@ -286,10 +283,10 @@ export const combat: Build[] = [
     phase: 'endgame',
     name: 'Backstab',
     grade: 'B',
-    rank: 5,
+    rank: 6,
     talents: points(13, 33, 5),
     talentNote:
-      'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush, with Blade Flurry before the pull. Shank goes on cooldown below 80 energy. Keep Slice and Dice up, Backstab from behind to 5 combo points, then Eviscerate.',
+      'The Sinister Strike build with a dagger main hand and Backstab as the builder, boosted by Adrenaline Rush, with Blade Flurry before the pull. Shank is used on cooldown whenever you won\'t cap energy. Keep Slice and Dice up, Backstab from behind to 4 combo points, then Eviscerate.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh005303002-3203030202012321351-005_t5',
     stats: backstabStats,
@@ -313,7 +310,7 @@ export const combat: Build[] = [
     rank: 2,
     talents: points(14, 34, 3),
     talentNote:
-      'Traditional Combat, centered on cleaving with Blade Flurry, which you use whenever a mob will live more than 15s or on a double pull. Sinister Strike builds combo points and Shank goes on cooldown below 80 energy. Keep Slice and Dice up, then Eviscerate at 5 combo points. No positioning to worry about.',
+      'Traditional Combat, centered on cleaving with Blade Flurry, which you use whenever a mob will live more than 15s or on a double pull. Sinister Strike builds combo points and Shank is used on cooldown whenever you won\'t cap energy. Keep Slice and Dice up, then Eviscerate at 5 combo points. No positioning to worry about.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v20253022-320033011201232155-3_t5/0B1BAEffjKfhnPqqsqRtV2A1tttt0CDGff',
     stats: questingStats,
@@ -330,7 +327,7 @@ export const combat: Build[] = [
     rank: 2,
     talents: points(16, 35, 0),
     talentNote:
-      'Combat for groups: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Sinister Strike builds combo points and Shank goes on cooldown below 80 energy. Keep Slice and Dice up, then Cold Blood and Eviscerate at 5 combo points.',
+      'Combat for groups: Blade Flurry cleaves your damage onto a second target while Adrenaline Rush boosts the rest. Sinister Strike builds combo points and Shank is used on cooldown whenever you won\'t cap energy. Keep Slice and Dice up, then Cold Blood and Eviscerate at 5 combo points.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530221201-3210032202012321551_t5/1BAFGKHcnPqqsqRtVwtttt0CDffGJhm',
     stats: dungeonsStats,

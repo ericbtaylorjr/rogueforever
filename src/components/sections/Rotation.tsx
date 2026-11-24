@@ -11,8 +11,8 @@ import { StaleNote } from '../ui/StaleNote';
 import { WowheadText, firstWowheadName } from '../ui/WowheadText';
 
 /** The icon of the spell or item an opener step presses, if it names one. */
-function OpenerIcon({ text }: { text: string }) {
-  const name = firstWowheadName(text);
+function OpenerIcon({ text, icon }: { text: string; icon?: string }) {
+  const name = icon ?? firstWowheadName(text);
   return name ? <GameIcon name={name} size={16} /> : null;
 }
 
@@ -46,18 +46,21 @@ function RotationDetail({
             <div className="panel p-[18px]">
               <span className="t-panel-label text-ink">{copy.openerTitle}</span>
               <ol className="mt-[14px] flex flex-wrap gap-[8px]">
-                {d.opener.map((o, i) => (
-                  <li
-                    key={o}
-                    className="flex items-center gap-[8px] rounded-[8px] border border-line px-[10px] py-[7px] text-[12.5px] text-prose"
-                  >
-                    <span className="t-num text-[10.5px] text-accent">{i + 1}</span>
-                    <OpenerIcon text={o} />
-                    <span>
-                      <WowheadText text={o} />
-                    </span>
-                  </li>
-                ))}
+                {d.opener.map((step, i) => {
+                  const { text: o, icon } = typeof step === 'string' ? { text: step, icon: undefined } : step;
+                  return (
+                    <li
+                      key={o}
+                      className="flex items-center gap-[8px] rounded-[8px] border border-line px-[10px] py-[7px] text-[12.5px] text-prose"
+                    >
+                      <span className="t-num text-[10.5px] text-accent">{i + 1}</span>
+                      <OpenerIcon text={o} icon={icon} />
+                      <span>
+                        <WowheadText text={o} />
+                      </span>
+                    </li>
+                  );
+                })}
               </ol>
             </div>
           )}
@@ -87,7 +90,6 @@ function RotationDetail({
                   </li>
                 ))}
               </ol>
-              {!leveling && <p className="mt-[4px] text-[12.5px] italic text-faint">{copy.repeat}</p>}
             </div>
           )}
         </div>

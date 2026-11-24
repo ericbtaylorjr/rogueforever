@@ -751,6 +751,10 @@
   ],
   "changelog": [
     {
+      "date": "Nov 24th, 2026",
+      "text": "Added the Subtlety Hemo Seal Fate build to the end game builds. It takes Seal Fate and Cold Blood instead of Death Mark and Boot Knife, and finishes with Cold Blood and Eviscerate at 5 combo points, with Rupture, Slice and Dice and Garrote kept up. It has its own talents, rotation with opener and pro tips, and Pre-raid BiS gear, and it is graded A in the Meta Breakdown, just below Subtlety Hemo. The Pre-raid BiS performance table now includes it, and it is essentially tied with Subtlety Hemo on single target, within 0.3% at every encounter length and slightly ahead at 1, 2 and 5 minutes. It also has its own stat weights."
+    },
+    {
       "date": "Nov 22nd, 2026",
       "text": "Adjusted the Pre-raid BiS gear lists and the Meta Breakdown for the Stormshroud nerf and the changes to how Mutilate works, which reduce Assassination's performance. Combat Sinister Strike, Venom and Backstab and Subtlety Hemo now use Darkmantle Spaulders, Dawn Armor, Devilsaur Gauntlets and Devilsaur Leggings in place of the Stormshroud pieces, with Stormshroud listed as an alternative. Their weapons are now enchanted with Crusader, Combat Backstab uses Hand of Justice, and every build now uses the Precisely Calibrated Boomstick for ranged, with Satyr's Bow as an alternative. Assassination Mutilate keeps its Stormshroud set. Updated the Assassination Mutilate rotation to match the new Mutilate: it builds to 3 or more combo points, Eviscerate is used at 3+ and Cold Blood at 4+, and Shank is used on cooldown whenever you won't cap energy. Dire Maul is in at launch, so its items are now included."
     },

@@ -26,6 +26,8 @@
   "other:OtherActionOffensivePotion": { "name": "Potion" },
   "399956": { "name": "Mutilate (talent)", "talent": true },
   "14082": { "name": "Dirty Deeds", "talent": true },
+  "14079": { "name": "Improved Ambush", "talent": true },
+  "14171": { "name": "Serrated Blades", "talent": true },
   "1310711": { "name": "Flawless Execution", "talent": true },
   "1316709": { "name": "Death Mark (talent)", "talent": true },
   "1325758": { "name": "Death Mark", "requires": 1316709 },

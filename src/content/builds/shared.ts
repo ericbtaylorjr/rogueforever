@@ -24,10 +24,10 @@ export const noRotation: Rotation = { opener: [], steps: [], tips: [] };
  * Rotation lines every build shares, worded once so a row of the WoWSims APL reads the
  * same in every build that can fire it. Regenerate a build's rows with `npm run apl -- <spec>/<id>`.
  */
-/** Shank, on cooldown whenever energy is 80 or less (Boot Knife builds also need 3 combo points or fewer). */
+/** Shank, on cooldown whenever you won't cap energy (the APL's 80 energy or less; Boot Knife builds also need 3 combo points or fewer). */
 export const shankStep: RotationStep = {
   press: 'Shank',
-  note: "On cooldown, whenever you're at 80 energy or less.",
+  note: "On cooldown, whenever you won't cap energy.",
 };
 
 export const sliceAndDiceStep: RotationStep = {
@@ -56,10 +56,6 @@ export const tip = {
   /** The shorter Vanish tip: Assassination Mutilate and Combat Backstab. */
   vanishGarroteWhenReady: {
     text: 'Cast Vanish into Garrote whenever Vanish comes back off cooldown and you have enough energy for the Garrote.',
-    sweaty: true,
-  },
-  earlyEviscerate: {
-    text: 'At 4 combo points with 6s or less of Slice and Dice left, Eviscerate early.',
     sweaty: true,
   },
   fightEnd: (letGo = 'Slice and Dice'): ProTip => ({

@@ -23,6 +23,7 @@ const PRESETS = {
   'Combat BS': { id: 'combat_backstab', name: 'Combat Backstab', build: 'combat/backstab' },
   'Combat Venom': { id: 'combat_venom', name: 'Combat Venom', build: 'combat/venom' },
   'Subtlety Hemo': { id: 'subtlety_hemo', name: 'Subtlety Hemo', build: 'subtlety/hemo' },
+  'Hemo Seal Fate': { id: 'subtlety_hemo_seal_fate', name: 'Subtlety Hemo Seal Fate', build: 'subtlety/hemo-seal-fate' },
 };
 const warn = (m) => console.warn(`! ${m}`);
 

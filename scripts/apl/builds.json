@@ -64,6 +64,15 @@
     },
     "mh": "dagger"
   },
+  "subtlety/hemo-seal-fate": {
+    "wowsimsPreset": null,
+    "vars": {
+      "Use Backstab": false,
+      "Use Expose Armor": false,
+      "Start In Stealth": true
+    },
+    "mh": "sword"
+  },
   "subtlety/hemo": {
     "wowsimsPreset": "Subtlety Hemo",
     "vars": {

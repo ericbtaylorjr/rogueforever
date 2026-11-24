@@ -32,9 +32,12 @@ export interface ProTip {
 /** S best to D worst. `X` is a placeholder for a build that hasn't been graded yet. */
 export type MetaGrade = 'S' | 'A' | 'B' | 'C' | 'D' | 'X';
 
+/** One opener step. An object picks the icon shown for a batched macro (the first spell named is the default). */
+export type OpenerStep = string | { text: string; icon: string };
+
 /** Opener, the repeating rotation and pro tips. Empty arrays render as a "coming soon" note. */
 export interface Rotation {
-  opener: string[];
+  opener: OpenerStep[];
   steps: RotationStep[];
   tips: ProTip[];
 }

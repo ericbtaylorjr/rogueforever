@@ -61,17 +61,17 @@ const dungeonsStats: StatPriority = {
  */
 const mutilateRotation: Rotation = {
   opener: [
-    'Evasion + Major Frenzy Potion + Trinket + Racial + Mutilate',
-    'Slice and Dice',
+    { text: 'Evasion + Major Frenzy Potion + Trinket + Racial + Mutilate', icon: 'Mutilate' },
     'Vanish + Garrote',
+    'Slice and Dice',
     'Shank',
     'Mutilate',
     'Cold Blood + Eviscerate',
   ],
   steps: [
-    { ...shankStep, note: "On cooldown, whenever you won't cap energy." },
-    sliceAndDiceStep,
     { press: 'Mutilate', note: 'Until you have 3 or more combo points. Needs a dagger in both hands.' },
+    shankStep,
+    sliceAndDiceStep,
     { press: 'Cold Blood', note: "If it's off cooldown and you have 4+ combo points." },
     { press: 'Eviscerate', note: 'With 3+ combo points.' },
   ],
@@ -94,10 +94,10 @@ const levelingMutilateRotation: Rotation = {
   opener: [],
   steps: [
     { press: 'Mutilate', note: 'This is your combo point builder. Needs a dagger in both hands.' },
-    { press: 'Shank', note: 'Whenever it is on cooldown and you are under 80 energy.' },
+    shankStep,
     { press: 'Slice and Dice', note: 'Only once it has fallen off, at any number of combo points. It is generally not worth casting until around the mid level 40s.' },
-    { press: 'Cold Blood', note: 'Whenever it is off cooldown, but only at 5 combo points.' },
-    { press: 'Eviscerate', note: 'With 4+ combo points.' },
+    { press: 'Cold Blood', note: 'Whenever it is off cooldown, but only at 4+ combo points.' },
+    { press: 'Eviscerate', note: 'With 3+ combo points.' },
   ],
   tips: [
     tip.meleeUptime,
@@ -116,7 +116,7 @@ export const assassination: Build[] = [
     rank: 1,
     talents: points(31, 19, 1),
     talentNote:
-      'Poison-focused dagger damage. Mutilate builds combo points two at a time and Shank, your off-hand strike, goes on cooldown below 80 energy with Venom boosting your poisons for 6 seconds. Keep Slice and Dice up, Mutilate to 4 combo points, then Eviscerate (Cold Blood first at 5). Needs a dagger in both hands.',
+      'Poison-focused dagger damage. Mutilate builds combo points two at a time and Shank, your off-hand strike, is used on cooldown whenever you won\'t cap energy with Venom boosting your poisons for 6 seconds. Keep Slice and Dice up, Mutilate to 3 combo points, then Eviscerate (Cold Blood first at 4+). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh00530311231251031-30230302020103-001_t5',
     stats: mutilateStats,
@@ -139,7 +139,7 @@ export const assassination: Build[] = [
     rank: 3,
     talents: points(38, 8, 5),
     talentNote:
-      'Only useful at level 40 and up, once Mutilate is talented. Poison-focused dagger damage: Mutilate builds your combo points while Shank yields Energy gain. Keep Slice and Dice up, then Eviscerate at 4+ combo points (Cold Blood first at 5). Needs a dagger in both hands.',
+      'Only useful at level 40 and up, once Mutilate is talented. Poison-focused dagger damage: Mutilate builds your combo points while Shank yields Energy gain. Keep Slice and Dice up, then Eviscerate at 3+ combo points (Cold Blood first at 4+). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v202530321241551031-3023-005_t0_r95/0BcccDffGccjmjnnnqppppSpnt2C1AccD0nhkkkkf',
     stats: questingStats,
@@ -156,7 +156,7 @@ export const assassination: Build[] = [
     rank: 3,
     talents: points(37, 9, 5),
     talentNote:
-      'Only useful at level 40 and up, once Mutilate is talented. Poison-focused dagger damage: Mutilate builds your combo points while Shank yields Energy gain. Keep Slice and Dice up, then Eviscerate at 4+ combo points (Cold Blood first at 5). Needs a dagger in both hands.',
+      'Only useful at level 40 and up, once Mutilate is talented. Poison-focused dagger damage: Mutilate builds your combo points while Shank yields Energy gain. Keep Slice and Dice up, then Eviscerate at 3+ combo points (Cold Blood first at 4+). Needs a dagger in both hands.',
     keyTalents: [],
     link: 'https://www.wowhead.com/forever/talent-calc/rogue/v200530321251551031-302301-005_t0_r95/0CDffGJfmnnnnqppppSpnt2C1AccD0hK1f',
     stats: dungeonsStats,

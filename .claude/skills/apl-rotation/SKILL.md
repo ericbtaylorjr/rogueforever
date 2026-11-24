@@ -52,10 +52,9 @@ tips. The `update-talents` skill covers the whole talent update (link, order, po
      is "With 4+ combo points.").
      The APL's real priority still decides *which conditions* go in each note; only the list order
      changes. Keep every number the APL uses. A short `note` says when or how long. The page adds
-     "Then back to step 1." for level 60 builds only; leveling builds show neither that line nor an
-     Opener, and their intro under the heading is fixed copy (`rotation.levelingIntro`, "This is the
+     no closing line after the steps; leveling builds show no Opener, and their intro under the heading is fixed copy (`rotation.levelingIntro`, "This is the
      general rotation and priority to follow when leveling as {Spec Build}..."), so write nothing about
-     either in a leveling build's rotation Example (Assassination Questing): Mutilate, Shank (on cooldown, under 80
+     the opener in a leveling build's rotation Example (Assassination Questing): Mutilate, Shank (on cooldown, under 80
      energy), Rupture (3+ combo points, if the mob lives 12s), Slice and Dice (only once fallen off),
      Cold Blood (off cooldown, only at 5 combo points), Eviscerate (with 4+ combo points).
    - `tips` (Pro tips): everything else, phrased as what to do, never "don't". Cooldowns,
@@ -91,7 +90,9 @@ tips. The `update-talents` skill covers the whole talent update (link, order, po
      definition. The offensive Vanish tip (Vanish into Garrote or Ambush) is swapped for "Use Vanish and Evasion
      as defensive abilities if threat becomes an issue." Premeditation, pooling and the other sweaty
      tips stay.
-3. `opener` (level 60 builds only; leveling builds leave it `[]`): walk the priority list from the prepull actions at time 0 (stealthed, 0
+3. `opener` (level 60 builds only; leveling builds leave it `[]`). A batched macro step ("Evasion + ... + Vanish + Garrote")
+   shows the icon of the first spell it names; write it as `{ text, icon }` to pick the most fitting one
+   (Vanish, Mutilate, Sinister Strike, Backstab): walk the priority list from the prepull actions at time 0 (stealthed, 0
    combo points, 100 energy, Slice and Dice down) until the first finisher. Prepull actions
    keep their timing, e.g. "Blade Flurry (-2s)". Don't fix counts that depend on crits or
    procs ("Sinister Strike to 5"). Keep manual edits the user made that differ from the

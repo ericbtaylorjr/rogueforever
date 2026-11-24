@@ -250,8 +250,7 @@ export const rotation = {
   openerTitle: 'Opener',
   stepsTitle: 'Rotation',
   /** Closes the rotation list. */
-  repeat: 'Then back to step 1.',
-  /** Leveling builds: no opener and no "back to step 1". {build} is the spec and build name. */
+  /** Leveling builds: no opener. {build} is the spec and build name. */
   levelingIntro:
     'This is the general rotation and priority to follow when leveling as {build}. They have been loosely modeled in WoWSims, but still somewhat too varied to be objective. You can adjust to your liking.',
   tipsTitle: 'Pro tips',

@@ -1,6 +1,6 @@
 import { levelingGearFor } from '../gear';
 import type { Build, ProTip, Rotation, RotationStep, StatPriority } from '../types';
-import { backstabMainHandAlternatives, points, preRaidGear, trinkets, weapons, racialTips, sliceAndDiceStep, tip, withRiposte } from './shared';
+import { backstabMainHandAlternatives, points, preRaidGear, trinkets, weapons, racialTips, shankStep, sliceAndDiceStep, tip, withRiposte } from './shared';
 
 /** Subtlety Hemo (slow main hand) weights from its own WoWSims run. */
 const hemoStats: StatPriority = {
@@ -15,6 +15,23 @@ const hemoStats: StatPriority = {
     { stat: 'Attack Power', ep: 1.0, op: '>' },
     { stat: 'Spell Piercing', ep: 0.44, op: '>' },
     { stat: 'Armor Penetration', ep: 0.25, op: '>' },
+    { stat: 'Stamina', ep: 0.01, op: '>' },
+  ],
+};
+
+/** Subtlety Hemo Seal Fate weights from its own WoWSims run (hit, crit, haste and expertise converted from per 1% at 10, 14, 10 and 10 rating). */
+const hemoSealFateStats: StatPriority = {
+  relativeTo: 'Attack Power',
+  stats: [
+    { stat: 'Expertise Rating', ep: 2.34 },
+    { stat: 'Agility', ep: 1.9, op: '>' },
+    { stat: 'Hit Rating', ep: 1.71, op: '>' },
+    { stat: 'Crit Rating', ep: 1.67, op: '>' },
+    { stat: 'Haste Rating', ep: 1.44, op: '>' },
+    { stat: 'Strength', ep: 1.1, op: '>' },
+    { stat: 'Attack Power', ep: 1.0, op: '>' },
+    { stat: 'Spell Piercing', ep: 0.71, op: '>' },
+    { stat: 'Armor Penetration', ep: 0.3, op: '>' },
     { stat: 'Stamina', ep: 0.01, op: '>' },
   ],
 };
@@ -53,6 +70,10 @@ const dungeonsStats: StatPriority = {
   ],
 };
 
+/** Preparation waits for Vanish, Ghostly Strike and Premeditation to all be on cooldown. */
+const preparationTip: ProTip = {
+  text: "Preparation when Vanish, Ghostly Strike and Premeditation are all on cooldown and you're at 85 energy or less.",
+};
 const ruptureStep = { press: 'Rupture', note: "With 3 or more combo points, whenever it isn't on the target." };
 /** Death Mark replaces Eviscerate in Hemo's talents, and the APL stops refreshing bleeds and Slice and Dice at the end. */
 const hemoFightEnd: ProTip = {
@@ -66,27 +87,34 @@ const hemoFightEnd: ProTip = {
  */
 const hemoRotation: Rotation = {
   opener: [
-    'Premeditation (-1s)',
-    'Slice and Dice',
-    'Evasion + Major Frenzy Potion + Trinket + Racial + Vanish + Garrote',
-    'Preparation',
-    'Premeditation + Death Mark',
+    'Premeditation (-3s)',
+    'Sprint (-2s)',
+    'Slice and Dice (-1s)',
+    { text: 'Evasion + Major Frenzy Potion + Trinket + Racial + Vanish + Garrote', icon: 'Vanish' },
     'Shank',
-    'Rupture',
-    'Hemorrhage to 5CP',
     'Death Mark',
+    'Hemorrhage',
+    'Ghostly Strike',
+    'Preparation',
+    'Premeditation + Rupture',
   ],
   steps: [
     { press: 'Garrote', note: "Whenever it isn't on the target. Ghostly Strike beforehand means it needs no Stealth." },
     {
       press: 'Shank',
-      note: 'On cooldown, at 3 combo points or fewer and 80 energy or less. Boot Knife adds 2 combo points.',
+      note: "On cooldown, whenever you won't cap energy, at 3 combo points or fewer. Boot Knife adds 2 combo points.",
     },
     { press: 'Death Mark', note: 'With 4 or more combo points.' },
     ruptureStep,
     sliceAndDiceStep,
-    { press: 'Ghostly Strike', note: 'When Garrote has 4s or less left, so the next Garrote needs no Stealth.' },
-    { press: 'Hemorrhage', note: 'Until you have 5 combo points, while Garrote has 8s or more left.' },
+    {
+      press: 'Ghostly Strike',
+      note: 'With under 5 combo points, when Garrote has 4s or less left, so the next Garrote needs no Stealth. Also when Garrote has 21s or more left and Hemorrhage has 2s or more left on the target.',
+    },
+    {
+      press: 'Hemorrhage',
+      note: "Until you have 5 combo points, while Garrote has 8s or more left and Ghostly Strike's buff is down. Hold it while Ghostly Strike is ready and Garrote has 21s or more left. At 75+ energy, use it whenever you have under 5 combo points.",
+    },
   ],
   tips: [
     tip.meleeUptime,
@@ -94,7 +122,55 @@ const hemoRotation: Rotation = {
     tip.trinkets,
     ...racialTips({ adrenalineRush: false, coldBlood: false, bladeFlurry: false }),
     { text: 'Thistle Tea at 25 energy or less, while Death Mark is up and you have under 3 combo points.' },
+    preparationTip,
     hemoFightEnd,
+  ],
+};
+
+/**
+ * "Subtlety Hemo Seal Fate" (slow main hand, Start In Stealth on, Cold Blood and Seal Fate instead of Death Mark
+ * and Boot Knife, Ghostly Strike for Garrote): `npm run apl -- subtlety/hemo-seal-fate`. Eviscerate finishes at 5 combo points.
+ */
+const hemoSealFateRotation: Rotation = {
+  opener: [
+    'Premeditation (-3s)',
+    'Sprint (-2s)',
+    'Slice and Dice (-1s)',
+    { text: 'Evasion + Major Frenzy Potion + Trinket + Racial + Vanish + Garrote', icon: 'Vanish' },
+    'Shank',
+    'Rupture',
+    'Hemorrhage',
+    'Ghostly Strike',
+    'Ambush',
+    'Cold Blood + Eviscerate',
+  ],
+  steps: [
+    {
+      press: 'Hemorrhage',
+      note: "Your combo point builder, until you have 5 combo points, while Garrote has 8s or more left and Ghostly Strike's buff is down. Hold it while Ghostly Strike is ready and Garrote has 21s or more left. At 75+ energy, use it whenever you have under 5 combo points.",
+    },
+    shankStep,
+    {
+      press: 'Ghostly Strike',
+      note: 'With under 5 combo points, when Garrote has 4s or less left, so the next Garrote needs no Stealth. Also when Garrote has 21s or more left and Hemorrhage has 2s or more left on the target.',
+    },
+    { press: 'Garrote', note: "Whenever it isn't on the target. Ghostly Strike beforehand means it needs no Stealth." },
+    ruptureStep,
+    sliceAndDiceStep,
+    { press: 'Cold Blood', note: "If it's off cooldown and you have 5 combo points." },
+    { press: 'Eviscerate', note: 'With 5 combo points, as long as Rupture has 3s or more left.' },
+  ],
+  tips: [
+    tip.meleeUptime,
+    tip.premeditation,
+    tip.trinkets,
+    ...racialTips({ adrenalineRush: false, bladeFlurry: false }),
+    tip.thistleTea,
+    tip.vanishGarroteWhenReady,
+    {
+      text: 'In the last 6s of the fight, Eviscerate at 3+ combo points and stop refreshing Slice and Dice and Rupture.',
+      sweaty: true,
+    },
   ],
 };
 
@@ -104,10 +180,9 @@ const swapMacroTip: ProTip = {
 const sinisterForHemoTip: ProTip = {
   text: 'Use Sinister Strike in place of Hemorrhage as your combo point builder until you have unlocked the Hemorrhage talent.',
 };
-const preparationTip: ProTip = { text: 'Preparation whenever Vanish is on cooldown.' };
 const subtletyShank = {
   press: 'Shank',
-  note: 'On cooldown, at 3 combo points or fewer and 80 energy or less. Boot Knife adds 2 combo points.',
+  note: "On cooldown, whenever you won't cap energy, at 3 combo points or fewer. Boot Knife adds 2 combo points.",
 };
 const deathMarkStep = { press: 'Death Mark', note: 'With 4+ combo points.' };
 
@@ -116,14 +191,17 @@ const levelingSteps: RotationStep[] = [
   { press: 'Ambush', note: 'Use weapon swap macro to equip Dagger with Stealth.' },
   {
     press: 'Ghostly Strike',
-    note: 'On cooldown, whenever you have under 5 combo points. Macro in your slow main hand if weapon swapping.',
+    note: 'With under 5 combo points, when Garrote has 4s or less left, or has 21s or more left with 2s or more of Hemorrhage left on the target. Macro in your slow main hand if weapon swapping.',
   },
   {
     press: 'Garrote',
     note: "Whenever it isn't on the target. Ghostly Strike beforehand means it needs no Stealth.",
   },
   subtletyShank,
-  { press: 'Hemorrhage', note: 'Your combo point builder when you cannot Ambush, until you have 5 combo points.' },
+  {
+    press: 'Hemorrhage',
+    note: "Your combo point builder when you cannot Ambush, until you have 5 combo points, while Garrote has 8s or more left and Ghostly Strike's buff is down. At 75+ energy, use it whenever you have under 5 combo points.",
+  },
   deathMarkStep,
   ruptureStep,
 ];
@@ -190,6 +268,29 @@ export const subtlety: Build[] = [
       offHand: [weapons.distractingDagger, 'crusader'],
     }),
     rotation: hemoRotation,
+  },
+  {
+    id: 'hemo-seal-fate',
+    spec: 'subtlety',
+    phase: 'endgame',
+    name: 'Hemo Seal Fate',
+    grade: 'A',
+    rank: 3,
+    talents: points(28, 2, 21),
+    talentNote:
+      'A Subtlety bleed build with Seal Fate: Garrote is kept up (Ghostly Strike makes the next one free of Stealth), Hemorrhage and Shank build combo points, and Rupture and Slice and Dice stay up. Cold Blood and Eviscerate finish at 5 combo points. Open from Stealth with Premeditation, Garrote, Shank and Slice and Dice.',
+    keyTalents: [],
+    link: 'https://www.wowhead.com/forever/talent-calc/rogue/vkndmh0053031121135102-02-0052030313210001_t0/2CFDHjKnMs0CFDghJnnnmkPqss1B',
+    stats: hemoSealFateStats,
+    gear: preRaidGear({
+      trinket: trinkets.handOfJustice,
+      legs: 'agility',
+      devilsaur: true,
+      mainHand: [weapons.felstriker, 'crusader'],
+      mainHandAlternatives: backstabMainHandAlternatives,
+      offHand: [weapons.distractingDagger, 'crusader'],
+    }),
+    rotation: hemoSealFateRotation,
   },
   {
     id: 'questing',
