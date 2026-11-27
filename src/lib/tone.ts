@@ -15,6 +15,8 @@ const LIGHT_SURFACES = ['#cbb386', '#eee1b9'];
 
 /** Lightest dark-theme surface text sits on, across all intensities (subtle panel2). */
 const DARK_SURFACES = ['#1e1e26'];
+/** The holiday theme's lightest surface (its panel2), a little lighter than the dark theme's. */
+export const CHRISTMAS_SURFACES = ['#18402b'];
 
 const toRgb = (hex: string): [number, number, number] => {
   const h = hex.replace('#', '');
@@ -99,13 +101,13 @@ export function readableOnLight(hex: string, min = 4.5): string {
 }
 
 /** Lighten `hex` (keeping its hue) until it reaches `min`:1 on every dark surface. */
-export function readableOnDark(hex: string, min = 4.5): string {
+export function readableOnDark(hex: string, min = 4.5, surfaces: string[] = DARK_SURFACES): string {
   if (!/^#[0-9a-f]{3,6}$/i.test(hex)) return hex;
-  const key = `dark|${hex}|${min}`;
+  const key = `dark|${surfaces.join()}|${hex}|${min}`;
   const hit = cache.get(key);
   if (hit) return hit;
 
-  const ok = (c: string) => DARK_SURFACES.every((bg) => contrast(c, bg) >= min);
+  const ok = (c: string) => surfaces.every((bg) => contrast(c, bg) >= min);
   let out = hex;
   if (!ok(hex)) {
     const [h, s, l0] = rgbToHsl(toRgb(hex));

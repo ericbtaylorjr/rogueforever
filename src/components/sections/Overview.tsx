@@ -2,6 +2,8 @@ import logo from '../../assets/logo-comfy-wizard.webp';
 import { hero } from '../../content/copy';
 import { links, wowsimsLink } from '../../content/links';
 import { useHandbook } from '../../state/HandbookProvider';
+import { useTheme } from '../../state/ThemeProvider';
+import { Flake } from '../shell/Christmas';
 import { Callout } from '../ui/Callout';
 import { LinkedText } from '../ui/LinkedText';
 import { StarIcon } from '../ui/StarIcon';
@@ -12,8 +14,7 @@ function TaperedRule({ className = '' }: { className?: string }) {
   return (
     <div
       aria-hidden="true"
-      className={`h-px w-full max-w-[520px] ${className}`}
-      style={{ background: 'linear-gradient(90deg, var(--accent), transparent)' }}
+      className={`rule-taper h-px w-full max-w-[520px] ${className}`}
     />
   );
 }
@@ -37,6 +38,22 @@ function PoisonDrip() {
             clipPath: 'polygon(50% 0%, 100% 62%, 78% 100%, 22% 100%, 0% 62%)',
           }}
         />
+      ))}
+    </div>
+  );
+}
+
+/** The holiday theme's version of PoisonDrip: snowflakes drift off the candy-cane rule instead. */
+function SnowDrip() {
+  return (
+    <div className="relative mt-[22px] h-[22px] w-full max-w-[520px]" aria-hidden="true">
+      <TaperedRule className="absolute left-0 top-0" />
+      {[
+        { left: '14%', cls: 'animate-flake' },
+        { left: '38%', cls: 'animate-flake-slow' },
+        { left: '61%', cls: 'animate-flake' },
+      ].map((d) => (
+        <Flake key={d.left} className={`xmas-hero-flake absolute top-[3px] ${d.cls}`} style={{ left: d.left }} />
       ))}
     </div>
   );
@@ -97,6 +114,7 @@ function CuratorNote() {
 
 export function Overview() {
   const { jump } = useHandbook();
+  const { theme } = useTheme();
 
   return (
     <section
@@ -129,7 +147,7 @@ export function Overview() {
         </Callout>
       </div>
 
-      <PoisonDrip />
+      {theme === 'christmas' ? <SnowDrip /> : <PoisonDrip />}
 
       <div className="mt-[26px] grid gap-[26px] hero:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
         <div>

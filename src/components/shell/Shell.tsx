@@ -3,6 +3,7 @@ import { config } from '../../config';
 import { shell } from '../../content/copy';
 import { themeVars } from '../../lib/theme';
 import { useTheme } from '../../state/ThemeProvider';
+import { Garland, Snowfall } from './Christmas';
 import { CommandPalette } from './CommandPalette';
 import { ConsentBanner } from './ConsentBanner';
 import { Drawer } from './Drawer';
@@ -37,10 +38,12 @@ export function Shell({ children }: { children: ReactNode }) {
         }`}
       >
         <div className="mx-auto max-w-[1180px] px-[15px] pb-[80px] sm:px-[22px] sm:pb-[120px] rail:px-[30px] wide:max-w-[1420px]">
+          {theme === 'christmas' && <Garland />}
           {children}
         </div>
       </main>
 
+      {theme === 'christmas' && <Snowfall />}
       <ConsentBanner />
       <PrivacyPolicy />
       <CommandPalette />

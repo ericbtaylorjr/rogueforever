@@ -8,19 +8,23 @@ import {
   type ReactNode,
 } from 'react';
 import { track } from '../lib/analytics';
-import { readableOnDark, readableOnLight } from '../lib/tone';
+import { CHRISTMAS_SURFACES, readableOnDark, readableOnLight } from '../lib/tone';
 
-export type Theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark' | 'christmas';
 
 interface ThemeState {
   theme: Theme;
   toggleTheme: () => void;
+  /** Where the toggle goes next. */
+  next: Theme;
   /** Content colour → a version that's legible in the current theme. */
   tone: (hex: string, min?: number) => string;
 }
 
 const STORE_KEY = 'rc:theme';
-const META_COLOR: Record<Theme, string> = { dark: '#0B0B0D', light: '#EBDEB6' };
+const META_COLOR: Record<Theme, string> = { dark: '#0B0B0D', light: '#EBDEB6', christmas: '#0B1F15' };
+/** Dark → holiday → light → dark. The holiday theme is only ever chosen, never picked for you. */
+const NEXT: Record<Theme, Theme> = { dark: 'christmas', christmas: 'light', light: 'dark' };
 const LIGHT_QUERY = '(prefers-color-scheme: light)';
 
 const Ctx = createContext<ThemeState | null>(null);
@@ -29,7 +33,7 @@ const Ctx = createContext<ThemeState | null>(null);
 function readStored(): Theme | null {
   try {
     const v = localStorage.getItem(STORE_KEY);
-    return v === 'light' || v === 'dark' ? v : null;
+    return v === 'light' || v === 'dark' || v === 'christmas' ? v : null;
   } catch {
     return null;
   }
@@ -48,7 +52,7 @@ function initialTheme(): Theme {
   if (typeof document === 'undefined') return 'dark';
   // theme-init.js already resolved this before first paint; trust it so React can't disagree.
   const applied = document.documentElement.getAttribute('data-theme');
-  if (applied === 'light' || applied === 'dark') return applied;
+  if (applied === 'light' || applied === 'dark' || applied === 'christmas') return applied;
   return readStored() ?? deviceTheme();
 }
 
@@ -76,7 +80,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    const next: Theme = theme === 'light' ? 'dark' : 'light';
+    const next = NEXT[theme];
     try {
       localStorage.setItem(STORE_KEY, next);
     } catch {
@@ -89,8 +93,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const value = useMemo<ThemeState>(
     () => ({
       theme,
+      next: NEXT[theme],
       toggleTheme,
-      tone: (hex, min) => (theme === 'light' ? readableOnLight(hex, min) : readableOnDark(hex, min)),
+      tone: (hex, min) =>
+        theme === 'light'
+          ? readableOnLight(hex, min)
+          : readableOnDark(hex, min, theme === 'christmas' ? CHRISTMAS_SURFACES : undefined),
     }),
     [theme, toggleTheme],
   );

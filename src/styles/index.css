@@ -267,6 +267,180 @@
   text-shadow: 0 1px 0 rgba(255, 246, 220, 0.7);
 }
 
+/* ---------------------------------------------------------------------------
+   Holiday theme — a dark pine-green night with candy-cane red, snowfall and string lights.
+   Only ever chosen with the theme toggle (the snowflake it grows in dark mode), never applied for you.
+   Every text token clears 4.5:1 on all three green surfaces, including --panel2, the lightest
+   (checked with the same contrast maths as src/lib/tone.ts): red accent 5.1:1, body copy 8.9:1+,
+   muted 8:1. `tone()` darkens/lightens content colours against #18402b (CHRISTMAS_SURFACES).
+   The decorations (snow, lights, hat, holly) are aria-hidden and pointer-events: none.
+--------------------------------------------------------------------------- */
+:root[data-theme="christmas"] {
+  --accent: #ff8a8a;
+  --accent-dim: rgba(255, 138, 138, 0.16);
+  --accent-ink: #2b0707;
+  --accent-rgb: 255, 138, 138;
+
+  --bg: #0b1f15;
+  --panel: #11301f;
+  --panel2: #18402b;
+  --line: rgba(214, 255, 226, 0.17);
+
+  --ink: #fff7ea;
+  --mute: #c4dccb;
+  --faint: #a9c7b3;
+  --dim: #a2c0ac;
+  --lede-ink: #e6f0e4;
+  --prose-ink: #d4e6d6;
+
+  --venom: #8ff0a4;
+  --venom-rgb: 143, 240, 164;
+  --sweat: #8fd8ff;
+  --sweat-rgb: 143, 216, 255;
+  --warn: #ffb987;
+  --warn-rgb: 255, 185, 135;
+  --sky: #a8dcf7;
+  --sky-rgb: 168, 220, 247;
+  --amber: #ffd27a;
+  --amber-rgb: 255, 210, 122;
+  --caution: #ffe583;
+  --caution-rgb: 255, 229, 131;
+  --bad: #ff9b9b;
+  --bad-rgb: 255, 155, 155;
+
+  --glow: 0 0 44px -14px rgba(255, 138, 138, 0.5);
+  --tex: 0.55;
+
+  --surface-deep: #08170f;
+  --surface-pop: #0d2418;
+  --rail-a: #0f2a1c;
+  --rail-b: #09180f;
+  --bar-bg: rgba(9, 24, 15, 0.95);
+  --specbar-bg: rgba(14, 38, 26, 0.94);
+  --scrim: rgba(3, 12, 7, 0.76);
+  --scrim-soft: rgba(3, 12, 7, 0.74);
+  --hue-end: #07150d;
+  --on-hue: #fff7ea;
+  --scroll-thumb: #2b5a40;
+  --scroll-thumb-hover: #3a7455;
+}
+
+/* A red glow top-left and a green one bottom-right, like tree light spilling into a dark room. */
+:root[data-theme="christmas"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(214, 40, 57, 0.18), transparent 46%),
+    radial-gradient(ellipse at 100% 100%, rgba(40, 170, 95, 0.16), transparent 46%);
+}
+
+/* Cards get a ribbon of red along the top edge. */
+:root[data-theme="christmas"] .panel,
+:root[data-theme="christmas"] .sheet {
+  box-shadow:
+    inset 0 2px 0 rgba(255, 138, 138, 0.42),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 14px 28px -20px #000;
+}
+:root[data-theme="christmas"] .t-h1,
+:root[data-theme="christmas"] .t-h2 {
+  text-shadow: 0 0 22px rgba(255, 138, 138, 0.28);
+}
+/* A sprig of holly after every section title. */
+:root[data-theme="christmas"] .t-h2::after {
+  content: "";
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  margin-left: 0.4em;
+  vertical-align: -0.04em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 13C9 8 4 8 2 11c3 0 5 1 6 3-2-1-4 0-5 2 3 1 6 0 9-3z' fill='%236fdc8c'/%3E%3Cpath d='M12 13c3-5 8-5 10-2-3 0-5 1-6 3 2-1 4 0 5 2-3 1-6 0-9-3z' fill='%234fc774'/%3E%3Ccircle cx='10.5' cy='15' r='2.4' fill='%23ff6b6b'/%3E%3Ccircle cx='14' cy='15.5' r='2.2' fill='%23ff4d5e'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* The hero's tapered rule becomes a candy-cane stripe that fades out. */
+.rule-taper {
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+:root[data-theme="christmas"] .rule-taper {
+  height: 4px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(135deg, #ff6b6b 0 6px, #fff7ea 6px 12px);
+  -webkit-mask-image: linear-gradient(90deg, #000 35%, transparent);
+  mask-image: linear-gradient(90deg, #000 35%, transparent);
+}
+
+/* The toggle's frost: three pulses to say "something's here", then a faint resting glow. */
+.frost-btn {
+  color: #8fd8ff;
+  border-color: rgba(143, 216, 255, 0.55);
+  box-shadow: 0 0 9px rgba(143, 216, 255, 0.3);
+  animation: rc-frost 1.6s ease-out 3;
+}
+.frost-btn svg {
+  transition: transform 500ms ease;
+}
+.frost-btn:hover svg {
+  transform: rotate(60deg);
+}
+
+/* Snowfall and string lights (src/components/shell/Christmas.tsx). */
+.xmas-snow {
+  position: fixed;
+  inset: 0;
+  z-index: 44;
+  pointer-events: none;
+  overflow: hidden;
+}
+.xmas-flake {
+  position: absolute;
+  top: -14px;
+  left: var(--l);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 42%, rgba(255, 255, 255, 0) 72%);
+  opacity: var(--o);
+  animation: rc-snow var(--d) linear var(--dl) infinite;
+}
+.xmas-garland {
+  display: flex;
+  height: 36px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.xmas-bulb-unit {
+  position: relative;
+  flex: none;
+  width: 60px;
+  height: 36px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='36' viewBox='0 0 60 36'%3E%3Cpath d='M0 2Q30 30 60 2' fill='none' stroke='%233f8f5f' stroke-width='1.6'/%3E%3C/svg%3E") 0 0 / 60px 36px no-repeat;
+}
+.xmas-bulb-unit::after {
+  content: "";
+  position: absolute;
+  left: 25px;
+  top: 14px;
+  width: 10px;
+  height: 14px;
+  border-radius: 50% 50% 45% 45%;
+  background: var(--bulb);
+  box-shadow: 0 0 10px 2px var(--bulb);
+  animation: rc-twinkle 2.6s ease-in-out calc(var(--i) * -0.41s) infinite;
+}
+.xmas-bulb-unit:nth-child(4n + 1) { --bulb: #ff5a6a; }
+.xmas-bulb-unit:nth-child(4n + 2) { --bulb: #5ee08a; }
+.xmas-bulb-unit:nth-child(4n + 3) { --bulb: #ffd56a; }
+.xmas-bulb-unit:nth-child(4n + 4) { --bulb: #8fd8ff; }
+/* "Pause the snow and lights": everything festive holds still. */
+.xmas-still .xmas-flake,
+.xmas-still .xmas-bulb-unit::after,
+.xmas-still .xmas-hero-flake {
+  animation-play-state: paused;
+}
+
 @theme inline {
   --color-bg: var(--bg);
   --color-panel: var(--panel);
@@ -312,6 +486,8 @@
 
   --animate-drip: rc-drip 3.4s ease-in infinite;
   --animate-drip-slow: rc-drip 4.2s ease-in infinite;
+  --animate-flake: rc-flake 3.6s ease-in infinite;
+  --animate-flake-slow: rc-flake 4.6s ease-in infinite;
   --animate-rise: rc-rise 200ms ease both;
   --animate-slide-in: rc-slide 200ms ease;
 }
@@ -324,6 +500,26 @@
   18% { opacity: 1; }
   70% { opacity: 1; }
   100% { transform: translateY(16px); opacity: 0; }
+}
+@keyframes rc-frost {
+  0% { box-shadow: 0 0 0 0 rgba(143, 216, 255, 0.6), 0 0 9px rgba(143, 216, 255, 0.3); }
+  70% { box-shadow: 0 0 0 10px rgba(143, 216, 255, 0), 0 0 16px rgba(143, 216, 255, 0.65); }
+  100% { box-shadow: 0 0 0 0 rgba(143, 216, 255, 0), 0 0 9px rgba(143, 216, 255, 0.3); }
+}
+@keyframes rc-snow {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(var(--x), 55vh, 0); }
+  100% { transform: translate3d(calc(var(--x) * -0.5), 108vh, 0); }
+}
+@keyframes rc-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+@keyframes rc-flake {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  18% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translateY(17px) rotate(160deg); opacity: 0; }
 }
 @keyframes rc-rise {
   from { transform: translateY(10px); opacity: 0; }
@@ -920,6 +1116,9 @@
 /* Motion preferences — the prototype ignored this; production should not.      */
 /* --------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
+  .xmas-snow {
+    display: none;
+  }
   *,
   *::before,
   *::after {

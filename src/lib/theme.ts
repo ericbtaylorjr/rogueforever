@@ -7,10 +7,10 @@ import { hexA } from './color';
  * `intensity` swaps the (dark) surface palette, `accent` recomputes the accent tint
  * and glow. Both are build config (src/config.ts), not user controls.
  */
-export function themeVars(theme: 'light' | 'dark' = 'dark'): CSSProperties {
-  // `intensity` / `accent` are dark-theme knobs. The light theme's palette lives in
+export function themeVars(theme: 'light' | 'dark' | 'christmas' = 'dark'): CSSProperties {
+  // `intensity` / `accent` are dark-theme knobs. The light and holiday palettes live in
   // styles/index.css and must not be overridden by inline variables.
-  if (theme === 'light') return {};
+  if (theme !== 'dark') return {};
   const t = themes[config.intensity];
   const accent = config.accent;
 

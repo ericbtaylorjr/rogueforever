@@ -1,18 +1,19 @@
 /*
  * Runs before first paint (inlined into index.html at build and allowed by its CSP hash) so the page never
  * flashes the wrong theme. Order of precedence: a choice the visitor made with the toggle,
- * then the device setting, then dark. Keep the logic in sync with src/state/ThemeProvider.tsx.
+ * then the device setting, then dark. The holiday theme is only ever a stored choice.
+ * Keep the logic in sync with src/state/ThemeProvider.tsx.
  */
 (function () {
   var theme = 'dark';
   try {
     var stored = localStorage.getItem('rc:theme');
-    if (stored === 'light' || stored === 'dark') theme = stored;
+    if (stored === 'light' || stored === 'dark' || stored === 'christmas') theme = stored;
     else if (window.matchMedia('(prefers-color-scheme: light)').matches) theme = 'light';
   } catch (e) {
     /* storage or matchMedia unavailable: stay dark */
   }
   document.documentElement.setAttribute('data-theme', theme);
   var meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', theme === 'light' ? '#EBDEB6' : '#0B0B0D');
+  if (meta) meta.setAttribute('content', theme === 'light' ? '#EBDEB6' : theme === 'christmas' ? '#0B1F15' : '#0B0B0D');
 })();

@@ -1,11 +1,17 @@
 import { shell } from '../../content/copy';
 import { useHandbook } from '../../state/HandbookProvider';
+import { useTheme } from '../../state/ThemeProvider';
 import { RogueMark } from '../ui/RogueMark';
+import { SantaHat } from './Christmas';
 
 export function Wordmark({ size = 30 }: { size?: number }) {
+  const { theme } = useTheme();
   return (
     <div className="flex items-center gap-[10px]">
-      <RogueMark size={size} />
+      <span className="relative inline-flex shrink-0">
+        <RogueMark size={size} />
+        {theme === 'christmas' && <SantaHat size={Math.round(size * 0.62)} />}
+      </span>
       <div>
         <div
           className="text-ink"

@@ -559,6 +559,9 @@ export const shell = {
 export const theme = {
   toLight: 'Switch to light mode',
   toDark: 'Switch to dark mode',
+  toChristmas: 'Switch to the holiday theme',
+  pauseSnow: 'Pause the snow and lights',
+  playSnow: 'Play the snow and lights',
 } as const;
 
 export const credits = {
@@ -666,7 +669,7 @@ export const privacy = {
     {
       heading: 'What stays in your browser',
       body: [
-        "Three small settings are saved in your browser's local storage: your spec, build and sweaty preference (rc:prefs), light or dark theme (rc:theme), and your cookie choice with the date you made it (rc:consent). They never leave your device, and clearing your site data removes them.",
+        "A few small settings are saved in your browser's local storage: your spec, build and sweaty preference (rc:prefs), your theme (rc:theme), whether you paused the holiday theme's snow (rc:snow), and your cookie choice with the date you made it (rc:consent). They never leave your device, and clearing your site data removes them.",
         "So repeat visits load faster, your browser also keeps a copy of the Handbook's own files (its page, scripts, styles, fonts and images) in its cache storage. They're the same files every visitor downloads, they hold nothing about you, and clearing your site data removes them too.",
         "Search runs in your browser. Unless you've allowed analytics (below), nothing you type into it leaves your device.",
       ],

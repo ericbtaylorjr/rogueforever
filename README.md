@@ -302,7 +302,20 @@ npm run audit:security                                # CSP, dependencies, patte
 
 ## Theming
 
-Dark is the default; light is a papyrus "bounty letter". Which one you get: a choice made
+**Holiday theme (`data-theme="christmas"`).** A dark pine-green theme with candy-cane red, snowfall,
+string lights, a Santa hat on the logo, holly after section titles and snowflakes instead of the hero's
+poison drips. It is an easter egg: never applied automatically, only chosen. The toggle cycles
+dark → holiday → light → dark, and its icon is the destination, so in dark mode it is a snowflake that
+pulses frost three times (a 5 second cap, WCAG 2.2.2) and then rests with a faint glow. A light-mode
+visitor sees the moon, so they reach it by going dark first. Palette and decorations live in
+`styles/index.css` (every text token is ≥4.5:1 on all three greens, checked with the maths in
+`lib/tone.ts`; `tone()` uses `CHRISTMAS_SURFACES`); the snow, lights, hat and flake are in
+`components/shell/Christmas.tsx`. The decorations are `aria-hidden` and `pointer-events: none`, reduced
+motion removes the snow, and a round button bottom-right pauses the snow and lights (`rc:snow`).
+To take it out, delete `Christmas.tsx`, the `christmas` block in `styles/index.css` and the `christmas`
+entries in `ThemeProvider.tsx`, `theme-init.js`, `lib/theme.ts` and `ThemeToggle.tsx`.
+
+Dark is the default; light is a papyrus "bounty letter"; there is also a holiday theme (below). Which one you get: a choice made
 with the sidebar toggle (`localStorage['rc:theme']`) → the device's `prefers-color-scheme`
 (followed live until the toggle is used) → dark. `src/theme-init.js` (inlined into `index.html` at build, allowed by its CSP hash) resolves this before
 first paint (no flash) and `src/state/ThemeProvider.tsx` owns it afterwards; both write
