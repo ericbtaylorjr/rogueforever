@@ -195,7 +195,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const [consumeFilter, setConsumeFilterState] = useState('All');
   const [guideFilter, setGuideFilterState] = useState('All');
   const [sweaty, setSweaty] = useState(initial.sweaty);
-  const [openRaid, setOpenRaid] = useState(0);
+  const [openRaid, setOpenRaid] = useState(-1);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(sectionIds[0]);

@@ -159,14 +159,37 @@ export interface RaidPhase {
   lines: string[];
 }
 
+/** An item named in an encounter's drops or gear list. Icons and tooltips come from `npm run icons` (`item:<id>`). */
+export interface EncounterItem {
+  itemId: number;
+  name: string;
+  quality: ItemQuality;
+  /** Why it matters here, shown under the name. */
+  note?: string;
+}
+
+/** One boss fight. Empty sections render a "coming soon" line, so an encounter can be filled in piece by piece. */
+export interface Encounter {
+  name: string;
+  /** A quick strategy: one short paragraph per entry. */
+  strategy: string[];
+  /** Rogue tips for better performance on this fight. */
+  tips: string[];
+  /** Notable drops from this encounter. */
+  drops: EncounterItem[];
+  /** Gear worth considering for this fight (resistance, immunity, utility). */
+  gear: EncounterItem[];
+}
+
 export interface Raid {
   name: string;
   abbr: string;
   hue: string;
   tag: string;
   summary: string;
-  prep: string;
   phases: RaidPhase[];
+  /** In-game order. Each expands on its own inside the raid. */
+  encounters: Encounter[];
 }
 
 export interface Tool {

@@ -489,27 +489,98 @@
       "hue": "#5C8A3A",
       "tag": "Unlocks Dec 9th, 2026",
       "summary": "20-player, 13-boss raid on the summit of Mount Hyjal near Nordrassil. After the opening fight the raid branches into multiple paths.",
-      "prep": "Rogue strategies and tips will be updated as soon as this raid's content becomes available for testing.",
-      "phases": [
+      "phases": [],
+      "encounters": [
         {
-          "n": "What Blizzard has confirmed",
-          "lines": [
-            "Level 60, 20 players, 13 bosses. Unlocks December 9th, 2026, five weeks after the November 4th launch.",
-            "Located on the summit of Mount Hyjal, near the World Tree Nordrassil.",
-            "Opens with a fight against an ancient guardian. After that, groups choose between multiple paths across the mountain, through ruins above and below ground, before the final encounters open up.",
-            "Blizzard's own words: \"Mount Hyjal invites you to explore the aftermath of Archimonde's defeat, journey through Darkwhisper Gorge, and help shape the future of a recovering land.\"",
-            "Ships with new tier sets and a legendary reward, shared across the Hyjal Summit and Barrow Deeps raid wave.",
-            "Resets weekly, which is the current plan for all three raids.",
-            "No attunement. Blizzard's raid overview gates only Onyxia's Lair, and the devs said on the Forever podcast that the new raids won't need a quest chain."
-          ]
+          "name": "Bandalar",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
         },
         {
-          "n": "Not yet published",
-          "lines": [
-            "Boss names. Blizzard has given the count but not the lineup.",
-            "Loot tables and set bonuses.",
-            "Any Rogue-specific mechanics or class calls."
-          ]
+          "name": "Ancient of Decay",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Time-Lost Battalion",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Sylvestris Dusksong",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Old Gloomlurker",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Gharalis the Abyssal",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Kathris the Haunted",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Anara Chillwind",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Elder Minderel",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Tracker Stillwind",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Council of Thorns",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Nythus the Dreambound",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "The Wild King",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
         }
       ]
     },
@@ -519,26 +590,63 @@
       "hue": "#4A2E6E",
       "tag": "Unlocks Dec 9th, 2026",
       "summary": "10-player, 8-boss raid in the prison beneath Kalimdor that held Illidan for 10,000 years. Entrances in Mount Hyjal, Winterspring and Blackmaw Hold.",
-      "prep": "Rogue strategies and tips will be updated as soon as this raid's content becomes available for testing.",
-      "phases": [
+      "phases": [],
+      "encounters": [
         {
-          "n": "What Blizzard has confirmed",
-          "lines": [
-            "Level 60, 10 players, eight bosses. Unlocks December 9th, 2026, alongside Hyjal Summit.",
-            "The prison hidden beneath Kalimdor that held Illidan Stormrage for 10,000 years, now opened up. Raiders go in to learn what became of those left behind and how the wardens plan to contain the danger below.",
-            "Several entrances, connected through Mount Hyjal, Winterspring and Blackmaw Hold.",
-            "Ships with new tier sets and a legendary reward, shared across the Hyjal Summit and Barrow Deeps raid wave.",
-            "Resets weekly, which is the current plan for all three raids.",
-            "No attunement. Blizzard's raid overview gates only Onyxia's Lair, and the devs said on the Forever podcast that the new raids won't need a quest chain."
-          ]
+          "name": "Chillhowl",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
         },
         {
-          "n": "Not yet published",
-          "lines": [
-            "Boss names. Blizzard has given the count but not the lineup.",
-            "Loot tables and set bonuses.",
-            "Any Rogue-specific mechanics or class calls."
-          ]
+          "name": "Elder Tangleclaw",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Khalith the Dreadspinner",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Well of Sorrow",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Amethrax",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Del'lynar Songwood",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Ravus and Darlissa",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
+        },
+        {
+          "name": "Sonya Darkhallow",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
         }
       ]
     },
@@ -548,18 +656,7 @@
       "hue": "#8E3A22",
       "tag": "Unlocks Dec 9th, 2026",
       "summary": "Classic's 40-player raid returns with its attunement intact. Every raider needs the Drakefire Amulet in their bags to enter.",
-      "prep": "Rogue strategies and tips will be updated as soon as this raid's content becomes available for testing.",
       "phases": [
-        {
-          "n": "What Blizzard has confirmed",
-          "lines": [
-            "Level 60, 40 players, in Dustwallow Marsh. Unlocks December 9th, 2026.",
-            "Still a three-phase fight with \"powerful fire attacks that can punish an unprepared raid.\" Blizzard says to build fire resistance before going in and be ready to reposition as the fight shifts.",
-            "Each raider needs the Drakefire Amulet to enter. Carrying it in your bags is enough; you don't have to equip it.",
-            "The attunement is per character. The devs said on the Forever podcast it won't be account-wide, at least at launch.",
-            "Resets weekly, which is the current plan for all three raids."
-          ]
-        },
         {
           "n": "Attunement: Alliance",
           "lines": [
@@ -580,14 +677,15 @@
             "Four quests starting with \"The Test of Skulls\": Scryer, Somnus, Chronalis and Axtroz. \"Ascension...\" gives you the Dull Drakefire Amulet to take back to Rexxar.",
             "\"Blood of the Black Dragon Champion\": kill General Drakkisath in Upper Blackrock Spire, then return to Rexxar for the Drakefire Amulet."
           ]
-        },
+        }
+      ],
+      "encounters": [
         {
-          "n": "Not yet published",
-          "lines": [
-            "Any changes to Onyxia's loot or the fine details of the encounter.",
-            "Whether Forever's Hit/Crit and Weapon Skill changes alter the fight.",
-            "Rogue-specific notes for the Forever version: class call, tail positioning, whelp phase."
-          ]
+          "name": "Onyxia",
+          "strategy": [],
+          "tips": [],
+          "drops": [],
+          "gear": []
         }
       ]
     }

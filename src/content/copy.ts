@@ -391,8 +391,15 @@ export const exposeArmor = {
 
 export const raidsCopy = {
   intro:
-    "The three raids that unlock December 9th, 2026. Blizzard has published their sizes, locations, boss counts and the Onyxia attunement. Boss names and Rogue notes aren't out yet, so this section only tracks what Blizzard has said.",
-  prepLabel: 'Status:',
+    "The three raids that unlock December 9th, 2026. Each lists its encounters. Open one for a quick strategy, Rogue tips, notable drops and gear to consider as they're added; sections that aren't written yet say so.",
+  /** Rendered with <Tip>, which adds the "Tip:" label. */
+  tip: "Each raid's encounters will be filled in after the raid is released, once the guidance has been tested and verified.",
+  encounters: 'Encounters',
+  strategy: 'Strategy',
+  tips: 'Rogue tips',
+  drops: 'Notable drops',
+  gear: 'Gear to consider',
+  soon: 'Coming soon.',
 } as const;
 
 export const pvpCopy = {
