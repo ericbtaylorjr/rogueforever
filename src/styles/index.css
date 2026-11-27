@@ -57,6 +57,35 @@
   src: url("../assets/fonts/plex-mono-600-latin.woff2") format("woff2");
 }
 
+/* Metric-matched fallbacks: until a web font arrives (or if it is slow), text is set in a local
+   face resized to the web font's average width and vertical metrics, so the swap doesn't reflow
+   the page (Cloudflare's CLS rows were all wrapped text). Numbers come from the font files
+   against Arial / Times New Roman / Courier New (capsize's xWidthAvg method). */
+@font-face {
+  font-family: "Source Sans 3 Fallback";
+  src: local("Arial"), local("Liberation Sans"), local("Arimo");
+  size-adjust: 89.28%;
+  ascent-override: 114.7%;
+  descent-override: 44.8%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Literata Fallback";
+  src: local("Times New Roman"), local("Liberation Serif"), local("Tinos");
+  size-adjust: 118.4%;
+  ascent-override: 99.41%;
+  descent-override: 26.01%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Fallback";
+  src: local("Courier New"), local("Liberation Mono"), local("Cousine");
+  size-adjust: 99.98%;
+  ascent-override: 102.52%;
+  descent-override: 27.5%;
+  line-gap-override: 0%;
+}
+
 /* ---------------------------------------------------------------------------
    Runtime tokens.
    These are plain CSS variables so the `intensity` / `accent` build config can
@@ -265,9 +294,9 @@
   /* Archivo is the brand only (hero title, wordmark, raid badges). Headings are the Literata
      book serif; body is Source Sans 3, built for reading on screens. */
   --font-brand: "Archivo", system-ui, sans-serif;
-  --font-display: "Literata", Georgia, serif;
-  --font-sans: "Source Sans 3", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Literata", "Literata Fallback", Georgia, serif;
+  --font-sans: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "IBM Plex Mono Fallback", ui-monospace, monospace;
 
   /* Design breakpoints. Named for what they do, not for t-shirt sizes. `sm` (phones end) is
      Tailwind's own, restated in px: breakpoints only sort into the right order when they

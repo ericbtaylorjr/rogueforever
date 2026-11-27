@@ -194,6 +194,21 @@ The CLS debug rows (`#raid` 0.367, `#specs` 0.105, `#overview` rule 0.198, a `di
 throttled network and CPU, on `/`, `#raid`, `#specs`, `#talents`, `#rotation` and `#poisons` links;
 check them again in Cloudflare after the next deploy.
 
+27 November 2026 (Cloudflare, 26–27 November, no new Lighthouse run): LCP 97% good (P75 844ms,
+P99 5.6s; the slow Debug rows were single samples of gear icons, 5.9s and 8.1s, and the talent
+background, 2.5s: a slow-network tail, not a code path), INP 97% good (P75: 8ms input delay, 14ms
+processing, 37ms presentation), CLS 100% good. The slowest taps were again the mobile bar's
+menu/search buttons (592ms, 3 samples; covered in the 4 November note, the cost is paint on a slow
+phone) and the page container / body (488–496ms, 2 samples). The CLS rows (a Races/Professions-style
+ruled list row 0.397, `#stats` 0.13, the Expose Armor card 0.152, one sample each) are all wrapped
+text, which is what moves when a web font replaces its fallback, so Source Sans 3, Literata and IBM
+Plex Mono now have metric-matched local fallbacks (`size-adjust` and the ascent/descent overrides
+in `styles/index.css`, measured from the font files against Arial, Times New Roman and Courier New).
+Not verified in the lab (it never reproduced the shift); check the CLS rows in Cloudflare after the
+next deploy. Not done, on purpose: eager gear icons (the lazy icons are only the LCP when the
+visitor lands on `#gear`, and eager would load every icon on every visit) and preloading Literata
+(56 KB on the critical path for a heading font).
+
 Earlier, 1 November 2026: Lighthouse mobile 95 (LCP 2.9s, TBT 50ms); Cloudflare FCP 97% good,
 INP 98% good, CLS 99% good. Their Debug View named two slow interactions (232ms and 272ms, mostly presentation delay):
 the Meta breakdown's **Leveling** tab (`#tab-leveling`) and a **build row** in the ranking
