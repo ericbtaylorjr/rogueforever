@@ -719,6 +719,11 @@
     "icon": "inv_weapon_shortblade_05",
     "kind": "item"
   },
+  "item:22384": {
+    "id": 22384,
+    "icon": "inv_hammer_08",
+    "kind": "item"
+  },
   "item:1728": {
     "id": 1728,
     "icon": "inv_sword_22",

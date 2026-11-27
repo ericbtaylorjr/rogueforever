@@ -324,12 +324,14 @@ const agilityWeapon = { enchant: '+15 Agility', enchantSpellId: 23794 };
 export const weapons = {
   felstriker: { itemId: 12590, name: 'Felstriker', quality: 'epic', source: 'Warchief Rend Blackhand (Blackrock Spire)' },
   distractingDagger: { itemId: 18392, name: 'Distracting Dagger', quality: 'rare', source: 'Prince Tortheldrin (Dire Maul)' },
+  persuader: { itemId: 22384, name: 'Persuader', quality: 'epic', source: 'Blacksmithing' },
   teebus: { itemId: 1728, name: "Teebu's Blazing Longsword", quality: 'epic', source: 'BoE Drop' },
   flurryAxe: { itemId: 871, name: 'Flurry Axe', quality: 'epic', source: 'BoE Drop' },
 } as const satisfies Record<string, Piece>;
 
 /** Main hand alternatives for the Combat Sinister Strike and Venom builds. Sword of Zeal has no source in the database; it's a BoE drop. */
 export const combatMainHandAlternatives: GearAlternative[] = [
+  weapons.teebus,
   { itemId: 6622, name: 'Sword of Zeal', quality: 'rare', source: 'BoE Drop' },
   { itemId: 11684, name: 'Ironfoe', quality: 'epic', source: 'Emperor Dagran Thaurissan (Blackrock Depths)' },
   { itemId: 12940, name: "Dal'Rend's Sacred Charge", quality: 'rare', source: 'Warchief Rend Blackhand (Blackrock Spire)' },
