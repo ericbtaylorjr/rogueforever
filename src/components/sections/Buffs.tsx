@@ -1,10 +1,8 @@
 import { buffGroups } from '../../content/content';
-import { buffsCopy as copy } from '../../content/copy';
 import { useHandbook } from '../../state/HandbookProvider';
 import { Droplet } from '../ui/Droplet';
 import { GameIcon, WowheadLink, wowheadRefFor } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
-import { Tip } from '../ui/Tip';
 import { useTooltip } from '../ui/Tooltip';
 
 export function Buffs() {
@@ -15,9 +13,7 @@ export function Buffs() {
     <section id="buffs" aria-label="Buffs and debuffs">
       <SectionHeading id="buffs" scope="all" />
 
-      <Tip>{copy.status.text}</Tip>
-
-      <div className="mt-[18px] grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,248px),1fr))]">
+      <div className="grid gap-[12px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,248px),1fr))]">
         {buffGroups.map((g) => {
           const items = g.items.filter((i) => sweaty || !i.s);
           return (

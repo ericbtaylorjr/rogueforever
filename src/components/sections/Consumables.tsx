@@ -5,7 +5,6 @@ import { Droplet } from '../ui/Droplet';
 import { FilterPill } from '../ui/Pill';
 import { GameIcon, WowheadLink, wowheadRefFor } from '../ui/GameIcon';
 import { SectionHeading } from '../ui/SectionHeading';
-import { Tip } from '../ui/Tip';
 import { useTooltip } from '../ui/Tooltip';
 
 export function Consumables() {
@@ -28,10 +27,6 @@ export function Consumables() {
         <span className="font-semibold text-sweat">{copy.sweatyNote.strong}</span>
         {copy.sweatyNote.after}
       </p>
-
-      <div className="mt-[16px]">
-        <Tip>{copy.status.text}</Tip>
-      </div>
 
       <div
         role="group"

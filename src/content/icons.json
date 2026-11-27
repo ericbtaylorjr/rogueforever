@@ -1,22 +1,22 @@
 {
+  "Major Frenzy Potion": {
+    "id": 250943,
+    "icon": "inv_potione_6",
+    "kind": "item"
+  },
+  "Thistle Tea": {
+    "id": 7676,
+    "icon": "inv_drink_milk_05",
+    "kind": "item"
+  },
+  "Flask of Natural Precision": {
+    "id": 274275,
+    "icon": "inv_potionc_3",
+    "kind": "item"
+  },
   "Elixir of the Mongoose": {
     "id": 13452,
     "icon": "inv_potion_32",
-    "kind": "item"
-  },
-  "Elixir of the Grizzly": {
-    "id": 250351,
-    "icon": "inv_potion_160",
-    "kind": "item"
-  },
-  "Elixir of Greater Strength": {
-    "id": 9206,
-    "icon": "inv_potion_59",
-    "kind": "item"
-  },
-  "Elixir of Fortitude": {
-    "id": 250334,
-    "icon": "inv_potion_44",
     "kind": "item"
   },
   "Elixir of Greater Fortitude": {
@@ -24,94 +24,9 @@
     "icon": "inv_potion_45",
     "kind": "item"
   },
-  "Elixir of Greater Defense": {
-    "id": 13445,
-    "icon": "inv_potion_66",
-    "kind": "item"
-  },
-  "Major Frenzy Potion": {
-    "id": 250943,
-    "icon": "inv_potione_6",
-    "kind": "item"
-  },
-  "Potion of Beast Slaying": {
-    "id": 250955,
-    "icon": "inv_alchemy_80_potion02yellow",
-    "kind": "item"
-  },
-  "Juju Might": {
-    "id": 12460,
-    "icon": "inv_misc_monsterscales_07",
-    "kind": "item"
-  },
-  "Juju Power": {
-    "id": 12451,
-    "icon": "inv_misc_monsterscales_11",
-    "kind": "item"
-  },
-  "Juju Flurry": {
-    "id": 12450,
-    "icon": "inv_misc_monsterscales_17",
-    "kind": "item"
-  },
-  "Juju Ember": {
-    "id": 12455,
-    "icon": "inv_misc_monsterscales_15",
-    "kind": "item"
-  },
-  "Winterfall Firewater": {
-    "id": 12820,
-    "icon": "inv_potion_92",
-    "kind": "item"
-  },
-  "Distilled Firewater": {
-    "id": 246948,
-    "icon": "inv_potion_92",
-    "kind": "item"
-  },
-  "Ground Scorpok Assay": {
-    "id": 8412,
-    "icon": "inv_misc_dust_02",
-    "kind": "item"
-  },
-  "R.O.I.D.S.": {
-    "id": 8410,
-    "icon": "inv_stone_15",
-    "kind": "item"
-  },
-  "Dense Sharpening Stone": {
-    "id": 12404,
-    "icon": "inv_stone_sharpeningstone_05",
-    "kind": "item"
-  },
-  "Dense Weightstone": {
-    "id": 12643,
-    "icon": "inv_stone_weightstone_05",
-    "kind": "item"
-  },
-  "Grilled Squid": {
-    "id": 13928,
-    "icon": "inv_misc_fish_13",
-    "kind": "item"
-  },
-  "Smoked Desert Dumplings": {
-    "id": 20452,
-    "icon": "inv_misc_food_64",
-    "kind": "item"
-  },
-  "Filet o' Flank": {
-    "id": 238638,
-    "icon": "inv_misc_food_88_ravagernuggets",
-    "kind": "item"
-  },
-  "Prowler Steak": {
-    "id": 238637,
-    "icon": "inv_misc_food_84_roastclefthoof",
-    "kind": "item"
-  },
-  "Mightfish Steak": {
-    "id": 13934,
-    "icon": "inv_misc_food_47",
+  "Swiftstrike Steak": {
+    "id": 250072,
+    "icon": "inv_misc_food_49",
     "kind": "item"
   },
   "Dragonbreath Chili": {
@@ -124,39 +39,79 @@
     "icon": "inv_drink_04",
     "kind": "item"
   },
-  "Flask of the Titans": {
-    "id": 13510,
-    "icon": "inv_potion_62",
+  "Goblin Sapper Charge": {
+    "id": 10646,
+    "icon": "spell_fire_selfdestruct",
     "kind": "item"
   },
-  "Flask of Natural Aggression": {
-    "id": 274274,
-    "icon": "inv_potionc_1",
+  "Dense Sharpening Stone": {
+    "id": 12404,
+    "icon": "inv_stone_sharpeningstone_05",
     "kind": "item"
   },
-  "Flask of Natural Swiftness": {
-    "id": 274276,
-    "icon": "inv_potionc_4",
+  "Dense Weightstone": {
+    "id": 12643,
+    "icon": "inv_stone_weightstone_05",
     "kind": "item"
   },
-  "Flask of Natural Accuracy": {
-    "id": 274273,
-    "icon": "inv_potionc_5",
+  "Instant Poison VI": {
+    "id": 8928,
+    "icon": "ability_poisons",
     "kind": "item"
   },
-  "Flask of Natural Precision": {
-    "id": 274275,
-    "icon": "inv_potionc_3",
+  "Deadly Poison IV": {
+    "id": 8985,
+    "icon": "ability_rogue_dualweild",
     "kind": "item"
   },
-  "Thistle Tea": {
-    "id": 7676,
-    "icon": "inv_drink_milk_05",
+  "Ground Scorpok Assay": {
+    "id": 8412,
+    "icon": "inv_misc_dust_02",
     "kind": "item"
   },
-  "Free Action Potion": {
-    "id": 5634,
-    "icon": "inv_potion_04",
+  "R.O.I.D.S.": {
+    "id": 8410,
+    "icon": "inv_stone_15",
+    "kind": "item"
+  },
+  "Juju Might": {
+    "id": 12460,
+    "icon": "inv_misc_monsterscales_07",
+    "kind": "item"
+  },
+  "Juju Power": {
+    "id": 12451,
+    "icon": "inv_misc_monsterscales_11",
+    "kind": "item"
+  },
+  "Bogling Root": {
+    "id": 5206,
+    "icon": "inv_misc_herb_07",
+    "kind": "item"
+  },
+  "Mind-numbing Poison III": {
+    "id": 9186,
+    "icon": "spell_nature_nullifydisease",
+    "kind": "item"
+  },
+  "Wound Poison III": {
+    "id": 10921,
+    "icon": "inv_misc_herb_16",
+    "kind": "item"
+  },
+  "Crippling Poison II": {
+    "id": 3776,
+    "icon": "ability_poisonsting",
+    "kind": "item"
+  },
+  "Elixir of Greater Defense": {
+    "id": 13445,
+    "icon": "inv_potion_66",
+    "kind": "item"
+  },
+  "Flash Powder": {
+    "id": 5140,
+    "icon": "inv_misc_powder_purple",
     "kind": "item"
   },
   "Living Action Potion": {
@@ -169,9 +124,39 @@
     "icon": "inv_potion_62",
     "kind": "item"
   },
-  "Major Healing Potion": {
-    "id": 13446,
-    "icon": "inv_potion_54",
+  "Greater Shadow Protection Potion": {
+    "id": 13459,
+    "icon": "inv_potion_23",
+    "kind": "item"
+  },
+  "Greater Nature Protection Potion": {
+    "id": 13458,
+    "icon": "inv_potion_22",
+    "kind": "item"
+  },
+  "Greater Frost Protection Potion": {
+    "id": 13456,
+    "icon": "inv_potion_20",
+    "kind": "item"
+  },
+  "Greater Fire Protection Potion": {
+    "id": 13457,
+    "icon": "inv_potion_24",
+    "kind": "item"
+  },
+  "Greater Arcane Protection Potion": {
+    "id": 13461,
+    "icon": "inv_potion_83",
+    "kind": "item"
+  },
+  "Juju Flurry": {
+    "id": 12450,
+    "icon": "inv_misc_monsterscales_17",
+    "kind": "item"
+  },
+  "Juju Ember": {
+    "id": 12455,
+    "icon": "inv_misc_monsterscales_15",
     "kind": "item"
   },
   "Restorative Potion": {
@@ -182,51 +167,6 @@
   "Purification Potion": {
     "id": 13462,
     "icon": "inv_potion_31",
-    "kind": "item"
-  },
-  "Magic Resistance Potion": {
-    "id": 9036,
-    "icon": "inv_potion_120",
-    "kind": "item"
-  },
-  "Greater Fire Protection Potion": {
-    "id": 13457,
-    "icon": "inv_potion_24",
-    "kind": "item"
-  },
-  "Greater Nature Protection Potion": {
-    "id": 13458,
-    "icon": "inv_potion_22",
-    "kind": "item"
-  },
-  "Greater Shadow Protection Potion": {
-    "id": 13459,
-    "icon": "inv_potion_23",
-    "kind": "item"
-  },
-  "Greater Arcane Protection Potion": {
-    "id": 13461,
-    "icon": "inv_potion_83",
-    "kind": "item"
-  },
-  "Greater Frost Protection Potion": {
-    "id": 13456,
-    "icon": "inv_potion_20",
-    "kind": "item"
-  },
-  "Goblin Sapper Charge": {
-    "id": 10646,
-    "icon": "spell_fire_selfdestruct",
-    "kind": "item"
-  },
-  "Dense Dynamite": {
-    "id": 18641,
-    "icon": "inv_misc_bomb_06",
-    "kind": "item"
-  },
-  "Thorium Grenade": {
-    "id": 15993,
-    "icon": "inv_misc_bomb_08",
     "kind": "item"
   },
   "Instant Poison": {
@@ -252,16 +192,6 @@
   "Mind-numbing Poison": {
     "id": 9186,
     "icon": "spell_nature_nullifydisease",
-    "kind": "item"
-  },
-  "Flash Powder": {
-    "id": 5140,
-    "icon": "inv_misc_powder_purple",
-    "kind": "item"
-  },
-  "Whipper Root Tuber": {
-    "id": 11951,
-    "icon": "inv_misc_food_55",
     "kind": "item"
   },
   "Blessing of Kings": {

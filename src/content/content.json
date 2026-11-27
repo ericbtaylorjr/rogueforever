@@ -167,29 +167,111 @@
   ],
   "consumables": [
     {
+      "n": "Major Frenzy Potion",
+      "k": "Potion",
+      "note": "+80 attack power for 30 seconds. Crafted and cheap, so use it on cooldown. Greater and Superior Frenzy are the weaker versions."
+    },
+    {
+      "n": "Thistle Tea",
+      "k": "Potion",
+      "note": "100 energy instantly. Open with it, use it again on cooldown, never save it for a moment that never comes."
+    },
+    {
+      "n": "Flask of Natural Precision",
+      "k": "Flask",
+      "note": "+60 Stamina, and 5% fewer parries and dodges in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
+    },
+    {
       "n": "Elixir of the Mongoose",
       "k": "Elixir",
       "note": "Agility and crit. The default battle elixir for a raiding Rogue."
     },
     {
-      "n": "Elixir of the Grizzly",
-      "k": "Elixir",
-      "note": "Strength and +2% crit for 30 minutes. Crafted. The Strength option when you want the crit too."
-    },
-    {
-      "n": "Elixir of Greater Strength",
-      "k": "Elixir",
-      "note": "Strength for a full hour. Elixir of the Grizzly has the same Strength plus 2% crit, for 30 minutes."
-    },
-    {
-      "n": "Elixir of Fortitude",
-      "k": "Elixir",
-      "note": "+200 health for 30 minutes. Cheap insurance against one mistake."
-    },
-    {
       "n": "Elixir of Greater Fortitude",
       "k": "Elixir",
       "note": "+400 health for 30 minutes. The level 55 step up from Fortitude."
+    },
+    {
+      "n": "Swiftstrike Steak",
+      "k": "Food",
+      "note": "Well Fed: +20 Agility for 15 minutes, and 5% more experience from kills. Level 45 food."
+    },
+    {
+      "n": "Dragonbreath Chili",
+      "k": "Food",
+      "note": "Proc fire damage on melee hits. Not worth a bag slot unless you are chasing the last fraction of a percent."
+    },
+    {
+      "n": "Rumsey Rum Black Label",
+      "s": true,
+      "k": "Food",
+      "note": "Stamina drink. Free, stacks with food, no reason to skip it."
+    },
+    {
+      "n": "Goblin Sapper Charge",
+      "k": "Engineering",
+      "note": "450 to 750 Fire damage to everything nearby, and 375 to 625 to you. 5 minute cooldown. Requires Engineering (205)."
+    },
+    {
+      "n": "Dense Sharpening Stone",
+      "k": "Stone",
+      "note": "+8 damage on a sharp weapon (dagger, sword, axe)."
+    },
+    {
+      "n": "Dense Weightstone",
+      "k": "Stone",
+      "note": "+8 damage on a blunt weapon (mace, fist weapon). Forever lets Combat use any weapon type, so this is the mace version of Dense Sharpening Stone."
+    },
+    {
+      "n": "Instant Poison VI",
+      "k": "Poison",
+      "note": "20% chance per strike to deal 76 to 100 Nature damage instantly. Level 60."
+    },
+    {
+      "n": "Deadly Poison IV",
+      "k": "Poison",
+      "note": "Stacking damage over time, 72 Nature damage over 12 seconds per stack, up to 5. The main damage poison at level 54."
+    },
+    {
+      "n": "Ground Scorpok Assay",
+      "k": "Misc",
+      "note": "Agility from Blasted Lands. Stacks with elixirs."
+    },
+    {
+      "n": "R.O.I.D.S.",
+      "k": "Misc",
+      "note": "Strength from Blasted Lands. Backup for Juju Power."
+    },
+    {
+      "n": "Juju Might",
+      "k": "Zandalar",
+      "note": "Attack power. Stacks with your elixirs, which is the whole reason to farm it."
+    },
+    {
+      "n": "Juju Power",
+      "k": "Zandalar",
+      "note": "Strength. Same deal — extra stat outside the elixir slots."
+    },
+    {
+      "n": "Bogling Root",
+      "s": true,
+      "k": "Misc",
+      "note": "+1 physical damage for 10 minutes. A tiny, cheap bonus for the last fraction of a percent."
+    },
+    {
+      "n": "Mind-numbing Poison III",
+      "k": "Poison",
+      "note": "Casting slow (60% for 14 seconds). Carry a few for caster adds."
+    },
+    {
+      "n": "Wound Poison III",
+      "k": "Poison",
+      "note": "Reduces healing received by 128, stacking up to 5 times. PvP tool, occasionally a PvE add answer."
+    },
+    {
+      "n": "Crippling Poison II",
+      "k": "Poison",
+      "note": "70% movement slow for 12 seconds. For kiting and PvP, not for your parse."
     },
     {
       "n": "Elixir of Greater Defense",
@@ -198,26 +280,45 @@
       "note": "Armor. Progression-only, and only when you are dying to physical damage."
     },
     {
-      "n": "Major Frenzy Potion",
-      "k": "Potion",
-      "note": "+80 attack power for 30 seconds. Crafted and cheap, so use it on cooldown. Greater and Superior Frenzy are the weaker versions."
+      "n": "Flash Powder",
+      "k": "Misc",
+      "note": "Blind reagent. Keep a stack, nothing more."
     },
     {
-      "n": "Potion of Beast Slaying",
-      "k": "Potion",
-      "note": "Attack power against beasts only. Worth it on beast bosses."
-    },
-    {
-      "n": "Juju Might",
+      "n": "Living Action Potion",
       "s": true,
-      "k": "Zandalar",
-      "note": "Attack power. Stacks with your elixirs, which is the whole reason to farm it."
+      "k": "Potion",
+      "note": "Free Action Potion that also clears a fear or charm. Rarer, better."
     },
     {
-      "n": "Juju Power",
-      "s": true,
-      "k": "Zandalar",
-      "note": "Strength. Same deal — extra stat outside the elixir slots."
+      "n": "Limited Invulnerability Potion",
+      "k": "Potion",
+      "note": "Physical immunity for a few seconds. A real panic button."
+    },
+    {
+      "n": "Greater Shadow Protection Potion",
+      "k": "Protection",
+      "note": "Shadow absorb. Naxxramas and Nefarian."
+    },
+    {
+      "n": "Greater Nature Protection Potion",
+      "k": "Protection",
+      "note": "Nature absorb. Ahn’Qiraj, and Huhuran in particular."
+    },
+    {
+      "n": "Greater Frost Protection Potion",
+      "k": "Protection",
+      "note": "Frost absorb. Sapphiron."
+    },
+    {
+      "n": "Greater Fire Protection Potion",
+      "k": "Protection",
+      "note": "Absorbs fire damage. Molten Core and Blackwing Lair want it constantly."
+    },
+    {
+      "n": "Greater Arcane Protection Potion",
+      "k": "Protection",
+      "note": "Arcane absorb. Situational."
     },
     {
       "n": "Juju Flurry",
@@ -231,121 +332,6 @@
       "note": "Fire resistance. Pairs with a Greater Fire Protection Potion."
     },
     {
-      "n": "Winterfall Firewater",
-      "k": "Misc",
-      "note": "Attack power. A decent alternative when Juju Might runs dry."
-    },
-    {
-      "n": "Distilled Firewater",
-      "k": "Misc",
-      "note": "Same +35 attack power for 20 minutes as Winterfall Firewater, but crafted."
-    },
-    {
-      "n": "Ground Scorpok Assay",
-      "k": "Misc",
-      "note": "Agility from Blasted Lands. Stacks with elixirs."
-    },
-    {
-      "n": "R.O.I.D.S.",
-      "k": "Misc",
-      "note": "Strength from Blasted Lands. Backup for Juju Power."
-    },
-    {
-      "n": "Dense Sharpening Stone",
-      "k": "Stone",
-      "note": "+8 damage on a sharp weapon (dagger, sword, axe)."
-    },
-    {
-      "n": "Dense Weightstone",
-      "k": "Stone",
-      "note": "+8 damage on a blunt weapon (mace, fist weapon). Forever lets Combat use any weapon type, so this is the mace version of Dense Sharpening Stone."
-    },
-    {
-      "n": "Grilled Squid",
-      "k": "Food",
-      "note": "Well Fed: +1% crit. Cheap, and a fine fallback while you level."
-    },
-    {
-      "n": "Smoked Desert Dumplings",
-      "k": "Food",
-      "note": "Strength food, quest-limited supply. Hoard them for progression."
-    },
-    {
-      "n": "Filet o' Flank",
-      "k": "Food",
-      "note": "Well Fed: +25 Agility and +10 Stamina. Crafted, level 55. Sim it against Prowler Steak and Mightfish Steak."
-    },
-    {
-      "n": "Prowler Steak",
-      "k": "Food",
-      "note": "Well Fed: +25 Strength and +10 Stamina. Crafted, level 55."
-    },
-    {
-      "n": "Mightfish Steak",
-      "k": "Food",
-      "note": "Well Fed: +40 attack power. Level 45 food that still holds up at 60."
-    },
-    {
-      "n": "Dragonbreath Chili",
-      "k": "Food",
-      "note": "Proc fire damage on melee hits. Not worth a bag slot unless you are chasing the last fraction of a percent."
-    },
-    {
-      "n": "Rumsey Rum Black Label",
-      "k": "Food",
-      "note": "Stamina drink. Free, stacks with food, no reason to skip it."
-    },
-    {
-      "n": "Flask of the Titans",
-      "k": "Flask",
-      "note": "Big health pool, survives death. Expensive — progression nights only."
-    },
-    {
-      "n": "Flask of Natural Aggression",
-      "k": "Flask",
-      "note": "+60 Stamina, and +4% crit in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
-    },
-    {
-      "n": "Flask of Natural Swiftness",
-      "k": "Flask",
-      "note": "+60 Stamina, and +5% Haste in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
-    },
-    {
-      "n": "Flask of Natural Accuracy",
-      "k": "Flask",
-      "note": "+60 Stamina, and +5% Hit in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
-    },
-    {
-      "n": "Flask of Natural Precision",
-      "k": "Flask",
-      "note": "+60 Stamina, and 5% fewer parries and dodges in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
-    },
-    {
-      "n": "Thistle Tea",
-      "k": "Potion",
-      "note": "100 energy instantly. Open with it, use it again on cooldown, never save it for a moment that never comes."
-    },
-    {
-      "n": "Free Action Potion",
-      "k": "Potion",
-      "note": "Immunity to movement impairment. Your answer to roots, slows and snares."
-    },
-    {
-      "n": "Living Action Potion",
-      "k": "Potion",
-      "note": "Free Action Potion that also clears a fear or charm. Rarer, better."
-    },
-    {
-      "n": "Limited Invulnerability Potion",
-      "k": "Potion",
-      "note": "Physical immunity for a few seconds. A real panic button."
-    },
-    {
-      "n": "Major Healing Potion",
-      "k": "Potion",
-      "note": "Self heal. Shares a cooldown with everything else useful, so plan it."
-    },
-    {
       "n": "Restorative Potion",
       "s": true,
       "k": "Potion",
@@ -356,88 +342,6 @@
       "s": true,
       "k": "Potion",
       "note": "Dispels poison, disease, curse and magic. Very situational, very good when it is right."
-    },
-    {
-      "n": "Magic Resistance Potion",
-      "k": "Potion",
-      "note": "All-school resistance. Niche but occasionally the correct call."
-    },
-    {
-      "n": "Greater Fire Protection Potion",
-      "k": "Protection",
-      "note": "Absorbs fire damage. Molten Core and Blackwing Lair want it constantly."
-    },
-    {
-      "n": "Greater Nature Protection Potion",
-      "k": "Protection",
-      "note": "Nature absorb. Ahn’Qiraj, and Huhuran in particular."
-    },
-    {
-      "n": "Greater Shadow Protection Potion",
-      "k": "Protection",
-      "note": "Shadow absorb. Naxxramas and Nefarian."
-    },
-    {
-      "n": "Greater Arcane Protection Potion",
-      "k": "Protection",
-      "note": "Arcane absorb. Situational."
-    },
-    {
-      "n": "Greater Frost Protection Potion",
-      "k": "Protection",
-      "note": "Frost absorb. Sapphiron."
-    },
-    {
-      "n": "Goblin Sapper Charge",
-      "s": true,
-      "k": "Engineering",
-      "note": "Requires Engineering. Free damage on every cooldown and it hurts you a little."
-    },
-    {
-      "n": "Dense Dynamite",
-      "s": true,
-      "k": "Engineering",
-      "note": "Requires Engineering. Cheap filler damage when you cannot reach the target."
-    },
-    {
-      "n": "Thorium Grenade",
-      "k": "Engineering",
-      "note": "Requires Engineering. An extra interrupt-adjacent stun in your pocket."
-    },
-    {
-      "n": "Instant Poison",
-      "k": "Poison",
-      "note": "Core weapon poison for most builds. Apply before you leave the bank."
-    },
-    {
-      "n": "Deadly Poison",
-      "k": "Poison",
-      "note": "Stacking damage over time. The main damage poison."
-    },
-    {
-      "n": "Wound Poison",
-      "k": "Poison",
-      "note": "Reduces healing received. PvP tool, occasionally a PvE add answer."
-    },
-    {
-      "n": "Crippling Poison",
-      "k": "Poison",
-      "note": "Movement slow. For kiting and PvP, not for your parse."
-    },
-    {
-      "n": "Mind-numbing Poison",
-      "k": "Poison",
-      "note": "Casting slow. Carry a few for caster adds."
-    },
-    {
-      "n": "Flash Powder",
-      "k": "Misc",
-      "note": "Blind reagent. Keep a stack, nothing more."
-    },
-    {
-      "n": "Whipper Root Tuber",
-      "k": "Misc",
-      "note": "Health on a separate cooldown from potions. Sneaky good."
     }
   ],
   "buffGroups": [
@@ -750,6 +654,10 @@
     }
   ],
   "changelog": [
+    {
+      "date": "Nov 27th, 2026",
+      "text": "Updated the Consumables section. It now lists a smaller, curated set: Major Frenzy Potion, Thistle Tea, Flask of Natural Precision, Elixir of the Mongoose and Elixir of Greater Fortitude, plus the food, Engineering, stones, rank-specific poisons, Blasted Lands and Zandalar buffs, and protection potions worth carrying. Rumsey Rum Black Label, Bogling Root, Elixir of Greater Defense, Living Action Potion, Juju Flurry, Restorative Potion and Purification Potion are marked as sweaty. The tentative-list note is gone from Consumables and from Buffs & debuffs."
+    },
     {
       "date": "Nov 24th, 2026",
       "text": "Added the Subtlety Hemo Seal Fate build to the end game builds. It takes Seal Fate and Cold Blood instead of Death Mark and Boot Knife, and finishes with Cold Blood and Eviscerate at 5 combo points, with Rupture, Slice and Dice and Garrote kept up. It has its own talents, rotation with opener and pro tips, and Pre-raid BiS gear, and it is graded A in the Meta Breakdown, just below Subtlety Hemo. The Pre-raid BiS performance table now includes it, and it is essentially tied with Subtlety Hemo on single target, within 0.3% at every encounter length and slightly ahead at 1, 2 and 5 minutes. It also has its own stat weights."

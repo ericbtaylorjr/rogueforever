@@ -359,18 +359,8 @@ export const consumablesCopy = {
     strong: 'sweaty',
     after: ' consumables, which most players can skip, as they may be too expensive or difficult to acquire to justify the effort for.',
   },
-  /** Rendered with <Tip>, which adds the "Tip:" label. */
-  status: {
-    text: "Checked against the Wowhead Forever item database on October 25th. This list is tentative: it may include entries that exist in the Wowhead database but won't actually be available in Forever.",
-  },
 } as const;
 
-export const buffsCopy = {
-  /** Rendered with <Tip>, which adds the "Tip:" label. */
-  status: {
-    text: "These are early baselines. Forever's balancing and stacking rules aren't settled, so I'll update this once they are and the sims have run.",
-  },
-} as const;
 
 export const exposeArmor = {
   p1: {
