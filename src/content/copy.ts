@@ -350,7 +350,7 @@ export const professionsCopy = {
 } as const;
 
 export const consumablesCopy = {
-  intro: 'The full bag. Hover anything to see what it does.',
+  intro: 'The consumables worth carrying. Hover anything to see what it does.',
   /** The droplet icon stands in for the word "Droplet" (and is read as it). */
   sweatyNote: {
     lead: 'The ',

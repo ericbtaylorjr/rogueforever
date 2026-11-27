@@ -179,17 +179,17 @@
     {
       "n": "Flask of Natural Precision",
       "k": "Flask",
-      "note": "+60 Stamina, and 5% fewer parries and dodges in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
+      "note": "+30 Stamina, and 2% fewer dodges and parries against you in Mount Hyjal, Hyjal Summit and the Barrow Deeps only. Crafted."
     },
     {
       "n": "Elixir of the Mongoose",
       "k": "Elixir",
-      "note": "Agility and crit. The default battle elixir for a raiding Rogue."
+      "note": "+25 Agility and +2% crit for 30 minutes. The default battle elixir for a raiding Rogue."
     },
     {
       "n": "Elixir of Greater Fortitude",
       "k": "Elixir",
-      "note": "+400 health for 30 minutes. The level 55 step up from Fortitude."
+      "note": "+400 health for 30 minutes. Cheap insurance against one mistake."
     },
     {
       "n": "Swiftstrike Steak",
@@ -205,7 +205,7 @@
       "n": "Rumsey Rum Black Label",
       "s": true,
       "k": "Food",
-      "note": "Stamina drink. Free, stacks with food, no reason to skip it."
+      "note": "+15 Stamina for 15 minutes, and it gets you drunk. Stacks with food, and not worth chasing unless you want every last point."
     },
     {
       "n": "Goblin Sapper Charge",
@@ -277,7 +277,7 @@
       "n": "Elixir of Greater Defense",
       "s": true,
       "k": "Elixir",
-      "note": "Armor. Progression-only, and only when you are dying to physical damage."
+      "note": "+450 armor for 1 hour. Progression-only, and only when you are dying to physical damage."
     },
     {
       "n": "Flash Powder",
@@ -288,7 +288,7 @@
       "n": "Living Action Potion",
       "s": true,
       "k": "Potion",
-      "note": "Free Action Potion that also clears a fear or charm. Rarer, better."
+      "note": "Immune to stuns and movement impairing effects for 5 seconds, and removes the ones already on you. Your answer to roots, slows and stuns."
     },
     {
       "n": "Limited Invulnerability Potion",
@@ -341,7 +341,7 @@
       "n": "Purification Potion",
       "s": true,
       "k": "Potion",
-      "note": "Dispels poison, disease, curse and magic. Very situational, very good when it is right."
+      "note": "Removes one curse, one disease and one poison from you. Very situational, very good when it is right."
     }
   ],
   "buffGroups": [
@@ -656,7 +656,7 @@
   "changelog": [
     {
       "date": "Nov 27th, 2026",
-      "text": "Updated the Consumables section. It now lists a smaller, curated set: Major Frenzy Potion, Thistle Tea, Flask of Natural Precision, Elixir of the Mongoose and Elixir of Greater Fortitude, plus the food, Engineering, stones, rank-specific poisons, Blasted Lands and Zandalar buffs, and protection potions worth carrying. Rumsey Rum Black Label, Bogling Root, Elixir of Greater Defense, Living Action Potion, Juju Flurry, Restorative Potion and Purification Potion are marked as sweaty. The tentative-list note is gone from Consumables and from Buffs & debuffs."
+      "text": "Updated the Consumables section. It now lists a smaller, curated set: Major Frenzy Potion, Thistle Tea, Flask of Natural Precision, Elixir of the Mongoose and Elixir of Greater Fortitude, plus the food, Engineering, stones, rank-specific poisons, Blasted Lands and Zandalar buffs, and protection potions worth carrying. Rumsey Rum Black Label, Bogling Root, Elixir of Greater Defense, Living Action Potion, Juju Flurry, Restorative Potion and Purification Potion are marked as sweaty. The tentative-list note is gone from Consumables and from Buffs & debuffs. Combat Sinister Strike and Combat Venom now list Persuader as their Pre-raid BiS main hand, with Teebu's Blazing Longsword moved to an alternative."
     },
     {
       "date": "Nov 24th, 2026",
